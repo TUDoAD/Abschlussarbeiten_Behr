@@ -7,7 +7,8 @@ Nachfolgend eine allgemeine Beschreibung welche Skripte durchlaufen werden.
 Welche Schritte dazu im jeweiligen Python-Skript ablaufen, ist an entsprechender Stelle im jeweiligen Skript kommentiert. 
 
 
-===============================================================================================================================================================================
+# Beschreibung
+
 Das Programm wird über das Skript "run.py" gestartet, welches alle anderen benötigten Skripte/ Funktionen aufruft. 
 Diesem Skript muss eine Name und ein Wert für den Min_Count Parameter von Word2Vec übergeben werden.
 
@@ -33,5 +34,3 @@ Anschließend wird durch das Skript "result_lists.py" die Anzahl gefundener Ober
 Abschließend werden durch das Skript "xlsx_postprocessing.py" die Duplikate gelöscht. Weiterhin werden hier Strings geändert in denen Klassen, bestehend aus mehreren Worten, 
 welche durch "_" getrennt sind vorkommen. Das "_" wird dabei durch ein Leerzeichen ersetzt.
 Die erstellte Klassenliste wird dann in einer Excel-Datei gespeichert. 
-===============================================================================================================================================================================
-
