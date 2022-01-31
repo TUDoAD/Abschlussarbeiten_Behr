@@ -1,14 +1,14 @@
 Code from A. Behr.
 
-## OntoClassesSearcher.py
-# onto_class comparison
-Find same entries of class names in both concept_table and ontologies
-load Excel-File with name file_name and store list with all concepts, 
-and their definitions (if any) as new_file_name Excel-file.
+# OntoClassesSearcher.py
 
-# onto_loader
-loads ontologies and outputs a class list and a description/definitions list as dict with ontology name as key(s)
+## onto_loader(list_of_ontology_names)
+Loads ontologies (based on list_of_ontology_names) and outputs a class list and a description/definitions list as dictionary with ontology name as key(s).
+Ontology names should be the ones of the .owl-files placed in the ./ontologies subdirectory.
 
-## Running
-Follow commands which are commented at end of OntoClassesSearcher.py (below Example)
+## onto_class_comparison(description_list_dictionary, file_name, new_file_name)
+Find same entries of class names in both concept_table and ontologies.
+Load Excel-File with name file_name and store list with all concepts, and their definitions (if any) as new_file_name Excel-file.
 
+# Running
+Follow commands which are commented at end of OntoClassesSearcher.py (below Example within code)
