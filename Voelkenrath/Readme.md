@@ -34,3 +34,6 @@ Anschließend wird durch das Skript "result_lists.py" die Anzahl gefundener Ober
 Abschließend werden durch das Skript "xlsx_postprocessing.py" die Duplikate gelöscht. Weiterhin werden hier Strings geändert in denen Klassen, bestehend aus mehreren Worten, 
 welche durch "_" getrennt sind vorkommen. Das "_" wird dabei durch ein Leerzeichen ersetzt.
 Die erstellte Klassenliste wird dann in einer Excel-Datei gespeichert. 
+
+
+![Ablaufplan](image/TextMiningScheme.png?raw=true "Ablaufplan des erstellten Text Mining Programms")
