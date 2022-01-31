@@ -12,3 +12,11 @@ Load Excel-File with name file_name and store list with all concepts, and their 
 
 # Running
 Follow commands which are commented at end of OntoClassesSearcher.py (below Example within code)
+
+Execute once to load all ontologies from list 
+    
+    [class_dict, desc_dict] = onto_loader(["chmo","Allotrope_OWL", "chebi"])
+
+Execute to compare text.xlsx with loaded ontologies, store resulting Dataframe in test_comp.xlsx
+
+    onto_class_comparison(desc_dict, 'test', 'test_comp')
