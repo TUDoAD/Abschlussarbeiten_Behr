@@ -40,8 +40,6 @@ for name in filenames:
 #       SKOS plotting begins
 ##
 model = ontospy.Ontospy("./export/"+str(Path(os.path.basename(name)).with_suffix(".ttl")), verbose = True)
-
-#model = ontospy.Ontospy("ExampleCFDOntology.owl", verbose = True)
 docs_model = HTMLVisualizer(model, title="docs")
 dendro = Dataviz(model, title = "dendrogram")
 
@@ -49,12 +47,7 @@ docs_model.build(output_path='./export/docs/')
 dendro.build(output_path = './export/dendro/')
 
 #dendro.preview()
-
-
 #docs_model.preview()
-
 #dendro.build()
 #dendro.preview()
-
-
 #ontospy.ontodocs.viz.viz_d3dendogram(model)
