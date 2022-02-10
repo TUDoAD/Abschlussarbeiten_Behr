@@ -4,7 +4,7 @@ Code from Alexander Behr @ TUDO University developed for NFDI4Cat
 run this first, in order to set up the installation of vocexcel properly
 
 # SKOS-plotter.py
-Uses vocexcel and ontospy. Use:
+Uses vocexcel and ontospy. To install ontospy properly, use:
 
 	pip install ontospy[FULL] -U
 
