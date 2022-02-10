@@ -9,7 +9,7 @@ Created on Fri Dec 31 15:41:14 2021
 # pip install ontospy
 # pip install ontospy[FULL]
 
-## full module (use this):
+## For full module (use this):
 # pip install ontospy[FULL] -U
 import ontospy
 from ontospy.ontodocs.viz.viz_html_single import *
@@ -21,12 +21,9 @@ from vocexcel import convert
 import glob
 import os
 from pathlib import Path
-#import subprocess
 
 import URIgenerator
 
-
-#convert.excel_to_rdf("eg-withRelated.xlsx")
 
 filenames = glob.glob("./import/*.xlsx")
 
@@ -38,12 +35,6 @@ for name in filenames:
     
     convert.excel_to_rdf(name,output_file_path = "./export/")#,output_format = "xml")
     print("converted import/{} successfully to export/{}.".format(os.path.basename(name),Path(os.path.basename(name)).with_suffix(".ttl")))
-
-
-
-
-# import shutil 
-# import os
 
 ##
 #       SKOS plotting begins
