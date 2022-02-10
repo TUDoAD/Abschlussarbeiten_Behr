@@ -1,4 +1,4 @@
-Code from A. Behr.
+Code from Alexander Behr @ TUDO University developed for NFDI4Cat
 
 # OntoClassesSearcher.py
 
