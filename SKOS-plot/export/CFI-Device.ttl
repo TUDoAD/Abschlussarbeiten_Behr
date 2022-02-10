@@ -1,0 +1,339 @@
+@prefix cs: <https://example.org/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+cs:LDR_sensor a skos:Concept ;
+    dcterms:provenance "self"@en ;
+    skos:broader cs:optical_sensor ;
+    skos:definition "An optical sensor based on extinction of light shining through a material and a light dependend resistor (LDR). Developed on the laboratory of equipment design at TU Dortmund, Germany."@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "LDR sensor"@en .
+
+cs:batch_reactor a skos:Concept ;
+    dcterms:provenance "https://www.wikidata.org/wiki/Q1141634"@en ;
+    rdfs:isDefinedBy <https://goldbook.iupac.org/terms/view/B00616> ;
+    skos:broader cs:reactor ;
+    skos:definition """In a batch reactor the reactants and the catalyst
+are placed in the reactor which is then closed to transport of matter and the reaction is allowed to proceed for a given time whereupon the mixture of unreacted material together with the products is withdrawn. Provision for mixing may be required."""@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "batch reactor"@en .
+
+cs:biochemical_plant a skos:Concept ;
+    dcterms:provenance "self"@en ;
+    skos:broader cs:industrial_plant ;
+    skos:definition "industrial process plant that manufactures (bio)chemicals using biologic systems such as microorganisms or enzymes."@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "biochemical plant"@en .
+
+cs:capillary a skos:Concept ;
+    rdfs:isDefinedBy <http://purl.allotrope.org/ontologies/equipment#AFE_0000340> ;
+    skos:broader cs:pipe ;
+    skos:definition "A capillary is a tube with a small diameter."@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "capillary"@en .
+
+cs:chemical_plant a skos:Concept ;
+    rdfs:isDefinedBy <https://www.wikidata.org/wiki/Q905286> ;
+    skos:broader cs:industrial_plant ;
+    skos:definition "industrial process plant that manufactures chemicals"@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "chemical plant"@en .
+
+cs:collection_tank a skos:Concept ;
+    dcterms:provenance "self"@en ;
+    skos:broader cs:storage_tank ;
+    skos:definition "Storage tank in which the reaction solution is collected after the reaction."@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "collection tank"@en .
+
+cs:feed_tank a skos:Concept ;
+    dcterms:provenance "self"@en ;
+    skos:broader cs:storage_tank ;
+    skos:definition "Storage tank in which the reaction solution is stored before the reaction is started."@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "feed tank"@en .
+
+cs:laboratory_plant a skos:Concept ;
+    dcterms:provenance "self"@en ;
+    skos:altLabel "lab scale plant"@en,
+        "miniplant"@en ;
+    skos:broader cs:industrial_plant ;
+    skos:definition "industrial process plant that manufactures (bio-)chemicals in small amounts. Often used to develop new industrial processes or test process plants."@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "laboratory plant"@en .
+
+cs:magnetic_stirrer a skos:Concept ;
+    dcterms:provenance "https://www.wikidata.org/wiki/Q900248"@en ;
+    rdfs:isDefinedBy <http://purl.allotrope.org/ontologies/equipment#AFE_0000374> ;
+    skos:altLabel "laboratory stirrer"@en,
+        "magnetic mixer"@en,
+        "magnetic stir plate"@en,
+        "magnetic stirring plate"@en,
+        "stir plate"@en,
+        "stirring plate"@en ;
+    skos:broader cs:dynamic_mixer ;
+    skos:definition "A magnetic stirrer or magnetic mixer is a laboratory device that employs a rotating magnetic field to cause a stir bar (also called \"flea\") immersed in a liquid to spin very quickly, thus stirring it."@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "magnetic stirrer"@en .
+
+cs:number_of_bends a skos:Concept ;
+    dcterms:provenance "self"@en ;
+    skos:altLabel "n_bends"@en ;
+    skos:broader cs:CFI_construction_method ;
+    skos:definition "Number of bends on a coiled flow inverter (CFI) in which the lateral axis of a coil gets redirected."@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "number of bends"@en .
+
+cs:number_of_turns a skos:Concept ;
+    dcterms:provenance "self"@en ;
+    skos:altLabel "n_turns"@en ;
+    skos:broader cs:CFI_construction_method ;
+    skos:definition "Number of turns of a capillary around a coil of the coiled flow inverter (CFI)"@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "number of turns"@en .
+
+cs:pressure_sensor a skos:Concept ;
+    rdfs:isDefinedBy <http://purl.allotrope.org/ontologies/equipment#AFE_0000327> ;
+    skos:broader cs:sensor ;
+    skos:definition "A sensor that measures the pressure. "@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "pressure sensor"@en .
+
+cs:pump a skos:Concept ;
+    dcterms:provenance "http://purl.allotrope.org/ontologies/equipment#AFE_0000499"@en ;
+    rdfs:isDefinedBy <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C50128> ;
+    skos:broader cs:laboratory_equipment ;
+    skos:definition "A device designed to facilitate the movement of a fluid."@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "pump"@en .
+
+cs:temperature_sensor a skos:Concept ;
+    rdfs:isDefinedBy <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C50304> ;
+    skos:altLabel "Temperature Sensor Device"@en ;
+    skos:broader cs:sensor ;
+    skos:definition "A sensor designed to respond to the temperature of a space, surface, or environment."@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "temperature sensor"@en .
+
+cs:valve a skos:Concept ;
+    rdfs:isDefinedBy <http://purl.allotrope.org/ontologies/equipment#AFE_0000795> ;
+    skos:broader cs:connector ;
+    skos:definition "A valve is a plumbing equipment that regulates, directs or controls the flow of a fluid (gases, liquids, fluidized solids, or slurries) by opening, closing, or partially obstructing various passageways."@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "valve"@en .
+
+cs:T-Piece_connector a skos:Concept ;
+    rdfs:isDefinedBy <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C50350> ;
+    skos:altLabel "T mixer"@en,
+        "T-Piece connector device"@en,
+        "T-mixer"@en ;
+    skos:broader cs:connector,
+        cs:static_mixer ;
+    skos:definition "A device, usually for connecting tubing, that resembles the letter T."@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "T-Piece connector"@en .
+
+cs:Y-Piece_connector a skos:Concept ;
+    rdfs:isDefinedBy <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C49886> ;
+    skos:altLabel "Y mixer"@en,
+        "Y-Piece connector device"@en,
+        "Y-mixer"@en ;
+    skos:broader cs:connector,
+        cs:static_mixer ;
+    skos:definition "A device, usually for connecting tubing, that resembles the letter Y."@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Y-Piece connector"@en .
+
+cs:coiled_flow_inverter a skos:Concept ;
+    dcterms:provenance "M. Mridha, K. Nigam, Chemical Engineering Science 2008, 63, 1724–1732."@en ;
+    skos:altLabel "CFI"@en ;
+    skos:broader cs:microreactor ;
+    skos:definition "A capillary reactor consisting of a helical spiral. The use of such a helical spiral favors mixing efficiency under laminar flow conditions. The mass transfer of the CFI is further improved by arranging several helical packets, rotated 90° to each other, in series."@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:CFI_construction_method ;
+    skos:prefLabel "coiled flow inverter"@en .
+
+cs:dynamic_mixer a skos:Concept ;
+    dcterms:provenance "self,  derived from wikipedia article, https://en.wikipedia.org/wiki/Mixing_(process_engineering)"@en ;
+    skos:altLabel "moving mixer"@en ;
+    skos:broader cs:mixer ;
+    skos:definition "Moving mixers utilize some kind of moving part within the medium or by rotation of a tank containing the material to be mixed. "@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:magnetic_stirrer ;
+    skos:prefLabel "dynamic mixer"@en .
+
+cs:flow_reactor a skos:Concept ;
+    rdfs:isDefinedBy <https://goldbook.iupac.org/terms/view/F02443> ;
+    skos:altLabel "continuous-flow reactor"@en ;
+    skos:broader cs:reactor ;
+    skos:definition "A reactor through which the reactants pass while catalysis is in progress."@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:microreactor ;
+    skos:prefLabel "flow reactor"@en .
+
+cs:microreactor a skos:Concept ;
+    rdfs:isDefinedBy <https://www.wikidata.org/wiki/Q1431442> ;
+    skos:altLabel "microchannel reactor"@en,
+        "microstructured reactor"@en,
+        "mikroreactor (chemistry)"@en ;
+    skos:broader cs:flow_reactor ;
+    skos:definition "A device in which chemical reactions take place in a confinement with typical lateral dimensions below 1 mm"@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:coiled_flow_inverter ;
+    skos:prefLabel "microreactor"@en .
+
+cs:optical_sensor a skos:Concept ;
+    rdfs:isDefinedBy <https://www.wikidata.org/wiki/Q2027487> ;
+    skos:altLabel "electro-optical sensor"@en ;
+    skos:broader cs:sensor ;
+    skos:definition "electronic sensors that convert light into electrical signals"@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:LDR_sensor ;
+    skos:prefLabel "optical sensor"@en .
+
+cs:pipe a skos:Concept ;
+    dcterms:provenance "https://www.wikidata.org/wiki/Q41551"@en ;
+    rdfs:isDefinedBy <http://purl.allotrope.org/ontologies/equipment#AFE_0000718> ;
+    skos:altLabel "tube"@en,
+        "tubing"@en ;
+    skos:broader cs:piping ;
+    skos:definition "tubular section or hollow cylinder"@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:capillary ;
+    skos:prefLabel "pipe"@en .
+
+cs:CFI_construction_method a skos:Concept ;
+    dcterms:provenance "self"@en ;
+    skos:altLabel "CFI geometry"@en ;
+    skos:broader cs:coiled_flow_inverter ;
+    skos:definition "Geometric parameters of the CFI, such as number of bends and turns."@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:number_of_bends,
+        cs:number_of_turns ;
+    skos:prefLabel "CFI construction method"@en .
+
+cs:equipment a skos:Concept ;
+    rdfs:isDefinedBy <http://vivoweb.org/ontology/core#Equipment> ;
+    skos:definition "A physical object provided for specific purpose, task or occupation."@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:laboratory_equipment ;
+    skos:prefLabel "equipment"@en ;
+    skos:related cs:industrial_plant ;
+    skos:topConceptOf cs: .
+
+cs:mixer a skos:Concept ;
+    rdfs:isDefinedBy <http://purl.obolibrary.org/obo/NCIT_C172142> ;
+    skos:altLabel "mechanical mixer"@en ;
+    skos:broader cs:laboratory_equipment ;
+    skos:definition "A mechanical component designed to blend materials."@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:dynamic_mixer,
+        cs:static_mixer ;
+    skos:prefLabel "mixer"@en .
+
+cs:piping a skos:Concept ;
+    rdfs:isDefinedBy <https://www.wikidata.org/wiki/Q3679502> ;
+    skos:altLabel "plumbing system"@en ;
+    skos:broader cs:laboratory_equipment ;
+    skos:definition "System of pipes used to transport fluids (gases, liquids or pourable or pumpable solids) from one location to another."@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:connector,
+        cs:pipe ;
+    skos:prefLabel "piping"@en .
+
+cs:reactor a skos:Concept ;
+    rdfs:isDefinedBy <http://purl.allotrope.org/ontologies/equipment#AFE_0000153> ;
+    skos:altLabel "chemical reactor"@en,
+        "fermenter"@en ;
+    skos:broader cs:laboratory_equipment ;
+    skos:definition "A reactor is a container for controlling a biological or chemical reaction or process. [Allotrope]"@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:batch_reactor,
+        cs:flow_reactor ;
+    skos:prefLabel "reactor"@en .
+
+cs:static_mixer a skos:Concept ;
+    dcterms:provenance "self"@en ;
+    rdfs:isDefinedBy <https://www.wikidata.org/wiki/Q1934483> ;
+    skos:broader cs:mixer ;
+    skos:definition "Fluids mix solely due to the flow guidance of the static mixer without application of moving parts, e.g. an impeller."@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:T-Piece_connector,
+        cs:Y-Piece_connector ;
+    skos:prefLabel "static mixer"@en .
+
+cs:storage_tank a skos:Concept ;
+    rdfs:isDefinedBy <https://www.wikidata.org/wiki/Q1756525> ;
+    skos:altLabel "tank"@en,
+        "vessel"@en ;
+    skos:broader cs:laboratory_equipment ;
+    skos:definition "container for liquids and compressed gasses"@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:collection_tank,
+        cs:feed_tank ;
+    skos:prefLabel "storage tank"@en .
+
+cs:connector a skos:Concept ;
+    skos:broader cs:piping ;
+    skos:definition "a"@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:T-Piece_connector,
+        cs:Y-Piece_connector,
+        cs:valve ;
+    skos:prefLabel "connector"@en .
+
+cs:sensor a skos:Concept ;
+    rdfs:isDefinedBy <http://purl.allotrope.org/ontologies/equipment#AFE_0002184> ;
+    skos:broader cs:laboratory_equipment ;
+    skos:definition "A sensor is a component of a measuring system that is directly affected by a phenomenon, body, or substance carrying a quantity to be measured."@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:optical_sensor,
+        cs:pressure_sensor,
+        cs:temperature_sensor ;
+    skos:prefLabel "sensor"@en .
+
+cs:industrial_plant a skos:Concept ;
+    rdfs:isDefinedBy <https://www.wikidata.org/wiki/Q557685> ;
+    skos:altLabel "industrial process plant"@en ;
+    skos:definition "planned compilation of machinery or equipment in (even in small-scale) spaces"@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:biochemical_plant,
+        cs:chemical_plant,
+        cs:laboratory_plant ;
+    skos:prefLabel "industrial plant"@en ;
+    skos:related cs:equipment ;
+    skos:topConceptOf cs: .
+
+cs:laboratory_equipment a skos:Concept ;
+    rdfs:isDefinedBy <https://www.wikidata.org/wiki/Q834028> ;
+    skos:altLabel ""@en,
+        "lab equipment"@en,
+        "laboratory apparatus"@en ;
+    skos:broader cs:equipment ;
+    skos:definition "equipment used for laboratory experiments"@en ;
+    skos:inScheme cs: ;
+    skos:narrower cs:mixer,
+        cs:piping,
+        cs:pump,
+        cs:reactor,
+        cs:sensor,
+        cs:storage_tank ;
+    skos:prefLabel "laboratory equipment"@en .
+
+cs: a skos:ConceptScheme ;
+    dcterms:created "2021-12-09"^^xsd:date ;
+    dcterms:creator <https://www.tu-dortmund.de/> ;
+    dcterms:modified "2022-01-08"^^xsd:date ;
+    dcterms:provenance "Laboratory experiments at TU Dortmund "@en ;
+    dcterms:publisher <https://nfdi4cat.org/> ;
+    owl:versionInfo "1" ;
+    skos:definition "Devices used in biocatalytic experiments on coiled flow inverters (CFI) at TU Dortmund in the laboratory of Norbert Kockmann. The CFI is a microreactor consisting of a coiled capillary in a mini-plant. Thus, the conducted experiments are investigations on the domain of micro-flow (bio-) chemistry."@en ;
+    skos:hasTopConcept cs:equipment,
+        cs:industrial_plant ;
+    skos:prefLabel "vocabulary for devices used in CFI experiments"@en ;
+    dcat:contactPoint "Alexander Behr, Norbert Kockmann" .
+

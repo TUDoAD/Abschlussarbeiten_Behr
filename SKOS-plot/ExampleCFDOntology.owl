@@ -1,0 +1,508 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="urn:absolute:CFD-ADTUDO#"
+     xml:base="urn:absolute:CFD-ADTUDO"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://tu-dortmund.de/CFD-ADTUDO">
+        <rdfs:comment>urn:absolute:CFD-ADTUDO</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#hasLocation -->
+
+    <owl:ObjectProperty rdf:about="http://tu-dortmund.de/CFD-ADTUDO#hasLocation">
+        <owl:inverseOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#isLocationOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#isLocationOf -->
+
+    <owl:ObjectProperty rdf:about="http://tu-dortmund.de/CFD-ADTUDO#isLocationOf">
+        <rdfs:domain rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Faces"/>
+        <rdfs:range rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#BoundaryConditions"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#BSL-ReynoldsStress -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#BSL-ReynoldsStress">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#TurbulenceModels"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#BoundaryConditions -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#BoundaryConditions"/>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#BouyancyModel -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#BouyancyModel">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#VolumetricForces"/>
+        <owl:disjointWith rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#OtherForces"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#CFDTypeOfSimulation -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#CFDTypeOfSimulation"/>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Edges -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Edges">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#SimulatedDomain"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Faces -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Faces">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#SimulatedDomain"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#ForceVector -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#ForceVector">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#OtherForces"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Geometry -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Geometry">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#SimulatedDomain"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Gravity -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Gravity">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#BouyancyModel"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Inlet -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Inlet">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#BoundaryConditions"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#hasLocation"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Faces"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#InstalledPatchesAndVersions -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#InstalledPatchesAndVersions">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Software"/>
+        <owl:disjointWith rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#SoftwareVersion"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#K-EpsilonModel -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#K-EpsilonModel">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#TurbulenceModels"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Laminar -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Laminar">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Turbulence"/>
+        <owl:disjointWith rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#TurbulenceModels"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Machine -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Machine">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Metadata"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Metadata -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Metadata"/>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#NumberOfDimensions -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#NumberOfDimensions">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#SpatialDimensions"/>
+        <owl:disjointWith rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#TypeOfCoordinateSystem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Opening -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Opening">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#BoundaryConditions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Other -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Other">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#TurbulenceModels"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#OtherForces -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#OtherForces">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#VolumetricForces"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Outlet -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Outlet">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#BoundaryConditions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Points -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Points">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#SimulatedDomain"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Pressure -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Pressure">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#StateVariables"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#SSG-ReynoldsStress -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#SSG-ReynoldsStress">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#TurbulenceModels"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#ShearStressTransport -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#ShearStressTransport">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#TurbulenceModels"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#SimulatedDomain -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#SimulatedDomain"/>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Software -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Software">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Metadata"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#SoftwareVersion -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#SoftwareVersion">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Software"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#SpatialDimensions -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#SpatialDimensions">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#CFDTypeOfSimulation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#StateVariables -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#StateVariables">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Variables"/>
+        <owl:disjointWith rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#UserDefinedVariables"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Stationary -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Stationary">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#TimeDependency"/>
+        <owl:disjointWith rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Transient"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Symmetry -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Symmetry">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#BoundaryConditions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Temperature -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Temperature">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#StateVariables"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#TimeDependency -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#TimeDependency">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#CFDTypeOfSimulation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Transient -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Transient">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#TimeDependency"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Turbulence -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Turbulence">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#CFDTypeOfSimulation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#TurbulenceModels -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#TurbulenceModels">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Turbulence"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#TypeOfCoordinateSystem -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#TypeOfCoordinateSystem">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#SpatialDimensions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#User -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#User">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Metadata"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#UserDefinedVariables -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#UserDefinedVariables">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Variables"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Variables -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Variables"/>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Velocity -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Velocity">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#StateVariables"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#VelocityU -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#VelocityU">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Velocity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#VelocityV -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#VelocityV">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Velocity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#VelocityW -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#VelocityW">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#Velocity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#VolumetricForces -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#VolumetricForces"/>
+    
+
+
+    <!-- http://tu-dortmund.de/CFD-ADTUDO#Wall -->
+
+    <owl:Class rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Wall">
+        <rdfs:subClassOf rdf:resource="http://tu-dortmund.de/CFD-ADTUDO#BoundaryConditions"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#BSL-ReynoldsStress"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#K-EpsilonModel"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Other"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#SSG-ReynoldsStress"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#ShearStressTransport"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#BoundaryConditions"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#CFDTypeOfSimulation"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Metadata"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#SimulatedDomain"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Variables"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#VolumetricForces"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Edges"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Faces"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Geometry"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Points"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Inlet"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Opening"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Outlet"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Symmetry"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Wall"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Machine"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Software"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#User"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Pressure"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Temperature"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Velocity"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#SpatialDimensions"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#TimeDependency"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#Turbulence"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#VelocityU"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#VelocityV"/>
+            <rdf:Description rdf:about="http://tu-dortmund.de/CFD-ADTUDO#VelocityW"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
