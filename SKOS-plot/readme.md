@@ -4,6 +4,10 @@ Code from Alexander Behr @ TUDO University developed for NFDI4Cat
 run this first, in order to set up the installation of vocexcel properly
 
 # SKOS-plotter.py
+Uses vocexcel and ontospy. Use:
+
+	pip install ontospy[FULL] -U
+
 This first translates the SKOS-Template Excel-file you created to another one with defined IRIs for the concept names.
 Then, the respective SKOS-file in ttl-format as well as a dendrogram, and the documentation in html format are generated (see example dendrogram below).
 
