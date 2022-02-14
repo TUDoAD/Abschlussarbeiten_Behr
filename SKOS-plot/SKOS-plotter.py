@@ -9,7 +9,7 @@ Created on Fri Dec 31 15:41:14 2021
 # pip install ontospy
 # pip install ontospy[FULL]
 
-## For full module (use this):
+## full module (use this):
 # pip install ontospy[FULL] -U
 import ontospy
 from ontospy.ontodocs.viz.viz_html_single import *
@@ -21,6 +21,7 @@ from vocexcel import convert
 import glob
 import os
 from pathlib import Path
+#import subprocess
 
 import URIgenerator
 
@@ -36,18 +37,26 @@ for name in filenames:
     convert.excel_to_rdf(name,output_file_path = "./export/")#,output_format = "xml")
     print("converted import/{} successfully to export/{}.".format(os.path.basename(name),Path(os.path.basename(name)).with_suffix(".ttl")))
 
-##
-#       SKOS plotting begins
-##
-model = ontospy.Ontospy("./export/"+str(Path(os.path.basename(name)).with_suffix(".ttl")), verbose = True)
-docs_model = HTMLVisualizer(model, title="docs")
-dendro = Dataviz(model, title = "dendrogram")
 
-docs_model.build(output_path='./export/docs/')
-dendro.build(output_path = './export/dendro/')
+    ##
+    #       SKOS plotting begins
+    ##
+    model = ontospy.Ontospy("./export/"+str(Path(os.path.basename(name)).with_suffix(".ttl")), verbose = True)
+    
+    #model = ontospy.Ontospy("ExampleCFDOntology.owl", verbose = True)
+    docs_model = HTMLVisualizer(model, title="docs")
+    dendro = Dataviz(model, title = "dendrogram")
+    
+    docs_model.build(output_path='./export/docs_'+ os.path.splitext(Path(os.path.basename(name)))[0] + '/')
+    dendro.build(output_path = './export/dendro_'+ os.path.splitext(Path(os.path.basename(name)))[0] + '/')
 
 #dendro.preview()
+
+
 #docs_model.preview()
+
 #dendro.build()
 #dendro.preview()
+
+
 #ontospy.ontodocs.viz.viz_d3dendogram(model)
