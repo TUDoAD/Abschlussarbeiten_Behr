@@ -1,0 +1,1540 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/-_sol_gel_derived_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/0.1_g_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/15,000_kg_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/2.3.5_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/3.6.6.2_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/3.6.6.3_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/3.6.6.4_metal_recovery_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/3d_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/3d_printing_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/ability_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/absence_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/accumulate:has_condition:@subject=non_volatile_hydrocarbons@preps=on_catalyst/on> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/accumulation_on_catalyst/on> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/acid_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/acid_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/acidic_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/acidic_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/acidic_or_basic_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/acidic_properties_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/active_and_selective_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/active_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/active_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/active_component_in_catalyst/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/acts::@subject=sulfuric_acid@adverb=hence@preps=as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/added_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/addition_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/additional_amounts_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/alloy_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/alumina_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/alumina_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/ammoxidation_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/ammoxidation_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/amount_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/annual_volume_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/appears::@subject=it@adverb=thus@preps=in_direct_contact_to_catalyst_packed_bed,,,as_membrane,,,as_catalyst@[can_be_located:that:@subject=permselective_zeolite_membranes@acomp=spatially_decoupled]/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/application_as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/application_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/applied_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/arrays_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/atoms_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/atoms_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/attractive_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/base_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/base_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/base_or_acid_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/base_or_acid_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/basic_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/basic_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/be_used::@preps=in_catalyst/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/best_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/bifunctional_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/bimetallic_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/bimetallic_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/bimetallic_or_silica_based_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/bona_fide_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/bonding_between_catalyst/between> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/bottom_type_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/btx_on_catalysts/on> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/bulk_and_supported_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/bulk_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/bulk_metal_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/bulk_oxides_type_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/c2=_on_catalysts/on> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/c3=_on_catalysts/on> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/c4=_on_catalysts/on> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/can_be_used::@subject=[metals:which:@full_verb=can_be_used@preps=as_catalysts]@preps=as_catalysts/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/can_be_used::@subject=aluminosilicates,,,amorphous,,,crystalline@preps=as_supports,,,as_catalysts,,,because_acidic_properties/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/can_be_used::@subject=ion@preps=as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/can_function::@subject=[white_abrasive_material:which:@full_verb=can_function@preps=as_catalyst,,,because_high_surface_area]@preps=as_catalyst,,,because_high_surface_area/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/capsule_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/capsule_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/capsuled_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/capsuled_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/carry_out:to:@direct_object=catalyst@preps=into_drums,,,into_trucks/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst/has_complex_property> rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst/has_complex_specification> rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst/has_property> rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst::@full_verb=affect@direct_object=high_temperature_polymerization@preps=to_higher_molecular_weight_laos> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst::@full_verb=based@preps=on_fluorine> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst::@full_verb=based@preps=on_neodymium> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst::@full_verb=based@preps=on_ﬂuorine> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst::@full_verb=followed@preps=by_distillation> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst::@full_verb=required@preps=in_catalytic_reformer> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst::@full_verb=used@preps=in_numerous_hydrogenations> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:forwhich:@full_verb=must_serve@subject=it@preps=as_support> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:to:@full_verb=discriminate@preps=among_different,,,among_functional_group,,,among_orientations> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:to:@full_verb=effect@direct_object=use_of_vanadium_pentoxide,,,use_as_formation_of_sulfur_trioxide,,,use_as_formation_from_sulfur_dioxide> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:to:@full_verb=favor@direct_object=one@adverb=selectively@preps=among_competitive_chemical_reactions> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:to:@full_verb=produce@direct_object=use_of_product> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:which:@full_verb=be_used@adverb=further> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:which:@full_verb=can_be@attribute=different_metals> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:which:@full_verb=enabled@direct_object=reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:which:@full_verb=exists@preps=as_foil> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:which:@full_verb=is@preps=in_line_with_previous_reports> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:which:@full_verb=is_not@acomp=biotechnological_in_nature> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:which:@full_verb=is_removed> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:which:@full_verb=is_required> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:which:@full_verb=should_be@adverb=also@acomp=sufficiently_stable_under_operation_conditions> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:which:@full_verb=turns@direct_object=starches@preps=into_ethanol> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst:which:@full_verb=were_based@adverb=originally@preps=as_cucl2> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_3a/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_ability/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_acidity/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_activation/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_activity/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_after_calcination> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_amount/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_amounts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_as_iron_oxide> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_at_250_˝c.> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_atom/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_attrition/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_batch/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_bed/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_beds/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_binders/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_bulk_composition/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_bulk_density/has_property> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_by_polycarbonate_producers> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_capacity/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_characterization/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_charge/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_components/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_composition/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_concentration/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_conditions/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_configuration/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_consumption/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_core/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_cores/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_costs/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_cycle/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_damage/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_deactivation/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_design/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_development/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_discharge/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_division/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_during_activation> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_during_preparation> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_during_reaction_stages> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_effectiveness/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_evaluation/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_extrudates/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_extrusion/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_for_ammonia_production> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_for_different_reactions> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_for_industrial_process> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_for_monolayer_coking> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_for_overall_re-_action> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_for_polymerisation_of_ethene> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_for_undesirable_side_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_for_vinyl_acetate_production> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_forms/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_formulations/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_from_charging_tube> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_from_coking> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_from_product> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_from_sol> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_grain/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_grains/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_grid/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_ammonia_production> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_different_tubes> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_empty_reactor_for_3_h.> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_empty_reactor_with_uv_light_irradiation> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_final_process> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_hydration> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_hydrogenation> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_hydrogenation_reactions> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_manufacture> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_manufacture_during_synthesis> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_monomeric_form> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_production> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_samples> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_steam_reforming_of_hydrocarbons> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_synthetic_pathway> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_in_true_sense> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_ir_spectrum/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_layer/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_level/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_levels/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_life/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_lifetime/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_loading/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_loadings/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_losses/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_manufacturers/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_manufactures/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_manufacturing/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_market/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_mass/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_materials/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_mechanical_stability/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_microsphere/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_mix/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_mixtures/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_nanocluster/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_nature/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_of_fairly_larger_size_in_form_of_extrudates> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_of_fairly_larger_size_in_form_of_pellets> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_on_optical_yields> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_outer_layer/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_packing/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_particle/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_particle_size/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_particles/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_pastes/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_pellet/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_pellets/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_performance/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_poison/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_poisoning/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_poisons/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_porosity/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_powder/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_powders/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_preparation/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_preparation_procedure/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_preparation_technology/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_preparations/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_production/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_production_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_profiling/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_promotion/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_protection/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_protective_membrane/has_property> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_reactivity/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_recycling/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_reduction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_regeneration/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_region/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_removal/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_renewal/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_replacement/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_sales/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_sample/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_samples/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_scale/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_screening/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_search/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_selectivity/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_shape/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_shapes/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_site/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_spheres/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_stability/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_start_up/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_structure/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_substrate/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_supplier/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_suppliers/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_support/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_supports/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_surface/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_synthesis/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_system/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_testing/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_throughout_catalyst_microsphere> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_tubes/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_type/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_unit/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_volume/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_weight/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_with_attritionresistant_binder> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_with_bimodal_pore_distribution> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_with_extremely_high_reaction_rate> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_with_five_transition_metal_components> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_with_high_turnover_number> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_with_low_metal_loading> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_with_minimal_amount_of_impurities> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_with_rare_earths> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_with_smaller_pellet_size> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts/has_complex_property> rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts/has_complex_specification> rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts/has_property> rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@adverb=subsequently@preps=with_developed_surface_area> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@direct_object=work@preps=upon_[influence:which:@full_verb=catalysts@direct_object=work]> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=are_used@subject=following_methods> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=being_made@preps=in_cost_-_effective_manner> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=employed> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=loading@direct_object=pt> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=needed> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=prepared@preps=by_selective_removal> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=related@preps=to_propylene_production> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=requiring@direct_object=less_viscous_pastes> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=scaling_up> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=showing@direct_object=strongest_lewis_type_acid_sites> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=tested@preps=in_lab> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=used> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=used@preps=for_production_of_cyclohexane> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=used@preps=in_ammonia_oxidation> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=used@preps=in_hydrogenation,,,in_dehydrogenation,,,in_oxidation> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=used@preps=in_oxidation_of_so2> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=used@preps=in_producing> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=used@preps=in_production_of_most_common_versions_of_title_polymers> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=used@preps=in_production_of_pp> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@full_verb=used@preps=in_system> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@subject=[performance::@full_verb=compared@preps=to_reference]@direct_object=al_sba-15,,,h_zsm-5> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@subject=fcc@preps=in_current_residue> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@subject=performance_of_zsc-24,,,reference@direct_object=al_sba-15,,,h_zsm-5@preps=in_cracking_of_wco,,,in_cracking_at_cto_ratio_of_0.4_g·g−1,,,in_cracking_at_550_◦_c> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts::@subject=sio2@direct_object=123_titanium_tetrachloride@preps=on_support_of_magnesium_chloride> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts:which:@full_verb=are@subject=both@acomp=tertiary_and_secondary,,,secondary> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts:which:@full_verb=be_replaced@adverb=earlier> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts:which:@full_verb=deactivate@adverb=gradually> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts:which:@full_verb=has_been_changed@subject=concentration_of_catalytically_active_material> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts:which:@full_verb=has_proven@direct_object=useful@preps=in_older_deacon_process> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_acidity/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_after_photocatalytic_experiment> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_beds/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_by_extrusion> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_development/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_for_acylation_of_aromatic_hydrocarbons> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_for_acylation_of_phenolics> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_for_bulk_chemical_production> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_for_efficient_conversion_of_n_butane> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_for_mainly_academic_purposes> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_for_petroleum_refining> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_for_phenol_benzoylation> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_for_process> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_from_2015–2016> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_in_domain_of_nanomaterials> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_in_environmental_and_biomass_related_reactions> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_in_exhaust_gas_cleaning> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_in_final_shape> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_in_form_of_powders> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_in_forms_of_rings> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_in_hydroxylation_of_phenol> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_in_hydroxylation_with_h2o2> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_in_multitubular_reactors> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_in_presence_of_binders> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_in_reactions> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_in_world> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_lifetime/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_of_different_particle_sizes> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_of_different_size> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_of_shape> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_of_tableting> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_of_ziegler_type> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_precursors/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_preparation/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_system/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_to_environment> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_to_overall_cost_of_product> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_with_controlled_metal_dispersion> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_with_core_shell_structure> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_with_crystal_size> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_with_different_shapes> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_with_high_metal_loadings> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_with_morphology> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_with_tailored_sar> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_with_texture> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts_without_aromatic_moiety> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalytic_cracking_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/ceramic_foam_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/choice_as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/choosing::@direct_object=catalyst/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/chromic_oxide_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/co_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/co_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/coat::@direct_object=catalyst@preps=with_attrition_-_resistant_material/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/coated_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/cobalt_-_based_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/cobalt_and_nickel_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/cobalt_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/cobalt_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/colloidal_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/comment_about_catalysts/about> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/commercial_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/common_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/common_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/common_type_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/complexes_with_catalyst/in_company_of_or_including> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/component_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/components_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/composites_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/composition_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/compounds_on_catalyst/on> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/concentrations_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/concept_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/conditions_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/contact_between_catalyst/between> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/contact_with_catalyst/in_company_of_or_including> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/containing::@direct_object=catalyst/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/containing_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/contaminated_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/controlled_flow_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/conventional_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/conventional_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/copper_chromite_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/copper_oxide_alumina_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/core_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/core_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/core_shell_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/core_shell_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/costs_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/cracking_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/cuznoa2o3_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/damage_to_catalyst/to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/deactivated_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/deactivated_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/decomposition_activities_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/dehydrogenation_ability_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/dehydrogenation_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/desired_amount_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/detailed_description_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/development_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/difference_between_catalysts/between> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/different_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/different_types_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/disadvantage_as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/discuss:to:@direct_object=catalysts,,,catalysis@preps=without_using/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/discussion_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/dispersed_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/distribute:to:@direct_object=catalyst@adverb=evenly/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/diverse_industrial_applications_as_catalysts/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/does_not_require::@subject=[process::@full_verb=called@direct_object=chlor_-_alkali_process]@direct_object=catalyst/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/drawbacks_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/earliest_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/economic_costs_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/economic_factors_in_catalyst/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/economic_shaping_technique_for_catalysts/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/effective_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/effectiveness_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/efficient_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/efficient_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/efficient_separation_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/egg_shell_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/egg_shell_type_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/element_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/emission_control_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/encapsulated_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/enough_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/exact_amount_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/excessive_coke_formation_on_catalysts/on> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/expensive_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/external_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/external_surface_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/extrusion_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/f_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/favored_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/fcc_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/fe1.82ce0.18o3_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/fe_-_based_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/fiber_-_based_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/fiber_based_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/fiber_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/final_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/first_reports_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/fischer_tropsch_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/fischer_tropsch_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/fixed_bed_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/fixed_beds_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/formaly_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/formation_on_catalysts/on> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/fresh_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/ft_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/gold_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/gold_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/good_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/great_success_as_catalysts/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/greater_amount_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/h_y_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/h_zsm-5_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hardiness_as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/has::@subject=purity@adverb=though@preps=as_catalyst@[be:to:@acomp=higher_than_that]/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/have_seen::@subject=roughly_85–90_%_of_chemical_products@direct_object=catalyst@preps=during_course_of_production/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hb_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hc_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/heat:to:@direct_object=reactant,,,catalyst@adverb=separately/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/heterogeneous_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/heterogeneous_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/high_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hinders::@subject=[zeolites:which:@full_verb=hinders@direct_object=potential_use_of_material@adverb=somehow@preps=along_with,,,as_catalyst,,,despite_hundreds_of_published_scientific_papers]@direct_object=potential_use_of_material@adverb=somehow@preps=along_with,,,as_catalyst,,,despite_hundreds_of_published_scientific_papers/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/homogeneity_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/homogeneous_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/homogeneous_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/homogeneous_or_heterogeneous_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/homogeneously_catalyzed_esterification_as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hot_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hybrid_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hybrid_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hydrogenation_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hydrogenation_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hydrophilicity_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hzsm-5_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/imaging_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/important_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/improve::@subject=[types:which:@full_verb=improve@direct_object=catalyst@preps=in_different_ways]@direct_object=catalyst@preps=in_different_ways/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/improvements_in_catalysts/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/industrial_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/industrial_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/industrial_preparation_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/ing::@direct_object=catalyst@preps=with_sulfur/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/initial_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/intrinsic_nature_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/iron_-_based_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/iron_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/iron_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/iron_oxide_based_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/iron_oxide_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is::@acomp=critical@preps=for_catalysts/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is::@subject=zeolite@attribute=typical_and_superior_candidate@preps=among_catalysts,,,because_excellent_stability,,,because_adjustable_acidity,,,because_special_pore_structure/among> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is_added::@subject=small_amount_of_platinum@preps=to_catalyst@[to_eliminate:to:@direct_object=odor@preps=from_[hydrocarbons::@full_verb=entering@direct_object=cabin],,,because_long_waits_behind_other_aircrafts,,,because_long_waits_on_runaway]/to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is_employed::@preps=as_catalyst,,,in_present_invention/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is_established::@subject=ion@adverb=rapidly@preps=as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is_heated::@subject=reaction_gas@adverb=thus@preps=by_catalyst/by> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is_reached::@subject=steady_state@preps=in_addition,,,on_catalysts,,,within_less_2_h_of_irradiation,,,within_less_2_h_on_stream/on> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is_used::@subject=[platinum::@full_verb=alloyed@preps=with_10_%_rhodium]@adverb=currently@preps=in_most_cases,,,as_catalyst@[mention:in_contrast_to:@subject=early_patents_on_improvement_of_ostwald_process@direct_object=[metals:which:@full_verb=can_be_used@preps=as_catalysts]]/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/kaap_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/kaap_synthesis_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/kaminsky_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/key_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/large_spending_for_catalysts/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/large_suite_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/latter_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/lewis_acid_as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/lewis_type_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/lewis_type_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/life_span_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/lifetime_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/load:to:@direct_object=catalyst@preps=into_reactor_volume,,,into_decrease_channeling_at_expense_of_higher_pressure_drop/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/loaded_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/longterm_performance_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/loss_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/m._catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/m.m._ni_zsm-5_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/macroscopic_units_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/magnetite_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/makes_up::@subject=[material:which:@full_verb=makes_up@direct_object=catalyst]@direct_object=catalyst/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/manufacture_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/maximum_possible_pressure_without_catalyst/in_absence_of> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/mean_particle_size_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/mercury_chloride_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/metal_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/metal_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/metal_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/metal_oxide_-_based_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/metallic_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/metallocene_-_based_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/metallocene_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/metallocene_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/methanation_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/mg_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/microspherical_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/might_damage:has_precondition:@subject=such_vibration_screens@direct_object=catalyst@adverb=additionally/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/migrates::@subject=[boron:which:@full_verb=migrates@preps=within_catalyst,,,by_solid_state_diffusion,,,to_passivate_ni]@preps=within_catalyst,,,by_solid_state_diffusion,,,to_passivate_ni/within> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/mixed_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/mode_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/model_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/monolithic_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/most_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/most_cost_-_effective_materials_for_catalyst/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/most_important_characteristics_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/must_be_converted::@subject=acetone@adverb=slowly@preps=by_catalysts,,,to_[intermediate:which:@full_verb=reacts@adverb=rapidly@preps=with_halogen@[give:to:@direct_object=products]]@[to_account:to:@preps=for_role_of_catalysts,,,for_lack_of_effect_on_rate,,,for_lack_of_effect_of_halogen_concentration]/by> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/must_culminate::@subject=regeneration@adverb=again@preps=in_catalyst@[being::@acomp=functional@preps=for_originally_intended_process]/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/nanosized_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/natta_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/nature_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/new_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/new_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/new_class_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/newer_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/ni3fe_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/nickel_-_based_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/nickel_and_,_palladium_,_platinum_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/nickel_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/nickel_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/novel_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/nox_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/nucleophilic_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/old_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/one_form_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/only_few_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/operational_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/optimal_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/optimum_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/other_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/other_types_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/outer_layer_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/oxidation_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/oxide_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/oxide_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/oxidic_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/packed::@preps=with_catalyst/in_company_of_or_including> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/palladium_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/palladium_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/particular_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/particular_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/pentoxide_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/pentoxide_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/performance_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/performing_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/peroxide_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/phillips_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/platinum_-_only_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/platinum_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/platinum_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/poisoned_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/polarity_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/potential_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/powder_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/practical_difficulties_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/preparation_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/preparation_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/prepared_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/presence_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/presence_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/present:parallel_in_time:@subject=ions@adverb=initially@preps=in_catalyst/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/pressure_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/price_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/product_from_catalyst/has_origin> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/production_from_catalysts/has_origin> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/production_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/production_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/products_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/protect:to:@direct_object=catalyst@preps=because_attrition,,,because_poisoning/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/pt_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/pt_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/published::@preps=in_catalysts/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/purity_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/pyrophoric_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/rather_colorful_name_for_catalyst/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reactants_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reactants_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/real_and_model_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/real_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/recent_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/recorded::@preps=with_catalysts/in_company_of_or_including> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/recovery_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/recycling::@direct_object=catalyst/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reduced_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reduction_over_catalyst/over> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reference_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/regenerate::@direct_object=catalyst@adverb=continuously/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/regeneration_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/releasing::@direct_object=catalyst/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/removal_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/removal_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/removed_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/replacement_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reprinted::@preps=from_catalysts/has_origin> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/require::@subject=[processes:which:@full_verb=require@direct_object=catalyst]@direct_object=catalyst/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/require::@subject=high_space_velocities_of_low_concentration_of_ozone,,,high_space_velocities_of_200,000–500,000_h@direct_object=efficient_contact_of_ozone@preps=with_catalyst/in_company_of_or_including> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/require:to:@direct_object=catalyst/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/requires::@subject=hydrogenation_step@direct_object=raney_nickel@preps=as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/requires::@subject=reaction@direct_object=lewis_acid@preps=as_catalyst,,,at_elevated_temperature,,,at_pressure/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/requires:parallel_in_time:@subject=second@direct_object=catalyst/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/research_on_catalyst/on> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/residual_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/resulting_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reusability_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reuse_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/rhodium_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/role_as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/role_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/role_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/ruthenium_-_based_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/ruthenium_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/scans::@subject=focused_laser_light@direct_object=catalyst@preps=in_fluorescence_microscopy@[detecting::@direct_object=fluorescence_emission@preps=from_focal_points]/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/selective_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/selective_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/selectivity_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/separation_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/series_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/severe_poisoning_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/shaped_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/shaping_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/should_not_deactivate::@direct_object=catalyst@preps=in_selective_doping/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/sieving_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/silica_alumina_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/silica_based_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/silver_-_based_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/silver_-_based_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/silver_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/silver_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/slight_structural_change_in_catalyst/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/small_amounts_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/small_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/solid_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/solid_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/special_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/spent_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/spent_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/sponge_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/spread:to:@direct_object=catalyst@adverb=evenly/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/stability_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/stable_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/stable_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/starting_material_for_catalyst/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/state_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/strong_deactivating_effect_on_catalyst/on> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/structural_damages_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/structural_properties_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/structured_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/such_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/such_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/suitable_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/suitable_forms_as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/sulfuric_or_phosphoric_acids_as_catalysts/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/supported_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/supported_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/supporter_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/surface_area_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/surface_properties_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/synthesis_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/tabletized_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/technical_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/temperature_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/temperature_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/texture_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/three_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/three_way_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/threeway_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/tio2_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/titanium_-_based_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/titanium_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/total_surface_area_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/treatment_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/tried::@subject=original_patent@direct_object=catalysts/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/tubular_boiling_water_reactor_with_catalyst/in_company_of_or_including> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/tungsten_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/two_applications_as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/two_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/types_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/undergo::@direct_object=halogenation@preps=without_catalyst/in_absence_of> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/unique_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/unreactive_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/unstable_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/use::@direct_object=catalyst/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/use::@direct_object=reactor_tube@adverb=once@preps=with_catalyst/in_company_of_or_including> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/use_as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/use_as_catalysts/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/use_of_catalyst/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/use_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/used::@preps=as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/used::@preps=in_catalysts/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/used::@subject=alumina@preps=as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/used_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/using_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/usual_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/utilizes::@subject=ethanol_dehydration,,,coupling@direct_object=metal_oxides@adverb=well@preps=as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/v2o5_as_catalyst/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/value_in_catalysts/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/vapourised::@subject=pgm@preps=from_catalyst/has_origin> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/was::@subject=pb@attribute=only_primary_product@adverb=also@preps=with_catalysts/in_company_of_or_including> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/was::@subject=pb@attribute=only_primary_product@adverb=clearly@preps=with_catalysts@[extrapolated:has_reason:@subject=selectivity@preps=at_low_conversion]/in_company_of_or_including> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/were_found::@subject=two_different_areas@preps=in_catalyst@[are_composed:parallel_in_time:@subject=other_areas@adverb=mainly@preps=of_matrix_material]/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/wgs_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/wide_variety_in_catalyst/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/wide_variety_of_catalysts/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/will_be_published::@subject=further_articles_on_above_mentioned_topics@adverb=soon@preps=in_catalysts/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/working_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/y_-_based_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/zeolite_-_based_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/zeolite_-_encapsulated_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/zeolite_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/zeolite_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/zeolitic_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/zeolitic_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/zirconia_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/zno_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/zr_o_so2_element_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/zr_tms_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/zr_tms_catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/zsc-24_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysts> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst> .
+

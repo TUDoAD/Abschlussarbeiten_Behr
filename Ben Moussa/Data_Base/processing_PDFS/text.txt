@@ -1,0 +1,28 @@
+Catalysis is the process of increasing the rate of a chemical reaction by adding a substance known as a catalyst.
+
+
+Catalysts are not consumed in the reaction and remain unchanged after it.
+If the reaction is rapid and the catalyst recycles quickly, very small amounts of catalyst often suffice.
+mixing, surface area, and temperature are important factors in reaction rate.
+Catalysis is ubiquitous in chemical industry of all kinds.
+Estimates are that 90% of all commercially produced chemical products involve catalysts at some stage in the process of their manufacture.
+The SI derived unit for measuring the catalytic activity of a catalyst is the katal, which is quantified in moles per second.
+The productivity of a catalyst can be described by the turnover number.
+In general, chemical reactions occur faster in the presence of a catalyst because the catalyst provides an alternative reaction pathway with a lower activation energy than the non-catalyzed mechanism.
+An example of heterogeneous catalysis is the reaction of oxygen and hydrogen on the surface of titanium dioxide to produce water.
+Catalysts enable pathways that differ from the uncatalyzed reactions.
+These pathways have lower activation energy.
+Consequently, more molecular collisions have the energy needed to reach the transition state.
+Hence, catalysts can enable reactions that would otherwise be blocked or slowed by a kinetic barrier.
+In the catalyzed elementary reaction, catalysts do not change the extent of a reaction.
+Catalysts have no effect on the chemical equilibrium of a reaction.
+The ratio of the forward and the reverse reaction rates is unaffected by the catalysts.
+The second law of thermodynamics describes why a catalyst does not change the chemical equilibrium of a reaction.
+Introducing the catalyst to the system would result in a reaction to move to the new equilibrium, producing energy.
+Production of energy is a necessary result since reactions are spontaneous only if Gibbs free energy is produced.
+Some so-called catalysts are really precatalysts. Precatalysts convert to catalysts in the reaction.
+Heterogeneous catalysts act in a different phase than the reactants.
+Most heterogeneous catalysts are solids that act on substrates in a liquid or gaseous reaction mixture.
+Important heterogeneous catalysts include zeolites, alumina,[15] higher-order oxides, graphitic carbon, transition metal oxides, metals, and vanadium oxide.
+A heterogeneous catalyst has active sites, which are the atoms or crystal faces where the reaction actually occurs.
+Thus, not only most of the volume but also most of the surface of a heterogeneous catalyst may be catalytically inactive.

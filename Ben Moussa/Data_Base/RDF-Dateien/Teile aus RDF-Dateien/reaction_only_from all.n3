@@ -1,0 +1,924 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/232_definitions_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/2_step_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/above_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/acid_-_catalyzed_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/acid_base_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/active_catalysts_for_reaction/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/adsorption_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/aim_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/alder_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/alterations_during_reaction/during> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/application_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/apply:to:@direct_object=reaction@preps=to_asymmetric_synthesis_of_allylic_alcohols,,,by_selective_deprotonation_of_enantiotopically_related_protons_in_symmetrical_epoxides/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/are:that:@subject=products@attribute=water,,,ammonia@preps=in_reaction@[must_be_separated:which:@[produce:to:@direct_object=pure_salt]]/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/are_applied::@subject=two@adverb=sometimes@preps=for_reaction/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/are_lost::@subject=small_amounts_of_catalyst@preps=in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/aspects_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/asymmetric_version_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/autooxidation_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/b._reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/batch_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/being_displaced::@preps=from_six_molecules_of_two_steps,,,from_six_molecules_of_stages,,,in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/being_needed::@preps=in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/benzoylation_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/benzoylation_with_reaction/in_company_of_or_including> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/bimolecular_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/bromine_butadiene_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/can_not_be_isolated::@subject=they@adverb=usually@preps=from_reaction@[will_react:has_precondition:@subject=they@adverb=immediately@[fill:to:@direct_object=orbital]]/has_origin> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/can_not_be_represented:that:@subject=state_of_catalyst,,,conditions_of_catalyst@adverb=easily@preps=in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/can_understand::@subject=we@direct_object=reaction@preps=in_similar_way/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/cannizzaro_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/case_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalysis_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalyst_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/catalytic_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/cell_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/certain_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/chain_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/changes_in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/characteristic_and_synthetically_important_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/characteristic_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/chemical_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/chlorination_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/cold_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/common_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/competing_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/completes::@subject=elimination_of_proton@direct_object=reaction/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/concerted_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/consecutive_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/controlled_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/could_conceive::@subject=one@direct_object=[only_possible_mechanisms:which:@full_verb=could_conceive@subject=one@preps=for_reaction]@preps=for_reaction/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/course_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/cracking_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/cross_aldol_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/deactivation_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/desire::@subject=you@preps=from_reaction/has_origin> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/desired_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/developed_and_widely_used_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/developed_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/diazonium_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/diels_alder_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/direct_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/displacement_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/displaces::@subject=nucleophile@direct_object=group@preps=at_[rate:atwhich:@full_verb=displaces@subject=nucleophile@direct_object=group@preps=in_reaction],,,in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/disproportionation_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/dissociation_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/do_not_is_not_shown::@subject=polycarbonate_reactions,,,it,,,this@preps=in_reaction,,,as_with@[require:to:@direct_object=catalyst][is_required:when:@subject=one]/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/does_not_change:that:@subject=concentration@adverb=effectively@preps=during_reaction/during> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/does_not_tell::@subject=method_of_notation@direct_object=anyone@adverb=much@preps=about_reaction/about> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/dramatic_change_in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/driving_force_for_reaction/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/e1_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/e2_or_e1_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/e2_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/e_l_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/electrode_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/electrophile_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/elementary_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/eley_rideal_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/enabled::@subject=[catalyst:which:@full_verb=enabled@direct_object=reaction]@direct_object=reaction/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/enhanced_enantioselectivity_in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/enthalpy_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/epoxidation_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/equation_for_reaction/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/equilibrium_limited_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/equilibrium_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/equilibrium_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/established_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/example_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/exchange_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/exothermic_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/explosive_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/extent_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/fast_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/faster_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/favorability_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/feasibility_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/feasible_mechanism_for_reaction/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/first_order_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/first_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/following_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/forward_and_backward_direction_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/forward_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/four_step_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/free_energy_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/free_energy_with_reaction/in_company_of_or_including> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/further_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/gas_shift_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/gasoline_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/gattermann_koch_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/general_characteristics_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/general_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/gibbs_energy_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/given_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/h_value_for_reaction/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/haloform_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/halogenation_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/has::@subject=[compressed_air:which:@full_verb=has@direct_object=sufficient_elemental_oxygen@preps=for_reaction]@direct_object=sufficient_elemental_oxygen@preps=for_reaction/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/heat::@subject=shows,,,liberated@adverb=simply@preps=of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/heat_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/heats_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/homogeneous_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hunsdiecker_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hydrogenation_catalyst_for_reaction/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hydrogenation_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/hydrogenolysis_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/important_example_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/important_feature_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/important_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/influence_on_reaction/on> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/intermolecular_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/introduction_in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/investigated_species_in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/ion_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/irreversible_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is::@acomp=especially_important_for_carbohydrates@preps=of_reaction@[will_be_discussed:has_precondition:@preps=in_chapter]/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is:when_for:@subject=∆g@adverb=when@acomp=positive/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is_described::@subject=[hydrogenation::@full_verb=involving@direct_object=formation_of_complexes_with_catalyst]@preps=for_example,,,by_reaction/by> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is_determined::@adverb=actually@preps=of_reaction,,,by_energy_differences_between_starting_halides,,,by_energy_differences_between_transition_states/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is_provided::@subject=simple_and_useful_chemical_test_for_1_alkyne@preps=by_reaction/by> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is_required::@subject=catalyst@adverb=well@preps=for_reaction/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/isotopic_exchange_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/keep:to:@direct_object=reaction/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/kinetic_control_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/less_complete_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/less_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/liquid_phase_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/main_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/may_occur::@subject=alkyl_hydrogen_sulfate_formation_from_alcohols,,,alkyl_hydrogen_sulfate_formation_from_concentrated_sulfuric_acid@preps=by_reaction/by> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/may_occur::@subject=combinations_of_mechanisms@adverb=together@preps=at_times,,,in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/mechanism_for_reaction/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/mechanism_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/medium_and_reaction_mixture/has_property> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/metal_catalysts_for_reaction/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/methane_chlorine_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/mixture_isomerization_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/model_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/most_noteworthy_point_in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/multistep_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/nature_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/necessary_condition_for_reaction/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/net_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/next_stage_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/not_written::@subject=reaction_chemistry@adverb=usually@preps=as_reaction/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/nrnr_spectrum_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/nucleophilic_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/one_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/order_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/organic_product_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/organic_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/overall_feasibility_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/overall_heat_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/overall_order_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/overall_rate_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/overall_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/oxidation_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/oxygen_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/oxygenreduction_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/part_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/participate::@subject=observed_species@preps=as_general_comment,,,in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/particular_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/pb_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/phase_as_reaction/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/portion_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/product_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/products_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/promote::@direct_object=reaction/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/propane_aromatization_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/rapid_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/rate_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reactants_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction/has_complex_property> rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction/has_complex_specification> rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction/has_property> rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction::@full_verb=assuming@direct_object=stoichiometry_corresponds_to_molecularity> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction::@full_verb=catalyzes@subject=it> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction::@full_verb=determined@preps=in_exercise> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction::@full_verb=involved@preps=in_methanol> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction::@full_verb=leading@preps=to_methanol> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction::@full_verb=occurring@preps=at_constant_pressure> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction::@full_verb=resulting@preps=in_combination_of_two_radicals,,,in_disproportionation_of_two_radicals> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction::@full_verb=showing@direct_object=chemistry_of_production> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction::@full_verb=starting@preps=from_pb> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction::@full_verb=termed@direct_object=dehydrochlorination> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction::@full_verb=use@subject=you> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction::@full_verb=using@direct_object=them@preps=in_two_configurations> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:to:@full_verb=approach@direct_object=driving_force_for_equilibrium> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:to:@full_verb=be@attribute=one> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:to:@full_verb=cycle@adverb=pointlessly@preps=between_attached_and_detached_forms> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:to:@full_verb=displace@direct_object=bromide_ion> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:to:@full_verb=give@direct_object=alkyl_bromides> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:to:@full_verb=give@direct_object=methanol,,,acetic_acid> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:to:@full_verb=give@direct_object=methyloxonium_bromide> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:to:@full_verb=occur@preps=at_reasonable_rate> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:to:@full_verb=produce@direct_object=following_molecule> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:which:@full_verb=can_decide@direct_object=direction@adverb=further> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:which:@full_verb=does_not_lead@preps=to_co> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:which:@full_verb=expresses@direct_object=production_of_nitric_oxide> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:which:@full_verb=have_encountered@subject=we@adverb=thus,,,far> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:which:@full_verb=is@acomp=characteristic_of_aldehydes> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:which:@full_verb=is@subject=important_example_of_c-0_bond_of_alcohol> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:which:@full_verb=is_not@attribute=portion_of_product> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:which:@full_verb=means> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:which:@full_verb=removes@direct_object=aluminum@preps=from_alloy_significant_amounts_of_hydrogen> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_affinity/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_arrow/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_at_80_◦_c> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_between_conjugated_diene> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_between_peroxodisulphate_and_iodide_ions> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_between_substituted_alkene> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_by_equation> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_center/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_chains/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_chamber/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_chemistry/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_conditions/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_constants/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_coordinate/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_cycles/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_dθa/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_efficiency/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_energies/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_engineering/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_enthalpy/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_environment/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_equation/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_equations/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_equilibrium/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_family/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_for_1_m_acetone_in_water> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_for_5_h> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_for_simple_carbonyl_com-_pounds> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_form/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_from_gas_phase> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_front/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_gas/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_heat/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_in_.> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_in_addition_to_metal> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_in_case> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_in_conventional_fixed_bed_reactor> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_in_detail> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_in_diffusion_region> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_in_eq> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_in_gas_phase> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_in_liquid_phase> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_in_region_of_external_diffusion> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_in_slate> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_intermediates/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_kinetics/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_mechanism/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_mechanisms/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_medium/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_mixture/has_property> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_mixture/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_mixtures/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_model/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_molecularity/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_network/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_networks/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_1,2> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_2_methyl-2_pentene> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_3,3_dimethyl-1_butyne> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_3,3_dimethyl-1_element> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_3,3_dimethyl_l_-butene> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_3,4_element> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_3_thiazolidine-2_thione_with_aldehyde> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_4_with_corresponding_grignard_reagents> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_acetaldehyde_with_base> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_acid_chloride> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_acid_chlorides> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_alcohol_with_hot_concentrated_sulfuric_acid> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_alcohol_with_overall_dehydration_of_alcohol> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_alcohols_with_hydrobromic_acid> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_alkoxides_with_alkyl_halides> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_alkoxides_with_sulfates> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_alkyl_halide> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_alkylmetal_derivative_with_acidic_hydrocarbon_as_alkyne> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_alkylmetal_derivative_with_acidic_hydrocarbon_as_element> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_boron_trifluoride> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_carbon_dioxide> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_carboxylate_anion_with_water> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_commercial_importance> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_dimethylcyclopentene> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_element_with_alcohols> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_element_with_amines> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_element_with_benzaldehyde> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_esters_with_grignard_reagents> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_ethene_with_bromine> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_ethyl_chloride> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_grignard_reagents> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_hydrogen> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_hydrogen_chloride> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_hydroxide_ion_with_methyl_bromide> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_ketone> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_lead_sodium_alloy_with_ethyl_chloride> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_mesitylene_with_ﬂuoroboric_acid> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_methanol> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_methanol_with_hydrogen_bromide> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_methyl> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_methyl_acetate> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_methyl_chloride_with_hydroxide_ion_in_aqueous_solution> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_one_type_of_compound> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_substrates> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_sulfuric_acid> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_t_butyl_chloride> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_of_water> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_on_graphite_surface> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_on_temperature> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_order/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_orders/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_over_time> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_parameters/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_path/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_paths/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_pathway/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_procedure/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_processing/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_product/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_products/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_rate/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_rates/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_route/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_routes/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_scheme/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_selectivity/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_sequence/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_side/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_sites/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_solution/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_solvent/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_space/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_stages/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_step/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_steps/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_system/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_technology/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_technology_technology/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_temperature/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_temperatures/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_term/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_thermodynamics/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_times/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_types/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_vessel/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_volume/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_alcohol> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_aliphatic_aldehyde> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_aqueous_base> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_bases> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_basic_catalyst> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_benzotrichloride> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_chlorination_of_toluene> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_co> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_different_acylating_agents_as_acyl_halides> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_different_acylating_agents_as_anhydrides> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_different_acylating_agents_as_carboxylic_acids> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_element> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_epoxides> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_ethyne> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_grignard_reagents> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_h2_-_selective_membrane> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_heat> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_high_energy_products> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_larger_∆g_value> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_lewis_acid> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_lowest_energy_products> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_metallic_sodium> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_most_heat> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_nadh> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_oxygen> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_potassium> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_pro-> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_reaction_with_metallic_sodium> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_reaction_with_potassium> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_respect_to_given_reactant> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_respect_to_specijic_reactant> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_rmgx> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_soaps> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_sodium_borohydride> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_sodium_hydroxide> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_strong_base> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_with_water> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_yield/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_zone/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_zones/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/redox_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reduction_half_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reduction_oxidation_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/regio_selectivity_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/related_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/remained:in_contrast_to:@subject=formaly_catalysts@acomp=unchanged@preps=during_reaction/during> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/remains::@subject=catalyst@acomp=unaltered@preps=during_reaction/during> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/removal_from_reaction/has_origin> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reverse_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/ring_closure_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/ritter_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/route_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/s,1_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/s,2_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/second_form_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/second_order_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/second_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/secondary_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/shall_meet::@subject=we,,,allyl_cation@direct_object=it@adverb=again@preps=as_reaction@[go:has_precondition:@subject=carbonium_ions]/as> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/side_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/similar_but_less_complete_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/similar_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/simplified_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/situ_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/sn1_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/sn2_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/sodium_fusion_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/specific_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/standard_enthalpy_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/standard_gibbs_energy_change_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/step_in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/stepwise_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/stereochemical_course_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/stoichiometric_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/structure_-_insensitive_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/studied_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/substitution_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/surface_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/synthetic_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/synthetically_important_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/synthetically_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/takes::@subject=it@direct_object=part@preps=in_reaction@[has_been_passed:ends_with:@subject=critical_ionization_stage]/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/test_tube_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/thermodynamically_equilibrium_limited_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/transfer_side_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/two_step_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/type_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/uncatalyzed_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/useful_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/values_for_reaction/for> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/was_cooled::@subject=crude@preps=after_reaction@[diluted::@preps=with_hplc_[hplc_acetone::@full_verb=filtered]]/after> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/wgs_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/widely_used_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/will_slow_down::@subject=high_peaks_in_diagram@direct_object=reaction/has_direct_object> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/written_representation_of_reaction/related_to> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/wurtz_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+

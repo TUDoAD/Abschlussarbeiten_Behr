@@ -1,0 +1,86 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/glyoxal> a rdfs:Class ;
+    rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/CHEBI_Chemical_Entity>,
+        <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/Chemical_Entity>,
+        <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/Semantic_Property> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/glyoxal_monohydrate> a rdfs:Class ;
+    rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/monohydrate> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/include::@direct_object=glyoxal> a rdfs:Class ;
+    rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/include> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is::@subject=glyoxal@acomp=unusual@preps=in_being> a rdfs:Class ;
+    rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/undergoes::@subject=glyoxal@direct_object=internal_cannizzaro_reaction> a rdfs:Class ;
+    rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/undergoes> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/will_have::@subject=multistep_chemical_reaction@direct_object=slow_rate_-_determining_step,,,[other_,_relatively_fast_steps:which:@full_verb=may_occur]@adverb=before,,,after> a rdfs:Class ;
+    rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/will_have> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/element/has_complex_property> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is::@subject=glyoxal@acomp=unusual@preps=in_being>,
+        <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/undergoes::@subject=glyoxal@direct_object=internal_cannizzaro_reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/glyoxal/has_charge> a rdf:Property ;
+    rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/glyoxal> ;
+    rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/0_e> ;
+    rdfs:subPropertyOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/Object_Property> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/glyoxal/has_chebi_identifier> a rdf:Property ;
+    rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/glyoxal> ;
+    rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/chebi_identifier_34779> ;
+    rdfs:subPropertyOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/Object_Property> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/glyoxal/has_formula> a rdf:Property ;
+    rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/glyoxal> ;
+    rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/c2h2o2> ;
+    rdfs:subPropertyOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/Object_Property> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/glyoxal/has_molar_mass> a rdf:Property ;
+    rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/glyoxal> ;
+    rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/58.036_g_pro_mol> ;
+    rdfs:subPropertyOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/Object_Property> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/glyoxal_monohydrate/has_property> a rdf:Property ;
+    rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/glyoxal_monohydrate> ;
+    rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/glyoxal> ;
+    rdfs:subPropertyOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/Object_Property> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/include::@direct_object=glyoxal/has_direct_object> a rdf:Property ;
+    rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/include::@direct_object=glyoxal> ;
+    rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/element> ;
+    rdfs:subPropertyOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/Object_Property> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is::@subject=glyoxal@acomp=unusual@preps=in_being/has_adjectival_complement> a rdf:Property ;
+    rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is::@subject=glyoxal@acomp=unusual@preps=in_being> ;
+    rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/unusual> ;
+    rdfs:subPropertyOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/Object_Property> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is::@subject=glyoxal@acomp=unusual@preps=in_being/in> a rdf:Property ;
+    rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/is::@subject=glyoxal@acomp=unusual@preps=in_being> ;
+    rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/being> ;
+    rdfs:subPropertyOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/Object_Property> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/multistep_chemical_reaction/has_complex_property> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/will_have::@subject=multistep_chemical_reaction@direct_object=slow_rate_-_determining_step,,,[other_,_relatively_fast_steps:which:@full_verb=may_occur]@adverb=before,,,after> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/undergoes::@subject=glyoxal@direct_object=internal_cannizzaro_reaction/has_direct_object> a rdf:Property ;
+    rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/undergoes::@subject=glyoxal@direct_object=internal_cannizzaro_reaction> ;
+    rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/internal_cannizzaro_reaction> ;
+    rdfs:subPropertyOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/Object_Property> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/will_have::@subject=multistep_chemical_reaction@direct_object=slow_rate_-_determining_step,,,[other_,_relatively_fast_steps:which:@full_verb=may_occur]@adverb=before,,,after/has_direct_object> a rdf:Property ;
+    rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/will_have::@subject=multistep_chemical_reaction@direct_object=slow_rate_-_determining_step,,,[other_,_relatively_fast_steps:which:@full_verb=may_occur]@adverb=before,,,after> ;
+    rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/other_,_relatively_fast_steps:which:@full_verb=may_occur>,
+        <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/slow_rate_-_determining_step> ;
+    rdfs:subPropertyOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/Object_Property> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/will_have::@subject=multistep_chemical_reaction@direct_object=slow_rate_-_determining_step,,,[other_,_relatively_fast_steps:which:@full_verb=may_occur]@adverb=before,,,after/has_specification> a rdf:Property ;
+    rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/will_have::@subject=multistep_chemical_reaction@direct_object=slow_rate_-_determining_step,,,[other_,_relatively_fast_steps:which:@full_verb=may_occur]@adverb=before,,,after> ;
+    rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/after>,
+        <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/before>,
+        <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/generally> ;
+    rdfs:subPropertyOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/Object_Property> .
+

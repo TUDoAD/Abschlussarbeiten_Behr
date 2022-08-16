@@ -1,0 +1,14 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/being_displaced::@preps=from_six_molecules_of_two_steps,,,from_six_molecules_of_stages,,,in_reaction/in> rdfs:range <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/chemical_reaction> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction/has_complex_property> rdfs:domain <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction:which:@full_verb=expresses@direct_object=production_of_nitric_oxide> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_in_case> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
+<http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction_in_slate> rdfs:subClassOf <http://TU-Dortmund.org/BCI/Apparatedesign/Bachelor_Arbeit/reaction> .
+
