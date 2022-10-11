@@ -59,7 +59,7 @@ def w2v_to_json(model, name):
     ddata = scipy.cluster.hierarchy.dendrogram(clusters,
                                                orientation='left',
                                                leaf_label_func=lambda v: str(model.wv.index_to_key[v]),
-                                               leaf_font_size=20)
+                                               leaf_font_size=5)
                                                # no_plot=True)
 
     # Create dictionary for labeling nodes by their IDs
@@ -67,9 +67,9 @@ def w2v_to_json(model, name):
     id2name = dict(zip(range(len(labels)), labels))
 
     # Draw dendrogram using matplotlib
-    # plt.figure(1)
+    #plt.figure(1)
     scipy.cluster.hierarchy.dendrogram(clusters, labels=labels, orientation='left', no_plot=True)
-    # plt.show()
+    #plt.show()
 
     # Initialize nested dictionary for d3, then recursively iterate through tree
     d3dendro = dict(children=[], name="Root1")
@@ -82,3 +82,46 @@ def w2v_to_json(model, name):
 
     # Resetting max recursion limit
     sys.setrecursionlimit(default_rec)
+    
+def w2v_to_json_mod(model, name):
+    # Expanding python's max recursion limit, if data is >1000
+    default_rec = sys.getrecursionlimit()
+    if default_rec < len(model.wv.index_to_key):
+        sys.setrecursionlimit(len(model.wv.index_to_key) * 2)
+
+    # Cluster hierarchical using scipy
+    clusters = scipy.cluster.hierarchy.linkage(model.wv.vectors, method='single')
+    t = scipy.cluster.hierarchy.to_tree(clusters, rd=False)
+
+    # Create a Dendro dictionary
+    ddata = scipy.cluster.hierarchy.dendrogram(clusters,
+                                               #orientation='left',
+                                              # truncate_mode = 'lastp',
+                                              # p = 5,
+                                               leaf_rotation = 90.,
+                                               leaf_label_func=lambda v: str(model.wv.index_to_key[v]),
+                                               leaf_font_size=5)
+                                               # no_plot=True)
+
+    # Create dictionary for labeling nodes by their IDs
+    labels = ddata['ivl']
+    id2name = dict(zip(range(len(labels)), labels))
+
+    # Draw dendrogram using matplotlib
+    plt.figure(1)
+    scipy.cluster.hierarchy.dendrogram(clusters, labels=labels, orientation='left', no_plot=True)
+    plt.show()
+    
+    # Initialize nested dictionary for d3, then recursively iterate through tree
+    d3dendro = dict(children=[], name="Root1")
+    add_node(t, d3dendro)
+
+    label_tree(d3dendro["children"][0], id2name)
+
+    # Output to JSON
+    json.dump(d3dendro, open("./json-files/" + name + ".json", "w"), sort_keys=True, indent=4)
+
+    # Resetting max recursion limit
+    sys.setrecursionlimit(default_rec)
+
+    return clusters, labels, d3dendro
