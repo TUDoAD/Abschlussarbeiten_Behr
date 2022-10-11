@@ -16,12 +16,17 @@ from gensim.models import Word2Vec
 import clustering
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+import pandas as pd
 
+import seaborn as sns
+from sklearn.decomposition import PCA
+import adjustText
 
 model_test = Word2Vec.load("./models/methanation_only_text_mc10")
 
 clusters, labels, d3dendro = clustering.w2v_to_json_mod(model_test, "methanation_only_text_mc10")
 
+vec = model_test.wv
 
 # set up plot
 fig, ax = plt.subplots(figsize=(17, 9)) # set size
@@ -44,7 +49,67 @@ ax.tick_params(\
     left='off',      # ticks along the bottom edge are off
     top='off',         # ticks along the top edge are off
     labelleft='off')
+    
+#ax.legend(numpoints=1)  #show legend with only 1 point
 
+#add label in x,y position with the label as the film title
+for i in range(len(clusters)):
+    ax.text(x[i],y[i], labels[i], size=8)  
+
+plt.show() # show the plot
+
+
+def plot_2d_representation_of_words(
+    word_list, 
+    word_vectors, 
+    flip_x_axis = False,
+    flip_y_axis = False,
+    label_x_axis = "x",
+    label_y_axis = "y", 
+    label_label = "city"):
+    
+    pca = PCA(n_components = 1)
+    
+    word_plus_coordinates=[]
+    
+    for word in word_list: 
+    
+        current_row = []
+        current_row.append(word)
+        current_row.extend(word_vectors[word])    
+        
+    word_plus_coordinates.append(current_row)
+    
+    word_plus_coordinates = pd.DataFrame(word_plus_coordinates)
+        
+    coordinates_2d = pca.fit_transform(
+        word_plus_coordinates.iloc[:,1:300])
+    coordinates_2d = pd.DataFrame(
+        coordinates_2d, columns=[label_x_axis, label_y_axis])
+    coordinates_2d[label_label] = word_plus_coordinates.iloc[:,0]    
+    if flip_x_axis:
+        coordinates_2d[label_x_axis] = \
+        coordinates_2d[label_x_axis] * (-1)    
+    if flip_y_axis:
+        coordinates_2d[label_y_axis] = \
+        coordinates_2d[label_y_axis] * (-1)
+            
+    plt.figure(figsize = (15,10))    
+    p1=sns.scatterplot(
+        data=coordinates_2d, x=label_x_axis, y=label_y_axis)
+    
+    x = coordinates_2d[label_x_axis]
+    y = coordinates_2d[label_y_axis]
+    label = coordinates_2d[label_label]
+    
+    texts = [plt.text(x[i], y[i], label[i]) for i in range(len(x))]    
+    adjustText.adjust_text(texts)
+    
+
+plot_2d_representation_of_words(
+    word_list = labels, 
+    word_vectors = vec, 
+    flip_y_axis = True)
 
 '''
 from scipy.cluster.hierarchy import ward, dendrogram
