@@ -69,7 +69,14 @@ for concept in resDict[onto_name]:
     # onto_name ontology with same label
     # temp_class = labels_to_classes_dict[concept[0]]  
     temp_class = onto_local.search_one(prefLabel = concept[0])
-    model_test.wv.similar_by_word[concept[0]]
+    tuple_similarities = model_test.wv.most_similar(positive = concept[0], topn = 5)
+    similarities = [tuple_similarities[i][0] for i in range(len(tuple_similarities))]
+    
+    with onto_local:
+        for i in similarities:
+            new_class = types.new_class(i, (Thing,))
+            
+        
     #temp_class.new_class("")
     '''
     defstring = ''.join(desc_dict[loaded_onto][concept[0]]) if desc_dict[loaded_onto][concept[0]] != concept[0] else "" 
