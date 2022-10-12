@@ -35,7 +35,6 @@ Onto_World = owlready2.World()
 onto_local = Onto_World.get_ontology('./ontologies/' + onto_name + '.owl').load()
 class_list = (onto_local.classes())
 
-labels_to_classes_dict = {i.prefLabel[0] : i for i in list(Onto_World.classes())}
 
 ##
 #   conceptList = Liste mit Konzepten aus MC = 10, die auch in AFO drin sind?
@@ -68,7 +67,8 @@ with open('FoundClasses' + model_name + '.json', 'w') as jsonfile:
 for concept in resDict[onto_name]:
     # iterates through classes of resDict and temp_class = class of the 
     # onto_name ontology with same label
-    temp_class = labels_to_classes_dict[concept[0]]  
+    # temp_class = labels_to_classes_dict[concept[0]]  
+    temp_class = onto_local.search_one(prefLabel = concept[0])
     model_test.wv.similar_by_word[concept[0]]
     #temp_class.new_class("")
     '''
@@ -83,4 +83,47 @@ for concept in resDict[onto_name]:
     '''
     # onto_local.search_one(prefLabel = 'tensor datum') gibt die Klasse zum PrefLabel aus
     #
+    
+'''
+model_test.wv.similar_by_word('reactor')
+Out[78]: 
+[('bed', 0.9994844198226929),
+ ('outlet', 0.9993471503257751),
+ ('tube', 0.999320924282074),
+ ('inlet', 0.9993012547492981),
+ ('heat', 0.9992453455924988),
+ ('temperature', 0.999235987663269),
+ ('salt', 0.9992288947105408),
+ ('ﬂow', 0.9992184638977051),
+ ('pressure', 0.9992129802703857),
+ ('feed', 0.9991992712020874)]
+
+model_test.wv.similar_by_word('bed')
+Out[79]: 
+[('reactor', 0.9994844794273376),
+ ('salt', 0.9994573593139648),
+ ('parameter', 0.9994072318077087),
+ ('tube', 0.999401330947876),
+ ('time', 0.9993911385536194),
+ ('temperature', 0.9993727803230286),
+ ('coolant', 0.9993698000907898),
+ ('drop', 0.999361515045166),
+ ('mass', 0.9993523955345154),
+ ('pressure', 0.9993463754653931)]
+
+model_test.wv.similar_by_word('outlet')
+Out[80]: 
+[('inlet', 0.9996315836906433),
+ ('feed', 0.9995215535163879),
+ ('pressure', 0.9994890689849854),
+ ('temperature', 0.999485194683075),
+ ('gas', 0.9994626045227051),
+ ('rate', 0.9994502663612366),
+ ('composition', 0.999421238899231),
+ ('flow', 0.9994135499000549),
+ ('concentration', 0.9993895292282104),
+ ('ﬂow', 0.9993889331817627)]
+'''
+    
+
 onto_local.save(file = './' + onto_name + '_ext_' + model_name + '.owl') 
