@@ -81,5 +81,6 @@ for concept in resDict[onto_name]:
     #print("{}: {}\n".format(concept[0],comment_string))
     temp_class.comment.append(comment_string)
     '''
-
+    # onto_local.search_one(prefLabel = 'tensor datum') gibt die Klasse zum PrefLabel aus
+    #
 onto_local.save(file = './' + onto_name + '_ext_' + model_name + '.owl') 
