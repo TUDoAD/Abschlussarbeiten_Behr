@@ -10,6 +10,9 @@ Created on Wed Oct 12 09:23:25 2022
 # model the top X words assigned as children of the existing class.
 ##
 
+##
+# TODO: IsRelatedTo verwenden Statt Subclass of?
+
 ## ToDo: Danach vllt. noch ein Check, wie viele der ursprünglichen Keys jetzt 
 #        in der Ontologie gelandet sind?
 
