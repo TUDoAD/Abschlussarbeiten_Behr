@@ -69,30 +69,44 @@ with open('FoundClasses' + model_name + '.json', 'w') as jsonfile:
 
 for concept in resDict[onto_name]:
     # iterates through classes of resDict and temp_class = class of the 
-    # onto_name ontology with same label
-    # temp_class = labels_to_classes_dict[concept[0]]  
+    # onto_name ontology with same label of concept
+
     temp_class = onto_local.search_one(prefLabel = concept[0])
     tuple_similarities = model_test.wv.most_similar(positive = concept[0], topn = 5)
-    similarities = [tuple_similarities[i][0] for i in range(len(tuple_similarities))]
+    new_classes = [tuple_similarities[i][0] for i in range(len(tuple_similarities))]
+    
+    # Hier noch suchen, ob's die Klasse schon gibt, bevor Children angelegt werden?!
+    
     
     with onto_local:
-        for i in similarities:
-            new_class = types.new_class(i, (Thing,))
+        for i in new_classes: # create new class 
+            ## check, if class already exists?
+            #existing_class = onto_local.search_one(prefLabel = i)
+            # if new_name
+            new_class = types.new_class(i, (temp_class,))
+            new_class.comment.append('Created automatically by [AB] based on word2vec output of concept name "{}"'.format(concept[0]))
             
-        
-    #temp_class.new_class("")
-    '''
-    defstring = ''.join(desc_dict[loaded_onto][concept[0]]) if desc_dict[loaded_onto][concept[0]] != concept[0] else "" 
-    
-    if defstring:
-        comment_string =  defstring + "\nFound by [AB] in [" + loaded_onto + "]"
-    else:
-        comment_string = "[AB] Class with same label also contained in [{}]".format(loaded_onto)
-    #print("{}: {}\n".format(concept[0],comment_string))
-    temp_class.comment.append(comment_string)
-    '''
+           # new_name = []
+            
     # onto_local.search_one(prefLabel = 'tensor datum') gibt die Klasse zum PrefLabel aus
-    #
+    
+    #temp_class.new_class("")            
+  
+
+onto_local.save(file = './' + onto_name + '_ext_' + model_name + '.owl')         
+
+
+'''
+defstring = ''.join(desc_dict[loaded_onto][concept[0]]) if desc_dict[loaded_onto][concept[0]] != concept[0] else "" 
+
+if defstring:
+    comment_string =  defstring + "\nFound by [AB] in [" + loaded_onto + "]"
+else:
+    comment_string = "[AB] Class with same label also contained in [{}]".format(loaded_onto)
+#print("{}: {}\n".format(concept[0],comment_string))
+temp_class.comment.append(comment_string)
+'''
+  
     
 '''
 model_test.wv.similar_by_word('reactor')
@@ -134,6 +148,4 @@ Out[80]:
  ('concentration', 0.9993895292282104),
  ('ﬂow', 0.9993889331817627)]
 '''
-    
-
-onto_local.save(file = './' + onto_name + '_ext_' + model_name + '.owl') 
+  
