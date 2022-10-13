@@ -8,9 +8,9 @@
          xmlns:obo="http://purl.obolibrary.org/obo/"
          xmlns:term="http://purl.org/dc/terms/"
          xmlns:prov="http://www.w3.org/ns/prov#"
+         xmlns:x_0.1="http://xmlns.com/foaf/0.1/"
          xmlns:prop="http://purl.allotrope.org/ontologies/property#"
          xmlns:core="http://www.w3.org/2004/02/skos/core#"
-         xmlns:x_0.1="http://xmlns.com/foaf/0.1/"
          xmlns:qudt="http://qudt.org/schema/qudt#"
          xmlns:pav="http://purl.org/pav/"
          xmlns:resu="http://purl.allotrope.org/ontologies/result#"
@@ -20367,12 +20367,12 @@ A af-q:ratio 'af-x:relation of' pato:mass is a mass ratio quality.</core:note>
     <owl:Restriction>
       <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0000690"/>
       <owl:allValuesFrom>
-        <owl:Class>
+        <rdfs:Datatype>
           <owl:unionOf rdf:parseType="Collection">
             <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#double"/>
             <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#float"/>
           </owl:unionOf>
-        </owl:Class>
+        </rdfs:Datatype>
       </owl:allValuesFrom>
     </owl:Restriction>
   </rdfs:subClassOf>
@@ -41517,519 +41517,1360 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
 <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Person"/>
 
 <owl:Class rdf:about="#parameter">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000021"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000090"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000168"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000718"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001478"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003374"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003735"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000003"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000576"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000937"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000954"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000993"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001092"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001844"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002036"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000056"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000034"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "range"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "condition"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "set"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "tube"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cooling"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "state"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "experiment"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "situation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "profile"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "time"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "rate"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "model"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "point"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "mass"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "concentration"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "consequence"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "function"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#state">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000021"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000090"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000354"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000857"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000785"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001478"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0002834"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000001"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000003"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000576"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000634"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000993"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001092"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001483"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001817"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001844"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002008"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000056"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000034"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0001585"/>
+  <rdfs:subClassOf rdf:resource="http://qudt.org/schema/qudt#Dimension"/>
+  <rdfs:subClassOf rdf:resource="http://qudt.org/schema/qudt#Quantity"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "range"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "condition"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "device"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "spectrometer"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dilution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cooling"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "test"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "action"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "situation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "profile"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "trend"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "model"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "point"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "account"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "length"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "mass"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "reference"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "consequence"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "function"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "conductivity"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dimension"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "quantity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#case">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000021"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000785"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0002834"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003735"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000955"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001732"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002107"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000056"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000075"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/spatial#AFSP_0000004"/>
+  <rdfs:subClassOf rdf:resource="http://qudt.org/schema/qudt#Dimension"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "range"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dilution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "test"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "experiment"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "observation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "frequency"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "diameter"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "consequence"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "variable"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "room"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dimension"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#experiment">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000021"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000576"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001844"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000075"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "range"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "profile"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "mass"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "variable"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#development">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000021"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000162"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000168"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000317"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000354"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000693"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000825"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000857"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000404"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001084"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000785"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003282"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003374"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003437"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003730"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000001"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000002"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000694"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000733"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000924"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000955"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001092"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001159"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001216"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001483"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001619"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001732"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001817"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001872"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002107"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000075"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_00002005"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "range"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "series"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "set"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "detector"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "device"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "balance"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "microscope"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "spectrometer"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "plasma"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "group"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dilution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "calculation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "state"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "emission"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "project"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "action"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "procedure"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "prediction"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "distribution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "factor"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "observation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "point"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "wavelength"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "position"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "account"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "resolution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "frequency"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "length"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "requirement"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "diameter"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "variable"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "air"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#rate">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000090"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001584"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002036"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "condition"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "gas"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "temperature"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "pressure"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "concentration"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#range">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000090"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "condition"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#mass">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000090"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000403"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0000025"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "condition"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "liquid"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "composition"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#electron">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000162"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000189"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001028"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000044"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001004"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "series"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "atom"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "microscopy"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "signal"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "molecule"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#factor">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000162"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000317"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000404"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001032"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003730"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003735"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000002"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000003"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000576"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000932"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000955"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001159"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001817"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002107"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "series"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "detector"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "plasma"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "foam"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "project"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "experiment"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "procedure"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "situation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "profile"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "order"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "observation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "wavelength"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "length"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "diameter"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "molecule"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#component">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000162"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000168"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000857"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000403"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000404"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001032"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000785"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001348"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003282"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000002"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000694"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000733"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "series"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "set"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "spectrometer"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "liquid"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "plasma"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "foam"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dilution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "synthesis"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "calculation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "procedure"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "prediction"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "distribution"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#result">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000162"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000354"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000077"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000403"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000044"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003735"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000179"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000002"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000007"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000634"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000924"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001092"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001732"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002537"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/spatial#AFSP_0000004"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000101"/>
+  <rdfs:subClassOf rdf:resource="http://qudt.org/schema/qudt#Quantity"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "series"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "device"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "ion"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "liquid"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "microscopy"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "experiment"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "amount"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "procedure"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "transition"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "trend"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "factor"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "point"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "frequency"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "intensity"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "room"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "role"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "image"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "quantity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#work">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000168"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000693"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000418"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001348"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003286"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "set"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "balance"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "electron"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "synthesis"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "end"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "role"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "molecule"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#optimization">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000168"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003282"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "set"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "calculation"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#bed">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000153"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000937"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "reactor"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "time"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#outlet">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000153"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/spatial#AFSP_0000005"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0002242"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "reactor"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "gas"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "space"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "velocity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#tube">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000153"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "reactor"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#inlet">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000153"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "reactor"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#heat">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000153"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "reactor"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#analysis">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000317"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000825"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000857"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000404"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000418"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001084"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000044"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0002834"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003282"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003286"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003437"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000007"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000634"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001159"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002537"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "detector"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "microscope"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "spectrometer"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "plasma"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "electron"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "group"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "microscopy"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "test"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "calculation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "end"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "emission"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "transition"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "trend"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "wavelength"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "intensity"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "molecule"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#antigen">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000317"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0002148"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "detector"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "controller"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#order">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000317"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001478"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003730"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000924"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001483"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001817"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002209"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/spatial#AFSP_0000004"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "detector"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cooling"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "project"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "factor"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "account"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "length"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "median"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "room"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#change">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000354"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001872"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "device"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "requirement"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#section">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000354"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001216"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002008"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000075"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "device"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "position"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "reference"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "variable"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#chemical">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000693"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000341"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001032"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001084"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001348"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003282"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003286"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003437"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000955"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001004"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001159"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001216"/>
+  <rdfs:subClassOf rdf:resource="http://qudt.org/schema/qudt#Quantity"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "balance"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cell"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "foam"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "group"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "synthesis"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "calculation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "end"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "emission"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "observation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "signal"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "wavelength"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "position"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "quantity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#application">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000693"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001032"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003730"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000733"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000932"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000993"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001483"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001619"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002209"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000075"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "balance"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "foam"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "project"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "distribution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "order"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "model"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "account"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "resolution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "median"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "variable"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#account">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000693"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000932"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002008"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "balance"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "order"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "reference"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#salt">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000718"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001478"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001584"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001844"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0000025"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "tube"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cooling"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "temperature"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "mass"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "composition"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#ﬂow">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000718"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "tube"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#coolant">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000718"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000003"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0001585"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "tube"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "situation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "conductivity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#flow">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000718"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000954"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002036"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "tube"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "rate"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "pressure"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "concentration"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#density">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000825"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003374"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001216"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001817"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_00002005"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "microscope"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "state"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "position"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "length"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "air"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#element">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000825"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000404"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_00002005"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "microscope"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "plasma"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "air"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#precursor">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000825"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000012"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "microscope"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "solution"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#catalysis">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000857"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002107"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "spectrometer"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "diameter"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#fraction">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0002148"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000001"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001843"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "controller"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "action"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "volume"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#term">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0002148"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0002834"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003735"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000924"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000932"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001004"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001483"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001619"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "controller"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "test"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "experiment"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "factor"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "order"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "signal"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "account"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "resolution"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#system">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0002148"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003437"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000993"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001872"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000034"/>
+  <rdfs:subClassOf rdf:resource="http://qudt.org/schema/qudt#Quantity"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "controller"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "emission"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "model"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "requirement"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "process"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "function"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "quantity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#oil">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0002148"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "controller"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#amount">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000012"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000077"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001028"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000005"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000007"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001843"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000101"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0001230"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "solution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "ion"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "atom"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "ratio"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "transition"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "volume"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "role"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "image"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "strength"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#ion">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000012"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "solution"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#zeolite">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000012"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000189"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000413"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "solution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "peak"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#presence">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000012"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000005"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000179"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "solution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "ratio"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "amount"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#solution">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000077"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000179"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001843"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "ion"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "amount"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "volume"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#exchange">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000077"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000044"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003286"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "ion"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "microscopy"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "end"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#impregnation">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000077"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "ion"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#feed">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000954"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001584"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "gas"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "rate"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "temperature"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "pressure"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#product">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "gas"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#stream">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000954"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002036"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0000025"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "gas"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "rate"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "concentration"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "process"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "composition"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#reduction">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000189"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000418"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000007"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000413"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001732"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002537"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "electron"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "transition"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "peak"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "frequency"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "intensity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#content">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000189"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cation"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#type">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000189"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000418"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002537"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0001230"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "electron"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "intensity"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "strength"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#stability">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000275"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000101"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "material"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "image"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#addition">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000275"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000708"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003620"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000413"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000936"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000029"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0000141"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0001230"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "material"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "loading"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "activity"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "peak"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "size"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "site"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "structure"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "strength"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#phase">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000275"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001843"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "material"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "volume"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#property">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000275"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000708"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003620"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002076"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0000141"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "material"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "loading"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "activity"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "area"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "structure"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#study">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000275"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "material"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "role"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "molecule"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#fuel">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000341"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cell"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#technology">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000341"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003437"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003730"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_00002005"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/RO_0002577"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cell"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "emission"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "project"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "process"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "air"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "system"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#emission">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000341"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001348"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000694"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000955"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001619"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001732"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001872"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_00002005"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/RO_0002577"/>
+  <rdfs:subClassOf rdf:resource="http://qudt.org/schema/qudt#Dimension"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cell"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "synthesis"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "prediction"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "observation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "resolution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "frequency"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "requirement"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "process"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "air"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "system"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dimension"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#value">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000341"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001478"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000002"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000932"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000993"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001619"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0001585"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cell"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cooling"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "procedure"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "order"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "model"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "resolution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "conductivity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#removal">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000403"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "liquid"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#plant">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000403"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/RO_0002577"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "liquid"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "system"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#characterization">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000418"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000044"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "electron"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "microscopy"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#strategy">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000880"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001917"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002209"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "energy"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "power"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "median"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#market">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000880"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001917"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002204"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "energy"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "power"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "deviation"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#capacity">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000880"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001917"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002204"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "energy"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "power"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "deviation"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#storage">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000880"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "energy"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#price">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000880"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "energy"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#oxygen">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001028"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "atom"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#adsorption">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001028"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000029"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0001230"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "atom"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "site"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "strength"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#specie">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001028"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000029"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "atom"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "site"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#ﬁlm">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001032"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "foam"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#particle">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001079"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000936"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002076"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dispersion"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "size"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "area"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#structure">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001079"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000708"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003620"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000936"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002076"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000029"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dispersion"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "loading"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "activity"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "size"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "area"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "site"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#size">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001079"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dispersion"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#nickel">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001079"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003620"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000936"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dispersion"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "activity"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "size"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#promoter">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001079"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003620"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000413"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0000141"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dispersion"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "activity"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "peak"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "structure"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#layer">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001084"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001843"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "group"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "volume"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#research">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001084"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "group"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#effect">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000708"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000005"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000179"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "loading"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "ratio"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "amount"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#dispersion">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000708"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000936"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002076"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000029"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0000141"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "loading"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "size"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "area"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "site"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "structure"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#profile">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000785"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003374"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000003"/>
+  <rdfs:subClassOf rdf:resource="http://qudt.org/schema/qudt#Dimension"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dilution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "state"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "situation"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dimension"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#problem">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001348"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000924"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "synthesis"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "factor"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#eﬀect">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0002834"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000005"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000179"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000101"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "test"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "ratio"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "amount"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "image"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#way">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003286"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002008"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "end"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "reference"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#simulation">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003374"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000576"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000634"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001092"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001844"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000034"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0001585"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "state"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "profile"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "trend"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "point"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "mass"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "function"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "conductivity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#increase">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000005"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "ratio"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#biosensor">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000001"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001159"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001216"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/spatial#AFSP_0000004"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "action"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "wavelength"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "position"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "room"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#form">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000001"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "action"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#oxidation">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000007"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "transition"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#sample">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000413"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000101"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "peak"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "image"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#point">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000634"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000694"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "trend"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "prediction"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#line">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000694"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "prediction"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#control">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000733"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "distribution"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#datum">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000733"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002204"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "distribution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "deviation"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#function">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000937"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "time"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#operating">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000937"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000034"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "time"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "function"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#methanol">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000937"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "time"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#concentration">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000954"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001584"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0000025"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "rate"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "temperature"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "composition"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#band">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001004"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002537"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "signal"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "intensity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#group">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001004"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "signal"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "role"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#pressure">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001584"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "temperature"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#equation">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001872"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "requirement"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#energy">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001917"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "power"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#approach">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001917"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002204"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "power"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "deviation"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#temperature">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0002242"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "pressure"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "velocity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#equilibrium">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "pressure"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#measurement">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002008"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0001230"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "reference"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "strength"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#composition">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002036"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "concentration"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#pore">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002076"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "area"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#sulfur">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002107"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "diameter"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#distribution">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002204"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "deviation"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#bid">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002209"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "median"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#operator">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002209"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "median"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#comparison">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000056"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "consequence"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#synthesis">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000056"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "consequence"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#decrease">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/spatial#AFSP_0000004"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "room"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#yield">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/spatial#AFSP_0000005"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0002242"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "space"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "velocity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#velocity">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/spatial#AFSP_0000005"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "space"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#time">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/spatial#AFSP_0000005"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0002242"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "space"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "velocity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#reactor">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/spatial#AFSP_0000005"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0002242"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "space"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "velocity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#kinetic">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "process"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#mixture">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0000025"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "composition"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#material">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0000141"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "structure"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#model">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0001585"/>
+  <rdfs:subClassOf rdf:resource="http://qudt.org/schema/qudt#Dimension"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "conductivity"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dimension"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#electricity">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/RO_0002577"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "system"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#operation">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/RO_0002577"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "system"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#wavelength">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://qudt.org/schema/qudt#Quantity"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "quantity"</rdfs:comment>
 </owl:Class>
 
 <x_0.1:Organization rdf:about="http://www.allotrope.org">
