@@ -68,6 +68,9 @@ with open('FoundClasses' + model_name + '.json', 'w') as jsonfile:
 # current selected ontology (onto_local) = resDict[onto_name]
 
 with onto_local:
+    class Concept(Thing):
+        prefLabel = 'Concept'
+        definition = 'A concept generated automatically by [AB] to gather all concepts added by word2vec'
     class conceptually_related_to(ObjectProperty):
         prefLabel = 'conceptually related to'
         definition = 'Created automatically by [AB] to specify relations of concepts to newly introduced concepts by word-vector similarity.'
@@ -88,12 +91,15 @@ for concept in resDict[onto_name]:
             ## check, if class already exists?
             #existing_class = onto_local.search_one(prefLabel = i)
             if onto_local.search_one(prefLabel = i):
-                # label i not yet included in Ontology:    
-                new_class = types.new_class(i, (temp_class,))
-                new_class.comment.append('Created automatically by [AB] based on word2vec output of concept name "{}"'.format(concept[0]))
+                new_class = onto_local.search_one(prefLabel = i)
+                new_class.conceptually_related_to = [temp_class]
             else:
-                pass            
-           #a.alex_property = onto_local.search_one(prefLabel = 'entity')
+                # label i not yet included in Ontology:    
+                # assign new class i as subclass of temp_class:    
+                # new_class = types.new_class(i, (temp_class,))
+                new_class = types.new_class(i,(Concept,) )
+                new_class.comment.append('Created automatically by [AB] based on word2vec output of concept name "{}"'.format(concept[0]))
+                new_class.conceptually_related_to = [temp_class]
             
     # onto_local.search_one(prefLabel = 'tensor datum') gibt die Klasse zum PrefLabel aus
     
