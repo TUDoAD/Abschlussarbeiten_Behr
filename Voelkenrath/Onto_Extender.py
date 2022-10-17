@@ -74,6 +74,7 @@ with onto_local:
     class conceptually_related_to(ObjectProperty):
         prefLabel = 'conceptually related to'
         definition = 'Created automatically by [AB] to specify relations of concepts to newly introduced concepts by word-vector similarity.'
+        python_name = "conceptRelTo"
         
 for concept in resDict[onto_name]:
     # iterates through classes of resDict and temp_class = class of the 
@@ -92,15 +93,16 @@ for concept in resDict[onto_name]:
             #existing_class = onto_local.search_one(prefLabel = i)
             if onto_local.search_one(prefLabel = i):
                 new_class = onto_local.search_one(prefLabel = i)
-                new_class.conceptually_related_to = [temp_class]
+                #new_class.conceptually_related_to = [temp_class]
+                new_class.is_a.append(conceptually_related_to.some(temp_class))
             else:
                 # label i not yet included in Ontology:    
                 # assign new class i as subclass of temp_class:    
                 # new_class = types.new_class(i, (temp_class,))
                 new_class = types.new_class(i,(Concept,) )
                 new_class.comment.append('Created automatically by [AB] based on word2vec output of concept name "{}"'.format(concept[0]))
-                new_class.conceptually_related_to = [temp_class]
-            
+                #new_class.conceptually_related_to = [temp_class]
+                new_class.is_a.append(conceptually_related_to.some(temp_class))
     # onto_local.search_one(prefLabel = 'tensor datum') gibt die Klasse zum PrefLabel aus
     
     #temp_class.new_class("")            
