@@ -67,6 +67,11 @@ with open('FoundClasses' + model_name + '.json', 'w') as jsonfile:
 # List of classes in Vectorspace and 
 # current selected ontology (onto_local) = resDict[onto_name]
 
+with onto_local:
+    class conceptually_related_to(ObjectProperty):
+        prefLabel = 'conceptually related to'
+        definition = 'Created automatically by [AB] to specify relations of concepts to newly introduced concepts by word-vector similarity.'
+        
 for concept in resDict[onto_name]:
     # iterates through classes of resDict and temp_class = class of the 
     # onto_name ontology with same label of concept
@@ -82,11 +87,13 @@ for concept in resDict[onto_name]:
         for i in new_classes: # create new class 
             ## check, if class already exists?
             #existing_class = onto_local.search_one(prefLabel = i)
-            # if new_name
-            new_class = types.new_class(i, (temp_class,))
-            new_class.comment.append('Created automatically by [AB] based on word2vec output of concept name "{}"'.format(concept[0]))
-            
-           # new_name = []
+            if onto_local.search_one(prefLabel = i):
+                # label i not yet included in Ontology:    
+                new_class = types.new_class(i, (temp_class,))
+                new_class.comment.append('Created automatically by [AB] based on word2vec output of concept name "{}"'.format(concept[0]))
+            else:
+                pass            
+           #a.alex_property = onto_local.search_one(prefLabel = 'entity')
             
     # onto_local.search_one(prefLabel = 'tensor datum') gibt die Klasse zum PrefLabel aus
     
