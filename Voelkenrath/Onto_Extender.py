@@ -25,38 +25,47 @@ from gensim.models import Word2Vec
 
 # parameters:
 model_name = 'methanation_only_text_mc10'
-onto_name = 'Allotrope_OWL'
+onto_name = 'ManalsHierarchyOutput_withDefinitions'
 similarity_threshold = 0.999
 ##
 
 # loading ontology from local file 
-[class_dict, desc_dict] = OntoClassSearcher.onto_loader([onto_name])
+#[class_dict, desc_dict] = OntoClassSearcher.onto_loader([onto_name])
 Onto_World = owlready2.World()
 onto_local = Onto_World.get_ontology('./ontologies/' + onto_name + '.owl').load()
-class_list = (onto_local.classes())
 
+# load word2vec model
+model_test = Word2Vec.load('./models/' + model_name)
+conceptList = model_test.wv.index_to_key
+
+# get all the preferred labels of the ontology:
+class_list = []
+for i in list(onto_local.classes()):
+    try: 
+        class_list.append(i.label[0])
+    except:
+        pass
 
 ##
 #   conceptList = Liste mit Konzepten aus MC = 10, die auch in AFO drin sind?
 ##
 
-model_test = Word2Vec.load('./models/' + model_name)
-
-conceptList = model_test.wv.index_to_key
-
+# allocate resultDictionary (only gets important, when more than 1 ontology is loaded)
 resDict = {}
-for loaded_onto in desc_dict:
-    summary = []
-    description_set =  list(desc_dict[loaded_onto].keys())
-    for i in description_set: # comparison of labels
-        try:
-            r = re.compile(str("[a-zA-Z0-9]*^" + i + "$"),re.IGNORECASE)
-            newlist = list(filter(r.match, conceptList))
-            if newlist: # entry found
-                summary.append(newlist)
-        except:
-            print("Passed '{}', Ontology: {}".format(i,loaded_onto))
-    resDict[loaded_onto] = summary
+
+# for loaded_onto in desc_dict:
+summary = []
+#description_set =  list(desc_dict[loaded_onto].keys())
+
+for i in class_list: # comparison of labels
+    try:
+        r = re.compile(str("[a-zA-Z0-9]*^" + i + "$"),re.IGNORECASE)
+        newlist = list(filter(r.match, conceptList))
+        if newlist: # entry found
+            summary.append(newlist)
+    except:
+        print("Passed '{}', Ontology: {}".format(i,onto_name))
+resDict[onto_name] = summary
 
 with open('FoundClasses' + model_name + '.json', 'w') as jsonfile:
     json.dump(resDict, jsonfile)
@@ -77,7 +86,8 @@ for concept in resDict[onto_name]:
     # iterates through classes of resDict and temp_class = class of the 
     # onto_name ontology with same label of concept
 
-    temp_class = onto_local.search_one(prefLabel = concept[0])
+    ## LABEL OR PREFLABEL
+    temp_class = onto_local.search_one(label = concept[0]) 
     tuple_similarities = model_test.wv.most_similar(positive = concept[0], topn = 5)
     # new_classes = [tuple_similarities[i][0] for i in range(len(tuple_similarities))]
     new_classes = []
@@ -90,8 +100,9 @@ for concept in resDict[onto_name]:
         for i in new_classes: # create new class 
             ## check, if class already exists?
             #existing_class = onto_local.search_one(prefLabel = i)
-            if onto_local.search_one(prefLabel = i):
-                new_class = onto_local.search_one(prefLabel = i)
+            if onto_local.search_one(label = i):
+                ## LABEL OR PREFLABEL
+                new_class = onto_local.search_one(label = i)
                 #new_class.conceptually_related_to = [temp_class]
                 new_class.is_a.append(conceptually_related_to.some(temp_class))
             else:
