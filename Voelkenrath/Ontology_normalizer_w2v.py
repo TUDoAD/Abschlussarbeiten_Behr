@@ -82,19 +82,19 @@ with open('FoundClasses.json', 'w') as jsonfile:
 onto_local = local_world.get_ontology("./Allotrope_OWL_ext_methanation_only_text_mc10_output.owl").load()
 #class_candidates = list(onto_local.get_children_of(onto_local.w2vConcept))
 #class_dict_locOntos = {i.name : i for i in class_candidates}
-
-for loaded_onto in resDict:
-    for classlabel in resDict[loaded_onto]: # list of classes        
-        defstring = ''.join(desc_dict[loaded_onto][classlabel[0]]) if desc_dict[loaded_onto][classlabel[0]] != classlabel[0] else "" 
-        if defstring:
-            comment_string = defstring + "\nFound by [AB] in [" + loaded_onto + "]"
-            print("def of {} found in ontology {}".format(classlabel[0], loaded_onto))
-        else:
-            comment_string = "[AB] Class with same label also contained in [{}] unable to obtain definition".format(loaded_onto)
-        
-        onto_local.search_one(label = classlabel[0]).comment.append(commend_string)
-        #class_dict_locOntos[classlabel[0]].comment.append(comment_string)    
-        #w2v_class.comment.append(comment_string)
+with onto_local:
+    for loaded_onto in resDict:
+        for classlabel in resDict[loaded_onto]: # list of classes        
+            defstring = ''.join(desc_dict[loaded_onto][classlabel[0]]) if desc_dict[loaded_onto][classlabel[0]] != classlabel[0] else "" 
+            if defstring:
+                comment_string = defstring + "\nFound by [AB] in [" + loaded_onto + "]"
+                print("def of {} found in ontology {}".format(classlabel[0], loaded_onto))
+            else:
+                comment_string = "[AB] Class with same label also contained in [{}] unable to obtain definition".format(loaded_onto)
+            
+            onto_local.search_one(label = classlabel[0]).comment.append(comment_string)
+            #class_dict_locOntos[classlabel[0]].comment.append(comment_string)    
+            #w2v_class.comment.append(comment_string)
 '''
 ## storing definitions in ontology
 for loaded_onto in resDict:
