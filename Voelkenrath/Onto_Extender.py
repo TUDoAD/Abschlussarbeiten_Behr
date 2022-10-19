@@ -13,6 +13,10 @@ Created on Wed Oct 12 09:23:25 2022
 ## ToDo: Danach vllt. noch ein Check, wie viele der ursprünglichen Keys jetzt 
 #        in der Ontologie gelandet sind?
 
+## ToDo: neu erzeugte Klassen prüfen auf 4 Ontologien und Definition-Strings 
+#        erzeugen 
+
+
 from owlready2 import *
 import LocalOntologies
 import OntoClassSearcher
