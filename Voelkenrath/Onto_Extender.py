@@ -126,6 +126,16 @@ onto_local.save(file = onto_savestring)
 print("=============================================")
 print('Added {} new classes based on word2vec model {}. \nFile saved as {}.'.format(different_class_count,model_name, onto_savestring))
 
+with open('FoundClasses.json', 'r') as f:
+    data = json.load(f)
+
+unique_dict = {}
+for keys in data.keys():
+    for i in data[keys]:
+        temp = dict.fromkeys(i,"")
+        unique_dict.update(temp)    
+
+print("Unique keys added to ontology:", len(unique_dict.keys()))
   
     
 '''
