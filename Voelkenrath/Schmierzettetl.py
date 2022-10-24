@@ -4,6 +4,7 @@ Created on Wed Oct 12 13:43:11 2022
 
 @author: User
 """
+"""
 from owlready2 import *
 
 onto_name = 'Allotrope_OWL'
@@ -50,3 +51,16 @@ with open('file.pkl', 'rb') as file:
     myvar = pickle.load(file)
   
     print(myvar)
+    
+"""
+import json
+with open('FoundClasses.json', 'r') as f:
+    data = json.load(f)
+
+unique_dict = {}
+for keys in data.keys():
+    for i in data[keys]:
+        temp = dict.fromkeys(i,"")
+        unique_dict.update(temp)    
+
+print("unique keys: ", len(unique_dict.keys()))
