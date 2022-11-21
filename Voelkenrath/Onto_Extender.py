@@ -29,7 +29,9 @@ from gensim.models import Word2Vec
 
 # parameters:
 model_name = 'methanation_only_text_mc10'
-onto_name = 'ManalsHierarchyOutput_withDefinitions'
+#model_name = 'methanation_only_text_mc5'
+#onto_name = 'ManalsHierarchyOutput_withDefinitions'
+onto_name = 'Allotrope_OWL'
 similarity_threshold = 0.999
 ##
 
@@ -43,13 +45,16 @@ model_test = Word2Vec.load('./models/' + model_name)
 conceptList = model_test.wv.index_to_key
 
 # get all the preferred labels of the ontology:
+count = 0
 class_list = []
 for i in list(onto_local.classes()):
     try: 
-        class_list.append(i.label[0])
+        class_list.append(i.prefLabel[0])
     except:
+        print('class not included:{}'.format(i))
+        count += 1
         pass
-
+print('Not able to include {} classes due to missing label'.format(count))
 ##
 #   conceptList = Liste mit Konzepten aus MC = 10, die auch in AFO drin sind?
 ##
@@ -91,7 +96,8 @@ for concept in resDict[onto_name]:
     # onto_name ontology with same label of concept
 
     ## LABEL OR PREFLABEL
-    temp_class = onto_local.search_one(label = concept[0]) 
+    ## label or prefLabel
+    temp_class = onto_local.search_one(prefLabel = concept[0]) 
     tuple_similarities = model_test.wv.most_similar(positive = concept[0], topn = 5)
     # new_classes = [tuple_similarities[i][0] for i in range(len(tuple_similarities))]
     new_classes = []
@@ -104,9 +110,9 @@ for concept in resDict[onto_name]:
         for i in new_classes: # create new class 
             ## check, if class already exists?
             #existing_class = onto_local.search_one(prefLabel = i)
-            if onto_local.search_one(label = i):
+            if onto_local.search_one(prefLabel = i):
                 ## LABEL OR PREFLABEL
-                new_class = onto_local.search_one(label = i)
+                new_class = onto_local.search_one(prefLabel = i)
                 #new_class.conceptually_related_to = [temp_class]
                 new_class.is_a.append(conceptually_related_to.some(temp_class))
             else:

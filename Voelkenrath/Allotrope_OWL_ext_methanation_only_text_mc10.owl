@@ -8,9 +8,9 @@
          xmlns:obo="http://purl.obolibrary.org/obo/"
          xmlns:term="http://purl.org/dc/terms/"
          xmlns:prov="http://www.w3.org/ns/prov#"
+         xmlns:x_0.1="http://xmlns.com/foaf/0.1/"
          xmlns:prop="http://purl.allotrope.org/ontologies/property#"
          xmlns:core="http://www.w3.org/2004/02/skos/core#"
-         xmlns:x_0.1="http://xmlns.com/foaf/0.1/"
          xmlns:qudt="http://qudt.org/schema/qudt#"
          xmlns:pav="http://purl.org/pav/"
          xmlns:resu="http://purl.allotrope.org/ontologies/result#"
@@ -20008,6 +20008,12 @@ A af-q:ratio 'af-x:relation of' pato:mass is a mass ratio quality.</core:note>
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000576"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000932"/>
     </owl:Restriction>
   </rdfs:subClassOf>
@@ -20118,12 +20124,6 @@ A af-q:ratio 'af-x:relation of' pato:mass is a mass ratio quality.</core:note>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001478"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000576"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
@@ -20950,12 +20950,12 @@ A af-q:ratio 'af-x:relation of' pato:mass is a mass ratio quality.</core:note>
     <owl:Restriction>
       <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0000690"/>
       <owl:allValuesFrom>
-        <owl:Class>
+        <rdfs:Datatype>
           <owl:unionOf rdf:parseType="Collection">
             <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#double"/>
             <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#float"/>
           </owl:unionOf>
-        </owl:Class>
+        </rdfs:Datatype>
       </owl:allValuesFrom>
     </owl:Restriction>
   </rdfs:subClassOf>
