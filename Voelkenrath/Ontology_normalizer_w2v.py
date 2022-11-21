@@ -40,7 +40,7 @@ onto_local.save(file = "./Allotrope_OWL_ext_methanation_only_text_mc10_output.ow
 
 ######
 
-manal_list = [i.label[0] for i in list_classes]
+label_list = [i.label[0] for i in list_classes]
 
 labels_to_classes_dict = {i.label[0] : i for i in list_classes}
 
@@ -69,7 +69,7 @@ for loaded_onto in desc_dict:
     for i in description_set: # comparison of labels
         try:
             r = re.compile(str("[a-zA-Z0-9]*^" + i + "$"),re.IGNORECASE)
-            newlist = list(filter(r.match, manal_list))
+            newlist = list(filter(r.match, label_list))
             if newlist: # entry found
                 summary.append(newlist)
         except:
