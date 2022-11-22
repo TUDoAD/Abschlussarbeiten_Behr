@@ -1,0 +1,712 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#"
+     xml:base="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#has -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#has">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#compressor"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#heat_exchanger"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#heater"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#pump"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#added_energy_stream"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_stream"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_stream"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#needs_as_input -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#needs_as_input"/>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#needs_one_of_as_input -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#needs_one_of_as_input">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#compressor"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#pump"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_stream"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#CSTR -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#CSTR">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reactor"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#PFR"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#PFR -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#PFR">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reactor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#added_energy_stream -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#added_energy_stream">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#energy_stream"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#removed_energy_stream"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#adiabatic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#adiabatic">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#temperature_modi"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#isothermic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#apparatus -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#apparatus">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#plant_equipment"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#arrhenius_parameter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#arrhenius_parameter">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#stochiometrie"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#base_compound -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#base_compound">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reaction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_mixture -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_mixture">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#material"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_process_simulation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_process_simulation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reaction -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reaction"/>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reactor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reactor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#process_units"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reactor_parameter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reactor_parameter">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reactor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#column_reflux_ratio -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#column_reflux_ratio">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#distilliation_construction_parameters"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#compressor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#compressor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#apparatus"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#cooler -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#cooler">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#apparatus"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#direct_order -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#direct_order">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reaction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#distillation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#distillation">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#process_units"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#distilliation_construction_parameters -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#distilliation_construction_parameters">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#distillation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#energy_stream -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#energy_stream">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#process_streams"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#material_stream"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#heat_exchanger -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#heat_exchanger">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#apparatus"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#heater -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#heater">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#apparatus"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#heavykey_compound -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#heavykey_compound">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_mixture"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#hk_mole_fraction_in_distillate -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#hk_mole_fraction_in_distillate">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#distilliation_construction_parameters"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_massflow -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_massflow">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_stream_conditions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_massfrac -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_massfrac">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_stream_conditions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_pressure -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_pressure">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_stream_conditions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_stream -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_stream">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#material_stream"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_stream"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_stream_conditions -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_stream_conditions">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_stream"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_temperature -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_temperature">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_stream_conditions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#isothermic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#isothermic">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#temperature_modi"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#lightkey_compound -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#lightkey_compound">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_mixture"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#liquid_frac -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#liquid_frac">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_mixture"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#lk_mole_fraction_in_bottom -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#lk_mole_fraction_in_bottom">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#distilliation_construction_parameters"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#mass_frac -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#mass_frac">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_mixture"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#material -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#material"/>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#material_stream -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#material_stream">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#process_streams"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#mathematical_modell -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#mathematical_modell">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#stochiometrie"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#mixing -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#mixing">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#process_units"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#mole_frac -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#mole_frac">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_mixture"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_massflow -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_massflow">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_stream_conditions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_massfrac -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_massfrac">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_stream_conditions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_pressure -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_pressure">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_stream_conditions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_stream -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_stream">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#material_stream"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_stream_conditions -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_stream_conditions">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_stream"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_temperature -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_temperature">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_stream_conditions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#plant_equipment -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#plant_equipment"/>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#power_required -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#power_required">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#required_input_information"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#pressure_increase -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#pressure_increase">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#required_input_information"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#process_streams -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#process_streams"/>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#process_units -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#process_units"/>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#pump -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#pump">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#apparatus"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#reactor_diameter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#reactor_diameter">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reactor_parameter"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#reactor_lenght -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#reactor_lenght">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reactor_parameter"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#reactor_volume -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#reactor_volume">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reactor_parameter"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#removed_energy_stream -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#removed_energy_stream">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#energy_stream"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#required_input_information -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#required_input_information">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_process_simulation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#reverse_order -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#reverse_order">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reaction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#separator -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#separator">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#apparatus"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#splitting -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#splitting">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#process_units"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#stochiometrie -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#stochiometrie">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reaction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#tank -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#tank">
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#vessel"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#apparatus"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#tank_volume -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#tank_volume">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#tank"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#temperature_difference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#temperature_difference">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#required_input_information"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#temperature_modi -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#temperature_modi">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reactor_parameter"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#user_defined_function -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#user_defined_function">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#stochiometrie"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#vapor_frac -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#vapor_frac">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_mixture"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#vessel -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#vessel">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#apparatus"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#arrhenius_parameter"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#mathematical_modell"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#user_defined_function"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#base_compound"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#direct_order"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#reverse_order"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#stochiometrie"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_process_simulation"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#chemical_reaction"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#distillation"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#material"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#plant_equipment"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#process_streams"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#process_units"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#column_reflux_ratio"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#hk_mole_fraction_in_distillate"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#lk_mole_fraction_in_bottom"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#compressor"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#cooler"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#heat_exchanger"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#heater"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#pump"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#separator"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#tank"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#vessel"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#heavykey_compound"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#lightkey_compound"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#liquid_frac"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#mass_frac"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#mole_frac"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#vapor_frac"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_massflow"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_massfrac"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_pressure"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#inlet_temperature"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_massflow"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_massfrac"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_pressure"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#outlet_temperature"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#power_required"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#pressure_increase"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#temperature_difference"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#reactor_diameter"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#reactor_lenght"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#reactor_volume"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#temperature_modi"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointProperties"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#has"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#needs_as_input"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/luckyluciano/ontologies/2022/10/untitled-ontology-7#needs_one_of_as_input"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

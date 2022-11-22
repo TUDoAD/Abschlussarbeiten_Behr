@@ -1,0 +1,967 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#"
+     xml:base="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_additional_quantity -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_additional_quantity">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#is_additional_quantity_of"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_input -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_input">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Input"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_input_quantity -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_input_quantity">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#is_input_quantity_of"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_output_quantity -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_output_quantity">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#is_output_quantity_of"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#is_additional_quantity_of -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#is_additional_quantity_of">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#is_input_of -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#is_input_of">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#is_input_quantity_of -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#is_input_quantity_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#is_output_quantity_of -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#is_output_quantity_of">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Additional_Information -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Additional_Information">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Setting"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Adiabatic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Adiabatic">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Thermal_Model"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Arrhenius_Parameter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Arrhenius_Parameter">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Stochiometry"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Base_Compound -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Base_Compound">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Material"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Phase"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Basis -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Basis">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reaction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#CSTR -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#CSTR">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Compressor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Compressor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Cooler -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Cooler">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Cooler_Duty -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Cooler_Duty">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Direct_Order -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Direct_Order">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reaction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Distillation_Column -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Distillation_Column">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Efficiency -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Efficiency">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Energy_Stream -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Energy_Stream">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Flux"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_Flow"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Enthalpy -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Enthalpy">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Entropy -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Entropy">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Flux -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Flux">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Fractions -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Fractions">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat_Added -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat_Added">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat_Removed -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat_Removed">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heater -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heater">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_additional_quantity"/>
+                                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                                <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat_Added"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_additional_quantity"/>
+                                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                                <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Outlet_Temperature"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_additional_quantity"/>
+                                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                                <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Temperature_Difference"/>
+                            </owl:Restriction>
+                        </owl:unionOf>
+                    </owl:Class>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_additional_quantity"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Efficiency"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_additional_quantity"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure_Drop"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_output_quantity"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Enthalpy"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_output_quantity"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Entropy"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_output_quantity"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_Flow"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_output_quantity"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_Frac"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_output_quantity"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Power"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_output_quantity"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_output_quantity"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Temperature"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_output_quantity"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Vapor_Frac"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_input_quantity"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_Flow"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_input_quantity"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_Frac"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_input_quantity"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_input_quantity"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Temperature"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#has_input_quantity"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Vapor_Frac"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heater_Duty -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heater_Duty">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet_Average -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet_Average">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet_Maximum -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet_Maximum">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet_Minimum -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet_Minimum">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Input -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Input">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Setting"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Isothermic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Isothermic">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Thermal_Model"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Length -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Length">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_Flow -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_Flow">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Flux"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_Frac -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_Frac">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Fractions"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Vapor_Frac"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Material -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Material"/>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mathematical_Model -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mathematical_Model">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Stochiometry"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Outlet_Pressure -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Outlet_Pressure">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Outlet_Temperature -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Outlet_Temperature">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Temperature"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Temperature_Difference"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Output -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Output">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Setting"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#PFR -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#PFR">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Phase -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Phase">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Material"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Power -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Power">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Power_Required -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Power_Required">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Power"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure_Drop -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure_Drop">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure_Increase -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure_Increase">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pump -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pump">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reaction -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reaction"/>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reactor_Diameter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reactor_Diameter">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Length"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reactor_Length"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reactor_Length -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reactor_Length">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Length"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reactor_Pressure_Drop -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reactor_Pressure_Drop">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure_Drop"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reactor_Volume -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reactor_Volume">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Volume"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Tank_Volume"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Residence_Time -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Residence_Time">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Time"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reverse_Order -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reverse_Order">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reaction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Separator -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Separator">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Set_Outlet_Temperature -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Set_Outlet_Temperature">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Thermal_Model"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Setting -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Setting"/>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Stochiometry -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Stochiometry">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reaction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Tank -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Tank">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Tank_Volume -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Tank_Volume">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Volume"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Temperature -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Temperature">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Temperature_Difference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Temperature_Difference">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Temperature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Thermal_Model -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Thermal_Model">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reaction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Time -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Time">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#User_Defined_Function -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#User_Defined_Function">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Stochiometry"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Valve -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Valve">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Vapor_Frac -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Vapor_Frac">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Fractions"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Volume -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Volume">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat_added -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat_added">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat_Added"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heater_A -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heater_A">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heater"/>
+        <has_additional_quantity rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat_added"/>
+        <has_additional_quantity rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Outlet_Temperature"/>
+        <has_input_quantity rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_FlowA"/>
+        <has_input_quantity rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_FracA"/>
+        <has_input_quantity rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#PressureA"/>
+        <has_input_quantity rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#TemperatureA"/>
+        <has_input_quantity rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Vapor_FracA"/>
+        <has_output_quantity rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#PressureA"/>
+        <has_output_quantity rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#TemperatureB"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_FlowA -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_FlowA">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_Flow"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_FracA -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_FracA">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mass_Frac"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Outlet_Temperature -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Outlet_Temperature">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Outlet_Temperature"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#PressureA -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#PressureA">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#TemperatureA -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#TemperatureA">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Temperature"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#TemperatureB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#TemperatureB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Temperature"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Vapor_FracA -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Vapor_FracA">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Vapor_Frac"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Additional_Information"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Input"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Output"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Adiabatic"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Isothermic"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Set_Outlet_Temperature"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Arrhenius_Parameter"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Mathematical_Model"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#User_Defined_Function"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Basis"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Direct_Order"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reverse_Order"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Stochiometry"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Thermal_Model"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#CSTR"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Compressor"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Cooler"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Distillation_Column"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heater"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#PFR"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pump"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Separator"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Tank"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Valve"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Cooler_Duty"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat_Added"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat_Removed"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heater_Duty"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Efficiency"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Enthalpy"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Entropy"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Flux"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Fractions"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Heat"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Length"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Power"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Temperature"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Time"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Volume"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet_Average"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet_Maximum"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Inlet_Minimum"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Material"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Quantity"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Reaction"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Setting"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Unit_Operation"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Outlet_Pressure"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure_Drop"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#Pressure_Increase"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

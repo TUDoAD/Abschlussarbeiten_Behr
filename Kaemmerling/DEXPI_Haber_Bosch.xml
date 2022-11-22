@@ -1,0 +1,304 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d38" for="edge" attr.name="edge_heated_cooled" attr.type="string"/>
+<key id="d37" for="edge" attr.name="edge_insulation" attr.type="string"/>
+<key id="d36" for="edge" attr.name="edge_number" attr.type="string"/>
+<key id="d35" for="edge" attr.name="edge_pipe_class" attr.type="string"/>
+<key id="d34" for="edge" attr.name="edge_diameter" attr.type="string"/>
+<key id="d33" for="edge" attr.name="edge_material" attr.type="string"/>
+<key id="d32" for="edge" attr.name="edge_sub_class" attr.type="string"/>
+<key id="d31" for="edge" attr.name="edge_class" attr.type="string"/>
+<key id="d30" for="node" attr.name="node_T_min" attr.type="string"/>
+<key id="d29" for="node" attr.name="node_T_max" attr.type="string"/>
+<key id="d28" for="node" attr.name="node_P_min" attr.type="string"/>
+<key id="d27" for="node" attr.name="node_P_max" attr.type="string"/>
+<key id="d26" for="node" attr.name="node_agitator" attr.type="string"/>
+<key id="d25" for="node" attr.name="node_sub_group" attr.type="string"/>
+<key id="d24" for="node" attr.name="node_group" attr.type="string"/>
+<key id="d23" for="node" attr.name="node_operation" attr.type="string"/>
+<key id="d22" for="node" attr.name="node_b" attr.type="string"/>
+<key id="d21" for="node" attr.name="node_a" attr.type="string"/>
+<key id="d20" for="node" attr.name="node_request" attr.type="string"/>
+<key id="d19" for="node" attr.name="node_location" attr.type="string"/>
+<key id="d18" for="node" attr.name="node_y" attr.type="double"/>
+<key id="d17" for="node" attr.name="node_x" attr.type="double"/>
+<key id="d16" for="node" attr.name="node_cool_heat_system" attr.type="string"/>
+<key id="d15" for="node" attr.name="node_insulation" attr.type="string"/>
+<key id="d14" for="node" attr.name="node_volume" attr.type="string"/>
+<key id="d13" for="node" attr.name="node_unit_T2" attr.type="string"/>
+<key id="d12" for="node" attr.name="node_T_min" attr.type="double"/>
+<key id="d11" for="node" attr.name="node_unit_T1" attr.type="string"/>
+<key id="d10" for="node" attr.name="node_T_max" attr.type="double"/>
+<key id="d9" for="node" attr.name="node_unit_P2" attr.type="string"/>
+<key id="d8" for="node" attr.name="node_P_min" attr.type="double"/>
+<key id="d7" for="node" attr.name="node_unit_P1" attr.type="string"/>
+<key id="d6" for="node" attr.name="node_P_max" attr.type="double"/>
+<key id="d5" for="node" attr.name="node_unit_V" attr.type="string"/>
+<key id="d4" for="node" attr.name="node_material" attr.type="string"/>
+<key id="d3" for="node" attr.name="node_sub_class" attr.type="string"/>
+<key id="d2" for="node" attr.name="node_class" attr.type="string"/>
+<key id="d1" for="node" attr.name="node_name" attr.type="string"/>
+<key id="d0" for="node" attr.name="node_ID" attr.type="string"/>
+<graph edgedefault="directed"><node id="MIX1">
+  <data key="d0">E_6</data>
+  <data key="d1">MIX1</data>
+  <data key="d2">Rotating mixer</data>
+  <data key="d3">Mixer</data>
+  <data key="d4">Edelstahl</data>
+  <data key="d5">Not available</data>
+  <data key="d6">1.0</data>
+  <data key="d7">bar</data>
+  <data key="d8">0.0</data>
+  <data key="d9">bar</data>
+  <data key="d10">298.15</data>
+  <data key="d11">K</data>
+  <data key="d12">298.118</data>
+  <data key="d13">K</data>
+  <data key="d14">Not available</data>
+  <data key="d15">Not available</data>
+  <data key="d16">Not available</data>
+  <data key="d17">115.00000000000007</data>
+  <data key="d18">160.00000000000023</data>
+  <data key="d19"></data>
+  <data key="d20">Not available</data>
+  <data key="d21">Not available</data>
+  <data key="d22">Not available</data>
+  <data key="d23">Mixer</data>
+  <data key="d24">Mixer</data>
+  <data key="d25">Mixer</data>
+  <data key="d26">not available</data>
+</node>
+<node id="COMP1">
+  <data key="d0">E_30</data>
+  <data key="d1">COMP1</data>
+  <data key="d2">Compressor</data>
+  <data key="d3">Compressor</data>
+  <data key="d4">Edelstahl</data>
+  <data key="d5">Not available</data>
+  <data key="d6">200.0</data>
+  <data key="d7">bar</data>
+  <data key="d8">1.0</data>
+  <data key="d9">bar</data>
+  <data key="d10">1583.49</data>
+  <data key="d11">K</data>
+  <data key="d12">298.118</data>
+  <data key="d13">K</data>
+  <data key="d14">Not available</data>
+  <data key="d15">No</data>
+  <data key="d16"></data>
+  <data key="d17">182.49999999999991</data>
+  <data key="d18">316.25000000000017</data>
+  <data key="d19"></data>
+  <data key="d20">Not available</data>
+  <data key="d21">Not available</data>
+  <data key="d22">Not available</data>
+  <data key="d23">Compressor</data>
+  <data key="d24">Compressor</data>
+  <data key="d25">Not available</data>
+  <data key="d26">not available</data>
+</node>
+<node id="PFR1">
+  <data key="d0">E_41</data>
+  <data key="d1">PFR1</data>
+  <data key="d2">Reactor</data>
+  <data key="d3">Plug flow reactor</data>
+  <data key="d4">Stainless steel</data>
+  <data key="d5">m^3</data>
+  <data key="d6">200</data>
+  <data key="d7">bar</data>
+  <data key="d8">191.287</data>
+  <data key="d9">bar</data>
+  <data key="d10">1583.59</data>
+  <data key="d11">K</data>
+  <data key="d12">1583.59</data>
+  <data key="d13">K</data>
+  <data key="d14">1.0</data>
+  <data key="d15">Not available</data>
+  <data key="d16">Not available</data>
+  <data key="d17">217.50000000000006</data>
+  <data key="d18">132.50000000000009</data>
+  <data key="d19"></data>
+  <data key="d20">Not available</data>
+  <data key="d21">Not available</data>
+  <data key="d22">Not available</data>
+  <data key="d23">Reactor</data>
+  <data key="d24">Reactor</data>
+  <data key="d25">Not available</data>
+  <data key="d26">not available</data>
+</node>
+<node id="COO1">
+  <data key="d0">E_42</data>
+  <data key="d1">COO1</data>
+  <data key="d2">Heat exchanger</data>
+  <data key="d3">Heat exchanger</data>
+  <data key="d4">Stainless  steel</data>
+  <data key="d5">Not available</data>
+  <data key="d6">191.287</data>
+  <data key="d7">bar</data>
+  <data key="d8">191.287</data>
+  <data key="d9">bar</data>
+  <data key="d10">1583.59</data>
+  <data key="d11">K</data>
+  <data key="d12">223.15</data>
+  <data key="d13">K</data>
+  <data key="d14">Not available</data>
+  <data key="d15">Not available</data>
+  <data key="d16">Not available</data>
+  <data key="d17">247.50000000000009</data>
+  <data key="d18">132.50000000000006</data>
+  <data key="d19"></data>
+  <data key="d20">Not available</data>
+  <data key="d21">Not available</data>
+  <data key="d22">Not available</data>
+  <data key="d23">Cooler</data>
+  <data key="d24">Cooler</data>
+  <data key="d25">Not available</data>
+  <data key="d26">not available</data>
+</node>
+<node id="V1">
+  <data key="d0">E_149</data>
+  <data key="d1">V1</data>
+  <data key="d2">Valve (general)</data>
+  <data key="d3">Valve</data>
+  <data key="d4">Edelstahl</data>
+  <data key="d5">Not available</data>
+  <data key="d6">191.287</data>
+  <data key="d7">bar</data>
+  <data key="d8">1.0</data>
+  <data key="d9">bar</data>
+  <data key="d10">223.15</data>
+  <data key="d11">K</data>
+  <data key="d12">198.656</data>
+  <data key="d13">K</data>
+  <data key="d14">Not available</data>
+  <data key="d15">Not available</data>
+  <data key="d16">Not available</data>
+  <data key="d17">275.00000000000006</data>
+  <data key="d18">453.75000000000006</data>
+  <data key="d19"></data>
+  <data key="d20">Not available</data>
+  <data key="d21">Not available</data>
+  <data key="d22">Not available</data>
+  <data key="d23">Valve</data>
+  <data key="d24">Valve</data>
+  <data key="d25">Valve</data>
+  <data key="d26">not available</data>
+</node>
+<node id="SEP1">
+  <data key="d0">E_150</data>
+  <data key="d1">SEP1</data>
+  <data key="d2">Separator</data>
+  <data key="d3">Liquid vapor separator</data>
+  <data key="d4">Edelstahl</data>
+  <data key="d5">Not available</data>
+  <data key="d6">1.0</data>
+  <data key="d7">bar</data>
+  <data key="d8">1.0</data>
+  <data key="d9">bar</data>
+  <data key="d10">198.656</data>
+  <data key="d11">K</data>
+  <data key="d12">198.656</data>
+  <data key="d13">K</data>
+  <data key="d14">Not available</data>
+  <data key="d15">Not available</data>
+  <data key="d16">Not available</data>
+  <data key="d17">275.00000000000006</data>
+  <data key="d18">521.2500000000001</data>
+  <data key="d19"></data>
+  <data key="d20">Not available</data>
+  <data key="d21">Not available</data>
+  <data key="d22">Not available</data>
+  <data key="d23">Separator</data>
+  <data key="d24">Separator</data>
+  <data key="d25">Separator</data>
+  <data key="d26">not available</data>
+</node>
+<node id="T1">
+  <data key="d0">E_220</data>
+  <data key="d1">T1</data>
+  <data key="d2">Vessel (liquid)</data>
+  <data key="d3">Storage tank</data>
+  <data key="d4">Edelstahl</data>
+  <data key="d5">m^3</data>
+  <data key="d6">1.0</data>
+  <data key="d7">bar</data>
+  <data key="d8">1.0</data>
+  <data key="d9">bar</data>
+  <data key="d10">198.656</data>
+  <data key="d11">K</data>
+  <data key="d12">198.656</data>
+  <data key="d13">K</data>
+  <data key="d14">100</data>
+  <data key="d15">Not available</data>
+  <data key="d16">Not available</data>
+  <data key="d17">384.2500000000002</data>
+  <data key="d18">361.25000000000006</data>
+  <data key="d19"></data>
+  <data key="d20">Not available</data>
+  <data key="d21">Not available</data>
+  <data key="d22">Not available</data>
+  <data key="d23">Column</data>
+  <data key="d24">Tank</data>
+  <data key="d25">Storage tank</data>
+  <data key="d26">not available</data>
+</node>
+<edge source="MIX1" target="COMP1">
+  <data key="d31">Piping</data>
+  <data key="d32">Main pipe</data>
+  <data key="d33"></data>
+  <data key="d34"></data>
+  <data key="d35"></data>
+  <data key="d36"></data>
+  <data key="d37">No</data>
+  <data key="d38">No</data>
+</edge>
+<edge source="COMP1" target="PFR1">
+  <data key="d31">Piping</data>
+  <data key="d32">Main pipe</data>
+  <data key="d33">Not available</data>
+  <data key="d34">Not available</data>
+  <data key="d35">Not available</data>
+  <data key="d36">Not available</data>
+  <data key="d37">Not available</data>
+  <data key="d38">Not available</data>
+</edge>
+<edge source="PFR1" target="COO1">
+  <data key="d31">Piping</data>
+  <data key="d32">Main pipe</data>
+  <data key="d33"></data>
+  <data key="d34"></data>
+  <data key="d35"></data>
+  <data key="d36"></data>
+  <data key="d37">No</data>
+  <data key="d38">No</data>
+</edge>
+<edge source="COO1" target="V1">
+  <data key="d31">Piping</data>
+  <data key="d32">Main pipe</data>
+  <data key="d33"></data>
+  <data key="d34"></data>
+  <data key="d35"></data>
+  <data key="d36"></data>
+  <data key="d37">No</data>
+  <data key="d38">No</data>
+</edge>
+<edge source="V1" target="SEP1">
+  <data key="d31">Piping</data>
+  <data key="d32">Main pipe</data>
+  <data key="d33"></data>
+  <data key="d34"></data>
+  <data key="d35"></data>
+  <data key="d36"></data>
+  <data key="d37">No</data>
+  <data key="d38">No</data>
+</edge>
+<edge source="SEP1" target="T1">
+  <data key="d31">Piping</data>
+  <data key="d32">Main pipe</data>
+  <data key="d33"></data>
+  <data key="d34"></data>
+  <data key="d35"></data>
+  <data key="d36"></data>
+  <data key="d37">No</data>
+  <data key="d38">No</data>
+</edge>
+</graph></graphml>
