@@ -1,15 +1,6 @@
 # Simulation Heater in DWSIM
+
 import os
-
-# fileTest = r"C:\Users\49157\Documents\DWSIM Application Data\dwsim_newui.ini"
-
-# try:
-  # os.remove(fileTest)
-#except OSError as e:
-  # print(e)
-# else:
-  #  print("File is deleted successfully")
-
 import pythoncom
 pythoncom.CoInitialize()
 import clr
