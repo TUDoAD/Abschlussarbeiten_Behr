@@ -49,49 +49,28 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, efficiency, heatremoved, outlettemperature, deltat):
+def Separator(temperature, pressure, compoundscompoundflow):
 
-#add compounds
+
     
     for key in compoundscompoundflow:
         
        sim.AddCompound(key)
         
        print(key)
-    
+       
+    #molefracs normalisieren
     
 #create and connect objects
 
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
-    m2 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet")
-    e1 = sim.AddObject(ObjectType.EnergyStream, 100, 50, "power")
-    c1 = sim.AddObject(ObjectType.Cooler, 200, 50, "cooler")
-    sim.ConnectObjects(m1.GraphicObject, c1.GraphicObject, -1, -1)
-    sim.ConnectObjects(c1.GraphicObject, m2.GraphicObject, -1, -1)
-    sim.ConnectObjects(c1.GraphicObject, e1.GraphicObject, -1, -1)
+    m2 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "vapor_outlet")
+    m3 = sim.AddObject(ObjectType.MaterialStream, 100, 100, 'liquid_outlet')
+    SEP1 = sim.AddObject(ObjectType.Vessel, 200, 50, "separator")
+    sim.ConnectObjects(m1.GraphicObject, SEP1.GraphicObject, -1, -1)
+    sim.ConnectObjects(SEP1.GraphicObject, m2.GraphicObject, -1, -1)
+    sim.ConnectObjects(SEP1.GraphicObject, m3.GraphicObject, -1, -1)
     
-    
-#set cooler operation mode
-
-    if heatremoved != 0:
-        c1.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
-        c1.setDeltaQ(heatremoved) # j
-            
-    if outlettemperature != 0:
-        c1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
-        c1.OutletTemperature = outlettemperature # k
-            
-    if deltat != 0:
-        c1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
-        c1.setDeltaT(deltat) # k
-            
-#set cooler efficiency  
-
-    c1.set_Eficiencia(efficiency) # 0-100
-
-#set Pressure drop
-
-    c1.set_DeltaP(pressuredrop) # pa
     
     sim.AutoLayout()
     
@@ -121,7 +100,6 @@ def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, effici
 
     errors = interf.CalculateFlowsheet2(sim)
 
-    print(String.Format("cooler Heat Load: {0} kW", c1.DeltaQ))
 
 
 #save file
@@ -161,4 +139,4 @@ def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, effici
     im = Image.open(imgPath)
     im.show()
     
-Cooler(300.0,100000.0,{"Water" : 9.57},0,100,0,350.0,0)
+Separator(300.0,100000.0,{"Water" : 9.57,'Air': 10.0})

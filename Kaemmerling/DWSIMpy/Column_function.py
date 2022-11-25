@@ -1,3 +1,18 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Nov 25 11:27:46 2022
+
+@author: Lucky Luciano
+"""
+
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Nov 24 17:08:33 2022
+
+@author: Lucky Luciano
+"""
+
+
 #delete dwsim_newui
 
 import os
@@ -49,7 +64,7 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, efficiency, heatremoved, outlettemperature, deltat):
+def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound):
 
 #add compounds
     
@@ -63,36 +78,24 @@ def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, effici
 #create and connect objects
 
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
-    m2 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet")
+    m2 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet1")
+    m3 = sim.AddObject(ObjectType.MaterialStream, 200, 50, 'outlet2')
     e1 = sim.AddObject(ObjectType.EnergyStream, 100, 50, "power")
-    c1 = sim.AddObject(ObjectType.Cooler, 200, 50, "cooler")
-    sim.ConnectObjects(m1.GraphicObject, c1.GraphicObject, -1, -1)
-    sim.ConnectObjects(c1.GraphicObject, m2.GraphicObject, -1, -1)
-    sim.ConnectObjects(c1.GraphicObject, e1.GraphicObject, -1, -1)
+    e2 = sim.AddObject(ObjectType.EnergyStream, 250, 50, "power")
+    DEST1 = sim.AddObject(ObjectType.Column, 200, 50, "Column")
+    sim.ConnectObjects(m1.GraphicObject, DEST1.GraphicObject, -1, -1)
+    sim.ConnectObjects(DEST1.GraphicObject, m2.GraphicObject, -1, -1)
+    sim.ConnectObjects(DEST1.GraphicObject, m3.GraphicObject, -1, -1)
+    sim.ConnectObjects(e1.GraphicObject, DEST1.GraphicObject, -1, -1)
+    sim.ConnectObjects(DEST1.GraphicObject, e2.GraphicObject, -1, -1)
     
     
-#set cooler operation mode
-
-    if heatremoved != 0:
-        c1.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
-        c1.setDeltaQ(heatremoved) # j
+    DEST1.m_lightkey = light_key_compound
+    DEST1.m_heavykey = heavy_key_compound
+    DEST1.m_heavykeymolarfrac = hk_mole_fraction_in_distillate
+    DEST1.m_lightkeymolarfrac = lk_mole_fraction_in_distillate
+    DEST1.m_refluxratio = reflux_ratio
             
-    if outlettemperature != 0:
-        c1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
-        c1.OutletTemperature = outlettemperature # k
-            
-    if deltat != 0:
-        c1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
-        c1.setDeltaT(deltat) # k
-            
-#set cooler efficiency  
-
-    c1.set_Eficiencia(efficiency) # 0-100
-
-#set Pressure drop
-
-    c1.set_DeltaP(pressuredrop) # pa
-    
     sim.AutoLayout()
     
 # add property package
@@ -120,8 +123,8 @@ def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, effici
     Settings.SolverMode = 0
 
     errors = interf.CalculateFlowsheet2(sim)
+    
 
-    print(String.Format("cooler Heat Load: {0} kW", c1.DeltaQ))
 
 
 #save file
@@ -161,4 +164,4 @@ def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, effici
     im = Image.open(imgPath)
     im.show()
     
-Cooler(300.0,100000.0,{"Water" : 9.57},0,100,0,350.0,0)
+Column(300.0,100000.0,{"Benzene" : 9.57, 'Toluene' : 9.57},0.01,0.01,1.4,'Benzene','Toluene')

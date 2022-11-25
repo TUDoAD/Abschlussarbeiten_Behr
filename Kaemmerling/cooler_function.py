@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Nov 24 15:12:55 2022
+
+@author: Lucky Luciano
+"""
+
 #delete dwsim_newui
 
 import os
@@ -49,7 +56,7 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, efficiency, heatremoved, outlettemperature, deltat):
+def Cooler(temperature, pressure, compoundscompoundflow, pressuredrop, efficiency, heatremoved, outlettemperature, deltat):
 
 #add compounds
     

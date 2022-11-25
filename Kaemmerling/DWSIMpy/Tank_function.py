@@ -1,3 +1,18 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Nov 25 11:27:25 2022
+
+@author: Lucky Luciano
+"""
+
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Nov 24 17:08:33 2022
+
+@author: Lucky Luciano
+"""
+
+
 #delete dwsim_newui
 
 import os
@@ -49,7 +64,7 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, efficiency, heatremoved, outlettemperature, deltat):
+def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
 
 #add compounds
     
@@ -64,35 +79,16 @@ def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, effici
 
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
     m2 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet")
-    e1 = sim.AddObject(ObjectType.EnergyStream, 100, 50, "power")
-    c1 = sim.AddObject(ObjectType.Cooler, 200, 50, "cooler")
-    sim.ConnectObjects(m1.GraphicObject, c1.GraphicObject, -1, -1)
-    sim.ConnectObjects(c1.GraphicObject, m2.GraphicObject, -1, -1)
-    sim.ConnectObjects(c1.GraphicObject, e1.GraphicObject, -1, -1)
+    t1 = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
+    sim.ConnectObjects(m1.GraphicObject, t1.GraphicObject, -1, -1)
+    sim.ConnectObjects(t1.GraphicObject, m2.GraphicObject, -1, -1)
+
     
     
-#set cooler operation mode
+#set pump operation mode
 
-    if heatremoved != 0:
-        c1.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
-        c1.setDeltaQ(heatremoved) # j
+
             
-    if outlettemperature != 0:
-        c1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
-        c1.OutletTemperature = outlettemperature # k
-            
-    if deltat != 0:
-        c1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
-        c1.setDeltaT(deltat) # k
-            
-#set cooler efficiency  
-
-    c1.set_Eficiencia(efficiency) # 0-100
-
-#set Pressure drop
-
-    c1.set_DeltaP(pressuredrop) # pa
-    
     sim.AutoLayout()
     
 # add property package
@@ -109,6 +105,9 @@ def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, effici
     
     m1.SetMolarFlow(0.0) # will be set by compounds
     
+    #t1.CalcMode = UnitOperations.Tank.Volume
+    t1.set_Volume(tank_volume) #m^3
+    
     for key in compoundscompoundflow:
          
        print(compoundscompoundflow[key])
@@ -120,8 +119,8 @@ def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, effici
     Settings.SolverMode = 0
 
     errors = interf.CalculateFlowsheet2(sim)
+    
 
-    print(String.Format("cooler Heat Load: {0} kW", c1.DeltaQ))
 
 
 #save file
@@ -161,4 +160,4 @@ def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, effici
     im = Image.open(imgPath)
     im.show()
     
-Cooler(300.0,100000.0,{"Water" : 9.57},0,100,0,350.0,0)
+Tank(300.0,100000.0,{"Water" : 9.57},100.0)

@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Nov 24 17:08:33 2022
+
+@author: Lucky Luciano
+"""
+
+
 #delete dwsim_newui
 
 import os
@@ -49,7 +57,7 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, efficiency, heatremoved, outlettemperature, deltat):
+def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, powerrequired):
 
 #add compounds
     
@@ -65,34 +73,31 @@ def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, effici
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
     m2 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet")
     e1 = sim.AddObject(ObjectType.EnergyStream, 100, 50, "power")
-    c1 = sim.AddObject(ObjectType.Cooler, 200, 50, "cooler")
-    sim.ConnectObjects(m1.GraphicObject, c1.GraphicObject, -1, -1)
-    sim.ConnectObjects(c1.GraphicObject, m2.GraphicObject, -1, -1)
-    sim.ConnectObjects(c1.GraphicObject, e1.GraphicObject, -1, -1)
+    p1 = sim.AddObject(ObjectType.Pump, 200, 50, "pump")
+    sim.ConnectObjects(m1.GraphicObject, p1.GraphicObject, -1, -1)
+    sim.ConnectObjects(p1.GraphicObject, m2.GraphicObject, -1, -1)
+    sim.ConnectObjects(e1.GraphicObject, p1.GraphicObject, -1, -1)
     
     
-#set cooler operation mode
+#set pump operation mode
 
-    if heatremoved != 0:
-        c1.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
-        c1.setDeltaQ(heatremoved) # j
+    if outletpressure != 0:
+        p1.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
+        p1.set_Pout(outletpressure) # pa
+        
             
-    if outlettemperature != 0:
-        c1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
-        c1.OutletTemperature = outlettemperature # k
+    if powerrequired != 0:
+        p1.CalcMode = UnitOperations.Pump.CalculationMode.Power 
+        p1.PowerRequired(powerrequired) # k
             
-    if deltat != 0:
-        c1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
-        c1.setDeltaT(deltat) # k
+    if energystream != 0:
+        p1.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
+        p1.set_EnergyFlow(energystream)
+        
+    if pressureincrease != 0:
+        p1.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
+        p1.set_DeltaP(pressureincrease) # k
             
-#set cooler efficiency  
-
-    c1.set_Eficiencia(efficiency) # 0-100
-
-#set Pressure drop
-
-    c1.set_DeltaP(pressuredrop) # pa
-    
     sim.AutoLayout()
     
 # add property package
@@ -120,8 +125,8 @@ def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, effici
     Settings.SolverMode = 0
 
     errors = interf.CalculateFlowsheet2(sim)
+    
 
-    print(String.Format("cooler Heat Load: {0} kW", c1.DeltaQ))
 
 
 #save file
@@ -161,4 +166,4 @@ def Separator(temperature, pressure, compoundscompoundflow, pressuredrop, effici
     im = Image.open(imgPath)
     im.show()
     
-Cooler(300.0,100000.0,{"Water" : 9.57},0,100,0,350.0,0)
+Pump(300.0,100000.0,{"Water" : 9.57},200000,0,0,0)
