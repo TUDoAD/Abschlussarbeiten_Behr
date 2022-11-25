@@ -1,16 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Nov 25 11:27:46 2022
 
-@author: Lucky Luciano
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 24 17:08:33 2022
-
-@author: Lucky Luciano
-"""
 
 
 #delete dwsim_newui
@@ -82,7 +70,7 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     m3 = sim.AddObject(ObjectType.MaterialStream, 200, 50, 'outlet2')
     e1 = sim.AddObject(ObjectType.EnergyStream, 100, 50, "power")
     e2 = sim.AddObject(ObjectType.EnergyStream, 250, 50, "power")
-    DEST1 = sim.AddObject(ObjectType.Column, 200, 50, "Column")
+    DEST1 = sim.AddObject(ObjectType.ShortcutColumn, 200, 50, "Column")
     sim.ConnectObjects(m1.GraphicObject, DEST1.GraphicObject, -1, -1)
     sim.ConnectObjects(DEST1.GraphicObject, m2.GraphicObject, -1, -1)
     sim.ConnectObjects(DEST1.GraphicObject, m3.GraphicObject, -1, -1)
@@ -100,9 +88,9 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
+    stables = PropertyPackages.RaoultPropertyPackage()
 
-    sim.AddPropertyPackage(stables) 
+    sim.AddPropertyPackage(stables)
 
 #set inlet stream properties
 
