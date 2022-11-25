@@ -64,7 +64,7 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, powerrequired):
+def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, arrhenius_parameter, user_defined_function):
 
 #add compounds
     
@@ -80,30 +80,34 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
     m2 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet")
     e1 = sim.AddObject(ObjectType.EnergyStream, 100, 50, "power")
-    p1 = sim.AddObject(ObjectType.Pump, 200, 50, "pump")
-    sim.ConnectObjects(m1.GraphicObject, p1.GraphicObject, -1, -1)
-    sim.ConnectObjects(p1.GraphicObject, m2.GraphicObject, -1, -1)
-    sim.ConnectObjects(e1.GraphicObject, p1.GraphicObject, -1, -1)
+    CSTR1 = sim.AddObject(ObjectType.RCT_CSTR, 100, 50, "CSTR")
+    sim.ConnectObjects(m1.GraphicObject, CSTR1.GraphicObject, -1, -1)
+    sim.ConnectObjects(CSTR1.GraphicObject, m2.GraphicObject, -1, -1)
+    sim.ConnectObjects(e1.GraphicObject, CSTR1.GraphicObject, -1, -1)
     
     
 #set pump operation mode
 
-    if outletpressure != 0:
-        p1.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
-        p1.set_Pout(outletpressure) # pa
+    if arrhenius_parameter != 0:
+        CSTR.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
+        CSTR.set_Pout(outletpressure) # pa
         
             
-    if powerrequired != 0:
-        p1.CalcMode = UnitOperations.Pump.CalculationMode.Power 
-        p1.PowerRequired(powerrequired) # k
+    if user_defined_function != 0:
+        CSTR.CalcMode = UnitOperations.Pump.CalculationMode.Power 
+        CSTR.PowerRequired(powerrequired) # k
             
-    if energystream != 0:
-        p1.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
-        p1.set_EnergyFlow(energystream)
+    if adiabatic != 0:
+        CSTR.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
+        CSTR.set_EnergyFlow(energystream)
         
-    if pressureincrease != 0:
-        p1.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
-        p1.set_DeltaP(pressureincrease) # k
+    if isothermic != 0:
+        CSTR.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
+        CSTR.set_DeltaP(pressureincrease) # k
+        
+    if outlet_temperature != 0:
+        CSTR.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
+        CSTR.set_EnergyFlow(energystream)
             
     sim.AutoLayout()
     
@@ -173,4 +177,4 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     im = Image.open(imgPath)
     im.show()
     
-Pump(300.0,100000.0,{"Water" : 9.57},200000,0,0,0)
+CSTR(300.0,100000.0,{"Water" : 9.57},200000,0,0,0)
