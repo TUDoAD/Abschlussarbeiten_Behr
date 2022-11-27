@@ -64,7 +64,7 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, arrhenius_parameter, user_defined_function):
+def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie,reactor_volume):
 
 #add compounds
     
@@ -86,36 +86,28 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     sim.ConnectObjects(e1.GraphicObject, CSTR1.GraphicObject, -1, -1)
     
     
-#set pump operation mode
+#set cstr operation mode
 
-    if arrhenius_parameter != 0:
-        CSTR.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
-        CSTR.set_Pout(outletpressure) # pa
+
         
-            
-    if user_defined_function != 0:
-        CSTR.CalcMode = UnitOperations.Pump.CalculationMode.Power 
-        CSTR.PowerRequired(powerrequired) # k
+
             
     if adiabatic != 0:
-        CSTR.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
-        CSTR.set_EnergyFlow(energystream)
+        CSTR1.ReactorOperationMode = Reactors.OperationMode.Adiabatic
         
     if isothermic != 0:
-        CSTR.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
-        CSTR.set_DeltaP(pressureincrease) # k
-        
+        CSTR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
+      
     if outlet_temperature != 0:
-        CSTR.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
-        CSTR.set_EnergyFlow(energystream)
-            
+        CSTR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
+
+
+    CSTR1.Volume = reactor_volume #m^3      
     sim.AutoLayout()
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law")
 
 #set inlet stream properties
 
@@ -130,6 +122,30 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
        print(compoundscompoundflow[key])
          
        m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       
+       # stoichiometric coefficients
+    for components in stochiometrie:
+        
+           comps = Dictionary()
+           comps.Add(components, stochiometrie[components]);
+
+       # direct order coefficients
+    for components in direct_order:
+           
+           dorders = Dictionary()
+           dorders.Add(components, stochiometrie[components]);
+           
+        # reverse order coefficients
+    for components in stochiometrie:
+        
+           rorders = Dictionary()
+           rorders.Add(components, stochiometrie[components]);
+
+    kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetae", 
+                   comps, dorders, rorders, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", 0.01, 0.0, 0.0, 0.0, "300", "")
+          
+    sim.AddReaction(kr1)
+    sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
 
 #request a calculation
 

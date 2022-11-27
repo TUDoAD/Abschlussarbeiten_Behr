@@ -64,7 +64,7 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, powerrequired):
+def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie, reactor_diameter, reactor_length, reactor_volume):
 
 #add compounds
     
@@ -73,6 +73,29 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
        sim.AddCompound(key)
         
        print(key)
+       
+       # stoichiometric coefficients
+    for components in stochiometrie:
+        
+           comps = Dictionary()
+           comps.Add(components, stochiometrie[components]);
+
+       # direct order coefficients
+    for components in direct_order:
+           
+           dorders = Dictionary()
+           dorders.Add(components, stochiometrie[components]);
+           
+        # reverse order coefficients
+    for components in stochiometrie:
+        
+           rorders = Dictionary()
+           rorders.Add(components, stochiometrie[components]);
+           
+    kr1 = sim.CreateKineticReaction("Ethylene Glycol Production", "Production of Ethylene Glycol from Ethylene Oxide and Water", 
+                comps, dorders, rorders, "Ethylene oxide", "Mixture","Molar Concentration", "kmol/m3", "kmol/[m3.h]", 0.5, 0.0, 0.0, 0.0, "", "")
+    sim.AddReaction(kr1)
+    sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
     
     
 #create and connect objects
@@ -80,38 +103,44 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
     m2 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet")
     e1 = sim.AddObject(ObjectType.EnergyStream, 100, 50, "power")
-    p1 = sim.AddObject(ObjectType.Pump, 200, 50, "pump")
-    sim.ConnectObjects(m1.GraphicObject, p1.GraphicObject, -1, -1)
-    sim.ConnectObjects(p1.GraphicObject, m2.GraphicObject, -1, -1)
-    sim.ConnectObjects(e1.GraphicObject, p1.GraphicObject, -1, -1)
+    PFR1 = sim.AddObject(ObjectType.RCT_PFR, 100, 50, "PFR")
+    sim.ConnectObjects(m1.GraphicObject, PFR1.GraphicObject, -1, -1)
+    sim.ConnectObjects(PFR1.GraphicObject, m2.GraphicObject, -1, -1)
+    sim.ConnectObjects(e1.GraphicObject, PFR1.GraphicObject, -1, -1)
     
     
 #set pump operation mode
 
-    if outletpressure != 0:
-        p1.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
-        p1.set_Pout(outletpressure) # pa
+    if isothermic != 0:
+        PFR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
         
+    if adiabatic != 0:
+        PFR1.CalcMode = UnitOperations.RCT_PFR.CalculationMode.Power 
+        PFR1.ReactorOperationMode = Reactors.OperationMode.Adiabatic
             
-    if powerrequired != 0:
-        p1.CalcMode = UnitOperations.Pump.CalculationMode.Power 
-        p1.PowerRequired(powerrequired) # k
-            
-    if energystream != 0:
-        p1.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
-        p1.set_EnergyFlow(energystream)
+    if outlet_temperature != 0:
+        PFR1.CalcMode = UnitOperations.RCT_PFR.CalculationMode.EnergyStream
+        PFR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
         
-    if pressureincrease != 0:
-        p1.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
-        p1.set_DeltaP(pressureincrease) # k
+    if reactor_diameter !=0:
+        
+        PFR1.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Diameter
+        PFR1.Diameter = reactor_diameter #m
+        
+    if reactor_length !=0:
+        
+        PFR1.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length
+        PFR1.Length = reactor_length #m
+    
+    
+    PFR1.Volume = reactor_volume #m^3
+        
             
     sim.AutoLayout()
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law")
 
 #set inlet stream properties
 
@@ -173,4 +202,4 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     im = Image.open(imgPath)
     im.show()
     
-Pump(300.0,100000.0,{"Water" : 9.57},200000,0,0,0)
+PFR(300.0,100000.0,{"Water" : 9.57},200000,0,0,0)
