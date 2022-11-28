@@ -148,7 +148,7 @@ for model_name in model_name_list:
                         
         different_class_count = len(list(onto_local.w2vConcept.subclasses()))
         
-        onto_savestring = './' + onto_name + '_ext_' + model_name + str(similarity_threshold) + '.owl'
+        onto_savestring = './ontologies_output/' + onto_name + '_ext_' + model_name + '_' + str(similarity_threshold) + '.owl'
         onto_local.save(file = onto_savestring)  
         
         print("=============================================")
@@ -164,7 +164,7 @@ for model_name in model_name_list:
                 temp = dict.fromkeys(i,"")
                 unique_dict.update(temp)    
         
-        print("Unique keys added to ontology:", len(dict.fromkeys(w2v_all_concepts_found))# len(unique_dict.keys()))
+        print("Unique keys added to ontology:", len(dict.fromkeys(w2v_all_concepts_found)))# len(unique_dict.keys()))
         print("=============================================")  
         modelname_list.append(model_name)
         sim_list.append(similarity_threshold)
