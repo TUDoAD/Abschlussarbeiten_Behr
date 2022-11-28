@@ -53,6 +53,7 @@ with open('file.pkl', 'rb') as file:
     print(myvar)
     
 """
+"""
 import json
 with open('FoundClasses.json', 'r') as f:
     data = json.load(f)
@@ -67,3 +68,9 @@ for keys in data.keys():
         unique_dict.update(temp)    
 
 print("unique keys: ", len(unique_dict.keys()))
+"""
+
+import pickle
+
+with open('./pickle/ontologie_search.pickle', 'rb') as pickle_file:
+    content = pickle.load(pickle_file)
