@@ -64,7 +64,7 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie,reactor_volume):
+def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie,reactor_volume, arrhenius_parameter):
 
 #add compounds
     
@@ -142,7 +142,7 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
            rorders.Add(components, stochiometrie[components]);
 
     kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetae", 
-                   comps, dorders, rorders, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", 0.01, 0.0, 0.0, 0.0, "300", "")
+                   comps, dorders, rorders, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
           
     sim.AddReaction(kr1)
     sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)

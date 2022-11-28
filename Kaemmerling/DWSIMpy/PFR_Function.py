@@ -64,7 +64,7 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie, reactor_diameter, reactor_length, reactor_volume):
+def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter):
 
 #add compounds
     
@@ -92,8 +92,8 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
            rorders = Dictionary()
            rorders.Add(components, stochiometrie[components]);
            
-    kr1 = sim.CreateKineticReaction("Ethylene Glycol Production", "Production of Ethylene Glycol from Ethylene Oxide and Water", 
-                comps, dorders, rorders, "Ethylene oxide", "Mixture","Molar Concentration", "kmol/m3", "kmol/[m3.h]", 0.5, 0.0, 0.0, 0.0, "", "")
+    kr1 = sim.CreateKineticReaction("Reaction", "", 
+                comps, dorders, rorders, base_compound, "Mixture","Molar Concentration", "kmol/m3", "kmol/[m3.h]", 0.5, 0.0, 0.0, 0.0, "", "")
     sim.AddReaction(kr1)
     sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
     
