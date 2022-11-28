@@ -61,13 +61,14 @@ for model_name in model_name_list:
         
         # get all the preferred labels of the ontology:
         count = 0
+        # USED COUNT DIFFERENTLY THAN IN OLDER VERSIONS!
         class_list = []
         for i in list(onto_local.classes()):
             try: 
                 class_list.append(i.prefLabel[0])
             except:
                 #print('class not included:{}'.format(i))
-                count += 1
+                #count += 1
                 pass
         #print('Not able to include {} classes due to missing label'.format(count))
         ##
@@ -138,6 +139,7 @@ for model_name in model_name_list:
                         new_class.comment.append('Created automatically by [AB] based on word2vec output of concept name "{}"'.format(concept[0]))
                         #new_class.conceptually_related_to = [temp_class]
                         new_class.is_a.append(conceptually_related_to.some(temp_class))
+                        count += 1
                         
         different_class_count = len(list(onto_local.w2vConcept.subclasses()))
                         
@@ -157,12 +159,12 @@ for model_name in model_name_list:
                 temp = dict.fromkeys(i,"")
                 unique_dict.update(temp)    
         
-        print("Unique keys added to ontology:", len(unique_dict.keys()))
+        print("Unique keys added to ontology:", count)# len(unique_dict.keys()))
         print("=============================================")  
         modelname_list.append(model_name)
         sim_list.append(similarity_threshold)
         new_classes_list.append(different_class_count)
-        unique_list.append(len(unique_dict.keys()))
+        unique_list.append(count)
 
 output_dict = {'min_count': modelname_list,'similarity_threshold':sim_list,'new_classes':new_classes_list,'unique_keys':unique_list}
 
