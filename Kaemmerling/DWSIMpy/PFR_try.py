@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jun  1 22:02:43 2022
-
-@author: Lucky Luciano
-"""
-
-# delete dwsim_newui
 
 import os
 

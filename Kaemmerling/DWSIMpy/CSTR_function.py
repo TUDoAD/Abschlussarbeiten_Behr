@@ -55,8 +55,7 @@ from DWSIM.Thermodynamics import Streams, PropertyPackages
 from DWSIM.UnitOperations import UnitOperations, Reactors
 from DWSIM.Automation import Automation2
 from DWSIM.GlobalSettings import Settings
-
-Directory.SetCurrentDirectory(dwsimpath)
+import DWSIM.Interfaces
 
 #create automation manager
 
@@ -67,6 +66,8 @@ sim = interf.CreateFlowsheet()
 def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie,reactor_volume, arrhenius_parameter):
 
 #add compounds
+
+    m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
     
     for key in compoundscompoundflow:
         
@@ -74,6 +75,29 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
         
        print(key)
     
+    for key in compoundscompoundflow:
+         
+       print(compoundscompoundflow[key])
+         
+       #m1.SetOverallCompoundMassFlow(key, compoundscompoundflow[key])
+       m1.SetMassFlow(key, compoundscompoundflow[key])
+       # stoichiometric coefficients
+        
+       comps = stochiometrie
+
+       # direct order coefficients
+           
+       dorders = direct_order
+           
+       # reverse order coefficients
+        
+       rorders = reverse_order
+
+    kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetae", 
+                   comps, dorders, rorders, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
+          
+    sim.AddReaction(kr1)
+    sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
     
 #create and connect objects
 
@@ -115,37 +139,8 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     
     m1.SetPressure(pressure) # pa        
     
-    m1.SetMolarFlow(0.0) # will be set by compounds
+
     
-    for key in compoundscompoundflow:
-         
-       print(compoundscompoundflow[key])
-         
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
-       
-       # stoichiometric coefficients
-    for components in stochiometrie:
-        
-           comps = Dictionary()
-           comps.Add(components, stochiometrie[components]);
-
-       # direct order coefficients
-    for components in direct_order:
-           
-           dorders = Dictionary()
-           dorders.Add(components, stochiometrie[components]);
-           
-        # reverse order coefficients
-    for components in stochiometrie:
-        
-           rorders = Dictionary()
-           rorders.Add(components, stochiometrie[components]);
-
-    kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetae", 
-                   comps, dorders, rorders, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
-          
-    sim.AddReaction(kr1)
-    sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
 
 #request a calculation
 
@@ -193,4 +188,4 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     im = Image.open(imgPath)
     im.show()
     
-CSTR(300.0,100000.0,{"Water" : 9.57},200000,0,0,0)
+CSTR(343.15,500000.0,{"Methyl acetate" : 0.48, '1-butanol' : 0.48, 'Methanol' : 0.04, 'N-butyl acetate' : 0.0},1,0,0,'1-butanol',{"Methyl acetate" : 0.48, '1-butanol' : 0.48, 'Methanol': 0.0, 'N-butyl acetate': 0.0}, {"Methyl acetate" : 0.48, '1-butanol' : 0.48, 'Methanol': 0.04, 'N-butyl acetate': 0.0},{"Methyl acetate" : 0.48, '1-butanol' : 0.48, 'Methanol':0.04, 'N-butyl acetate': 0.0}, 4.0, 0.01)

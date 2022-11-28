@@ -55,8 +55,7 @@ from DWSIM.Thermodynamics import Streams, PropertyPackages
 from DWSIM.UnitOperations import UnitOperations, Reactors
 from DWSIM.Automation import Automation2
 from DWSIM.GlobalSettings import Settings
-
-Directory.SetCurrentDirectory(dwsimpath)
+import DWSIM.Interfaces
 
 #create automation manager
 
@@ -75,25 +74,22 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
        print(key)
        
        # stoichiometric coefficients
-    for components in stochiometrie:
+
         
-           comps = Dictionary()
-           comps.Add(components, stochiometrie[components]);
+    comps = stochiometrie
 
        # direct order coefficients
-    for components in direct_order:
+
            
-           dorders = Dictionary()
-           dorders.Add(components, stochiometrie[components]);
+    dorders = direct_order
+
            
-        # reverse order coefficients
-    for components in stochiometrie:
-        
-           rorders = Dictionary()
-           rorders.Add(components, stochiometrie[components]);
+       # reverse order coefficients
+
+    rorders = stochiometrie
+
            
-    kr1 = sim.CreateKineticReaction("Reaction", "", 
-                comps, dorders, rorders, base_compound, "Mixture","Molar Concentration", "kmol/m3", "kmol/[m3.h]", 0.5, 0.0, 0.0, 0.0, "", "")
+    kr1 = sim.CreateKineticReaction("Reaction", "Reaction_set", comps, dorders, rorders, base_compound, "Mixture","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
     sim.AddReaction(kr1)
     sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
     
@@ -202,4 +198,4 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
     im = Image.open(imgPath)
     im.show()
     
-PFR(300.0,100000.0,{"Water" : 9.57},200000,0,0,0)
+PFR(328.2,10000.0,{"Water" : 9.57, "Ethylene oxide" : 2.39, 'Ethylene glycol' : 0.0},1,0,0,'Ethylene oxide', {"Water" : 0.0, "Ethylene oxide" : 1.0, 'Ethylene glycol' : 0.0}, {"Water" : 0.0, "Ethylene oxide" : 0.0, 'Ethylene glycol' : 0.0}, {"Water" : -1.0, "Ethylene oxide" : -1.0, 'Ethylene glycol' : 1.0}, 0.0, 1.2, 1.0, 0.5)

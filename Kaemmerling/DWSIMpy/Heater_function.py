@@ -1,17 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
-"""
-Created on Thu Jul 28 11:30:48 2022
-
-@author: Lucky Luciano
-"""
-
-"""
-Spyder Editor
-
-This is a temporary script file.
-"""
 
 #delete dwsim_newui
 
