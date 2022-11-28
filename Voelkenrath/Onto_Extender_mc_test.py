@@ -61,14 +61,14 @@ for model_name in model_name_list:
         
         # get all the preferred labels of the ontology:
         count = 0
-        # USED COUNT DIFFERENTLY THAN IN OLDER VERSIONS!
+        
         class_list = []
         for i in list(onto_local.classes()):
             try: 
                 class_list.append(i.prefLabel[0])
             except:
                 #print('class not included:{}'.format(i))
-                #count += 1
+                count += 1
                 pass
         #print('Not able to include {} classes due to missing label'.format(count))
         ##
@@ -77,6 +77,9 @@ for model_name in model_name_list:
         
         # allocate resultDictionary (only gets important, when more than 1 ontology is loaded)
         resDict = {}
+        
+        # for unique classes:
+        w2v_all_concepts_found = []
         
         # for loaded_onto in desc_dict:
         summary = []
@@ -122,6 +125,8 @@ for model_name in model_name_list:
                 if tuple_similarities[i][1] > similarity_threshold:
                     new_classes.append(tuple_similarities[i][0])
             
+            w2v_all_concepts_found.extend(new_classes)
+            
             with onto_local:
                 for i in new_classes: # create new class 
                     ## check, if class already exists?
@@ -139,10 +144,10 @@ for model_name in model_name_list:
                         new_class.comment.append('Created automatically by [AB] based on word2vec output of concept name "{}"'.format(concept[0]))
                         #new_class.conceptually_related_to = [temp_class]
                         new_class.is_a.append(conceptually_related_to.some(temp_class))
-                        count += 1
+                        
                         
         different_class_count = len(list(onto_local.w2vConcept.subclasses()))
-                        
+        
         onto_savestring = './' + onto_name + '_ext_' + model_name + str(similarity_threshold) + '.owl'
         onto_local.save(file = onto_savestring)  
         
@@ -159,12 +164,12 @@ for model_name in model_name_list:
                 temp = dict.fromkeys(i,"")
                 unique_dict.update(temp)    
         
-        print("Unique keys added to ontology:", count)# len(unique_dict.keys()))
+        print("Unique keys added to ontology:", len(dict.fromkeys(w2v_all_concepts_found))# len(unique_dict.keys()))
         print("=============================================")  
         modelname_list.append(model_name)
         sim_list.append(similarity_threshold)
         new_classes_list.append(different_class_count)
-        unique_list.append(count)
+        unique_list.append(len(dict.fromkeys(w2v_all_concepts_found)))
 
 output_dict = {'min_count': modelname_list,'similarity_threshold':sim_list,'new_classes':new_classes_list,'unique_keys':unique_list}
 
