@@ -91,7 +91,7 @@ for model_name in model_name_list:
                 print("Passed '{}', Ontology: {}".format(i,onto_name))
         resDict[onto_name] = summary
         
-        with open('FoundClasses' + model_name + '.json', 'w') as jsonfile:
+        with open('./json-files/FoundClasses' + model_name + str(similarity_threshold) + '.json', 'w') as jsonfile:
             json.dump(resDict, jsonfile)
             
         # List of classes in Vectorspace and 
@@ -148,7 +148,7 @@ for model_name in model_name_list:
         print("model_name = {} \n similarity_threshold = {}".format(model_name,similarity_threshold))
         print('Added {} new classes based on word2vec model {}. \nFile saved as {}.'.format(different_class_count,model_name, onto_savestring))
         
-        with open('FoundClasses.json', 'r') as f:
+        with open('./json-files/FoundClasses' + model_name + str(similarity_threshold) + '.json', 'r') as f:
             data = json.load(f)
         
         unique_dict = {}
