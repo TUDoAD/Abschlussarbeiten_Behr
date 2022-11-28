@@ -71,6 +71,15 @@ print("unique keys: ", len(unique_dict.keys()))
 """
 
 import pickle
+import w2v_training 
 
-with open('./pickle/ontologie_search.pickle', 'rb') as pickle_file:
+with open('./pickle/methanation_only_text.pickle', 'rb') as pickle_file:
     content = pickle.load(pickle_file)
+    
+print('Training Word2Vec...')
+model = w2v_training.create_model(content, 1)
+name_model = 'methanation_only_text' + '_mc' + str(1)
+model.save('./models/' + name_model)
+print('Done!')
+
+conceptList = model.wv.index_to_key

@@ -28,11 +28,13 @@ from gensim.models import Word2Vec
 
 
 # parameters:
+#model_name = 'methanation_only_text_mc1'
 model_name = 'methanation_only_text_mc10'
 #model_name = 'methanation_only_text_mc5'
+#model_name = 'methanation_only_text_mc25'
 #onto_name = 'ManalsHierarchyOutput_withDefinitions'
 onto_name = 'Allotrope_OWL'
-similarity_threshold = 0.999
+similarity_threshold = 0.99
 ##
 
 # loading ontology from local file 
