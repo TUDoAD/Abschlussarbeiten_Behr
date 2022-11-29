@@ -41,10 +41,14 @@ onto_name = 'Allotrope_OWL'
 # similarity_threshold = 0.99
 
 
+## Allocation of lists used for statistics
 modelname_list = []
 sim_list = []
 new_classes_list = []
 unique_list = []
+model_token_number = []
+unique_len_all_concepts_found = []
+##
 
 ##
 for model_name in model_name_list:
@@ -170,8 +174,10 @@ for model_name in model_name_list:
         sim_list.append(similarity_threshold)
         new_classes_list.append(different_class_count)
         unique_list.append(len(dict.fromkeys(w2v_all_concepts_found)))
-
-output_dict = {'min_count': modelname_list,'similarity_threshold':sim_list,'new_classes':new_classes_list,'unique_keys':unique_list}
+        unique_len_all_concepts_found.append(len(w2v_all_concepts_found))
+        model_token_number.append(len(conceptList))
+        
+output_dict = {'min_count': modelname_list,'similarity_threshold':sim_list,'new_classes':new_classes_list,'unique_keys':unique_list, 'model_token_number':model_token_number, 'unique_len_all_concepts_found':unique_len_all_concepts_found}
 
 df = pd.DataFrame(output_dict)
 df.to_excel('Auswertung_versch_MC_und_Thresholds.xlsx')
