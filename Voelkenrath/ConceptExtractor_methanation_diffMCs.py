@@ -117,6 +117,7 @@ for min_count in min_count_list:
     df_concepts.to_excel(output_file_name + '.xlsx') 
     print('Stored common concepts and definitions in {}'.format(output_file_name + '.xlsx'))
     
+    # replaces empty strings with NaN entries
     df_conceps_nan = df_concepts.replace(r'^\s*$', np.nan, regex=True)
     
     # count each row seperately if entry != NaN and sum up 
