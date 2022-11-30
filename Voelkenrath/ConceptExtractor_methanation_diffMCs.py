@@ -92,7 +92,6 @@ for min_count in min_count_list:
         print("{}: Found {} labels".format(key, len(resDict[key])))
         statistics_dict[key] = len(resDict[key])
     print("=============================================")
-    statistics_dict['keys_total'] = len(word_list)
     
     
     set_1 = [iter_string.lower() for iter_string in list(word_list)]
@@ -122,9 +121,21 @@ for min_count in min_count_list:
     
     # count each row seperately if entry != NaN and sum up 
     sum_of_found_defs = df_conceps_nan.iloc[:,1:].count(1).astype(bool).sum(axis = 0)
-    statistics_dict["sum_of_found_defs"] = sum_of_found_defs
+    statistics_dict["sum_of_found_defs"] = int(sum_of_found_defs)
+    
+    statistics_dict['keys_total'] = len(word_list)
     
     statistics_dict_res[min_count] = statistics_dict
+    
+"""
+with open('concept_statistics_diffMCs.json', 'w') as f:
+    json.dump(statistics_dict_res, f)
+"""
+pd.DataFrame(statistics_dict_res).to_excel("concept_statistics_diffMCs.xlsx")
+
+
+    
+    
 '''
 OntoClassSearcher.onto_class_comparison(desc_dict, 'methanation_mc10_searched', 'methanation_mc10_searched-concepts')
 
