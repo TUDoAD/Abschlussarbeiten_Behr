@@ -77,6 +77,7 @@ for min_count in min_count_list:
         description_set =  list(desc_dict[loaded_onto].keys())
         for i in description_set: # comparison of labels
             try:
+                # Make sure, that no special characters are contained in class-name
                 r = re.compile(str("[a-zA-Z0-9]*^" + i + "$"),re.IGNORECASE)
                 newlist = list(filter(r.match, word_list))
                 if newlist: # entry found
