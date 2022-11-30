@@ -14,8 +14,12 @@ import re
 import pandas as pd
 import numpy as np
 
-[class_dict, desc_dict] = OntoClassSearcher.onto_loader(["chmo","Allotrope_OWL"])#, "chebi"])
-#[class_dict, desc_dict] = OntoClassSearcher.onto_loader(["chmo","Allotrope_OWL", "chebi", "NCIT", "bao_complete_merged", "SBO"])
+import pickle
+import w2v_training 
+
+
+#[class_dict, desc_dict] = OntoClassSearcher.onto_loader(["chmo","Allotrope_OWL"])#, "chebi"])
+[class_dict, desc_dict] = OntoClassSearcher.onto_loader(["bao_complete_merged", "Allotrope_OWL", "chebi", "chmo", "NCIT", "SBO"])
 
 #####
 # TODO: INCLUDE FOR LOOP, that iterates through different w2v models' concept lists
@@ -39,17 +43,13 @@ with open('./ontologies/goldbook_vocab.json', encoding = "utf8") as json_file:
 desc_dict["IUPAC-Goldbook"] = temp_dict
 
 
-import pickle
-import w2v_training 
-
-
 statistics_dict_res = {}
 
 
 with open('./pickle/methanation_only_text.pickle', 'rb') as pickle_file:
     content = pickle.load(pickle_file)
     
-min_count_list = [1,5,10,25]
+min_count_list = [1,5,10,25,50,100]
 
 
 for min_count in min_count_list:
