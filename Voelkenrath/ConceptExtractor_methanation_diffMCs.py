@@ -13,15 +13,42 @@ import re
 
 import pandas as pd
 
-#[class_dict, desc_dict] = OntoClassSearcher.onto_loader(["chmo","Allotrope_OWL"])#, "chebi"])
-[class_dict, desc_dict] = OntoClassSearcher.onto_loader(["chmo","Allotrope_OWL", "chebi", "NCIT", "bao_complete_merged", "SBO"])
+[class_dict, desc_dict] = OntoClassSearcher.onto_loader(["chmo","Allotrope_OWL"])#, "chebi"])
+#[class_dict, desc_dict] = OntoClassSearcher.onto_loader(["chmo","Allotrope_OWL", "chebi", "NCIT", "bao_complete_merged", "SBO"])
 
-file_name = "methanation_mc10_searched"
-new_file_name = "conceptsMC10_test"
-df_concepts = pd.read_excel(file_name + '.xlsx')
-df_concepts.drop(df_concepts.columns.difference([file_name + '.xlsx','methanation_mc10_prep']),1,inplace =True)
-word_list = list(df_concepts['methanation_mc10_prep'])
-found_classes = []
+#####
+# TODO: INCLUDE FOR LOOP, that iterates through different w2v models' concept lists
+
+# TODO: ALPHA variieren in w2v models + cluster visualisieren!
+#####
+
+
+
+import pickle
+import w2v_training 
+
+with open('./pickle/methanation_only_text.pickle', 'rb') as pickle_file:
+    content = pickle.load(pickle_file)
+    
+min_count_list = [1]#,5,10,25]
+for min_count in min_count_list:
+    print('Training Word2Vec with mincount = {}...'.format(min_count))
+    model = w2v_training.create_model(content, min_count)
+    name_model = 'methanation_only_text' + '_mc' + str(min_count)
+    model.save('./models/' + name_model)
+    print('Done!')
+
+    word_list = model.wv.index_to_key
+
+#file_name = "methanation_mc10_searched"
+output_file_name = "conceptsMC{}_definitions".format(min_count)
+#df_concepts = pd.read_excel(file_name + '.xlsx')
+#df_concepts.drop(df_concepts.columns.difference([file_name + '.xlsx','methanation_mc10_prep']),1,inplace =True)
+
+df_concepts = pd.DataFrame({"MC {}".format(min_count) :  word_list})
+
+#word_list = list(df_concepts['methanation_mc10_prep'])
+
 
 ## LOADING IUPAC GOLDBOOK 
 temp_dict = {}
@@ -71,15 +98,15 @@ for i in resDict:
     for j in candidates:
         if desc_dict[i][j]: # not empty
             try:    
-                df_concepts.loc[getattr(df_concepts, "methanation_mc10_prep") == j, i] =  desc_dict[i][j] # changes entry in ontology column to definition, when in concepts
+                df_concepts.loc[getattr(df_concepts, "MC {}".format(min_count)) == j, i] =  desc_dict[i][j] # changes entry in ontology column to definition, when in concepts
             except:
-                df_concepts.loc[getattr(df_concepts, "methanation_mc10_prep") == j, i] = str(desc_dict[i][j])
+                df_concepts.loc[getattr(df_concepts, "MC {}".format(min_count)) == j, i] = str(desc_dict[i][j])
         else:
-            df_concepts.loc[getattr(df_concepts, "methanation_mc10_prep") == j, i] =  j # changes entry in ontology column to definition, when in concepts
+            df_concepts.loc[getattr(df_concepts, "MC {}".format(min_count)) == j, i] =  j # changes entry in ontology column to definition, when in concepts
 
 #save dataframe as excel sheet
-df_concepts.to_excel(new_file_name + '.xlsx') 
-print('Stored common concepts and definitions in {}'.format(new_file_name + '.xlsx'))
+df_concepts.to_excel(output_file_name + '.xlsx') 
+print('Stored common concepts and definitions in {}'.format(output_file_name + '.xlsx'))
 
 
 '''
