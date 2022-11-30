@@ -22,15 +22,33 @@ import pandas as pd
 # TODO: ALPHA variieren in w2v models + cluster visualisieren!
 #####
 
+## LOADING IUPAC GOLDBOOK 
+temp_dict = {}
+with open('./ontologies/goldbook_vocab.json', encoding = "utf8") as json_file:
+    dict_data = json.load(json_file)
+    for entry in dict_data["entries"].keys(): 
+        if dict_data["entries"][entry]["term"] != None:
+            if dict_data["entries"][entry]["definition"] != None:
+                temp_dict[dict_data["entries"][entry]["term"].lower()] = dict_data["entries"][entry]["definition"]
+            else:
+                print("IUPAC Goldbook - empty definition in term: {}".format(dict_data["entries"][entry]["term"]))
+                temp_dict[dict_data["entries"][entry]["term"].lower()] = "[AB] Class with same label also contained in [IUPAC-Goldbook]"
+        else:
+            print("empty entry: {}".format(dict_data["entries"][entry]))
+desc_dict["IUPAC-Goldbook"] = temp_dict
 
 
 import pickle
 import w2v_training 
 
+
+statistics_dict_res = {}
+
+
 with open('./pickle/methanation_only_text.pickle', 'rb') as pickle_file:
     content = pickle.load(pickle_file)
     
-min_count_list = [1]#,5,10,25]
+min_count_list = [1,5,10,25]
 for min_count in min_count_list:
     print('Training Word2Vec with mincount = {}...'.format(min_count))
     model = w2v_training.create_model(content, min_count)
@@ -40,74 +58,63 @@ for min_count in min_count_list:
 
     word_list = model.wv.index_to_key
 
-#file_name = "methanation_mc10_searched"
-output_file_name = "conceptsMC{}_definitions".format(min_count)
-#df_concepts = pd.read_excel(file_name + '.xlsx')
-#df_concepts.drop(df_concepts.columns.difference([file_name + '.xlsx','methanation_mc10_prep']),1,inplace =True)
+    #file_name = "methanation_mc10_searched"
+    output_file_name = "conceptsMC{}_definitions".format(min_count)
+    #df_concepts = pd.read_excel(file_name + '.xlsx')
+    #df_concepts.drop(df_concepts.columns.difference([file_name + '.xlsx','methanation_mc10_prep']),1,inplace =True)
+    
+    df_concepts = pd.DataFrame({"MC {}".format(min_count) :  word_list})
+    
+    #word_list = list(df_concepts['methanation_mc10_prep'])
+    statistics_dict = {}
 
-df_concepts = pd.DataFrame({"MC {}".format(min_count) :  word_list})
-
-#word_list = list(df_concepts['methanation_mc10_prep'])
-
-
-## LOADING IUPAC GOLDBOOK 
-temp_dict = {}
-with open('./ontologies/goldbook_vocab.json', encoding = "utf8") as json_file:
-    dict_data = json.load(json_file)
-    for entry in dict_data["entries"].keys():
-        if dict_data["entries"][entry]["term"] != None:
-            if dict_data["entries"][entry]["definition"] != None:
-                temp_dict[dict_data["entries"][entry]["term"].lower()] = dict_data["entries"][entry]["definition"]
-            else:
-                print("empty definition for term: {}".format(dict_data["entries"][entry]["term"]))
-                temp_dict[dict_data["entries"][entry]["term"].lower()] = "[AB] Class with same label also contained in [IUPAC-Goldbook]"
-        else:
-            print("empty entry: {}".format(dict_data["entries"][entry]))
-desc_dict["IUPAC-Goldbook"] = temp_dict
-
-resDict = {}
-for loaded_onto in desc_dict:
-    summary = []
-    description_set =  list(desc_dict[loaded_onto].keys())
-    for i in description_set: # comparison of labels
-        try:
-            r = re.compile(str("[a-zA-Z0-9]*^" + i + "$"),re.IGNORECASE)
-            newlist = list(filter(r.match, word_list))
-            if newlist: # entry found
-                summary.append(newlist)
-        except:
-            print("Passed '{}', Ontology: {}".format(i,loaded_onto))
-    resDict[loaded_onto] = summary
-
-## output number of labels found for each ontology
-print("=============================================")
-for key in resDict:
-    print("{}: Found {} labels".format(key, len(resDict[key])))
-print("=============================================")
-
-set_1 = [iter_string.lower() for iter_string in list(word_list)]
-## store prefLabels and definitions
-for i in resDict:
-    df_concepts.insert(len(df_concepts.columns),i,'') # empty column with name of ontology
-    set_2 = desc_dict[i] # set (Ontology) to compare concepts to
-    candidates = list(set(set_1).intersection(set_2)) # intersection of concept_table-list and ontology
-    # print("Found {}/{} common concept names for Ontology {} and rawdata".format(len(candidates),len(set_1),onto_names[i]))
-  
-    # paste description of class into respective row, when no description exist, 
-    # use the class name to mark concepts, which also exist in the ontology
-    for j in candidates:
-        if desc_dict[i][j]: # not empty
-            try:    
-                df_concepts.loc[getattr(df_concepts, "MC {}".format(min_count)) == j, i] =  desc_dict[i][j] # changes entry in ontology column to definition, when in concepts
+    resDict = {}
+    for loaded_onto in desc_dict:
+        summary = []
+        description_set =  list(desc_dict[loaded_onto].keys())
+        for i in description_set: # comparison of labels
+            try:
+                r = re.compile(str("[a-zA-Z0-9]*^" + i + "$"),re.IGNORECASE)
+                newlist = list(filter(r.match, word_list))
+                if newlist: # entry found
+                    summary.append(newlist)
             except:
-                df_concepts.loc[getattr(df_concepts, "MC {}".format(min_count)) == j, i] = str(desc_dict[i][j])
-        else:
-            df_concepts.loc[getattr(df_concepts, "MC {}".format(min_count)) == j, i] =  j # changes entry in ontology column to definition, when in concepts
-
-#save dataframe as excel sheet
-df_concepts.to_excel(output_file_name + '.xlsx') 
-print('Stored common concepts and definitions in {}'.format(output_file_name + '.xlsx'))
-
+                print("Passed '{}', Ontology: {}".format(i,loaded_onto))
+        resDict[loaded_onto] = summary
+    
+    ## output number of labels found for each ontology
+    print("=============================================")
+    print("Min_Count = {}".format(min_count))
+    for key in resDict:
+        print("{}: Found {} labels".format(key, len(resDict[key])))
+        statistics_dict = {key : len(resDict[key])}
+    print("=============================================")
+    statistics_dict[ ] = 
+    statistics_dict_res = {min_count:statistics_dict}
+    
+    set_1 = [iter_string.lower() for iter_string in list(word_list)]
+    ## store prefLabels and definitions
+    for i in resDict:
+        df_concepts.insert(len(df_concepts.columns),i,'') # empty column with name of ontology
+        set_2 = desc_dict[i] # set (Ontology) to compare concepts to
+        candidates = list(set(set_1).intersection(set_2)) # intersection of concept_table-list and ontology
+        # print("Found {}/{} common concept names for Ontology {} and rawdata".format(len(candidates),len(set_1),onto_names[i]))
+      
+        # paste description of class into respective row, when no description exist, 
+        # use the class name to mark concepts, which also exist in the ontology
+        for j in candidates:
+            if desc_dict[i][j]: # not empty
+                try:    
+                    df_concepts.loc[getattr(df_concepts, "MC {}".format(min_count)) == j, i] =  desc_dict[i][j] # changes entry in ontology column to definition, when in concepts
+                except:
+                    df_concepts.loc[getattr(df_concepts, "MC {}".format(min_count)) == j, i] = str(desc_dict[i][j])
+            else:
+                df_concepts.loc[getattr(df_concepts, "MC {}".format(min_count)) == j, i] =  j # changes entry in ontology column to definition, when in concepts
+    
+    #save dataframe as excel sheet
+    df_concepts.to_excel(output_file_name + '.xlsx') 
+    print('Stored common concepts and definitions in {}'.format(output_file_name + '.xlsx'))
+    
 
 '''
 OntoClassSearcher.onto_class_comparison(desc_dict, 'methanation_mc10_searched', 'methanation_mc10_searched-concepts')
