@@ -8,9 +8,9 @@
          xmlns:obo="http://purl.obolibrary.org/obo/"
          xmlns:term="http://purl.org/dc/terms/"
          xmlns:prov="http://www.w3.org/ns/prov#"
-         xmlns:x_0.1="http://xmlns.com/foaf/0.1/"
          xmlns:prop="http://purl.allotrope.org/ontologies/property#"
          xmlns:core="http://www.w3.org/2004/02/skos/core#"
+         xmlns:x_0.1="http://xmlns.com/foaf/0.1/"
          xmlns:qudt="http://qudt.org/schema/qudt#"
          xmlns:pav="http://purl.org/pav/"
          xmlns:resu="http://purl.allotrope.org/ontologies/result#"
@@ -8948,12 +8948,6 @@ A af-q:ratio 'af-x:relation of' pato:mass is a mass ratio quality.</core:note>
 
 <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000880">
   <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000040"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001917"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
   <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2021/09/aft"/>
   <prop:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</prop:AFX_0002818>
   <core:definition>Energy must be transferred to an object in order to perform work on, or to heat the object. It can be converted in form, but not created or destroyed. [Wikipedia]</core:definition>
@@ -11063,12 +11057,6 @@ A af-q:ratio 'af-x:relation of' pato:mass is a mass ratio quality.</core:note>
 <owl:Class rdf:about="http://purl.allotrope.org/ontologies/process#AFP_0000708">
   <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003275"/>
   <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003349"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000936"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
@@ -13590,7 +13578,19 @@ A af-q:ratio 'af-x:relation of' pato:mass is a mass ratio quality.</core:note>
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000090"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000785"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001348"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
@@ -15300,6 +15300,12 @@ A af-q:ratio 'af-x:relation of' pato:mass is a mass ratio quality.</core:note>
 <owl:Class rdf:about="http://purl.allotrope.org/ontologies/process#AFP_0003735">
   <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003315"/>
   <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/OBI_0000011"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003282"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
   <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2021/09/aft"/>
   <prop:AFX_0002808 rdf:resource="http://semanticscience.org/resource/SIO_000994"/>
   <term:source rdf:resource="http://semanticscience.org/resource/SIO_000994"/>
@@ -19726,6 +19732,12 @@ A af-q:ratio 'af-x:relation of' pato:mass is a mass ratio quality.</core:note>
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001092"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
     </owl:Restriction>
   </rdfs:subClassOf>
@@ -20626,12 +20638,12 @@ A af-q:ratio 'af-x:relation of' pato:mass is a mass ratio quality.</core:note>
     <owl:Restriction>
       <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0000690"/>
       <owl:allValuesFrom>
-        <rdfs:Datatype>
+        <owl:Class>
           <owl:unionOf rdf:parseType="Collection">
             <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#double"/>
             <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#float"/>
           </owl:unionOf>
-        </rdfs:Datatype>
+        </owl:Class>
       </owl:allValuesFrom>
     </owl:Restriction>
   </rdfs:subClassOf>
@@ -21205,12 +21217,6 @@ A af-q:ratio 'af-x:relation of' pato:mass is a mass ratio quality.</core:note>
 
 <owl:Class rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0001092">
   <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000038"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000021"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
   <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2021/09/aft"/>
   <core:altLabel>dot</core:altLabel>
   <core:altLabel>two-dimensional point</core:altLabel>
@@ -25567,12 +25573,6 @@ A af-q:ratio 'af-x:relation of' pato:mass is a mass ratio quality.</core:note>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000993"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001092"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
@@ -37687,6 +37687,12 @@ dispersion. [NIST]</core:definition>
 <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000023">
   <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000091"/>
   <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000017"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001084"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
   <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/bfo/REC/2018/04/bfo-2-0"/>
   <rdfs:isDefinedBy rdf:resource="http://purl.obolibrary.org/obo/bfo.owl"/>
   <rdfs:label>role</rdfs:label>
@@ -38909,6 +38915,12 @@ To say that b is causally unified means: b is a material entity which is such th
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001584"/>
     </owl:Restriction>
   </rdfs:subClassOf>
@@ -39025,12 +39037,6 @@ To say that b is causally unified means: b is a material entity which is such th
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000708"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003620"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
@@ -39532,6 +39538,18 @@ To say that b is causally unified means: b is a material entity which is such th
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000693"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000733"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/BFO_0000034"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2021/09/relation"/>
@@ -41924,7 +41942,7 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000576"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000937"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
@@ -41948,16 +41966,23 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001817"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001844"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "range"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "condition"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "tube"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "profile"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "time"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "rate"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "model"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "point"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "length"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "mass"</rdfs:comment>
 </owl:Class>
 
@@ -42007,6 +42032,66 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "process"</rdfs:comment>
 </owl:Class>
 
+<owl:Class rdf:about="#fraction">
+  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000021"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003735"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000002"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001092"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001159"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001843"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001844"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002107"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "range"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "experiment"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "procedure"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "point"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "wavelength"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "volume"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "mass"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "diameter"</rdfs:comment>
+</owl:Class>
+
 <owl:Class rdf:about="#change">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
@@ -42021,26 +42106,15 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003374"/>
     </owl:Restriction>
   </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002036"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "condition"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "state"</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#eﬀect">
-  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/common#AFC_0000090"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0002834"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "condition"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "test"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "concentration"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#component">
@@ -42402,6 +42476,12 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000954"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001844"/>
     </owl:Restriction>
   </rdfs:subClassOf>
@@ -42418,6 +42498,7 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "tube"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "rate"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "mass"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "pressure"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "composition"</rdfs:comment>
@@ -42434,24 +42515,10 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000954"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001817"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001844"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "tube"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "rate"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "length"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "mass"</rdfs:comment>
 </owl:Class>
 
@@ -42487,15 +42554,8 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000077"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000179"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "solution"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "ion"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "amount"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#zeolite">
@@ -42521,6 +42581,31 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "solution"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "ion"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "peak"</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#layer">
+  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000012"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000077"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001843"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "solution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "ion"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "volume"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#presence">
@@ -42560,31 +42645,6 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "electron"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "atom"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "diameter"</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#layer">
-  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000012"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000077"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001843"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "solution"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "ion"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "volume"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#impregnation">
@@ -42691,30 +42751,18 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "gas"</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#mixture">
-  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/PATO_0000025"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "gas"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "composition"</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#study">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000275"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000179"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
@@ -42730,6 +42778,7 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "material"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "amount"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "diameter"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "strength"</rdfs:comment>
 </owl:Class>
@@ -42763,7 +42812,7 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "role"</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#stability">
+<owl:Class rdf:about="#performance">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -42772,31 +42821,6 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "material"</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#chemical">
-  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000341"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001348"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cell"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "synthesis"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "process"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#technology">
@@ -42816,19 +42840,30 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000733"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/RO_0002577"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cell"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "emission"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "distribution"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "system"</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#chemical">
+  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000341"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001348"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "cell"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "synthesis"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#oxygen">
@@ -42856,7 +42891,7 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "strength"</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#nanoparticle">
+<owl:Class rdf:about="#property">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -42864,7 +42899,42 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000418"/>
     </owl:Restriction>
   </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001079"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000708"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002076"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/PATO_0000141"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/PATO_0001230"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "electron"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dispersion"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "loading"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "area"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "structure"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "strength"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#market">
@@ -42929,6 +42999,17 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "energy"</rdfs:comment>
 </owl:Class>
 
+<owl:Class rdf:about="#hydrogenation">
+  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001028"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "atom"</rdfs:comment>
+</owl:Class>
+
 <owl:Class rdf:about="#intermediate">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
@@ -42940,15 +43021,22 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "atom"</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#hydrogenation">
+<owl:Class rdf:about="#particle">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001028"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001079"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "atom"</rdfs:comment>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000936"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dispersion"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "size"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#promoter">
@@ -42983,63 +43071,6 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "structure"</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#particle">
-  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001079"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000936"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dispersion"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "size"</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#property">
-  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001079"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000708"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002076"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/PATO_0000141"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/PATO_0001230"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dispersion"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "loading"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "area"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "structure"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "strength"</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#nickel">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
@@ -43054,8 +43085,15 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003620"/>
     </owl:Restriction>
   </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000936"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dispersion"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "activity"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "size"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#band">
@@ -43105,12 +43143,6 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000924"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002107"/>
     </owl:Restriction>
   </rdfs:subClassOf>
@@ -43118,68 +43150,7 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "calculation"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "amount"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "trend"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "factor"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "diameter"</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#work">
-  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001084"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001348"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0002834"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003282"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003735"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000634"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000924"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "group"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "synthesis"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "test"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "calculation"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "experiment"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "trend"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "factor"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "molecule"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#addition">
@@ -43235,35 +43206,6 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "strength"</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#comparison">
-  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000785"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/ENVO_00002005"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dilution"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "air"</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#mode">
-  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000785"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dilution"</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#problem">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
@@ -43303,7 +43245,43 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "air"</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#stage">
+<owl:Class rdf:about="#comparison">
+  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000785"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000576"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/ENVO_00002005"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dilution"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "profile"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "air"</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#mode">
+  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000785"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "dilution"</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#work">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -43311,7 +43289,53 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001348"/>
     </owl:Restriction>
   </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0002834"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003735"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000634"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000924"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "synthesis"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "test"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "experiment"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "trend"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "factor"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "molecule"</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#eﬀect">
+  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0002834"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "test"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#term">
@@ -43337,6 +43361,12 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000924"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000932"/>
     </owl:Restriction>
   </rdfs:subClassOf>
@@ -43349,11 +43379,23 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "emission"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "experiment"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "trend"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "factor"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "order"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "account"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#catalyst">
+  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003620"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "activity"</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#metal">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -43390,63 +43432,10 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
       <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001817"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/BFO_0000034"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "experiment"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "profile"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "factor"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "length"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "function"</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#fraction">
-  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003735"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/realizable#AFRE_0000002"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001092"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001159"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001843"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002107"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "experiment"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "procedure"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "point"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "wavelength"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "volume"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "diameter"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#decrease">
@@ -43518,6 +43507,17 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "amount"</rdfs:comment>
 </owl:Class>
 
+<owl:Class rdf:about="#sample">
+  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000413"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "peak"</rdfs:comment>
+</owl:Class>
+
 <owl:Class rdf:about="#reduction">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
@@ -43541,17 +43541,6 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "peak"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "role"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "molecule"</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#sample">
-  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000413"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "peak"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#coke">
@@ -43646,12 +43635,19 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/BFO_0000034"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "time"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "model"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "mass"</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "process"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "function"</rdfs:comment>
 </owl:Class>
 
@@ -43672,37 +43668,12 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0002036"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
       <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/BFO_0000034"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "time"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "model"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "concentration"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "function"</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#yield">
-  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000937"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/PATO_0002242"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "time"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "velocity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#variation">
@@ -43738,24 +43709,6 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "length"</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#unit">
-  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001843"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#conceptually_related_to"/>
-      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001844"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "volume"</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "mass"</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#pore">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
@@ -43772,6 +43725,17 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "volume"</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "area"</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#unit">
+  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001843"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "volume"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#h2o">
@@ -43807,7 +43771,7 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "diameter"</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#step">
+<owl:Class rdf:about="#kinetic">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -43818,7 +43782,7 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "process"</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#kinetic">
+<owl:Class rdf:about="#step">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -43851,7 +43815,7 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "site"</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#oxide">
+<owl:Class rdf:about="#interaction">
   <rdfs:subClassOf rdf:resource="#w2vConcept"/>
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -43871,6 +43835,28 @@ In almost all cases, the system identifies a subset of base quantity kinds. The 
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "composition"</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#mixture">
+  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/PATO_0000025"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "composition"</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#yield">
+  <rdfs:subClassOf rdf:resource="#w2vConcept"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#conceptually_related_to"/>
+      <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/PATO_0002242"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Created automatically by [AB] based on word2vec output of concept name "velocity"</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#electricity">

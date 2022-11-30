@@ -29,9 +29,14 @@ from gensim.models import Word2Vec
 
 
 # parameters:
-model_name_list = ['methanation_only_text_mc1','methanation_only_text_mc5',
-                   'methanation_only_text_mc10','methanation_only_text_mc25','methanation_only_text_mc25']    
-similarity_threshold_list = [0.8,0.9,0.95,0.99,0.995,0.999]
+#model_name_list = ['methanation_only_text_mc1','methanation_only_text_mc5',
+#                   'methanation_only_text_mc10','methanation_only_text_mc25']    
+mc_list = range(1,26)
+model_name_list = ['methanation_only_text_mc'+str(i) for i in mc_list]
+
+#similarity_threshold_list = [0.8,0.9,0.95,0.99,0.995,0.996,0.997,0.998,0.999]
+similarity_threshold_list = [0.999,0.9995,1]
+
 #model_name = 'methanation_only_text_mc1'
 #model_name = 'methanation_only_text_mc10'
 #model_name = 'methanation_only_text_mc5'
@@ -176,6 +181,9 @@ for model_name in model_name_list:
         unique_list.append(len(dict.fromkeys(w2v_all_concepts_found)))
         unique_len_all_concepts_found.append(len(w2v_all_concepts_found))
         model_token_number.append(len(conceptList))
+        
+        Onto_World = None
+        onto_local = None
         
 output_dict = {'min_count': modelname_list,'similarity_threshold':sim_list,'new_classes':new_classes_list,'unique_keys':unique_list, 'model_token_number':model_token_number, 'unique_len_all_concepts_found':unique_len_all_concepts_found}
 

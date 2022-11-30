@@ -70,22 +70,24 @@ for keys in data.keys():
 print("unique keys: ", len(unique_dict.keys()))
 """
 
-"""
+#"""
 import pickle
 import w2v_training 
 
 with open('./pickle/methanation_only_text.pickle', 'rb') as pickle_file:
     content = pickle.load(pickle_file)
     
-print('Training Word2Vec...')
-model = w2v_training.create_model(content, 1)
-name_model = 'methanation_only_text' + '_mc' + str(1)
-model.save('./models/' + name_model)
-print('Done!')
+min_count = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
+for i in min_count:
+    print('Training Word2Vec with mincount = {}...'.format(i))
+    model = w2v_training.create_model(content, i)
+    name_model = 'methanation_only_text' + '_mc' + str(i)
+    model.save('./models/' + name_model)
+    print('Done!')
 
 conceptList = model.wv.index_to_key
+#"""
 """
-
 import plotly
 import numpy as np
 import plotly.graph_objs as go
@@ -187,3 +189,4 @@ model = Word2Vec.load('./models/methanation_only_text_mc10')
 
 display_pca_scatterplot_3D(model, user_input = w2v_all_concepts_found)#,user_input = ['reactor','chemical', 'methane'])#, sample = sample)#, words = ['1']) 
 #display_pca_scatterplot_3D(model, user_input = ['reactor'])#, similar_word, labels, color_map)
+"""
