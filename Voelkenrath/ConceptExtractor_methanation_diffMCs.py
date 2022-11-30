@@ -12,6 +12,7 @@ import OntoClassSearcher
 import re 
 
 import pandas as pd
+import numpy as np
 
 [class_dict, desc_dict] = OntoClassSearcher.onto_loader(["chmo","Allotrope_OWL"])#, "chebi"])
 #[class_dict, desc_dict] = OntoClassSearcher.onto_loader(["chmo","Allotrope_OWL", "chebi", "NCIT", "bao_complete_merged", "SBO"])
@@ -49,6 +50,8 @@ with open('./pickle/methanation_only_text.pickle', 'rb') as pickle_file:
     content = pickle.load(pickle_file)
     
 min_count_list = [1,5,10,25]
+
+
 for min_count in min_count_list:
     print('Training Word2Vec with mincount = {}...'.format(min_count))
     model = w2v_training.create_model(content, min_count)
@@ -66,8 +69,8 @@ for min_count in min_count_list:
     df_concepts = pd.DataFrame({"MC {}".format(min_count) :  word_list})
     
     #word_list = list(df_concepts['methanation_mc10_prep'])
+    
     statistics_dict = {}
-
     resDict = {}
     for loaded_onto in desc_dict:
         summary = []
@@ -87,10 +90,10 @@ for min_count in min_count_list:
     print("Min_Count = {}".format(min_count))
     for key in resDict:
         print("{}: Found {} labels".format(key, len(resDict[key])))
-        statistics_dict = {key : len(resDict[key])}
+        statistics_dict[key] = len(resDict[key])
     print("=============================================")
-    statistics_dict[ ] = 
-    statistics_dict_res = {min_count:statistics_dict}
+    statistics_dict['keys_total'] = len(word_list)
+    
     
     set_1 = [iter_string.lower() for iter_string in list(word_list)]
     ## store prefLabels and definitions
@@ -115,7 +118,13 @@ for min_count in min_count_list:
     df_concepts.to_excel(output_file_name + '.xlsx') 
     print('Stored common concepts and definitions in {}'.format(output_file_name + '.xlsx'))
     
-
+    df_conceps_nan = df_concepts.replace(r'^\s*$', np.nan, regex=True)
+    
+    # count each row seperately if entry != NaN and sum up 
+    sum_of_found_defs = df_conceps_nan.iloc[:,1:].count(1).astype(bool).sum(axis = 0)
+    statistics_dict["sum_of_found_defs"] = sum_of_found_defs
+    
+    statistics_dict_res[min_count] = statistics_dict
 '''
 OntoClassSearcher.onto_class_comparison(desc_dict, 'methanation_mc10_searched', 'methanation_mc10_searched-concepts')
 
