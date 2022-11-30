@@ -82,7 +82,7 @@ for min_count in min_count_list:
                 if newlist: # entry found
                     summary.append(newlist)
             except:
-                print("Passed '{}', Ontology: {}".format(i,loaded_onto))
+                print("Passed due to class-name: '{}', Ontology: {}".format(i,loaded_onto))
         resDict[loaded_onto] = summary
     
     ## output number of labels found for each ontology
