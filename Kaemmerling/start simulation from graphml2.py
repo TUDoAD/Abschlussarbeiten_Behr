@@ -80,7 +80,7 @@ def startsimulationfromgraphml(graph):
             reflux_ratio = graph._node[first_node]['reflux_ratio']
             light_key_compound = graph._node[first_node]['light_key_compound']
             heavy_key_compound = graph._node[first_node]['heavy_key_compound']
-            Column(inlet_temperature, inlet_pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
+            column_function.Column(inlet_temperature, inlet_pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
             before_node = 0
         if node =='column' != nodes[0]:  
             before_node = node[before_node]
@@ -102,12 +102,12 @@ def startsimulationfromgraphml(graph):
                 compound_mass_flow = compound_mass_frac * mass_flow
                 compoundscompoundflow[compound].append(compound_mass_flow)
                 c = c+1
-            Column(inlet_temperature, inlet_pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
+            column_function.Column(inlet_temperature, inlet_pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
             c = 0
             before_node = before_node +1
         if node == 'Vessel' == nodes[0]: 
             tank_volume = graph._node[first_node]['tank_volume'] 
-            Tank(temperature, pressure, compoundscompoundflow, tank_volume)
+            Tank_function.Tank(inlet_temperature, inlet_pressure, compoundscompoundflow, tank_volume)
             before_node = 0
                 
         if node == 'Vessel' != nodes[0]:
@@ -124,81 +124,81 @@ def startsimulationfromgraphml(graph):
                 compoundscompoundflow[compound].append(compound_mass_flow)
                 c = c+1
             tank_volume = graph._node[node]['tank_volume'] 
-            Tank(temperature, pressure, compoundscompoundflow, tank_volume)
+            Tank_function.Tank(inlet_temperature, inlet_pressure, compoundscompoundflow, tank_volume)
             before_node = before_node +1
             c = 0
             
             
             
         if node == 'PFR' == nodes[0]:
-            PFR(inlet_temperature, inlet_pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)
+            PFR_Function.PFR(inlet_temperature, inlet_pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)
             before_node = 0
             
         if node == 'PFR' != nodes[0]:
-            PFR(inlet_temperature, inlet_pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)
+            PFR_Function.PFR(inlet_temperature, inlet_pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)
             before_node = before_node +1
             c = 0
             
         if node == 'CSTR' == nodes[0]:
-            CSTR(inlet_temperature, inlet_pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie,reactor_volume, arrhenius_parameter)
+            CSTR_function.CSTR(inlet_temperature, inlet_pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie,reactor_volume, arrhenius_parameter)
             before_node = 0
             
         if node == 'CSTR' != nodes[0]:
-            CSTR(inlet_temperature, inlet_pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie,reactor_volume, arrhenius_parameter)
+            CSTR_function.CSTR(inlet_temperature, inlet_pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie,reactor_volume, arrhenius_parameter)
             before_node = before_node +1
             c = 0
             
         if node == 'Heater' == nodes[0]: 
-            Heater(inlet_temperature, inlet_pressure, compoundscompoundflow, pressuredrop, efficiency, heatadded, outlettemperature, deltat)
+            Heater_function.Heater(inlet_temperature, inlet_pressure, compoundscompoundflow, pressuredrop, efficiency, heatadded, outlettemperature, deltat)
             before_node = 0
             
         if node == 'Heater' != nodes[0]:
-            Heater(inlet_temperature, inlet_pressure, compoundscompoundflow, pressuredrop, efficiency, heatadded, outlettemperature, deltat)
+            Heater_function.Heater(inlet_temperature, inlet_pressure, compoundscompoundflow, pressuredrop, efficiency, heatadded, outlettemperature, deltat)
             before_node = before_node +1
             c = 0
             
         if node =='Cooler'== nodes[0]:
-            Cooler(inlet_temperature, inlet_pressure, compoundscompoundflow, pressuredrop, efficiency, heatremoved, outlettemperature, deltat)
+            cooler_function.Cooler(inlet_temperature, inlet_pressure, compoundscompoundflow, pressuredrop, efficiency, heatremoved, outlettemperature, deltat)
             before_node = 0
             
         if node =='Cooler'!= nodes[0]:
-            Cooler(inlet_temperature, inlet_pressure, compoundscompoundflow, pressuredrop, efficiency, heatremoved, outlettemperature, deltat)
+            cooler_function.Cooler(inlet_temperature, inlet_pressure, compoundscompoundflow, pressuredrop, efficiency, heatremoved, outlettemperature, deltat)
             before_node = before_node +1
             c = 0
             
         if node == 'Heat exchanger, detailed'== nodes[0]:
-            Heat_exchanger(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, compoundscompoundflow, compoundscompoundflow2, heat_exchange_area, global_heat_transfer)
+            heat_exchanger_function.Heat_exchanger(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, compoundscompoundflow, compoundscompoundflow2, heat_exchange_area, global_heat_transfer)
             before_node = 0
             
         if node == 'Heat exchanger, detailed'!= nodes[0]:
-            Heat_exchanger(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, compoundscompoundflow, compoundscompoundflow2, heat_exchange_area, global_heat_transfer)
+            heat_exchanger_function.Heat_exchanger(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, compoundscompoundflow, compoundscompoundflow2, heat_exchange_area, global_heat_transfer)
             before_node = before_node +1
             c = 0
             
         if node == 'Pump'== nodes[0]:
-            Pump(inlet_temperature, inlet_pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, powerrequired)
+            Pump_function.Pump(inlet_temperature, inlet_pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, powerrequired)
             before_node = 0
             
         if node == 'Pump'!= nodes[0]:
-            Pump(inlet_temperature, inlet_pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, powerrequired)
+            Pump_function.Pump(inlet_temperature, inlet_pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, powerrequired)
             before_node = before_node +1
             c = 0
             
         if node == 'Compressor'== nodes[0]:
-            Compressor(inlet_temperature, inlet_pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream)
+            Compressor_function.Compressor(inlet_temperature, inlet_pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream)
             before_node = 0
             
         if node == 'Compressor'!= nodes[0]:
-            Compressor(inlet_temperature, inlet_pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream)
+            Compressor_function.Compressor(inlet_temperature, inlet_pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream)
             before_node = before_node +1
             c = 0
             
         if node == 'Separator'== nodes[0]:
-            Separator(inlet_temperature, inlet_pressure, compoundscompoundflow)
+            Separator_function.Separator(inlet_temperature, inlet_pressure, compoundscompoundflow)
             before_node = 0
             
         if node == 'Separator'!= nodes[0]:
-            Separator(inlet_temperature, inlet_pressure, compoundscompoundflow)
+            Separator_function.Separator(inlet_temperature, inlet_pressure, compoundscompoundflow)
             before_node = before_node +1
             c = 0    
          
