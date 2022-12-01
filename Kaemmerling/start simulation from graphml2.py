@@ -84,8 +84,8 @@ def startsimulationfromgraphml(graph):
             before_node = 0
         if node =='column' != nodes[0]:  
             before_node = node[before_node]
-            mass_flow = graph._node[first_node]['inlet_mass_flow'] 
-            lk_mole_fraction_in_distillate = graph._node[before_node]['lk_mole_fraction_in_distillate'] 
+            mass_flow = graph._node[node]['inlet_mass_flow'] 
+            lk_mole_fraction_in_distillate = graph._node[node]['lk_mole_fraction_in_distillate'] 
             hk_mole_fraction_in_distillate = graph._node[before_node]['hk_mole_fraction_in_distillate']
             reflux_ratio = graph._node[before_node]['reflux_ratio']
             light_key_compound = graph._node[before_node]['light_key_compound']
@@ -103,9 +103,30 @@ def startsimulationfromgraphml(graph):
                 compoundscompoundflow[compound].append(compound_mass_flow)
                 c = c+1
             Column(inlet_temperature, inlet_pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
-        
-        if node == 'Vessel' == nodes[0]:
+            c = 0
+            before_node = before_node +1
+        if node == 'Vessel' == nodes[0]: 
+            tank_volume = graph._node[first_node]['tank_volume'] 
+            Tank(temperature, pressure, compoundscompoundflow, tank_volume)
+            before_node = 0
+                
         if node == 'Vessel' != nodes[0]:
+            inlet_temperature = graph._node[before_node]['inlet_temperature'] 
+            inlet_pressure = graph._node[before_node]['inlet_pressure'] 
+            composition = graph._node[before_node]['inlet_composition'] 
+            mass_flow = graph._node[before_node]['inlet_mass_flow'] 
+            compounds = graph._node[before_node]['compounds'] #dwsim function fehlt noch 
+            compoundscompoundflow = dict()
+            for components in compounds:
+                compound = compounds[c]
+                compound_mass_frac = composition[c]
+                compound_mass_flow = compound_mass_frac * mass_flow
+                compoundscompoundflow[compound].append(compound_mass_flow)
+                c = c+1
+            tank_volume = graph._node[node]['tank_volume'] 
+            Tank(temperature, pressure, compoundscompoundflow, tank_volume)
+            before_node = before_node +1
+            c = 0
             
             
             
