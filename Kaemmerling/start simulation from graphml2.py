@@ -51,3 +51,51 @@ import Pump_function
 import Compressor_function
 import Separator_function
 import cooler_function
+import heat_exchanger_function
+
+#for schleife
+
+def startsimulationfromgraphml(graph):
+    c = 0
+    nodes = list(graph.nodes)
+    first_node = nodes[0]
+    inlet_temperature = graph._node[first_node]['inlet_temperature'] 
+    inlet_pressure = graph._node[first_node]['inlet_pressure'] 
+    composition = graph._node[first_node]['inlet_composition'] 
+    mass_flow = graph._node[first_node]['inlet_mass_flow'] 
+    compounds = graph._node[first_node]['compounds'] #dwsim function fehlt noch 
+    compoundscompoundflow = dict()
+    for components in compounds:
+        compound = compounds[c]
+        compound_mass_frac = composition[c]
+        compound_mass_flow = compound_mass_frac * mass_flow
+        compoundscompoundflow[compound].append(compound_mass_flow)
+        c = c+1
+        
+    if nodes[0] == 'column':
+        mass_flow = graph._node[first_node]['inlet_mass_flow'] 
+        lk_mole_fraction_in_distillate = graph._node[first_node]['lk_mole_fraction_in_distillate'] 
+        hk_mole_fraction_in_distillate = graph._node[first_node]['hk_mole_fraction_in_distillate']
+        reflux_ratio = graph._node[first_node]['reflux_ratio']
+        light_key_compound = graph._node[first_node]['light_key_compound']
+        heavy_key_compound = graph._node[first_node]['heavy_key_compound']
+        Column(inlet_temperature, inlet_pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
+        
+    if nodes[0] == 'Vessel':
+    if nodes[0] == 'PFR':
+    if nodes[0] == 'CSTR':
+    if nodes[0] == 'Heater':
+    if nodes[0] == 'Cooler':
+    if nodes[0] == 'Heat exchanger, detailed':
+    if nodes[0] == 'Pump':
+    if nodes[0] == 'Compressor':
+    if nodes[0] == 'Separator':
+    
+         
+
+
+
+
+
+
+

@@ -327,6 +327,10 @@ for position in wanted_list:
 nx.write_graphml(W,'./Output/graphs_graphml/clean/graphml_pfd')
 functions.plot_graph2('./Output/graphs_graphml/clean/graphml_pfd', './Output/graphs_plots_clean')
 f = nx.read_graphml('./Output/graphs_graphml/clean/graphml_pfd')
+
+########################################################################
+### inputs für die jeweiligen UO müssen graphen eingetragen werden !!!##
+########################################################################
 for grop in wanted_list:
     dict1 = {'node_group':g._node[grop]['node_group']}
     group= {grop:dict1}
