@@ -96,7 +96,7 @@ import pickle
 import w2v_training 
 from gensim.models import Word2Vec
 
-def display_pca_scatterplot_3D(model, user_input=None, words=None, label=None, color_map=None, topn=5, sample=10):
+def display_pca_scatterplot_3D(model, user_input=None, words=None, label=None, color_map=None, topn=10, sample=250):
 ## Code adapted from: https://towardsdatascience.com/visualizing-word-embedding-with-pca-and-t-sne-961a692509f5
     if words == None:
         if sample > 0:
@@ -187,6 +187,6 @@ def display_pca_scatterplot_3D(model, user_input=None, words=None, label=None, c
 model = Word2Vec.load('./models/methanation_only_text_mc10')
 #sample = 10 # len(model.wv.index_to_key)
 
-display_pca_scatterplot_3D(model, user_input = w2v_all_concepts_found)#,user_input = ['reactor','chemical', 'methane'])#, sample = sample)#, words = ['1']) 
-#display_pca_scatterplot_3D(model, user_input = ['reactor'])#, similar_word, labels, color_map)
+#display_pca_scatterplot_3D(model, user_input = w2v_all_concepts_found)#,user_input = ['reactor','chemical', 'methane'])#, sample = sample)#, words = ['1']) 
+display_pca_scatterplot_3D(model, user_input = ['reactor','engineering','methanation'])#, similar_word, labels, color_map)
 """

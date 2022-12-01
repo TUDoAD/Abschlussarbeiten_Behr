@@ -34,8 +34,8 @@ from gensim.models import Word2Vec
 mc_list = range(1,26)
 model_name_list = ['methanation_only_text_mc'+str(i) for i in mc_list]
 
-#similarity_threshold_list = [0.8,0.9,0.95,0.99,0.995,0.996,0.997,0.998,0.999]
-similarity_threshold_list = [0.999,0.9995,1]
+similarity_threshold_list = [0.8,0.9,0.95,0.99,0.995,0.996,0.997,0.998,0.999]
+#similarity_threshold_list = [0.999,0.9995,1]
 
 #model_name = 'methanation_only_text_mc1'
 #model_name = 'methanation_only_text_mc10'
