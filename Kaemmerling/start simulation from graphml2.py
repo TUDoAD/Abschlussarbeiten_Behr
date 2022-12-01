@@ -53,7 +53,6 @@ import Separator_function
 import cooler_function
 import heat_exchanger_function
 
-#for schleife
 
 def startsimulationfromgraphml(graph):
     c = 0
@@ -72,24 +71,60 @@ def startsimulationfromgraphml(graph):
         compoundscompoundflow[compound].append(compound_mass_flow)
         c = c+1
         
-    if nodes[0] == 'column':
-        mass_flow = graph._node[first_node]['inlet_mass_flow'] 
-        lk_mole_fraction_in_distillate = graph._node[first_node]['lk_mole_fraction_in_distillate'] 
-        hk_mole_fraction_in_distillate = graph._node[first_node]['hk_mole_fraction_in_distillate']
-        reflux_ratio = graph._node[first_node]['reflux_ratio']
-        light_key_compound = graph._node[first_node]['light_key_compound']
-        heavy_key_compound = graph._node[first_node]['heavy_key_compound']
-        Column(inlet_temperature, inlet_pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
+    for node in nodes:
         
-    if nodes[0] == 'Vessel':
-    if nodes[0] == 'PFR':
-    if nodes[0] == 'CSTR':
-    if nodes[0] == 'Heater':
-    if nodes[0] == 'Cooler':
-    if nodes[0] == 'Heat exchanger, detailed':
-    if nodes[0] == 'Pump':
-    if nodes[0] == 'Compressor':
-    if nodes[0] == 'Separator':
+        if node == 'column' == nodes[0]:
+            mass_flow = graph._node[first_node]['inlet_mass_flow'] 
+            lk_mole_fraction_in_distillate = graph._node[first_node]['lk_mole_fraction_in_distillate'] 
+            hk_mole_fraction_in_distillate = graph._node[first_node]['hk_mole_fraction_in_distillate']
+            reflux_ratio = graph._node[first_node]['reflux_ratio']
+            light_key_compound = graph._node[first_node]['light_key_compound']
+            heavy_key_compound = graph._node[first_node]['heavy_key_compound']
+            Column(inlet_temperature, inlet_pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
+            before_node = 0
+        if node =='column' != nodes[0]:  
+            before_node = node[before_node]
+            mass_flow = graph._node[first_node]['inlet_mass_flow'] 
+            lk_mole_fraction_in_distillate = graph._node[before_node]['lk_mole_fraction_in_distillate'] 
+            hk_mole_fraction_in_distillate = graph._node[before_node]['hk_mole_fraction_in_distillate']
+            reflux_ratio = graph._node[before_node]['reflux_ratio']
+            light_key_compound = graph._node[before_node]['light_key_compound']
+            heavy_key_compound = graph._node[before_node]['heavy_key_compound']
+            inlet_temperature = graph._node[before_node]['inlet_temperature'] 
+            inlet_pressure = graph._node[before_node]['inlet_pressure'] 
+            composition = graph._node[before_node]['inlet_composition'] 
+            mass_flow = graph._node[before_node]['inlet_mass_flow'] 
+            compounds = graph._node[before_node]['compounds'] #dwsim function fehlt noch 
+            compoundscompoundflow = dict()
+            for components in compounds:
+                compound = compounds[c]
+                compound_mass_frac = composition[c]
+                compound_mass_flow = compound_mass_frac * mass_flow
+                compoundscompoundflow[compound].append(compound_mass_flow)
+                c = c+1
+            Column(inlet_temperature, inlet_pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
+        
+        if node == 'Vessel' == nodes[0]:
+        if node == 'Vessel' != nodes[0]:
+            
+            
+            
+        if node == 'PFR' == nodes[0]:
+        if node == 'PFR' != nodes[0]:
+        if node == 'CSTR' == nodes[0]:
+        if node == 'CSTR' != nodes[0]:
+        if node == 'Heater' == nodes[0]:
+        if node == 'Heater' != nodes[0]:
+        if node =='Cooler'== nodes[0]:
+        if node =='Cooler'!= nodes[0]:
+        if node == 'Heat exchanger, detailed'== nodes[0]:
+        if node == 'Heat exchanger, detailed'!= nodes[0]:
+        if node == 'Pump'== nodes[0]:
+        if node == 'Pump'!= nodes[0]:
+        if node == 'Compressor'== nodes[0]:
+        if node == 'Compressor'!= nodes[0]:
+        if node == 'Separator'== nodes[0]:
+        if node == 'Separator'!= nodes[0]:
     
          
 
