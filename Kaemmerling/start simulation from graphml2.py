@@ -131,10 +131,63 @@ def startsimulationfromgraphml(graph):
             
             
         if node == 'PFR' == nodes[0]:
+            if 'outlet_temperature' in graph[node]:
+                outlet_temperature = graph._node[node]['outlet_temperature']
+            else:
+                outlet_temperature = 0
+            if 'adiabatic' in graph[node]:
+                adiabatic = graph._node[node]['adiabatic']
+            else:
+                adiabatic = 0
+            if 'isothermic' in graph[node]:
+                isothermic = graph._node[node]['isothermic']
+            else:
+                isothermic = 0
+            if 'reactor_length' in graph[node]:
+                    reactor_length = graph._node[node]['reactor_length']
+            else:
+                    reactor_length = 0
+            if 'reactor_diameter' in graph[node]:
+                    reactor_diameter = graph._node[node]['reactor_diameter']
+            else:
+                    reactor_diameter = 0
+            base_compound = graph._node[node]['base_compound']
+            direct_order = graph._node[node]['direct_order']
+            reverse_order = graph._node[node]['reverse_order']
+            stochiometrie = graph._node[node]['stochiometrie']
+            reactor_volume = graph._node[node]['reactor_volume']
+            arrhenius_parameter = graph._node[node]['arrhenius_parameter']
             PFR_Function.PFR(inlet_temperature, inlet_pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)
             before_node = 0
             
         if node == 'PFR' != nodes[0]:
+
+            if 'outlet_temperature' in graph[node]:
+                outlet_temperature = graph._node[node]['outlet_temperature']
+            else:
+                outlet_temperature = 0
+            if 'adiabatic' in graph[node]:
+                adiabatic = graph._node[node]['adiabatic']
+            else:
+                adiabatic = 0
+            if 'isothermic' in graph[node]:
+                isothermic = graph._node[node]['isothermic']
+            else:
+                isothermic = 0
+            if 'reactor_length' in graph[node]:
+                    reactor_length = graph._node[node]['reactor_length']
+            else:
+                    reactor_length = 0
+            if 'reactor_diameter' in graph[node]:
+                    reactor_diameter = graph._node[node]['reactor_diameter']
+            else:
+                    reactor_diameter = 0
+            base_compound = graph._node[node]['base_compound']
+            direct_order = graph._node[node]['direct_order']
+            reverse_order = graph._node[node]['reverse_order']
+            stochiometrie = graph._node[node]['stochiometrie']
+            reactor_volume = graph._node[node]['reactor_volume']
+            arrhenius_parameter = graph._node[node]['arrhenius_parameter']
             inlet_temperature = graph._node[before_node]['inlet_temperature'] 
             inlet_pressure = graph._node[before_node]['inlet_pressure'] 
             composition = graph._node[before_node]['inlet_composition'] 
@@ -152,10 +205,40 @@ def startsimulationfromgraphml(graph):
             c = 0
             
         if node == 'CSTR' == nodes[0]:
+            if 'outlet_temperature' in graph[node]:
+                outlet_temperature = graph._node[node]['outlet_temperature']
+            else:
+                outlet_temperature = 0
+            if 'adiabatic' in graph[node]:
+                adiabatic = graph._node[node]['adiabatic']
+            else:
+                adiabatic = 0
+            if 'isothermic' in graph[node]:
+                isothermic = graph._node[node]['isothermic']
+            else:
+                isothermic = 0
+            base_compound = graph._node[node]['base_compound']
+            direct_order = graph._node[node]['direct_order']
+            reverse_order = graph._node[node]['reverse_order']
+            stochiometrie = graph._node[node]['stochiometrie']
+            reactor_volume = graph._node[node]['reactor_volume']
+            arrhenius_parameter = graph._node[node]['arrhenius_parameter']
             CSTR_function.CSTR(inlet_temperature, inlet_pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie,reactor_volume, arrhenius_parameter)
             before_node = 0
             
         if node == 'CSTR' != nodes[0]:
+            if 'outlet_temperature' in graph[node]:
+                outlet_temperature = graph._node[node]['outlet_temperature']
+            else:
+                outlet_temperature = 0
+            if 'adiabatic' in graph[node]:
+                adiabatic = graph._node[node]['adiabatic']
+            else:
+                adiabatic = 0
+            if 'isothermic' in graph[node]:
+                isothermic = graph._node[node]['isothermic']
+            else:
+                isothermic = 0
             inlet_temperature = graph._node[before_node]['inlet_temperature'] 
             inlet_pressure = graph._node[before_node]['inlet_pressure'] 
             composition = graph._node[before_node]['inlet_composition'] 
@@ -168,6 +251,7 @@ def startsimulationfromgraphml(graph):
                 compound_mass_flow = compound_mass_frac * mass_flow
                 compoundscompoundflow[compound].append(compound_mass_flow)
                 c = c+1
+            
             CSTR_function.CSTR(inlet_temperature, inlet_pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie,reactor_volume, arrhenius_parameter)            
             before_node = before_node +1
             c = 0
