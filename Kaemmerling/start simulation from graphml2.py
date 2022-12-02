@@ -261,15 +261,15 @@ def startsimulationfromgraphml(graph):
                 outlet_temperature = graph._node[node]['outlet_temperature']
             else:
                 outlet_temperature = 0
-            if 'heat_added' in graph[node]:
-                heat_added = graph._node[node]['heat_added']
+            if 'added_energy_stream' in graph[node]:
+                added_energy_stream = graph._node[node]['added_energy_stream']
             else:
-                heat_added = 0
+                added_energy_stream = 0
             if 'deltat' in graph[node]:
                 deltat = graph._node[node]['deltat']
             else:
                 deltat = 0
-            Heater_function.Heater(inlet_temperature, inlet_pressure, inlet_stream, heat_added, outlet_temperature, deltat)
+            Heater_function.Heater(inlet_temperature, inlet_pressure, inlet_stream, added_energy_stream, outlet_temperature, deltat)
             before_node = 0
             
         if node == 'Heater' != nodes[0]:
@@ -277,10 +277,10 @@ def startsimulationfromgraphml(graph):
                 outlet_temperature = graph._node[node]['outlet_temperature']
             else:
                 outlet_temperature = 0
-            if 'heat_added' in graph[node]:
-                heat_added = graph._node[node]['heat_added']
+            if 'added_energy_stream' in graph[node]:
+                added_energy_stream = graph._node[node]['added_energy_stream']
             else:
-                heat_added = 0
+                added_energy_stream = 0
             if 'deltat' in graph[node]:
                 deltat = graph._node[node]['deltat']
             else:
@@ -297,7 +297,7 @@ def startsimulationfromgraphml(graph):
                 compound_mass_flow = compound_mass_frac * mass_flow
                 inlet_stream[compound].append(compound_mass_flow)
                 c = c+1
-            Heater_function.Heater(inlet_temperature, inlet_pressure, inlet_stream, heat_added, outlet_temperature, deltat)            
+            Heater_function.Heater(inlet_temperature, inlet_pressure, inlet_stream, added_energy_stream, outlet_temperature, deltat)            
             before_node = before_node +1
             c = 0
             
@@ -306,15 +306,15 @@ def startsimulationfromgraphml(graph):
                 outlet_temperature = graph._node[node]['outlet_temperature']
             else:
                 outlet_temperature = 0
-            if 'heat_removed' in graph[node]:
-                heat_removed = graph._node[node]['heat_removed']
+            if 'removed_energy_stream' in graph[node]:
+                removed_energy_stream = graph._node[node]['removed_energy_stream']
             else:
-                heat_removed = 0
+                removed_energy_stream = 0
             if 'deltat' in graph[node]:
                 deltat = graph._node[node]['deltat']
             else:
                 deltat = 0
-            cooler_function.Cooler(inlet_temperature, inlet_pressure, inlet_stream, heat_removed, outlet_temperature, deltat)
+            cooler_function.Cooler(inlet_temperature, inlet_pressure, inlet_stream, removed_energy_stream, outlet_temperature, deltat)
             before_node = 0
             
         if node =='Cooler'!= nodes[0]:
@@ -326,10 +326,10 @@ def startsimulationfromgraphml(graph):
                 deltat = graph._node[node]['deltat']
             else:
                 pressure_increase = 0
-            if 'heat_removed' in graph[node]:
-                heat_removed = graph._node[node]['heat_removed']
+            if 'removed_energy_stream' in graph[node]:
+                removed_energy_stream = graph._node[node]['removed_energy_stream']
             else:
-                heat_removed = 0
+                removed_energy_stream = 0
             inlet_temperature = graph._node[before_node]['inlet_temperature'] 
             inlet_pressure = graph._node[before_node]['inlet_pressure'] 
             composition = graph._node[before_node]['inlet_composition'] 
@@ -342,7 +342,7 @@ def startsimulationfromgraphml(graph):
                 compound_mass_flow = compound_mass_frac * mass_flow
                 inlet_stream[compound].append(compound_mass_flow)
                 c = c+1
-            cooler_function.Cooler(inlet_temperature, inlet_pressure, inlet_stream, heat_removed, outlet_temperature, deltat)            
+            cooler_function.Cooler(inlet_temperature, inlet_pressure, inlet_stream, removed_energy_stream, outlet_temperature, deltat)            
             before_node = before_node +1
             c = 0
             
