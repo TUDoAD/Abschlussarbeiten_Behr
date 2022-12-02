@@ -236,11 +236,42 @@ def startsimulationfromgraphml(graph):
             c = 0
             
         if node == 'Pump'== nodes[0]:
-            Pump_function.Pump(inlet_temperature, inlet_pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, powerrequired)
+            if 'outlet_pressure' in graph[node]:
+                outlet_pressure = graph._node[node]['outlet_pressure']
+            else:
+                outlet_pressure = 0
+            if 'pressure_increase' in graph[node]:
+                pressure_increase = graph._node[node]['pressure_increase']
+            else:
+                pressure_increase = 0
+            if 'power_required' in graph[node]:
+                power_required = graph._node[node]['power_required']
+            else:
+                power_required = 0
+            if 'energy_stream' in graph[node]:
+                energy_stream = graph._node[node]['energy_stream']
+            else:
+                energy_stream = 0
+            Pump_function.Pump(inlet_temperature, inlet_pressure, compoundscompoundflow, outlet_pressure, pressure_increase, energy_stream, power_required)
             before_node = 0
             
         if node == 'Pump'!= nodes[0]:
-            Pump_function.Pump(inlet_temperature, inlet_pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, powerrequired)
+            if 'outlet_pressure' in graph[node]:
+                outlet_pressure = graph._node[node]['outlet_pressure']
+            else:
+                outlet_pressure = 0
+            if 'pressure_increase' in graph[node]:
+                pressure_increase = graph._node[node]['pressure_increase']
+            else:
+                pressure_increase = 0
+            if 'power_required' in graph[node]:
+                power_required = graph._node[node]['power_required']
+            else:
+                power_required = 0
+            if 'energy_stream' in graph[node]:
+                energy_stream = graph._node[node]['energy_stream']
+            else:
+                energy_stream = 0
             inlet_temperature = graph._node[before_node]['inlet_temperature'] 
             inlet_pressure = graph._node[before_node]['inlet_pressure'] 
             composition = graph._node[before_node]['inlet_composition'] 
@@ -253,15 +284,47 @@ def startsimulationfromgraphml(graph):
                 compound_mass_flow = compound_mass_frac * mass_flow
                 compoundscompoundflow[compound].append(compound_mass_flow)
                 c = c+1
+            Pump_function.Pump(inlet_temperature, inlet_pressure, compoundscompoundflow, outlet_pressure, pressure_increase, energy_stream, power_required)
             before_node = before_node +1
             c = 0
             
         if node == 'Compressor'== nodes[0]:
-            Compressor_function.Compressor(inlet_temperature, inlet_pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream)
+            if 'outlet_pressure' in graph[node]:
+                outlet_pressure = graph._node[node]['outlet_pressure']
+            else:
+                outlet_pressure = 0
+            if 'pressure_increase' in graph[node]:
+                pressure_increase = graph._node[node]['pressure_increase']
+            else:
+                pressure_increase = 0
+            if 'power_required' in graph[node]:
+                power_required = graph._node[node]['power_required']
+            else:
+                power_required = 0
+            if 'energy_stream' in graph[node]:
+                energy_stream = graph._node[node]['energy_stream']
+            else:
+                energy_stream = 0
+            Compressor_function.Compressor(inlet_temperature, inlet_pressure, compoundscompoundflow, outlet_pressure, pressure_increase, energy_stream)
             before_node = 0
             
         if node == 'Compressor'!= nodes[0]:
-            Compressor_function.Compressor(inlet_temperature, inlet_pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream)
+            if 'outlet_pressure' in graph[node]:
+                outlet_pressure = graph._node[node]['outlet_pressure']
+            else:
+                outlet_pressure = 0
+            if 'pressure_increase' in graph[node]:
+                pressure_increase = graph._node[node]['pressure_increase']
+            else:
+                pressure_increase = 0
+            if 'power_required' in graph[node]:
+                power_required = graph._node[node]['power_required']
+            else:
+                power_required = 0
+            if 'energy_stream' in graph[node]:
+                energy_stream = graph._node[node]['energy_stream']
+            else:
+                energy_stream = 0
             inlet_temperature = graph._node[before_node]['inlet_temperature'] 
             inlet_pressure = graph._node[before_node]['inlet_pressure'] 
             composition = graph._node[before_node]['inlet_composition'] 
@@ -274,6 +337,7 @@ def startsimulationfromgraphml(graph):
                 compound_mass_flow = compound_mass_frac * mass_flow
                 compoundscompoundflow[compound].append(compound_mass_flow)
                 c = c+1
+            Compressor_function.Compressor(inlet_temperature, inlet_pressure, compoundscompoundflow, outlet_pressure, pressure_increase, energy_stream)
             before_node = before_node +1
             c = 0
             
