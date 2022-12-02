@@ -56,7 +56,7 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def Cooler(temperature, pressure, compoundscompoundflow, pressuredrop, efficiency, heatremoved, outlettemperature, deltat):
+def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemperature, deltat):
 
 #add compounds
     
@@ -92,13 +92,6 @@ def Cooler(temperature, pressure, compoundscompoundflow, pressuredrop, efficienc
         c1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
         c1.setDeltaT(deltat) # k
             
-#set cooler efficiency  
-
-    c1.set_Eficiencia(efficiency) # 0-100
-
-#set Pressure drop
-
-    c1.set_DeltaP(pressuredrop) # pa
     
     sim.AutoLayout()
     
@@ -168,4 +161,4 @@ def Cooler(temperature, pressure, compoundscompoundflow, pressuredrop, efficienc
     im = Image.open(imgPath)
     im.show()
     
-Cooler(300.0,100000.0,{"Water" : 9.57},0,100,0,350.0,0)
+Cooler(300.0,100000.0,{"Water" : 9.57},0,350.0,0)

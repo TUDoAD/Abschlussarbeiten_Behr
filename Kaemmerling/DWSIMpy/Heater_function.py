@@ -50,7 +50,7 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def Heater(temperature, pressure, compoundscompoundflow, pressuredrop, efficiency, heatadded, outlettemperature, deltat):
+def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemperature, deltat):
 
 #add compounds
     
@@ -85,14 +85,8 @@ def Heater(temperature, pressure, compoundscompoundflow, pressuredrop, efficienc
     if deltat != 0:
         h1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
         h1.setDeltaT(deltat) # k
-            
-#set heater efficiency  
 
-    h1.set_Eficiencia(efficiency) # 0-100
 
-#set Pressure drop
-
-    h1.set_DeltaP(pressuredrop) # pa
     
     sim.AutoLayout()
     
@@ -162,4 +156,4 @@ def Heater(temperature, pressure, compoundscompoundflow, pressuredrop, efficienc
     im = Image.open(imgPath)
     im.show()
     
-Heater(300.0,100000.0,{"Water" : 9.57},0,100,0,350.0,0)
+Heater(300.0,100000.0,{"Water" : 9.57},0,350.0,0)
