@@ -697,25 +697,48 @@ for unitoperation in wanted_list:
         dict1 = {'inlet_temperature':inlet_temperature}
         group= {unitoperation:dict1}
         nx.set_node_attributes(f,group)
+        inlet_temperature2 = m3.GetTemperature()
+        dict1 = {'inlet_temperature2':inlet_temperature2}
+        group= {unitoperation:dict1}
+        nx.set_node_attributes(f,group)
         outlet_temperature = m2.GetTemperature()
         dict1 = {'outlet_temperature':outlet_temperature}
+        group= {unitoperation:dict1}
+        nx.set_node_attributes(f,group)
+        outlet_temperature2 = m4.GetTemperature()
+        dict1 = {'outlet_temperature2':outlet_temperature2}
         group= {unitoperation:dict1}
         nx.set_node_attributes(f,group)
         inlet_pressure = m1.GetPressure()
         dict1 = {'inlet_pressure':inlet_pressure}
         group= {unitoperation:dict1}
         nx.set_node_attributes(f,group)
-        outlet_pressure = m1.GetPressure()
+        inlet_pressure2 = m3.GetPressure()
+        dict1 = {'inlet_pressure2':inlet_pressure2}
+        group= {unitoperation:dict1}
+        nx.set_node_attributes(f,group)
+        outlet_pressure = m2.GetPressure()
         dict1 = {'outlet_pressure':outlet_pressure}
+        group= {unitoperation:dict1}
+        nx.set_node_attributes(f,group)
+        outlet_pressure2 = m4.GetPressure()
+        dict1 = {'outlet_pressure2':outlet_pressure2}
         group= {unitoperation:dict1}
         nx.set_node_attributes(f,group)
         inlet_mass_flow = m1.GetMassFlow() 
         dict1 = {'inlet_mass_flow':inlet_mass_flow}
         group= {unitoperation:dict1}
         nx.set_node_attributes(f,group)
+        inlet_mass_flow2 = m3.GetMassFlow() 
+        dict1 = {'inlet_mass_flow2':inlet_mass_flow2}
+        group= {unitoperation:dict1}
         nx.set_node_attributes(f,group)
         outlet_mass_flow = m2.GetMassFlow() 
         dict1 = {'outlet_mass_flow':outlet_mass_flow}
+        group= {unitoperation:dict1}
+        nx.set_node_attributes(f,group)
+        outlet_mass_flow2 = m4.GetMassFlow() 
+        dict1 = {'outlet_mass_flow2':outlet_mass_flow2}
         group= {unitoperation:dict1}
         nx.set_node_attributes(f,group)
         energy_flow = e3.EnergyFlow   #energy muss allgemein gehalten werden
@@ -728,6 +751,14 @@ for unitoperation in wanted_list:
         nx.set_node_attributes(f,group)
         outlet_composition = list(m2.GetOverallComposition())
         dict1 = {'outlet_composition':outlet_composition}
+        group= {unitoperation:dict1}
+        nx.set_node_attributes(f,group)
+        inlet_composition2 = list(m4.GetOverallComposition())
+        dict1 = {'inlet_composition2':inlet_composition2}
+        group= {unitoperation:dict1}
+        nx.set_node_attributes(f,group)
+        outlet_composition2 = list(m4.GetOverallComposition())
+        dict1 = {'outlet_composition2':outlet_composition2}
         group= {unitoperation:dict1}
         nx.set_node_attributes(f,group)
     if  f._node[unitoperation]['node_class'] == 'Fluid pump':
