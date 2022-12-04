@@ -701,11 +701,11 @@ for unitoperation in wanted_list:
         dict1 = {'inlet_temperature2':inlet_temperature2}
         group= {unitoperation:dict1}
         nx.set_node_attributes(f,group)
-        outlet_temperature = m2.GetTemperature()
+        outlet_temperature = Heat_ex.get_ColdSideOutletTemperature()
         dict1 = {'outlet_temperature':outlet_temperature}
         group= {unitoperation:dict1}
         nx.set_node_attributes(f,group)
-        outlet_temperature2 = m4.GetTemperature()
+        outlet_temperature2 = Heat_ex.get_HotSideOutletTemperature()
         dict1 = {'outlet_temperature2':outlet_temperature2}
         group= {unitoperation:dict1}
         nx.set_node_attributes(f,group)
@@ -741,8 +741,12 @@ for unitoperation in wanted_list:
         dict1 = {'outlet_mass_flow2':outlet_mass_flow2}
         group= {unitoperation:dict1}
         nx.set_node_attributes(f,group)
-        energy_flow = e3.EnergyFlow   #energy muss allgemein gehalten werden
-        dict1 = {'energy_flow':energy_flow}
+        heat_exchange_area = Heat_ex.get_Area()
+        dict1 = {'heat_exchange_area':heat_exchange_area}
+        group= {unitoperation:dict1}
+        nx.set_node_attributes(f,group)
+        global_heat_transfer = Heat_ex.GetPowerGeneratedOrConsumed
+        dict1 = {'global_heat_transfer':global_heat_transfer}
         group= {unitoperation:dict1}
         nx.set_node_attributes(f,group)
         inlet_composition = list(m1.GetOverallComposition())
