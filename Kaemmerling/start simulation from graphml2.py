@@ -154,10 +154,10 @@ def startsimulationfromgraphml(graph):
             base_compound = graph._node[node]['base_compound']
             direct_order = graph._node[node]['direct_order']
             reverse_order = graph._node[node]['reverse_order']
-            stochiometrie = graph._node[node]['stochiometrie']
+            stochiometry = graph._node[node]['stochiometry']
             reactor_volume = graph._node[node]['reactor_volume']
             arrhenius_parameter = graph._node[node]['arrhenius_parameter']
-            PFR_Function.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)
+            PFR_Function.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)
             before_node = 0
             
         if node == 'PFR' != nodes[0]:
@@ -185,7 +185,7 @@ def startsimulationfromgraphml(graph):
             base_compound = graph._node[node]['base_compound']
             direct_order = graph._node[node]['direct_order']
             reverse_order = graph._node[node]['reverse_order']
-            stochiometrie = graph._node[node]['stochiometrie']
+            stochiometry = graph._node[node]['stochiometry']
             reactor_volume = graph._node[node]['reactor_volume']
             arrhenius_parameter = graph._node[node]['arrhenius_parameter']
             inlet_temperature = graph._node[before_node]['inlet_temperature'] 
@@ -200,7 +200,7 @@ def startsimulationfromgraphml(graph):
                 compound_mass_flow = compound_mass_frac * mass_flow
                 inlet_stream[compound].append(compound_mass_flow)
                 c = c+1
-            PFR_Function.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)            
+            PFR_Function.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)            
             before_node = before_node +1
             c = 0
             
@@ -220,10 +220,10 @@ def startsimulationfromgraphml(graph):
             base_compound = graph._node[node]['base_compound']
             direct_order = graph._node[node]['direct_order']
             reverse_order = graph._node[node]['reverse_order']
-            stochiometrie = graph._node[node]['stochiometrie']
+            stochiometry = graph._node[node]['stochiometry']
             reactor_volume = graph._node[node]['reactor_volume']
             arrhenius_parameter = graph._node[node]['arrhenius_parameter']
-            CSTR_function.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie,reactor_volume, arrhenius_parameter)
+            CSTR_function.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter)
             before_node = 0
             
         if node == 'CSTR' != nodes[0]:
@@ -252,7 +252,7 @@ def startsimulationfromgraphml(graph):
                 inlet_stream[compound].append(compound_mass_flow)
                 c = c+1
             
-            CSTR_function.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie,reactor_volume, arrhenius_parameter)            
+            CSTR_function.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter)            
             before_node = before_node +1
             c = 0
             
