@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Dec  1 11:02:32 2022
 
-@author: Lucky Luciano
-"""
+
 
 #delete dwsim_newui
 
@@ -66,13 +62,14 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
         
        print(key)
        
-     #  if key in compoundscompoundflow1 != key in compoundscompoundflow2:
        
-      #     for key in compoundscompoundflow2:
+       for key2 in compoundscompoundflow2:
         
-       #        sim.AddCompound(key)
+           if key != key2:
         
-        #       print(key)
+              sim.AddCompound(key2)
+        
+              print(key)
     
     
 #create and connect objects
@@ -119,7 +116,7 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
          
        print(compoundscompoundflow2[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow2[key])
+       m3.SetOverallCompoundMolarFlow(key , compoundscompoundflow2[key])
 
 #request a calculation
 
@@ -165,4 +162,4 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     im = Image.open(imgPath)
     im.show()
     
-Heat_exchanger(300.0,100000.0, 400.0, 100000.0, {"Water" : 9.57,}, {"Water" : 9.57,},1,1000)
+Heat_exchanger(300.0,100000.0, 400.0, 100000.0, {"Water" : 9.57}, {"Ethanol" : 9.97},1,1000)

@@ -63,7 +63,7 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie,reactor_volume, arrhenius_parameter):
+def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter):
 
 #add compounds
 
@@ -75,15 +75,9 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
         
        print(key)
     
-    for key in compoundscompoundflow:
-         
-       print(compoundscompoundflow[key])
-         
-       #m1.SetOverallCompoundMassFlow(key, compoundscompoundflow[key])
-       m1.SetMassFlow(key, compoundscompoundflow[key])
        # stoichiometric coefficients
         
-       comps = stochiometrie
+       comps = stochiometry
 
        # direct order coefficients
            
@@ -128,6 +122,13 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
 
     CSTR1.Volume = reactor_volume #m^3      
     sim.AutoLayout()
+    
+    for key in compoundscompoundflow:
+         
+       print(compoundscompoundflow[key])
+         
+
+       m1.SetOverallCompoundMassFlow(key, compoundscompoundflow[key])
     
 # add property package
 
@@ -188,4 +189,4 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     im = Image.open(imgPath)
     im.show()
     
-CSTR(343.15,500000.0,{"Methyl acetate" : 0.48, '1-butanol' : 0.48, 'Methanol' : 0.04, 'N-butyl acetate' : 0.0},1,0,0,'1-butanol',{"Methyl acetate" : 0.48, '1-butanol' : 0.48, 'Methanol': 0.0, 'N-butyl acetate': 0.0}, {"Methyl acetate" : 0.48, '1-butanol' : 0.48, 'Methanol': 0.04, 'N-butyl acetate': 0.0},{"Methyl acetate" : 0.48, '1-butanol' : 0.48, 'Methanol':0.04, 'N-butyl acetate': 0.0}, 4.0, 0.01)
+CSTR(343.15,500000.0,{"Methyl acetate" : 0.48, '1-butanol' : 0.48, 'Methanol' : 0.04, 'N-butyl acetate' : 0.0},1,0,0,'1-butanol',{"Methyl acetate" : 1.0, '1-butanol' : 1.0, 'Methanol': 0.0, 'N-butyl acetate': 0.0}, {"Methyl acetate" : 0.0, '1-butanol' : 0.0, 'Methanol': 0.0, 'N-butyl acetate': 0.0},{"Methyl acetate" : -1.0, '1-butanol' : -1.0, 'Methanol':1.0, 'N-butyl acetate': 1.0}, 4.0, 0.01)

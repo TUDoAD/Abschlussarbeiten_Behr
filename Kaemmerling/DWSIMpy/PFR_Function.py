@@ -63,7 +63,7 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometrie, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter):
+def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter):
 
 #add compounds
     
@@ -76,7 +76,7 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
        # stoichiometric coefficients
 
         
-    comps = stochiometrie
+    comps = stochiometry
 
        # direct order coefficients
 
@@ -86,7 +86,7 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
            
        # reverse order coefficients
 
-    rorders = stochiometrie
+    rorders = reverse_order
 
            
     kr1 = sim.CreateKineticReaction("Reaction", "Reaction_set", comps, dorders, rorders, base_compound, "Mixture","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
