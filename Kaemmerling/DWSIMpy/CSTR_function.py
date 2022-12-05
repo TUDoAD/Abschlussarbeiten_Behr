@@ -76,19 +76,31 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
        print(key)
     
        # stoichiometric coefficients
-        
+       
        comps = stochiometry
+       for key1 in comps:  
+           comps1 = Dictionary[str, float]()
+           value = comps[key1]
+           comps1.Add(key1, value);
 
        # direct order coefficients
-           
+       
        dorders = direct_order
+       for key2 in dorders:  
+           dorders1 = Dictionary[str, float]()
+           value = dorders[key2]
+           dorders1.Add(key2, value);
            
        # reverse order coefficients
         
        rorders = reverse_order
+       for key3 in rorders:  
+           rorders1 = Dictionary[str, float]()
+           value = rorders[key3]
+           rorders1.Add(key3, value);
 
-    kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetae", 
-                   comps, dorders, rorders, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
+    kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetate", 
+                   comps1, dorders1, rorders1, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
           
     sim.AddReaction(kr1)
     sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
@@ -175,12 +187,12 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
