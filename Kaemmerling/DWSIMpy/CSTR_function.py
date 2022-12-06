@@ -67,7 +67,6 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
 
 #add compounds
 
-    m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
     
     for key in compoundscompoundflow:
         
@@ -78,24 +77,24 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
        # stoichiometric coefficients
        
        comps = stochiometry
+       comps1 = Dictionary[str, float]()
        for key1 in comps:  
-           comps1 = Dictionary[str, float]()
            value = comps[key1]
            comps1.Add(key1, value);
 
        # direct order coefficients
        
        dorders = direct_order
+       dorders1 = Dictionary[str, float]()
        for key2 in dorders:  
-           dorders1 = Dictionary[str, float]()
            value = dorders[key2]
            dorders1.Add(key2, value);
            
        # reverse order coefficients
         
        rorders = reverse_order
+       rorders1 = Dictionary[str, float]()
        for key3 in rorders:  
-           rorders1 = Dictionary[str, float]()
            value = rorders[key3]
            rorders1.Add(key3, value);
 

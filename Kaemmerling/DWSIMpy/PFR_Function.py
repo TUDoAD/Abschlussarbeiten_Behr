@@ -74,19 +74,28 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
        print(key)
        
        # stoichiometric coefficients
-
-        
-    comps = stochiometry
+       
+       comps = stochiometry
+       comps1 = Dictionary[str, float]()
+       for key1 in comps:  
+           value = comps[key1]
+           comps1.Add(key1, value);
 
        # direct order coefficients
-
-           
-    dorders = direct_order
-
+       
+       dorders = direct_order
+       dorders1 = Dictionary[str, float]()
+       for key2 in dorders:  
+           value = dorders[key2]
+           dorders1.Add(key2, value);
            
        # reverse order coefficients
-
-    rorders = reverse_order
+        
+       rorders = reverse_order
+       rorders1 = Dictionary[str, float]()
+       for key3 in rorders:  
+           value = rorders[key3]
+           rorders1.Add(key3, value);
 
            
     kr1 = sim.CreateKineticReaction("Reaction", "Reaction_set", comps, dorders, rorders, base_compound, "Mixture","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
@@ -184,12 +193,12 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
