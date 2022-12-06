@@ -31,11 +31,12 @@ from gensim.models import Word2Vec
 # parameters:
 #model_name_list = ['methanation_only_text_mc1','methanation_only_text_mc5',
 #                   'methanation_only_text_mc10','methanation_only_text_mc25']    
-mc_list = range(1,26)
+#mc_list = range(1,26)
+mc_list = range(5,11)
 model_name_list = ['methanation_only_text_mc'+str(i) for i in mc_list]
 
-similarity_threshold_list = [0.8,0.9,0.95,0.99,0.995,0.996,0.997,0.998,0.999]
-#similarity_threshold_list = [0.999,0.9995,1]
+#similarity_threshold_list = [0.8,0.9,0.95,0.99,0.995,0.996,0.997,0.998,0.999]
+similarity_threshold_list = [0.999]#,0.9995,1]
 
 #model_name = 'methanation_only_text_mc1'
 #model_name = 'methanation_only_text_mc10'
@@ -54,6 +55,28 @@ unique_list = []
 model_token_number = []
 unique_len_all_concepts_found = []
 ##
+
+## Load Definitions
+[class_dict, desc_dict] = OntoClassSearcher.onto_loader(["chmo", "chebi", "NCIT", "bao_complete_merged", "SBO"])
+
+
+## LOADING IUPAC GOLDBOOK 
+temp_dict = {}
+with open('./ontologies/goldbook_vocab.json', encoding = "utf8") as json_file:
+    dict_data = json.load(json_file)
+    for entry in dict_data["entries"].keys():
+        if dict_data["entries"][entry]["term"] != None:
+            if dict_data["entries"][entry]["definition"] != None:
+                temp_dict[dict_data["entries"][entry]["term"].lower()] = dict_data["entries"][entry]["definition"]
+            else:
+                print("empty definition for term: {}".format(dict_data["entries"][entry]["term"]))
+                temp_dict[dict_data["entries"][entry]["term"].lower()] = "[AB] Class with same label also contained in [IUPAC-Goldbook]"
+        else:
+            print("empty entry: {}".format(dict_data["entries"][entry]))
+desc_dict["IUPAC-Goldbook"] = temp_dict
+
+
+
 
 ##
 for model_name in model_name_list:
@@ -152,10 +175,32 @@ for model_name in model_name_list:
                         new_class = types.new_class(i,(w2vConcept,) )
                         new_class.comment.append('Created automatically by [AB] based on word2vec output of concept name "{}"'.format(concept[0]))
                         #new_class.conceptually_related_to = [temp_class]
-                        new_class.is_a.append(conceptually_related_to.some(temp_class))
+                        new_class.is_a.append(conceptually_related_to.some(temp_class))                       
                         
                         
         different_class_count = len(list(onto_local.w2vConcept.subclasses()))
+        
+        for w2vConceptClass in list(onto_local.w2vConcept.subclasses()):
+            for onto_names in desc_dict:
+                classlabel = w2vConceptClass.name
+                try:
+                    defstring = ''.join(desc_dict[onto_names][classlabel]) if desc_dict[onto_names][classlabel] != classlabel else "" 
+                except:
+                    defstring = 1
+                    pass
+                
+                if defstring == 1:
+                    pass
+                else:
+                    if defstring:
+                        comment_string = defstring + "\nFound by [AB] in [" + onto_names + "]"
+                        print("def of {} found in ontology {}".format(classlabel, onto_names))
+                    else:
+                        comment_string = "[AB] Class with same label also contained in [{}] unable to obtain definition".format(onto_names)
+                
+                w2vConceptClass.comment.append(comment_string)
+        
+        
         
         onto_savestring = './ontologies_output/' + onto_name + '_ext_' + model_name + '_' + str(similarity_threshold) + '.owl'
         onto_local.save(file = onto_savestring)  
