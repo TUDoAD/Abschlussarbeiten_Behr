@@ -49,7 +49,8 @@ statistics_dict_res = {}
 with open('./pickle/methanation_only_text.pickle', 'rb') as pickle_file:
     content = pickle.load(pickle_file)
     
-min_count_list = [1,5,10,25,50,100]
+min_count_list = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,50,100]
+#min_count_list = [1,5,10,25,50,100]
 
 
 for min_count in min_count_list:
