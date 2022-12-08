@@ -73,19 +73,20 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
         
     nodes = list(graph.nodes)
     for node in nodes:
-        if node == 'column':
+
+        if graph._node[node]['node_class'] == 'Column':
             a = a+2
-        if node == 'heater':
+        if graph._node[node]['node_class'] == 'heater':
             a = a+1
-        if node =='cooler':
+        if graph._node[node]['node_class'] == 'cooler':
             a = a+1
-        if node == 'PFR':
+        if graph._node[node]['node_class'] == 'PFR':
             a = a+1
-        if node == 'CSTR':
+        if graph._node[node]['node_class'] == 'CSTR':
             a = a+1
-        if node == 'compressor':
+        if graph._node[node]['node_class'] == 'compressor':
             a = a+1
-        if node == 'pump':
+        if graph._node[node]['node_class'] == 'pump':
             a = a+1
     for i in range(a):
         globals()['e_{}'.format(i)] = sim.AddObject(ObjectType.EnergyStream, 50, 50, "inlet")
@@ -157,20 +158,70 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
     sim.AddPropertyPackage(stables)
 
 # set inlet stream conditions
-#Overall Molar flow = 1 kg/s
+    m_0.SetTemperature(inlet_temperature) # K # als string?
+    m_0.SetPressure(inlet_pressure) # Pa # als string?
+    for key in compoundscompoundflow:
+         
+       print(compoundscompoundflow[key])
+         
+       m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+
+    for node in nodes:
+       if graph._node[node]['node_class'] == 'Vessel':
+           T1.CalcMode = UnitOperations.Tank.set_Volume
+           T1.set_Volume(nx.get_node_attributes(graph, "tank_volume")) #m^3
+       if graph._node[node]['node_class'] == 'Tank':
+           T1.CalcMode = UnitOperations.Tank.set_Volume
+           T1.set_Volume(nx.get_node_attributes(graph, "tank_volume")) #m^3
+       if graph._node[node]['node_class'] == 'Silo':
+           T1.CalcMode = UnitOperations.Tank.set_Volume
+           T1.set_Volume(nx.get_node_attributes(graph, "tank_volume")) #m^3
+           
+       if graph._node[node]['node_class'] == 'Pump':
+           
+           if graph._node[node]['outlet_pressure']!= 0:
+               p1.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
+               p1.set_Pout(outletpressure) # pa
+                              
+           if graph._node[node]['power_required']!= 0:
+               p1.CalcMode = UnitOperations.Pump.CalculationMode.Power 
+               p1.PowerRequired(powerrequired) 
+                   
+           if graph._node[node]['energy_stream']!= 0:
+               p1.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
+               p1.set_EnergyFlow(energystream)
+               
+           if graph._node[node]['pressure_increase']!= 0:
+               p1.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
+               p1.set_DeltaP(pressureincrease) 
+               
+       if graph._node[node]['node_class'] == 'Compressor':
+           
+           if graph._node[node]['outlet_pressure']!= 0:
+               p1.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
+               p1.set_Pout(outletpressure) # pa
+                              
+           if graph._node[node]['power_required']!= 0:
+               p1.CalcMode = UnitOperations.Pump.CalculationMode.Power 
+               p1.PowerRequired(powerrequired) 
+                   
+           if graph._node[node]['energy_stream']!= 0:
+               p1.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
+               p1.set_EnergyFlow(energystream)
+               
+           if graph._node[node]['pressure_increase']!= 0:
+               p1.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
+               p1.set_DeltaP(pressureincrease)
+               
+       if graph._node[node]['node_class'] == 'CSTR':    
+       if graph._node[node]['node_class'] == 'PFR':
+       if graph._node[node]['node_class'] == 'Cooler':
+       if graph._node[node]['node_class'] == 'Heater':
+       if graph._node[node]['node_class'] == 'Heat exchanger':
+       if graph._node[node]['node_class'] == 'Heat exchanger, detailed':    
+           
 
 
-    m1.SetTemperature(inlet_temperature) # K # als string?
-    m1.SetOverallCompoundMolarFlow("Water", 0.5) #kg/s
-    m1.SetOverallCompoundMolarFlow("Ethanol", 0.5) #kg/s
-    m1.SetPressure(inlet_pressure) # Pa # als string?
-
-
-    T1.CalcMode = UnitOperations.Tank.set_Volume
-    T1.set_Volume(100) #m^3
-
-    T2.CalcMode = UnitOperations.Tank.set_Volume
-    T2.set_Volume(100) #m^3
 
     T3.CalcMode = UnitOperations.Tank.set_Volume
     T3.set_Volume(100) #m^3
