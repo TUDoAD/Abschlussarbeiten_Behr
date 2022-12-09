@@ -168,17 +168,20 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
 
     for node in nodes:
        if graph._node[node]['node_class'] == 'Vessel':
+           node = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
            node.CalcMode = UnitOperations.Tank.set_Volume
            node.set_Volume(graph.nodes[node]['tank_volume']) #m^3
        if graph._node[node]['node_class'] == 'Tank':
+           node = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
            node.CalcMode = UnitOperations.Tank.set_Volume
            node.set_Volume(graph.nodes[node]['tank_volume']) #m^3
        if graph._node[node]['node_class'] == 'Silo':
+           node = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
            node.CalcMode = UnitOperations.Tank.set_Volume
            node.set_Volume(graph.nodes[node]['tank_volume']) #m^3
            
        if graph._node[node]['node_class'] == 'Pump':
-           
+           node = sim.AddObject(ObjectType.Pump, 200, 50, "pump")
            if graph._node[node][node]!= 0:
                node.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
                node.set_Pout(graph.nodes[node]['outlet_pressure']) # pa
@@ -196,7 +199,7 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
                node.set_DeltaP(graph.nodes[node]['pressure_increase'])
                
        if graph._node[node]['node_class'] == 'Compressor':
-           
+           node = sim.AddObject(ObjectType.Compressor, 200, 50, "compressor")
            if graph._node[node][node]!= 0:
                node.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
                node.set_Pout(graph.nodes[node]['outlet_pressure']) # pa
@@ -214,7 +217,7 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
                node.set_DeltaP(graph.nodes[node]['pressure_increase'])
                
        if graph._node[node]['node_class'] == 'CSTR':
-           
+           CSTR1 = sim.AddObject(ObjectType.RCT_CSTR, 100, 50, "CSTR") 
            # stoichiometric coefficients
            
            comps = graph.nodes[node]['stochiometry']
@@ -258,25 +261,22 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
            node.Volume = graph.nodes[node]['reactor_volume'] #m^3  
            
        if graph._node[node]['node_class'] == 'PFR':
-           
-           # stoichiometric coefficients
-           
+           node = sim.AddObject(ObjectType.RCT_PFR, 100, 50, "PFR")
+           # stoichiometric coefficients        
            comps = graph.nodes[node]['stochiometry']
            comps1 = Dictionary[str, float]()
            for key1 in comps:  
                value = comps[key1]
                comps1.Add(key1, value);
 
-           # direct order coefficients
-           
+           # direct order coefficients        
            dorders = graph.nodes[node]['direct_order']
            dorders1 = Dictionary[str, float]()
            for key2 in dorders:  
                value = dorders[key2]
                dorders1.Add(key2, value);
                
-           # reverse order coefficients
-            
+           # reverse order coefficients       
            rorders = graph.nodes[node]['reverse_order']
            rorders1 = Dictionary[str, float]()
            for key3 in rorders:  
@@ -291,32 +291,31 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
        
 #set pfr operation mode
 
-       if graph.nodes[node]['isothermic']!= 0:
-           node.ReactorOperationMode = Reactors.OperationMode.Isothermic
+           if graph.nodes[node]['isothermic']!= 0:
+               node.ReactorOperationMode = Reactors.OperationMode.Isothermic
         
-       if graph.nodes[node]['adiabatic']!= 0:
-           node.CalcMode = UnitOperations.RCT_PFR.CalculationMode.Power 
-           node.ReactorOperationMode = Reactors.OperationMode.Adiabatic
+           if graph.nodes[node]['adiabatic']!= 0:
+               node.CalcMode = UnitOperations.RCT_PFR.CalculationMode.Power 
+               node.ReactorOperationMode = Reactors.OperationMode.Adiabatic
             
-       if graph.nodes[node]['outlet_temperature']!= 0:
-           node.CalcMode = UnitOperations.RCT_PFR.CalculationMode.EnergyStream
-           node.ReactorOperationMode = Reactors.OperationMode.OutletTemperature
+           if graph.nodes[node]['outlet_temperature']!= 0:
+               node.CalcMode = UnitOperations.RCT_PFR.CalculationMode.EnergyStream
+               node.ReactorOperationMode = Reactors.OperationMode.OutletTemperature
         
-       if graph.nodes[node]['reactor_diameter']!= 0:
-           node.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Diameter
-           node.Diameter = graph.nodes[node]['reactor_diameter'] #m
+           if graph.nodes[node]['reactor_diameter']!= 0:
+               node.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Diameter
+               node.Diameter = graph.nodes[node]['reactor_diameter'] #m
         
-       if graph.nodes[node]['reactor_length']!= 0:
-           node.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length
-           node.Length = graph.nodes[node]['reactor_length']  #m
+           if graph.nodes[node]['reactor_length']!= 0:
+               node.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length
+               node.Length = graph.nodes[node]['reactor_length']  #m
     
     
-       node.Volume = graph.nodes[node]['reactor_volume'] #m^3
+           node.Volume = graph.nodes[node]['reactor_volume'] #m^3
            
        if graph._node[node]['node_class'] == 'Cooler':
-           
-#set cooler operation mode
-
+            node = sim.AddObject(ObjectType.Cooler, 200, 50, "cooler")
+            #set cooler operation mode
             if graph.nodes[node]['heat_removed']!= 0:
                 node.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
                 node.set_DeltaQ(nodes[node]['heat_removed']) # j
@@ -330,9 +329,8 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
                 node.set_DeltaT(nodes[node]['deltat']) # k
            
        if graph._node[node]['node_class'] == 'Heater':
-           
-           #set heater operation mode
-
+            node = sim.AddObject(ObjectType.Heater, 100, 50, "heater")
+            #set heater operation mode
             if graph.nodes[node]['heat_added']!= 0:
                 node.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
                 node.set_DeltaQ(nodes[node]['heat_added']) # j
@@ -346,23 +344,24 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
                 node.set_DeltaT(nodes[node]['deltat']) # k
            
        if graph._node[node]['node_class'] == 'Heat exchanger':
-           
+          node = sim.AddObject(ObjectType.HeatExchanger, 100, 50, "heat_exchanger")
           node.set_Area(graph.nodes[node]['heat_exchange_area'])
           node.set_Q(graph.nodes[node]['global_heat_transfer'])
            
        if graph._node[node]['node_class'] == 'Heat exchanger, detailed':    
-          
+          node = sim.AddObject(ObjectType.HeatExchanger, 100, 50, "heat_exchanger")
           node.set_Area(graph.nodes[node]['heat_exchange_area'])
           node.set_Q(graph.nodes[node]['global_heat_transfer'])
           
        if graph._node[node]['node_class'] == 'Column':
-          
-           node.m_lightkey =graph.nodes[node]['light_key_compound']
-           node.m_heavykey =graph.nodes[node]['heavy_key_compound'] 
-           node.m_heavykeymolarfrac =graph.nodes[node]['hk_mole_fraction_in_distillate']
-           node.m_lightkeymolarfrac =graph.nodes[node]['lk_mole_fraction_in_distillate']
-           node.m_refluxratio =graph.nodes[node]['reflux_ratio']
-
+          node = sim.AddObject(ObjectType.ShortcutColumn, 200, 50, "Column")          
+          node.m_lightkey =graph.nodes[node]['light_key_compound']
+          node.m_heavykey =graph.nodes[node]['heavy_key_compound'] 
+          node.m_heavykeymolarfrac =graph.nodes[node]['hk_mole_fraction_in_distillate']
+          node.m_lightkeymolarfrac =graph.nodes[node]['lk_mole_fraction_in_distillate']
+          node.m_refluxratio =graph.nodes[node]['reflux_ratio']
+       if graph._node[node]['node_class'] == 'Separator':
+          node = sim.AddObject(ObjectType.Vessel, 200, 50, "separator")
 
 
 
