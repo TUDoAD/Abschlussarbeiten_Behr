@@ -215,7 +215,105 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
                
        if graph._node[node]['node_class'] == 'CSTR':
            
+           # stoichiometric coefficients
+           
+           comps = stochiometry
+           comps1 = Dictionary[str, float]()
+           for key1 in comps:  
+               value = comps[key1]
+               comps1.Add(key1, value);
+
+           # direct order coefficients
+           
+           dorders = direct_order
+           dorders1 = Dictionary[str, float]()
+           for key2 in dorders:  
+               value = dorders[key2]
+               dorders1.Add(key2, value);
+               
+           # reverse order coefficients
+            
+           rorders = reverse_order
+           rorders1 = Dictionary[str, float]()
+           for key3 in rorders:  
+               value = rorders[key3]
+               rorders1.Add(key3, value);
+
+       kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetate", 
+                       comps1, dorders1, rorders1, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
+              
+       sim.AddReaction(kr1)
+       sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
+       
+       if adiabatic != 0:
+           CSTR1.ReactorOperationMode = Reactors.OperationMode.Adiabatic
+           
+       if isothermic != 0:
+           CSTR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
+         
+       if outlet_temperature != 0:
+           CSTR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
+
+
+       CSTR1.Volume = reactor_volume #m^3  
+           
        if graph._node[node]['node_class'] == 'PFR':
+           
+           # stoichiometric coefficients
+           
+           comps = stochiometry
+           comps1 = Dictionary[str, float]()
+           for key1 in comps:  
+               value = comps[key1]
+               comps1.Add(key1, value);
+
+           # direct order coefficients
+           
+           dorders = direct_order
+           dorders1 = Dictionary[str, float]()
+           for key2 in dorders:  
+               value = dorders[key2]
+               dorders1.Add(key2, value);
+               
+           # reverse order coefficients
+            
+           rorders = reverse_order
+           rorders1 = Dictionary[str, float]()
+           for key3 in rorders:  
+               value = rorders[key3]
+               rorders1.Add(key3, value);
+
+       kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetate", 
+                       comps1, dorders1, rorders1, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
+              
+       sim.AddReaction(kr1)
+       sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
+       
+#set pfr operation mode
+
+       if isothermic != 0:
+           PFR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
+        
+       if adiabatic != 0:
+           PFR1.CalcMode = UnitOperations.RCT_PFR.CalculationMode.Power 
+           PFR1.ReactorOperationMode = Reactors.OperationMode.Adiabatic
+            
+       if outlet_temperature != 0:
+           PFR1.CalcMode = UnitOperations.RCT_PFR.CalculationMode.EnergyStream
+           PFR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
+        
+       if reactor_diameter !=0:
+        
+           PFR1.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Diameter
+           PFR1.Diameter = reactor_diameter #m
+        
+       if reactor_length !=0:
+        
+           PFR1.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length
+           PFR1.Length = reactor_length #m
+    
+    
+       PFR1.Volume = reactor_volume #m^3
            
        if graph._node[node]['node_class'] == 'Cooler':
            
@@ -251,13 +349,13 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
            
        if graph._node[node]['node_class'] == 'Heat exchanger':
            
-           h_ex1.set_Area(nx.get_node_attributes(graph, 'heat_exchange_area')
-           h_ex1.set_Q(nx.get_node_attributes(graph, 'global_heat_transfer')
+          h_ex1.set_Area(nx.get_node_attributes(graph, 'heat_exchange_area'))
+          h_ex1.set_Q(nx.get_node_attributes(graph, 'global_heat_transfer'))
            
        if graph._node[node]['node_class'] == 'Heat exchanger, detailed':    
            
-           h_ex1.set_Area(nx.get_node_attributes(graph, 'heat_exchange_area')
-           h_ex1.set_Q(nx.get_node_attributes(graph, 'global_heat_transfer')
+           h_ex1.set_Area(nx.get_node_attributes(graph, 'heat_exchange_area'))
+           h_ex1.set_Q(nx.get_node_attributes(graph, 'global_heat_transfer'))
 
 
 

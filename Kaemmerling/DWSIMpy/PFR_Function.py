@@ -102,7 +102,7 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
     sim.ConnectObjects(e1.GraphicObject, PFR1.GraphicObject, -1, -1)
     
     
-#set pump operation mode
+#set pfr operation mode
 
     if isothermic != 0:
         PFR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
