@@ -76,7 +76,7 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
 
     if heatadded != 0:
         h1.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
-        h1.setDeltaQ(heatadded) # j
+        h1.set_DeltaQ(heatadded) # j
             
     if outlettemperature != 0:
         h1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
@@ -84,7 +84,7 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
             
     if deltat != 0:
         h1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
-        h1.setDeltaT(deltat) # k
+        h1.set_DeltaT(deltat) # k
 
 
     

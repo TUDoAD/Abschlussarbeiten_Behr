@@ -82,7 +82,7 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
 
     if heatremoved != 0:
         c1.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
-        c1.setDeltaQ(heatremoved) # j
+        c1.set_DeltaQ(heatremoved) # j
             
     if outlettemperature != 0:
         c1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
@@ -90,7 +90,7 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
             
     if deltat != 0:
         c1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
-        c1.setDeltaT(deltat) # k
+        c1.set_DeltaT(deltat) # k
             
     
     sim.AutoLayout()

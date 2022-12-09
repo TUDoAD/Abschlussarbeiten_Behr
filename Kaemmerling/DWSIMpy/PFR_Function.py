@@ -113,7 +113,7 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
             
     if outlet_temperature != 0:
         PFR1.CalcMode = UnitOperations.RCT_PFR.CalculationMode.EnergyStream
-        PFR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
+        PFR1.ReactorOperationMode = Reactors.OperationMode.OutletTemperature
         
     if reactor_diameter !=0:
         

@@ -168,64 +168,64 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
 
     for node in nodes:
        if graph._node[node]['node_class'] == 'Vessel':
-           T1.CalcMode = UnitOperations.Tank.set_Volume
-           T1.set_Volume(nx.get_node_attributes(graph, "tank_volume")) #m^3
+           node.CalcMode = UnitOperations.Tank.set_Volume
+           node.set_Volume(graph.nodes[node]['tank_volume']) #m^3
        if graph._node[node]['node_class'] == 'Tank':
-           T1.CalcMode = UnitOperations.Tank.set_Volume
-           T1.set_Volume(nx.get_node_attributes(graph, "tank_volume")) #m^3
+           node.CalcMode = UnitOperations.Tank.set_Volume
+           node.set_Volume(graph.nodes[node]['tank_volume']) #m^3
        if graph._node[node]['node_class'] == 'Silo':
-           T1.CalcMode = UnitOperations.Tank.set_Volume
-           T1.set_Volume(nx.get_node_attributes(graph, "tank_volume")) #m^3
+           node.CalcMode = UnitOperations.Tank.set_Volume
+           node.set_Volume(graph.nodes[node]['tank_volume']) #m^3
            
        if graph._node[node]['node_class'] == 'Pump':
            
-           if graph._node[node]['outlet_pressure']!= 0:
-               p1.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
-               p1.set_Pout(nx.get_node_attributes(graph, "outlet_pressure")) # pa
+           if graph._node[node][node]!= 0:
+               node.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
+               node.set_Pout(graph.nodes[node]['outlet_pressure']) # pa
                               
-           if graph._node[node]['power_required']!= 0:
-               p1.CalcMode = UnitOperations.Pump.CalculationMode.Power 
-               p1.PowerRequired(nx.get_node_attributes(graph, "power_required"))
+           if graph._node[node][node]!= 0:
+               node.CalcMode = UnitOperations.Pump.CalculationMode.Power 
+               node.PowerRequired(graph.nodes[node]['power_required'])
                    
-           if graph._node[node]['energy_stream']!= 0:
-               p1.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
-               p1.set_EnergyFlow(nx.get_node_attributes(graph, "energy_stream"))
+           if graph._node[node][node]!= 0:
+               node.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
+               node.set_EnergyFlow(graph.nodes[node]['energy_stream'])
                
-           if graph._node[node]['pressure_increase']!= 0:
-               p1.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
-               p1.set_DeltaP(nx.get_node_attributes(graph, "pressure_increase")) 
+           if graph._node[node][node]!= 0:
+               node.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
+               node.set_DeltaP(graph.nodes[node]['pressure_increase'])
                
        if graph._node[node]['node_class'] == 'Compressor':
            
-           if graph._node[node]['outlet_pressure']!= 0:
-               p1.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
-               p1.set_Pout(nx.get_node_attributes(graph, "outlet_pressure")) # pa
+           if graph._node[node][node]!= 0:
+               node.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
+               node.set_Pout(graph.nodes[node]['outlet_pressure']) # pa
                               
-           if graph._node[node]['power_required']!= 0:
-               p1.CalcMode = UnitOperations.Pump.CalculationMode.Power 
-               p1.PowerRequired(nx.get_node_attributes(graph, "power_required"))
+           if graph._node[node][node]!= 0:
+               node.CalcMode = UnitOperations.Pump.CalculationMode.Power 
+               node.PowerRequired(graph.nodes[node]['power_required'])
                    
-           if graph._node[node]['energy_stream']!= 0:
-               p1.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
-               p1.set_EnergyFlow(nx.get_node_attributes(graph, "energy_stream"))
+           if graph._node[node][node]!= 0:
+               node.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
+               node.set_EnergyFlow(graph.nodes[node]['energy_stream'])
                
-           if graph._node[node]['pressure_increase']!= 0:
-               p1.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
-               p1.set_DeltaP(nx.get_node_attributes(graph, "pressure_increase"))
+           if graph._node[node][node]!= 0:
+               node.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
+               node.set_DeltaP(graph.nodes[node]['pressure_increase'])
                
        if graph._node[node]['node_class'] == 'CSTR':
            
            # stoichiometric coefficients
            
-           comps = stochiometry
+           comps = graph.nodes[node]['stochiometry']
            comps1 = Dictionary[str, float]()
            for key1 in comps:  
                value = comps[key1]
                comps1.Add(key1, value);
-
+               
            # direct order coefficients
            
-           dorders = direct_order
+           dorders = graph.nodes[node]['direct_order']
            dorders1 = Dictionary[str, float]()
            for key2 in dorders:  
                value = dorders[key2]
@@ -233,35 +233,35 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
                
            # reverse order coefficients
             
-           rorders = reverse_order
+           rorders = graph.nodes[node]['reverse_order']
            rorders1 = Dictionary[str, float]()
            for key3 in rorders:  
                value = rorders[key3]
                rorders1.Add(key3, value);
 
-       kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetate", 
-                       comps1, dorders1, rorders1, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
+           kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetate", 
+                       comps1, dorders1, rorders1, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", graph.nodes[node]['arrhenius_parameter'], 0.0, 0.0, 0.0, "", "")
               
-       sim.AddReaction(kr1)
-       sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
+           sim.AddReaction(kr1)
+           sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
        
-       if adiabatic != 0:
-           CSTR1.ReactorOperationMode = Reactors.OperationMode.Adiabatic
+           if graph.nodes[node]['adiabatic'] != 0:
+               node.ReactorOperationMode = Reactors.OperationMode.Adiabatic
            
-       if isothermic != 0:
-           CSTR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
+           if graph.nodes[node]['isothermic'] != 0:
+                node.ReactorOperationMode = Reactors.OperationMode.Isothermic
          
-       if outlet_temperature != 0:
-           CSTR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
+           if graph.nodes[node]['outlet_temperature'] != 0:
+               node.ReactorOperationMode = Reactors.OperationMode.OutletTemperature
 
 
-       CSTR1.Volume = reactor_volume #m^3  
+           node.Volume = graph.nodes[node]['reactor_volume'] #m^3  
            
        if graph._node[node]['node_class'] == 'PFR':
            
            # stoichiometric coefficients
            
-           comps = stochiometry
+           comps = graph.nodes[node]['stochiometry']
            comps1 = Dictionary[str, float]()
            for key1 in comps:  
                value = comps[key1]
@@ -269,7 +269,7 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
 
            # direct order coefficients
            
-           dorders = direct_order
+           dorders = graph.nodes[node]['direct_order']
            dorders1 = Dictionary[str, float]()
            for key2 in dorders:  
                value = dorders[key2]
@@ -277,96 +277,92 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
                
            # reverse order coefficients
             
-           rorders = reverse_order
+           rorders = graph.nodes[node]['reverse_order']
            rorders1 = Dictionary[str, float]()
            for key3 in rorders:  
                value = rorders[key3]
                rorders1.Add(key3, value);
 
-       kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetate", 
-                       comps1, dorders1, rorders1, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
+           kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetate", 
+                       comps1, dorders1, rorders1, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", graph.nodes[node]['arrhenius_parameter'], 0.0, 0.0, 0.0, "", "")
               
-       sim.AddReaction(kr1)
-       sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
+           sim.AddReaction(kr1)
+           sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
        
 #set pfr operation mode
 
-       if isothermic != 0:
-           PFR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
+       if graph.nodes[node]['isothermic']!= 0:
+           node.ReactorOperationMode = Reactors.OperationMode.Isothermic
         
-       if adiabatic != 0:
-           PFR1.CalcMode = UnitOperations.RCT_PFR.CalculationMode.Power 
-           PFR1.ReactorOperationMode = Reactors.OperationMode.Adiabatic
+       if graph.nodes[node]['adiabatic']!= 0:
+           node.CalcMode = UnitOperations.RCT_PFR.CalculationMode.Power 
+           node.ReactorOperationMode = Reactors.OperationMode.Adiabatic
             
-       if outlet_temperature != 0:
-           PFR1.CalcMode = UnitOperations.RCT_PFR.CalculationMode.EnergyStream
-           PFR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
+       if graph.nodes[node]['outlet_temperature']!= 0:
+           node.CalcMode = UnitOperations.RCT_PFR.CalculationMode.EnergyStream
+           node.ReactorOperationMode = Reactors.OperationMode.OutletTemperature
         
-       if reactor_diameter !=0:
+       if graph.nodes[node]['reactor_diameter']!= 0:
+           node.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Diameter
+           node.Diameter = graph.nodes[node]['reactor_diameter'] #m
         
-           PFR1.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Diameter
-           PFR1.Diameter = reactor_diameter #m
-        
-       if reactor_length !=0:
-        
-           PFR1.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length
-           PFR1.Length = reactor_length #m
+       if graph.nodes[node]['reactor_length']!= 0:
+           node.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length
+           node.Length = graph.nodes[node]['reactor_length']  #m
     
     
-       PFR1.Volume = reactor_volume #m^3
+       node.Volume = graph.nodes[node]['reactor_volume'] #m^3
            
        if graph._node[node]['node_class'] == 'Cooler':
            
 #set cooler operation mode
 
-            if heatremoved != 0:
-                c1.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
-                c1.setDeltaQ(heatremoved) # j
+            if graph.nodes[node]['heat_removed']!= 0:
+                node.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
+                node.set_DeltaQ(nodes[node]['heat_removed']) # j
             
-            if outlettemperature != 0:
-                c1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
-                c1.OutletTemperature = outlettemperature # k
+            if nodes[node]['outlet_temperature']!= 0:
+                node.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
+                node.OutletTemperature = nodes[node]['outlet_temperature'] # k
             
-            if deltat != 0:
-                c1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
-                c1.setDeltaT(deltat) # k
+            if nodes[node]['deltat']!= 0:
+                node.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
+                node.set_DeltaT(nodes[node]['deltat']) # k
            
        if graph._node[node]['node_class'] == 'Heater':
            
            #set heater operation mode
 
-           if heatadded != 0:
-                   h1.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
-                   h1.setDeltaQ(heatadded) # j
-                       
-           if outlettemperature != 0:
-                   h1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
-                   h1.OutletTemperature = outlettemperature # k
-                       
-           if deltat != 0:
-                   h1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
-                   h1.setDeltaT(deltat) # k
+            if graph.nodes[node]['heat_added']!= 0:
+                node.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
+                node.set_DeltaQ(nodes[node]['heat_added']) # j
+            
+            if nodes[node]['outlet_temperature']!= 0:
+                node.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
+                node.OutletTemperature = nodes[node]['outlet_temperature'] # k
+            
+            if nodes[node]['deltat']!= 0:
+                node.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
+                node.set_DeltaT(nodes[node]['deltat']) # k
            
        if graph._node[node]['node_class'] == 'Heat exchanger':
            
-          h_ex1.set_Area(nx.get_node_attributes(graph, 'heat_exchange_area'))
-          h_ex1.set_Q(nx.get_node_attributes(graph, 'global_heat_transfer'))
+          node.set_Area(graph.nodes[node]['heat_exchange_area'])
+          node.set_Q(graph.nodes[node]['global_heat_transfer'])
            
        if graph._node[node]['node_class'] == 'Heat exchanger, detailed':    
-           
-           h_ex1.set_Area(nx.get_node_attributes(graph, 'heat_exchange_area'))
-           h_ex1.set_Q(nx.get_node_attributes(graph, 'global_heat_transfer'))
+          
+          node.set_Area(graph.nodes[node]['heat_exchange_area'])
+          node.set_Q(graph.nodes[node]['global_heat_transfer'])
+          
+       if graph._node[node]['node_class'] == 'Column':
+          
+           node.m_lightkey =graph.nodes[node]['light_key_compound']
+           node.m_heavykey =graph.nodes[node]['heavy_key_compound'] 
+           node.m_heavykeymolarfrac =graph.nodes[node]['hk_mole_fraction_in_distillate']
+           node.m_lightkeymolarfrac =graph.nodes[node]['lk_mole_fraction_in_distillate']
+           node.m_refluxratio =graph.nodes[node]['reflux_ratio']
 
-
-
-    T3.CalcMode = UnitOperations.Tank.set_Volume
-    T3.set_Volume(100) #m^3
-
-    DEST1.m_lightkey = "Ethanol"
-    DEST1.m_heavykey = "Water"
-    DEST1.m_heavykeymolarfrac = 0.01
-    DEST1.m_lightkeymolarfrac = 0.01
-    DEST1.m_refluxratio = 1.4
 
 
 

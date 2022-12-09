@@ -128,7 +128,7 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
         CSTR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
       
     if outlet_temperature != 0:
-        CSTR1.ReactorOperationMode = Reactors.OperationMode.Isothermic
+        CSTR1.ReactorOperationMode = Reactors.OperationMode.OutletTemperature
 
 
     CSTR1.Volume = reactor_volume #m^3      
