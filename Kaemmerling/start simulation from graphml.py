@@ -181,37 +181,37 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
            
            if graph._node[node]['outlet_pressure']!= 0:
                p1.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
-               p1.set_Pout(outletpressure) # pa
+               p1.set_Pout(nx.get_node_attributes(graph, "outlet_pressure")) # pa
                               
            if graph._node[node]['power_required']!= 0:
                p1.CalcMode = UnitOperations.Pump.CalculationMode.Power 
-               p1.PowerRequired(powerrequired) 
+               p1.PowerRequired(nx.get_node_attributes(graph, "power_required"))
                    
            if graph._node[node]['energy_stream']!= 0:
                p1.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
-               p1.set_EnergyFlow(energystream)
+               p1.set_EnergyFlow(nx.get_node_attributes(graph, "energy_stream"))
                
            if graph._node[node]['pressure_increase']!= 0:
                p1.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
-               p1.set_DeltaP(pressureincrease) 
+               p1.set_DeltaP(nx.get_node_attributes(graph, "pressure_increase")) 
                
        if graph._node[node]['node_class'] == 'Compressor':
            
            if graph._node[node]['outlet_pressure']!= 0:
                p1.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
-               p1.set_Pout(outletpressure) # pa
+               p1.set_Pout(nx.get_node_attributes(graph, "outlet_pressure")) # pa
                               
            if graph._node[node]['power_required']!= 0:
                p1.CalcMode = UnitOperations.Pump.CalculationMode.Power 
-               p1.PowerRequired(powerrequired) 
+               p1.PowerRequired(nx.get_node_attributes(graph, "power_required"))
                    
            if graph._node[node]['energy_stream']!= 0:
                p1.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
-               p1.set_EnergyFlow(energystream)
+               p1.set_EnergyFlow(nx.get_node_attributes(graph, "energy_stream"))
                
            if graph._node[node]['pressure_increase']!= 0:
                p1.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
-               p1.set_DeltaP(pressureincrease)
+               p1.set_DeltaP(nx.get_node_attributes(graph, "pressure_increase"))
                
        if graph._node[node]['node_class'] == 'CSTR':
            
@@ -219,12 +219,45 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
            
        if graph._node[node]['node_class'] == 'Cooler':
            
+#set cooler operation mode
+
+            if heatremoved != 0:
+                c1.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
+                c1.setDeltaQ(heatremoved) # j
+            
+            if outlettemperature != 0:
+                c1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
+                c1.OutletTemperature = outlettemperature # k
+            
+            if deltat != 0:
+                c1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
+                c1.setDeltaT(deltat) # k
+           
        if graph._node[node]['node_class'] == 'Heater':
+           
+           #set heater operation mode
+
+           if heatadded != 0:
+                   h1.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
+                   h1.setDeltaQ(heatadded) # j
+                       
+           if outlettemperature != 0:
+                   h1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
+                   h1.OutletTemperature = outlettemperature # k
+                       
+           if deltat != 0:
+                   h1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
+                   h1.setDeltaT(deltat) # k
            
        if graph._node[node]['node_class'] == 'Heat exchanger':
            
+           h_ex1.set_Area(nx.get_node_attributes(graph, 'heat_exchange_area')
+           h_ex1.set_Q(nx.get_node_attributes(graph, 'global_heat_transfer')
+           
        if graph._node[node]['node_class'] == 'Heat exchanger, detailed':    
            
+           h_ex1.set_Area(nx.get_node_attributes(graph, 'heat_exchange_area')
+           h_ex1.set_Q(nx.get_node_attributes(graph, 'global_heat_transfer')
 
 
 
