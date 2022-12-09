@@ -213,11 +213,16 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
                p1.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
                p1.set_DeltaP(pressureincrease)
                
-       if graph._node[node]['node_class'] == 'CSTR':    
+       if graph._node[node]['node_class'] == 'CSTR':
+           
        if graph._node[node]['node_class'] == 'PFR':
+           
        if graph._node[node]['node_class'] == 'Cooler':
+           
        if graph._node[node]['node_class'] == 'Heater':
+           
        if graph._node[node]['node_class'] == 'Heat exchanger':
+           
        if graph._node[node]['node_class'] == 'Heat exchanger, detailed':    
            
 

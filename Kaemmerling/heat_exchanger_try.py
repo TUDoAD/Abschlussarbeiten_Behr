@@ -84,7 +84,8 @@ m1.SetMassFlow(100.0) # kg/s
 m3.SetTemperature(200.0) # K
 m3.SetMassFlow(100.0)
 
-
+h1.set_Area(1)
+h1.set_Q(1000)
 # request a calculation
 
 Settings.SolverMode = 0

@@ -117,6 +117,9 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
        print(compoundscompoundflow2[key])
          
        m3.SetOverallCompoundMolarFlow(key , compoundscompoundflow2[key])
+       
+       h_ex1.set_Area(heat_exchange_area)
+       h_ex1.set_Q(global_heat_transfer)
 
 #request a calculation
 
@@ -162,4 +165,4 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     im = Image.open(imgPath)
     im.show()
     
-Heat_exchanger(300.0,100000.0, 400.0, 100000.0, {"Water" : 9.57}, {"Ethanol" : 9.97},1,1000)
+Heat_exchanger(300.0,100000.0, 400.0, 100000.0, {"Water" : 9.57}, {"Ethanol" : 9.97},1.0,1000.0)

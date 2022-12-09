@@ -88,7 +88,7 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
             
     if powerrequired != 0:
         p1.CalcMode = UnitOperations.Pump.CalculationMode.Power 
-        p1.PowerRequired(powerrequired) # k
+        p1.PowerRequired(powerrequired) 
             
     if energystream != 0:
         p1.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
@@ -96,7 +96,7 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
         
     if pressureincrease != 0:
         p1.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
-        p1.set_DeltaP(pressureincrease) # k
+        p1.set_DeltaP(pressureincrease) 
             
     sim.AutoLayout()
     
