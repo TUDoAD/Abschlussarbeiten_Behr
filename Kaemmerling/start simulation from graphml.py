@@ -65,10 +65,11 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
         print(key)
         
     #add mass streams
+    mass_list = []
     number_of_mass_flows = 2 + nx.number_of_edges(graph)
     for i in range(number_of_mass_flows):
         globals()['m_{}'.format(i)] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
-    
+        mass_list
     #add energy streams
         
     nodes = list(graph.nodes)
@@ -93,34 +94,6 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
         
 
 # create and connect objects
-
-    m1 = sim.AddObject(ObjectType.MaterialStream, 0, 50, "dest_inlet")
-    m2 = sim.AddObject(ObjectType.MaterialStream, 200, 50, "dest_head")
-    m3 = sim.AddObject(ObjectType.MaterialStream, 350, 50, "dest_bottom")
-    m4 = sim.AddObject(ObjectType.MaterialStream, 550, 50, "pump1_outlet")
-    m5 = sim.AddObject(ObjectType.MaterialStream, 750, 50, "tank1_outlet")
-    m6 = sim.AddObject(ObjectType.MaterialStream, 850, 50, "splitter_inlet")
-    m7 = sim.AddObject(ObjectType.MaterialStream, 850, 200, "heat_ex_inlet")
-    m8 = sim.AddObject(ObjectType.MaterialStream, 1000, 300, "heat_ex_outlet")
-    m9 = sim.AddObject(ObjectType.MaterialStream, 1000, 300, "splitter_outlet1")
-    m10 = sim.AddObject(ObjectType.MaterialStream, 1000, 300, "splitter_outlet2")
-    m11 = sim.AddObject(ObjectType.MaterialStream, 1000, 300, "tank2_outlet")
-    m12 = sim.AddObject(ObjectType.MaterialStream, 1000, 300, "tank3_outlet")
-    m13 = sim.AddObject(ObjectType.MaterialStream, 1000, 300, "mixer_outlet")
-    m14 = sim.AddObject(ObjectType.MaterialStream, 1000, 300, "pump2_outlet")
-    e1 = sim.AddObject(ObjectType.EnergyStream, 100, 100, "power1")
-    e2 = sim.AddObject(ObjectType.EnergyStream, 250, 100, "power2")
-    e3 = sim.AddObject(ObjectType.EnergyStream, 450, 300, "power3")
-    e4 = sim.AddObject(ObjectType.EnergyStream, 450, 300, "power4")
-    DEST1 = sim.AddObject(ObjectType.ShortcutColumn, 250, 50, "DEST")
-    Heat_ex = sim.AddObject(ObjectType.HeatExchanger, 450, 200, "Heat_ex")
-    Split1 = sim.AddObject(ObjectType.Splitter, 100, 50, "Splitter")
-    T1 = sim.AddObject(ObjectType.Tank, 800, 50, "Tank1")
-    T2 = sim.AddObject(ObjectType.Tank, 800, 50, "Tank2")
-    MIX1 = sim.AddObject(ObjectType.Mixer, 950, 200, "Mixer")
-    P1 = sim.AddObject(ObjectType.Pump, 650, 50, "Pump")
-    T3 = sim.AddObject(ObjectType.Tank, 800, 50, "Tank3")
-    P2 = sim.AddObject(ObjectType.Pump, 650, 50, "Pump2")
     
     sim.ConnectObjects(m1.GraphicObject, DEST1.GraphicObject, -1, -1)
     sim.ConnectObjects(DEST1.GraphicObject, m2.GraphicObject, -1, -1)
@@ -150,6 +123,8 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
     sim.ConnectObjects(m8.GraphicObject, Heat_ex.GraphicObject, -1, -1)
     sim.ConnectObjects(Heat_ex.GraphicObject, m7.GraphicObject, -1, -1)
     sim.AutoLayout()
+    
+    
 
 # Peng Robinson Property Package
 
@@ -169,6 +144,13 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
     for node in nodes:
        if graph._node[node]['node_class'] == 'Vessel':
            node = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
+           if node == nodes[0]:
+               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+               sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
+           else:
+               successors = list(graph.successors(node))
+               for process_unit in successors:
+                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
            node.CalcMode = UnitOperations.Tank.set_Volume
            node.set_Volume(graph.nodes[node]['tank_volume']) #m^3
        if graph._node[node]['node_class'] == 'Tank':
