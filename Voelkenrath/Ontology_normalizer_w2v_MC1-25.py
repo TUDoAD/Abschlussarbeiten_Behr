@@ -96,6 +96,10 @@ with onto_local:
             onto_local.search_one(label = classlabel[0]).comment.append(comment_string)
             #class_dict_locOntos[classlabel[0]].comment.append(comment_string)    
             #w2v_class.comment.append(comment_string)
+    
+    w2vSubclasses = len(set(list(onto_local.w2vConcept.subclasses())))
+    onto_local.save(file = ontology_filename + "_output.owl")
+    
 '''
 ## storing definitions in ontology
 for loaded_onto in resDict:
@@ -117,16 +121,13 @@ for loaded_onto in resDict:
         temp_class.comment.append(comment_string)
 '''
 
-onto_local.save(file = ontology_filename + "_output.owl")
-
-
 # Found concepts (unique)
 tempVar = []
 for key in resDict:
     for i in resDict[key]: tempVar.append(i[0])    
 found_concepts = set(tempVar)
 resDict["unique_keys"] = len(found_concepts)
-
+resDict["new_classes"] = w2vSubclasses
 with open(ontology_filename + "_new_classes.json", 'w') as f:
         json.dump(resDict, f)
 #andereVariableTest = list_classes[5]
