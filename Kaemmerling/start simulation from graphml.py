@@ -91,41 +91,6 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
             a = a+1
     for i in range(a):
         globals()['e_{}'.format(i)] = sim.AddObject(ObjectType.EnergyStream, 50, 50, "inlet")
-        
-
-# create and connect objects
-    
-    sim.ConnectObjects(m1.GraphicObject, DEST1.GraphicObject, -1, -1)
-    sim.ConnectObjects(DEST1.GraphicObject, m2.GraphicObject, -1, -1)
-    sim.ConnectObjects(DEST1.GraphicObject, m3.GraphicObject, -1, -1)
-    sim.ConnectObjects(m2.GraphicObject, Heat_ex.GraphicObject, -1, -1)
-    sim.ConnectObjects(m3.GraphicObject, P1.GraphicObject, -1, -1)
-    sim.ConnectObjects(P1.GraphicObject, m4.GraphicObject, -1, -1)
-    sim.ConnectObjects(m4.GraphicObject, T1.GraphicObject, -1, -1)
-    sim.ConnectObjects(T1.GraphicObject, m5.GraphicObject, -1, -1)
-    sim.ConnectObjects(Heat_ex.GraphicObject, m6.GraphicObject, -1, -1)
-    sim.ConnectObjects(m6.GraphicObject, Split1.GraphicObject, -1, -1)
-    sim.ConnectObjects(Split1.GraphicObject, m9.GraphicObject, -1, -1)
-    sim.ConnectObjects(Split1.GraphicObject, m10.GraphicObject, -1, -1)
-    sim.ConnectObjects(m9.GraphicObject, T2.GraphicObject, -1, -1)
-    sim.ConnectObjects(m10.GraphicObject, T3.GraphicObject, -1, -1)
-    sim.ConnectObjects(T3.GraphicObject, m12.GraphicObject, -1, -1)
-    sim.ConnectObjects(T2.GraphicObject, m11.GraphicObject, -1, -1)
-    sim.ConnectObjects(m11.GraphicObject, MIX1.GraphicObject, -1, -1)
-    sim.ConnectObjects(m12.GraphicObject, MIX1.GraphicObject, -1, -1)
-    sim.ConnectObjects(MIX1.GraphicObject, m13.GraphicObject, -1, -1)
-    sim.ConnectObjects(m13.GraphicObject, P2.GraphicObject, -1, -1)
-    sim.ConnectObjects(P2.GraphicObject, m14.GraphicObject, -1, -1)
-    sim.ConnectObjects(e1.GraphicObject, DEST1.GraphicObject, -1, -1)
-    sim.ConnectObjects(DEST1.GraphicObject, e2.GraphicObject, -1, -1)
-    sim.ConnectObjects(e3.GraphicObject, P1.GraphicObject, -1, -1)
-    sim.ConnectObjects(e4.GraphicObject, P2.GraphicObject, -1, -1)
-    sim.ConnectObjects(m8.GraphicObject, Heat_ex.GraphicObject, -1, -1)
-    sim.ConnectObjects(Heat_ex.GraphicObject, m7.GraphicObject, -1, -1)
-    sim.AutoLayout()
-    
-    
-
 # Peng Robinson Property Package
 
     stables = PropertyPackages.PengRobinsonPropertyPackage()
@@ -144,44 +109,104 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
     for node in nodes:
        if graph._node[node]['node_class'] == 'Vessel':
            node = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
+           edges = graph.edges(node)
+           for edge in edges: 
+               if edge == edges[0]: 
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+               if edge == edges[1]:
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+               if edge == edges [2]:
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)  
            if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
-           else:
-               successors = list(graph.successors(node))
-               for process_unit in successors:
-                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
            node.CalcMode = UnitOperations.Tank.set_Volume
            node.set_Volume(graph.nodes[node]['tank_volume']) #m^3
        if graph._node[node]['node_class'] == 'Tank':
            node = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
+           edges = graph.edges(node)
+           for edge in edges: 
+               if edge == edges[0]: 
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+               if edge == edges[1]:
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+           if node == nodes[0]:
+               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+               sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
            node.CalcMode = UnitOperations.Tank.set_Volume
            node.set_Volume(graph.nodes[node]['tank_volume']) #m^3
        if graph._node[node]['node_class'] == 'Silo':
            node = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
+           edges = graph.edges(node)
+           for edge in edges: 
+               if edge == edges[0]: 
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+               if edge == edges[1]:
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+               if edge == edges [2]:
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+           if node == nodes[0]:
+               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+               sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
            node.CalcMode = UnitOperations.Tank.set_Volume
            node.set_Volume(graph.nodes[node]['tank_volume']) #m^3
            
        if graph._node[node]['node_class'] == 'Pump':
            node = sim.AddObject(ObjectType.Pump, 200, 50, "pump")
-           if graph._node[node][node]!= 0:
+           edges = graph.edges(node)
+           for edge in edges: 
+               if edge == edges[0]: 
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+               if edge == edges[1]:
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+               if edge == edges [2]:
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+           if node == nodes[0]:
+               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+               sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
+           if graph._node[node]['outlet_pressure']!= 0:
                node.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
                node.set_Pout(graph.nodes[node]['outlet_pressure']) # pa
                               
-           if graph._node[node][node]!= 0:
+           if graph._node[node]['power_required']!= 0:
                node.CalcMode = UnitOperations.Pump.CalculationMode.Power 
                node.PowerRequired(graph.nodes[node]['power_required'])
                    
-           if graph._node[node][node]!= 0:
+           if graph._node[node]['energy_stream']!= 0:
                node.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
                node.set_EnergyFlow(graph.nodes[node]['energy_stream'])
                
-           if graph._node[node][node]!= 0:
+           if graph._node[node]['pressure_increase']!= 0:
                node.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
                node.set_DeltaP(graph.nodes[node]['pressure_increase'])
                
        if graph._node[node]['node_class'] == 'Compressor':
            node = sim.AddObject(ObjectType.Compressor, 200, 50, "compressor")
+           edges = graph.edges(node)
+           for edge in edges: 
+               if edge == edges[0]: 
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+               if edge == edges[1]:
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+               if edge == edges [2]:
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+           if node == nodes[0]:
+               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+               sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
            if graph._node[node][node]!= 0:
                node.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
                node.set_Pout(graph.nodes[node]['outlet_pressure']) # pa
@@ -199,7 +224,18 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
                node.set_DeltaP(graph.nodes[node]['pressure_increase'])
                
        if graph._node[node]['node_class'] == 'CSTR':
-           CSTR1 = sim.AddObject(ObjectType.RCT_CSTR, 100, 50, "CSTR") 
+           node = sim.AddObject(ObjectType.RCT_CSTR, 100, 50, "CSTR")
+           edges = graph.edges(node)
+           for edge in edges: 
+               if edge == edges[0]: 
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+               if edge == edges[1]:
+                   mass_flow = graph._[edge]['mass_flow']
+                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+           if node == nodes[0]:
+               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+               sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
            # stoichiometric coefficients
            
            comps = graph.nodes[node]['stochiometry']
@@ -243,100 +279,184 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
            node.Volume = graph.nodes[node]['reactor_volume'] #m^3  
            
        if graph._node[node]['node_class'] == 'PFR':
-           node = sim.AddObject(ObjectType.RCT_PFR, 100, 50, "PFR")
+          edges = graph.edges(node)
+          for edge in edges: 
+              if edge == edges[0]: 
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+              if edge == edges[1]:
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+              if edge == edges [2]:
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+          if node == nodes[0]:
+               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+               sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
+          node = sim.AddObject(ObjectType.RCT_PFR, 100, 50, "PFR")
            # stoichiometric coefficients        
-           comps = graph.nodes[node]['stochiometry']
-           comps1 = Dictionary[str, float]()
-           for key1 in comps:  
+          comps = graph.nodes[node]['stochiometry']
+          comps1 = Dictionary[str, float]()
+          for key1 in comps:  
                value = comps[key1]
                comps1.Add(key1, value);
 
            # direct order coefficients        
-           dorders = graph.nodes[node]['direct_order']
-           dorders1 = Dictionary[str, float]()
-           for key2 in dorders:  
+          dorders = graph.nodes[node]['direct_order']
+          dorders1 = Dictionary[str, float]()
+          for key2 in dorders:  
                value = dorders[key2]
                dorders1.Add(key2, value);
                
            # reverse order coefficients       
-           rorders = graph.nodes[node]['reverse_order']
-           rorders1 = Dictionary[str, float]()
-           for key3 in rorders:  
+          rorders = graph.nodes[node]['reverse_order']
+          rorders1 = Dictionary[str, float]()
+          for key3 in rorders:  
                value = rorders[key3]
                rorders1.Add(key3, value);
 
-           kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetate", 
+          kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetate", 
                        comps1, dorders1, rorders1, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", graph.nodes[node]['arrhenius_parameter'], 0.0, 0.0, 0.0, "", "")
               
-           sim.AddReaction(kr1)
-           sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
+          sim.AddReaction(kr1)
+          sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
        
 #set pfr operation mode
 
-           if graph.nodes[node]['isothermic']!= 0:
+          if graph.nodes[node]['isothermic']!= 0:
                node.ReactorOperationMode = Reactors.OperationMode.Isothermic
         
-           if graph.nodes[node]['adiabatic']!= 0:
+          if graph.nodes[node]['adiabatic']!= 0:
                node.CalcMode = UnitOperations.RCT_PFR.CalculationMode.Power 
                node.ReactorOperationMode = Reactors.OperationMode.Adiabatic
             
-           if graph.nodes[node]['outlet_temperature']!= 0:
+          if graph.nodes[node]['outlet_temperature']!= 0:
                node.CalcMode = UnitOperations.RCT_PFR.CalculationMode.EnergyStream
                node.ReactorOperationMode = Reactors.OperationMode.OutletTemperature
         
-           if graph.nodes[node]['reactor_diameter']!= 0:
+          if graph.nodes[node]['reactor_diameter']!= 0:
                node.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Diameter
                node.Diameter = graph.nodes[node]['reactor_diameter'] #m
         
-           if graph.nodes[node]['reactor_length']!= 0:
+          if graph.nodes[node]['reactor_length']!= 0:
                node.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length
                node.Length = graph.nodes[node]['reactor_length']  #m
     
     
-           node.Volume = graph.nodes[node]['reactor_volume'] #m^3
+          node.Volume = graph.nodes[node]['reactor_volume'] #m^3
            
        if graph._node[node]['node_class'] == 'Cooler':
-            node = sim.AddObject(ObjectType.Cooler, 200, 50, "cooler")
+          node = sim.AddObject(ObjectType.Cooler, 200, 50, "cooler")
+          edges = graph.edges(node)
+          for edge in edges: 
+              if edge == edges[0]: 
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+              if edge == edges[1]:
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+              if edge == edges [2]:
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+          if node == nodes[0]:
+               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+               sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
             #set cooler operation mode
-            if graph.nodes[node]['heat_removed']!= 0:
+          if graph.nodes[node]['heat_removed']!= 0:
                 node.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
                 node.set_DeltaQ(nodes[node]['heat_removed']) # j
             
-            if nodes[node]['outlet_temperature']!= 0:
+          if nodes[node]['outlet_temperature']!= 0:
                 node.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
                 node.OutletTemperature = nodes[node]['outlet_temperature'] # k
             
-            if nodes[node]['deltat']!= 0:
+          if nodes[node]['deltat']!= 0:
                 node.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
                 node.set_DeltaT(nodes[node]['deltat']) # k
            
        if graph._node[node]['node_class'] == 'Heater':
-            node = sim.AddObject(ObjectType.Heater, 100, 50, "heater")
+          node = sim.AddObject(ObjectType.Heater, 100, 50, "heater")
+          edges = graph.edges(node)
+          for edge in edges: 
+              if edge == edges[0]: 
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+              if edge == edges[1]:
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+              if edge == edges [2]:
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+          if node == nodes[0]:
+               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+               sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
             #set heater operation mode
-            if graph.nodes[node]['heat_added']!= 0:
+          if graph.nodes[node]['heat_added']!= 0:
                 node.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
                 node.set_DeltaQ(nodes[node]['heat_added']) # j
             
-            if nodes[node]['outlet_temperature']!= 0:
+          if nodes[node]['outlet_temperature']!= 0:
                 node.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
                 node.OutletTemperature = nodes[node]['outlet_temperature'] # k
             
-            if nodes[node]['deltat']!= 0:
+          if nodes[node]['deltat']!= 0:
                 node.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
                 node.set_DeltaT(nodes[node]['deltat']) # k
            
        if graph._node[node]['node_class'] == 'Heat exchanger':
           node = sim.AddObject(ObjectType.HeatExchanger, 100, 50, "heat_exchanger")
+          edges = graph.edges(node)
+          for edge in edges: 
+              if edge == edges[0]: 
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+              if edge == edges[1]:
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+              if edge == edges [2]:
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+          if node == nodes[0]:
+               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+               sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
           node.set_Area(graph.nodes[node]['heat_exchange_area'])
           node.set_Q(graph.nodes[node]['global_heat_transfer'])
            
-       if graph._node[node]['node_class'] == 'Heat exchanger, detailed':    
+       if graph._node[node]['node_class'] == 'Heat exchanger, detailed': 
+          edges = graph.edges(node)
+          for edge in edges: 
+              if edge == edges[0]: 
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+              if edge == edges[1]:
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+              if edge == edges [2]:
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+          if node == nodes[0]:
+               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+               sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
           node = sim.AddObject(ObjectType.HeatExchanger, 100, 50, "heat_exchanger")
           node.set_Area(graph.nodes[node]['heat_exchange_area'])
           node.set_Q(graph.nodes[node]['global_heat_transfer'])
           
        if graph._node[node]['node_class'] == 'Column':
-          node = sim.AddObject(ObjectType.ShortcutColumn, 200, 50, "Column")          
+          node = sim.AddObject(ObjectType.ShortcutColumn, 200, 50, "Column")
+          edges = graph.edges(node)
+          for edge in edges: 
+              if edge == edges[0]: 
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+              if edge == edges[1]:
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+              if edge == edges [2]:
+                  mass_flow = graph._[edge]['mass_flow']
+                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+          if node == nodes[0]:
+               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+               sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
           node.m_lightkey =graph.nodes[node]['light_key_compound']
           node.m_heavykey =graph.nodes[node]['heavy_key_compound'] 
           node.m_heavykeymolarfrac =graph.nodes[node]['hk_mole_fraction_in_distillate']
@@ -344,6 +464,21 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
           node.m_refluxratio =graph.nodes[node]['reflux_ratio']
        if graph._node[node]['node_class'] == 'Separator':
           node = sim.AddObject(ObjectType.Vessel, 200, 50, "separator")
+          edges = graph.edges(node)
+          for edge in edges:
+              if node != nodes[0]:
+                  if edge == edges[0]: 
+                      mass_flow = graph._[edge]['mass_flow']
+                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                      if edge == edges[1]:
+                          mass_flow = graph._[edge]['mass_flow']
+                          sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+                          if edge == edges [2]:
+                              mass_flow = graph._[edge]['mass_flow']
+                              sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+              if   node == nodes[0]:
+               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+               sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
 
 
 
