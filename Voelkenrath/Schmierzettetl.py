@@ -70,7 +70,7 @@ for keys in data.keys():
 print("unique keys: ", len(unique_dict.keys()))
 """
 
-#"""
+"""
 import pickle
 import w2v_training 
 
@@ -86,7 +86,7 @@ for i in min_count:
     print('Done!')
 
 conceptList = model.wv.index_to_key
-#"""
+"""
 """
 import plotly
 import numpy as np
@@ -190,3 +190,31 @@ model = Word2Vec.load('./models/methanation_only_text_mc10')
 #display_pca_scatterplot_3D(model, user_input = w2v_all_concepts_found)#,user_input = ['reactor','chemical', 'methane'])#, sample = sample)#, words = ['1']) 
 display_pca_scatterplot_3D(model, user_input = ['reactor','engineering','methanation'])#, similar_word, labels, color_map)
 """
+
+import json
+import pandas as pd
+
+json_filenames = ["mc1_0.999_new_classes.json",
+"mc10_0.995_new_classes.json",
+"mc10_0.99_new_classes.json",
+"mc25_0.999_new_classes.json",
+"mc10_0.999_new_classes.json",
+"mc5_0.999_new_classes.json",
+"mc2_0.999_new_classes.json"]
+
+df_dict = {}
+
+for filename in json_filenames:
+    with open('./ontologies_output/Allotrope_OWL_ext_methanation_only_text_'+filename, 'r') as f:
+        data = json.load(f)
+    tempdict = {}
+    for key in data:
+        if key == 'unique_keys' or key == 'new_classes':
+            tempdict[key] = data[key]
+        else:
+            tempdict[key] = len(data[key])
+    
+    df_dict[filename] = tempdict
+    
+df = pd.DataFrame(df_dict)
+df.to_excel('Auswertung_Onto_extension_defCounts.xlsx')

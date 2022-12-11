@@ -138,3 +138,31 @@ for ontology_filename in ontology_filename_list:
     #andereVariableTest = list_classes[5]
     # andereVariableTest.name
     # .title()
+    
+import json
+import pandas as pd
+
+json_filenames = ["mc1_0.999_new_classes.json",
+"mc10_0.995_new_classes.json",
+"mc10_0.99_new_classes.json",
+"mc25_0.999_new_classes.json",
+"mc10_0.999_new_classes.json",
+"mc5_0.999_new_classes.json",
+"mc2_0.999_new_classes.json"]
+
+df_dict = {}
+
+for filename in json_filenames:
+    with open('./ontologies_output/Allotrope_OWL_ext_methanation_only_text_'+filename, 'r') as f:
+        data = json.load(f)
+    tempdict = {}
+    for key in data:
+        if key == 'unique_keys' or key == 'new_classes':
+            tempdict[key] = data[key]
+        else:
+            tempdict[key] = len(data[key])
+    
+    df_dict[filename] = tempdict
+    
+df = pd.DataFrame(df_dict)
+df.to_excel('Auswertung_Onto_extension_defCounts.xlsx')
