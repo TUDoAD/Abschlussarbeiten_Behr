@@ -98,8 +98,8 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
     sim.AddPropertyPackage(stables)
 
 # set inlet stream conditions
-    m_0.SetTemperature(inlet_temperature) # K # als string?
-    m_0.SetPressure(inlet_pressure) # Pa # als string?
+    m_0.SetTemperature(inlet_temperature) # K 
+    m_0.SetPressure(inlet_pressure) # Pa 
     for key in compoundscompoundflow:
          
        print(compoundscompoundflow[key])
@@ -110,16 +110,14 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
        if graph._node[node]['node_class'] == 'Vessel':
            node = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
            edges = graph.edges(node)
-           for edge in edges: 
-               if edge == edges[0]: 
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-               if edge == edges[1]:
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
-               if edge == edges [2]:
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)  
+           if node != nodes[0]:
+               for edge in edges: 
+                   if edge == edges[0]: 
+                       mass_flow = graph._[edge]['mass_flow']
+                       sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                   if edge == edges[1]:
+                       mass_flow = graph._[edge]['mass_flow']
+                       sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1) 
            if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
@@ -128,13 +126,14 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
        if graph._node[node]['node_class'] == 'Tank':
            node = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
            edges = graph.edges(node)
-           for edge in edges: 
-               if edge == edges[0]: 
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-               if edge == edges[1]:
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+           if node != nodes[0]:
+               for edge in edges: 
+                   if edge == edges[0]: 
+                       mass_flow = graph._[edge]['mass_flow']
+                       sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                   if edge == edges[1]:
+                       mass_flow = graph._[edge]['mass_flow']
+                       sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
            if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
@@ -143,13 +142,14 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
        if graph._node[node]['node_class'] == 'Silo':
            node = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
            edges = graph.edges(node)
-           for edge in edges: 
-               if edge == edges[0]: 
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-               if edge == edges[1]:
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+           if node != nodes[0]:
+               for edge in edges: 
+                   if edge == edges[0]: 
+                       mass_flow = graph._[edge]['mass_flow']
+                       sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                   if edge == edges[1]:
+                       mass_flow = graph._[edge]['mass_flow']
+                       sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
                if edge == edges [2]:
                    mass_flow = graph._[edge]['mass_flow']
                    sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
@@ -162,16 +162,14 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
        if graph._node[node]['node_class'] == 'Pump':
            node = sim.AddObject(ObjectType.Pump, 200, 50, "pump")
            edges = graph.edges(node)
-           for edge in edges: 
-               if edge == edges[0]: 
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-               if edge == edges[1]:
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
-               if edge == edges [2]:
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+           if node != nodes[0]:
+               for edge in edges: 
+                   if edge == edges[0]:
+                           mass_flow = graph._[edge]['mass_flow']
+                           sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                   if edge == edges[1]:
+                           mass_flow = graph._[edge]['mass_flow']
+                           sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
            if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
@@ -194,16 +192,14 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
        if graph._node[node]['node_class'] == 'Compressor':
            node = sim.AddObject(ObjectType.Compressor, 200, 50, "compressor")
            edges = graph.edges(node)
-           for edge in edges: 
-               if edge == edges[0]: 
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-               if edge == edges[1]:
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
-               if edge == edges [2]:
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+           if node != nodes[0]:
+               for edge in edges: 
+                   if edge == edges[0]: 
+                       mass_flow = graph._[edge]['mass_flow']
+                       sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                   if edge == edges[1]:
+                       mass_flow = graph._[edge]['mass_flow']
+                       sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
            if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
@@ -226,13 +222,14 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
        if graph._node[node]['node_class'] == 'CSTR':
            node = sim.AddObject(ObjectType.RCT_CSTR, 100, 50, "CSTR")
            edges = graph.edges(node)
-           for edge in edges: 
-               if edge == edges[0]: 
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-               if edge == edges[1]:
-                   mass_flow = graph._[edge]['mass_flow']
-                   sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+           if node != nodes[0]:
+               for edge in edges: 
+                   if edge == edges[0]: 
+                       mass_flow = graph._[edge]['mass_flow']
+                       sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                   if edge == edges[1]:
+                       mass_flow = graph._[edge]['mass_flow']
+                       sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
            if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
@@ -280,16 +277,14 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
            
        if graph._node[node]['node_class'] == 'PFR':
           edges = graph.edges(node)
-          for edge in edges: 
-              if edge == edges[0]: 
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-              if edge == edges[1]:
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
-              if edge == edges [2]:
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+          if node != nodes[0]:
+              for edge in edges: 
+                  if edge == edges[0]: 
+                      mass_flow = graph._[edge]['mass_flow']
+                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                  if edge == edges[1]:
+                      mass_flow = graph._[edge]['mass_flow']
+                      sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
           if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
@@ -349,15 +344,13 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
           node = sim.AddObject(ObjectType.Cooler, 200, 50, "cooler")
           edges = graph.edges(node)
           for edge in edges: 
-              if edge == edges[0]: 
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-              if edge == edges[1]:
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
-              if edge == edges [2]:
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+              if node != nodes[0]:
+                  if edge == edges[0]: 
+                      mass_flow = graph._[edge]['mass_flow']
+                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                  if edge == edges[1]:
+                      mass_flow = graph._[edge]['mass_flow']
+                      sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
           if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
@@ -377,16 +370,17 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
        if graph._node[node]['node_class'] == 'Heater':
           node = sim.AddObject(ObjectType.Heater, 100, 50, "heater")
           edges = graph.edges(node)
-          for edge in edges: 
-              if edge == edges[0]: 
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-              if edge == edges[1]:
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
-              if edge == edges [2]:
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+          for edge in edges:
+              if node != nodes[0]:
+                  if edge == edges[0]: 
+                      mass_flow = graph._[edge]['mass_flow']
+                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                  if edge == edges[1]:
+                      mass_flow = graph._[edge]['mass_flow']
+                      sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+                  if edge == edges [2]:
+                      mass_flow = graph._[edge]['mass_flow']
+                      sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
           if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
@@ -406,16 +400,14 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
        if graph._node[node]['node_class'] == 'Heat exchanger':
           node = sim.AddObject(ObjectType.HeatExchanger, 100, 50, "heat_exchanger")
           edges = graph.edges(node)
-          for edge in edges: 
-              if edge == edges[0]: 
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-              if edge == edges[1]:
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
-              if edge == edges [2]:
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+          if node != nodes[0]:
+              for edge in edges: 
+                  if edge == edges[0]: 
+                      mass_flow = graph._[edge]['mass_flow']
+                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                  if edge == edges[1]:
+                      mass_flow = graph._[edge]['mass_flow']
+                      sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
           if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
@@ -423,17 +415,22 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
           node.set_Q(graph.nodes[node]['global_heat_transfer'])
            
        if graph._node[node]['node_class'] == 'Heat exchanger, detailed': 
+          node = sim.AddObject(ObjectType.HeatExchanger, 100, 50, "heat_exchanger")
           edges = graph.edges(node)
-          for edge in edges: 
-              if edge == edges[0]: 
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-              if edge == edges[1]:
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
-              if edge == edges [2]:
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+          if node != nodes[0]:
+              for edge in edges: 
+                  if edge == edges[0]: 
+                      mass_flow = graph._[edge]['mass_flow']
+                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                  if edge == edges[1]: 
+                     mass_flow = graph._[edge]['mass_flow']
+                     sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                  if edge == edges[2]:
+                      mass_flow = graph._[edge]['mass_flow']
+                      sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+                  if edge == edges [3]:
+                      mass_flow = graph._[edge]['mass_flow']
+                      sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
           if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
@@ -444,16 +441,17 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
        if graph._node[node]['node_class'] == 'Column':
           node = sim.AddObject(ObjectType.ShortcutColumn, 200, 50, "Column")
           edges = graph.edges(node)
-          for edge in edges: 
-              if edge == edges[0]: 
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-              if edge == edges[1]:
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
-              if edge == edges [2]:
-                  mass_flow = graph._[edge]['mass_flow']
-                  sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+          if node != nodes[0]:
+              for edge in edges: 
+                  if edge == edges[0]: 
+                      mass_flow = graph._[edge]['mass_flow']
+                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                  if edge == edges[1]:
+                          mass_flow = graph._[edge]['mass_flow']
+                          sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+                  if edge == edges [2]:
+                          mass_flow = graph._[edge]['mass_flow']
+                          sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
           if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
@@ -468,15 +466,15 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
           for edge in edges:
               if node != nodes[0]:
                   if edge == edges[0]: 
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-                      if edge == edges[1]:
+                          mass_flow = graph._[edge]['mass_flow']
+                          sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
+                  if edge == edges[1]:
                           mass_flow = graph._[edge]['mass_flow']
                           sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
-                          if edge == edges [2]:
-                              mass_flow = graph._[edge]['mass_flow']
-                              sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
-              if   node == nodes[0]:
+                  if edge == edges [2]:
+                          mass_flow = graph._[edge]['mass_flow']
+                          sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+          if   node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
 
