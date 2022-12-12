@@ -57,21 +57,20 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compoundscompoundflow):
+def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoundscompoundflow):
     a = 0
+    p = 0
     #add compounds    
     for key in compoundscompoundflow:
         sim.AddCompound(key)
         print(key)
         
     #add mass streams
-    mass_list = []
     number_of_mass_flows = 2 + nx.number_of_edges(graph)
     for i in range(number_of_mass_flows):
         globals()['m_{}'.format(i)] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
-        mass_list
-    #add energy streams
         
+    #add energy streams    
     nodes = list(graph.nodes)
     for node in nodes:
 
@@ -90,7 +89,7 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
         if graph._node[node]['node_class'] == 'pump':
             a = a+1
     for i in range(a):
-        globals()['e_{}'.format(i)] = sim.AddObject(ObjectType.EnergyStream, 50, 50, "inlet")
+        globals()['e_{}'.format(i)] = sim.AddObject(ObjectType.EnergyStream, 50, 50, "energy")
 # Peng Robinson Property Package
 
     stables = PropertyPackages.PengRobinsonPropertyPackage()
@@ -173,6 +172,8 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
            if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
+           energy = graph._[node]['energy_stream']
+           sim.ConnectObjects(energy.GraphicObject, node.GraphicObject, -1, -1)
            if graph._node[node]['outlet_pressure']!= 0:
                node.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
                node.set_Pout(graph.nodes[node]['outlet_pressure']) # pa
@@ -203,19 +204,21 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
            if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
-           if graph._node[node][node]!= 0:
+           energy = graph._[node]['energy_stream']
+           sim.ConnectObjects(energy.GraphicObject, node.GraphicObject, -1, -1)
+           if graph._node[node]['outlet_pressure']!= 0:
                node.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
                node.set_Pout(graph.nodes[node]['outlet_pressure']) # pa
                               
-           if graph._node[node][node]!= 0:
+           if graph._node[node]['power_required']!= 0:
                node.CalcMode = UnitOperations.Pump.CalculationMode.Power 
                node.PowerRequired(graph.nodes[node]['power_required'])
                    
-           if graph._node[node][node]!= 0:
+           if graph._node[node]['energy_stream']!= 0:
                node.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
                node.set_EnergyFlow(graph.nodes[node]['energy_stream'])
                
-           if graph._node[node][node]!= 0:
+           if graph._node[node]['pressure_increase']!= 0:
                node.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
                node.set_DeltaP(graph.nodes[node]['pressure_increase'])
                
@@ -233,6 +236,8 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
            if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
+           energy = graph._[node]['energy_stream']
+           sim.ConnectObjects(energy.GraphicObject, node.GraphicObject, -1, -1)
            # stoichiometric coefficients
            
            comps = graph.nodes[node]['stochiometry']
@@ -289,6 +294,8 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
           node = sim.AddObject(ObjectType.RCT_PFR, 100, 50, "PFR")
+          energy = graph._[node]['energy_stream']
+          sim.ConnectObjects(energy.GraphicObject, node.GraphicObject, -1, -1)
            # stoichiometric coefficients        
           comps = graph.nodes[node]['stochiometry']
           comps1 = Dictionary[str, float]()
@@ -354,6 +361,8 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
           if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
+          energy = graph._[node]['energy_stream']
+          sim.ConnectObjects(node.GraphicObject, energy.GraphicObject, -1, -1)
             #set cooler operation mode
           if graph.nodes[node]['heat_removed']!= 0:
                 node.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
@@ -384,6 +393,8 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
           if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
+          energy = graph._[node]['energy_stream']
+          sim.ConnectObjects(energy.GraphicObject, node.GraphicObject, -1, -1)
             #set heater operation mode
           if graph.nodes[node]['heat_added']!= 0:
                 node.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
@@ -455,6 +466,10 @@ def startsimulatinfromgraphml(graph, inlet_temperature, inlet_pressure, compound
           if node == nodes[0]:
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
                sim.ConnectObjects(node.GraphicObject, m_1.GraphicObject, -1, -1)
+          energy = graph._[node]['energy_stream1']
+          sim.ConnectObjects(energy.GraphicObject, node.GraphicObject, -1, -1)
+          energy = graph._[node]['energy_stream2']
+          sim.ConnectObjects(node.GraphicObject, energy.GraphicObject, -1, -1)
           node.m_lightkey =graph.nodes[node]['light_key_compound']
           node.m_heavykey =graph.nodes[node]['heavy_key_compound'] 
           node.m_heavykeymolarfrac =graph.nodes[node]['hk_mole_fraction_in_distillate']
