@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d5" for="edge" attr.name="edge_sub_class" attr.type="string"/>
+<key id="d4" for="edge" attr.name="edge_class" attr.type="string"/>
+<key id="d3" for="node" attr.name="node_class" attr.type="string"/>
+<key id="d2" for="node" attr.name="node_y" attr.type="double"/>
+<key id="d1" for="node" attr.name="node_x" attr.type="double"/>
+<key id="d0" for="node" attr.name="node_group" attr.type="string"/>
+<graph edgedefault="directed"><node id="CO61">
+  <data key="d0">Column</data>
+  <data key="d1">182.49999999999991</data>
+  <data key="d2">316.25000000000017</data>
+  <data key="d3">Column</data>
+</node>
+<node id="HE9">
+  <data key="d0">Heat exchanger</data>
+  <data key="d1">275.00000000000006</data>
+  <data key="d2">521.2500000000001</data>
+  <data key="d3">Heat exchanger, detailed</data>
+</node>
+<node id="HE139">
+  <data key="d0">Heat exchanger</data>
+  <data key="d1">115.00000000000007</data>
+  <data key="d2">160.00000000000023</data>
+  <data key="d3">Heat exchanger, detailed</data>
+</node>
+<node id="PL152">
+  <data key="d0">Pump</data>
+  <data key="d1">217.50000000000006</data>
+  <data key="d2">132.50000000000009</data>
+  <data key="d3">Fluid pump</data>
+</node>
+<node id="HE75">
+  <data key="d0">Heat exchanger</data>
+  <data key="d1">299.99999999999994</data>
+  <data key="d2">279.9999999999999</data>
+  <data key="d3">Heat exchanger, detailed</data>
+</node>
+<node id="HE37">
+  <data key="d0">Heat exchanger</data>
+  <data key="d1">384.2500000000002</data>
+  <data key="d2">361.25000000000006</data>
+  <data key="d3">Heat exchanger, detailed</data>
+</node>
+<node id="VE109">
+  <data key="d0">Vessel</data>
+  <data key="d1">432.5000000000003</data>
+  <data key="d2">200.00000000000009</data>
+  <data key="d3">Vessel</data>
+</node>
+<node id="VE110">
+  <data key="d0">Vessel</data>
+  <data key="d1">520.0000000000002</data>
+  <data key="d2">200.00000000000009</data>
+  <data key="d3">Vessel</data>
+</node>
+<node id="PL134">
+  <data key="d0">Pump</data>
+  <data key="d1">600.0000063508533</data>
+  <data key="d2">167.5000000000001</data>
+  <data key="d3">Fluid pump</data>
+</node>
+<node id="VE155">
+  <data key="d0">Vessel</data>
+  <data key="d1">357.5</data>
+  <data key="d2">119.99999999999999</data>
+  <data key="d3">Vessel</data>
+</node>
+<node id="HE22">
+  <data key="d0">Heat exchanger</data>
+  <data key="d1">275.00000000000006</data>
+  <data key="d2">453.75000000000006</data>
+  <data key="d3">Heat exchanger, detailed</data>
+</node>
+<node id="VE114">
+  <data key="d0">Vessel</data>
+  <data key="d1">357.5000000000003</data>
+  <data key="d2">198.74999999999983</data>
+  <data key="d3">Silo</data>
+</node>
+<edge source="CO61" target="HE139">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="CO61" target="PL152">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="CO61" target="HE22">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="HE9" target="CO61">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="HE9" target="HE37">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="HE139" target="CO61">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="PL152" target="CO61">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="PL152" target="HE75">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="HE75" target="VE114">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="HE37" target="VE109">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="HE37" target="VE110">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="VE109" target="PL134">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="VE110" target="PL134">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="HE22" target="CO61">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="HE22" target="HE9">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="HE22" target="HE37">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+<edge source="VE114" target="VE155">
+  <data key="d4">Piping</data>
+  <data key="d5">Main pipe</data>
+</edge>
+</graph></graphml>

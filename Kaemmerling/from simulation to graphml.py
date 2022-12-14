@@ -338,6 +338,7 @@ for grop in wanted_list:
     dict2 = {'node_class':g._node[grop]['node_class']}
     clas= {grop:dict2}
     nx.set_node_attributes(f,clas)
+nx.write_graphml(f,'./Output/graphs_graphml/clean/graphml_pfd2')
 for unitoperation in wanted_list:
     if  f._node[unitoperation]['node_class'] == 'Column':
         inlet_temperature = m1.GetTemperature()

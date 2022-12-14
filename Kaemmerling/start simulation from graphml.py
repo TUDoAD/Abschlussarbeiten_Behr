@@ -11,7 +11,6 @@ else:
     print("File is deleted successfully")
 
 
-
 import pythoncom
 pythoncom.CoInitialize()
 
@@ -61,7 +60,7 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
     a = 0
     p = 0
     b = graph.number_of_nodes()
-    
+
     
     #add compounds    
     for key in compoundscompoundflow:
@@ -674,4 +673,4 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
     im.show()
 
 
-
+f = nx.read_graphml('./Output/graphs_graphml/clean/graphml_pfd')
