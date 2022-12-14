@@ -1,5 +1,5 @@
 import networkx as nx
-f = nx.read_graphml('./Output/graphs_graphml/clean/graphml_pfd')
+f = nx.read_graphml('./Output/graphs_graphml/clean/graphml_pfd2')
 nodes = list(f.nodes)
 for unitoperation in nodes:
     if  f._node[unitoperation]['node_class'] == 'Column':
@@ -28,4 +28,6 @@ for unitoperation in nodes:
             dict1 = {'tank_volume':'100.0'}
             group= {unitoperation:dict1}
             nx.set_node_attributes(f,group)
+            
+nx.write_graphml(f,'./Output/graphs_graphml/clean/graphml_pfd3')
 

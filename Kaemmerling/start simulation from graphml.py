@@ -60,7 +60,6 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
     a = 0
     p = 0
     b = graph.number_of_nodes()
-
     
     #add compounds    
     for key in compoundscompoundflow:
@@ -538,10 +537,10 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
                   if edge == edges[2]:
                       mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+                      sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
                   if edge == edges [3]:
                       mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+                      sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
           if node == nodes[0]:
                m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
@@ -570,10 +569,10 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
                       sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
                   if edge == edges[1]:
                           mass_flow = graph._[edge]['mass_flow']
-                          sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+                          sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
                   if edge == edges [2]:
                           mass_flow = graph._[edge]['mass_flow']
-                          sim.ConnectObjects(node.GraphicObject, node.GraphicObject, -1, -1)
+                          sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
           if node == nodes[0]:
                m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
@@ -673,4 +672,4 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
     im.show()
 
 
-f = nx.read_graphml('./Output/graphs_graphml/clean/graphml_pfd')
+f = nx.read_graphml('./Output/graphs_graphml/clean/graphml_pfd3')
