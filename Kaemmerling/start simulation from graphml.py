@@ -65,14 +65,17 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
     for key in compoundscompoundflow:
         sim.AddCompound(key)
         print(key)
-        
+    nodes = list(graph.nodes)    
     #add mass streams
     number_of_mass_flows = nx.number_of_edges(graph)
     for i in range(number_of_mass_flows):
-        globals()['m_{}'.format(i)] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
-        
+        edges = graph.edges()
+        for edge in edges:
+            globals()['m_{}'.format(i)] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
+            dict1 = {'mass_stream':m_i}
+            group= {edge:dict1}
+            nx.set_edge_attributes(f,group)
     #add energy streams    
-    nodes = list(graph.nodes)
     for node in nodes:
 
         if graph._node[node]['node_class'] == 'Column':
@@ -90,7 +93,11 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
         if graph._node[node]['node_class'] == 'Pump':
             a = a+1
     for i in range(a):
-        globals()['e_{}'.format(i)] = sim.AddObject(ObjectType.EnergyStream, 50, 50, "energy")
+        for node in nodes:
+            globals()['e_{}'.format(i)] = sim.AddObject(ObjectType.EnergyStream, 50, 50, "energy")
+            dict1 = {'energy_stream':e_i}
+            group= {node:dict1}
+            nx.set_edge_attributes(f,group)
 # Peng Robinson Property Package
 
     stables = PropertyPackages.PengRobinsonPropertyPackage()

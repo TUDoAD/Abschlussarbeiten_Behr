@@ -60,16 +60,19 @@ sim.SelectedCompounds.Add(water.Name, water)
 
 m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
 m2 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet")
-m3 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet2")
 e1 = sim.AddObject(ObjectType.EnergyStream, 100, 50, "power")
 p1 = sim.AddObject(ObjectType.Pump, 100, 50, "pump")
-t1 = sim.AddObject(ObjectType.Tank, 100, 50, "tank")
-
 sim.ConnectObjects(m1.GraphicObject, p1.GraphicObject, -1, -1)
-sim.ConnectObjects(m2.GraphicObject, t1.GraphicObject, -1, -1)
 sim.ConnectObjects(p1.GraphicObject, m2.GraphicObject, -1, -1)
-sim.ConnectObjects(t1.GraphicObject, m3.GraphicObject, -1, -1)
 sim.ConnectObjects(e1.GraphicObject, p1.GraphicObject, -1, -1)
+p1.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure
+p1.set_Pout(500000)
+
+m3 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet2")
+t1 = sim.AddObject(ObjectType.Tank, 100, 50, "tank")
+sim.ConnectObjects(m2.GraphicObject, t1.GraphicObject, -1, -1)
+sim.ConnectObjects(t1.GraphicObject, m3.GraphicObject, -1, -1)
+
 
 sim.AutoLayout()
 
@@ -85,13 +88,6 @@ sim.AddPropertyPackage(stables)
 m1.SetTemperature(293.15) # K
 m1.SetMassFlow(1.0) # kg/s
 
-# set Pressure Increase
-
-
-p1.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure
-p1.set_Pout(500000)
-t1.CalcMode = UnitOperations.Tank.set_Volume
-t1.set_Volume(1000) #m^3
 
 
 # request a calculation
