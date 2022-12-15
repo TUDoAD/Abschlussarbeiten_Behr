@@ -58,7 +58,7 @@ sim = interf.CreateFlowsheet()
 
 def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoundscompoundflow):
     a = 0
-    p = 0
+    p = graph.number_of_edges()+2
     b = graph.number_of_nodes()
     
     #add compounds    
@@ -67,14 +67,14 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
         print(key)
     nodes = list(graph.nodes)    
     #add mass streams
-    number_of_mass_flows = nx.number_of_edges(graph)
-    for i in range(number_of_mass_flows):
-        edges = graph.edges()
-        for edge in edges:
-            globals()['m_{}'.format(i)] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
-            dict1 = {'mass_stream':m_i}
-            group= {edge:dict1}
-            nx.set_edge_attributes(f,group)
+   # number_of_mass_flows = nx.number_of_edges(graph)
+   # for i in range(number_of_mass_flows):
+    #    edges = graph.edges()
+     #   for edge in edges:
+      #      globals()['m_{}'.format(i)] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
+       #     dict1 = {'mass_stream':m_i}
+        #    group= {edge:dict1}
+         #   nx.set_edge_attributes(f,group)
     #add energy streams    
     for node in nodes:
 
@@ -92,12 +92,23 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
             a = a+1
         if graph._node[node]['node_class'] == 'Pump':
             a = a+1
-    for i in range(a):
-        for node in nodes:
-            globals()['e_{}'.format(i)] = sim.AddObject(ObjectType.EnergyStream, 50, 50, "energy")
-            dict1 = {'energy_stream':e_i}
-            group= {node:dict1}
-            nx.set_edge_attributes(f,group)
+        
+        mass_streams = {}
+        for i in range(p):
+            if i != 0:
+                if i != p:
+                    mass_streams["m%s" % i] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                
+        energy_streams = {}
+        for i in range(a):
+                energy_streams["e%s" % i] = sim.AddObject(ObjectType.EnergyStream, 50, 50, "energy_stream")
+                
+   # for i in range(a):
+    #    for node in nodes:
+     #       globals()['e_{}'.format(i)] = sim.AddObject(ObjectType.EnergyStream, 50, 50, "energy")
+      #      dict1 = {'energy_stream':e_i}
+       #     group= {node:dict1}
+        #    nx.set_edge_attributes(f,group)
 # Peng Robinson Property Package
 
     stables = PropertyPackages.PengRobinsonPropertyPackage()
@@ -679,4 +690,5 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
     im.show()
 
 
-f = nx.read_graphml('./Output/graphs_graphml/clean/graphml_pfd3')
+graph = nx.read_graphml('C:/Users/Lucky Luciano/Documents/GitHub/Abschlussarbeiten_Behr/Kaemmerling/Output/graphs_graphml/clean/graphml_pfd3')
+startsimulatingfromgraphml(graph, 298.15, 100000, {"Water" : 0.5,'Ethanol' : 0.5})
