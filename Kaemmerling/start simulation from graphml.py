@@ -60,7 +60,7 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
     a = 0
     p = graph.number_of_edges()+2
     b = graph.number_of_nodes()
-    edges = graph._edges
+    edges = graph.edges
     
     #add compounds    
     for key in compoundscompoundflow:
