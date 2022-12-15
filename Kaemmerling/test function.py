@@ -59,6 +59,7 @@ sim.SelectedCompounds.Add(water.Name, water)
 # create and connect objects
 
 m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
+m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
 m2 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet")
 e1 = sim.AddObject(ObjectType.EnergyStream, 100, 50, "power")
 p1 = sim.AddObject(ObjectType.Pump, 100, 50, "pump")

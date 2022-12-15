@@ -11,3 +11,6 @@ for i in range(5):
         bla["variable%s" % i] = i
 
 print (bla)
+
+for x in bla:
+    bla[x] = 

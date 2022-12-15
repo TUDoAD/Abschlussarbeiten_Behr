@@ -60,6 +60,7 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
     a = 0
     p = graph.number_of_edges()+2
     b = graph.number_of_nodes()
+    edges = graph._edges
     
     #add compounds    
     for key in compoundscompoundflow:
@@ -97,11 +98,13 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
         for i in range(p):
             if i != 0:
                 if i != p:
-                    mass_streams["m%s" % i] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                    mass_streams["m%s" % i] = mass_streams["m%s" % i]
+            #for x in mass_streams:
+             #   mass_streams[x] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
                 
         energy_streams = {}
         for i in range(a):
-                energy_streams["e%s" % i] = sim.AddObject(ObjectType.EnergyStream, 50, 50, "energy_stream")
+                energy_streams["e%s" % i] = energy_streams["e%s" % i]
                 
    # for i in range(a):
     #    for node in nodes:
@@ -118,27 +121,35 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
     for node in nodes:
        if graph._node[node]['node_class'] == 'Vessel':
            node = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
-           edges = graph.edges(node)
            if node != nodes[0]:
-               for edge in edges: 
-                   if edge == edges[0]: 
-                       mass_flow = graph._[edge]['mass_flow']
-                       sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-                   if edge == edges[1]:
-                       mass_flow = graph._[edge]['mass_flow']
-                       sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1) 
+               in_nodes = graph.in_edges(node)
+               for edge in in_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+               out_nodes = graph.out_edges(node)
+               for edge in out_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
            if node == nodes[0]:
                m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
-               mass_flow = graph._[edge]['mass_flow']
-               sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
-               # set inlet stream conditions
+               for edge in out_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
+                # set inlet stream conditions
                m_0.SetTemperature(inlet_temperature) # K 
                m_0.SetPressure(inlet_pressure) # Pa 
                for key in compoundscompoundflow:
-                      print(compoundscompoundflow[key])  
-                      m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+                       print(compoundscompoundflow[key])  
+                       m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
            if node == nodes[b]:
+               for edge in in_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
                m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
                sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
            node.CalcMode = UnitOperations.Tank.set_Volume
@@ -172,59 +183,73 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
            node.set_Volume(graph.nodes[node]['tank_volume']) #m^3
        if graph._node[node]['node_class'] == 'Silo':
            node = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
-           edges = graph.edges(node)
            if node != nodes[0]:
-               for edge in edges: 
-                   if edge == edges[0]: 
-                       mass_flow = graph._[edge]['mass_flow']
-                       sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-                   if edge == edges[1]:
-                       mass_flow = graph._[edge]['mass_flow']
-                       sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
+               in_nodes = graph.in_edges(node)
+               for edge in in_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+               out_nodes = graph.out_edges(node)
+               for edge in out_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
            if node == nodes[0]:
                m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
-               # set inlet stream conditions
+               for edge in out_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
+                # set inlet stream conditions
                m_0.SetTemperature(inlet_temperature) # K 
                m_0.SetPressure(inlet_pressure) # Pa 
                for key in compoundscompoundflow:
-                      print(compoundscompoundflow[key])  
-                      m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
-               mass_flow = graph._[edge]['mass_flow']
-               sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
+                       print(compoundscompoundflow[key])  
+                       m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
            if node == nodes[b]:
-                   m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
-                   sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
+               for edge in in_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+               m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
+               sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
            node.CalcMode = UnitOperations.Tank.set_Volume
            node.set_Volume(graph.nodes[node]['tank_volume']) #m^3
            
        if graph._node[node]['node_class'] == 'Pump':
            node = sim.AddObject(ObjectType.Pump, 200, 50, "pump")
-           edges = graph.edges(node)
            if node != nodes[0]:
-               for edge in edges: 
-                   if edge == edges[0]:
-                           mass_flow = graph._[edge]['mass_flow']
-                           sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-                   if edge == edges[1]:
-                           mass_flow = graph._[edge]['mass_flow']
-                           sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
+               in_nodes = graph.in_edges(node)
+               for edge in in_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+               out_nodes = graph.out_edges(node)
+               for edge in out_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
            if node == nodes[0]:
                m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
-               # set inlet stream conditions
+               for edge in out_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
+                # set inlet stream conditions
                m_0.SetTemperature(inlet_temperature) # K 
                m_0.SetPressure(inlet_pressure) # Pa 
                for key in compoundscompoundflow:
-                      print(compoundscompoundflow[key])  
-                      m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
+                       print(compoundscompoundflow[key])  
+                       m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
            if node == nodes[b]:
-                   m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
-                   sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
-           energy = graph._[node]['energy_stream']
-           sim.ConnectObjects(energy.GraphicObject, node.GraphicObject, -1, -1)
+               for edge in in_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+               m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
+               sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
            if graph._node[node]['outlet_pressure']!= 0:
                node.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure 
                node.set_Pout(graph.nodes[node]['outlet_pressure']) # pa
@@ -286,29 +311,37 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
                
        if graph._node[node]['node_class'] == 'CSTR':
            node = sim.AddObject(ObjectType.RCT_CSTR, 100, 50, "CSTR")
-           edges = graph.edges(node)
            if node != nodes[0]:
-               for edge in edges: 
-                   if edge == edges[0]: 
-                       mass_flow = graph._[edge]['mass_flow']
-                       sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-                   if edge == edges[1]:
-                       mass_flow = graph._[edge]['mass_flow']
-                       sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
+               in_nodes = graph.in_edges(node)
+               for edge in in_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+               out_nodes = graph.out_edges(node)
+               for edge in out_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
            if node == nodes[0]:
                m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
-               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
-               mass_flow = graph._[edge]['mass_flow']
-               # set inlet stream conditions
+               for edge in out_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
+                # set inlet stream conditions
                m_0.SetTemperature(inlet_temperature) # K 
                m_0.SetPressure(inlet_pressure) # Pa 
                for key in compoundscompoundflow:
-                      print(compoundscompoundflow[key])  
-                      m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+                       print(compoundscompoundflow[key])  
+                       m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
            if node == nodes[b]:
-                   m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
-                   sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
+               for edge in in_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+               m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
+               sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
            energy = graph._[node]['energy_stream']
            sim.ConnectObjects(energy.GraphicObject, node.GraphicObject, -1, -1)
            # stoichiometric coefficients
@@ -354,257 +387,208 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
            node.Volume = graph.nodes[node]['reactor_volume'] #m^3  
            
        if graph._node[node]['node_class'] == 'PFR':
-          edges = graph.edges(node)
-          if node != nodes[0]:
-              for edge in edges: 
-                  if edge == edges[0]: 
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-                  if edge == edges[1]:
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
-          if node == nodes[0]:
+           node = sim.AddObject(ObjectType.RCT_PFR, 200, 50, "PFR")
+           for edge in in_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+           out_nodes = graph.out_edges(node)
+           for edge in out_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
+           if node == nodes[0]:
                m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
                sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
-               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
-               mass_flow = graph._[edge]['mass_flow']
-               # set inlet stream conditions
+               for edge in out_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
+                # set inlet stream conditions
                m_0.SetTemperature(inlet_temperature) # K 
                m_0.SetPressure(inlet_pressure) # Pa 
                for key in compoundscompoundflow:
-                      print(compoundscompoundflow[key])  
-                      m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
-          if node == nodes[b]:
-                   m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
-                   sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
-          node = sim.AddObject(ObjectType.RCT_PFR, 100, 50, "PFR")
-          energy = graph._[node]['energy_stream']
-          sim.ConnectObjects(energy.GraphicObject, node.GraphicObject, -1, -1)
+                       print(compoundscompoundflow[key])  
+                       m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+           if node == nodes[b]:
+               for edge in in_nodes:
+                   index = edges.index(edge)
+                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                   sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+               m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
+               sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
+           energy = graph._[node]['energy_stream']
+           sim.ConnectObjects(energy.GraphicObject, node.GraphicObject, -1, -1)
            # stoichiometric coefficients        
-          comps = graph.nodes[node]['stochiometry']
-          comps1 = Dictionary[str, float]()
-          for key1 in comps:  
+           comps = graph.nodes[node]['stochiometry']
+           comps1 = Dictionary[str, float]()
+           for key1 in comps:  
                value = comps[key1]
                comps1.Add(key1, value);
 
            # direct order coefficients        
-          dorders = graph.nodes[node]['direct_order']
-          dorders1 = Dictionary[str, float]()
-          for key2 in dorders:  
+           dorders = graph.nodes[node]['direct_order']
+           dorders1 = Dictionary[str, float]()
+           for key2 in dorders:  
                value = dorders[key2]
                dorders1.Add(key2, value);
                
            # reverse order coefficients       
-          rorders = graph.nodes[node]['reverse_order']
-          rorders1 = Dictionary[str, float]()
-          for key3 in rorders:  
+           rorders = graph.nodes[node]['reverse_order']
+           rorders1 = Dictionary[str, float]()
+           for key3 in rorders:  
                value = rorders[key3]
                rorders1.Add(key3, value);
 
-          kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetate", 
+           kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetate", 
                        comps1, dorders1, rorders1, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", graph.nodes[node]['arrhenius_parameter'], 0.0, 0.0, 0.0, "", "")
               
-          sim.AddReaction(kr1)
-          sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
+           sim.AddReaction(kr1)
+           sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
        
 #set pfr operation mode
 
-          if graph.nodes[node]['isothermic']!= 0:
+           if graph.nodes[node]['isothermic']!= 0:
                node.ReactorOperationMode = Reactors.OperationMode.Isothermic
         
-          if graph.nodes[node]['adiabatic']!= 0:
+           if graph.nodes[node]['adiabatic']!= 0:
                node.CalcMode = UnitOperations.RCT_PFR.CalculationMode.Power 
                node.ReactorOperationMode = Reactors.OperationMode.Adiabatic
             
-          if graph.nodes[node]['outlet_temperature']!= 0:
+           if graph.nodes[node]['outlet_temperature']!= 0:
                node.CalcMode = UnitOperations.RCT_PFR.CalculationMode.EnergyStream
                node.ReactorOperationMode = Reactors.OperationMode.OutletTemperature
         
-          if graph.nodes[node]['reactor_diameter']!= 0:
+           if graph.nodes[node]['reactor_diameter']!= 0:
                node.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Diameter
                node.Diameter = graph.nodes[node]['reactor_diameter'] #m
         
-          if graph.nodes[node]['reactor_length']!= 0:
+           if graph.nodes[node]['reactor_length']!= 0:
                node.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length
                node.Length = graph.nodes[node]['reactor_length']  #m
     
     
-          node.Volume = graph.nodes[node]['reactor_volume'] #m^3
-           
-       if graph._node[node]['node_class'] == 'Cooler':
-          node = sim.AddObject(ObjectType.Cooler, 200, 50, "cooler")
-          edges = graph.edges(node)
-          for edge in edges: 
-              if node != nodes[0]:
-                  if edge == edges[0]: 
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-                  if edge == edges[1]:
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
-          if node == nodes[0]:
-               m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
-               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
-               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
-               mass_flow = graph._[edge]['mass_flow']
-               # set inlet stream conditions
-               m_0.SetTemperature(inlet_temperature) # K 
-               m_0.SetPressure(inlet_pressure) # Pa 
-               for key in compoundscompoundflow:
-                      print(compoundscompoundflow[key])  
-                      m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
-          if node == nodes[b]:
-                   m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
-                   sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
-          energy = graph._[node]['energy_stream']
-          sim.ConnectObjects(node.GraphicObject, energy.GraphicObject, -1, -1)
+           node.Volume = graph.nodes[node]['reactor_volume'] #m^3
+           energy = graph._[node]['energy_stream']
+           sim.ConnectObjects(node.GraphicObject, energy.GraphicObject, -1, -1)
             #set cooler operation mode
-          if graph.nodes[node]['heat_removed']!= 0:
+           if graph.nodes[node]['heat_removed']!= 0:
                 node.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
                 node.set_DeltaQ(nodes[node]['heat_removed']) # j
             
-          if nodes[node]['outlet_temperature']!= 0:
+           if nodes[node]['outlet_temperature']!= 0:
                 node.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
                 node.OutletTemperature = nodes[node]['outlet_temperature'] # k
             
-          if nodes[node]['deltat']!= 0:
+           if nodes[node]['deltat']!= 0:
                 node.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
                 node.set_DeltaT(nodes[node]['deltat']) # k
            
        if graph._node[node]['node_class'] == 'Heater':
           node = sim.AddObject(ObjectType.Heater, 100, 50, "heater")
-          edges = graph.edges(node)
-          for edge in edges:
-              if node != nodes[0]:
-                  if edge == edges[0]: 
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-                  if edge == edges[1]:
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
-                  if edge == edges [2]:
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
-          if node == nodes[0]:
-               m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
-               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
-               mass_flow = graph._[edge]['mass_flow']
-               sim.ConnectObjects(edge.GraphicObject, mass_flow.GraphicObject, -1, -1)
-               # set inlet stream conditions
-               m_0.SetTemperature(inlet_temperature) # K 
-               m_0.SetPressure(inlet_pressure) # Pa 
-               for key in compoundscompoundflow:
-                      print(compoundscompoundflow[key])  
-                      m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
-          if node == nodes[b]:
-                   m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
-                   sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
-          energy = graph._[node]['energy_stream']
-          sim.ConnectObjects(energy.GraphicObject, node.GraphicObject, -1, -1)
-            #set heater operation mode
-          if graph.nodes[node]['heat_added']!= 0:
-                node.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
-                node.set_DeltaQ(nodes[node]['heat_added']) # j
-            
-          if nodes[node]['outlet_temperature']!= 0:
-                node.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature 
-                node.OutletTemperature = nodes[node]['outlet_temperature'] # k
-            
-          if nodes[node]['deltat']!= 0:
-                node.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
-                node.set_DeltaT(nodes[node]['deltat']) # k
-           
-       if graph._node[node]['node_class'] == 'Heat exchanger':
-          node = sim.AddObject(ObjectType.HeatExchanger, 100, 50, "heat_exchanger")
-          edges = graph.edges(node)
           if node != nodes[0]:
-              for edge in edges: 
-                  if edge == edges[0]: 
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-                  if edge == edges[1]:
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
+                 in_nodes = graph.in_edges(node)
+                 for edge in in_nodes:
+                     index = edges.index(edge)
+                     mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                     sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+                     out_nodes = graph.out_edges(node)
+                 for edge in out_nodes:
+                         index = edges.index(edge)
+                         mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                         sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
           if node == nodes[0]:
-               m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
-               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
-               mass_flow = graph._[edge]['mass_flow']
-               sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
-               # set inlet stream conditions
-               m_0.SetTemperature(inlet_temperature) # K 
-               m_0.SetPressure(inlet_pressure) # Pa 
-               for key in compoundscompoundflow:
-                      print(compoundscompoundflow[key])  
-                      m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+              m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
+              sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+              for edge in out_nodes:
+                  index = edges.index(edge)
+                  mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                  sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
+                  # set inlet stream conditions
+              m_0.SetTemperature(inlet_temperature) # K 
+              m_0.SetPressure(inlet_pressure) # Pa 
+              for key in compoundscompoundflow:
+                  print(compoundscompoundflow[key])  
+                  m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
           if node == nodes[b]:
-                   m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
-                   sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
-          node.set_Area(graph.nodes[node]['heat_exchange_area'])
-          node.set_Q(graph.nodes[node]['global_heat_transfer'])
+              for edge in in_nodes:
+                  index = edges.index(edge)
+                  mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                  sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+                  m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
+                  sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
+                  node.set_Area(graph.nodes[node]['heat_exchange_area'])
+                  node.set_Q(graph.nodes[node]['global_heat_transfer'])
            
        if graph._node[node]['node_class'] == 'Heat exchanger, detailed': 
           node = sim.AddObject(ObjectType.HeatExchanger, 100, 50, "heat_exchanger")
-          edges = graph.edges(node)
           if node != nodes[0]:
-              for edge in edges: 
-                  if edge == edges[0]: 
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-                  if edge == edges[1]: 
-                     mass_flow = graph._[edge]['mass_flow']
-                     sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-                  if edge == edges[2]:
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
-                  if edge == edges [3]:
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
+              in_nodes = graph.in_edges(node)
+              for edge in in_nodes:
+                  index = edges.index(edge)
+                  mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                  sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+              out_nodes = graph.out_edges(node)
+              for edge in out_nodes:
+                  index = edges.index(edge)
+                  mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                  sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
           if node == nodes[0]:
-               m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
-               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
-               mass_flow = graph._[edge]['mass_flow']
-               sim.ConnectObjects(edge.GraphicObject, mass_flow.GraphicObject, -1, -1)
+              m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
+              sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+              for edge in out_nodes:
+                  index = edges.index(edge)
+                  mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                  sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
                # set inlet stream conditions
-               m_0.SetTemperature(inlet_temperature) # K 
-               m_0.SetPressure(inlet_pressure) # Pa 
-               for key in compoundscompoundflow:
+              m_0.SetTemperature(inlet_temperature) # K 
+              m_0.SetPressure(inlet_pressure) # Pa 
+              for key in compoundscompoundflow:
                       print(compoundscompoundflow[key])  
                       m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
           if node == nodes[b]:
-                   m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
-                   sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
-          node = sim.AddObject(ObjectType.HeatExchanger, 100, 50, "heat_exchanger")
+              for edge in in_nodes:
+                  index = edges.index(edge)
+                  mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                  sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+              m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
+              sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
           node.set_Area(graph.nodes[node]['heat_exchange_area'])
           node.set_Q(graph.nodes[node]['global_heat_transfer'])
           
        if graph._node[node]['node_class'] == 'Column':
           node = sim.AddObject(ObjectType.ShortcutColumn, 200, 50, "Column")
-          edges = graph.edges(node)
           if node != nodes[0]:
-              for edge in edges: 
-                  if edge == edges[0]: 
-                      mass_flow = graph._[edge]['mass_flow']
-                      sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-                  if edge == edges[1]:
-                          mass_flow = graph._[edge]['mass_flow']
-                          sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
-                  if edge == edges [2]:
-                          mass_flow = graph._[edge]['mass_flow']
-                          sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
+              in_nodes = graph.in_edges(node)
+              for edge in in_nodes:
+                  index = edges.index(edge)
+                  mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                  sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+              out_nodes = graph.out_edges(node)
+              for edge in out_nodes:
+                  index = edges.index(edge)
+                  mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                  sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
           if node == nodes[0]:
-               m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
-               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
-               mass_flow = graph._[edge]['mass_flow']
-               sim.ConnectObjects(edge.GraphicObject, mass_flow.GraphicObject, -1, -1)
+              m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
+              sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+              for edge in out_nodes:
+                  index = edges.index(edge)
+                  mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                  sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
                # set inlet stream conditions
-               m_0.SetTemperature(inlet_temperature) # K 
-               m_0.SetPressure(inlet_pressure) # Pa 
-               for key in compoundscompoundflow:
+              m_0.SetTemperature(inlet_temperature) # K 
+              m_0.SetPressure(inlet_pressure) # Pa 
+              for key in compoundscompoundflow:
                       print(compoundscompoundflow[key])  
                       m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
           if node == nodes[b]:
-                   m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
-                   sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
+              for edge in in_nodes:
+                  index = edges.index(edge)
+                  mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                  sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+              m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
+              sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
           energy = graph._[node]['energy_stream1']
           sim.ConnectObjects(energy.GraphicObject, node.GraphicObject, -1, -1)
           energy = graph._[node]['energy_stream2']
@@ -616,33 +600,37 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
           node.m_refluxratio =graph.nodes[node]['reflux_ratio']
        if graph._node[node]['node_class'] == 'Separator':
           node = sim.AddObject(ObjectType.Vessel, 200, 50, "separator")
-          edges = graph.edges(node)
-          for edge in edges:
-              if node != nodes[0]:
-                  if edge == edges[0]: 
-                          mass_flow = graph._[edge]['mass_flow']
-                          sim.ConnectObjects(mass_flow.GraphicObject, node.GraphicObject, -1, -1)
-                  if edge == edges[1]:
-                          mass_flow = graph._[edge]['mass_flow']
-                          sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
-                  if edge == edges [2]:
-                          mass_flow = graph._[edge]['mass_flow']
-                          sim.ConnectObjects(node.GraphicObject, mass_flow.GraphicObject, -1, -1)
-          if   node == nodes[0]:
-               m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
-               sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
-               mass_flow = graph._[edge]['mass_flow']
-               sim.ConnectObjects(edge.GraphicObject, mass_flow.GraphicObject, -1, -1)
+          if node != nodes[0]:
+              in_nodes = graph.in_edges(node)
+              for edge in in_nodes:
+                  index = edges.index(edge)
+                  mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                  sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+              out_nodes = graph.out_edges(node)
+              for edge in out_nodes:
+                  index = edges.index(edge)
+                  mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                  sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
+          if node == nodes[0]:
+              m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
+              sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+              for edge in out_nodes:
+                  index = edges.index(edge)
+                  mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                  sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
                # set inlet stream conditions
-               m_0.SetTemperature(inlet_temperature) # K 
-               m_0.SetPressure(inlet_pressure) # Pa 
-               for key in compoundscompoundflow:
+              m_0.SetTemperature(inlet_temperature) # K 
+              m_0.SetPressure(inlet_pressure) # Pa 
+              for key in compoundscompoundflow:
                       print(compoundscompoundflow[key])  
                       m_0.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
           if node == nodes[b]:
-                   m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
-                   sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
-
+              for edge in in_nodes:
+                  index = edges.index(edge)
+                  mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
+                  sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+              m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
+              sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
 
 
     # request calculation
