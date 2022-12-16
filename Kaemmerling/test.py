@@ -8,9 +8,7 @@ Created on Thu Dec 15 12:46:33 2022
 bla = {}
 for i in range(5):
     if i != 0:
-        bla["variable%s" % i] = i
+        bla["variable%s" % i] = "variable%s" % i
 
 print (bla)
 
-for x in bla:
-    bla[x] = 

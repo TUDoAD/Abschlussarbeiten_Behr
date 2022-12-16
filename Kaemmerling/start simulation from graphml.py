@@ -98,7 +98,7 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
         for i in range(p):
             if i != 0:
                 if i != p:
-                    mass_streams["m%s" % i] = mass_streams["m%s" % i]
+                    mass_streams["m%s" % i] = "m%s" % i
             #for x in mass_streams:
              #   mass_streams[x] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
                 
