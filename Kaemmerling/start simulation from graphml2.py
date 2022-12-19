@@ -54,32 +54,24 @@ import cooler_function
 import heat_exchanger_function
 
 
-def startsimulationfromgraphml(graph):
+def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compoundscompoundflow):
+    
+    
     c = 0
     nodes = list(graph.nodes)
-    first_node = nodes[0]
-    inlet_temperature = graph._node[first_node]['inlet_temperature'] 
-    inlet_pressure = graph._node[first_node]['inlet_pressure'] 
-    composition = graph._node[first_node]['inlet_composition'] 
-    mass_flow = graph._node[first_node]['inlet_mass_flow'] 
-    compounds = graph._node[first_node]['compounds'] #dwsim function fehlt noch 
-    inlet_stream = dict()
-    for components in compounds:
-        compound = compounds[c]
-        compound_mass_frac = composition[c]
-        compound_mass_flow = compound_mass_frac * mass_flow
-        inlet_stream[compound].append(compound_mass_flow)
-        c = c+1
+    first_node = nodes[0] 
+    #add compounds    
+
         
     for node in nodes:
         
         if node == 'column' == nodes[0]:
-            mass_flow = graph._node[first_node]['inlet_mass_flow'] 
             lk_mole_fraction_in_distillate = graph._node[first_node]['lk_mole_fraction_in_distillate'] 
             hk_mole_fraction_in_distillate = graph._node[first_node]['hk_mole_fraction_in_distillate']
             reflux_ratio = graph._node[first_node]['reflux_ratio']
             light_key_compound = graph._node[first_node]['light_key_compound']
             heavy_key_compound = graph._node[first_node]['heavy_key_compound']
+            inlet_stream = compoundscompoundflow
             column_function.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
             before_node = 0
         if node =='column' != nodes[0]:  
@@ -96,20 +88,22 @@ def startsimulationfromgraphml(graph):
             mass_flow = graph._node[before_node]['inlet_mass_flow'] 
             compounds = graph._node[before_node]['compounds'] #dwsim function fehlt noch 
             inlet_stream = dict()
-            for components in compounds:
-                compound = compounds[c]
-                compound_mass_frac = composition[c]
-                compound_mass_flow = compound_mass_frac * mass_flow
-                inlet_stream[compound].append(compound_mass_flow)
-                c = c+1
             column_function.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
-            c = 0
             before_node = before_node +1
         if node == 'Vessel' == nodes[0]: 
             tank_volume = graph._node[first_node]['tank_volume'] 
             Tank_function.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
-            before_node = 0
-                
+            inlet_temperature = Tank_function.m2.GetTemperature()
+            inlet_pressure = Tank_function.m2.GetPressure()
+            dict2 = []
+            list2 = Tank_function.m2.Get_OverallComposition
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            compoundscompoundflow = dict2
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
         if node == 'Vessel' != nodes[0]:
             inlet_temperature = graph._node[before_node]['inlet_temperature'] 
             inlet_pressure = graph._node[before_node]['inlet_pressure'] 
@@ -117,16 +111,20 @@ def startsimulationfromgraphml(graph):
             mass_flow = graph._node[before_node]['inlet_mass_flow'] 
             compounds = graph._node[before_node]['compounds'] #dwsim function fehlt noch 
             inlet_stream = dict()
-            for components in compounds:
-                compound = compounds[c]
-                compound_mass_frac = composition[c]
-                compound_mass_flow = compound_mass_frac * mass_flow
-                inlet_stream[compound].append(compound_mass_flow)
-                c = c+1
             tank_volume = graph._node[node]['tank_volume'] 
             Tank_function.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
             before_node = before_node +1
-            c = 0
+            inlet_temperature = Tank_function.m2.GetTemperature()
+            inlet_pressure = Tank_function.m2.GetPressure()
+            dict2 = []
+            list2 = Tank_function.m2.Get_OverallComposition
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            compoundscompoundflow = dict2
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             
             
             
@@ -159,6 +157,17 @@ def startsimulationfromgraphml(graph):
             arrhenius_parameter = graph._node[node]['arrhenius_parameter']
             PFR_Function.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)
             before_node = 0
+            inlet_temperature = PFR_Function.m2.GetTemperature()
+            inlet_pressure = PFR_Function.m2.GetPressure()
+            dict2 = []
+            list2 = PFR_Function.m2.Get_OverallComposition
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            compoundscompoundflow = dict2
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             
         if node == 'PFR' != nodes[0]:
 
@@ -193,16 +202,19 @@ def startsimulationfromgraphml(graph):
             composition = graph._node[before_node]['inlet_composition'] 
             mass_flow = graph._node[before_node]['inlet_mass_flow'] 
             compounds = graph._node[before_node]['compounds'] #dwsim function fehlt noch 
-            inlet_stream = dict()
-            for components in compounds:
-                compound = compounds[c]
-                compound_mass_frac = composition[c]
-                compound_mass_flow = compound_mass_frac * mass_flow
-                inlet_stream[compound].append(compound_mass_flow)
-                c = c+1
             PFR_Function.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)            
             before_node = before_node +1
-            c = 0
+            inlet_temperature = PFR_Function.m2.GetTemperature()
+            inlet_pressure = PFR_Function.m2.GetPressure()
+            dict2 = []
+            list2 = PFR_Function.m2.Get_OverallComposition
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            compoundscompoundflow = dict2
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             
         if node == 'CSTR' == nodes[0]:
             if 'outlet_temperature' in graph[node]:
@@ -225,6 +237,17 @@ def startsimulationfromgraphml(graph):
             arrhenius_parameter = graph._node[node]['arrhenius_parameter']
             CSTR_function.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter)
             before_node = 0
+            inlet_temperature = CSTR_function.m2.GetTemperature()
+            inlet_pressure = CSTR_function.m2.GetPressure()
+            dict2 = []
+            list2 = CSTR_function.m2.Get_OverallComposition
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            compoundscompoundflow = dict2
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             
         if node == 'CSTR' != nodes[0]:
             if 'outlet_temperature' in graph[node]:
@@ -243,18 +266,20 @@ def startsimulationfromgraphml(graph):
             inlet_pressure = graph._node[before_node]['inlet_pressure'] 
             composition = graph._node[before_node]['inlet_composition'] 
             mass_flow = graph._node[before_node]['inlet_mass_flow'] 
-            compounds = graph._node[before_node]['compounds'] #dwsim function fehlt noch 
-            inlet_stream = dict()
-            for components in compounds:
-                compound = compounds[c]
-                compound_mass_frac = composition[c]
-                compound_mass_flow = compound_mass_frac * mass_flow
-                inlet_stream[compound].append(compound_mass_flow)
-                c = c+1
-            
+            compounds = graph._node[before_node]['compounds'] #dwsim function fehlt noch
             CSTR_function.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter)            
             before_node = before_node +1
-            c = 0
+            inlet_temperature = CSTR_function.m2.GetTemperature()
+            inlet_pressure = CSTR_function.m2.GetPressure()
+            dict2 = []
+            list2 = CSTR_function.m2.Get_OverallComposition
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            compoundscompoundflow = dict2
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             
         if node == 'Heater' == nodes[0]:
             if 'outlet_temperature' in graph[node]:
@@ -271,6 +296,17 @@ def startsimulationfromgraphml(graph):
                 deltat = 0
             Heater_function.Heater(inlet_temperature, inlet_pressure, inlet_stream, added_energy_stream, outlet_temperature, deltat)
             before_node = 0
+            inlet_temperature = Heater_function.m2.GetTemperature()
+            inlet_pressure = Heater_function.m2.GetPressure()
+            dict2 = []
+            list2 = Heater_function.m2.Get_OverallComposition
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            compoundscompoundflow = dict2
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             
         if node == 'Heater' != nodes[0]:
             if 'outlet_temperature' in graph[node]:
@@ -290,16 +326,19 @@ def startsimulationfromgraphml(graph):
             composition = graph._node[before_node]['inlet_composition'] 
             mass_flow = graph._node[before_node]['inlet_mass_flow'] 
             compounds = graph._node[before_node]['compounds'] #dwsim function fehlt noch 
-            inlet_stream = dict()
-            for components in compounds:
-                compound = compounds[c]
-                compound_mass_frac = composition[c]
-                compound_mass_flow = compound_mass_frac * mass_flow
-                inlet_stream[compound].append(compound_mass_flow)
-                c = c+1
             Heater_function.Heater(inlet_temperature, inlet_pressure, inlet_stream, added_energy_stream, outlet_temperature, deltat)            
             before_node = before_node +1
-            c = 0
+            inlet_temperature = Heater_function.m2.GetTemperature()
+            inlet_pressure = Heater_function.m2.GetPressure()
+            dict2 = []
+            list2 = Heater_function.m2.Get_OverallComposition
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            compoundscompoundflow = dict2
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             
         if node =='Cooler'== nodes[0]:
             if 'outlet_temperature' in graph[node]:
@@ -316,6 +355,17 @@ def startsimulationfromgraphml(graph):
                 deltat = 0
             cooler_function.Cooler(inlet_temperature, inlet_pressure, inlet_stream, removed_energy_stream, outlet_temperature, deltat)
             before_node = 0
+            inlet_temperature = cooler_function.m2.GetTemperature()
+            inlet_pressure = cooler_function.m2.GetPressure()
+            dict2 = []
+            list2 = cooler_function.m2.Get_OverallComposition
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            compoundscompoundflow = dict2
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             
         if node =='Cooler'!= nodes[0]:
             if 'outlet_temperature' in graph[node]:
@@ -335,34 +385,42 @@ def startsimulationfromgraphml(graph):
             composition = graph._node[before_node]['inlet_composition'] 
             mass_flow = graph._node[before_node]['inlet_mass_flow'] 
             compounds = graph._node[before_node]['compounds'] #dwsim function fehlt noch 
-            inlet_stream = dict()
-            for components in compounds:
-                compound = compounds[c]
-                compound_mass_frac = composition[c]
-                compound_mass_flow = compound_mass_frac * mass_flow
-                inlet_stream[compound].append(compound_mass_flow)
-                c = c+1
             cooler_function.Cooler(inlet_temperature, inlet_pressure, inlet_stream, removed_energy_stream, outlet_temperature, deltat)            
             before_node = before_node +1
-            c = 0
+            inlet_temperature = cooler_function.m2.GetTemperature()
+            inlet_pressure = cooler_function.m2.GetPressure()
+            dict2 = []
+            list2 = cooler_function.m2.Get_OverallComposition
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            compoundscompoundflow = dict2
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             
         if node == 'Heat exchanger, detailed'== nodes[0]:
             composition2 = graph._node[node]['inlet_composition2']
             mass_flow2 = graph._node[node]['inlet_mass_flow2'] 
             compounds2 = graph._node[node]['compounds2'] #dwsim function fehlt noch 
-            inlet_stream2 = dict()
-            for components in compounds2:
-                compound = compounds2[c]
-                compound_mass_frac = composition2[c]
-                compound_mass_flow = compound_mass_frac * mass_flow2
-                inlet_stream2[compound].append(compound_mass_flow)
-                c = c+1
+            inlet_stream2 = compoundscompoundflow2
             inlet_temperature2 = graph._node[node]['inlet_temperature2']
             inlet_pressure2 = graph._node[node]['inlet_pressure2']
             heat_exchange_area = graph._node[node]['heat_exchange_area']
             global_heat_transfer = graph._node[node]['global_heat_transfer']
             heat_exchanger_function.Heat_exchanger(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, inlet_stream, inlet_stream2, heat_exchange_area, global_heat_transfer)
             before_node = 0
+            inlet_temperature = cooler_function.m2.GetTemperature()
+            inlet_pressure = cooler_function.m2.GetPressure()
+            dict2 = []
+            list2 = cooler_function.m2.Get_OverallComposition
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            compoundscompoundflow = dict2
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             
         if node == 'Heat exchanger, detailed'!= nodes[0]:
             composition2 = graph._node[node]['inlet_composition2']
