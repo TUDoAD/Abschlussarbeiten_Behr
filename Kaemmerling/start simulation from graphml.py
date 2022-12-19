@@ -35,7 +35,6 @@ clr.AddReference(dwsimpath + "DWSIM.MathOps.dll")
 clr.AddReference(dwsimpath + "TcpComm.dll")
 clr.AddReference(dwsimpath + "Microsoft.ServiceBus.dll")
 
-
 from DWSIM.Interfaces.Enums.GraphicObjects import ObjectType
 from DWSIM.Thermodynamics import Streams, PropertyPackages
 from DWSIM.UnitOperations import UnitOperations
@@ -104,7 +103,11 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
                 
         energy_streams = {}
         for i in range(a):
-                energy_streams["e%s" % i] = energy_streams["e%s" % i]
+                energy_streams["e%s" % i] = "e%s" % i
+                
+        machines = {}
+        for i in range(b):
+                machines["m%s" % i] = "m%s" % i
                 
    # for i in range(a):
     #    for node in nodes:
@@ -112,8 +115,8 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
       #      dict1 = {'energy_stream':e_i}
        #     group= {node:dict1}
         #    nx.set_edge_attributes(f,group)
-# Peng Robinson Property Package
-
+        
+    # Peng Robinson Property Package
     stables = PropertyPackages.PengRobinsonPropertyPackage()
 
     sim.AddPropertyPackage(stables)
@@ -459,7 +462,6 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
            sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
        
            #set pfr operation mode
-
            if graph.nodes[node]['isothermic']!= 0:
                node.ReactorOperationMode = Reactors.OperationMode.Isothermic
         
@@ -626,13 +628,17 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
           node.set_Q(graph.nodes[node]['global_heat_transfer'])
           
        if graph._node[node]['node_class'] == 'Column':
-          node = sim.AddObject(ObjectType.ShortcutColumn, 200, 50, "Column")
+          index1 = nodes.index(node)
+          value = [machines.values()[index1]]
+          keys = [k for k, v in machines.items() if v in value]
+          k = keys[0]
+          globals()[k[0]] = sim.AddObject(ObjectType.ShortcutColumn, 200, 50, "Column")
           if node != nodes[0]:
               in_nodes = graph.in_edges(node)
               for edge in in_nodes:
                   index = edges.index(edge)
                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
-                  sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+                  sim.ConnectObjects(mass_streams.values()[index].GraphicObject, machines.values()[index1].GraphicObject, -1, -1)
               out_nodes = graph.out_edges(node)
               for edge in out_nodes:
                   index = edges.index(edge)
@@ -640,7 +646,7 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
                   sim.ConnectObjects(node.GraphicObject, mass_streams.values()[index].GraphicObject, -1, -1)
           if node == nodes[0]:
               m_0 = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'inlet')
-              sim.ConnectObjects(m_0.GraphicObject, node.GraphicObject, -1, -1)
+              sim.ConnectObjects(m_0.GraphicObject, machines.values()[index1].GraphicObject, -1, -1)
               for edge in out_nodes:
                   index = edges.index(edge)
                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
@@ -656,7 +662,7 @@ def startsimulatingfromgraphml(graph, inlet_temperature, inlet_pressure, compoun
               for edge in in_nodes:
                   index = edges.index(edge)
                   mass_streams.values()[index] = sim.AddObject(ObjectType.MaterialStream, 50, 50, "mass_stream")
-                  sim.ConnectObjects(mass_streams.values()[index].GraphicObject, node.GraphicObject, -1, -1)
+                  sim.ConnectObjects(mass_streams.values()[index].GraphicObject, machines.values()[index1].GraphicObject, -1, -1)
               m_end = sim.AddObject(ObjectType.MaterialStream, 50, 50, 'outlet')
               sim.ConnectObjects(node.GraphicObject, m_end.GraphicObject, -1, -1)
           index = nodes.index(node)
