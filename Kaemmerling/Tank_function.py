@@ -160,4 +160,4 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
     im = Image.open(imgPath)
     im.show()
     
-Tank(300.0,100000.0,{"Water" : 9.57},100.0)
+#Tank(300.0,100000.0,{"Water" : 9.57},100.0)

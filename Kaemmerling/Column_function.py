@@ -152,4 +152,4 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     im = Image.open(imgPath)
     im.show()
     
-Column(300.0,100000.0,{"Benzene" : 9.57, 'Toluene' : 9.57},0.01,0.01,1.4,'Benzene','Toluene')
+#Column(300.0,100000.0,{"Benzene" : 9.57, 'Toluene' : 9.57},0.01,0.01,1.4,'Benzene','Toluene')

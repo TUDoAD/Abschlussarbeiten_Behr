@@ -200,4 +200,4 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     im = Image.open(imgPath)
     im.show()
     
-CSTR(343.15,500000.0,{"Methyl acetate" : 0.48, '1-butanol' : 0.48, 'Methanol' : 0.04, 'N-butyl acetate' : 0.0},1,0,0,'1-butanol',{"Methyl acetate" : 1.0, '1-butanol' : 1.0, 'Methanol': 0.0, 'N-butyl acetate': 0.0}, {"Methyl acetate" : 0.0, '1-butanol' : 0.0, 'Methanol': 0.0, 'N-butyl acetate': 0.0},{"Methyl acetate" : -1.0, '1-butanol' : -1.0, 'Methanol':1.0, 'N-butyl acetate': 1.0}, 4.0, 0.01)
+#CSTR(343.15,500000.0,{"Methyl acetate" : 0.48, '1-butanol' : 0.48, 'Methanol' : 0.04, 'N-butyl acetate' : 0.0},1,0,0,'1-butanol',{"Methyl acetate" : 1.0, '1-butanol' : 1.0, 'Methanol': 0.0, 'N-butyl acetate': 0.0}, {"Methyl acetate" : 0.0, '1-butanol' : 0.0, 'Methanol': 0.0, 'N-butyl acetate': 0.0},{"Methyl acetate" : -1.0, '1-butanol' : -1.0, 'Methanol':1.0, 'N-butyl acetate': 1.0}, 4.0, 0.01)

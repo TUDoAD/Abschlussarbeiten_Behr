@@ -156,4 +156,4 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     im = Image.open(imgPath)
     im.show()
     
-Heater(300.0,100000.0,{"Water" : 9.57},0,350.0,0)
+#Heater(300.0,100000.0,{"Water" : 9.57},0,350.0,0)

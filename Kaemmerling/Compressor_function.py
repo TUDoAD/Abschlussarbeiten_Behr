@@ -160,4 +160,4 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     im = Image.open(imgPath)
     im.show()
     
-Compressor(300.0,100000.0,{"Hydrogen" : 9.57},200000,0,0)
+#Compressor(300.0,100000.0,{"Hydrogen" : 9.57},200000,0,0)

@@ -166,4 +166,4 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     im = Image.open(imgPath)
     im.show()
     
-Pump(300.0,100000.0,{"Water" : 9.57},200000,0,0,0)
+#Pump(300.0,100000.0,{"Water" : 9.57},200000,0,0,0)
