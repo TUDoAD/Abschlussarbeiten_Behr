@@ -73,9 +73,15 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             heavy_key_compound = graph._node[first_node]['heavy_key_compound']
             inlet_stream = compoundscompoundflow
             column_function.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
-            before_node = 0
+            outlet_temperature1 = column_function.m2.GetTemperature()
+            outlet_temperature2 = column_function.m3.GetTemperature()
+            dict1 = {'outlet_temperature':outlet_temperature1}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_temperature2':outlet_temperature2}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
         if node =='column' != nodes[0]:  
-            before_node = node[before_node]
             inlet_stream = compoundscompoundflow
             lk_mole_fraction_in_distillate = graph._node[node]['lk_mole_fraction_in_distillate'] 
             hk_mole_fraction_in_distillate = graph._node[before_node]['hk_mole_fraction_in_distillate']
