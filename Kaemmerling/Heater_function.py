@@ -12,7 +12,7 @@ except OSError as e:
 else:
     print("File is deleted successfully")
 
-
+work_dir = os.getcwd()
 import pythoncom
 pythoncom.CoInitialize()
 import clr
@@ -155,5 +155,7 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
 
     im = Image.open(imgPath)
     im.show()
+    
+Directory.SetCurrentDirectory(work_dir)
     
 #Heater(300.0,100000.0,{"Water" : 9.57},0,350.0,0)

@@ -1,63 +1,10 @@
-import os
 
-fileTest = r"C:\Users\Lucky Luciano\Documents\DWSIM Application Data\dwsim_newui.ini"
-
-try:
-    os.remove(fileTest)
-except OSError as e:
-    print(e)
-else:
-    print("File is deleted successfully")
-
-
-import pythoncom
-pythoncom.CoInitialize()
-import clr
-from System.IO import Directory, Path, File
-from System import String, Environment
-from System.Collections.Generic import Dictionary
-
-dwsimpath = "C:\\Users\\Lucky Luciano\\AppData\\Local\\DWSIM 8\\"
-
-clr.AddReference(dwsimpath + "CapeOpen.dll")
-clr.AddReference(dwsimpath + "DWSIM.Automation.dll")
-clr.AddReference(dwsimpath + "DWSIM.Interfaces.dll")
-clr.AddReference(dwsimpath + "DWSIM.GlobalSettings.dll")
-clr.AddReference(dwsimpath + "DWSIM.SharedClasses.dll")
-clr.AddReference(dwsimpath + "DWSIM.Thermodynamics.dll")
-clr.AddReference(dwsimpath + "DWSIM.UnitOperations.dll")
-clr.AddReference(dwsimpath + "System.Buffers.dll")
-
-clr.AddReference(dwsimpath + "DWSIM.Inspector.dll")
-clr.AddReference(dwsimpath + "DWSIM.MathOps.dll")
-clr.AddReference(dwsimpath + "TcpComm.dll")
-clr.AddReference(dwsimpath + "Microsoft.ServiceBus.dll")
-
-from DWSIM.Interfaces.Enums.GraphicObjects import ObjectType
-from DWSIM.Thermodynamics import Streams, PropertyPackages
-from DWSIM.UnitOperations import UnitOperations, Reactors
-from DWSIM.Automation import Automation2
-from DWSIM.GlobalSettings import Settings
-import DWSIM.Interfaces
 import networkx as nx
-import functions
-import sys
-import Heater_function
-import PFR_Function
-import CSTR_function
-import column_function
-import Tank_function
-import Pump_function
-import Compressor_function
-import Separator_function
-import cooler_function
-import heat_exchanger_function
-
+import DWSIMfunctions
 
 def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compoundscompoundflow):
     
     
-    c = 0
     nodes = list(graph.nodes)
     first_node = nodes[0] 
     #add compounds    
@@ -72,11 +19,11 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             light_key_compound = graph._node[first_node]['light_key_compound']
             heavy_key_compound = graph._node[first_node]['heavy_key_compound']
             inlet_stream = compoundscompoundflow
-            column_function.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
-            outlet_temperature = column_function.m2.GetTemperature()
-            outlet_temperature2 = column_function.m3.GetTemperature()
-            outlet_pressure = column_function.m2.GetPressure()
-            outlet_pressure2 = column_function.m3.GetPressure()
+            DWSIMfunctions.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_temperature2 = DWSIMfunctions.m3.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            outlet_pressure2 = DWSIMfunctions.m3.GetPressure()
             dict1 = {'outlet_temperature':outlet_temperature}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -95,7 +42,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             dict2 = []
-            list2 = list(column_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -103,7 +50,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             dict2 = []
-            list2 = list(column_function.m3.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m3.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -119,10 +66,10 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure']
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
-            column_function.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
+            DWSIMfunctions.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
             before_node = node
             dict2 = []
-            list2 = list(column_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -130,7 +77,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             dict2 = []
-            list2 = list(column_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -138,18 +85,18 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             compoundscompoundflow = dict2
             nx.set_node_attributes(graph,group)
-            outlet_temperature1 = column_function.m2.GetTemperature()
-            outlet_temperature2 = column_function.m3.GetTemperature()
-            outlet_pressure1 = column_function.m2.GetPressure()
-            outlet_pressure2 = column_function.m3.GetPressure()
+            outlet_temperature1 = DWSIMfunctions.m2.GetTemperature()
+            outlet_temperature2 = DWSIMfunctions.m3.GetTemperature()
+            outlet_pressure1 = DWSIMfunctions.m2.GetPressure()
+            outlet_pressure2 = DWSIMfunctions.m3.GetPressure()
         if node == 'Vessel' == nodes[0]: 
             tank_volume = graph._node[first_node]['tank_volume'] 
             inlet_stream = compoundscompoundflow
-            Tank_function.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
-            inlet_temperature = Tank_function.m2.GetTemperature()
-            inlet_pressure = Tank_function.m2.GetPressure()
+            DWSIMfunctions.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(Tank_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -163,12 +110,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
             inlet_stream = dict()
             tank_volume = graph._node[node]['tank_volume'] 
-            Tank_function.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
+            DWSIMfunctions.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
             before_node = node
-            inlet_temperature = Tank_function.m2.GetTemperature()
-            inlet_pressure = Tank_function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(Tank_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -207,12 +154,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             reactor_volume = graph._node[node]['reactor_volume']
             arrhenius_parameter = graph._node[node]['arrhenius_parameter']
             inlet_stream = compoundscompoundflow
-            PFR_Function.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)
+            DWSIMfunctions.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)
             before_node = node
-            inlet_temperature = PFR_Function.m2.GetTemperature()
-            inlet_pressure = PFR_Function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(PFR_Function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -252,12 +199,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_temperature = graph._node[before_node]['inlet_temperature'] 
             inlet_pressure = graph._node[before_node]['inlet_pressure'] 
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
-            PFR_Function.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)            
+            DWSIMfunctions.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)            
             before_node = node
-            inlet_temperature = PFR_Function.m2.GetTemperature()
-            inlet_pressure = PFR_Function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(PFR_Function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -286,12 +233,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             reactor_volume = graph._node[node]['reactor_volume']
             arrhenius_parameter = graph._node[node]['arrhenius_parameter']
             inlet_stream = compoundscompoundflow
-            CSTR_function.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter)
+            DWSIMfunctions.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter)
             before_node = node
-            inlet_temperature = CSTR_function.m2.GetTemperature()
-            inlet_pressure = CSTR_function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(CSTR_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -316,12 +263,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
-            CSTR_function.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter)            
+            DWSIMfunctions.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter)            
             before_node = node
-            inlet_temperature = CSTR_function.m2.GetTemperature()
-            inlet_pressure = CSTR_function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(CSTR_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -344,12 +291,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             else:
                 deltat = 0
             inlet_stream = compoundscompoundflow
-            Heater_function.Heater(inlet_temperature, inlet_pressure, inlet_stream, added_energy_stream, outlet_temperature, deltat)
+            DWSIMfunctions.Heater(inlet_temperature, inlet_pressure, inlet_stream, added_energy_stream, outlet_temperature, deltat)
             before_node = node
-            inlet_temperature = Heater_function.m2.GetTemperature()
-            inlet_pressure = Heater_function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(Heater_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -374,12 +321,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
-            Heater_function.Heater(inlet_temperature, inlet_pressure, inlet_stream, added_energy_stream, outlet_temperature, deltat)            
+            DWSIMfunctions.Heater(inlet_temperature, inlet_pressure, inlet_stream, added_energy_stream, outlet_temperature, deltat)            
             before_node = node
-            inlet_temperature = Heater_function.m2.GetTemperature()
-            inlet_pressure = Heater_function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(Heater_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -402,12 +349,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             else:
                 deltat = 0
             inlet_stream = compoundscompoundflow
-            cooler_function.Cooler(inlet_temperature, inlet_pressure, inlet_stream, removed_energy_stream, outlet_temperature, deltat)
+            DWSIMfunctions.Cooler(inlet_temperature, inlet_pressure, inlet_stream, removed_energy_stream, outlet_temperature, deltat)
             before_node = node
-            inlet_temperature = cooler_function.m2.GetTemperature()
-            inlet_pressure = cooler_function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(cooler_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -432,12 +379,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
-            cooler_function.Cooler(inlet_temperature, inlet_pressure, inlet_stream, removed_energy_stream, outlet_temperature, deltat)            
+            DWSIMfunctions.Cooler(inlet_temperature, inlet_pressure, inlet_stream, removed_energy_stream, outlet_temperature, deltat)            
             before_node = node
-            inlet_temperature = cooler_function.m2.GetTemperature()
-            inlet_pressure = cooler_function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(cooler_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -455,12 +402,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_pressure2 = graph._node[node]['inlet_pressure2']
             heat_exchange_area = graph._node[node]['heat_exchange_area']
             global_heat_transfer = graph._node[node]['global_heat_transfer']
-            heat_exchanger_function.Heat_exchanger(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, inlet_stream, inlet_stream2, heat_exchange_area, global_heat_transfer)
+            DWSIMfunctions.Heat_exchanger(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, inlet_stream, inlet_stream2, heat_exchange_area, global_heat_transfer)
             before_node = node
-            inlet_temperature = heat_exchanger_function.m2.GetTemperature()
-            inlet_pressure = heat_exchanger_function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(heat_exchanger_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -478,12 +425,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
-            heat_exchanger_function.Heat_exchanger(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, inlet_stream, inlet_stream2, heat_exchange_area, global_heat_transfer)                
+            DWSIMfunctions.Heat_exchanger(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, inlet_stream, inlet_stream2, heat_exchange_area, global_heat_transfer)                
             before_node = node
-            inlet_temperature = heat_exchanger_function.m2.GetTemperature()
-            inlet_pressure = heat_exchanger_function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(heat_exchanger_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -510,12 +457,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             else:
                 added_energy_stream = 0
             inlet_stream2 = graph._node[node]['compoundscompoundflow2']
-            Pump_function.Pump(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream, power_required)
+            DWSIMfunctions.Pump(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream, power_required)
             before_node = node
-            inlet_temperature = Pump_function.m2.GetTemperature()
-            inlet_pressure = Pump_function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(Pump_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -544,12 +491,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
-            Pump_function.Pump(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream, power_required)
+            DWSIMfunctions.Pump(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream, power_required)
             before_node = node
-            inlet_temperature = Pump_function.m2.GetTemperature()
-            inlet_pressure = Pump_function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(Pump_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -576,12 +523,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             else:
                 added_energy_stream = 0
             inlet_stream = compoundscompoundflow
-            Compressor_function.Compressor(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream)
+            DWSIMfunctions.Compressor(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream)
             before_node = node
-            inlet_temperature = Compressor_function.m2.GetTemperature()
-            inlet_pressure = Compressor_function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(Compressor_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
@@ -610,28 +557,28 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
-            Compressor_function.Compressor(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream)
-            Compressor_function.Compressor(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream)
+            DWSIMfunctions.Compressor(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream)
+            DWSIMfunctions.Compressor(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream)
             before_node = node
-            inlet_temperature = Compressor_function.m2.GetTemperature()
-            inlet_pressure = Compressor_function.m2.GetPressure()
+            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
-            list2 = list(Compressor_function.m2.Get_OverallComposition)
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
             
         if node == 'Separator'== nodes[0]:
             inlet_stream = compoundscompoundflow
-            Separator_function.Separator(inlet_temperature, inlet_pressure, inlet_stream)
+            DWSIMfunctions.Separator(inlet_temperature, inlet_pressure, inlet_stream)
             before_node = node
             
         if node == 'Separator'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  
-            Separator_function.Separator(inlet_temperature, inlet_pressure, inlet_stream)
+            DWSIMfunctions.Separator(inlet_temperature, inlet_pressure, inlet_stream)
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
-            Separator_function.Separator(inlet_temperature, inlet_pressure, inlet_stream)
+            DWSIMfunctions.Separator(inlet_temperature, inlet_pressure, inlet_stream)
             before_node = node
             
 graph = nx.read_graphml('C:/Users/Lucky Luciano/Documents/GitHub/Abschlussarbeiten_Behr/Kaemmerling/Output/graphs_graphml/clean/graphml_pfd3')
