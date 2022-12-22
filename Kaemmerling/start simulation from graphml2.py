@@ -102,18 +102,32 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure2':outlet_pressure2}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            
         if node == 'Vessel' == nodes[0]: 
             tank_volume = graph._node[first_node]['tank_volume'] 
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
-            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
-            inlet_pressure = DWSIMfunctions.m2.GetPressure()
+            before_node = node
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
             compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -126,14 +140,148 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             tank_volume = graph._node[node]['tank_volume'] 
             DWSIMfunctions.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
             before_node = node
-            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
-            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
             compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            
+        if node == 'Tank' == nodes[0]: 
+            tank_volume = graph._node[first_node]['tank_volume'] 
+            inlet_stream = compoundscompoundflow
+            DWSIMfunctions.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
+            before_node = node
+            dict2 = []
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
+            compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            
+        if node == 'Tank' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:
+            inlet_temperature = graph._node[before_node]['outlet_temperature'] 
+            inlet_pressure = graph._node[before_node]['outlet_pressure'] 
+            inlet_stream = graph._node[before_node]['compoundscompoundflow']
+            inlet_stream = dict()
+            tank_volume = graph._node[node]['tank_volume'] 
+            DWSIMfunctions.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
+            before_node = node
+            dict2 = []
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
+            compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            
+        if node == 'Silo' == nodes[0]: 
+            tank_volume = graph._node[first_node]['tank_volume'] 
+            inlet_stream = compoundscompoundflow
+            DWSIMfunctions.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
+            before_node = node
+            dict2 = []
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
+            compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            
+        if node == 'Silo' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:
+            inlet_temperature = graph._node[before_node]['outlet_temperature'] 
+            inlet_pressure = graph._node[before_node]['outlet_pressure'] 
+            inlet_stream = graph._node[before_node]['compoundscompoundflow']
+            inlet_stream = dict()
+            tank_volume = graph._node[node]['tank_volume'] 
+            DWSIMfunctions.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
+            before_node = node
+            dict2 = []
+            list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
+            for key in compoundscompoundflow:
+                for value in list2:
+                    dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
+            compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -168,14 +316,26 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)
             before_node = node
-            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
-            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
             compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -213,14 +373,26 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
             DWSIMfunctions.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)            
             before_node = node
-            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
-            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
             compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -247,14 +419,26 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter)
             before_node = node
-            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
-            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
             compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -277,14 +461,26 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
             DWSIMfunctions.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter)            
             before_node = node
-            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
-            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
             compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -305,14 +501,26 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.Heater(inlet_temperature, inlet_pressure, inlet_stream, added_energy_stream, outlet_temperature, deltat)
             before_node = node
-            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
-            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
             compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -335,14 +543,26 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
             DWSIMfunctions.Heater(inlet_temperature, inlet_pressure, inlet_stream, added_energy_stream, outlet_temperature, deltat)            
             before_node = node
-            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
-            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
             compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -363,14 +583,26 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.Cooler(inlet_temperature, inlet_pressure, inlet_stream, removed_energy_stream, outlet_temperature, deltat)
             before_node = node
-            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
-            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
             compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -393,14 +625,26 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
             DWSIMfunctions.Cooler(inlet_temperature, inlet_pressure, inlet_stream, removed_energy_stream, outlet_temperature, deltat)            
             before_node = node
-            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
-            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
             compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -416,14 +660,26 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             global_heat_transfer = graph._node[node]['global_heat_transfer']
             DWSIMfunctions.Heat_exchanger(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, inlet_stream, inlet_stream2, heat_exchange_area, global_heat_transfer)
             before_node = node
-            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
-            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
             compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -439,14 +695,26 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
             DWSIMfunctions.Heat_exchanger(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, inlet_stream, inlet_stream2, heat_exchange_area, global_heat_transfer)                
             before_node = node
-            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
-            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
             compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -471,14 +739,26 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream2 = graph._node[node]['compoundscompoundflow2']
             DWSIMfunctions.Pump(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream, power_required)
             before_node = node
-            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
-            inlet_pressure = DWSIMfunctions.m2.GetPressure()
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
             compoundscompoundflow = dict2
+            nx.set_node_attributes(graph,group)
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
