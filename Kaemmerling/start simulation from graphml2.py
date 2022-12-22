@@ -5,21 +5,24 @@ import DWSIMfunctions
 def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compoundscompoundflow):
     
     
-    nodes = list(graph.nodes)
-    first_node = nodes[0] 
-    #add compounds    
+    nodes = list(graph.nodes) # list all nodes
+    first_node = nodes[0]    
 
-        
     for node in nodes:
         
         if node == 'column' == nodes[0]:
+            # set column parameter
             lk_mole_fraction_in_distillate = graph._node[first_node]['lk_mole_fraction_in_distillate'] 
             hk_mole_fraction_in_distillate = graph._node[first_node]['hk_mole_fraction_in_distillate']
             reflux_ratio = graph._node[first_node]['reflux_ratio']
             light_key_compound = graph._node[first_node]['light_key_compound']
             heavy_key_compound = graph._node[first_node]['heavy_key_compound']
             inlet_stream = compoundscompoundflow
+            # start DWSIM simulation
             DWSIMfunctions.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
+            #set node as last node
+            before_node = node
+            # get data from simulation and save it in graphml
             outlet_temperature = DWSIMfunctions.m2.GetTemperature()
             outlet_temperature2 = DWSIMfunctions.m3.GetTemperature()
             outlet_pressure = DWSIMfunctions.m2.GetPressure()
@@ -34,11 +37,6 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             dict1 = {'outlet_pressure2':outlet_pressure2}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
-            before_node = node
-            successors = graph.successors(node)
-            dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             dict2 = []
@@ -57,8 +55,14 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'compoundscompoundflow2': dict2}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
+            successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             
-        if node =='column' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  
+        if node =='column' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  # start next function only if it was not run before (dict condition) and if it is in the successor list
             lk_mole_fraction_in_distillate = graph._node[node]['lk_mole_fraction_in_distillate'] 
             hk_mole_fraction_in_distillate = graph._node[node]['hk_mole_fraction_in_distillate']
             reflux_ratio = graph._node[node]['reflux_ratio']
@@ -125,12 +129,11 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+
             
         if node == 'Vessel' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
@@ -157,12 +160,11 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+
             
         if node == 'Tank' == nodes[0]: 
             tank_volume = graph._node[first_node]['tank_volume'] 
@@ -186,9 +188,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -218,9 +218,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -247,9 +245,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -279,9 +275,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -333,9 +327,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -390,9 +382,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -436,9 +426,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -478,9 +466,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -518,9 +504,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -560,9 +544,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -600,9 +582,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -642,9 +622,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -677,9 +655,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -712,9 +688,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -756,9 +730,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            dict1 = {'simulated_node':'TRUE'}
-            group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -801,6 +773,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -825,14 +798,23 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.Compressor(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream)
             before_node = node
-            inlet_temperature = DWSIMfunctions.m2.GetTemperature()
-            inlet_pressure = DWSIMfunctions.m2.GetPressure()
+            outlet_temperature = DWSIMfunctions.m2.GetTemperature()
+            outlet_pressure = DWSIMfunctions.m2.GetPressure()
+            dict1 = {'outlet_temperature':outlet_temperature}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            dict1 = {'outlet_pressure':outlet_pressure}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
                 for value in list2:
                     dict2.append(key, value)
-            compoundscompoundflow = dict2
+            dict1 = {'compoundscompoundflow': dict2}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -876,6 +858,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -917,6 +900,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure2':outlet_pressure2}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -961,6 +945,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure2':outlet_pressure2}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            successors = graph.successors(node)
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
