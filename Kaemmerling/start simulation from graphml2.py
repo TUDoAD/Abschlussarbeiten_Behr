@@ -20,7 +20,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             # start DWSIM simulation
             DWSIMfunctions.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
-            #set node as last node
+            # set node as last node
             before_node = node
             # get data from simulation and save it in graphml
             outlet_temperature = DWSIMfunctions.m2.GetTemperature()
@@ -63,16 +63,21 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             nx.set_node_attributes(graph,group)
             
         if node =='column' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  # start next function only if it was not run before (dict condition) and if it is in the successor list
+            # set column parameter 
             lk_mole_fraction_in_distillate = graph._node[node]['lk_mole_fraction_in_distillate'] 
             hk_mole_fraction_in_distillate = graph._node[node]['hk_mole_fraction_in_distillate']
             reflux_ratio = graph._node[node]['reflux_ratio']
             light_key_compound = graph._node[node]['light_key_compound']
             heavy_key_compound = graph._node[node]['heavy_key_compound']
+            # read data from graphml
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure']
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
+            # start DWSIM simulation
             DWSIMfunctions.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
+            # set node as last node
             before_node = node
+            # get data from simulation and save it in graphml
             dict2 = []
             list2 = list(DWSIMfunctions.m2.Get_OverallComposition)
             for key in compoundscompoundflow:
@@ -106,6 +111,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure2':outlet_pressure2}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
+            successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
+            dict1 = {'simulated_node':'TRUE'}
+            group= {node:dict1}
+            nx.set_node_attributes(graph,group)
             
         if node == 'Vessel' == nodes[0]: 
             tank_volume = graph._node[first_node]['tank_volume'] 
@@ -129,13 +140,15 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
 
             
-        if node == 'Vessel' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:
+        if node == 'Vessel' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
@@ -160,7 +173,9 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -188,12 +203,14 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Tank' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:
+        if node == 'Tank' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
@@ -218,7 +235,9 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -245,12 +264,14 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Silo' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:
+        if node == 'Silo' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
             inlet_stream = graph._node[before_node]['compoundscompoundflow']
@@ -275,7 +296,9 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -327,12 +350,14 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'PFR' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  
+        if node == 'PFR' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list  
 
             if 'outlet_temperature' in graph[node]:
                 outlet_temperature = graph._node[node]['outlet_temperature']
@@ -382,7 +407,9 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -426,12 +453,14 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'CSTR' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  
+        if node == 'CSTR' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
             if 'outlet_temperature' in graph[node]:
                 outlet_temperature = graph._node[node]['outlet_temperature']
             else:
@@ -466,7 +495,9 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -504,12 +535,14 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Heater' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  
+        if node == 'Heater' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list  
             if 'outlet_temperature' in graph[node]:
                 outlet_temperature = graph._node[node]['outlet_temperature']
             else:
@@ -544,7 +577,9 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -582,12 +617,14 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node =='Cooler'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  
+        if node =='Cooler'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
             if 'outlet_temperature' in graph[node]:
                 outlet_temperature = graph._node[node]['outlet_temperature']
             else:
@@ -621,8 +658,10 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             nx.set_node_attributes(graph,group)
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
-            nx.set_node_attributes(graph,group)
+            nx.set_node_attributes(graph,group)#
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -655,12 +694,14 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Heat exchanger, detailed'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  
+        if node == 'Heat exchanger, detailed'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
             inlet_stream2 = graph._node[node]['compoundscompoundflow2']
             inlet_temperature2 = graph._node[node]['inlet_temperature2']
             inlet_pressure2 = graph._node[node]['inlet_pressure2']
@@ -688,7 +729,9 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -730,12 +773,14 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Pump'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  
+        if node == 'Pump'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
             if 'outlet_pressure' in graph[node]:
                 outlet_pressure = graph._node[node]['outlet_pressure']
             else:
@@ -773,7 +818,9 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -814,12 +861,14 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'compoundscompoundflow': dict2}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Compressor'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  
+        if node == 'Compressor'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list  
             if 'outlet_pressure' in graph[node]:
                 outlet_pressure = graph._node[node]['outlet_pressure']
             else:
@@ -858,7 +907,9 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -900,12 +951,14 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure2':outlet_pressure2}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Separator'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  
+        if node == 'Separator'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list 
             DWSIMfunctions.Separator(inlet_temperature, inlet_pressure, inlet_stream)
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
@@ -945,7 +998,9 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'outlet_pressure2':outlet_pressure2}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            # get successors from node to find out which node is next 
             successors = graph.successors(node)
+            # saves that this node is already simulated and avoids that it is simulated again
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
