@@ -10,7 +10,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
 
     for node in nodes:
         
-        if node == 'column' == nodes[0]:
+        if node == 'Column' == nodes[0]:
             # set column parameter
             lk_mole_fraction_in_distillate = graph._node[first_node]['lk_mole_fraction_in_distillate'] 
             hk_mole_fraction_in_distillate = graph._node[first_node]['hk_mole_fraction_in_distillate']
@@ -62,7 +62,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node =='column' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  # start next function only if it was not run before (dict condition) and if it is in the successor list
+        if node =='Column' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  # start next function only if it was not run before (dict condition) and if it is in the successor list
             # set column parameter 
             lk_mole_fraction_in_distillate = graph._node[node]['lk_mole_fraction_in_distillate'] 
             hk_mole_fraction_in_distillate = graph._node[node]['hk_mole_fraction_in_distillate']

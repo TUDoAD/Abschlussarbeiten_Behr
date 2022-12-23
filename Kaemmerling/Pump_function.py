@@ -126,9 +126,6 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
 
     errors = interf.CalculateFlowsheet2(sim)
     
-
-
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
@@ -166,4 +163,6 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     im = Image.open(imgPath)
     im.show()
     
-#Pump(300.0,100000.0,{"Water" : 9.57},200000,0,0,0)
+# function call     
+
+Pump(300.0,100000.0,{"Water" : 9.57},200000,0,0,0)

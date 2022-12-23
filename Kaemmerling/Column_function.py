@@ -1,6 +1,4 @@
 
-
-
 #delete dwsim_newui
 
 import os
@@ -77,6 +75,7 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     sim.ConnectObjects(e1.GraphicObject, DEST1.GraphicObject, -1, -1)
     sim.ConnectObjects(DEST1.GraphicObject, e2.GraphicObject, -1, -1)
     
+# set column parameter
     
     DEST1.m_lightkey = light_key_compound
     DEST1.m_heavykey = heavy_key_compound
@@ -152,4 +151,5 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     im = Image.open(imgPath)
     im.show()
     
-#Column(300.0,100000.0,{"Benzene" : 9.57, 'Toluene' : 9.57},0.01,0.01,1.4,'Benzene','Toluene')
+# function call    
+Column(300.0,100000.0,{"Benzene" : 9.57, 'Toluene' : 9.57},0.01,0.01,1.4,'Benzene','Toluene')

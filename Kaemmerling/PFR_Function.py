@@ -61,7 +61,7 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
         
        print(key)
        
-       # stoichiometric coefficients
+# stoichiometric coefficients
        
        comps = stochiometry
        comps1 = Dictionary[str, float]()
@@ -69,7 +69,7 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
            value = comps[key1]
            comps1.Add(key1, value);
 
-       # direct order coefficients
+# direct order coefficients
        
        dorders = direct_order
        dorders1 = Dictionary[str, float]()
@@ -77,14 +77,13 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
            value = dorders[key2]
            dorders1.Add(key2, value);
            
-       # reverse order coefficients
+# reverse order coefficients
         
        rorders = reverse_order
        rorders1 = Dictionary[str, float]()
        for key3 in rorders:  
            value = rorders[key3]
            rorders1.Add(key3, value);
-
            
     kr1 = sim.CreateKineticReaction("Reaction", "Reaction_set", comps1, dorders1, rorders1, base_compound, "Mixture","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
     sim.AddReaction(kr1)
@@ -155,9 +154,6 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
 
     errors = interf.CalculateFlowsheet2(sim)
     
-
-
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
@@ -195,4 +191,5 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
     im = Image.open(imgPath)
     im.show()
     
-#PFR(328.2,2000000.0,{"Water" : 9.57, "Ethylene oxide" : 2.39, 'Ethylene glycol' : 0.0},1,0,0,'Ethylene oxide', {"Water" : 0.0, "Ethylene oxide" : 1.0, 'Ethylene glycol' : 0.0}, {"Water" : 0.0, "Ethylene oxide" : 0.0, 'Ethylene glycol' : 0.0}, {"Water" : -1.0, "Ethylene oxide" : -1.0, 'Ethylene glycol' : 1.0}, 0.0, 1.2, 1.0, 0.5)
+# function call
+PFR(328.2,2000000.0,{"Water" : 9.57, "Ethylene oxide" : 2.39, 'Ethylene glycol' : 0.0},1,0,0,'Ethylene oxide', {"Water" : 0.0, "Ethylene oxide" : 1.0, 'Ethylene glycol' : 0.0}, {"Water" : 0.0, "Ethylene oxide" : 0.0, 'Ethylene glycol' : 0.0}, {"Water" : -1.0, "Ethylene oxide" : -1.0, 'Ethylene glycol' : 1.0}, 0.0, 1.2, 1.0, 0.5)

@@ -107,7 +107,9 @@ functions.plot_graph2(Path_graph, './Output/graphs_plots') #plot function
 
 f = nx.read_graphml(Path_graph) #graphml einladen
 
-nodes = list(f.nodes)
+nodes = list(f.nodes) # list all nodes from graph
+
+# search string in dictionary 
 
 for node in nodes:
     attribute_dict = nx.get_node_attributes(f, node)

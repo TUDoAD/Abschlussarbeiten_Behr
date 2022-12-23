@@ -1,18 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Nov 25 11:27:25 2022
-
-@author: Lucky Luciano
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 24 17:08:33 2022
-
-@author: Lucky Luciano
-"""
-
-
 #delete dwsim_newui
 
 import os
@@ -74,21 +59,13 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
         
        print(key)
     
-    
 #create and connect objects
 
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
     m2 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet")
     t1 = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
     sim.ConnectObjects(m1.GraphicObject, t1.GraphicObject, -1, -1)
-    sim.ConnectObjects(t1.GraphicObject, m2.GraphicObject, -1, -1)
-
-    
-    
-#set pump operation mode
-
-
-            
+    sim.ConnectObjects(t1.GraphicObject, m2.GraphicObject, -1, -1)            
     sim.AutoLayout()
     
 # add property package
@@ -103,9 +80,6 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
     
     m1.SetPressure(pressure) # pa        
     
-    m1.SetMolarFlow(0.0) # will be set by compounds
-    
-    #t1.CalcMode = UnitOperations.Tank.Volume
     t1.set_Volume(tank_volume) #m^3
     
     for key in compoundscompoundflow:
@@ -120,9 +94,6 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
 
     errors = interf.CalculateFlowsheet2(sim)
     
-
-
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
@@ -160,4 +131,6 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
     im = Image.open(imgPath)
     im.show()
     
-#Tank(300.0,100000.0,{"Water" : 9.57},100.0)
+# function call
+
+Tank(300.0,100000.0,{"Water" : 9.57},100.0)

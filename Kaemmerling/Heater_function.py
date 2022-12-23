@@ -86,8 +86,6 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
         h1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
         h1.set_DeltaT(deltat) # k
 
-
-    
     sim.AutoLayout()
     
 # add property package
@@ -157,5 +155,7 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     im.show()
     
 Directory.SetCurrentDirectory(work_dir)
+
+# function call
     
-#Heater(300.0,100000.0,{"Water" : 9.57},0,350.0,0)
+Heater(300.0,100000.0,{"Water" : 9.57},0,350.0,0)

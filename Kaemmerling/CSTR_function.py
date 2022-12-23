@@ -1,17 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Nov 25 11:36:37 2022
-
-@author: Lucky Luciano
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 24 17:08:33 2022
-
-@author: Lucky Luciano
-"""
-
 
 #delete dwsim_newui
 
@@ -74,7 +60,7 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
         
        print(key)
     
-       # stoichiometric coefficients
+# stoichiometric coefficients
        
        comps = stochiometry
        comps1 = Dictionary[str, float]()
@@ -82,7 +68,7 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
            value = comps[key1]
            comps1.Add(key1, value);
 
-       # direct order coefficients
+# direct order coefficients
        
        dorders = direct_order
        dorders1 = Dictionary[str, float]()
@@ -90,7 +76,7 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
            value = dorders[key2]
            dorders1.Add(key2, value);
            
-       # reverse order coefficients
+# reverse order coefficients
         
        rorders = reverse_order
        rorders1 = Dictionary[str, float]()
@@ -116,10 +102,6 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     
     
 #set cstr operation mode
-
-
-        
-
             
     if adiabatic != 0:
         CSTR1.ReactorOperationMode = Reactors.OperationMode.Adiabatic
@@ -133,6 +115,8 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
 
     CSTR1.Volume = reactor_volume #m^3      
     sim.AutoLayout()
+    
+# set compounds
     
     for key in compoundscompoundflow:
          
@@ -151,18 +135,12 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     
     m1.SetPressure(pressure) # pa        
     
-
-    
-
 #request a calculation
 
     Settings.SolverMode = 0
 
     errors = interf.CalculateFlowsheet2(sim)
     
-
-
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
@@ -200,4 +178,5 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     im = Image.open(imgPath)
     im.show()
     
-#CSTR(343.15,500000.0,{"Methyl acetate" : 0.48, '1-butanol' : 0.48, 'Methanol' : 0.04, 'N-butyl acetate' : 0.0},1,0,0,'1-butanol',{"Methyl acetate" : 1.0, '1-butanol' : 1.0, 'Methanol': 0.0, 'N-butyl acetate': 0.0}, {"Methyl acetate" : 0.0, '1-butanol' : 0.0, 'Methanol': 0.0, 'N-butyl acetate': 0.0},{"Methyl acetate" : -1.0, '1-butanol' : -1.0, 'Methanol':1.0, 'N-butyl acetate': 1.0}, 4.0, 0.01)
+# function call    
+CSTR(343.15,500000.0,{"Methyl acetate" : 0.48, '1-butanol' : 0.48, 'Methanol' : 0.04, 'N-butyl acetate' : 0.0},1,0,0,'1-butanol',{"Methyl acetate" : 1.0, '1-butanol' : 1.0, 'Methanol': 0.0, 'N-butyl acetate': 0.0}, {"Methyl acetate" : 0.0, '1-butanol' : 0.0, 'Methanol': 0.0, 'N-butyl acetate': 0.0},{"Methyl acetate" : -1.0, '1-butanol' : -1.0, 'Methanol':1.0, 'N-butyl acetate': 1.0}, 4.0, 0.01)

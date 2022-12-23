@@ -139,4 +139,6 @@ def Separator(temperature, pressure, compoundscompoundflow):
     im = Image.open(imgPath)
     im.show()
     
-#Separator(300.0,100000.0,{"Water" : 9.57,'Air': 10.0})
+# function call
+    
+Separator(300.0,100000.0,{"Water" : 9.57,'Air': 10.0})
