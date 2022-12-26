@@ -82,7 +82,6 @@ stables = PropertyPackages.SteamTablesPropertyPackage()
 sim.AddPropertyPackage(stables)
 
 # set inlet stream temperature
-# default properties: T = 298.15 K, P = 101325 Pa, Mass Flow = 1 kg/s
 
 m1.SetTemperature(300.0) # K
 m1.SetMassFlow(100.0) # kg/s

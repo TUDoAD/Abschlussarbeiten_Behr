@@ -6,11 +6,12 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
     
     
     nodes = list(graph.nodes) # list all nodes
-    first_node = nodes[0]    
+    first_node = nodes[0] 
+    node_class = graph._node[first_node]['node_class']
 
     for node in nodes:
         
-        if node == 'Column' == nodes[0]:
+        if graph._node[node]['node_class'] == 'Column' == node_class:
             # set column parameter
             lk_mole_fraction_in_distillate = graph._node[first_node]['lk_mole_fraction_in_distillate'] 
             hk_mole_fraction_in_distillate = graph._node[first_node]['hk_mole_fraction_in_distillate']
@@ -62,7 +63,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node =='Column' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True:  # start next function only if it was not run before (dict condition) and if it is in the successor list
+        if graph._node[node]['node_class'] =='Column' != node_class and node in successors == True and 'simulated_node' not in graph._node[node] == True:  # start next function only if it was not run before (dict condition) and if it is in the successor list
             # set column parameter 
             lk_mole_fraction_in_distillate = graph._node[node]['lk_mole_fraction_in_distillate'] 
             hk_mole_fraction_in_distillate = graph._node[node]['hk_mole_fraction_in_distillate']
@@ -117,7 +118,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Vessel' == nodes[0]: 
+        if graph._node[node]['node_class'] == 'Vessel' == node_class: 
             # set tank volume
             tank_volume = graph._node[first_node]['tank_volume'] 
             inlet_stream = compoundscompoundflow
@@ -148,7 +149,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             nx.set_node_attributes(graph,group)
 
             
-        if node == 'Vessel' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
+        if graph._node[node]['node_class'] == 'Vessel' != node_class and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
             # read data from graphml
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
@@ -183,7 +184,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             nx.set_node_attributes(graph,group)
 
             
-        if node == 'Tank' == nodes[0]: 
+        if graph._node[node]['node_class'] == 'Tank' == node_class: 
             # set tank volume
             tank_volume = graph._node[first_node]['tank_volume'] 
             inlet_stream = compoundscompoundflow
@@ -213,7 +214,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Tank' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
+        if graph._node[node]['node_class'] == 'Tank' != node_class and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
             # read data from graphml
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
@@ -247,7 +248,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Silo' == nodes[0]: 
+        if graph._node[node]['node_class'] == 'Silo' == node_class: 
             # set tank volume
             tank_volume = graph._node[first_node]['tank_volume'] 
             inlet_stream = compoundscompoundflow
@@ -277,7 +278,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Silo' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
+        if graph._node[node]['node_class'] == 'Silo' != node_class and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
            # read data from graphml
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
@@ -311,7 +312,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'PFR' == nodes[0]:
+        if graph._node[node]['node_class'] == 'PFR' == node_class:
             # set PFR parameter
             if 'outlet_temperature' in graph[node]:
                 outlet_temperature = graph._node[node]['outlet_temperature']
@@ -366,7 +367,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'PFR' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list  
+        if graph._node[node]['node_class'] == 'PFR' != node_class and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list  
             # set PFR parameter
             if 'outlet_temperature' in graph[node]:
                 outlet_temperature = graph._node[node]['outlet_temperature']
@@ -424,7 +425,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'CSTR' == nodes[0]:
+        if graph._node[node]['node_class'] == 'CSTR' == node_class:
             # set CSTR parameter
             if 'outlet_temperature' in graph[node]:
                 outlet_temperature = graph._node[node]['outlet_temperature']
@@ -471,7 +472,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'CSTR' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
+        if graph._node[node]['node_class'] == 'CSTR' != node_class and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
             # set CSTR parameter
             if 'outlet_temperature' in graph[node]:
                 outlet_temperature = graph._node[node]['outlet_temperature']
@@ -515,7 +516,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Heater' == nodes[0]:
+        if graph._node[node]['node_class'] == 'Heater' == node_class:
             # set heater parameter
             if 'outlet_temperature' in graph[node]:
                 outlet_temperature = graph._node[node]['outlet_temperature']
@@ -556,7 +557,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Heater' != nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list  
+        if graph._node[node]['node_class'] == 'Heater' != node_class and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list  
             # set heater parameter          
             if 'outlet_temperature' in graph[node]:
                 outlet_temperature = graph._node[node]['outlet_temperature']
@@ -600,7 +601,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node =='Cooler'== nodes[0]:
+        if graph._node[node]['node_class'] =='Cooler'== node_class:
             # set cooler parameter
             if 'outlet_temperature' in graph[node]:
                 outlet_temperature = graph._node[node]['outlet_temperature']
@@ -641,7 +642,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node =='Cooler'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
+        if graph._node[node]['node_class'] =='Cooler'!= node_class and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
             # set cooler parameter
             if 'outlet_temperature' in graph[node]:
                 outlet_temperature = graph._node[node]['outlet_temperature']
@@ -685,7 +686,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Heat exchanger, detailed'== nodes[0]:
+        if graph._node[node]['node_class'] == 'Heat exchanger, detailed'== node_class:
             # set heat exchanger parameter
             heat_exchange_area = graph._node[node]['heat_exchange_area']
             global_heat_transfer = graph._node[node]['global_heat_transfer'] 
@@ -721,7 +722,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Heat exchanger, detailed'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
+        if graph._node[node]['node_class'] == 'Heat exchanger, detailed'!= node_class and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
             # set heat exchanger parameter
             inlet_stream2 = graph._node[node]['compoundscompoundflow2']
             inlet_temperature2 = graph._node[node]['inlet_temperature2']
@@ -758,7 +759,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Pump'== nodes[0]:
+        if graph._node[node]['node_class'] == 'Pump'== node_class:
             # set pump parameter
             if 'outlet_pressure' in graph[node]:
                 outlet_pressure = graph._node[node]['outlet_pressure']
@@ -803,7 +804,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Pump'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
+        if graph._node[node]['node_class'] == 'Pump'!= node_class and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list
             # set pump parameter
             if 'outlet_pressure' in graph[node]:
                 outlet_pressure = graph._node[node]['outlet_pressure']
@@ -850,7 +851,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Compressor'== nodes[0]:
+        if graph._node[node]['node_class'] == 'Compressor'== node_class:
             # set compressor parameter
             if 'outlet_pressure' in graph[node]:
                 outlet_pressure = graph._node[node]['outlet_pressure']
@@ -894,7 +895,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Compressor'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list  
+        if graph._node[node]['node_class'] == 'Compressor'!= node_class and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list  
             # set compressor parameter
             if 'outlet_pressure' in graph[node]:
                 outlet_pressure = graph._node[node]['outlet_pressure']
@@ -942,7 +943,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Separator'== nodes[0]:
+        if graph._node[node]['node_class'] == 'Separator'== node_class:
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.Separator(inlet_temperature, inlet_pressure, inlet_stream)
             before_node = node
@@ -986,7 +987,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
-        if node == 'Separator'!= nodes[0] and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list 
+        if graph._node[node]['node_class'] == 'Separator'!= node_class and node in successors == True and 'simulated_node' not in graph._node[node] == True: # start next function only if it was not run before (dict condition) and if it is in the successor list 
             # read data from graphml
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
