@@ -115,6 +115,7 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     errors = interf.CalculateFlowsheet2(sim)
 
     print(String.Format("Heater Heat Load: {0} kW", h1.DeltaQ))
+    
 
 
 #save file
@@ -154,8 +155,10 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     im = Image.open(imgPath)
     im.show()
     
+    outletcomposition = list(m2.GetOverallComposition())
+    return outletcomposition
 Directory.SetCurrentDirectory(work_dir)
 
 # function call
-    
-Heater(300.0,100000.0,{"Water" : 9.57},0,350.0,0)
+
+#Heater(300.0,100000.0,{"Water" : 9.57},0,350.0,0)

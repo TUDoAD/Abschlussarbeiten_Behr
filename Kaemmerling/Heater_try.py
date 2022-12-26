@@ -139,3 +139,4 @@ from PIL import Image
 
 im = Image.open(imgPath)
 im.show()
+outletcomposition = list(m2.GetOverallComposition())
