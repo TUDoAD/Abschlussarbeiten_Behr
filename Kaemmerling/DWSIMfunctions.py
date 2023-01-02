@@ -11,7 +11,7 @@ except OSError as e:
 else:
     print("File is deleted successfully")
 
-
+work_dir = os.getcwd()
 import pythoncom
 pythoncom.CoInitialize()
 import clr
@@ -35,6 +35,7 @@ clr.AddReference(dwsimpath + "DWSIM.MathOps.dll")
 clr.AddReference(dwsimpath + "TcpComm.dll")
 clr.AddReference(dwsimpath + "Microsoft.ServiceBus.dll")
 
+import networkx as nx
 from DWSIM.Interfaces.Enums.GraphicObjects import ObjectType
 from DWSIM.Thermodynamics import Streams, PropertyPackages
 from DWSIM.UnitOperations import UnitOperations, Reactors
@@ -810,6 +811,28 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
 
     im = Image.open(imgPath)
     im.show()
+    
+    Heater1 = nx.Graph()
+    Heater1.add_node('heater')
+    outlet_temperature = m2.GetTemperature()
+    dict1 = {'outlet_temperature':outlet_temperature}
+    group= {'heater':dict1}
+    nx.set_node_attributes(Heater1,group)
+    outlet_pressure = m2.GetPressure()
+    dict1 = {'outlet_pressure':outlet_pressure}
+    group= {'heater':dict1}
+    nx.set_node_attributes(Heater1,group)
+    list2 = m2.GetOverallComposition()
+    for key in compoundscompoundflow:
+                dict1 = {'compounds': key}
+                group= {'heater':dict1}
+                nx.set_node_attributes(Heater1,group)
+    for value in list2:
+                dict1 = {'flow': value}
+                group= {'heater':dict1}
+                nx.set_node_attributes(Heater1,group)
+    Directory.SetCurrentDirectory(work_dir)
+    nx.write_graphml(Heater1,'./Output/graphs_graphml/clean/Heater_Graph')
 
 def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter):
 
