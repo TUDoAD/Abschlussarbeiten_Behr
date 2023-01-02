@@ -26,6 +26,7 @@ import clr
 
 from System.IO import Directory, Path, File
 from System import String, Environment
+import networkx as nx
 
 dwsimpath = "C:\\Users\\Lucky Luciano\\AppData\\Local\\DWSIM 8\\"
 
@@ -139,4 +140,17 @@ from PIL import Image
 
 im = Image.open(imgPath)
 im.show()
-outletcomposition = list(m2.GetOverallComposition())
+
+Heater = nx.DiGraph()
+Heater.add_node('heater')
+outlet_temperature = m2.GetTemperature()
+dict1 = {'outlet_temperature':outlet_temperature}
+group= {'heater':dict1}
+nx.set_node_attributes(Heater,group)
+outlet_pressure = m2.GetPressure()
+dict1 = {'outlet_pressure':outlet_pressure}
+group= {'heater':dict1}
+nx.set_node_attributes(Heater,group)
+dict2 = []
+list2 = list(m2.GetOverallComposition())
+nx.write_graphml(Heater,'./Output/graphs_graphml/clean/Heater_Graph')
