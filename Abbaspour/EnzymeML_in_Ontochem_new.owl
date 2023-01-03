@@ -1,0 +1,611 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.nfdi.org/nfdi4cat/ontochem"
+     xml:base="http://www.nfdi.org/nfdi4cat/ontochem"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:bibo="http://purl.org/ontology/bibo/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:o4cat="http://www.nfdi.org/nfdi4cat/ontochem#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:schema="https://schema.org/">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/49157/ontologies/2022/11/Ontochem_EnzymeML"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/BFO_0000050 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/BFO_0000050"/>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/BFO_0000051 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/BFO_0000051"/>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/RO_0002224 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002224">
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasPart"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/RO_0002230 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002230">
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasPart"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#hasChemicalMaterialInput -->
+
+    <owl:ObjectProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#hasChemicalMaterialInput">
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasMetadata"/>
+        <rdfs:domain rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingModule"/>
+        <rdfs:range rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ChemicalMaterial"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#hasChemicalMaterialOutput -->
+
+    <owl:ObjectProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#hasChemicalMaterialOutput">
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasMetadata"/>
+        <rdfs:domain rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingModule"/>
+        <rdfs:range rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ChemicalMaterial"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#hasInputFrom -->
+
+    <owl:ObjectProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#hasInputFrom">
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasMetadata"/>
+        <owl:inverseOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasOutputTo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#hasInputImmediatelyFrom -->
+
+    <owl:ObjectProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#hasInputImmediatelyFrom">
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasInputFrom"/>
+        <owl:inverseOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasOutputImmediatelyTo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#hasMetadata -->
+
+    <owl:ObjectProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#hasMetadata">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#isMetadataOf"/>
+        <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:range rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#Metadata"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#hasOutputImmediatelyTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#hasOutputImmediatelyTo">
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasOutputTo"/>
+        <rdfs:domain rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModule"/>
+        <rdfs:range rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModule"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#hasOutputTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#hasOutputTo">
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasMetadata"/>
+        <rdfs:domain rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModule"/>
+        <rdfs:range rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModule"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#hasPart -->
+
+    <owl:ObjectProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#hasPart">
+        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
+        <owl:inverseOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#isPartOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#hasProcessingModule -->
+
+    <owl:ObjectProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#hasProcessingModule">
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasMetadata"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasPart"/>
+        <rdfs:domain rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ResearchStep"/>
+        <rdfs:range rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModule"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#hasUnitOperation -->
+
+    <owl:ObjectProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#hasUnitOperation">
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasMetadata"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasPart"/>
+        <rdfs:domain rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingModule"/>
+        <rdfs:range rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#UnitOperation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#isMetadataOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#isMetadataOf">
+        <rdfs:range rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#isPartOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#isPartOf">
+        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000050"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#storedMaterial -->
+
+    <owl:ObjectProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#storedMaterial">
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasMetadata"/>
+        <rdfs:domain rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingModule"/>
+        <rdfs:range rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#Matter"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#inSeries -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/dcat#inSeries">
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#isPartOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/member -->
+
+    <owl:ObjectProperty rdf:about="http://xmlns.com/foaf/0.1/member">
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasPart"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#hasSimpleMetadata -->
+
+    <owl:DatatypeProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#hasSimpleMetadata"/>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#referenceLabel -->
+
+    <owl:DatatypeProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#referenceLabel">
+        <rdfs:subPropertyOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasSimpleMetadata"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://w3id.org/nfdi4ing/metadata4ing#ProcessingStep -->
+
+    <owl:Class rdf:about="http://w3id.org/nfdi4ing/metadata4ing#ProcessingStep"/>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#Alloy -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#Alloy">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ChemicalMaterial"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#BioProcessingTask -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#BioProcessingTask">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingTask"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#ChemicalCompound -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#ChemicalCompound">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ChemicalSubstance"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#ChemicalMaterial -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#ChemicalMaterial">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#Matter"/>
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModuleMetadata"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#ChemicalMixture -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#ChemicalMixture">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ChemicalMaterial"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#ChemicalReaction -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#ChemicalReaction"/>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#ChemicalSubstance -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#ChemicalSubstance">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ChemicalMaterial"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#DataProcessingModule -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#DataProcessingModule">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModule"/>
+        <owl:disjointWith rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingModule"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#DataProcessingTask -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#DataProcessingTask">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingTask"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#Device -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#Device"/>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#Matter -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#Matter"/>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#Metadata -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#Metadata">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#isMetadataOf"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingModule -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingModule">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModule"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingTask -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingTask">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#CHEMICAL_REACTION"/>
+                    <rdf:Description rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#LIQUID_GAS_SEPARATION"/>
+                    <rdf:Description rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#SUBSTANCE_TRANSFER"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingTask"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModule -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModule">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModuleMetadata"/>
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ResearchStepMetadata"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModuleMetadata -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModuleMetadata">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#isMetadataOf"/>
+                <owl:someValuesFrom rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModule"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#ProcessingTask -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingTask">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModuleMetadata"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#ResearchStep -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#ResearchStep">
+        <rdfs:subClassOf rdf:resource="http://w3id.org/nfdi4ing/metadata4ing#ProcessingStep"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#hasProcessingModule"/>
+                <owl:allValuesFrom rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModule"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#ResearchStepMetadata -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#ResearchStepMetadata">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#isMetadataOf"/>
+                <owl:someValuesFrom rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ResearchStep"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#SimpleSubstance -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#SimpleSubstance">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ChemicalSubstance"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#SpectroscopicModule -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#SpectroscopicModule">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModule"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#SpectroscopicTask -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#SpectroscopicTask">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingTask"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#Still -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#Still">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#Device"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#UODistillation -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UODistillation">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#UOLiquidLiquidSeparation"/>
+        <rdfs:comment>Distillation is an effective method to separate mixtures comprised of two or more pure liquids. Distillation is a purification process where the components of a liquid mixture are vaporized and then condensed and isolated.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#UOHeating -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UOHeating">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#UnitOperation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#UOLiquidGasSeparation -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UOLiquidGasSeparation">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#UOSeparation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#UOLiquidLiquidSeparation -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UOLiquidLiquidSeparation">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#UOSeparation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#UOMixing -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UOMixing">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#UnitOperation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#UOMixingMagnetic -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UOMixingMagnetic">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#UOMixing"/>
+        <owl:disjointWith rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#UOMixingManual"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#UOMixingManual -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UOMixingManual">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#UOMixing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#UOSeparation -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UOSeparation">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#UnitOperation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#UOStorage -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UOStorage">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#UnitOperation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#UOTransfer -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UOTransfer">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#UnitOperation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#UnitOperation -->
+
+    <owl:Class rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UnitOperation">
+        <rdfs:subClassOf rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModuleMetadata"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#CHEMICAL_REACTION -->
+
+    <owl:NamedIndividual rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#CHEMICAL_REACTION">
+        <rdf:type rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingTask"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#LIQUID_GAS_SEPARATION -->
+
+    <owl:NamedIndividual rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#LIQUID_GAS_SEPARATION">
+        <rdf:type rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingTask"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.nfdi.org/nfdi4cat/ontochem#SUBSTANCE_TRANSFER -->
+
+    <owl:NamedIndividual rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#SUBSTANCE_TRANSFER">
+        <rdf:type rdf:resource="http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingTask"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#Alloy"/>
+            <rdf:Description rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#ChemicalMixture"/>
+            <rdf:Description rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#ChemicalSubstance"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UOHeating"/>
+            <rdf:Description rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UOMixing"/>
+            <rdf:Description rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UOSeparation"/>
+            <rdf:Description rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UOStorage"/>
+            <rdf:Description rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#UOTransfer"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
