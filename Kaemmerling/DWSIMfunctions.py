@@ -1370,5 +1370,22 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
                 dict1 = {'flow': value}
                 group= {'unitoperation':dict1}
                 nx.set_node_attributes(UnitOperation,group)
+    outlet_temperature2 = m3.GetTemperature()
+    dict1 = {'outlet_temperature2':outlet_temperature2}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    outlet_pressure2 = m3.GetPressure()
+    dict1 = {'outlet_pressure2':outlet_pressure2}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    list2 = m3.GetOverallComposition()
+    for key in compoundscompoundflow:
+                dict1 = {'compounds': key}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    for value in list2:
+                dict1 = {'flow2': value}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
