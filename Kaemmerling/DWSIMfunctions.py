@@ -161,6 +161,28 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
 
     im = Image.open(imgPath)
     im.show()
+    
+    UnitOperation = nx.Graph()
+    UnitOperation.add_node('unitoperation')
+    outlet_temperature = m2.GetTemperature()
+    dict1 = {'outlet_temperature':outlet_temperature}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    outlet_pressure = m2.GetPressure()
+    dict1 = {'outlet_pressure':outlet_pressure}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    list2 = m2.GetOverallComposition()
+    for key in compoundscompoundflow1:
+                dict1 = {'compounds': key}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    for value in list2:
+                dict1 = {'flow': value}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    Directory.SetCurrentDirectory(work_dir)
+    nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
 def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemperature, deltat):
 
@@ -266,6 +288,28 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
 
     im = Image.open(imgPath)
     im.show()
+    
+    UnitOperation = nx.Graph()
+    UnitOperation.add_node('unitoperation')
+    outlet_temperature = m2.GetTemperature()
+    dict1 = {'outlet_temperature':outlet_temperature}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    outlet_pressure = m2.GetPressure()
+    dict1 = {'outlet_pressure':outlet_pressure}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    list2 = m2.GetOverallComposition()
+    for key in compoundscompoundflow:
+                dict1 = {'compounds': key}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    for value in list2:
+                dict1 = {'flow': value}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    Directory.SetCurrentDirectory(work_dir)
+    nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
 def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
 
@@ -362,6 +406,28 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
 
     im = Image.open(imgPath)
     im.show()
+    
+    UnitOperation = nx.Graph()
+    UnitOperation.add_node('unitoperation')
+    outlet_temperature = m2.GetTemperature()
+    dict1 = {'outlet_temperature':outlet_temperature}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    outlet_pressure = m2.GetPressure()
+    dict1 = {'outlet_pressure':outlet_pressure}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    list2 = m2.GetOverallComposition()
+    for key in compoundscompoundflow:
+                dict1 = {'compounds': key}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    for value in list2:
+                dict1 = {'flow': value}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    Directory.SetCurrentDirectory(work_dir)
+    nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
 def Separator(temperature, pressure, compoundscompoundflow):
 
@@ -452,6 +518,28 @@ def Separator(temperature, pressure, compoundscompoundflow):
 
     im = Image.open(imgPath)
     im.show()
+    
+    UnitOperation = nx.Graph()
+    UnitOperation.add_node('unitoperation')
+    outlet_temperature = m2.GetTemperature()
+    dict1 = {'outlet_temperature':outlet_temperature}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    outlet_pressure = m2.GetPressure()
+    dict1 = {'outlet_pressure':outlet_pressure}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    list2 = m2.GetOverallComposition()
+    for key in compoundscompoundflow:
+                dict1 = {'compounds': key}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    for value in list2:
+                dict1 = {'flow': value}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    Directory.SetCurrentDirectory(work_dir)
+    nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
 def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, powerrequired):
 
@@ -561,6 +649,28 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
 
     im = Image.open(imgPath)
     im.show()
+    
+    UnitOperation = nx.Graph()
+    UnitOperation.add_node('unitoperation')
+    outlet_temperature = m2.GetTemperature()
+    dict1 = {'outlet_temperature':outlet_temperature}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    outlet_pressure = m2.GetPressure()
+    dict1 = {'outlet_pressure':outlet_pressure}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    list2 = m2.GetOverallComposition()
+    for key in compoundscompoundflow:
+                dict1 = {'compounds': key}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    for value in list2:
+                dict1 = {'flow': value}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    Directory.SetCurrentDirectory(work_dir)
+    nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
 def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter):
 
@@ -705,6 +815,28 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
 
     im = Image.open(imgPath)
     im.show()
+    
+    UnitOperation = nx.Graph()
+    UnitOperation.add_node('unitoperation')
+    outlet_temperature = m2.GetTemperature()
+    dict1 = {'outlet_temperature':outlet_temperature}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    outlet_pressure = m2.GetPressure()
+    dict1 = {'outlet_pressure':outlet_pressure}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    list2 = m2.GetOverallComposition()
+    for key in compoundscompoundflow:
+                dict1 = {'compounds': key}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    for value in list2:
+                dict1 = {'flow': value}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    Directory.SetCurrentDirectory(work_dir)
+    nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
 def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemperature, deltat):
 
@@ -812,27 +944,27 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     im = Image.open(imgPath)
     im.show()
     
-    Heater1 = nx.Graph()
-    Heater1.add_node('heater')
+    UnitOperation = nx.Graph()
+    UnitOperation.add_node('unitoperation')
     outlet_temperature = m2.GetTemperature()
     dict1 = {'outlet_temperature':outlet_temperature}
-    group= {'heater':dict1}
-    nx.set_node_attributes(Heater1,group)
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
     outlet_pressure = m2.GetPressure()
     dict1 = {'outlet_pressure':outlet_pressure}
-    group= {'heater':dict1}
-    nx.set_node_attributes(Heater1,group)
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
     list2 = m2.GetOverallComposition()
     for key in compoundscompoundflow:
                 dict1 = {'compounds': key}
-                group= {'heater':dict1}
-                nx.set_node_attributes(Heater1,group)
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
     for value in list2:
                 dict1 = {'flow': value}
-                group= {'heater':dict1}
-                nx.set_node_attributes(Heater1,group)
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
-    nx.write_graphml(Heater1,'./Output/graphs_graphml/clean/Heater_Graph')
+    nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
 def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter):
 
@@ -970,6 +1102,28 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
 
     im = Image.open(imgPath)
     im.show()
+    
+    UnitOperation = nx.Graph()
+    UnitOperation.add_node('unitoperation')
+    outlet_temperature = m2.GetTemperature()
+    dict1 = {'outlet_temperature':outlet_temperature}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    outlet_pressure = m2.GetPressure()
+    dict1 = {'outlet_pressure':outlet_pressure}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    list2 = m2.GetOverallComposition()
+    for key in compoundscompoundflow:
+                dict1 = {'compounds': key}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    for value in list2:
+                dict1 = {'flow': value}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    Directory.SetCurrentDirectory(work_dir)
+    nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
 def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream):
 
@@ -1074,6 +1228,28 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
 
     im = Image.open(imgPath)
     im.show()
+    
+    UnitOperation = nx.Graph()
+    UnitOperation.add_node('unitoperation')
+    outlet_temperature = m2.GetTemperature()
+    dict1 = {'outlet_temperature':outlet_temperature}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    outlet_pressure = m2.GetPressure()
+    dict1 = {'outlet_pressure':outlet_pressure}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    list2 = m2.GetOverallComposition()
+    for key in compoundscompoundflow:
+                dict1 = {'compounds': key}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    for value in list2:
+                dict1 = {'flow': value}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    Directory.SetCurrentDirectory(work_dir)
+    nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
 def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound):
 
@@ -1174,3 +1350,25 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
 
     im = Image.open(imgPath)
     im.show()
+    
+    UnitOperation = nx.Graph()
+    UnitOperation.add_node('unitoperation')
+    outlet_temperature = m2.GetTemperature()
+    dict1 = {'outlet_temperature':outlet_temperature}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    outlet_pressure = m2.GetPressure()
+    dict1 = {'outlet_pressure':outlet_pressure}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    list2 = m2.GetOverallComposition()
+    for key in compoundscompoundflow:
+                dict1 = {'compounds': key}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    for value in list2:
+                dict1 = {'flow': value}
+                group= {'unitoperation':dict1}
+                nx.set_node_attributes(UnitOperation,group)
+    Directory.SetCurrentDirectory(work_dir)
+    nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
