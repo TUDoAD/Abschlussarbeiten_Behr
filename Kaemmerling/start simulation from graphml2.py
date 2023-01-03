@@ -1,10 +1,12 @@
 
 import networkx as nx
 import DWSIMfunctions
+import os
+from System.IO import Directory
 
 def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compoundscompoundflow):
     
-    
+    work_dir = os.getcwd()
     nodes = list(graph.nodes) # list all nodes
     first_node = nodes[0] 
     node_class = graph._node[first_node]['node_class']
@@ -71,7 +73,10 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             # read data from graphml
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure']
-            inlet_stream = graph._node[before_node]['compoundscompoundflow']
+            !flow = graph._node[before_node]['flow']
+            !compound = graph._node[before_node]['compound']
+            !inlet_stream = {}
+            !inlet_stream[compound] = flow
             # start DWSIM simulation
             DWSIMfunctions.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
             # set node as last node
@@ -1031,9 +1036,11 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+    Directory.SetCurrentDirectory(work_dir)
+    nx.write_graphml(graph,'./Output/graphs_graphml/clean/Graph_after_simulation')
             
 graph = nx.read_graphml('C:/Users/Lucky Luciano/Documents/GitHub/Abschlussarbeiten_Behr/Kaemmerling/Output/graphs_graphml/clean/graphml_pfd3')
-startsimulationfromgraphml(graph, 298.15, 100000, {"Water" : 0.5,'Ethanol' : 0.5})
+startsimulationfromgraphml(graph, 298.15, 100000, {"Water" : 0.5})
     
          
 
