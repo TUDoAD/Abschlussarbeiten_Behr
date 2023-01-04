@@ -177,7 +177,7 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = m2.GetOverallComposition
+    key = list(m2.GetOverallComposition)
     k = key[0]
     dict1 = {'flow': k}
     group= {'unitoperation':dict1}
@@ -305,7 +305,7 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = m2.GetOverallComposition
+    key = list(m2.GetOverallComposition)
     k = key[0]
     dict1 = {'flow': k}
     group= {'unitoperation':dict1}
@@ -424,7 +424,7 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = m2.GetOverallComposition
+    key = list(m2.GetOverallComposition)
     k = key[0]
     dict1 = {'flow': k}
     group= {'unitoperation':dict1}
@@ -532,13 +532,12 @@ def Separator(temperature, pressure, compoundscompoundflow):
     dict1 = {'outlet_pressure':outlet_pressure}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    list2 = m2.GetOverallComposition()
     key = list(compoundscompoundflow.keys())
     k = key[0]
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = m2.GetOverallComposition
+    key = list(m2.GetOverallComposition)
     k = key[0]
     dict1 = {'flow': k}
     group= {'unitoperation':dict1}
@@ -551,13 +550,12 @@ def Separator(temperature, pressure, compoundscompoundflow):
     dict1 = {'outlet_pressure2':outlet_pressure2}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    list2 = m3.GetOverallComposition()
     key = list(compoundscompoundflow.keys())
     k = key[0]
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = m3.GetOverallComposition
+    key = list(m3.GetOverallComposition)
     k = key[0]
     dict1 = {'flow2': k}
     group= {'unitoperation':dict1}
@@ -689,7 +687,7 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = m2.GetOverallComposition
+    key = list(m2.GetOverallComposition)
     k = key[0]
     dict1 = {'flow': k}
     group= {'unitoperation':dict1}
@@ -856,7 +854,7 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = m2.GetOverallComposition
+    key = list(m2.GetOverallComposition)
     k = key[0]
     dict1 = {'flow': k}
     group= {'unitoperation':dict1}
@@ -985,7 +983,7 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = m2.GetOverallComposition
+    key = list(m2.GetOverallComposition)
     k = key[0]
     dict1 = {'flow': k}
     group= {'unitoperation':dict1}
@@ -1145,7 +1143,7 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = m2.GetOverallComposition
+    key = list(m2.GetOverallComposition)
     k = key[0]
     dict1 = {'flow': k}
     group= {'unitoperation':dict1}
@@ -1272,7 +1270,7 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = m2.GetOverallComposition
+    key = list(m2.GetOverallComposition)
     k = key[0]
     dict1 = {'flow': k}
     group= {'unitoperation':dict1}
@@ -1395,7 +1393,7 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = m2.GetOverallComposition
+    key = list(m2.GetOverallComposition)
     k = key[0]
     dict1 = {'flow': k}
     group= {'unitoperation':dict1}
@@ -1413,7 +1411,7 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = m3.GetOverallComposition
+    key = list(m3.GetOverallComposition)
     k = key[0]
     dict1 = {'flow2': k}
     group= {'unitoperation':dict1}
