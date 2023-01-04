@@ -51,8 +51,8 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'flow2':flow2}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             
@@ -81,6 +81,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             DWSIMfunctions.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound)
             # set node as last node
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             # get data from simulation and save it in graphml
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
@@ -90,8 +91,8 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'flow2':flow2}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -123,12 +124,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -159,12 +161,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             tank_volume = graph._node[node]['tank_volume'] 
             DWSIMfunctions.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -189,12 +192,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -224,12 +228,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             tank_volume = graph._node[node]['tank_volume'] 
             DWSIMfunctions.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -253,12 +258,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -288,12 +294,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             tank_volume = graph._node[node]['tank_volume'] 
             DWSIMfunctions.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -342,12 +349,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -402,12 +410,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream[compound] = flow
             DWSIMfunctions.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter)            
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -448,12 +457,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -494,12 +504,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream[compound] = flow
             DWSIMfunctions.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter)            
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             nx.set_node_attributes(graph,group)
@@ -535,12 +546,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.Heater(inlet_temperature, inlet_pressure, inlet_stream, added_energy_stream, outlet_temperature, deltat)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -581,12 +593,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream[compound] = flow
             DWSIMfunctions.Heater(inlet_temperature, inlet_pressure, inlet_stream, added_energy_stream, outlet_temperature, deltat)            
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -621,12 +634,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.Cooler(inlet_temperature, inlet_pressure, inlet_stream, removed_energy_stream, outlet_temperature, deltat)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -667,12 +681,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream[compound] = flow
             DWSIMfunctions.Cooler(inlet_temperature, inlet_pressure, inlet_stream, removed_energy_stream, outlet_temperature, deltat)            
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -702,12 +717,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             global_heat_transfer = graph._node[node]['global_heat_transfer']
             DWSIMfunctions.Heat_exchanger(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, inlet_stream, inlet_stream2, heat_exchange_area, global_heat_transfer)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -741,12 +757,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream[compound] = flow
             DWSIMfunctions.Heat_exchanger(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, inlet_stream, inlet_stream2, heat_exchange_area, global_heat_transfer)                
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -785,12 +802,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.Pump(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream, power_required)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             nx.set_node_attributes(graph,group)
@@ -836,12 +854,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream[compound] = flow
             DWSIMfunctions.Pump(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream, power_required)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -880,6 +899,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.Compressor(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
             outlet_pressure = UnitOperation._node['unitoperation']['outlet_pressure']
             dict1 = {'outlet_temperature':outlet_temperature}
@@ -892,8 +912,8 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             # get successors from node to find out which node is next 
@@ -930,12 +950,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream[compound] = flow
             DWSIMfunctions.Compressor(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -957,6 +978,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = compoundscompoundflow
             DWSIMfunctions.Separator(inlet_temperature, inlet_pressure, inlet_stream)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
@@ -965,8 +987,8 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'flow2':flow2}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
@@ -1002,6 +1024,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream[compound] = flow
             DWSIMfunctions.Separator(inlet_temperature, inlet_pressure, inlet_stream)
             before_node = node
+            UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             flow = UnitOperation._node['unitoperation']['flow']
             dict1 = {'flow':flow}
             group= {node:dict1}
@@ -1010,8 +1033,8 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'flow2':flow2}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            compounds = UnitOperation._node['unitoperation']['compounds'] 
-            dict1 = {'compounds':compounds}
+            compound = UnitOperation._node['unitoperation']['compound'] 
+            dict1 = {'compound':compound}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             nx.set_node_attributes(graph,group)
