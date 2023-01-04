@@ -16,8 +16,11 @@ nx.set_node_attributes(G,clas)
 dict2 = {'node_class':'Pump'}
 clas= {'pump1':dict2}
 nx.set_node_attributes(G,clas)
-dict2 = {'outlet_pressure':150000}
+dict2 = {'outlet_pressure':100000.0}
 clas= {'pump1':dict2}
+nx.set_node_attributes(G,clas)
+dict2 = {'tank_volume':100.0}
+clas= {'tank1':dict2}
 nx.set_node_attributes(G,clas)
 
 nx.write_graphml(G,'./Output/graphs_graphml/clean/graphml_test')
