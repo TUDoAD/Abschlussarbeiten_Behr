@@ -1,4 +1,4 @@
-# load ontochem and add EnzymeML-classes
+# load ontology ontochem.owl from local file
 
 import owlready2
 from owlready2 import *
@@ -10,6 +10,7 @@ local_world = owlready2.World()
 onto = local_world.get_ontology("./metadata4ing.owl").load()
 onto = local_world.get_ontology("./EnzymeML_in_Ontochem_new.owl").load()
 
+# check existing components of the ontology
 import ontospy
 
 model = ontospy.Ontospy("./EnzymeML_in_Ontochem_.owl", verbose=True)
@@ -50,6 +51,7 @@ print( list(onto.individuals()) )
 
 print(list(onto.search(iri="*PhysChemProcessingTask")))
 
+# create classes and subclasses into ontochem.owl
 with onto:
     class Agent(Thing): pass
     class Organisation(Agent): pass
