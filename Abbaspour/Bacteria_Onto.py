@@ -8,6 +8,7 @@ Created on Mon Dec  5 14:43:30 2022
 from owlready2 import *
  
 onto = get_ontology("http://www.semanticweb.org/49157/ontologies/2022/11/bacteria1.owl#")
+owlready2.JAVA_EXE = "C://Users//49157//Downloads//Protege-5.5.0-win//Protege-5.5.0//jre//bin//java.exe"
  
 with onto:
     class Shape(Thing): pass
@@ -78,5 +79,8 @@ with onto:
         has_grouping = [ InCluster("in_cluster1") ],
         gram_positive = True,
         nb_colonies = 6)
-    
+
+with onto:
+    sync_reasoner()
+  
 onto.save("bacteria1.owl")
