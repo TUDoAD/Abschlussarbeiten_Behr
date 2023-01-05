@@ -70,7 +70,10 @@ with onto:
     class StraightTubeReactor(Reactor): pass
 
     class BioProcessingModule(onto.search_one(iri="*ProcessingModule")): pass
-         
+
+# create properties 
+class has_sheet_ID(Vessels >> Reactor): pass
+        
 with onto:
     sync_reasoner()
 
