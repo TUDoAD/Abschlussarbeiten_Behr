@@ -1725,8 +1725,7 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
 def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettemperature, deltat):
-    
-    
+      
 #create and connect objects
 
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
@@ -2070,18 +2069,12 @@ def CSTR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, o
     
     m1.SetPressure(pressure) # pa        
     
-
-    
-
 #request a calculation
 
     Settings.SolverMode = 0
 
     errors = interf.CalculateFlowsheet2(sim)
     
-
-
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
@@ -2144,7 +2137,6 @@ def CSTR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, o
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
-
 def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream):
 
 #add compounds
@@ -2155,7 +2147,6 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
         
        print(key)
     
-    
 #create and connect objects
 
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
@@ -2165,7 +2156,6 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     sim.ConnectObjects(m1.GraphicObject, comp1.GraphicObject, -1, -1)
     sim.ConnectObjects(comp1.GraphicObject, m2.GraphicObject, -1, -1)
     sim.ConnectObjects(e1.GraphicObject, comp1.GraphicObject, -1, -1)
-    
     
 #set pump operation mode
 
@@ -2209,9 +2199,6 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
 
     errors = interf.CalculateFlowsheet2(sim)
     
-
-
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
@@ -2275,8 +2262,7 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
 def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream):
-    
-    
+     
 #create and connect objects
 
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
@@ -2330,9 +2316,6 @@ def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pr
 
     errors = interf.CalculateFlowsheet2(sim)
     
-
-
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
@@ -2405,7 +2388,6 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
         
        print(key)
     
-    
 #create and connect objects
 
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
@@ -2455,9 +2437,6 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
 
     errors = interf.CalculateFlowsheet2(sim)
     
-
-
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
@@ -2592,9 +2571,6 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
 
     errors = interf.CalculateFlowsheet2(sim)
     
-
-
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
