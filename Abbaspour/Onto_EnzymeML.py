@@ -4,11 +4,11 @@ import owlready2
 from owlready2 import *
 import types
 
-local_world = owlready2.World()
-onto_local = local_world.get_ontology("./metadata4ing.owl").load()
-onto_local = local_world.get_ontology("./EnzymeML_in_Ontochem_.owl").load()
+owlready2.JAVA_EXE = "C://Users//49157//Downloads//Protege-5.5.0-win//Protege-5.5.0//jre//bin//java.exe"
 
-onto = onto_local
+local_world = owlready2.World()
+onto = local_world.get_ontology("./metadata4ing.owl").load()
+onto = local_world.get_ontology("./EnzymeML_in_Ontochem_new.owl").load()
 
 import ontospy
 
@@ -51,6 +51,25 @@ print( list(onto.individuals()) )
 print(list(onto.search(iri="*PhysChemProcessingTask")))
 
 with onto:
+    class Agent(Thing): pass
+    class Organisation(Agent): pass
+    class Group(Agent): pass
+    class Person(Agent): pass
+
+    class Project(Thing): pass
+    class Documentation(Project): pass
+    class EnzymeML_Document(Documentation): pass
+
+    class EnzymaticReaction(Thing): pass
+
     class Vessels(onto.search_one(iri="*Device")): pass
+    class Reactor(Vessels): pass
+    class HelicalTubeReactor(Reactor): pass
+    class StraightTubeReactor(Reactor): pass
+
+    class BioProcessingModule(onto.search_one(iri="*ProcessingModule")): pass
          
+with onto:
+    sync_reasoner()
+
 onto.save("OntoPyEnzymeMl.owl")
