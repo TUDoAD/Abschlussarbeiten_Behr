@@ -174,7 +174,9 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     nx.set_node_attributes(UnitOperation,group)
     key = list(compoundscompoundflow.keys())
     k = key[0]
-    dict1 = {'compound': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
@@ -199,8 +201,6 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
     sim.ConnectObjects(h_ex1.GraphicObject, m2.GraphicObject, -1, -1)
     sim.ConnectObjects(m3.GraphicObject, h_ex1.GraphicObject, -1, -1)
     sim.ConnectObjects(h_ex1.GraphicObject, m4.GraphicObject, -1, -1)
-    
-    
     
     sim.AutoLayout()
     
@@ -243,7 +243,6 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
 
     errors = interf.CalculateFlowsheet2(sim)
 
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
@@ -298,7 +297,9 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -339,8 +340,7 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
     if deltat != 0:
         c1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
         c1.set_DeltaT(deltat) # k
-            
-    
+             
     sim.AutoLayout()
     
 # add property package
@@ -426,16 +426,16 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
 def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettemperature, deltat):
-
-    
-    
+ 
 #create and connect objects
 
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
@@ -445,8 +445,7 @@ def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettem
     sim.ConnectObjects(m1.GraphicObject, c1.GraphicObject, -1, -1)
     sim.ConnectObjects(c1.GraphicObject, m2.GraphicObject, -1, -1)
     sim.ConnectObjects(c1.GraphicObject, e1.GraphicObject, -1, -1)
-    
-    
+     
 #set cooler operation mode
 
     if heatremoved != 0:
@@ -492,7 +491,6 @@ def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettem
 
     print(String.Format("cooler Heat Load: {0} kW", c1.DeltaQ))
 
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
@@ -547,7 +545,9 @@ def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettem
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -562,8 +562,7 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
        sim.AddCompound(key)
         
        print(key)
-    
-    
+     
 #create and connect objects
 
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
@@ -571,13 +570,7 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
     t1 = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
     sim.ConnectObjects(m1.GraphicObject, t1.GraphicObject, -1, -1)
     sim.ConnectObjects(t1.GraphicObject, m2.GraphicObject, -1, -1)
-
-    
-    
-#set pump operation mode
-
-
-            
+       
     sim.AutoLayout()
     
 # add property package
@@ -608,9 +601,6 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
     Settings.SolverMode = 0
 
     errors = interf.CalculateFlowsheet2(sim)
-    
-
-
 
 #save file
 
@@ -666,7 +656,9 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -682,12 +674,6 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume):
     t1 = sim.AddObject(ObjectType.Tank, 200, 50, "tank")
     sim.ConnectObjects(m1.GraphicObject, t1.GraphicObject, -1, -1)
     sim.ConnectObjects(t1.GraphicObject, m2.GraphicObject, -1, -1)
-
-    
-    
-#set pump operation mode
-
-
             
     sim.AutoLayout()
     
@@ -720,9 +706,6 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume):
 
     errors = interf.CalculateFlowsheet2(sim)
     
-
-
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
@@ -777,7 +760,9 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume):
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -785,8 +770,6 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume):
 
 def Separator(temperature, pressure, compoundscompoundflow):
 
-
-    
     for key in compoundscompoundflow:
         
        sim.AddCompound(key)
@@ -805,7 +788,6 @@ def Separator(temperature, pressure, compoundscompoundflow):
     sim.ConnectObjects(SEP1.GraphicObject, m2.GraphicObject, -1, -1)
     sim.ConnectObjects(SEP1.GraphicObject, m3.GraphicObject, -1, -1)
     
-    
     sim.AutoLayout()
     
 # add property package
@@ -890,7 +872,9 @@ def Separator(temperature, pressure, compoundscompoundflow):
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     outlet_temperature2 = m3.GetTemperature()
@@ -908,7 +892,9 @@ def Separator(temperature, pressure, compoundscompoundflow):
     nx.set_node_attributes(UnitOperation,group)
     key = list(m3.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow2': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow2': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -955,8 +941,6 @@ def Separator1(temperature, pressure, compoundscompoundflow):
 
     errors = interf.CalculateFlowsheet2(sim)
 
-
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
@@ -1011,7 +995,9 @@ def Separator1(temperature, pressure, compoundscompoundflow):
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     outlet_temperature2 = m3.GetTemperature()
@@ -1029,7 +1015,9 @@ def Separator1(temperature, pressure, compoundscompoundflow):
     nx.set_node_attributes(UnitOperation,group)
     key = list(m3.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow2': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow2': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -1045,7 +1033,6 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
         
        print(key)
     
-    
 #create and connect objects
 
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
@@ -1055,7 +1042,6 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     sim.ConnectObjects(m1.GraphicObject, p1.GraphicObject, -1, -1)
     sim.ConnectObjects(p1.GraphicObject, m2.GraphicObject, -1, -1)
     sim.ConnectObjects(e1.GraphicObject, p1.GraphicObject, -1, -1)
-    
     
 #set pump operation mode
 
@@ -1103,9 +1089,6 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     Settings.SolverMode = 0
 
     errors = interf.CalculateFlowsheet2(sim)
-    
-
-
 
 #save file
 
@@ -1161,7 +1144,9 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -1179,8 +1164,7 @@ def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressure
     sim.ConnectObjects(m1.GraphicObject, p1.GraphicObject, -1, -1)
     sim.ConnectObjects(p1.GraphicObject, m2.GraphicObject, -1, -1)
     sim.ConnectObjects(e1.GraphicObject, p1.GraphicObject, -1, -1)
-    
-    
+       
 #set pump operation mode
 
     if outletpressure != 0:
@@ -1227,9 +1211,6 @@ def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressure
     Settings.SolverMode = 0
 
     errors = interf.CalculateFlowsheet2(sim)
-    
-
-
 
 #save file
 
@@ -1285,7 +1266,9 @@ def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressure
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -1395,9 +1378,6 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
 
     errors = interf.CalculateFlowsheet2(sim)
     
-
-
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
@@ -1452,7 +1432,9 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -1488,8 +1470,7 @@ def PFR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     kr1 = sim.CreateKineticReaction("Reaction", "Reaction_set", comps1, dorders1, rorders1, base_compound, "Mixture","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
     sim.AddReaction(kr1)
     sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
-    
-    
+     
 #create and connect objects
 
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
@@ -1553,9 +1534,6 @@ def PFR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     Settings.SolverMode = 0
 
     errors = interf.CalculateFlowsheet2(sim)
-    
-
-
 
 #save file
 
@@ -1611,12 +1589,13 @@ def PFR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
-
 
 def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemperature, deltat):
 
@@ -1628,7 +1607,6 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
         
        print(key)
     
-    
 #create and connect objects
 
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
@@ -1638,7 +1616,6 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     sim.ConnectObjects(m1.GraphicObject, h1.GraphicObject, -1, -1)
     sim.ConnectObjects(h1.GraphicObject, m2.GraphicObject, -1, -1)
     sim.ConnectObjects(e1.GraphicObject, h1.GraphicObject, -1, -1)
-    
     
 #set heater operation mode
 
@@ -1654,8 +1631,6 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
         h1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
         h1.set_DeltaT(deltat) # k
 
-
-    
     sim.AutoLayout()
     
 # add property package
@@ -1741,7 +1716,9 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -1760,7 +1737,6 @@ def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettempe
     sim.ConnectObjects(h1.GraphicObject, m2.GraphicObject, -1, -1)
     sim.ConnectObjects(e1.GraphicObject, h1.GraphicObject, -1, -1)
     
-    
 #set heater operation mode
 
     if heatadded != 0:
@@ -1775,8 +1751,6 @@ def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettempe
         h1.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
         h1.set_DeltaT(deltat) # k
 
-
-    
     sim.AutoLayout()
     
 # add property package
@@ -1862,7 +1836,9 @@ def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettempe
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -1919,13 +1895,8 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     sim.ConnectObjects(m1.GraphicObject, CSTR1.GraphicObject, -1, -1)
     sim.ConnectObjects(CSTR1.GraphicObject, m2.GraphicObject, -1, -1)
     sim.ConnectObjects(e1.GraphicObject, CSTR1.GraphicObject, -1, -1)
-    
-    
+      
 #set cstr operation mode
-
-
-        
-
             
     if adiabatic != 0:
         CSTR1.ReactorOperationMode = Reactors.OperationMode.Adiabatic
@@ -1957,18 +1928,12 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     
     m1.SetPressure(pressure) # pa        
     
-
-    
-
 #request a calculation
 
     Settings.SolverMode = 0
 
     errors = interf.CalculateFlowsheet2(sim)
     
-
-
-
 #save file
 
     fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
@@ -2023,7 +1988,9 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -2071,13 +2038,8 @@ def CSTR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, o
     sim.ConnectObjects(CSTR1.GraphicObject, m2.GraphicObject, -1, -1)
     sim.ConnectObjects(e1.GraphicObject, CSTR1.GraphicObject, -1, -1)
     
-    
 #set cstr operation mode
 
-
-        
-
-            
     if adiabatic != 0:
         CSTR1.ReactorOperationMode = Reactors.OperationMode.Adiabatic
         
@@ -2174,7 +2136,9 @@ def CSTR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, o
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -2302,7 +2266,9 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -2421,7 +2387,9 @@ def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pr
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -2544,7 +2512,9 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     outlet_temperature2 = m3.GetTemperature()
@@ -2562,7 +2532,9 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     nx.set_node_attributes(UnitOperation,group)
     key = list(m3.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow2': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow2': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
@@ -2677,7 +2649,9 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
     nx.set_node_attributes(UnitOperation,group)
     key = list(m2.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     outlet_temperature2 = m3.GetTemperature()
@@ -2695,7 +2669,9 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
     nx.set_node_attributes(UnitOperation,group)
     key = list(m3.GetOverallComposition())
     k = key[0]
-    dict1 = {'flow2': k}
+    for values in compoundscompoundflow.values():
+            molar_flow = values * k
+    dict1 = {'flow2': molar_flow}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     Directory.SetCurrentDirectory(work_dir)
