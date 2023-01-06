@@ -51,7 +51,7 @@ print( list(onto.individuals()) )
 
 print(list(onto.search(iri="*PhysChemProcessingTask")))
 
-# create classes and subclasses into ontochem.owl
+# create classes and subclasses into ontochem.owl 
 with onto:
     class Agent(Thing): pass
     class Organisation(Agent): pass
@@ -69,12 +69,31 @@ with onto:
     class HelicalTubeReactor(Reactor): pass
     class StraightTubeReactor(Reactor): pass
 
+    # Protein and organism as subclass of chemical substance
+    # SMILES and InCHI already implied
+    # EC Number and UniprotID too?
+    class Proteins(onto.search_one(iri='*ChemicalSubstance')): pass
+    class Organism(onto.search_one(iri='*ChemicalSubstance')): pass
     class BioProcessingModule(onto.search_one(iri="*ProcessingModule")): pass
 
-# create properties 
-class has_sheet_ID(Vessels >> Reactor): pass
-        
+# create object properties
+    class has_agent(EnzymeML_Document >> Agent): pass
+    class has_sheet_ID(Vessels >> Reactor): pass  
+    class has_source_organism(Proteins >> Organism): pass # Source organism from which the given protein originated from
+    class is_reversible(): pass # Is the reaction reversible?
+    class is_irreversible(): pass # If not reversible
+    
+    
+# create data properties
+    class has_volume_value(): pass # Numeric value of the vessel volume
+    class has_volume_unit(): pass # Unit of the vessel volume
+    class is_constant(): pass # Wheter or not the concentration of given protein varies over time; as boolean
+    class has_sequence(): pass # Primary sequence of your protein; as string
+    class has_temperature_value(): pass # Numeric value of the temperature the experiment was executed at
+    class has_temperature_unit(): pass # Unit of the temperature 
+    class pH_value(): pass # pH value at which your reaction was executed
+
+onto.save("OntoPyEnzymeML.owl")
+
 with onto:
     sync_reasoner()
-
-onto.save("OntoPyEnzymeMl.owl")
