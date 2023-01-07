@@ -50,8 +50,8 @@ sim.SelectedCompounds.Add(water.Name, water)
 
 # Create and connect objects
 
-m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet1")
-m2 = sim.AddObject(ObjectType.MaterialStream, 100, 50, "inlet2")
+m1 = sim.AddObject(ObjectType.MaterialStream, 10, 10, "inlet1")
+m2 = sim.AddObject(ObjectType.MaterialStream, 10, 60, "inlet2")
 m3 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet")
 MIX1 = sim.AddObject(ObjectType.Mixer, 100, 50, "Mixer")
 
@@ -66,12 +66,14 @@ sim.ConnectObjects(m1.GraphicObject, MIX1.GraphicObject, -1, -1)
 sim.ConnectObjects(MIX1.GraphicObject, m3.GraphicObject, -1, -1)
 sim.ConnectObjects(m2.GraphicObject, MIX1.GraphicObject, -1, -1)
 
-sim.AutoLayout()
 
 # Peng Robinson Property Package
 stables = PropertyPackages.PengRobinsonPropertyPackage()
 sim.AddPropertyPackage(stables)
 
+# Set Temperature
+m1.SetTemperature(298.15) # Kelvin
+m2.SetTemperature(298.15) # Kelvin
 
 # Request calculation
 Settings.SolverMode = 0
@@ -92,7 +94,7 @@ from System.Drawing.Imaging import ImageFormat
 
 PFDSurface = sim.GetSurface()
 
-bmp = SKBitmap(1024, 768)
+bmp = SKBitmap(600, 300)
 canvas = SKCanvas(bmp)
 canvas.Scale(3.0)
 PFDSurface.UpdateCanvas(canvas)
