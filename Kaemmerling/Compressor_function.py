@@ -96,7 +96,7 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
+    stables = PropertyPackages.SRKPropertyPackage()
 
     sim.AddPropertyPackage(stables) 
 

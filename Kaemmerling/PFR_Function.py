@@ -93,8 +93,8 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
 #create and connect objects
 
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
-    m2 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet")
-    e1 = sim.AddObject(ObjectType.EnergyStream, 100, 50, "power")
+    m2 = sim.AddObject(ObjectType.MaterialStream, 200, 50, "outlet")
+    e1 = sim.AddObject(ObjectType.EnergyStream, 100, 100, "power")
     PFR1 = sim.AddObject(ObjectType.RCT_PFR, 100, 50, "PFR")
     sim.ConnectObjects(m1.GraphicObject, PFR1.GraphicObject, -1, -1)
     sim.ConnectObjects(PFR1.GraphicObject, m2.GraphicObject, -1, -1)
@@ -128,7 +128,7 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
     PFR1.Volume = reactor_volume #m^3
         
             
-    sim.AutoLayout()
+
     
 # add property package
 
