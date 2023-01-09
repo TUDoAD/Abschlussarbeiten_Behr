@@ -93,14 +93,14 @@ with onto:
     class has_agent(EnzymeML_Document >> Agent):
         pass
     class is_agent_of(Agent >> EnzymeML_Document):
-        inverse = has_agent      
-    class has_sheet_ID(Vessels >> Reactor):
-        pass  
+        inverse = has_agent       
     class has_source_organism(Proteins >> Organism):
         pass # Source organism from which the given protein originated from
    
     
 # create data properties
+    class has_sheet_ID(Vessels, onto.search_one(iri='*ChemicalSubstance') >> int):
+        pass
     class has_volume_value(Vessels >> int):
         pass # Numeric value of the vessel volume
     class has_volume_unit(Vessels >> str):
