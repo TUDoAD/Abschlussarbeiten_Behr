@@ -8,31 +8,6 @@ Created on Tue Jan  3 11:55:11 2023
 dict2 = {}
 list2 = [9.57, 1.0]
 compoundscompoundflow = {"Water" : 9.57, 'Ethanol' : 1.0}
-
-#for key in compoundscompoundflow:
- #   dict2[key] = 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 list3 = list(compoundscompoundflow.keys())
 
 for key in list3:
@@ -40,3 +15,7 @@ for key in list3:
         dict2[key] = value
         list2.remove(value)
         break
+sum_list = [] 
+for values in compoundscompoundflow.values():
+    sum_list.append(values)
+total_mass_flow = sum(sum_list)

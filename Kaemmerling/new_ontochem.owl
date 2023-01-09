@@ -1,0 +1,1065 @@
+@prefix : <http://www.nfdi.org/nfdi4cat/ontochem#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix o4cat: <http://www.nfdi.org/nfdi4cat/ontochem#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix schema: <https://schema.org/> .
+@base <http://www.nfdi.org/nfdi4cat/ontochem> .
+
+<http://www.nfdi.org/nfdi4cat/ontochem> rdf:type owl:Ontology ;
+                                         owl:imports <http://w3id.org/nfdi4ing/metadata4ing/1.0.0> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.obolibrary.org/obo/RO_0002224
+<http://purl.obolibrary.org/obo/RO_0002224> rdfs:subPropertyOf o4cat:hasPart .
+
+
+###  http://purl.obolibrary.org/obo/RO_0002230
+<http://purl.obolibrary.org/obo/RO_0002230> rdfs:subPropertyOf o4cat:hasPart .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#contains
+o4cat:contains rdf:type owl:ObjectProperty .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#hasChemicalMaterialInput
+o4cat:hasChemicalMaterialInput rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf o4cat:hasMetadata ;
+                               rdfs:domain o4cat:PhysChemProcessingModule ;
+                               rdfs:range o4cat:ChemicalMaterial .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#hasChemicalMaterialOutput
+o4cat:hasChemicalMaterialOutput rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf o4cat:hasMetadata ;
+                                rdfs:domain o4cat:PhysChemProcessingModule ;
+                                rdfs:range o4cat:ChemicalMaterial .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#hasInputFrom
+o4cat:hasInputFrom rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf o4cat:hasMetadata ;
+                   owl:inverseOf o4cat:hasOutputTo .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#hasInputImmediatelyFrom
+o4cat:hasInputImmediatelyFrom rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf o4cat:hasInputFrom ;
+                              owl:inverseOf o4cat:hasOutputImmediatelyTo .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#hasMetadata
+o4cat:hasMetadata rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf owl:topObjectProperty ;
+                  owl:inverseOf o4cat:isMetadataOf ;
+                  rdfs:domain owl:Thing ;
+                  rdfs:range o4cat:Metadata .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#hasOutputImmediatelyTo
+o4cat:hasOutputImmediatelyTo rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf o4cat:hasOutputTo ;
+                             rdfs:domain o4cat:ProcessingModule ;
+                             rdfs:range o4cat:ProcessingModule .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#hasOutputTo
+o4cat:hasOutputTo rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf o4cat:hasMetadata ;
+                  rdfs:domain o4cat:ProcessingModule ;
+                  rdfs:range o4cat:ProcessingModule .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#hasPart
+o4cat:hasPart rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000051> ;
+              owl:inverseOf o4cat:isPartOf ;
+              rdf:type owl:TransitiveProperty .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#hasProcessingModule
+o4cat:hasProcessingModule rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf o4cat:hasMetadata ,
+                                             o4cat:hasPart ;
+                          rdfs:domain o4cat:ResearchStep ;
+                          rdfs:range o4cat:ProcessingModule .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#hasUnitOperation
+o4cat:hasUnitOperation rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf o4cat:hasMetadata ,
+                                          o4cat:hasPart ;
+                       rdfs:domain o4cat:PhysChemProcessingModule ;
+                       rdfs:range o4cat:UnitOperation .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#has_arbitrary_input
+o4cat:has_arbitrary_input rdf:type owl:ObjectProperty .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#has_arbitrary_output
+o4cat:has_arbitrary_output rdf:type owl:ObjectProperty .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#has_input
+o4cat:has_input rdf:type owl:ObjectProperty .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#has_output
+o4cat:has_output rdf:type owl:ObjectProperty .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#isMetadataOf
+o4cat:isMetadataOf rdf:type owl:ObjectProperty ;
+                   rdfs:range owl:Thing .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#isPartOf
+o4cat:isPartOf rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000050> ;
+               rdf:type owl:TransitiveProperty .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#storedMaterial
+o4cat:storedMaterial rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf o4cat:hasMetadata ;
+                     rdfs:domain o4cat:PhysChemProcessingModule ;
+                     rdfs:range o4cat:Matter .
+
+
+###  http://www.w3.org/ns/dcat#inSeries
+<http://www.w3.org/ns/dcat#inSeries> rdfs:subPropertyOf o4cat:isPartOf .
+
+
+###  http://xmlns.com/foaf/0.1/member
+<http://xmlns.com/foaf/0.1/member> rdfs:subPropertyOf o4cat:hasPart .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#hasSimpleMetadata
+o4cat:hasSimpleMetadata rdf:type owl:DatatypeProperty .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#referenceLabel
+o4cat:referenceLabel rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf o4cat:hasSimpleMetadata .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Alloy
+o4cat:Alloy rdf:type owl:Class ;
+            rdfs:subClassOf o4cat:ChemicalMaterial .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Area
+o4cat:Area rdf:type owl:Class ;
+           rdfs:subClassOf <http://www.molmod.info/semantics/pims-ii.ttl#Property> .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#CSTR
+o4cat:CSTR rdf:type owl:Class ;
+           rdfs:subClassOf o4cat:Reactors ,
+                           [ rdf:type owl:Class ;
+                             owl:unionOf ( o4cat:added_energy_stream
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty o4cat:has_arbitrary_output ;
+                                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                             owl:onClass o4cat:removed_energy_stream
+                                           ]
+                                         )
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_arbitrary_input ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass [ rdf:type owl:Class ;
+                                           owl:unionOf ( o4cat:adiabatic
+                                                         o4cat:isothermic
+                                                         o4cat:outlet_temperature
+                                                       )
+                                         ]
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_input ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass o4cat:arrhenius_parameter
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_input ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass o4cat:base_compound
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_input ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass o4cat:direct_order
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_input ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass o4cat:inlet_stream
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_input ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass o4cat:outlet_stream
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_input ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass o4cat:reactor_volume
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_input ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass o4cat:reverse_order
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_input ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass o4cat:stochiometry
+                           ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#ChemicalCompound
+o4cat:ChemicalCompound rdf:type owl:Class ;
+                       rdfs:subClassOf o4cat:ChemicalSubstance .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#ChemicalMaterial
+o4cat:ChemicalMaterial rdf:type owl:Class ;
+                       rdfs:subClassOf o4cat:Matter ,
+                                       o4cat:ProcessingModuleMetadata .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#ChemicalMixture
+o4cat:ChemicalMixture rdf:type owl:Class ;
+                      rdfs:subClassOf o4cat:ChemicalMaterial .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#ChemicalReaction
+o4cat:ChemicalReaction rdf:type owl:Class .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#ChemicalSubstance
+o4cat:ChemicalSubstance rdf:type owl:Class ;
+                        rdfs:subClassOf o4cat:ChemicalMaterial .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Columns
+o4cat:Columns rdf:type owl:Class ;
+              rdfs:subClassOf o4cat:PhysChemProcessingModule .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#DataProcessingModule
+o4cat:DataProcessingModule rdf:type owl:Class ;
+                           rdfs:subClassOf o4cat:ProcessingModule ;
+                           owl:disjointWith o4cat:PhysChemProcessingModule .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#DataProcessingTask
+o4cat:DataProcessingTask rdf:type owl:Class ;
+                         rdfs:subClassOf o4cat:ProcessingTask .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Device
+o4cat:Device rdf:type owl:Class .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Diameter
+o4cat:Diameter rdf:type owl:Class ;
+               rdfs:subClassOf <http://www.molmod.info/semantics/pims-ii.ttl#Property> .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Electric_Energy
+o4cat:Electric_Energy rdf:type owl:Class ;
+                      rdfs:subClassOf o4cat:Energy .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Energy
+o4cat:Energy rdf:type owl:Class ;
+             rdfs:subClassOf <http://www.molmod.info/semantics/pims-ii.ttl#Variable> .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Exchangers
+o4cat:Exchangers rdf:type owl:Class ;
+                 rdfs:subClassOf o4cat:PhysChemProcessingModule .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Heat_Energy
+o4cat:Heat_Energy rdf:type owl:Class ;
+                  rdfs:subClassOf o4cat:Energy .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Length
+o4cat:Length rdf:type owl:Class ;
+             rdfs:subClassOf <http://www.molmod.info/semantics/pims-ii.ttl#Property> .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#MaterialStream
+o4cat:MaterialStream rdf:type owl:Class ;
+                     rdfs:subClassOf o4cat:ChemicalMaterial .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Matter
+o4cat:Matter rdf:type owl:Class .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Metadata
+o4cat:Metadata rdf:type owl:Class ;
+               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                     owl:onProperty o4cat:isMetadataOf ;
+                                     owl:someValuesFrom owl:Thing
+                                   ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#PFR
+o4cat:PFR rdf:type owl:Class ;
+          rdfs:subClassOf o4cat:Reactors ,
+                          [ rdf:type owl:Class ;
+                            owl:unionOf ( o4cat:added_energy_stream
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty o4cat:has_arbitrary_output ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass o4cat:removed_energy_stream
+                                          ]
+                                        )
+                          ] ,
+                          [ rdf:type owl:Class ;
+                            owl:unionOf ( o4cat:adiabatic
+                                          o4cat:outlet_temperature
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty o4cat:has_arbitrary_input ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass o4cat:isothermic
+                                          ]
+                                        )
+                          ] ,
+                          [ rdf:type owl:Class ;
+                            owl:unionOf ( o4cat:reactor_length
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty o4cat:has_arbitrary_input ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass o4cat:reactor_diameter
+                                          ]
+                                        )
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty o4cat:has_input ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass o4cat:arrhenius_parameter
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty o4cat:has_input ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass o4cat:base_compound
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty o4cat:has_input ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass o4cat:direct_order
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty o4cat:has_input ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass o4cat:inlet_stream
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty o4cat:has_input ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass o4cat:reactor_volume
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty o4cat:has_input ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass o4cat:reverse_order
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty o4cat:has_input ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass o4cat:stochiometry
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty o4cat:has_output ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass o4cat:outlet_stream
+                          ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingModule
+o4cat:PhysChemProcessingModule rdf:type owl:Class ;
+                               rdfs:subClassOf o4cat:ProcessingModule .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingTask
+o4cat:PhysChemProcessingTask rdf:type owl:Class ;
+                             owl:equivalentClass [ rdf:type owl:Class ;
+                                                   owl:oneOf ( o4cat:CHEMICAL_REACTION
+                                                               o4cat:LIQUID_GAS_SEPARATION
+                                                               o4cat:SUBSTANCE_TRANSFER
+                                                             )
+                                                 ] ;
+                             rdfs:subClassOf o4cat:ProcessingTask .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Pressure
+o4cat:Pressure rdf:type owl:Class ;
+               rdfs:subClassOf <http://www.molmod.info/semantics/pims-ii.ttl#Property> .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#PressureChanger
+o4cat:PressureChanger rdf:type owl:Class ;
+                      rdfs:subClassOf o4cat:PhysChemProcessingModule .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModule
+o4cat:ProcessingModule rdf:type owl:Class ;
+                       rdfs:subClassOf o4cat:ProcessingModuleMetadata ,
+                                       o4cat:ResearchStepMetadata .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#ProcessingModuleMetadata
+o4cat:ProcessingModuleMetadata rdf:type owl:Class ;
+                               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                     owl:onProperty o4cat:isMetadataOf ;
+                                                     owl:someValuesFrom o4cat:ProcessingModule
+                                                   ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#ProcessingTask
+o4cat:ProcessingTask rdf:type owl:Class ;
+                     rdfs:subClassOf o4cat:ProcessingModuleMetadata .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Reactors
+o4cat:Reactors rdf:type owl:Class ;
+               rdfs:subClassOf o4cat:PhysChemProcessingModule .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#ResearchStep
+o4cat:ResearchStep rdf:type owl:Class ;
+                   rdfs:subClassOf <http://w3id.org/nfdi4ing/metadata4ing#ProcessingStep> ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty o4cat:hasProcessingModule ;
+                                     owl:allValuesFrom o4cat:ProcessingModule
+                                   ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#ResearchStepMetadata
+o4cat:ResearchStepMetadata rdf:type owl:Class ;
+                           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                 owl:onProperty o4cat:isMetadataOf ;
+                                                 owl:someValuesFrom o4cat:ResearchStep
+                                               ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#SimpleSubstance
+o4cat:SimpleSubstance rdf:type owl:Class ;
+                      rdfs:subClassOf o4cat:ChemicalSubstance .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#SpectroscopicModule
+o4cat:SpectroscopicModule rdf:type owl:Class ;
+                          rdfs:subClassOf o4cat:ProcessingModule .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#SpectroscopicTask
+o4cat:SpectroscopicTask rdf:type owl:Class ;
+                        rdfs:subClassOf o4cat:ProcessingTask .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Still
+o4cat:Still rdf:type owl:Class ;
+            rdfs:subClassOf o4cat:Device .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Temperature
+o4cat:Temperature rdf:type owl:Class ;
+                  rdfs:subClassOf <http://www.molmod.info/semantics/pims-ii.ttl#Property> .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#TemperatureModi
+o4cat:TemperatureModi rdf:type owl:Class ;
+                      rdfs:subClassOf schema:Intangible .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#UODistillation
+o4cat:UODistillation rdf:type owl:Class ;
+                     rdfs:subClassOf o4cat:UOLiquidLiquidSeparation ;
+                     rdfs:comment "Distillation is an effective method to separate mixtures comprised of two or more pure liquids. Distillation is a purification process where the components of a liquid mixture are vaporized and then condensed and isolated." .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#UOHeating
+o4cat:UOHeating rdf:type owl:Class ;
+                rdfs:subClassOf o4cat:UnitOperation .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#UOLiquidGasSeparation
+o4cat:UOLiquidGasSeparation rdf:type owl:Class ;
+                            rdfs:subClassOf o4cat:UOSeparation .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#UOLiquidLiquidSeparation
+o4cat:UOLiquidLiquidSeparation rdf:type owl:Class ;
+                               rdfs:subClassOf o4cat:UOSeparation .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#UOMixing
+o4cat:UOMixing rdf:type owl:Class ;
+               rdfs:subClassOf o4cat:UnitOperation .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#UOMixingMagnetic
+o4cat:UOMixingMagnetic rdf:type owl:Class ;
+                       rdfs:subClassOf o4cat:UOMixing ;
+                       owl:disjointWith o4cat:UOMixingManual .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#UOMixingManual
+o4cat:UOMixingManual rdf:type owl:Class ;
+                     rdfs:subClassOf o4cat:UOMixing .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#UOSeparation
+o4cat:UOSeparation rdf:type owl:Class ;
+                   rdfs:subClassOf o4cat:UnitOperation .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#UOStorage
+o4cat:UOStorage rdf:type owl:Class ;
+                rdfs:subClassOf o4cat:UnitOperation .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#UOTransfer
+o4cat:UOTransfer rdf:type owl:Class ;
+                 rdfs:subClassOf o4cat:UnitOperation .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#UnitOperation
+o4cat:UnitOperation rdf:type owl:Class ;
+                    rdfs:subClassOf o4cat:ProcessingModuleMetadata .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Volume
+o4cat:Volume rdf:type owl:Class ;
+             rdfs:subClassOf <http://www.molmod.info/semantics/pims-ii.ttl#Property> .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#added_energy_stream
+o4cat:added_energy_stream rdf:type owl:Class ;
+                          rdfs:subClassOf o4cat:Electric_Energy .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#adiabatic
+o4cat:adiabatic rdf:type owl:Class ;
+                rdfs:subClassOf o4cat:TemperatureModi .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#arrhenius_parameter
+o4cat:arrhenius_parameter rdf:type owl:Class ;
+                          rdfs:subClassOf o4cat:ChemicalReaction .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#base_compound
+o4cat:base_compound rdf:type owl:Class ;
+                    rdfs:subClassOf o4cat:ChemicalReaction .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#column_reflux_ratio
+o4cat:column_reflux_ratio rdf:type owl:Class ;
+                          rdfs:subClassOf <http://www.molmod.info/semantics/pims-ii.ttl#Variable> .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#compressor
+o4cat:compressor rdf:type owl:Class ;
+                 rdfs:subClassOf o4cat:PressureChanger ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty o4cat:has_arbitrary_input ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass [ rdf:type owl:Class ;
+                                                 owl:unionOf ( o4cat:added_energy_stream
+                                                               o4cat:outlet_pressure
+                                                               o4cat:power_required
+                                                               o4cat:pressure_increase
+                                                             )
+                                               ]
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty o4cat:has_input ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass o4cat:inlet_stream
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty o4cat:has_output ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass o4cat:outlet_stream
+                                 ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#cooler
+o4cat:cooler rdf:type owl:Class ;
+             rdfs:subClassOf o4cat:Exchangers ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty o4cat:has_arbitrary_input ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass [ rdf:type owl:Class ;
+                                             owl:unionOf ( o4cat:deltat
+                                                           o4cat:outlet_temperature
+                                                           o4cat:removed_energy_stream
+                                                         )
+                                           ]
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty o4cat:has_input ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass o4cat:inlet_stream
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty o4cat:has_output ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass o4cat:outlet_stream
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty o4cat:has_output ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass o4cat:removed_energy_stream
+                             ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#deltat
+o4cat:deltat rdf:type owl:Class ;
+             rdfs:subClassOf o4cat:Temperature .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#direct_order
+o4cat:direct_order rdf:type owl:Class ;
+                   rdfs:subClassOf o4cat:ChemicalReaction .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#distillation_column
+o4cat:distillation_column rdf:type owl:Class ;
+                          rdfs:subClassOf o4cat:Columns ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty o4cat:has_input ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass o4cat:column_reflux_ratio
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty o4cat:has_input ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass o4cat:heavy_key_compound
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty o4cat:has_input ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass o4cat:hk_mole_fraction_in_distillate
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty o4cat:has_input ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass o4cat:inlet_stream
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty o4cat:has_input ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass o4cat:light_key_compound
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty o4cat:has_input ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass o4cat:lk_mole_fraction_in_distillate
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty o4cat:has_output ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass o4cat:added_energy_stream
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty o4cat:has_output ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass o4cat:removed_energy_stream
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty o4cat:has_output ;
+                                            owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                            owl:onClass o4cat:outlet_stream
+                                          ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#global_heat_transfer
+o4cat:global_heat_transfer rdf:type owl:Class ;
+                           rdfs:subClassOf o4cat:Heat_Energy .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#heat_exchange_area
+o4cat:heat_exchange_area rdf:type owl:Class ;
+                         rdfs:subClassOf o4cat:Area .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#heat_exchanger
+o4cat:heat_exchanger rdf:type owl:Class ;
+                     rdfs:subClassOf o4cat:Exchangers ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty o4cat:has_input ;
+                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass o4cat:global_heat_transfer
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty o4cat:has_input ;
+                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass o4cat:heat_exchange_area
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty o4cat:has_input ;
+                                       owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                       owl:onClass o4cat:inlet_stream
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty o4cat:has_output ;
+                                       owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                       owl:onClass o4cat:outlet_stream
+                                     ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#heater
+o4cat:heater rdf:type owl:Class ;
+             rdfs:subClassOf o4cat:Exchangers ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty o4cat:has_arbitrary_input ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass [ rdf:type owl:Class ;
+                                             owl:unionOf ( o4cat:added_energy_stream
+                                                           o4cat:deltat
+                                                           o4cat:outlet_temperature
+                                                         )
+                                           ]
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty o4cat:has_input ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass o4cat:inlet_stream
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty o4cat:has_input ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass o4cat:outlet_stream
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty o4cat:has_output ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass o4cat:added_energy_stream
+                             ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#heavy_key_compound
+o4cat:heavy_key_compound rdf:type owl:Class ;
+                         rdfs:subClassOf o4cat:ChemicalMixture .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#hk_mole_fraction_in_distillate
+o4cat:hk_mole_fraction_in_distillate rdf:type owl:Class ;
+                                     rdfs:subClassOf o4cat:ChemicalMixture .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#inlet_mass_frac
+o4cat:inlet_mass_frac rdf:type owl:Class ;
+                      rdfs:subClassOf o4cat:ChemicalMixture .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#inlet_massflow
+o4cat:inlet_massflow rdf:type owl:Class ;
+                     rdfs:subClassOf o4cat:ChemicalMixture .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#inlet_massfrac
+o4cat:inlet_massfrac rdf:type owl:Class ;
+                     rdfs:subClassOf o4cat:ChemicalMixture .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#inlet_pressure
+o4cat:inlet_pressure rdf:type owl:Class ;
+                     rdfs:subClassOf o4cat:Pressure .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#inlet_stream
+o4cat:inlet_stream rdf:type owl:Class ;
+                   rdfs:subClassOf o4cat:MaterialStream ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty o4cat:contains ;
+                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass o4cat:inlet_massflow
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty o4cat:contains ;
+                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass o4cat:inlet_massfrac
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty o4cat:contains ;
+                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass o4cat:inlet_pressure
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty o4cat:contains ;
+                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass o4cat:inlet_temperature
+                                   ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#inlet_temperature
+o4cat:inlet_temperature rdf:type owl:Class ;
+                        rdfs:subClassOf o4cat:Temperature .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#isothermic
+o4cat:isothermic rdf:type owl:Class ;
+                 rdfs:subClassOf o4cat:TemperatureModi .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#light_key_compound
+o4cat:light_key_compound rdf:type owl:Class ;
+                         rdfs:subClassOf o4cat:ChemicalMixture .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#liquid_frac
+o4cat:liquid_frac rdf:type owl:Class ;
+                  rdfs:subClassOf o4cat:ChemicalMixture .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#lk_mole_fraction_in_distillate
+o4cat:lk_mole_fraction_in_distillate rdf:type owl:Class ;
+                                     rdfs:subClassOf o4cat:ChemicalMixture .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#mole_frac
+o4cat:mole_frac rdf:type owl:Class ;
+                rdfs:subClassOf o4cat:ChemicalMixture .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#outlet_mass_frac
+o4cat:outlet_mass_frac rdf:type owl:Class ;
+                       rdfs:subClassOf o4cat:ChemicalMixture .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#outlet_massflow
+o4cat:outlet_massflow rdf:type owl:Class ;
+                      rdfs:subClassOf o4cat:ChemicalMixture .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#outlet_massfrac
+o4cat:outlet_massfrac rdf:type owl:Class ;
+                      rdfs:subClassOf o4cat:ChemicalMixture .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#outlet_pressure
+o4cat:outlet_pressure rdf:type owl:Class ;
+                      rdfs:subClassOf o4cat:Pressure .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#outlet_stream
+o4cat:outlet_stream rdf:type owl:Class ;
+                    rdfs:subClassOf o4cat:MaterialStream ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty o4cat:contains ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass o4cat:outlet_mass_frac
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty o4cat:contains ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass o4cat:outlet_massflow
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty o4cat:contains ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass o4cat:outlet_pressure
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty o4cat:contains ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass o4cat:outlet_temperature
+                                    ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#outlet_temperature
+o4cat:outlet_temperature rdf:type owl:Class ;
+                         rdfs:subClassOf o4cat:Temperature .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#power_required
+o4cat:power_required rdf:type owl:Class ;
+                     rdfs:subClassOf o4cat:Electric_Energy .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#pressure_increase
+o4cat:pressure_increase rdf:type owl:Class ;
+                        rdfs:subClassOf o4cat:Pressure .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#pump
+o4cat:pump rdf:type owl:Class ;
+           rdfs:subClassOf o4cat:PressureChanger ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_arbitrary_input ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass [ rdf:type owl:Class ;
+                                           owl:unionOf ( o4cat:added_energy_stream
+                                                         o4cat:outlet_pressure
+                                                         o4cat:power_required
+                                                         o4cat:pressure_increase
+                                                       )
+                                         ]
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_input ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass o4cat:inlet_stream
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_output ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass o4cat:outlet_stream
+                           ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#reactor_diameter
+o4cat:reactor_diameter rdf:type owl:Class ;
+                       rdfs:subClassOf o4cat:Diameter .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#reactor_length
+o4cat:reactor_length rdf:type owl:Class ;
+                     rdfs:subClassOf o4cat:Length .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#reactor_volume
+o4cat:reactor_volume rdf:type owl:Class ;
+                     rdfs:subClassOf o4cat:Volume .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#removed_energy_stream
+o4cat:removed_energy_stream rdf:type owl:Class ;
+                            rdfs:subClassOf o4cat:Electric_Energy .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#reverse_order
+o4cat:reverse_order rdf:type owl:Class ;
+                    rdfs:subClassOf o4cat:ChemicalReaction .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#separator
+o4cat:separator rdf:type owl:Class ;
+                rdfs:subClassOf <http://www.nfdi.org/nfdi4cat/ontochem#Separators/Tanks> ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty o4cat:has_input ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass o4cat:inlet_stream
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty o4cat:has_output ;
+                                  owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                  owl:onClass o4cat:outlet_stream
+                                ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#solid_frac
+o4cat:solid_frac rdf:type owl:Class ;
+                 rdfs:subClassOf o4cat:ChemicalMixture .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#stochiometry
+o4cat:stochiometry rdf:type owl:Class ;
+                   rdfs:subClassOf o4cat:ChemicalReaction .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#tank
+o4cat:tank rdf:type owl:Class ;
+           rdfs:subClassOf <http://www.nfdi.org/nfdi4cat/ontochem#Separators/Tanks> ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_input ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass o4cat:inlet_stream
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_input ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass o4cat:tank_volume
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty o4cat:has_output ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass o4cat:outlet_stream
+                           ] .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#tank_volume
+o4cat:tank_volume rdf:type owl:Class ;
+                  rdfs:subClassOf o4cat:Volume .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#vapor_frac
+o4cat:vapor_frac rdf:type owl:Class ;
+                 rdfs:subClassOf o4cat:ChemicalMixture .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#Separators/Tanks
+<http://www.nfdi.org/nfdi4cat/ontochem#Separators/Tanks> rdf:type owl:Class ;
+                                                         rdfs:subClassOf o4cat:PhysChemProcessingModule .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#CHEMICAL_REACTION
+o4cat:CHEMICAL_REACTION rdf:type owl:NamedIndividual ,
+                                 o4cat:PhysChemProcessingTask .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#LIQUID_GAS_SEPARATION
+o4cat:LIQUID_GAS_SEPARATION rdf:type owl:NamedIndividual ,
+                                     o4cat:PhysChemProcessingTask .
+
+
+###  http://www.nfdi.org/nfdi4cat/ontochem#SUBSTANCE_TRANSFER
+o4cat:SUBSTANCE_TRANSFER rdf:type owl:NamedIndividual ,
+                                  o4cat:PhysChemProcessingTask .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( o4cat:Alloy
+                o4cat:ChemicalMixture
+                o4cat:ChemicalSubstance
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( o4cat:UOHeating
+                o4cat:UOMixing
+                o4cat:UOSeparation
+                o4cat:UOStorage
+                o4cat:UOTransfer
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
