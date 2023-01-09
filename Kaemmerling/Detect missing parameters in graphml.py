@@ -16,47 +16,33 @@ g = nx.read_graphml(Path_graph) #graphml einladen
 # relevante nodes finden und in neuen graphen einfügen
     
 nodes = list(g.nodes)
-
 wantednodes = []
-
 W = nx.DiGraph()
-    
 for x in nodes:
-           
            newlist = list(g.successors(x)) 
-           
            for z in newlist:            
-                 
+               
                if  g._node[z]['node_class'] == 'Column':
-                             
                      wantednodes.append(z)
                
-               elif  g._node[z]['node_class'] == 'Heat exchanger, detailed':
-                  
+               elif  g._node[z]['node_class'] == 'Heat exchanger, detailed':                  
                      wantednodes.append(z)
                   
-               elif  g._node[z]['node_class'] == 'Vessel':
-               
+               elif  g._node[z]['node_class'] == 'Vessel':               
                      wantednodes.append(z)
                      
-               elif  g._node[z]['node_class'] == 'Silo':
-   
+               elif  g._node[z]['node_class'] == 'Silo':   
                      wantednodes.append(z)
                        
-               elif g._node[z]['node_class'] == 'Fluid pump':    #redundante Pumpen entfernen           
-            
-                    size = len(z)
-            
+               elif g._node[z]['node_class'] == 'Fluid pump':    #redundante Pumpen entfernen                       
+                    size = len(z)           
                     num = z[size-1]
-            
-                    if int(num) % 2 == 0:
-                
+                    
+                    if int(num) % 2 == 0:                
                        wantednodes.append(z)
 
 wanted_list = list(dict.fromkeys(wantednodes)) # doppelte einträge entfernen
-
 W.add_nodes_from(wantednodes)
-
 # verdbindungen der nodes herstellen
 
 for w in wanted_list: 
@@ -73,17 +59,14 @@ for w in wanted_list:
                 for n in path[0]:
                 
                     if m == n:
-                     
                         b = b+1
                      
             if b == 2:
                 
-               W.add_edge(w, p, edge_class='Piping',edge_sub_class='Main pipe')
-                
+               W.add_edge(w, p, edge_class='Piping',edge_sub_class='Main pipe')      
                b = 0
                 
-            else:
-                
+            else:            
                b = 0
                 
 # node atrributes übertragen
