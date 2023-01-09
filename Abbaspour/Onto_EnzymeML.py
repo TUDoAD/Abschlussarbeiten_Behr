@@ -46,52 +46,77 @@ print("print disjoints:")
 print( list(onto.disjoints()) )
 print()
 
-print("showing individuals:")
-print( list(onto.individuals()) )
-
 print(list(onto.search(iri="*PhysChemProcessingTask")))
 
 # create classes and subclasses into ontochem.owl 
 with onto:
-    class Agent(Thing): pass
-    class Organisation(Agent): pass
-    class Group(Agent): pass
-    class Person(Agent): pass
+    class Agent(Thing):
+        pass
+    class Organisation(Agent):
+        pass
+    class Group(Agent):
+        pass
+    class Person(Agent):
+        pass
 
-    class Project(Thing): pass
-    class Documentation(Project): pass
-    class EnzymeML_Document(Documentation): pass
+    class Project(Thing):
+        pass
+    class Documentation(Project):
+        pass
+    class EnzymeML_Document(Documentation):
+        pass
 
-    class EnzymaticReaction(Thing): pass
+    class EnzymaticReaction(Thing):
+        pass
 
-    class Vessels(onto.search_one(iri="*Device")): pass
-    class Reactor(Vessels): pass
-    class HelicalTubeReactor(Reactor): pass
-    class StraightTubeReactor(Reactor): pass
+    class Vessels(onto.search_one(iri="*Device")):
+        pass
+    class Reactor(Vessels):
+        pass
+    class HelicalTubeReactor(Reactor):
+        pass
+    class StraightTubeReactor(Reactor):
+        pass
 
     # Protein and organism as subclass of chemical substance
     # SMILES and InCHI already implied
     # EC Number and UniprotID too?
-    class Proteins(onto.search_one(iri='*ChemicalSubstance')): pass
-    class Organism(onto.search_one(iri='*ChemicalSubstance')): pass
-    class BioProcessingModule(onto.search_one(iri="*ProcessingModule")): pass
+    class Proteins(onto.search_one(iri='*ChemicalSubstance')):
+        pass
+    class Organism(onto.search_one(iri='*ChemicalSubstance')):
+        pass
+    class BioProcessingModule(onto.search_one(iri="*ProcessingModule")):
+        pass
+
 
 # create object properties
-    class has_agent(EnzymeML_Document >> Agent): pass
-    class has_sheet_ID(Vessels >> Reactor): pass  
-    class has_source_organism(Proteins >> Organism): pass # Source organism from which the given protein originated from
-    class is_reversible(): pass # Is the reaction reversible?
-    class is_irreversible(): pass # If not reversible
-    
+    class has_agent(EnzymeML_Document >> Agent):
+        pass
+    class is_agent_of(Agent >> EnzymeML_Document):
+        inverse = has_agent      
+    class has_sheet_ID(Vessels >> Reactor):
+        pass  
+    class has_source_organism(Proteins >> Organism):
+        pass # Source organism from which the given protein originated from
+   
     
 # create data properties
-    class has_volume_value(): pass # Numeric value of the vessel volume
-    class has_volume_unit(): pass # Unit of the vessel volume
-    class is_constant(): pass # Wheter or not the concentration of given protein varies over time; as boolean
-    class has_sequence(): pass # Primary sequence of your protein; as string
-    class has_temperature_value(): pass # Numeric value of the temperature the experiment was executed at
-    class has_temperature_unit(): pass # Unit of the temperature 
-    class pH_value(): pass # pH value at which your reaction was executed
+    class has_volume_value(Vessels >> int):
+        pass # Numeric value of the vessel volume
+    class has_volume_unit(Vessels >> str):
+        pass # Unit of the vessel volume
+    class is_constant():
+        pass # Wheter or not the concentration of given protein varies over time; as boolean
+    class has_sequence():
+        pass # Primary sequence of your protein; as string
+    class has_temperature_value():
+        pass # Numeric value of the temperature the experiment was executed at
+    class has_temperature_unit():
+        pass # Unit of the temperature 
+    class pH_value():
+        pass # pH value at which your reaction was executed
+    class is_reversible(onto.search_one(iri='*ChemicalSubstance') >> bool):
+        pass # Is the reaction reversible?
 
 onto.save("OntoPyEnzymeML.owl")
 
