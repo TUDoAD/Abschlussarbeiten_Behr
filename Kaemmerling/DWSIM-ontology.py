@@ -179,18 +179,20 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     dict1 = {'outlet_pressure':outlet_pressure}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(compoundscompoundflow.keys())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    dict1 = {'flow': k}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -306,13 +308,20 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -440,13 +449,20 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -564,13 +580,20 @@ def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettem
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -680,13 +703,20 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -788,13 +818,20 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume):
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -925,13 +962,20 @@ def Separator(temperature, pressure, compoundscompoundflow):
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow2': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -1033,17 +1077,20 @@ def Separator1(temperature, pressure, compoundscompoundflow):
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
-    outlet_temperature2 = m3.GetTemperature()
-    dict1 = {'outlet_temperature2':outlet_temperature2}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     outlet_pressure2 = m3.GetPressure()
     dict1 = {'outlet_pressure2':outlet_pressure2}
     group= {'unitoperation':dict1}
@@ -1053,13 +1100,20 @@ def Separator1(temperature, pressure, compoundscompoundflow):
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m3.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow2': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m3.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -1187,13 +1241,20 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -1313,13 +1374,20 @@ def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressure
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -1484,13 +1552,20 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -1646,13 +1721,20 @@ def PFR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -1773,18 +1855,20 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     dict1 = {'outlet_pressure':outlet_pressure}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(compoundscompoundflow.keys())
-    k = key[0]
-    dict1 = {'compound': k}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -1902,13 +1986,20 @@ def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettempe
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -2059,13 +2150,20 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -2206,13 +2304,20 @@ def CSTR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, o
     dict1 = {'compound': k}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -2330,18 +2435,20 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     dict1 = {'outlet_pressure':outlet_pressure}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(compoundscompoundflow.keys())
-    k = key[0]
-    dict1 = {'compound': k}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -2452,18 +2559,20 @@ def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pr
     dict1 = {'outlet_pressure':outlet_pressure}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(compoundscompoundflow.keys())
-    k = key[0]
-    dict1 = {'compound': k}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -2598,18 +2707,20 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     dict1 = {'outlet_pressure2':outlet_pressure2}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(compoundscompoundflow.keys())
-    k = key[0]
-    dict1 = {'compound': k}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
-    key = list(m3.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values 
-    dict1 = {'flow2': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m3.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -2716,18 +2827,20 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
     dict1 = {'outlet_pressure':outlet_pressure}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(compoundscompoundflow.keys())
-    k = key[0]
-    dict1 = {'compound': k}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m2.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     outlet_temperature2 = m3.GetTemperature()
     dict1 = {'outlet_temperature2':outlet_temperature2}
     group= {'unitoperation':dict1}
@@ -2736,17 +2849,19 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
     dict1 = {'outlet_pressure2':outlet_pressure2}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(compoundscompoundflow.keys())
-    k = key[0]
-    dict1 = {'compound': k}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
-    key = list(m3.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow2': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = m3.GetOverallMassComposition() # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
+    #nx.set_node_attributes(UnitOperation,group)##
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
