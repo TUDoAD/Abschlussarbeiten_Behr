@@ -476,12 +476,9 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </Temperature>
 
-<Output rdf:about="#{'water': 8.9}">
+<Output rdf:about="#Substance1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Output>
-
-<Output rdf:about="#{'Flow': {'water': 1.0}}">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{'Flow':{[{'water':1.0},{'water2':1.0},{'water3':1.0},{'water4':1.0}]}}</rdfs:comment>
 </Output>
 
 <owl:AllDisjointClasses>

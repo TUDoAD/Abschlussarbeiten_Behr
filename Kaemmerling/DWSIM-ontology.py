@@ -42,6 +42,9 @@ from DWSIM.UnitOperations import UnitOperations, Reactors
 from DWSIM.Automation import Automation2
 from DWSIM.GlobalSettings import Settings
 import DWSIM.Interfaces
+from owlready2 import *
+onto_world = owlready2.World()
+onto = onto_world.get_ontology("./KlassenHierarchieDWSIM_AB.owl").load()
 
 #create automation manager
 
@@ -191,8 +194,7 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -320,8 +322,7 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -461,8 +462,7 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -592,8 +592,7 @@ def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettem
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -715,8 +714,7 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume):
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -830,8 +828,7 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume):
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -974,8 +971,7 @@ def Separator(temperature, pressure, compoundscompoundflow):
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -1089,8 +1085,7 @@ def Separator1(temperature, pressure, compoundscompoundflow):
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     outlet_pressure2 = m3.GetPressure()
     dict1 = {'outlet_pressure2':outlet_pressure2}
     group= {'unitoperation':dict1}
@@ -1112,8 +1107,7 @@ def Separator1(temperature, pressure, compoundscompoundflow):
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -1253,8 +1247,7 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -1386,8 +1379,7 @@ def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressure
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -1564,8 +1556,7 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -1733,8 +1724,7 @@ def PFR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -1867,8 +1857,7 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -1998,8 +1987,7 @@ def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettempe
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -2162,8 +2150,7 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -2316,8 +2303,7 @@ def CSTR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, o
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -2447,8 +2433,7 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -2571,8 +2556,7 @@ def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pr
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -2719,8 +2703,7 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -2861,7 +2844,6 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
-    #nx.set_node_attributes(UnitOperation,group)##
+    Flow = onto.Output(dict2)
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
