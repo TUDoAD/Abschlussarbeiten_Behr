@@ -3,583 +3,1064 @@
          xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
-         xml:base="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101"
-         xmlns="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101#">
+         xml:base="http://www.nfdi.org/nfdi4cat/ontochem"
+         xmlns="http://www.nfdi.org/nfdi4cat/ontochem#">
 
-<owl:Ontology rdf:about="http://www.semanticweb.org/user/ontologies/2022/9/untitled-ontology-101"/>
+<owl:Ontology rdf:about="http://www.nfdi.org/nfdi4cat/ontochem">
+  <owl:imports rdf:resource="https://nfdi4ing.pages.rwth-aachen.de/metadata4ing/metadata4ing/1.0.0/ontology.xml"/>
+</owl:Ontology>
 
-<owl:ObjectProperty rdf:about="#has_additional_quantity">
-  <owl:inverseOf rdf:resource="#is_additional_quantity_of"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-  <rdfs:domain rdf:resource="#Unit_Operation"/>
-  <rdfs:range rdf:resource="#Quantity"/>
+<owl:ObjectProperty rdf:about="#hasPart">
+  <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
+  <owl:inverseOf rdf:resource="#isPartOf"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#is_additional_quantity_of">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+<owl:ObjectProperty rdf:about="#contains"/>
+
+<owl:ObjectProperty rdf:about="#hasChemicalMaterialInput">
+  <rdfs:subPropertyOf rdf:resource="#hasMetadata"/>
+  <rdfs:domain rdf:resource="#PhysChemProcessingModule"/>
+  <rdfs:range rdf:resource="#ChemicalMaterial"/>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#has_input">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-  <rdfs:domain rdf:resource="#Unit_Operation"/>
-  <rdfs:range rdf:resource="#Input"/>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#has_input_quantity">
+<owl:ObjectProperty rdf:about="#hasMetadata">
   <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-  <owl:inverseOf rdf:resource="#is_input_quantity_of"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-  <rdfs:domain rdf:resource="#Unit_Operation"/>
-  <rdfs:range rdf:resource="#Quantity"/>
+  <owl:inverseOf rdf:resource="#isMetadataOf"/>
+  <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:range rdf:resource="#Metadata"/>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#is_input_quantity_of">
-  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+<owl:ObjectProperty rdf:about="#hasChemicalMaterialOutput">
+  <rdfs:subPropertyOf rdf:resource="#hasMetadata"/>
+  <rdfs:domain rdf:resource="#PhysChemProcessingModule"/>
+  <rdfs:range rdf:resource="#ChemicalMaterial"/>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#has_output_quantity">
-  <owl:inverseOf rdf:resource="#is_output_quantity_of"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-  <rdfs:domain rdf:resource="#Unit_Operation"/>
-  <rdfs:range rdf:resource="#Quantity"/>
+<owl:ObjectProperty rdf:about="#hasInputFrom">
+  <rdfs:subPropertyOf rdf:resource="#hasMetadata"/>
+  <owl:inverseOf rdf:resource="#hasOutputTo"/>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#is_output_quantity_of">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+<owl:ObjectProperty rdf:about="#hasOutputTo">
+  <rdfs:subPropertyOf rdf:resource="#hasMetadata"/>
+  <rdfs:domain rdf:resource="#ProcessingModule"/>
+  <rdfs:range rdf:resource="#ProcessingModule"/>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#is_input_of">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+<owl:ObjectProperty rdf:about="#hasInputImmediatelyFrom">
+  <rdfs:subPropertyOf rdf:resource="#hasInputFrom"/>
+  <owl:inverseOf rdf:resource="#hasOutputImmediatelyTo"/>
 </owl:ObjectProperty>
 
-<owl:Class rdf:about="#Unit_Operation"/>
+<owl:ObjectProperty rdf:about="#hasOutputImmediatelyTo">
+  <rdfs:subPropertyOf rdf:resource="#hasOutputTo"/>
+  <rdfs:domain rdf:resource="#ProcessingModule"/>
+  <rdfs:range rdf:resource="#ProcessingModule"/>
+</owl:ObjectProperty>
 
-<owl:Class rdf:about="#Quantity"/>
+<owl:ObjectProperty rdf:about="#isMetadataOf">
+  <rdfs:range rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:ObjectProperty>
 
-<owl:Class rdf:about="#Input">
-  <rdfs:subClassOf rdf:resource="#Setting"/>
+<owl:ObjectProperty rdf:about="#isPartOf">
+  <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000050"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasProcessingModule">
+  <rdfs:subPropertyOf rdf:resource="#hasMetadata"/>
+  <rdfs:subPropertyOf rdf:resource="#hasPart"/>
+  <rdfs:domain rdf:resource="#ResearchStep"/>
+  <rdfs:range rdf:resource="#ProcessingModule"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasUnitOperation">
+  <rdfs:subPropertyOf rdf:resource="#hasMetadata"/>
+  <rdfs:subPropertyOf rdf:resource="#hasPart"/>
+  <rdfs:domain rdf:resource="#PhysChemProcessingModule"/>
+  <rdfs:range rdf:resource="#UnitOperation"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_arbitrary_input"/>
+
+<owl:ObjectProperty rdf:about="#has_arbitrary_output"/>
+
+<owl:ObjectProperty rdf:about="#has_input"/>
+
+<owl:ObjectProperty rdf:about="#has_output"/>
+
+<owl:ObjectProperty rdf:about="#storedMaterial">
+  <rdfs:subPropertyOf rdf:resource="#hasMetadata"/>
+  <rdfs:domain rdf:resource="#PhysChemProcessingModule"/>
+  <rdfs:range rdf:resource="#Matter"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#hasSimpleMetadata"/>
+
+<owl:DatatypeProperty rdf:about="#referenceLabel">
+  <rdfs:subPropertyOf rdf:resource="#hasSimpleMetadata"/>
+</owl:DatatypeProperty>
+
+<owl:Class rdf:about="#PhysChemProcessingModule">
+  <rdfs:subClassOf rdf:resource="#ProcessingModule"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Setting"/>
-
-<owl:Class rdf:about="#Additional_Information">
-  <rdfs:subClassOf rdf:resource="#Setting"/>
+<owl:Class rdf:about="#ChemicalMaterial">
+  <rdfs:subClassOf rdf:resource="#Matter"/>
+  <rdfs:subClassOf rdf:resource="#ProcessingModuleMetadata"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Adiabatic">
-  <rdfs:subClassOf rdf:resource="#Thermal_Model"/>
+<owl:Class rdf:about="#Metadata">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#isMetadataOf"/>
+      <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
 </owl:Class>
 
-<owl:Class rdf:about="#Thermal_Model">
-  <rdfs:subClassOf rdf:resource="#Reaction"/>
+<owl:Class rdf:about="#ProcessingModule">
+  <rdfs:subClassOf rdf:resource="#ProcessingModuleMetadata"/>
+  <rdfs:subClassOf rdf:resource="#ResearchStepMetadata"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Reaction"/>
-
-<owl:Class rdf:about="#Arrhenius_Parameter">
-  <rdfs:subClassOf rdf:resource="#Stochiometry"/>
+<owl:Class rdf:about="#ResearchStep">
+  <rdfs:subClassOf rdf:resource="http://w3id.org/nfdi4ing/metadata4ing#ProcessingStep"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasProcessingModule"/>
+      <owl:allValuesFrom rdf:resource="#ProcessingModule"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
 </owl:Class>
 
-<owl:Class rdf:about="#Stochiometry">
-  <rdfs:subClassOf rdf:resource="#Reaction"/>
+<owl:Class rdf:about="#UnitOperation">
+  <rdfs:subClassOf rdf:resource="#ProcessingModuleMetadata"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Base_Compound">
-  <rdfs:subClassOf rdf:resource="#Material"/>
-  <owl:disjointWith rdf:resource="#Phase"/>
+<owl:Class rdf:about="#Matter"/>
+
+<owl:Class rdf:about="#Alloy">
+  <rdfs:subClassOf rdf:resource="#ChemicalMaterial"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Material"/>
-
-<owl:Class rdf:about="#Phase">
-  <rdfs:subClassOf rdf:resource="#Material"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Basis">
-  <rdfs:subClassOf rdf:resource="#Reaction"/>
+<owl:Class rdf:about="#Area">
+  <rdfs:subClassOf rdf:resource="http://www.molmod.info/semantics/pims-ii.ttl#Property"/>
 </owl:Class>
 
 <owl:Class rdf:about="#CSTR">
-  <rdfs:subClassOf rdf:resource="#Unit_Operation"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Compressor">
-  <rdfs:subClassOf rdf:resource="#Unit_Operation"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Cooler">
-  <rdfs:subClassOf rdf:resource="#Unit_Operation"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Cooler_Duty">
-  <rdfs:subClassOf rdf:resource="#Heat"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Heat">
-  <rdfs:subClassOf rdf:resource="#Quantity"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Direct_Order">
-  <rdfs:subClassOf rdf:resource="#Reaction"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Distillation_Column">
-  <rdfs:subClassOf rdf:resource="#Unit_Operation"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Efficiency">
-  <rdfs:subClassOf rdf:resource="#Quantity"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Energy_Stream">
-  <rdfs:subClassOf rdf:resource="#Flux"/>
-  <owl:disjointWith rdf:resource="#Mass_Flow"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Flux">
-  <rdfs:subClassOf rdf:resource="#Quantity"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Mass_Flow">
-  <rdfs:subClassOf rdf:resource="#Flux"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Enthalpy">
-  <rdfs:subClassOf rdf:resource="#Quantity"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Entropy">
-  <rdfs:subClassOf rdf:resource="#Quantity"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Fractions">
-  <rdfs:subClassOf rdf:resource="#Quantity"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Heat_Added">
-  <rdfs:subClassOf rdf:resource="#Heat"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Heat_Removed">
-  <rdfs:subClassOf rdf:resource="#Heat"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Heater">
-  <rdfs:subClassOf rdf:resource="#Unit_Operation"/>
+  <rdfs:subClassOf rdf:resource="#Reactors"/>
   <rdfs:subClassOf>
     <owl:Class>
-      <owl:intersectionOf rdf:parseType="Collection">
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#added_energy_stream"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#has_arbitrary_output"/>
+          <owl:onClass rdf:resource="#removed_energy_stream"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        </owl:Restriction>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_arbitrary_input"/>
+      <owl:onClass>
         <owl:Class>
           <owl:unionOf rdf:parseType="Collection">
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#has_additional_quantity"/>
-              <owl:onClass rdf:resource="#Heat_Added"/>
-              <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-            </owl:Restriction>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#has_additional_quantity"/>
-              <owl:onClass rdf:resource="#Outlet_Temperature"/>
-              <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-            </owl:Restriction>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#has_additional_quantity"/>
-              <owl:onClass rdf:resource="#Temperature_Difference"/>
-              <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-            </owl:Restriction>
+            <rdf:Description rdf:about="#adiabatic"/>
+            <rdf:Description rdf:about="#isothermic"/>
+            <rdf:Description rdf:about="#outlet_temperature"/>
           </owl:unionOf>
         </owl:Class>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="#has_additional_quantity"/>
-          <owl:onClass rdf:resource="#Efficiency"/>
-          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-        </owl:Restriction>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="#has_additional_quantity"/>
-          <owl:onClass rdf:resource="#Pressure_Drop"/>
-          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-        </owl:Restriction>
-      </owl:intersectionOf>
-    </owl:Class>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Class>
-      <owl:intersectionOf rdf:parseType="Collection">
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="#has_output_quantity"/>
-          <owl:onClass rdf:resource="#Enthalpy"/>
-          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-        </owl:Restriction>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="#has_output_quantity"/>
-          <owl:onClass rdf:resource="#Entropy"/>
-          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-        </owl:Restriction>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="#has_output_quantity"/>
-          <owl:onClass rdf:resource="#Mass_Flow"/>
-          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-        </owl:Restriction>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="#has_output_quantity"/>
-          <owl:onClass rdf:resource="#Mass_Frac"/>
-          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-        </owl:Restriction>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="#has_output_quantity"/>
-          <owl:onClass rdf:resource="#Power"/>
-          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-        </owl:Restriction>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="#has_output_quantity"/>
-          <owl:onClass rdf:resource="#Pressure"/>
-          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-        </owl:Restriction>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="#has_output_quantity"/>
-          <owl:onClass rdf:resource="#Temperature"/>
-          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-        </owl:Restriction>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="#has_output_quantity"/>
-          <owl:onClass rdf:resource="#Vapor_Frac"/>
-          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-        </owl:Restriction>
-      </owl:intersectionOf>
-    </owl:Class>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#has_input_quantity"/>
-      <owl:onClass rdf:resource="#Mass_Flow"/>
+      </owl:onClass>
       <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#has_input_quantity"/>
-      <owl:onClass rdf:resource="#Mass_Frac"/>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#arrhenius_parameter"/>
       <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#has_input_quantity"/>
-      <owl:onClass rdf:resource="#Pressure"/>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#base_compound"/>
       <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#has_input_quantity"/>
-      <owl:onClass rdf:resource="#Temperature"/>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#direct_order"/>
       <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#has_input_quantity"/>
-      <owl:onClass rdf:resource="#Vapor_Frac"/>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#inlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#outlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#reactor_volume"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#reverse_order"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#stochiometry"/>
       <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </owl:Restriction>
   </rdfs:subClassOf>
 </owl:Class>
 
-<owl:Class rdf:about="#Outlet_Temperature">
-  <rdfs:subClassOf rdf:resource="#Temperature"/>
-  <owl:disjointWith rdf:resource="#Temperature_Difference"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Outlet_Temperature"/>
+<owl:Class rdf:about="#Reactors">
+  <rdfs:subClassOf rdf:resource="#PhysChemProcessingModule"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Temperature_Difference">
+<owl:Class rdf:about="#added_energy_stream">
+  <rdfs:subClassOf rdf:resource="#Electric_Energy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#removed_energy_stream">
+  <rdfs:subClassOf rdf:resource="#Electric_Energy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#adiabatic">
+  <rdfs:subClassOf rdf:resource="#TemperatureModi"/>
+</owl:Class>
+
+<owl:Class rdf:about="#isothermic">
+  <rdfs:subClassOf rdf:resource="#TemperatureModi"/>
+</owl:Class>
+
+<owl:Class rdf:about="#outlet_temperature">
   <rdfs:subClassOf rdf:resource="#Temperature"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Pressure_Drop">
-  <rdfs:subClassOf rdf:resource="#Pressure"/>
+<owl:Class rdf:about="#arrhenius_parameter">
+  <rdfs:subClassOf rdf:resource="#ChemicalReaction"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Mass_Frac">
-  <rdfs:subClassOf rdf:resource="#Fractions"/>
-  <owl:disjointWith rdf:resource="#Vapor_Frac"/>
+<owl:Class rdf:about="#base_compound">
+  <rdfs:subClassOf rdf:resource="#ChemicalReaction"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Power">
-  <rdfs:subClassOf rdf:resource="#Quantity"/>
+<owl:Class rdf:about="#direct_order">
+  <rdfs:subClassOf rdf:resource="#ChemicalReaction"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Pressure">
-  <rdfs:subClassOf rdf:resource="#Quantity"/>
+<owl:Class rdf:about="#inlet_stream">
+  <rdfs:subClassOf rdf:resource="#MaterialStream"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:onClass rdf:resource="#inlet_massflow"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:onClass rdf:resource="#inlet_massfrac"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:onClass rdf:resource="#inlet_pressure"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:onClass rdf:resource="#inlet_temperature"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
 </owl:Class>
 
-<owl:Class rdf:about="#Temperature">
-  <rdfs:subClassOf rdf:resource="#Quantity"/>
+<owl:Class rdf:about="#outlet_stream">
+  <rdfs:subClassOf rdf:resource="#MaterialStream"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:onClass rdf:resource="#outlet_mass_frac"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:onClass rdf:resource="#outlet_massflow"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:onClass rdf:resource="#outlet_pressure"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:onClass rdf:resource="#outlet_temperature"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
 </owl:Class>
 
-<owl:Class rdf:about="#Vapor_Frac">
-  <rdfs:subClassOf rdf:resource="#Fractions"/>
+<owl:Class rdf:about="#reactor_volume">
+  <rdfs:subClassOf rdf:resource="#Volume"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Heater_Duty">
-  <rdfs:subClassOf rdf:resource="#Heat"/>
+<owl:Class rdf:about="#reverse_order">
+  <rdfs:subClassOf rdf:resource="#ChemicalReaction"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Inlet">
-  <rdfs:subClassOf rdf:resource="#Quantity"/>
+<owl:Class rdf:about="#stochiometry">
+  <rdfs:subClassOf rdf:resource="#ChemicalReaction"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Inlet_Average">
-  <rdfs:subClassOf rdf:resource="#Inlet"/>
+<owl:Class rdf:about="#ChemicalCompound">
+  <rdfs:subClassOf rdf:resource="#ChemicalSubstance"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Inlet_Maximum">
-  <rdfs:subClassOf rdf:resource="#Inlet"/>
+<owl:Class rdf:about="#ChemicalSubstance">
+  <rdfs:subClassOf rdf:resource="#ChemicalMaterial"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Inlet_Minimum">
-  <rdfs:subClassOf rdf:resource="#Inlet"/>
+<owl:Class rdf:about="#ProcessingModuleMetadata">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#isMetadataOf"/>
+      <owl:someValuesFrom rdf:resource="#ProcessingModule"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
 </owl:Class>
 
-<owl:Class rdf:about="#Isothermic">
-  <rdfs:subClassOf rdf:resource="#Thermal_Model"/>
+<owl:Class rdf:about="#ChemicalMixture">
+  <rdfs:subClassOf rdf:resource="#ChemicalMaterial"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ChemicalReaction"/>
+
+<owl:Class rdf:about="#Columns">
+  <rdfs:subClassOf rdf:resource="#PhysChemProcessingModule"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DataProcessingModule">
+  <rdfs:subClassOf rdf:resource="#ProcessingModule"/>
+  <owl:disjointWith rdf:resource="#PhysChemProcessingModule"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DataProcessingTask">
+  <rdfs:subClassOf rdf:resource="#ProcessingTask"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ProcessingTask">
+  <rdfs:subClassOf rdf:resource="#ProcessingModuleMetadata"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Device"/>
+
+<owl:Class rdf:about="#Diameter">
+  <rdfs:subClassOf rdf:resource="http://www.molmod.info/semantics/pims-ii.ttl#Property"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Electric_Energy">
+  <rdfs:subClassOf rdf:resource="#Energy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Energy">
+  <rdfs:subClassOf rdf:resource="http://www.molmod.info/semantics/pims-ii.ttl#Variable"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Exchangers">
+  <rdfs:subClassOf rdf:resource="#PhysChemProcessingModule"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Heat_Energy">
+  <rdfs:subClassOf rdf:resource="#Energy"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Length">
-  <rdfs:subClassOf rdf:resource="#Quantity"/>
+  <rdfs:subClassOf rdf:resource="http://www.molmod.info/semantics/pims-ii.ttl#Property"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Mathematical_Model">
-  <rdfs:subClassOf rdf:resource="#Stochiometry"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Outlet_Pressure">
-  <rdfs:subClassOf rdf:resource="#Pressure"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Output">
-  <rdfs:subClassOf rdf:resource="#Setting"/>
+<owl:Class rdf:about="#MaterialStream">
+  <rdfs:subClassOf rdf:resource="#ChemicalMaterial"/>
 </owl:Class>
 
 <owl:Class rdf:about="#PFR">
-  <rdfs:subClassOf rdf:resource="#Unit_Operation"/>
+  <rdfs:subClassOf rdf:resource="#Reactors"/>
+  <rdfs:subClassOf>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#added_energy_stream"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#has_arbitrary_output"/>
+          <owl:onClass rdf:resource="#removed_energy_stream"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        </owl:Restriction>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#adiabatic"/>
+        <rdf:Description rdf:about="#outlet_temperature"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#has_arbitrary_input"/>
+          <owl:onClass rdf:resource="#isothermic"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        </owl:Restriction>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#reactor_length"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#has_arbitrary_input"/>
+          <owl:onClass rdf:resource="#reactor_diameter"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        </owl:Restriction>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#arrhenius_parameter"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#base_compound"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#direct_order"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#inlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#reactor_volume"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#reverse_order"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#stochiometry"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_output"/>
+      <owl:onClass rdf:resource="#outlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
 </owl:Class>
 
-<owl:Class rdf:about="#Power_Required">
-  <rdfs:subClassOf rdf:resource="#Power"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Pressure_Increase">
-  <rdfs:subClassOf rdf:resource="#Pressure"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Pump">
-  <rdfs:subClassOf rdf:resource="#Unit_Operation"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Reactor_Diameter">
+<owl:Class rdf:about="#reactor_length">
   <rdfs:subClassOf rdf:resource="#Length"/>
-  <owl:disjointWith rdf:resource="#Reactor_Length"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Reactor_Length">
-  <rdfs:subClassOf rdf:resource="#Length"/>
+<owl:Class rdf:about="#reactor_diameter">
+  <rdfs:subClassOf rdf:resource="#Diameter"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Reactor_Pressure_Drop">
-  <rdfs:subClassOf rdf:resource="#Pressure_Drop"/>
+<owl:Class rdf:about="#PhysChemProcessingTask">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:oneOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#CHEMICAL_REACTION"/>
+        <rdf:Description rdf:about="#LIQUID_GAS_SEPARATION"/>
+        <rdf:Description rdf:about="#SUBSTANCE_TRANSFER"/>
+      </owl:oneOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#ProcessingTask"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Reactor_Volume">
-  <rdfs:subClassOf rdf:resource="#Volume"/>
-  <owl:disjointWith rdf:resource="#Tank_Volume"/>
+<owl:Class rdf:about="#Pressure">
+  <rdfs:subClassOf rdf:resource="http://www.molmod.info/semantics/pims-ii.ttl#Property"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PressureChanger">
+  <rdfs:subClassOf rdf:resource="#PhysChemProcessingModule"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ResearchStepMetadata">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#isMetadataOf"/>
+      <owl:someValuesFrom rdf:resource="#ResearchStep"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#SimpleSubstance">
+  <rdfs:subClassOf rdf:resource="#ChemicalSubstance"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SpectroscopicModule">
+  <rdfs:subClassOf rdf:resource="#ProcessingModule"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SpectroscopicTask">
+  <rdfs:subClassOf rdf:resource="#ProcessingTask"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Still">
+  <rdfs:subClassOf rdf:resource="#Device"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Temperature">
+  <rdfs:subClassOf rdf:resource="http://www.molmod.info/semantics/pims-ii.ttl#Property"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TemperatureModi">
+  <rdfs:subClassOf rdf:resource="https://schema.org/Intangible"/>
+</owl:Class>
+
+<owl:Class rdf:about="#UODistillation">
+  <rdfs:subClassOf rdf:resource="#UOLiquidLiquidSeparation"/>
+  <rdfs:comment>Distillation is an effective method to separate mixtures comprised of two or more pure liquids. Distillation is a purification process where the components of a liquid mixture are vaporized and then condensed and isolated.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#UOLiquidLiquidSeparation">
+  <rdfs:subClassOf rdf:resource="#UOSeparation"/>
+</owl:Class>
+
+<owl:Class rdf:about="#UOHeating">
+  <rdfs:subClassOf rdf:resource="#UnitOperation"/>
+</owl:Class>
+
+<owl:Class rdf:about="#UOLiquidGasSeparation">
+  <rdfs:subClassOf rdf:resource="#UOSeparation"/>
+</owl:Class>
+
+<owl:Class rdf:about="#UOSeparation">
+  <rdfs:subClassOf rdf:resource="#UnitOperation"/>
+</owl:Class>
+
+<owl:Class rdf:about="#UOMixing">
+  <rdfs:subClassOf rdf:resource="#UnitOperation"/>
+</owl:Class>
+
+<owl:Class rdf:about="#UOMixingMagnetic">
+  <rdfs:subClassOf rdf:resource="#UOMixing"/>
+  <owl:disjointWith rdf:resource="#UOMixingManual"/>
+</owl:Class>
+
+<owl:Class rdf:about="#UOMixingManual">
+  <rdfs:subClassOf rdf:resource="#UOMixing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#UOStorage">
+  <rdfs:subClassOf rdf:resource="#UnitOperation"/>
+</owl:Class>
+
+<owl:Class rdf:about="#UOTransfer">
+  <rdfs:subClassOf rdf:resource="#UnitOperation"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Volume">
-  <rdfs:subClassOf rdf:resource="#Quantity"/>
+  <rdfs:subClassOf rdf:resource="http://www.molmod.info/semantics/pims-ii.ttl#Property"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Tank_Volume">
+<owl:Class rdf:about="#column_reflux_ratio">
+  <rdfs:subClassOf rdf:resource="http://www.molmod.info/semantics/pims-ii.ttl#Variable"/>
+</owl:Class>
+
+<owl:Class rdf:about="#compressor">
+  <rdfs:subClassOf rdf:resource="#PressureChanger"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_arbitrary_input"/>
+      <owl:onClass>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#added_energy_stream"/>
+            <rdf:Description rdf:about="#outlet_pressure"/>
+            <rdf:Description rdf:about="#power_required"/>
+            <rdf:Description rdf:about="#pressure_increase"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:onClass>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#inlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_output"/>
+      <owl:onClass rdf:resource="#outlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#outlet_pressure">
+  <rdfs:subClassOf rdf:resource="#Pressure"/>
+</owl:Class>
+
+<owl:Class rdf:about="#power_required">
+  <rdfs:subClassOf rdf:resource="#Electric_Energy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#pressure_increase">
+  <rdfs:subClassOf rdf:resource="#Pressure"/>
+</owl:Class>
+
+<owl:Class rdf:about="#cooler">
+  <rdfs:subClassOf rdf:resource="#Exchangers"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_arbitrary_input"/>
+      <owl:onClass>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#deltat"/>
+            <rdf:Description rdf:about="#outlet_temperature"/>
+            <rdf:Description rdf:about="#removed_energy_stream"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:onClass>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#inlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_output"/>
+      <owl:onClass rdf:resource="#outlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_output"/>
+      <owl:onClass rdf:resource="#removed_energy_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#deltat">
+  <rdfs:subClassOf rdf:resource="#Temperature"/>
+</owl:Class>
+
+<owl:Class rdf:about="#distillation_column">
+  <rdfs:subClassOf rdf:resource="#Columns"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#column_reflux_ratio"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#heavy_key_compound"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#hk_mole_fraction_in_distillate"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#inlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#light_key_compound"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#lk_mole_fraction_in_distillate"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_output"/>
+      <owl:onClass rdf:resource="#added_energy_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_output"/>
+      <owl:onClass rdf:resource="#removed_energy_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_output"/>
+      <owl:onClass rdf:resource="#outlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#heavy_key_compound">
+  <rdfs:subClassOf rdf:resource="#ChemicalMixture"/>
+</owl:Class>
+
+<owl:Class rdf:about="#hk_mole_fraction_in_distillate">
+  <rdfs:subClassOf rdf:resource="#ChemicalMixture"/>
+</owl:Class>
+
+<owl:Class rdf:about="#light_key_compound">
+  <rdfs:subClassOf rdf:resource="#ChemicalMixture"/>
+</owl:Class>
+
+<owl:Class rdf:about="#lk_mole_fraction_in_distillate">
+  <rdfs:subClassOf rdf:resource="#ChemicalMixture"/>
+</owl:Class>
+
+<owl:Class rdf:about="#global_heat_transfer">
+  <rdfs:subClassOf rdf:resource="#Heat_Energy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#heat_exchange_area">
+  <rdfs:subClassOf rdf:resource="#Area"/>
+</owl:Class>
+
+<owl:Class rdf:about="#heat_exchanger">
+  <rdfs:subClassOf rdf:resource="#Exchangers"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#global_heat_transfer"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#heat_exchange_area"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#inlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_output"/>
+      <owl:onClass rdf:resource="#outlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#heater">
+  <rdfs:subClassOf rdf:resource="#Exchangers"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_arbitrary_input"/>
+      <owl:onClass>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#added_energy_stream"/>
+            <rdf:Description rdf:about="#deltat"/>
+            <rdf:Description rdf:about="#outlet_temperature"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:onClass>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#inlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#outlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_output"/>
+      <owl:onClass rdf:resource="#added_energy_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#inlet_mass_frac">
+  <rdfs:subClassOf rdf:resource="#ChemicalMixture"/>
+</owl:Class>
+
+<owl:Class rdf:about="#inlet_massflow">
+  <rdfs:subClassOf rdf:resource="#ChemicalMixture"/>
+</owl:Class>
+
+<owl:Class rdf:about="#inlet_massfrac">
+  <rdfs:subClassOf rdf:resource="#ChemicalMixture"/>
+</owl:Class>
+
+<owl:Class rdf:about="#inlet_pressure">
+  <rdfs:subClassOf rdf:resource="#Pressure"/>
+</owl:Class>
+
+<owl:Class rdf:about="#inlet_temperature">
+  <rdfs:subClassOf rdf:resource="#Temperature"/>
+</owl:Class>
+
+<owl:Class rdf:about="#liquid_frac">
+  <rdfs:subClassOf rdf:resource="#ChemicalMixture"/>
+</owl:Class>
+
+<owl:Class rdf:about="#mole_frac">
+  <rdfs:subClassOf rdf:resource="#ChemicalMixture"/>
+</owl:Class>
+
+<owl:Class rdf:about="#outlet_mass_frac">
+  <rdfs:subClassOf rdf:resource="#ChemicalMixture"/>
+</owl:Class>
+
+<owl:Class rdf:about="#outlet_massflow">
+  <rdfs:subClassOf rdf:resource="#ChemicalMixture"/>
+</owl:Class>
+
+<owl:Class rdf:about="#outlet_massfrac">
+  <rdfs:subClassOf rdf:resource="#ChemicalMixture"/>
+</owl:Class>
+
+<owl:Class rdf:about="#pump">
+  <rdfs:subClassOf rdf:resource="#PressureChanger"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_arbitrary_input"/>
+      <owl:onClass>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#added_energy_stream"/>
+            <rdf:Description rdf:about="#outlet_pressure"/>
+            <rdf:Description rdf:about="#power_required"/>
+            <rdf:Description rdf:about="#pressure_increase"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:onClass>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#inlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_output"/>
+      <owl:onClass rdf:resource="#outlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#separator">
+  <rdfs:subClassOf rdf:resource="#Separators/Tanks"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#inlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_output"/>
+      <owl:onClass rdf:resource="#outlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Separators/Tanks">
+  <rdfs:subClassOf rdf:resource="#PhysChemProcessingModule"/>
+</owl:Class>
+
+<owl:Class rdf:about="#solid_frac">
+  <rdfs:subClassOf rdf:resource="#ChemicalMixture"/>
+</owl:Class>
+
+<owl:Class rdf:about="#tank">
+  <rdfs:subClassOf rdf:resource="#Separators/Tanks"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#inlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_input"/>
+      <owl:onClass rdf:resource="#tank_volume"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_output"/>
+      <owl:onClass rdf:resource="#outlet_stream"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#tank_volume">
   <rdfs:subClassOf rdf:resource="#Volume"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Residence_Time">
-  <rdfs:subClassOf rdf:resource="#Time"/>
+<owl:Class rdf:about="#vapor_frac">
+  <rdfs:subClassOf rdf:resource="#ChemicalMixture"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Time">
-  <rdfs:subClassOf rdf:resource="#Quantity"/>
-</owl:Class>
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/RO_0002224">
+  <rdfs:subPropertyOf rdf:resource="#hasPart"/>
+</rdf:Description>
 
-<owl:Class rdf:about="#Reverse_Order">
-  <rdfs:subClassOf rdf:resource="#Reaction"/>
-</owl:Class>
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/RO_0002230">
+  <rdfs:subPropertyOf rdf:resource="#hasPart"/>
+</rdf:Description>
 
-<owl:Class rdf:about="#Separator">
-  <rdfs:subClassOf rdf:resource="#Unit_Operation"/>
-</owl:Class>
+<rdf:Description rdf:about="http://www.w3.org/ns/dcat#inSeries">
+  <rdfs:subPropertyOf rdf:resource="#isPartOf"/>
+</rdf:Description>
 
-<owl:Class rdf:about="#Set_Outlet_Temperature">
-  <rdfs:subClassOf rdf:resource="#Thermal_Model"/>
-</owl:Class>
+<rdf:Description rdf:about="http://xmlns.com/foaf/0.1/member">
+  <rdfs:subPropertyOf rdf:resource="#hasPart"/>
+</rdf:Description>
 
-<owl:Class rdf:about="#Tank">
-  <rdfs:subClassOf rdf:resource="#Unit_Operation"/>
-</owl:Class>
-
-<owl:Class rdf:about="#User_Defined_Function">
-  <rdfs:subClassOf rdf:resource="#Stochiometry"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Valve">
-  <rdfs:subClassOf rdf:resource="#Unit_Operation"/>
-</owl:Class>
-
-<Heat_Added rdf:about="#Heat_added">
+<PhysChemProcessingTask rdf:about="#CHEMICAL_REACTION">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Heat_Added>
+</PhysChemProcessingTask>
 
-<Heater rdf:about="#Heater_A">
+<PhysChemProcessingTask rdf:about="#LIQUID_GAS_SEPARATION">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <has_additional_quantity rdf:resource="#Heat_added"/>
-  <has_additional_quantity rdf:resource="#Outlet_Temperature"/>
-  <has_input_quantity rdf:resource="#Mass_FlowA"/>
-  <has_input_quantity rdf:resource="#Mass_FracA"/>
-  <has_input_quantity rdf:resource="#PressureA"/>
-  <has_input_quantity rdf:resource="#TemperatureA"/>
-  <has_input_quantity rdf:resource="#Vapor_FracA"/>
-  <has_output_quantity rdf:resource="#PressureA"/>
-  <has_output_quantity rdf:resource="#TemperatureB"/>
-</Heater>
+</PhysChemProcessingTask>
 
-<Mass_Flow rdf:about="#Mass_FlowA">
+<PhysChemProcessingTask rdf:about="#SUBSTANCE_TRANSFER">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Mass_Flow>
+</PhysChemProcessingTask>
 
-<Mass_Frac rdf:about="#Mass_FracA">
+<outlet_stream rdf:about="#Composition1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Mass_Frac>
-
-<Pressure rdf:about="#PressureA">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Pressure>
-
-<Temperature rdf:about="#TemperatureA">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Temperature>
-
-<Vapor_Frac rdf:about="#Vapor_FracA">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Vapor_Frac>
-
-<Temperature rdf:about="#TemperatureB">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Temperature>
-
-<Output rdf:about="#Substance1">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{'Flow':{[{'water':1.0},{'water2':1.0},{'water3':1.0},{'water4':1.0}]}}</rdfs:comment>
-</Output>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{'Water': 0.5, 'Ethanol': 0.5}</rdfs:comment>
+</outlet_stream>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Outlet_Pressure"/>
-    <rdf:Description rdf:about="#Pressure_Drop"/>
-    <rdf:Description rdf:about="#Pressure_Increase"/>
+    <rdf:Description rdf:about="#UOHeating"/>
+    <rdf:Description rdf:about="#UOMixing"/>
+    <rdf:Description rdf:about="#UOSeparation"/>
+    <rdf:Description rdf:about="#UOStorage"/>
+    <rdf:Description rdf:about="#UOTransfer"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Material"/>
-    <rdf:Description rdf:about="#Quantity"/>
-    <rdf:Description rdf:about="#Reaction"/>
-    <rdf:Description rdf:about="#Setting"/>
-    <rdf:Description rdf:about="#Unit_Operation"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Inlet_Average"/>
-    <rdf:Description rdf:about="#Inlet_Maximum"/>
-    <rdf:Description rdf:about="#Inlet_Minimum"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Efficiency"/>
-    <rdf:Description rdf:about="#Enthalpy"/>
-    <rdf:Description rdf:about="#Entropy"/>
-    <rdf:Description rdf:about="#Flux"/>
-    <rdf:Description rdf:about="#Fractions"/>
-    <rdf:Description rdf:about="#Heat"/>
-    <rdf:Description rdf:about="#Inlet"/>
-    <rdf:Description rdf:about="#Length"/>
-    <rdf:Description rdf:about="#Power"/>
-    <rdf:Description rdf:about="#Pressure"/>
-    <rdf:Description rdf:about="#Temperature"/>
-    <rdf:Description rdf:about="#Time"/>
-    <rdf:Description rdf:about="#Volume"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Cooler_Duty"/>
-    <rdf:Description rdf:about="#Heat_Added"/>
-    <rdf:Description rdf:about="#Heat_Removed"/>
-    <rdf:Description rdf:about="#Heater_Duty"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#CSTR"/>
-    <rdf:Description rdf:about="#Compressor"/>
-    <rdf:Description rdf:about="#Cooler"/>
-    <rdf:Description rdf:about="#Distillation_Column"/>
-    <rdf:Description rdf:about="#Heater"/>
-    <rdf:Description rdf:about="#PFR"/>
-    <rdf:Description rdf:about="#Pump"/>
-    <rdf:Description rdf:about="#Separator"/>
-    <rdf:Description rdf:about="#Tank"/>
-    <rdf:Description rdf:about="#Valve"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Basis"/>
-    <rdf:Description rdf:about="#Direct_Order"/>
-    <rdf:Description rdf:about="#Reverse_Order"/>
-    <rdf:Description rdf:about="#Stochiometry"/>
-    <rdf:Description rdf:about="#Thermal_Model"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Arrhenius_Parameter"/>
-    <rdf:Description rdf:about="#Mathematical_Model"/>
-    <rdf:Description rdf:about="#User_Defined_Function"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Adiabatic"/>
-    <rdf:Description rdf:about="#Isothermic"/>
-    <rdf:Description rdf:about="#Set_Outlet_Temperature"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Additional_Information"/>
-    <rdf:Description rdf:about="#Input"/>
-    <rdf:Description rdf:about="#Output"/>
+    <rdf:Description rdf:about="#Alloy"/>
+    <rdf:Description rdf:about="#ChemicalMixture"/>
+    <rdf:Description rdf:about="#ChemicalSubstance"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
