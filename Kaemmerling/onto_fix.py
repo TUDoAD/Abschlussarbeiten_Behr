@@ -11,10 +11,7 @@ Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(compoundscompoun
 ## Ab hier: Auslesen des neuesten Dictionaries aus Ontology
 # Verweis auf Individuum aus Ontologie suchen
 individual_searched = onto.search_one(iri=onto.base_iri+"Composition"+ProcessID)
-#auslesen des comments = auslesen des Dicts (aber noch als liste, mit einem 
-# Eintrag = string des dic)
 comment_string = individual_searched.comment
-# konvertieren des strings in dict -> type(c) = dict
 compoundscompoundflow = json.loads(comment_string[0].replace("'","\""))
 # ontology speichern
 onto.save("KlassenHierarchieDWSIM_AB.owl")

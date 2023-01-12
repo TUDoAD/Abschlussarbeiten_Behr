@@ -18,7 +18,7 @@ import clr
 from System.IO import Directory, Path, File
 from System import String, Environment
 from System.Collections.Generic import Dictionary
-import json
+
 
 dwsimpath = "C:\\Users\\Lucky Luciano\\AppData\\Local\\DWSIM 8\\"
 
