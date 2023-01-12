@@ -75,6 +75,16 @@ sim.AddPropertyPackage(stables)
 m1.SetTemperature(298.15) # Kelvin
 m2.SetTemperature(298.15) # Kelvin
 
+# Define inlet streams
+m1.SetMolarFlow("0.0") # will set by compound
+m2.SetMolarFlow("0.0") # will set by compound
+
+m1.SetOverallCompoundMolarFlow("Methanol", 0.0) # mol/s
+m1.SetOverallCompoundMolarFlow("Water", 1.0)  # mol/s
+
+m2.SetOverallCompoundMolarFlow("Methanol", 1.0) # mol/s
+m2.SetOverallCompoundMolarFlow("Water", 0.0)  # mol/s
+
 # Request calculation
 Settings.SolverMode = 0
 errors = interf.CalculateFlowsheet2(sim)
