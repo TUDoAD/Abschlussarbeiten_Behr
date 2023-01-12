@@ -1,12 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jan 12 14:47:54 2023
-
-@author: 49157
-"""
-
+# this is a simulation of a test process flowsheet
 import os
-
 import pythoncom
 pythoncom.CoInitialize()
 import clr
@@ -69,16 +62,16 @@ rorders.Add("Water", 0.0);
 rorders.Add("Ethylene glycol", 0.0);
 
 # create kinetic reaction object
-# https://dwsim.org/api_help/html/M_DWSIM_FlowsheetBase_FlowsheetBase_CreateKineticReaction.htm
-# https://github.com/DanWBR/dwsim/blob/1103a3144734b7e1f20071aae98503a5e62daf35/DWSIM.FlowsheetBase/FlowsheetBase.vb#L3646
-kr1 = sim.CreateKineticReaction("Ethylene Glycol Production", "Production of Ethylene Glycol from Ethylene Oxide and Water", 
-        comps, dorders, rorders, "Ethylene oxide", "Mixture", "Molar Concentration", "kmol/m3", "kmol/[m3.h]", 0.5, 0.0, 0.0, 0.0, "", "")
+
+kr1 = sim.CreateKineticReaction( "Ethylene Glycol Production", 
+                                 "Production of Ethylene Glycol from Ethylene Oxide and Water", 
+        comps, dorders, rorders, "Ethylene oxide", "Mixture", "Molar Concentration", 
+                                 "kmol/m3", "kmol/[m3.h]", 0.5, 0.0, 0.0, 0.0, "", "" )
 
 sim.AddReaction(kr1)
 sim.AddReactionToSet(kr1.ID, "DefaultSet", True, 0)
 
 # add objects
-# https://dwsim.org/api_help/html/M_DWSIM_FlowsheetBase_FlowsheetBase_AddObject.htm
 m1 = sim.AddObject(ObjectType.MaterialStream, 0, 10, "Inlet1")
 m2 = sim.AddObject(ObjectType.MaterialStream, 0, 60, "Inlet2")
 m3 = sim.AddObject(ObjectType.MaterialStream, 100, 50, "Outlet1")
@@ -95,40 +88,27 @@ e1 = e1.GetAsObject()
 MIX1 = MIX1.GetAsObject()
 pfr = pfr.GetAsObject()
 
-# m1.Phases[0].Properties.molarfraction = 1
-
 # connect the streams
 sim.ConnectObjects(m1.GraphicObject, MIX1.GraphicObject, -1, -1)
 sim.ConnectObjects(MIX1.GraphicObject, m3.GraphicObject, -1, -1)
 sim.ConnectObjects(m2.GraphicObject, MIX1.GraphicObject, -1, -1)
 
-
-# https://dwsim.org/api_help/html/M_DWSIM_Interfaces_ISimulationObject_ConnectFeedMaterialStream.htm
 pfr.ConnectFeedMaterialStream(m3, 0)
-
-# https://dwsim.org/api_help/html/M_DWSIM_Interfaces_ISimulationObject_ConnectProductMaterialStream.htm
 pfr.ConnectProductMaterialStream(m4, 0)
-
-# https://dwsim.org/api_help/html/M_DWSIM_Interfaces_ISimulationObject_ConnectFeedEnergyStream.htm
 pfr.ConnectFeedEnergyStream(e1, 1)
 
-# PFR properties
-# https://dwsim.org/api_help/html/T_DWSIM_UnitOperations_Reactors_Reactor_PFR.htm
+# PFR properties (if pressure drop is too high change geometry)
 pfr.ReactorOperationMode = Reactors.OperationMode.Isothermic
 pfr.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length
 pfr.Volume = 1.0; # m3
-pfr.Length = 1.2; # m
-
+pfr.Length = 1.0; # m
 
 # property package
-
-# https://github.com/DanWBR/dwsim/blob/1103a3144734b7e1f20071aae98503a5e62daf35/DWSIM.FlowsheetBase/FlowsheetBase.vb#L3801
-# https://github.com/DanWBR/dwsim/blob/1103a3144734b7e1f20071aae98503a5e62daf35/DWSIM.FlowsheetBase/FlowsheetBase.vb#L3787
 sim.CreateAndAddPropertyPackage("Raoult's Law")
 
+# Set temperature and molarflow
 m1.SetTemperature(328.2) # Kelvin
 m2.SetTemperature(328.2) # Kelvin
-m3.SetTemperature(328.2) # Kelvin
 
 m1.SetMolarFlow(0.0) # will set by compound
 m2.SetMolarFlow(0.0) # will set by compound
@@ -138,8 +118,6 @@ m1.SetOverallCompoundMolarFlow("Water", 9.57)  # mol/s
 
 m2.SetOverallCompoundMolarFlow("Ethylene oxide", 2.39) # mol/s
 m2.SetOverallCompoundMolarFlow("Water", 0.0)  # mol/s
-
-#pfr.CalcMode = UnitOperations.pfr.CalculationMode.OutletTemperature
 
 # request a calculation
 
@@ -156,7 +134,8 @@ if (len(errors) > 0):
 # reactor profiles (temperature, pressure and concentration)
 coordinates = [] # volume coordinate in m3
 names = [] # compound names
-values = [] # concentrations in mol/m3 (0 to j, j = number of compounds - 1), temperature in K (j+1), pressure in Pa (j+2)
+values = [] # concentrations in mol/m3 (0 to j, j = number of compounds - 1),
+            # temperature in K (j+1), pressure in Pa (j+2)
 
 for p in pfr.points:
     coordinates.append(p[0])
