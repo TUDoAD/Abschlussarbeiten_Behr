@@ -25,6 +25,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             heavy_key_compound = graph._node[first_node]['heavy_key_compound']
             inlet_stream = compoundscompoundflow
             # start DWSIM simulation
+            Laufvar = Laufvar +1
             DWSIMOntology.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound, Laufvar)
             # set node as last node
             before_node = node
@@ -67,6 +68,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = onto_output.get_name()
             destroy_entity(Flow)
             # start DWSIM simulation
+            Laufvar = Laufvar +1
             DWSIMOntology.Column1(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound, Laufvar)
             # set node as last node
             before_node = node
@@ -99,6 +101,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             # set tank volume
             tank_volume = graph._node[first_node]['tank_volume'] 
             inlet_stream = compoundscompoundflow
+            Laufvar = Laufvar +1
             DWSIMOntology.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -127,6 +130,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             destroy_entity(Flow)
             # set tank volume
             tank_volume = graph._node[node]['tank_volume'] 
+            Laufvar = Laufvar +1
             DWSIMOntology.Tank1(inlet_temperature, inlet_pressure, inlet_stream, tank_volume, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -150,6 +154,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             # set tank volume
             tank_volume = graph._node[first_node]['tank_volume'] 
             inlet_stream = compoundscompoundflow
+            Laufvar = Laufvar +1
             DWSIMOntology.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -178,6 +183,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             destroy_entity(Flow)
             # set tank volume
             tank_volume = graph._node[node]['tank_volume'] 
+            Laufvar = Laufvar +1
             DWSIMOntology.Tank1(inlet_temperature, inlet_pressure, inlet_stream, tank_volume, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -208,6 +214,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             # set tank volume
             tank_volume = graph._node[first_node]['tank_volume'] 
             inlet_stream = compoundscompoundflow
+            Laufvar = Laufvar +1
             DWSIMOntology.Tank(inlet_temperature, inlet_pressure, inlet_stream, tank_volume, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -234,7 +241,8 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = onto_output.get_name()
             destroy_entity(Flow)
             # set tank volume
-            tank_volume = graph._node[node]['tank_volume'] 
+            tank_volume = graph._node[node]['tank_volume']
+            Laufvar = Laufvar +1
             DWSIMOntology.Tank1(inlet_temperature, inlet_pressure, inlet_stream, tank_volume, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -282,6 +290,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             reactor_volume = graph._node[node]['reactor_volume']
             arrhenius_parameter = graph._node[node]['arrhenius_parameter']
             inlet_stream = compoundscompoundflow
+            Laufvar = Laufvar +1
             DWSIMOntology.PFR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -335,6 +344,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             onto_output = list(onto.Output.direct_instances())[1]
             inlet_stream = onto_output.get_name()
             destroy_entity(Flow)
+            Laufvar = Laufvar +1
             DWSIMOntology.PFR1(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter, Laufvar)            
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -374,6 +384,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             reactor_volume = graph._node[node]['reactor_volume']
             arrhenius_parameter = graph._node[node]['arrhenius_parameter']
             inlet_stream = compoundscompoundflow
+            Laufvar = Laufvar +1
             DWSIMOntology.CSTR(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -412,6 +423,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             onto_output = list(onto.Output.direct_instances())[1]
             inlet_stream = onto_output.get_name()
             destroy_entity(Flow)
+            Laufvar = Laufvar +1
             DWSIMOntology.CSTR1(inlet_temperature, inlet_pressure, inlet_stream, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter, Laufvar)            
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -445,6 +457,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             else:
                 deltat = 0
             inlet_stream = compoundscompoundflow
+            Laufvar = Laufvar +1
             DWSIMOntology.Heater(inlet_temperature, inlet_pressure, inlet_stream, added_energy_stream, outlet_temperature, deltat, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -483,6 +496,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             onto_output = list(onto.Output.direct_instances())[1]
             inlet_stream = onto_output.get_name()
             destroy_entity(Flow)
+            Laufvar = Laufvar +1
             DWSIMOntology.Heater1(inlet_temperature, inlet_pressure, inlet_stream, added_energy_stream, outlet_temperature, deltat)            
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -516,6 +530,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             else:
                 deltat = 0
             inlet_stream = compoundscompoundflow
+            Laufvar = Laufvar +1
             DWSIMOntology.Cooler(inlet_temperature, inlet_pressure, inlet_stream, removed_energy_stream, outlet_temperature, deltat, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -554,6 +569,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             onto_output = list(onto.Output.direct_instances())[1]
             inlet_stream = onto_output.get_name()
             destroy_entity(Flow)
+            Laufvar = Laufvar +1
             DWSIMOntology.Cooler1(inlet_temperature, inlet_pressure, inlet_stream, removed_energy_stream, outlet_temperature, deltat, Laufvar)            
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -582,6 +598,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_pressure2 = graph._node[node]['inlet_pressure2']
             heat_exchange_area = graph._node[node]['heat_exchange_area']
             global_heat_transfer = graph._node[node]['global_heat_transfer']
+            Laufvar = Laufvar +1
             DWSIMOntology.Heat_exchanger(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, inlet_stream, inlet_stream2, heat_exchange_area, global_heat_transfer, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -613,6 +630,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             onto_output = list(onto.Output.direct_instances())[1]
             inlet_stream = onto_output.get_name()
             destroy_entity(Flow)
+            Laufvar = Laufvar +1
             DWSIMOntology.Heat_exchanger1(inlet_temperature, inlet_pressure, inlet_temperature2, inlet_pressure2, inlet_stream, inlet_stream2, heat_exchange_area, global_heat_transfer, Laufvar)                
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -650,6 +668,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             else:
                 added_energy_stream = 0
             inlet_stream = compoundscompoundflow
+            Laufvar = Laufvar +1
             DWSIMOntology.Pump(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream, power_required, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -692,6 +711,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             onto_output = list(onto.Output.direct_instances())[1]
             inlet_stream = onto_output.get_name()
             destroy_entity(Flow)
+            Laufvar = Laufvar +1
             DWSIMOntology.Pump1(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream, power_required, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -729,6 +749,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             else:
                 added_energy_stream = 0
             inlet_stream = compoundscompoundflow
+            Laufvar = Laufvar +1
             DWSIMOntology.Compressor(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -771,6 +792,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             onto_output = list(onto.Output.direct_instances())[1]
             inlet_stream = onto_output.get_name()
             destroy_entity(Flow)
+            Laufvar = Laufvar +1
             DWSIMOntology.Compressor1(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -791,6 +813,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             
         if graph._node[node]['node_class'] == 'Separator'== node_class:
             inlet_stream = compoundscompoundflow
+            Laufvar = Laufvar +1
             DWSIMOntology.Separator(inlet_temperature, inlet_pressure, inlet_stream, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -824,6 +847,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             onto_output = list(onto.Output.direct_instances())[1]
             inlet_stream = onto_output.get_name()
             destroy_entity(Flow)
+            Laufvar = Laufvar +1
             DWSIMOntology.Separator1(inlet_temperature, inlet_pressure, inlet_stream, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
