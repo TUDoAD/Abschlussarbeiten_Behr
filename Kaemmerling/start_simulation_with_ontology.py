@@ -781,7 +781,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             else:
                 added_energy_stream = 0
             inlet_stream = compoundscompoundflow
-            Laufvar = Laufvar +1
+            print(Laufvar, type(Laufvar))
             DWSIMOntology.Pump(inlet_temperature, inlet_pressure, inlet_stream, outlet_pressure, pressure_increase, added_energy_stream, power_required, Laufvar)
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -799,12 +799,15 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = {'simulated_node':'TRUE'}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            ProcessID = str(Laufvar)
-            individual_searched = onto.search_one(iri=onto.base_iri+"Composition"+ProcessID)
+            ProcessID_str = str(Laufvar)
+            #onto_world = owlready2.World()
+            onto_updated = onto_world.get_ontology("./rdf-new_out.owl").load()
+            individual_searched = onto_updated.search_one(iri=onto.base_iri+"Composition"+ProcessID_str)
             comment_string = individual_searched.comment
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
+            Laufvar = Laufvar +1
             
         if graph._node[node]['node_class'] == 'Pump'!= node_class and node in successors and 'simulated_node' not in graph._node[node]: # start next function only if it was not run before (dict condition) and if it is in the successor list
             # set pump parameter
@@ -850,8 +853,10 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             ProcessID = str(Laufvar)
-            individual_searched = onto.search_one(iri=onto.base_iri+"Composition"+ProcessID)
-            comment_string = individual_searched.comment
+            #onto_world = owlready2.World()
+            onto2 = onto_world.get_ontology("./rdf-new_out.owl").load()
+            individual_searched_2 = onto2.search_one(iri=onto.base_iri+"Composition"+ProcessID)
+            comment_string = individual_searched_2.comment
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
             nx.set_node_attributes(graph,group)

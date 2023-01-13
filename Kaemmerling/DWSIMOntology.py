@@ -16,7 +16,8 @@ import pythoncom
 pythoncom.CoInitialize()
 import clr
 from System.IO import Directory, Path, File
-from System import String, Environment
+#from System import * # String, Environment
+import System
 from System.Collections.Generic import Dictionary
 
 
@@ -137,7 +138,7 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
 
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -161,7 +162,7 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -264,7 +265,7 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
 
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -288,7 +289,7 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -403,12 +404,12 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
 
     errors = interf.CalculateFlowsheet2(sim)
 
-    print(String.Format("cooler Heat Load: {0} kW", c1.DeltaQ))
+    print(System.String.Format("cooler Heat Load: {0} kW", c1.DeltaQ))
 
 
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -432,7 +433,7 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -538,11 +539,11 @@ def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettem
 
     errors = interf.CalculateFlowsheet2(sim)
 
-    print(String.Format("cooler Heat Load: {0} kW", c1.DeltaQ))
+    print(System.String.Format("cooler Heat Load: {0} kW", c1.DeltaQ))
 
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -566,7 +567,7 @@ def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettem
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -668,7 +669,7 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume, Laufvar):
 
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -692,7 +693,7 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume, Laufvar):
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -786,7 +787,7 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume, Laufvar):
     
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -810,7 +811,7 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume, Laufvar):
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -913,7 +914,7 @@ def Separator(temperature, pressure, compoundscompoundflow, Laufvar):
 
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -937,7 +938,7 @@ def Separator(temperature, pressure, compoundscompoundflow, Laufvar):
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -1051,7 +1052,7 @@ def Separator1(temperature, pressure, compoundscompoundflow, Laufvar):
 
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -1075,7 +1076,7 @@ def Separator1(temperature, pressure, compoundscompoundflow, Laufvar):
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -1143,8 +1144,7 @@ def Separator1(temperature, pressure, compoundscompoundflow, Laufvar):
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
-def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, powerrequired, Laufvar):
-
+def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, powerrequired, laufvar_loc):
     sum_list = [] 
     for values in compoundscompoundflow.values():
         sum_list.append(values)
@@ -1217,7 +1217,7 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
 
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -1238,12 +1238,12 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    str_var = MemoryStream()
+    d.SaveTo(str_var)
+    image = Image.FromStream(str_var)
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str_var.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -1251,7 +1251,7 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
 
     im = Image.open(imgPath)
     im.show()
-    
+    str_var
     UnitOperation = nx.Graph()
     UnitOperation.add_node('unitoperation')
     outlet_temperature = m2.GetTemperature()
@@ -1268,7 +1268,7 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -1280,10 +1280,10 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
 # ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
@@ -1353,7 +1353,7 @@ def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressure
 
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -1377,7 +1377,7 @@ def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressure
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -1534,7 +1534,7 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
     
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -1558,7 +1558,7 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
     str1 = MemoryStream()
     d.SaveTo(str1)
     image = Image.FromStream(str1)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str1.Dispose()
     canvas.Dispose()
@@ -1706,7 +1706,7 @@ def PFR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
 
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -1730,7 +1730,7 @@ def PFR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     str1 = MemoryStream()
     d.SaveTo(str1)
     image = Image.FromStream(str1)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str1.Dispose()
     canvas.Dispose()
@@ -1843,12 +1843,12 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
 
     errors = interf.CalculateFlowsheet2(sim)
 
-    print(String.Format("Heater Heat Load: {0} kW", h1.DeltaQ))
+    print(System.String.Format("Heater Heat Load: {0} kW", h1.DeltaQ))
 
 
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -1872,7 +1872,7 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -1972,12 +1972,12 @@ def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettempe
 
     errors = interf.CalculateFlowsheet2(sim)
 
-    print(String.Format("Heater Heat Load: {0} kW", h1.DeltaQ))
+    print(System.String.Format("Heater Heat Load: {0} kW", h1.DeltaQ))
 
 
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -2001,7 +2001,7 @@ def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettempe
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -2144,7 +2144,7 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -2168,7 +2168,7 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     str1 = MemoryStream()
     d.SaveTo(str1)
     image = Image.FromStream(str1)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str1.Dispose()
     canvas.Dispose()
@@ -2301,7 +2301,7 @@ def CSTR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, o
     
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -2325,7 +2325,7 @@ def CSTR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, o
     str1 = MemoryStream()
     d.SaveTo(str1)
     image = Image.FromStream(str1)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str1.Dispose()
     canvas.Dispose()
@@ -2440,7 +2440,7 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -2464,7 +2464,7 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -2567,7 +2567,7 @@ def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pr
     
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -2591,7 +2591,7 @@ def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pr
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -2698,7 +2698,7 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -2722,7 +2722,7 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -2841,7 +2841,7 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
     
 #save file
 
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -2865,7 +2865,7 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
