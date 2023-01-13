@@ -55,7 +55,7 @@ interf = Automation2()
 sim = interf.CreateFlowsheet()
 
 
-def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pressure_inlet2, compoundscompoundflow, compoundscompoundflow2, heat_exchange_area, global_heat_transfer, Laufvar):
+def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pressure_inlet2, compoundscompoundflow, compoundscompoundflow2, heat_exchange_area, global_heat_transfer, laufvar_loc):
 
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -118,13 +118,13 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
     for key in compoundscompoundflow2:
          
        print(compoundscompoundflow2[key])
          
-       m3.SetOverallCompoundMolarFlow(key , compoundscompoundflow2[key])
+       m3.SetOverallCompoundMassFlow(key , compoundscompoundflow2[key])
        
        h_ex1.set_Area(heat_exchange_area)
        h_ex1.set_Q(global_heat_transfer)
@@ -159,12 +159,12 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -184,7 +184,7 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -196,14 +196,14 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
-def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pressure_inlet2, compoundscompoundflow, compoundscompoundflow2, heat_exchange_area, global_heat_transfer, Laufvar):
+def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pressure_inlet2, compoundscompoundflow, compoundscompoundflow2, heat_exchange_area, global_heat_transfer, laufvar_loc):
     
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -246,13 +246,13 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
     for key in compoundscompoundflow2:
          
        print(compoundscompoundflow2[key])
          
-       m3.SetOverallCompoundMolarFlow(key , compoundscompoundflow2[key])
+       m3.SetOverallCompoundMassFlow(key , compoundscompoundflow2[key])
        
        h_ex1.set_Area(heat_exchange_area)
        h_ex1.set_Q(global_heat_transfer)
@@ -286,12 +286,12 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -316,7 +316,7 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -328,14 +328,14 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
-def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemperature, deltat, Laufvar):
+def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemperature, deltat, laufvar_loc):
 
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -396,7 +396,7 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -430,12 +430,12 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -460,7 +460,7 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -472,14 +472,14 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
-def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettemperature, deltat, Laufvar):
+def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettemperature, deltat, laufvar_loc):
  
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -531,7 +531,7 @@ def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettem
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -564,12 +564,12 @@ def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettem
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -594,7 +594,7 @@ def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettem
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -606,14 +606,14 @@ def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettem
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
-def Tank(temperature, pressure, compoundscompoundflow, tank_volume, Laufvar):
+def Tank(temperature, pressure, compoundscompoundflow, tank_volume, laufvar_loc):
 
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -659,7 +659,7 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume, Laufvar):
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -690,12 +690,12 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume, Laufvar):
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -720,7 +720,7 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume, Laufvar):
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -732,14 +732,14 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume, Laufvar):
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
-def Tank1(temperature, pressure, compoundscompoundflow, tank_volume, Laufvar):
+def Tank1(temperature, pressure, compoundscompoundflow, tank_volume, laufvar_loc):
     
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -777,7 +777,7 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume, Laufvar):
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -808,12 +808,12 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume, Laufvar):
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -838,7 +838,7 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume, Laufvar):
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -850,14 +850,14 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume, Laufvar):
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
-def Separator(temperature, pressure, compoundscompoundflow, Laufvar):
+def Separator(temperature, pressure, compoundscompoundflow, laufvar_loc):
 
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -902,7 +902,7 @@ def Separator(temperature, pressure, compoundscompoundflow, Laufvar):
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -935,12 +935,12 @@ def Separator(temperature, pressure, compoundscompoundflow, Laufvar):
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -959,18 +959,23 @@ def Separator(temperature, pressure, compoundscompoundflow, Laufvar):
     dict1 = {'outlet_pressure':outlet_pressure}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(compoundscompoundflow.keys())
-    k = key[0]
-    dict1 = {'compound': k}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     outlet_temperature2 = m3.GetTemperature()
     dict1 = {'outlet_temperature2':outlet_temperature2}
     group= {'unitoperation':dict1}
@@ -985,7 +990,7 @@ def Separator(temperature, pressure, compoundscompoundflow, Laufvar):
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m3.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -997,14 +1002,14 @@ def Separator(temperature, pressure, compoundscompoundflow, Laufvar):
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
-def Separator1(temperature, pressure, compoundscompoundflow, Laufvar):
+def Separator1(temperature, pressure, compoundscompoundflow, laufvar_loc):
     
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -1042,7 +1047,7 @@ def Separator1(temperature, pressure, compoundscompoundflow, Laufvar):
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -1073,12 +1078,12 @@ def Separator1(temperature, pressure, compoundscompoundflow, Laufvar):
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -1103,7 +1108,7 @@ def Separator1(temperature, pressure, compoundscompoundflow, Laufvar):
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -1125,7 +1130,7 @@ def Separator1(temperature, pressure, compoundscompoundflow, Laufvar):
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m3.GetOverallMassComposition() # mass fracs
+    list2 = list(m3.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -1137,10 +1142,10 @@ def Separator1(temperature, pressure, compoundscompoundflow, Laufvar):
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
 # ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
@@ -1207,7 +1212,7 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -1282,12 +1287,12 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
     Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
-# ontology speichern
+    # ontology speichern
     onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
-def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, powerrequired, Laufvar):
+def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, powerrequired, laufvar_loc):
     
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -1343,7 +1348,7 @@ def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressure
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -1374,12 +1379,12 @@ def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressure
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -1404,7 +1409,7 @@ def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressure
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -1416,14 +1421,14 @@ def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressure
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
 # ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
-def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter, Laufvar):
+def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter, laufvar_loc):
 
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -1524,7 +1529,7 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -1585,7 +1590,7 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -1597,14 +1602,14 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
 # ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
-def PFR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter, Laufvar):
+def PFR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry, reactor_diameter, reactor_length, reactor_volume, arrhenius_parameter, laufvar_loc):
      
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -1696,7 +1701,7 @@ def PFR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -1757,7 +1762,7 @@ def PFR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -1769,14 +1774,14 @@ def PFR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
-def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemperature, deltat, Laufvar):
+def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemperature, deltat, laufvar_loc):
 
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -1835,7 +1840,7 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -1869,12 +1874,12 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -1894,7 +1899,7 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -1906,14 +1911,14 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
+    ProcessID_str = str(Laufvar)
+    Flow = onto.outlet_stream("Composition"+ProcessID_str, comment =str(dict2)) 
 # ontology speichern
     onto.save("KlassenHierarchieDWSIM_AB.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
-def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettemperature, deltat, Laufvar):
+def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettemperature, deltat, laufvar_loc):
     
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -1964,7 +1969,7 @@ def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettempe
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -1998,12 +2003,12 @@ def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettempe
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -2028,7 +2033,7 @@ def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettempe
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -2039,16 +2044,16 @@ def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettempe
             dict2[key] = value
             list2.remove(value)
             break
-    # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+        # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
+        comp_string_test = "Composition"+str(laufvar_loc)
+        Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+        # ontology speichern
+        onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
 
-def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter, Laufvar):
+def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter, laufvar_loc):
 
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -2195,7 +2200,7 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -2207,14 +2212,14 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
-def CSTR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter, Laufvar):
+def CSTR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, outlet_temperature, base_compound, direct_order, reverse_order, stochiometry,reactor_volume, arrhenius_parameter, laufvar_loc):
     
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -2352,7 +2357,7 @@ def CSTR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, o
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -2364,14 +2369,14 @@ def CSTR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, o
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
-def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, Laufvar):
+def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, laufvar_loc):
 
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -2430,7 +2435,7 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -2461,12 +2466,12 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -2486,7 +2491,7 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -2498,14 +2503,14 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
-def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, Laufvar):
+def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pressureincrease, energystream, laufvar_loc):
      
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -2557,7 +2562,7 @@ def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pr
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -2588,12 +2593,12 @@ def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pr
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -2613,7 +2618,7 @@ def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pr
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -2625,14 +2630,14 @@ def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pr
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
 
-def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound, Laufvar):
+def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound, laufvar_loc):
 
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -2688,7 +2693,7 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -2719,12 +2724,12 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -2743,28 +2748,8 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     dict1 = {'outlet_pressure':outlet_pressure}
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
-    key = list(compoundscompoundflow.keys())
-    k = key[0]
-    dict1 = {'compound': k}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
-    key = list(m2.GetOverallMassComposition())
-    k = key[0]
-    for values in compoundscompoundflow.values():
-            molar_flow = values * k
-    dict1 = {'flow': molar_flow}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
-    outlet_temperature2 = m3.GetTemperature()
-    dict1 = {'outlet_temperature2':outlet_temperature2}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
-    outlet_pressure2 = m3.GetPressure()
-    dict1 = {'outlet_pressure2':outlet_pressure2}
-    group= {'unitoperation':dict1}
-    nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m3.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_mass_flow
@@ -2776,14 +2761,39 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
+    outlet_temperature2 = m3.GetTemperature()
+    dict1 = {'outlet_temperature2':outlet_temperature2}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    outlet_pressure2 = m3.GetPressure()
+    dict1 = {'outlet_pressure2':outlet_pressure2}
+    group= {'unitoperation':dict1}
+    nx.set_node_attributes(UnitOperation,group)
+    dict2 = {}
+    list2 = list(m3.GetOverallMassComposition()) # mass fracs
+    total_mass_flow_list = []
+    for mass_frac in list2:
+        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_mass_flow_list.append(total_compound_mass_flow)
+    list3 = list(compoundscompoundflow.keys())
+    for key in list3:
+        for value in list2:
+            dict2[key] = value
+            list2.remove(value)
+            break
+    # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
-def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound, Laufvar):
+def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound, laufvar_loc):
     
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -2831,7 +2841,7 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -2862,12 +2872,12 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
     canvas.Scale(1.0)
     PFDSurface.UpdateCanvas(canvas)
     d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
-    str = MemoryStream()
-    d.SaveTo(str)
-    image = Image.FromStream(str)
+    str1 = MemoryStream()
+    d.SaveTo(str1)
+    image = Image.FromStream(str1)
     imgPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfd.png")
     image.Save(imgPath, ImageFormat.Png)
-    str.Dispose()
+    str1.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
@@ -2887,7 +2897,7 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m2.GetOverallMassComposition() # mass fracs
+    list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_flow
@@ -2909,7 +2919,7 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
     group= {'unitoperation':dict1}
     nx.set_node_attributes(UnitOperation,group)
     dict2 = {}
-    list2 = m3.GetOverallMassComposition() # mass fracs
+    list2 = list(m3.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
     for mass_frac in list2:
         total_compound_mass_flow = mass_frac * total_flow
@@ -2921,9 +2931,9 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
             list2.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
-    ProcessID = str(Laufvar)
-    Flow = onto.outlet_stream("Composition"+ProcessID, comment =str(dict2)) 
-# ontology speichern
-    onto.save("KlassenHierarchieDWSIM_AB.owl")
+    comp_string_test = "Composition"+str(laufvar_loc)
+    Flow = onto.outlet_stream(comp_string_test, comment =str(dict2)) 
+    # ontology speichern
+    onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')

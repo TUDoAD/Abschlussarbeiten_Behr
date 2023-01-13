@@ -1043,7 +1043,7 @@
 
 <outlet_stream rdf:about="#Composition1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{'Water': 1.0, 'Ethanol': 0.5611327787183766}</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{'Water': 1.0, 'Ethanol': 0.4182254800995278}</rdfs:comment>
 </outlet_stream>
 
 <owl:AllDisjointClasses>
