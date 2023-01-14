@@ -16,7 +16,6 @@ import pythoncom
 pythoncom.CoInitialize()
 import clr
 from System.IO import Directory, Path, File
-#from System import * # String, Environment
 import System
 from System.Collections.Generic import Dictionary
 
@@ -2937,3 +2936,4 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
     onto.save("rdf-new_out.owl")
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
+    
