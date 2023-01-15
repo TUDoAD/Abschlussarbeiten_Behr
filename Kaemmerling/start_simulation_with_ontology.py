@@ -53,14 +53,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             ProcessID_str = str(Laufvar)
-            #onto_world = owlready2.World()
+            onto_world = owlready2.World()
             onto_updated = onto_world.get_ontology("./rdf-new_out.owl").load()
             individual_searched = onto_updated.search_one(iri=onto.base_iri+"Composition"+ProcessID_str)
             comment_string = individual_searched.comment
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            Laufvar = Laufvar +1
             
         if graph._node[node]['node_class'] =='Column' != node_class and node in successors and 'simulated_node' not in graph._node[node]:  # start next function only if it was not run before (dict condition) and if it is in the successor list
             # set column parameter 
@@ -73,6 +72,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure']
             ProcessID_str = str(Laufvar)
+            onto_world = owlready2.World()
             onto_updated = onto_world.get_ontology("./rdf-new_out.owl").load()
             individual_searched = onto_updated.search_one(iri=onto.base_iri+"Composition"+ProcessID_str)
             comment_string = individual_searched.comment
@@ -107,7 +107,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             ProcessID_str = str(Laufvar)
-            #onto_world = owlready2.World()
+            onto_world = owlready2.World()
             onto_updated = onto_world.get_ontology("./rdf-new_out.owl").load()
             individual_searched = onto_updated.search_one(iri=onto.base_iri+"Composition"+ProcessID_str)
             comment_string = individual_searched.comment
@@ -137,20 +137,20 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             ProcessID_str = str(Laufvar)
-            #onto_world = owlready2.World()
+            onto_world = owlready2.World()
             onto_updated = onto_world.get_ontology("./rdf-new_out.owl").load()
             individual_searched = onto_updated.search_one(iri=onto.base_iri+"Composition"+ProcessID_str)
             comment_string = individual_searched.comment
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            Laufvar = Laufvar +1
             
         if graph._node[node]['node_class'] == 'Vessel' != node_class and node in successors and 'simulated_node' not in graph._node[node]: # start next function only if it was not run before (dict condition) and if it is in the successor list
             # read data from graphml
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
             ProcessID_str = str(Laufvar)
+            onto_world = owlready2.World()
             onto_updated = onto_world.get_ontology("./rdf-new_out.owl").load()
             individual_searched = onto_updated.search_one(iri=onto.base_iri+"Composition"+ProcessID_str)
             comment_string = individual_searched.comment
@@ -176,7 +176,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             ProcessID_str = str(Laufvar)
-            #onto_world = owlready2.World()
+            onto_world = owlready2.World()
             onto_updated = onto_world.get_ontology("./rdf-new_out.owl").load()
             individual_searched = onto_updated.search_one(iri=onto.base_iri+"Composition"+ProcessID_str)
             comment_string = individual_searched.comment
@@ -207,21 +207,22 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             ProcessID_str = str(Laufvar)
-            #onto_world = owlready2.World()
+            onto_world = owlready2.World()
             onto_updated = onto_world.get_ontology("./rdf-new_out.owl").load()
             individual_searched = onto_updated.search_one(iri=onto.base_iri+"Composition"+ProcessID_str)
             comment_string = individual_searched.comment
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            Laufvar = Laufvar +1
             
         if graph._node[node]['node_class'] == 'Tank' and node in successors and 'simulated_node' not in graph._node[node]: # start next function only if it was not run before (dict condition) and if it is in the successor list
             # read data from graphml
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
+            onto_world = owlready2.World()
             onto_updated = onto_world.get_ontology("./rdf-new_out.owl").load()
             ProcessID_str = str(Laufvar)
+            print(Laufvar)
             individual_searched = onto_updated.search_one(iri=onto.base_iri+"Composition"+ProcessID_str)
             comment_string = individual_searched.comment
             inlet_stream = json.loads(comment_string[0].replace("'","\""))
@@ -232,8 +233,10 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             ProcessID_str = str(Laufvar)
+            onto_world = owlready2.World()#clear ontology
             onto_updated = onto_world.get_ontology("./rdf-new_out.owl").load()
             individual_searched = onto_updated.search_one(iri=onto.base_iri+"Composition"+ProcessID_str)
+            print(Laufvar)
             comment_string = individual_searched.comment
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
@@ -291,7 +294,6 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            Laufvar = Laufvar +1
             
         if graph._node[node]['node_class'] == 'Silo' != node_class and node in successors and 'simulated_node' not in graph._node[node]: # start next function only if it was not run before (dict condition) and if it is in the successor list
            # read data from graphml
@@ -385,7 +387,6 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            Laufvar = Laufvar +1
             
         if graph._node[node]['node_class'] == 'PFR' != node_class and node in successors and 'simulated_node' not in graph._node[node]: # start next function only if it was not run before (dict condition) and if it is in the successor list  
             # set PFR parameter
@@ -496,7 +497,6 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            Laufvar = Laufvar +1
             
         if graph._node[node]['node_class'] == 'CSTR' != node_class and node in successors and 'simulated_node' not in graph._node[node]: # start next function only if it was not run before (dict condition) and if it is in the successor list
             # set CSTR parameter
@@ -588,7 +588,6 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            Laufvar = Laufvar +1
             
         if graph._node[node]['node_class'] == 'Heater' != node_class and node in successors and 'simulated_node' not in graph._node[node]: # start next function only if it was not run before (dict condition) and if it is in the successor list  
             # set heater parameter          
@@ -680,7 +679,6 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            Laufvar = Laufvar +1
             
         if graph._node[node]['node_class'] =='Cooler'!= node_class and node in successors and 'simulated_node' not in graph._node[node]: # start next function only if it was not run before (dict condition) and if it is in the successor list
             # set cooler parameter
@@ -759,14 +757,13 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             ProcessID_str = str(Laufvar)
-            #onto_world = owlready2.World()
+            onto_world = owlready2.World()
             onto_updated = onto_world.get_ontology("./rdf-new_out.owl").load()
             individual_searched = onto_updated.search_one(iri=onto.base_iri+"Composition"+ProcessID_str)
             comment_string = individual_searched.comment
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            Laufvar = Laufvar +1
             
         if graph._node[node]['node_class'] == 'Heat exchanger, detailed'!= node_class and node in successors and 'simulated_node' not in graph._node[node]: # start next function only if it was not run before (dict condition) and if it is in the successor list
             # set heat exchanger parameter
@@ -848,14 +845,14 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
             ProcessID_str = str(Laufvar)
-            #onto_world = owlready2.World()
+            onto_world = owlready2.World()
             onto_updated = onto_world.get_ontology("./rdf-new_out.owl").load()
             individual_searched = onto_updated.search_one(iri=onto.base_iri+"Composition"+ProcessID_str)
             comment_string = individual_searched.comment
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            Laufvar = Laufvar +1
+            
             
         if graph._node[node]['node_class'] == 'Pump'!= node_class and node in successors and 'simulated_node' not in graph._node[node]: # start next function only if it was not run before (dict condition) and if it is in the successor list
             # set pump parameter
@@ -954,7 +951,6 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            Laufvar = Laufvar +1
             
         if graph._node[node]['node_class'] == 'Compressor'!= node_class and node in successors and 'simulated_node' not in graph._node[node]: # start next function only if it was not run before (dict condition) and if it is in the successor list  
             # set compressor parameter
@@ -1044,7 +1040,6 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             dict1 = json.loads(comment_string[0].replace("'","\""))
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
-            Laufvar = Laufvar +1
             
         if graph._node[node]['node_class'] == 'Separator'!= node_class and node in successors and 'simulated_node' not in graph._node[node]: # start next function only if it was not run before (dict condition) and if it is in the successor list 
             # read data from graphml

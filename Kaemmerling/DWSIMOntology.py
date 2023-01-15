@@ -639,9 +639,7 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume, laufvar_loc)
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law") 
 
 #set inlet stream properties
 
@@ -1205,7 +1203,7 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     
     m1.SetPressure(pressure) # pa        
     
-    m1.SetMolarFlow(0.0) # will be set by compounds
+    m1.SetMassFlow(0.0) # will be set by compounds
     
     for key in compoundscompoundflow:
          

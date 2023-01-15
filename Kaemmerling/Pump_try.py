@@ -27,6 +27,9 @@ import clr
 from System.IO import Directory, Path, File
 from System import String, Environment
 
+import math
+from System import Array
+
 dwsimpath = "C:\\Users\\Lucky Luciano\\AppData\\Local\\DWSIM\\"
 
 clr.AddReference(dwsimpath + "CapeOpen.dll")
@@ -59,8 +62,10 @@ sim = interf.CreateFlowsheet()
 # add water
 
 water = sim.AvailableCompounds["Water"]
+ethanol = sim.AvailableCompounds['Ethanol']
 
 sim.SelectedCompounds.Add(water.Name, water)
+sim.SelectedCompounds.Add(ethanol.Name, ethanol)
 
 # create and connect objects
 
@@ -85,7 +90,9 @@ sim.AddPropertyPackage(stables)
 # default properties: T = 298.15 K, P = 101325 Pa, Mass Flow = 1 kg/s
 
 m1.SetTemperature(293.15) # K
-m1.SetMassFlow(1.0) # kg/s
+
+myComp = Array[float]((0.5,0.5))
+m1.SetOverallComposition(myComp)
 
 # set Pressure Increase
 

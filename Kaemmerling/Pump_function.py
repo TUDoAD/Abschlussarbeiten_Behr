@@ -64,7 +64,7 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     for key in compoundscompoundflow:
         
        sim.AddCompound(key)
-        
+       
        print(key)
     
     
@@ -112,7 +112,7 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     
     m1.SetPressure(pressure) # pa        
     
-    m1.SetMolarFlow(0.0) # will be set by compounds
+    #m1.SetMolarFlow(0.0) # will be set by compounds
     
     for key in compoundscompoundflow:
          
@@ -165,4 +165,4 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     
 # function call     
 
-Pump(300.0,100000.0,{"Water" : 9.57},200000,0,0,0)
+Pump(300.0,100000.0,{"Water" : 0.5, 'Ethanol': 0.5},200000,0,0,0)
