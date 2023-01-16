@@ -1,27 +1,27 @@
 <?xml version='1.0' encoding='utf-8'?>
-<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d7" for="node" attr.name="inlet_pressure2" attr.type="double"/>
-<key id="d6" for="node" attr.name="inlet_temperature2" attr.type="double"/>
-<key id="d5" for="node" attr.name="Flow" attr.type="double"/>
-<key id="d4" for="node" attr.name="Compound" attr.type="string"/>
-<key id="d3" for="node" attr.name="heat_exchange_area" attr.type="double"/>
-<key id="d2" for="node" attr.name="tank_volume" attr.type="double"/>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d7" for="node" attr.name="tank_volume" attr.type="double"/>
+<key id="d6" for="node" attr.name="inlet_pressure2" attr.type="double"/>
+<key id="d5" for="node" attr.name="inlet_temperature2" attr.type="double"/>
+<key id="d4" for="node" attr.name="Flow" attr.type="double"/>
+<key id="d3" for="node" attr.name="Compound" attr.type="string"/>
+<key id="d2" for="node" attr.name="heat_exchange_area" attr.type="double"/>
 <key id="d1" for="node" attr.name="outlet_pressure" attr.type="double"/>
 <key id="d0" for="node" attr.name="node_class" attr.type="string"/>
 <graph edgedefault="directed"><node id="pump1">
   <data key="d0">Pump</data>
-  <data key="d1">100000.0</data>
-</node>
-<node id="tank1">
-  <data key="d0">Tank</data>
-  <data key="d2">100.0</data>
+  <data key="d1">200000.0</data>
 </node>
 <node id="heat_exchanger1">
   <data key="d0">Heat exchanger, detailed</data>
-  <data key="d3">1.0</data>
-  <data key="d4">Water</data>
-  <data key="d5">1.0</data>
-  <data key="d6">300.0</data>
-  <data key="d7">100000.0</data>
+  <data key="d2">1.0</data>
+  <data key="d3">Water</data>
+  <data key="d4">1.0</data>
+  <data key="d5">300.0</data>
+  <data key="d6">100000.0</data>
+</node>
+<node id="tank1">
+  <data key="d0">Tank</data>
+  <data key="d7">100.0</data>
 </node>
 <edge source="pump1" target="heat_exchanger1"/>
 <edge source="heat_exchanger1" target="tank1"/>

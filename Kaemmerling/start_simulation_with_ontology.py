@@ -698,7 +698,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
                 if 'removed_energy_stream' == key:
                     removed_energy_stream = graph._node[node]['removed_energy_stream']
                 else:
-                    added_energy_stream = 0
+                    removed_energy_stream = 0
                     
             for key in attribute_dict:
                 if 'deltat' == key:
@@ -734,18 +734,24 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             
         if graph._node[node]['node_class'] =='Cooler'!= node_class and node in successors and 'simulated_node' not in graph._node[node]: # start next function only if it was not run before (dict condition) and if it is in the successor list
             # set cooler parameter
-            if 'outlet_temperature' in graph[node]:
-                outlet_temperature = graph._node[node]['outlet_temperature']
-            else:
-                outlet_temperature = 0
-            if 'deltat' in graph[node]:
-                deltat = graph._node[node]['deltat']
-            else:
-                pressure_increase = 0
-            if 'removed_energy_stream' in graph[node]:
-                removed_energy_stream = graph._node[node]['removed_energy_stream']
-            else:
-                removed_energy_stream = 0
+            attribute_dict = graph._node[node]
+            for key in attribute_dict:
+                if 'outlet_temperature' == key:
+                    outlet_temperature = graph._node[node]['outlet_temperature']
+                else:
+                    outlet_temperature = 0
+                    
+            for key in attribute_dict:
+                if 'removed_energy_stream' == key:
+                    removed_energy_stream = graph._node[node]['removed_energy_stream']
+                else:
+                    removed_energy_stream = 0
+                    
+            for key in attribute_dict:
+                if 'deltat' == key:
+                    deltat = graph._node[node]['deltat']
+                else:
+                        deltat = 0
             # read data from graphml
             inlet_temperature = graph._node[before_node]['outlet_temperature'] 
             inlet_pressure = graph._node[before_node]['outlet_pressure'] 
@@ -766,7 +772,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             nx.set_node_attributes(graph,group)
             dict1 = {'outlet_pressure':outlet_pressure}
             group= {node:dict1}
-            nx.set_node_attributes(graph,group)#
+            nx.set_node_attributes(graph,group)
             # get successors from node to find out which node is next 
             successors = list(graph.successors(node))
             # saves that this node is already simulated and avoids that it is simulated again
@@ -1173,6 +1179,6 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
 
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(graph,'./Output/graphs_graphml/clean/Graph_after_simulation')
-graph = nx.read_graphml('C:/Users/Lucky Luciano/Documents/GitHub/Abschlussarbeiten_Behr/Kaemmerling/Output/graphs_graphml/clean/graphml_test_heater')
+graph = nx.read_graphml('C:/Users/Lucky Luciano/Documents/GitHub/Abschlussarbeiten_Behr/Kaemmerling/Output/graphs_graphml/clean/graphml_test_exchanger')
 #graph = nx.read_graphml('C:/Users/Lucky Luciano/Documents/GitHub/Abschlussarbeiten_Behr/Kaemmerling/Output/graphs_graphml/clean/graphml_pfd3')
-startsimulationfromgraphml(graph, 298.15, 100000.0, {"Water" : 0.5, 'Ethanol': 0.5})
+startsimulationfromgraphml(graph, 278.15, 100000.0, {"Water" : 0.5, 'Ethanol': 0.5})

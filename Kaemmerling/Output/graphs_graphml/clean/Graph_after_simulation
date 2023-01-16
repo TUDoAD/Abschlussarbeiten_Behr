@@ -1,5 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d6" for="node" attr.name="tank_volume" attr.type="double"/>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d11" for="node" attr.name="tank_volume" attr.type="double"/>
+<key id="d10" for="node" attr.name="inlet_pressure2" attr.type="double"/>
+<key id="d9" for="node" attr.name="inlet_temperature2" attr.type="double"/>
+<key id="d8" for="node" attr.name="Flow" attr.type="double"/>
+<key id="d7" for="node" attr.name="Compound" attr.type="string"/>
+<key id="d6" for="node" attr.name="heat_exchange_area" attr.type="double"/>
 <key id="d5" for="node" attr.name="Ethanol" attr.type="double"/>
 <key id="d4" for="node" attr.name="Water" attr.type="double"/>
 <key id="d3" for="node" attr.name="simulated_node" attr.type="string"/>
@@ -8,24 +13,34 @@
 <key id="d0" for="node" attr.name="node_class" attr.type="string"/>
 <graph edgedefault="directed"><node id="pump1">
   <data key="d0">Pump</data>
-  <data key="d1">100000.0</data>
-  <data key="d2">298.1500021800821</data>
+  <data key="d1">200000.0</data>
+  <data key="d2">278.1580606475555</data>
   <data key="d3">TRUE</data>
   <data key="d4">1.0</data>
   <data key="d5">0.4182254800995278</data>
 </node>
-<node id="tank1">
-  <data key="d0">Tank</data>
-  <data key="d6">100.0</data>
-</node>
-<node id="heater1">
-  <data key="d0">Heater</data>
-  <data key="d2">300.00000042773416</data>
-  <data key="d1">100000.0</data>
+<node id="heat_exchanger1">
+  <data key="d0">Heat exchanger, detailed</data>
+  <data key="d6">1.0</data>
+  <data key="d7">Water</data>
+  <data key="d8">1.0</data>
+  <data key="d9">300.0</data>
+  <data key="d10">100000.0</data>
+  <data key="d2">281.2030135317321</data>
+  <data key="d1">200000.0</data>
   <data key="d3">TRUE</data>
   <data key="d4">1.0</data>
   <data key="d5">0.26440271659316095</data>
 </node>
-<edge source="pump1" target="heater1"/>
-<edge source="heater1" target="tank1"/>
+<node id="tank1">
+  <data key="d0">Tank</data>
+  <data key="d11">100.0</data>
+  <data key="d4">1.0</data>
+  <data key="d5">0.19330529255671794</data>
+  <data key="d2">281.2030484435265</data>
+  <data key="d1">200000.0</data>
+  <data key="d3">TRUE</data>
+</node>
+<edge source="pump1" target="heat_exchanger1"/>
+<edge source="heat_exchanger1" target="tank1"/>
 </graph></graphml>

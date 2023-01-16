@@ -9,8 +9,8 @@ import networkx as nx
 
 G = nx.DiGraph()
 G.add_node('pump1')
-G.add_node('tank1')
 G.add_node('heat_exchanger1')
+G.add_node('tank1')
 G.add_edge('pump1','heat_exchanger1')
 G.add_edge('heat_exchanger1','tank1')
 dict2 = {'node_class':'Heat exchanger, detailed'}
@@ -40,7 +40,7 @@ nx.set_node_attributes(G,clas)
 dict2 = {'node_class':'Pump'}
 clas= {'pump1':dict2}
 nx.set_node_attributes(G,clas)
-dict2 = {'outlet_pressure':100000.0}
+dict2 = {'outlet_pressure':200000.0}
 clas= {'pump1':dict2}
 nx.set_node_attributes(G,clas)
 dict2 = {'tank_volume':100.0}

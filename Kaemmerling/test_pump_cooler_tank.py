@@ -9,8 +9,8 @@ import networkx as nx
 
 G = nx.DiGraph()
 G.add_node('pump1')
-G.add_node('tank1')
 G.add_node('cooler1')
+G.add_node('tank1')
 G.add_edge('cooler1','tank1')
 G.add_edge('pump1','cooler1')
 dict2 = {'node_class':'Tank'}
