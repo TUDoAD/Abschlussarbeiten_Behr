@@ -54,7 +54,7 @@ interf = Automation2()
 sim = interf.CreateFlowsheet()
 
 
-def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pressure_inlet2, compoundscompoundflow, compoundscompoundflow2, heat_exchange_area, global_heat_transfer, laufvar_loc):
+def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pressure_inlet2, compoundscompoundflow, compoundscompoundflow2, heat_exchange_area, laufvar_loc):
 
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -126,7 +126,6 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
        m3.SetOverallCompoundMassFlow(key , compoundscompoundflow2[key])
        
        h_ex1.set_Area(heat_exchange_area)
-       h_ex1.set_Q(global_heat_transfer)
 
 #request a calculation
 
@@ -202,7 +201,7 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(UnitOperation,'./Output/graphs_graphml/clean/UnitOperation_Graph')
     
-def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pressure_inlet2, compoundscompoundflow, compoundscompoundflow2, heat_exchange_area, global_heat_transfer, laufvar_loc):
+def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pressure_inlet2, compoundscompoundflow, compoundscompoundflow2, heat_exchange_area, laufvar_loc):
     
     sum_list = [] 
     for values in compoundscompoundflow.values():
@@ -254,7 +253,7 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
        m3.SetOverallCompoundMassFlow(key , compoundscompoundflow2[key])
        
        h_ex1.set_Area(heat_exchange_area)
-       h_ex1.set_Q(global_heat_transfer)
+
 
 #request a calculation
 
@@ -1933,6 +1932,8 @@ def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettempe
     sim.ConnectObjects(e1.GraphicObject, h1.GraphicObject, -1, -1)
     
 #set heater operation mode
+
+    print(outlettemperature)
 
     if heatadded != 0:
         h1.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded 
