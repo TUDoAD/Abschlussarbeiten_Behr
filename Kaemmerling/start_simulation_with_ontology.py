@@ -1179,6 +1179,6 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
 
     Directory.SetCurrentDirectory(work_dir)
     nx.write_graphml(graph,'./Output/graphs_graphml/clean/Graph_after_simulation')
-graph = nx.read_graphml('C:/Users/Lucky Luciano/Documents/GitHub/Abschlussarbeiten_Behr/Kaemmerling/Output/graphs_graphml/clean/graphml_test_exchanger')
+graph = nx.read_graphml('C:/Users/Lucky Luciano/Documents/GitHub/Abschlussarbeiten_Behr/Kaemmerling/Output/graphs_graphml/clean/graphml_test_heater')
 #graph = nx.read_graphml('C:/Users/Lucky Luciano/Documents/GitHub/Abschlussarbeiten_Behr/Kaemmerling/Output/graphs_graphml/clean/graphml_pfd3')
 startsimulationfromgraphml(graph, 278.15, 100000.0, {"Water" : 0.5, 'Ethanol': 0.5})
