@@ -97,9 +97,7 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law")  
 
 #set inlet stream properties
 
@@ -224,9 +222,7 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law")  
 
 #set inlet stream properties
 
@@ -378,9 +374,7 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law") 
 
 #set inlet stream properties
 
@@ -513,9 +507,7 @@ def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettem
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law") 
 
 #set inlet stream properties
 
@@ -754,9 +746,7 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume, laufvar_loc
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law") 
 
 #set inlet stream properties
 
@@ -882,9 +872,7 @@ def Separator(temperature, pressure, compoundscompoundflow, laufvar_loc):
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law")
 
 #set inlet stream properties
 
@@ -1027,9 +1015,7 @@ def Separator1(temperature, pressure, compoundscompoundflow, laufvar_loc):
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law")  
 
 #set inlet stream properties
 
@@ -1192,9 +1178,7 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law") 
 
 #set inlet stream properties
 
@@ -1328,9 +1312,7 @@ def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressure
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law")  
 
 #set inlet stream properties
 
@@ -1820,9 +1802,7 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law") 
 
 #set inlet stream properties
 
@@ -1951,9 +1931,7 @@ def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettempe
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law") 
 
 #set inlet stream properties
 
@@ -2417,9 +2395,7 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     
 # add property package
 
-    stables = PropertyPackages.SRKPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law") 
 
 #set inlet stream properties
 
@@ -2544,9 +2520,7 @@ def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pr
     
 # add property package
 
-    stables = PropertyPackages.SRKPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law") 
 
 #set inlet stream properties
 

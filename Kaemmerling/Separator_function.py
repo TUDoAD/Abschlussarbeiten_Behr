@@ -76,9 +76,11 @@ def Separator(temperature, pressure, compoundscompoundflow):
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
+    sim.CreateAndAddPropertyPackage("Raoult's Law")
 
-    sim.AddPropertyPackage(stables) 
+    #stables = PropertyPackages.SteamTablesPropertyPackage()
+
+    #sim.AddPropertyPackage(stables) 
 
 #set inlet stream properties
 
@@ -141,4 +143,4 @@ def Separator(temperature, pressure, compoundscompoundflow):
     
 # function call
     
-Separator(300.0,100000.0,{"Water" : 9.57,'Air': 10.0})
+Separator(300.0,100000.0,{"Water" : 10.0,'Air': 10.0})
