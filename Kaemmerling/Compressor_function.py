@@ -96,9 +96,9 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     
 # add property package
 
-    stables = PropertyPackages.SRKPropertyPackage()
+    stables = PropertyPackages.RaoultPropertyPackage()
 
-    sim.AddPropertyPackage(stables) 
+    sim.AddPropertyPackage(stables)
 
 #set inlet stream properties
 
@@ -112,7 +112,7 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -157,4 +157,4 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     im = Image.open(imgPath)
     im.show()
 # function call  
-Compressor(300.0,100000.0,{"Hydrogen" : 9.57},200000,0,0)
+Compressor(300.0,100000.0,{"Hydrogen" : 1.0},200000,0,0)

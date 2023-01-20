@@ -113,7 +113,7 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -161,4 +161,4 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
     im = Image.open(imgPath)
     im.show()
     
-Cooler(300.0,100000.0,{"Water" : 9.57},0,350.0,0)
+Cooler(300.0,100000.0,{"Water" : 1.0},0,280.0,0)

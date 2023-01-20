@@ -52,7 +52,7 @@ interf = Automation2()
 
 sim = interf.CreateFlowsheet()
 
-def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pressure_inlet2, compoundscompoundflow1, compoundscompoundflow2, heat_exchange_area, global_heat_transfer):
+def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pressure_inlet2, compoundscompoundflow1, compoundscompoundflow2, heat_exchange_area):
 
 #add compounds
     
@@ -90,9 +90,7 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     
 # add property package
 
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-
-    sim.AddPropertyPackage(stables) 
+    sim.CreateAndAddPropertyPackage("Raoult's Law") 
 
 #set inlet stream properties
 
@@ -110,16 +108,15 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
          
        print(compoundscompoundflow1[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow1[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow1[key])
 
     for key in compoundscompoundflow2:
          
        print(compoundscompoundflow2[key])
          
-       m3.SetOverallCompoundMolarFlow(key , compoundscompoundflow2[key])
+       m3.SetOverallCompoundMassFlow(key , compoundscompoundflow2[key])
        
        h_ex1.set_Area(heat_exchange_area)
-       h_ex1.set_Q(global_heat_transfer)
 
 #request a calculation
 
@@ -165,4 +162,4 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     im = Image.open(imgPath)
     im.show()
     
-Heat_exchanger(300.0,100000.0, 400.0, 100000.0, {"Water" : 9.57}, {"Ethanol" : 9.97},1.0,1000.0)
+Heat_exchanger(300.0,100000.0, 400.0, 100000.0, {"Water" : 1.0}, {"Ethanol" : 1.0},1.0)

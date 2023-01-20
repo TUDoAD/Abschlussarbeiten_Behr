@@ -94,7 +94,7 @@ def Separator(temperature, pressure, compoundscompoundflow):
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 

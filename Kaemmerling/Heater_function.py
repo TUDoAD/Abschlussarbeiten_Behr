@@ -107,7 +107,7 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -155,31 +155,6 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
 
     im = Image.open(imgPath)
     im.show()
-    
-    
-
-    Heater1 = nx.Graph()
-    Heater1.add_node('heater')
-    outlet_temperature = 270.0
-    dict1 = {'outlet_temperature':outlet_temperature}
-    group= {'heater':dict1}
-    nx.set_node_attributes(Heater1,group)
-    outlet_pressure = 500000.0
-    dict1 = {'outlet_pressure':outlet_pressure}
-    group= {'heater':dict1}
-    nx.set_node_attributes(Heater1,group)
-    list2 = [1.0]
-    compoundscompoundflow = {"Water" : 9.57}
-    for key in compoundscompoundflow:
-                dict1 = {'compounds': key}
-                group= {'heater':dict1}
-                nx.set_node_attributes(Heater1,group)
-    for value in list2:
-                dict1 = {'flow': value}
-                group= {'heater':dict1}
-                nx.set_node_attributes(Heater1,group)
-    Directory.SetCurrentDirectory(work_dir)
-    nx.write_graphml(Heater1,'./Output/graphs_graphml/clean/Heater_Graph')
 
 # function call
-Heater(300.0,100000.0,{"Water" : 9.57},0,350.0,0)
+Heater(300.0,100000.0,{"Water" : 1.0},0,350.0,0)

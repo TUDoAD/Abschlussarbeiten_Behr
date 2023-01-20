@@ -118,7 +118,7 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
          
        print(compoundscompoundflow[key])
          
-       m1.SetOverallCompoundMolarFlow(key , compoundscompoundflow[key])
+       m1.SetOverallCompoundMassFlow(key , compoundscompoundflow[key])
 
 #request a calculation
 
@@ -165,4 +165,4 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     
 # function call     
 
-Pump(300.0,100000.0,{"Water" : 0.5, 'Ethanol': 0.5},200000,0,0,0)
+Pump(300.0,100000.0,{"Water" : 1.0},200000,0,0,0)
