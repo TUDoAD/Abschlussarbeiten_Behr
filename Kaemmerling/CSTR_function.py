@@ -84,8 +84,8 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
            value = rorders[key3]
            rorders1.Add(key3, value);
 
-    kr1 = sim.CreateKineticReaction("N-butyl acetate Production", "Production of N-butyl acetate", 
-                   comps1, dorders1, rorders1, "1-butanol", "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
+    kr1 = sim.CreateKineticReaction("Ethyl acetate Production", "Production of ethyl acetate", 
+                   comps1, dorders1, rorders1, base_compound, "Liquid","Molar Concentration", "kmol/m3", "kmol/[m3.h]", arrhenius_parameter, 0.0, 0.0, 0.0, "", "")
           
     sim.AddReaction(kr1)
     sim.AddReactionToSet(kr1.ID, "DefaultSet", 'true', 0)
@@ -127,7 +127,9 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     
 # add property package
 
-    sim.CreateAndAddPropertyPackage("Raoult's Law")
+    stables = PropertyPackages.RaoultPropertyPackage()
+
+    sim.AddPropertyPackage(stables)
 
 #set inlet stream properties
 
@@ -179,4 +181,4 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     im.show()
     
 # function call    
-CSTR(343.15,500000.0,{"Methyl acetate" : 0.48, '1-butanol' : 0.48, 'Methanol' : 0.04, 'N-butyl acetate' : 0.0},1,0,0,'1-butanol',{"Methyl acetate" : 1.0, '1-butanol' : 1.0, 'Methanol': 0.0, 'N-butyl acetate': 0.0}, {"Methyl acetate" : 0.0, '1-butanol' : 0.0, 'Methanol': 0.0, 'N-butyl acetate': 0.0},{"Methyl acetate" : -1.0, '1-butanol' : -1.0, 'Methanol':1.0, 'N-butyl acetate': 1.0}, 4.0, 0.01)
+CSTR(343.15,100000.0,{"Ethanol" : 0.48, 'Acetic acid' : 0.5, 'Water' : 0.2, 'Ethyl acetate' : 0.0},1,0,0,'Ethanol',{"Ethanol" : 1.0, 'Acetic acid' : 1.0, 'Water': 0.0, 'Ethyl acetate': 0.0}, {"Ethanol" : 0.0, 'Acetic acid' : 0.0, 'Water': 0.0, 'Ethyl acetate': 0.0},{"Ethanol" : -1.0, 'Acetic acid' : -1.0, 'Water':1.0, 'Ethyl acetate': 1.0}, 0.14, 0.005)

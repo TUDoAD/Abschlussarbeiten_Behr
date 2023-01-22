@@ -1043,17 +1043,7 @@
 
 <outlet_stream rdf:about="#Composition1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{'Water': 1.0, 'Ethanol': 0.4182254800995278}</rdfs:comment>
-</outlet_stream>
-
-<outlet_stream rdf:about="#Composition2">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{'Water': 1.0, 'Ethanol': 0.26440271659316095}</rdfs:comment>
-</outlet_stream>
-
-<outlet_stream rdf:about="#Composition3">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{'Water': 1.0, 'Ethanol': 0.19330529255671794}</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{'Water': 0.9748202860865453, 'Ethanol': 0.025179713913454662}</rdfs:comment>
 </outlet_stream>
 
 <owl:AllDisjointClasses>

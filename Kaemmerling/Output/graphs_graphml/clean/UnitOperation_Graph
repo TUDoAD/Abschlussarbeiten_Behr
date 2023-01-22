@@ -1,10 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="compound" attr.type="string"/>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d3" for="node" attr.name="outlet_pressure2" attr.type="double"/>
+<key id="d2" for="node" attr.name="outlet_temperature2" attr.type="double"/>
 <key id="d1" for="node" attr.name="outlet_pressure" attr.type="double"/>
 <key id="d0" for="node" attr.name="outlet_temperature" attr.type="double"/>
 <graph edgedefault="undirected"><node id="unitoperation">
-  <data key="d0">300.0000008497433</data>
-  <data key="d1">150000.0</data>
-  <data key="d2">Water</data>
+  <data key="d0">351.94844468177814</data>
+  <data key="d1">101325.0</data>
+  <data key="d2">372.8046897325809</data>
+  <data key="d3">101325.0</data>
 </node>
 </graph></graphml>
