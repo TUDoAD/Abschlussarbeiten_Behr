@@ -2,12 +2,12 @@
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d17" for="edge" attr.name="edge_sub_class" attr.type="string"/>
 <key id="d16" for="edge" attr.name="edge_class" attr.type="string"/>
 <key id="d15" for="node" attr.name="tank_volume" attr.type="string"/>
-<key id="d14" for="node" attr.name="heat_exchange_area" attr.type="string"/>
-<key id="d13" for="node" attr.name="inlet_pressure2" attr.type="string"/>
-<key id="d12" for="node" attr.name="inlet_temperature2" attr.type="string"/>
-<key id="d11" for="node" attr.name="Flow" attr.type="string"/>
+<key id="d14" for="node" attr.name="heat_exchange_area" attr.type="double"/>
+<key id="d13" for="node" attr.name="inlet_pressure2" attr.type="double"/>
+<key id="d12" for="node" attr.name="inlet_temperature2" attr.type="double"/>
+<key id="d11" for="node" attr.name="Flow" attr.type="double"/>
 <key id="d10" for="node" attr.name="Compound" attr.type="string"/>
-<key id="d9" for="node" attr.name="outlet_pressure" attr.type="string"/>
+<key id="d9" for="node" attr.name="outlet_pressure" attr.type="double"/>
 <key id="d8" for="node" attr.name="reflux_ratio" attr.type="double"/>
 <key id="d7" for="node" attr.name="hk_mole_fraction_in_distillate" attr.type="double"/>
 <key id="d6" for="node" attr.name="lk_mole_fraction_in_distillate" attr.type="double"/>
@@ -33,24 +33,24 @@
   <data key="d1">Heat exchanger, detailed</data>
   <data key="d2">275.00000000000006</data>
   <data key="d3">521.2500000000001</data>
-  <data key="d9">100.0</data>
+  <data key="d9">100000.0</data>
   <data key="d10">Water</data>
   <data key="d11">1.0</data>
   <data key="d12">300.0</data>
   <data key="d13">100000.0</data>
-  <data key="d14">100.0</data>
+  <data key="d14">1.0</data>
 </node>
 <node id="HE139">
   <data key="d0">Heat exchanger</data>
   <data key="d1">Heat exchanger, detailed</data>
   <data key="d2">115.00000000000007</data>
   <data key="d3">160.00000000000023</data>
-  <data key="d9">100.0</data>
+  <data key="d9">100000.0</data>
   <data key="d10">Water</data>
   <data key="d11">1.0</data>
   <data key="d12">300.0</data>
   <data key="d13">100000.0</data>
-  <data key="d14">100.0</data>
+  <data key="d14">1.0</data>
 </node>
 <node id="PL152">
   <data key="d0">Pump</data>
@@ -64,24 +64,24 @@
   <data key="d1">Heat exchanger, detailed</data>
   <data key="d2">299.99999999999994</data>
   <data key="d3">279.9999999999999</data>
-  <data key="d9">100.0</data>
+  <data key="d9">100000.0</data>
   <data key="d10">Water</data>
   <data key="d11">1.0</data>
   <data key="d12">300.0</data>
   <data key="d13">100000.0</data>
-  <data key="d14">100.0</data>
+  <data key="d14">1.0</data>
 </node>
 <node id="HE37">
   <data key="d0">Heat exchanger</data>
   <data key="d1">Heat exchanger, detailed</data>
   <data key="d2">384.2500000000002</data>
   <data key="d3">361.25000000000006</data>
-  <data key="d9">100.0</data>
+  <data key="d9">100000.0</data>
   <data key="d10">Water</data>
   <data key="d11">1.0</data>
   <data key="d12">300.0</data>
   <data key="d13">100000.0</data>
-  <data key="d14">100.0</data>
+  <data key="d14">1.0</data>
 </node>
 <node id="VE109">
   <data key="d0">Vessel</data>
@@ -116,12 +116,12 @@
   <data key="d1">Heat exchanger, detailed</data>
   <data key="d2">275.00000000000006</data>
   <data key="d3">453.75000000000006</data>
-  <data key="d9">100.0</data>
+  <data key="d9">100000.0</data>
   <data key="d10">Water</data>
   <data key="d11">1.0</data>
   <data key="d12">300.0</data>
   <data key="d13">100000.0</data>
-  <data key="d14">100.0</data>
+  <data key="d14">1.0</data>
 </node>
 <node id="VE114">
   <data key="d0">Vessel</data>

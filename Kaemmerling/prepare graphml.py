@@ -30,32 +30,32 @@ for unitoperation in nodes:
             nx.set_node_attributes(f,group)
             
     if  f._node[unitoperation]['node_class'] == 'Pump':
-            dict1 = {'outlet_temperature':'100.0'}
+            dict1 = {'outlet_temperature':100.0}
             group= {unitoperation:dict1}
             nx.set_node_attributes(f,group)
         
     if  f._node[unitoperation]['node_class'] == 'Fluid pump':
-            dict1 = {'outlet_pressure':'100.0'}
+            dict1 = {'outlet_pressure':100.0}
             group= {unitoperation:dict1}
             nx.set_node_attributes(f,group)
             
     if  f._node[unitoperation]['node_class'] == 'Heat exchanger, detailed':
-            dict1 = {'outlet_pressure':'100.0'}
+            dict1 = {'outlet_pressure':100000.0}
             group= {unitoperation:dict1}
             nx.set_node_attributes(f,group)
             dict1 = {'Compound':'Water'}
             group= {unitoperation:dict1}
             nx.set_node_attributes(f,group)
-            dict1 = {'Flow':'1.0'}
+            dict1 = {'Flow':1.0}
             group= {unitoperation:dict1}
             nx.set_node_attributes(f,group)
-            dict1 = {'inlet_temperature2':'300.0'}
+            dict1 = {'inlet_temperature2':300.0}
             group= {unitoperation:dict1}
             nx.set_node_attributes(f,group)
-            dict1 = {'inlet_pressure2':'100000.0'}
+            dict1 = {'inlet_pressure2':100000.0}
             group= {unitoperation:dict1}
             nx.set_node_attributes(f,group)
-            dict1 = {'heat_exchange_area':'100.0'}
+            dict1 = {'heat_exchange_area':1.0}
             group= {unitoperation:dict1}
             nx.set_node_attributes(f,group)
 nx.write_graphml(f,'./Output/graphs_graphml/clean/graphml_pfd_filled')

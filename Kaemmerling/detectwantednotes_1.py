@@ -95,6 +95,18 @@ for grop in wanted_list:
     group= g._node[grop]['node_class']
     group= {grop:group}
     nx.set_node_attributes(W,group,'node_class')
+for grop in wanted_list:
+    group= g._node[grop]['node_name']
+    group= {grop:group}
+    nx.set_node_attributes(W,group,'node_name')
+for grop in wanted_list:
+    group= g._node[grop]['node_material']
+    group= {grop:group}
+    nx.set_node_attributes(W,group,'node_material')
+for grop in wanted_list:
+    group= g._node[grop]['node_operation']
+    group= {grop:group}
+    nx.set_node_attributes(W,group,'node_operation')
     
     
 # position der nodes übertragen
