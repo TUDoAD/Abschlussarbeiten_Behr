@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
     <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
-        <uri id="Automatically generated entry, Timestamp=1673728230630" name="duplicate:http://www.nfdi.org/nfdi4cat/ontochem" uri="KlassenHierarchieDWSIM_AB.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1673728230630" name="duplicate:http://www.nfdi.org/nfdi4cat/ontochem" uri="ontochem_test.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1673728230630" name="duplicate:http://www.nfdi.org/nfdi4cat/ontochem" uri="rdf-new.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1673728230630" name="duplicate:http://www.nfdi.org/nfdi4cat/ontochem" uri="rdf-new_out.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1673728230630" name="duplicate:http://www.nfdi.org/nfdi4cat/ontochem" uri="rdf.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1674510883699" name="duplicate:http://www.nfdi.org/nfdi4cat/ontochem" uri="KlassenHierarchieDWSIM_AB.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1674510883699" name="duplicate:http://www.nfdi.org/nfdi4cat/ontochem" uri="ontochem_test.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1674510883699" name="duplicate:http://www.nfdi.org/nfdi4cat/ontochem" uri="rdf-new.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1674510883699" name="duplicate:http://www.nfdi.org/nfdi4cat/ontochem" uri="rdf-new_out.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1674510883699" name="duplicate:http://www.nfdi.org/nfdi4cat/ontochem" uri="rdf.owl"/>
     </group>
 </catalog>

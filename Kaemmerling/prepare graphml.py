@@ -20,22 +20,17 @@ for unitoperation in nodes:
             nx.set_node_attributes(f,group)
              
     if  f._node[unitoperation]['node_class'] == 'Vessel':
-            dict1 = {'tank_volume':'100.0'}
+            dict1 = {'tank_volume':100.0}
             group= {unitoperation:dict1}
             nx.set_node_attributes(f,group)
          
     if  f._node[unitoperation]['node_class'] == 'Silo':
-            dict1 = {'tank_volume':'100.0'}
-            group= {unitoperation:dict1}
-            nx.set_node_attributes(f,group)
-            
-    if  f._node[unitoperation]['node_class'] == 'Pump':
-            dict1 = {'outlet_temperature':100.0}
+            dict1 = {'tank_volume':100.0}
             group= {unitoperation:dict1}
             nx.set_node_attributes(f,group)
         
     if  f._node[unitoperation]['node_class'] == 'Fluid pump':
-            dict1 = {'outlet_pressure':100.0}
+            dict1 = {'outlet_pressure':200000.0}
             group= {unitoperation:dict1}
             nx.set_node_attributes(f,group)
             

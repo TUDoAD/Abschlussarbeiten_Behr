@@ -27,7 +27,7 @@ import clr
 from System.IO import Directory, Path, File
 from System import String, Environment
 
-dwsimpath = "C:\\Users\\Lucky Luciano\\AppData\\Local\\DWSIM\\"
+dwsimpath = "C:\\Users\\Lucky Luciano\\AppData\\Local\\DWSIM 8\\"
 
 clr.AddReference(dwsimpath + "CapeOpen.dll")
 clr.AddReference(dwsimpath + "DWSIM.Automation.dll")
@@ -58,11 +58,11 @@ sim = interf.CreateFlowsheet()
 
 # add benzene, toluene
 
-benzene = sim.AvailableCompounds["Benzene"]
-toluene = sim.AvailableCompounds["Toluene"]
+ethanol = sim.AvailableCompounds["Ethanol"]
+water = sim.AvailableCompounds["Water"]
 
-sim.SelectedCompounds.Add(benzene.Name, benzene)
-sim.SelectedCompounds.Add(toluene.Name, toluene)
+sim.SelectedCompounds.Add(ethanol.Name, ethanol)
+sim.SelectedCompounds.Add(water.Name, water)
 
 # create and connect objects
 
@@ -98,8 +98,8 @@ m1.SetMassFlow(2.4) # kg/s
 # set column
 
 
-column1.m_lightkey = "Benzene"
-column1.m_heavykey = "Toluene"
+column1.m_lightkey = "Ethanol"
+column1.m_heavykey = "Water"
 column1.m_heavykeymolarfrac = 0.01
 column1.m_lightkeymolarfrac = 0.01
 column1.m_refluxratio = 1.4

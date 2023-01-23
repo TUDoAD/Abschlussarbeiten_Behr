@@ -3,8 +3,8 @@
 <key id="d1" for="node" attr.name="outlet_pressure" attr.type="double"/>
 <key id="d0" for="node" attr.name="outlet_temperature" attr.type="double"/>
 <graph edgedefault="undirected"><node id="unitoperation">
-  <data key="d0">342.13932364874734</data>
-  <data key="d1">101325.0</data>
+  <data key="d0">322.534943370362</data>
+  <data key="d1">200000.0</data>
   <data key="d2">Water</data>
 </node>
 </graph></graphml>

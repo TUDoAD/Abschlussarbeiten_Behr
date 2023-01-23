@@ -62,21 +62,24 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     total_mass_flow = sum(sum_list)    
 
 #add compounds
-    
+
+    compoundslist  = list()
+
     for key in compoundscompoundflow:
         
-       sim.AddCompound(key)
-        
-       print(key)
-       
-       
-       for key2 in compoundscompoundflow2:
-        
-           if key != key2:
-        
-              sim.AddCompound(key2)
-        
-              print(key)
+        sim.AddCompound(key)
+           
+        compoundslist.append(key)
+            
+        print(key)
+           
+    for key2 in compoundscompoundflow2:
+            
+        if key not in compoundslist:
+            
+            sim.AddCompound(key2)
+            
+            print(key2)
     
     
 #create and connect objects
@@ -134,7 +137,7 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
 
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatexsample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -182,14 +185,15 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -259,7 +263,7 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
 
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatexsample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -312,14 +316,15 @@ def Heat_exchanger1(temperature_inlet1, pressure_inlet1, temperature_inlet2, pre
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -401,7 +406,7 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
 
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "coolersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -454,14 +459,15 @@ def Cooler(temperature, pressure, compoundscompoundflow, heatremoved, outlettemp
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -533,7 +539,7 @@ def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettem
 
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "coolersample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -586,14 +592,15 @@ def Cooler1(temperature, pressure, compoundscompoundflow, heatremoved, outlettem
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -657,7 +664,7 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume, laufvar_loc)
 
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "tanksample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -710,14 +717,15 @@ def Tank(temperature, pressure, compoundscompoundflow, tank_volume, laufvar_loc)
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -773,7 +781,7 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume, laufvar_loc
     
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "tanksample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -826,14 +834,15 @@ def Tank1(temperature, pressure, compoundscompoundflow, tank_volume, laufvar_loc
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -898,7 +907,7 @@ def Separator(temperature, pressure, compoundscompoundflow, laufvar_loc):
 
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "separatorsample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -946,14 +955,15 @@ def Separator(temperature, pressure, compoundscompoundflow, laufvar_loc):
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -976,14 +986,15 @@ def Separator(temperature, pressure, compoundscompoundflow, laufvar_loc):
     dict2 = {}
     list2 = list(m3.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m3.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -1039,7 +1050,7 @@ def Separator1(temperature, pressure, compoundscompoundflow, laufvar_loc):
 
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "separatorsample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -1092,14 +1103,15 @@ def Separator1(temperature, pressure, compoundscompoundflow, laufvar_loc):
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     Flow = onto.Output(dict2)
     outlet_pressure2 = m3.GetPressure()
@@ -1114,14 +1126,15 @@ def Separator1(temperature, pressure, compoundscompoundflow, laufvar_loc):
     dict2 = {}
     list2 = list(m3.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m3.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -1202,7 +1215,7 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
 
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pumpsample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -1255,14 +1268,15 @@ def Pump(temperature, pressure, compoundscompoundflow, outletpressure, pressurei
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -1336,7 +1350,7 @@ def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressure
 
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pumpsample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -1389,14 +1403,15 @@ def Pump1(temperature, pressure, compoundscompoundflow, outletpressure, pressure
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -1517,7 +1532,7 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
     
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfrsample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -1570,14 +1585,15 @@ def PFR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, out
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -1689,7 +1705,7 @@ def PFR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
 
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "pfrsample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -1742,14 +1758,15 @@ def PFR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -1877,14 +1894,15 @@ def Heater(temperature, pressure, compoundscompoundflow, heatadded, outlettemper
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     ProcessID_str = str(Laufvar)
@@ -2011,14 +2029,15 @@ def Heater1(temperature, pressure, compoundscompoundflow, heatadded, outlettempe
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
         # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
         comp_string_test = "Composition"+str(laufvar_loc)
@@ -2125,7 +2144,7 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "cstrsample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -2178,14 +2197,15 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -2282,7 +2302,7 @@ def CSTR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, o
     
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "cstrsample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -2335,14 +2355,15 @@ def CSTR1(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, o
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -2419,7 +2440,7 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "compressorsample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -2467,14 +2488,15 @@ def Compressor(temperature, pressure, compoundscompoundflow, outletpressure, pre
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -2544,7 +2566,7 @@ def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pr
     
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "compressorsample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -2592,14 +2614,15 @@ def Compressor1(temperature, pressure, compoundscompoundflow, outletpressure, pr
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -2675,7 +2698,7 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "columnsample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -2723,14 +2746,15 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -2748,14 +2772,15 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     dict2 = {}
     list2 = list(m3.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    total_flow = m3.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_mass_flow
+        total_compound_mass_flow = mass_frac * total_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)
@@ -2767,10 +2792,10 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     
 def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound, laufvar_loc):
     
-    sum_list = [] 
-    for values in compoundscompoundflow.values():
-        sum_list.append(values)
-    total_flow = sum(sum_list) 
+    #sum_list = [] 
+    #for values in compoundscompoundflow.values():
+     #   sum_list.append(values)
+    #total_flow = sum(sum_list) 
     
 #create and connect objects
 
@@ -2823,7 +2848,7 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
     
 #save file
 
-    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileNameToSave = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "columnsample.dwxmz")
 
     interf.SaveFlowsheet(sim, fileNameToSave, True)
 
@@ -2871,8 +2896,9 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
     dict2 = {}
     list2 = list(m2.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    mass_flow = m2.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_flow
+        total_compound_mass_flow = mass_frac * mass_flow
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
@@ -2893,14 +2919,16 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
     dict2 = {}
     list2 = list(m3.GetOverallMassComposition()) # mass fracs
     total_mass_flow_list = []
+    mass_flow = m3.GetMassFlow()
     for mass_frac in list2:
-        total_compound_mass_flow = mass_frac * total_flow
+        total_compound_mass_flow = mass_frac * mass_flow
+        print(total_compound_mass_flow)
         total_mass_flow_list.append(total_compound_mass_flow)
     list3 = list(compoundscompoundflow.keys())
     for key in list3:
-        for value in list2:
+        for value in total_mass_flow_list:
             dict2[key] = value
-            list2.remove(value)
+            total_mass_flow_list.remove(value)
             break
     # Ab hier : Speichern des substance Dicts in Ontology Individual als comment 
     comp_string_test = "Composition"+str(laufvar_loc)

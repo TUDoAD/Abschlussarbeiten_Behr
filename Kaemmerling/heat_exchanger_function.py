@@ -62,14 +62,16 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
         
        print(key)
        
+       #key1 = key
        
-       for key2 in compoundscompoundflow2:
+       
+    for key2 in compoundscompoundflow2:
         
-           if key != key2:
+         if key != key2:
         
-              sim.AddCompound(key2)
+            sim.AddCompound(key2)
         
-              print(key)
+            print(key2)
     
     
 #create and connect objects
@@ -162,4 +164,4 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
     im = Image.open(imgPath)
     im.show()
     
-Heat_exchanger(300.0,100000.0, 400.0, 100000.0, {"Water" : 1.0}, {"Ethanol" : 1.0},1.0)
+Heat_exchanger(300.0,100000.0, 400.0, 100000.0, {"Water" : 1.0}, {"Water" : 1.0},1.0)

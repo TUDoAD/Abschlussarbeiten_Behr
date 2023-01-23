@@ -60,13 +60,13 @@ def Heat_exchanger(temperature_inlet1, pressure_inlet1, temperature_inlet2, pres
        print(key)
        
        
-       for key2 in compoundscompoundflow2:
+    for key2 in compoundscompoundflow2:
         
-           if key != key2:
+        if key != key2:
         
-              sim.AddCompound(key2)
+           sim.AddCompound(key2)
         
-              print(key)
+           print(key2)
     
     
 #create and connect objects
