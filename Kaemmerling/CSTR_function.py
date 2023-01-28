@@ -181,4 +181,4 @@ def CSTR(temperature, pressure, compoundscompoundflow, isothermic, adiabatic, ou
     im.show()
     
 # function call    
-CSTR(343.15,100000.0,{"Ethanol" : 0.48, 'Acetic acid' : 0.5, 'Water' : 0.2, 'Ethyl acetate' : 0.0},1,0,0,'Ethanol',{"Ethanol" : 1.0, 'Acetic acid' : 1.0, 'Water': 0.0, 'Ethyl acetate': 0.0}, {"Ethanol" : 0.0, 'Acetic acid' : 0.0, 'Water': 0.0, 'Ethyl acetate': 0.0},{"Ethanol" : -1.0, 'Acetic acid' : -1.0, 'Water':1.0, 'Ethyl acetate': 1.0}, 0.14, 0.005)
+CSTR(343.15,100000.0,{"Ethanol" : 0.48, 'Acetic acid' : 0.5, 'Water' : 0.02, 'Ethyl acetate' : 0.0},1,0,0,'Ethanol',{"Ethanol" : 1.0, 'Acetic acid' : 1.0, 'Water': 0.0, 'Ethyl acetate': 0.0}, {"Ethanol" : 0.0, 'Acetic acid' : 0.0, 'Water': 0.0, 'Ethyl acetate': 0.0},{"Ethanol" : -1.0, 'Acetic acid' : -1.0, 'Water':1.0, 'Ethyl acetate': 1.0}, 0.14, 0.005)

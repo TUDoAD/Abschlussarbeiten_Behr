@@ -2906,7 +2906,6 @@ def Column1(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_di
             dict2[key] = value
             list2.remove(value)
             break
-    #group= {'unitoperation':dict1} ############## wird durch ontologieverknüpfung ersetzt
     #nx.set_node_attributes(UnitOperation,group)##
     outlet_temperature2 = m3.GetTemperature()
     dict1 = {'outlet_temperature2':outlet_temperature2}

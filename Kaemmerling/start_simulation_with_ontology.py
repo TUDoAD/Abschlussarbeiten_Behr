@@ -7,11 +7,11 @@ import json
 onto_world = owlready2.World()
 onto = onto_world.get_ontology("./rdf-new.owl").load()
 
-def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compoundscompoundflow):
+def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compoundscompoundflow,node_in, node_out):
     Laufvar = 1
     work_dir = os.getcwd()
     #nodes = list(graph.nodes) # list all nodes
-    nodes = list(nx.shortest_path(graph, 'HE139','PL134'))
+    nodes = list(nx.shortest_path(graph, node_in, node_out))
     first_node = nodes[0] 
     node_class = graph._node[first_node]['node_class']
 
@@ -19,14 +19,14 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
         
         if graph._node[node]['node_class'] == 'Column' and node == first_node:
             # set column parameter
-            lk_mole_fraction_in_distillate = graph._node[first_node]['lk_mole_fraction_in_distillate'] 
+            lk_mole_fraction_in_bottom = graph._node[first_node]['lk_mole_fraction_in_bottom'] 
             hk_mole_fraction_in_distillate = graph._node[first_node]['hk_mole_fraction_in_distillate']
             reflux_ratio = graph._node[first_node]['reflux_ratio']
             light_key_compound = graph._node[first_node]['light_key_compound']
             heavy_key_compound = graph._node[first_node]['heavy_key_compound']
             inlet_stream = compoundscompoundflow
             # start DWSIM simulation
-            DWSIMOntology.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound, Laufvar)
+            DWSIMOntology.Column(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_bottom, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound, Laufvar)
             # set node as last node
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -64,7 +64,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             
         if graph._node[node]['node_class'] =='Column' != first_node and 'simulated_node' not in graph._node[node]:  # start next function only if it was not run before (dict condition) and if it is in the successor list
             # set column parameter 
-            lk_mole_fraction_in_distillate = graph._node[node]['lk_mole_fraction_in_distillate'] 
+            lk_mole_fraction_in_bottom = graph._node[node]['lk_mole_fraction_in_bottom'] 
             hk_mole_fraction_in_distillate = graph._node[node]['hk_mole_fraction_in_distillate']
             reflux_ratio = graph._node[node]['reflux_ratio']
             light_key_compound = graph._node[node]['light_key_compound']
@@ -80,7 +80,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             inlet_stream = json.loads(comment_string[0].replace("'","\""))
             Laufvar = Laufvar +1
             # start DWSIM simulation
-            DWSIMOntology.Column1(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_distillate, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound, Laufvar)
+            DWSIMOntology.Column1(inlet_temperature, inlet_pressure, inlet_stream, lk_mole_fraction_in_bottom, hk_mole_fraction_in_distillate, reflux_ratio, light_key_compound, heavy_key_compound, Laufvar)
             # set node as last node
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
@@ -961,7 +961,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
-            outlet_pressure = UnitOperation._node['unitoperation']['outlet_temperature']
+            outlet_pressure = UnitOperation._node['unitoperation']['outlet_pressure']
             dict1 = {'outlet_temperature':outlet_temperature}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -1294,4 +1294,4 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
     nx.write_graphml(graph,'./Output/graphs_graphml/clean/Graph_after_simulation')
 #graph = nx.read_graphml('C:/Users/Lucky Luciano/Documents/GitHub/Abschlussarbeiten_Behr/Kaemmerling/Output/graphs_graphml/clean/graphml_test_heater')
 graph = nx.read_graphml('C:/Users/Lucky Luciano/Documents/GitHub/Abschlussarbeiten_Behr/Kaemmerling/Output/graphs_graphml/clean/graphml_pfd_filled')
-startsimulationfromgraphml(graph, 278.15, 100000.0, {"Water" : 0.5, 'Ethanol': 0.5})
+startsimulationfromgraphml(graph, 278.15, 100000.0, {"Water" : 0.5, 'Ethanol': 0.5}, 'HE9', 'PL134')

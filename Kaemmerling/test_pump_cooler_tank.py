@@ -9,15 +9,15 @@ import networkx as nx
 
 G = nx.DiGraph()
 G.add_node('pump1')
-G.add_node('cooler1')
+G.add_node('pfr1')
 G.add_node('tank1')
-G.add_edge('cooler1','tank1')
-G.add_edge('pump1','cooler1')
+G.add_edge('pfr1','tank1')
+G.add_edge('pump1','pfr1')
 dict2 = {'node_class':'Tank'}
 clas= {'tank1':dict2}
 nx.set_node_attributes(G,clas)
-dict2 = {'node_class':'Cooler'}
-clas= {'cooler1':dict2}
+dict2 = {'node_class':'PFR'}
+clas= {'pfr1':dict2}
 nx.set_node_attributes(G,clas)
 dict2 = {'outlet_temperature':293.15}
 clas= {'cooler1':dict2}

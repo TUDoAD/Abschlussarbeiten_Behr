@@ -152,4 +152,4 @@ def Column(temperature, pressure, compoundscompoundflow, lk_mole_fraction_in_dis
     im.show()
     
 # function call    
-Column(300.0,100000.0,{"Benzene" : 9.57, 'Toluene' : 9.57},0.01,0.01,1.4,'Benzene','Toluene')
+Column(368.0,100000.0,{"Benzene" : 14.0, 'Toluene' : 14.0},0.01,0.01,1.4,'Benzene','Toluene')
