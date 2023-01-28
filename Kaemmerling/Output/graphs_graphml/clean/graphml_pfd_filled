@@ -10,7 +10,7 @@
 <key id="d12" for="node" attr.name="outlet_pressure" attr.type="double"/>
 <key id="d11" for="node" attr.name="reflux_ratio" attr.type="double"/>
 <key id="d10" for="node" attr.name="hk_mole_fraction_in_distillate" attr.type="double"/>
-<key id="d9" for="node" attr.name="lk_mole_fraction_in_distillate" attr.type="double"/>
+<key id="d9" for="node" attr.name="lk_mole_fraction_in_bottom" attr.type="double"/>
 <key id="d8" for="node" attr.name="heavy_key_compound" attr.type="string"/>
 <key id="d7" for="node" attr.name="light_key_compound" attr.type="string"/>
 <key id="d6" for="node" attr.name="node_y" attr.type="double"/>

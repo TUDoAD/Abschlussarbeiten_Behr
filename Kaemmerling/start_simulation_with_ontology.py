@@ -1074,7 +1074,7 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
             before_node = node
             UnitOperation = nx.read_graphml('./Output/graphs_graphml/clean/UnitOperation_Graph')
             outlet_temperature = UnitOperation._node['unitoperation']['outlet_temperature']
-            outlet_pressure = UnitOperation._node['unitoperation']['outlet_temperature']
+            outlet_pressure = UnitOperation._node['unitoperation']['outlet_pressure']
             dict1 = {'outlet_temperature':outlet_temperature}
             group= {node:dict1}
             nx.set_node_attributes(graph,group)
@@ -1294,4 +1294,4 @@ def startsimulationfromgraphml(graph, inlet_temperature,inlet_pressure, compound
     nx.write_graphml(graph,'./Output/graphs_graphml/clean/Graph_after_simulation')
 #graph = nx.read_graphml('C:/Users/Lucky Luciano/Documents/GitHub/Abschlussarbeiten_Behr/Kaemmerling/Output/graphs_graphml/clean/graphml_test_heater')
 graph = nx.read_graphml('C:/Users/Lucky Luciano/Documents/GitHub/Abschlussarbeiten_Behr/Kaemmerling/Output/graphs_graphml/clean/graphml_pfd_filled')
-startsimulationfromgraphml(graph, 278.15, 100000.0, {"Water" : 0.5, 'Ethanol': 0.5}, 'HE9', 'PL134')
+startsimulationfromgraphml(graph, 278.15, 100000.0, {"Water" : 0.5, 'Ethanol': 0.5}, 'HE139', 'PL134')

@@ -9,7 +9,7 @@ for unitoperation in nodes:
             dict1 = {'heavy_key_compound':'Water'}
             group= {unitoperation:dict1}
             nx.set_node_attributes(f,group)
-            dict1 = {'lk_mole_fraction_in_distillate':0.01}
+            dict1 = {'lk_mole_fraction_in_bottom':0.01}
             group= {unitoperation:dict1}
             nx.set_node_attributes(f,group)
             dict1 = {'hk_mole_fraction_in_distillate':0.01}

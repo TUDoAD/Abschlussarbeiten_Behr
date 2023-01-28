@@ -1,20 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
-<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d24" for="edge" attr.name="edge_sub_class" attr.type="string"/>
-<key id="d23" for="edge" attr.name="edge_class" attr.type="string"/>
-<key id="d22" for="node" attr.name="tank_volume" attr.type="double"/>
-<key id="d21" for="node" attr.name="Ethanol" attr.type="double"/>
-<key id="d20" for="node" attr.name="Water" attr.type="double"/>
-<key id="d19" for="node" attr.name="simulated_node" attr.type="string"/>
-<key id="d18" for="node" attr.name="outlet_temperature" attr.type="double"/>
-<key id="d17" for="node" attr.name="heat_exchange_area" attr.type="double"/>
-<key id="d16" for="node" attr.name="inlet_pressure2" attr.type="double"/>
-<key id="d15" for="node" attr.name="inlet_temperature2" attr.type="double"/>
-<key id="d14" for="node" attr.name="Flow" attr.type="double"/>
-<key id="d13" for="node" attr.name="Compound" attr.type="string"/>
-<key id="d12" for="node" attr.name="outlet_pressure" attr.type="double"/>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d26" for="edge" attr.name="edge_sub_class" attr.type="string"/>
+<key id="d25" for="edge" attr.name="edge_class" attr.type="string"/>
+<key id="d24" for="node" attr.name="tank_volume" attr.type="double"/>
+<key id="d23" for="node" attr.name="heat_exchange_area" attr.type="double"/>
+<key id="d22" for="node" attr.name="inlet_pressure2" attr.type="double"/>
+<key id="d21" for="node" attr.name="inlet_temperature2" attr.type="double"/>
+<key id="d20" for="node" attr.name="Flow" attr.type="double"/>
+<key id="d19" for="node" attr.name="Compound" attr.type="string"/>
+<key id="d18" for="node" attr.name="Ethanol" attr.type="double"/>
+<key id="d17" for="node" attr.name="Water" attr.type="double"/>
+<key id="d16" for="node" attr.name="simulated_node" attr.type="string"/>
+<key id="d15" for="node" attr.name="outlet_pressure2" attr.type="double"/>
+<key id="d14" for="node" attr.name="outlet_pressure" attr.type="double"/>
+<key id="d13" for="node" attr.name="outlet_temperature2" attr.type="double"/>
+<key id="d12" for="node" attr.name="outlet_temperature" attr.type="double"/>
 <key id="d11" for="node" attr.name="reflux_ratio" attr.type="double"/>
 <key id="d10" for="node" attr.name="hk_mole_fraction_in_distillate" attr.type="double"/>
-<key id="d9" for="node" attr.name="lk_mole_fraction_in_distillate" attr.type="double"/>
+<key id="d9" for="node" attr.name="lk_mole_fraction_in_bottom" attr.type="double"/>
 <key id="d8" for="node" attr.name="heavy_key_compound" attr.type="string"/>
 <key id="d7" for="node" attr.name="light_key_compound" attr.type="string"/>
 <key id="d6" for="node" attr.name="node_y" attr.type="double"/>
@@ -37,6 +39,13 @@
   <data key="d9">0.01</data>
   <data key="d10">0.01</data>
   <data key="d11">1.4</data>
+  <data key="d12">351.94844468177814</data>
+  <data key="d13">372.8046897325809</data>
+  <data key="d14">101325.0</data>
+  <data key="d15">101325.0</data>
+  <data key="d16">TRUE</data>
+  <data key="d17">0.4980757827085092</data>
+  <data key="d18">0.012865351588207343</data>
 </node>
 <node id="HE9">
   <data key="d0">Heat exchanger</data>
@@ -46,16 +55,12 @@
   <data key="d4">Column</data>
   <data key="d5">275.00000000000006</data>
   <data key="d6">521.2500000000001</data>
-  <data key="d12">100000.0</data>
-  <data key="d13">Water</data>
-  <data key="d14">1.0</data>
-  <data key="d15">300.0</data>
-  <data key="d16">100000.0</data>
-  <data key="d17">1.0</data>
-  <data key="d18">283.2998982017245</data>
-  <data key="d19">TRUE</data>
-  <data key="d20">0.5</data>
-  <data key="d21">0.5000000000000001</data>
+  <data key="d14">100000.0</data>
+  <data key="d19">Water</data>
+  <data key="d20">1.0</data>
+  <data key="d21">300.0</data>
+  <data key="d22">100000.0</data>
+  <data key="d23">1.0</data>
 </node>
 <node id="HE139">
   <data key="d0">Heat exchanger</data>
@@ -65,12 +70,16 @@
   <data key="d4">Column</data>
   <data key="d5">115.00000000000007</data>
   <data key="d6">160.00000000000023</data>
-  <data key="d12">100000.0</data>
-  <data key="d13">Water</data>
-  <data key="d14">1.0</data>
-  <data key="d15">300.0</data>
-  <data key="d16">100000.0</data>
-  <data key="d17">1.0</data>
+  <data key="d14">100000.0</data>
+  <data key="d19">Water</data>
+  <data key="d20">1.0</data>
+  <data key="d21">300.0</data>
+  <data key="d22">100000.0</data>
+  <data key="d23">1.0</data>
+  <data key="d12">283.2998982017245</data>
+  <data key="d16">TRUE</data>
+  <data key="d17">0.5</data>
+  <data key="d18">0.5000000000000001</data>
 </node>
 <node id="PL152">
   <data key="d0">Pump</data>
@@ -80,7 +89,7 @@
   <data key="d4">Column</data>
   <data key="d5">217.50000000000006</data>
   <data key="d6">132.50000000000009</data>
-  <data key="d12">200000.0</data>
+  <data key="d14">200000.0</data>
 </node>
 <node id="HE75">
   <data key="d0">Heat exchanger</data>
@@ -90,12 +99,12 @@
   <data key="d4">Column</data>
   <data key="d5">299.99999999999994</data>
   <data key="d6">279.9999999999999</data>
-  <data key="d12">100000.0</data>
-  <data key="d13">Water</data>
-  <data key="d14">1.0</data>
-  <data key="d15">300.0</data>
-  <data key="d16">100000.0</data>
-  <data key="d17">1.0</data>
+  <data key="d14">100000.0</data>
+  <data key="d19">Water</data>
+  <data key="d20">1.0</data>
+  <data key="d21">300.0</data>
+  <data key="d22">100000.0</data>
+  <data key="d23">1.0</data>
 </node>
 <node id="HE37">
   <data key="d0">Heat exchanger</data>
@@ -105,16 +114,16 @@
   <data key="d4">Column</data>
   <data key="d5">384.2500000000002</data>
   <data key="d6">361.25000000000006</data>
-  <data key="d12">100000.0</data>
-  <data key="d13">Water</data>
-  <data key="d14">1.0</data>
-  <data key="d15">300.0</data>
-  <data key="d16">100000.0</data>
-  <data key="d17">1.0</data>
-  <data key="d18">287.2148314002554</data>
-  <data key="d19">TRUE</data>
-  <data key="d20">0.49999999999999994</data>
-  <data key="d21">0.5000000000000001</data>
+  <data key="d14">101325.0</data>
+  <data key="d19">Water</data>
+  <data key="d20">1.0</data>
+  <data key="d21">300.0</data>
+  <data key="d22">100000.0</data>
+  <data key="d23">1.0</data>
+  <data key="d12">322.52693226665326</data>
+  <data key="d16">TRUE</data>
+  <data key="d17">0.4980757827085093</data>
+  <data key="d18">0.012865351588207346</data>
 </node>
 <node id="VE109">
   <data key="d0">Vessel</data>
@@ -124,12 +133,12 @@
   <data key="d4">Column</data>
   <data key="d5">432.5000000000003</data>
   <data key="d6">200.00000000000009</data>
-  <data key="d22">100.0</data>
-  <data key="d18">287.214831400255</data>
-  <data key="d12">100000.0</data>
-  <data key="d19">TRUE</data>
-  <data key="d20">0.49999999999999994</data>
-  <data key="d21">0.5000000000000001</data>
+  <data key="d24">100.0</data>
+  <data key="d12">322.526932266653</data>
+  <data key="d14">101325.0</data>
+  <data key="d16">TRUE</data>
+  <data key="d17">0.4980757827085093</data>
+  <data key="d18">0.012865351588207346</data>
 </node>
 <node id="VE110">
   <data key="d0">Vessel</data>
@@ -139,7 +148,7 @@
   <data key="d4">Column</data>
   <data key="d5">520.0000000000002</data>
   <data key="d6">200.00000000000009</data>
-  <data key="d22">100.0</data>
+  <data key="d24">100.0</data>
 </node>
 <node id="PL134">
   <data key="d0">Pump</data>
@@ -149,11 +158,11 @@
   <data key="d4">Column</data>
   <data key="d5">600.0000063508533</data>
   <data key="d6">167.5000000000001</data>
-  <data key="d12">287.2254465859785</data>
-  <data key="d18">287.2254465859785</data>
-  <data key="d19">TRUE</data>
-  <data key="d20">0.49999999999999994</data>
-  <data key="d21">0.5000000000000001</data>
+  <data key="d14">200000.0</data>
+  <data key="d12">322.534943370362</data>
+  <data key="d16">TRUE</data>
+  <data key="d17">0.4980757827085093</data>
+  <data key="d18">0.012865351588207346</data>
 </node>
 <node id="VE155">
   <data key="d0">Vessel</data>
@@ -163,7 +172,7 @@
   <data key="d4">Column</data>
   <data key="d5">357.5</data>
   <data key="d6">119.99999999999999</data>
-  <data key="d22">100.0</data>
+  <data key="d24">100.0</data>
 </node>
 <node id="HE22">
   <data key="d0">Heat exchanger</data>
@@ -173,12 +182,16 @@
   <data key="d4">Column</data>
   <data key="d5">275.00000000000006</data>
   <data key="d6">453.75000000000006</data>
-  <data key="d12">100000.0</data>
-  <data key="d13">Water</data>
-  <data key="d14">1.0</data>
-  <data key="d15">300.0</data>
-  <data key="d16">100000.0</data>
-  <data key="d17">1.0</data>
+  <data key="d14">101325.0</data>
+  <data key="d19">Water</data>
+  <data key="d20">1.0</data>
+  <data key="d21">300.0</data>
+  <data key="d22">100000.0</data>
+  <data key="d23">1.0</data>
+  <data key="d12">334.3249404585679</data>
+  <data key="d16">TRUE</data>
+  <data key="d17">0.4980757827085093</data>
+  <data key="d18">0.012865351588207345</data>
 </node>
 <node id="VE114">
   <data key="d0">Vessel</data>
@@ -188,74 +201,74 @@
   <data key="d4">Column</data>
   <data key="d5">357.5000000000003</data>
   <data key="d6">198.74999999999983</data>
-  <data key="d22">100.0</data>
+  <data key="d24">100.0</data>
 </node>
 <edge source="CO61" target="HE139">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="CO61" target="PL152">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="CO61" target="HE22">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="HE9" target="CO61">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="HE9" target="HE37">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="HE139" target="CO61">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="PL152" target="CO61">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="PL152" target="HE75">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="HE75" target="VE114">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="HE37" target="VE109">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="HE37" target="VE110">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="VE109" target="PL134">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="VE110" target="PL134">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="HE22" target="CO61">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="HE22" target="HE9">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="HE22" target="HE37">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 <edge source="VE114" target="VE155">
-  <data key="d23">Piping</data>
-  <data key="d24">Main pipe</data>
+  <data key="d25">Piping</data>
+  <data key="d26">Main pipe</data>
 </edge>
 </graph></graphml>
