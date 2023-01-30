@@ -22,10 +22,10 @@ with onto:
     class Person(Agent): pass  
     class Project(Thing): pass
     class Projecttitle(Project): pass
-    class Documentation(Project): pass          
-    
+             
 
     # Add classes to organize documentation
+    class Documentation(Project): pass
     class EnzymeML_Document(Documentation): pass
     class Title(EnzymeML_Document): equivalent_to = [Projecttitle] 
     class Institution(Project): equivalent_to = [Organisation]
@@ -37,21 +37,40 @@ with onto:
     
    
     # Add enzyme classes to SBO 'ENZYMATIC CATALYST'
-    class Oxidoreductases(onto.search_one(iri = '*SBO_0000460')): equivalent_to = [onto.search_one('*SBO_0000200')]
+    # Oxidoreductase catalyses redox reaction -> SBO_0000200 'REDOX REACTION' 
+    class Oxidoreductases(onto.search_one(iri = '*SBO_0000460')): equivalent_to = [(onto.search_one(iri = '*SBO_0000200'))]
     class Transferases(onto.search_one(iri = '*SBO_0000460')): pass
     class Hydrolases(onto.search_one(iri = '*SBO_0000460')): pass
     class Lyases(onto.search_one(iri = '*SBO_0000460')): pass
     class Isomerases(onto.search_one(iri = '*SBO_0000460')): pass
     class Ligases(onto.search_one(iri = '*SBO_0000460')): pass
+    
+#onto.serach_one(iri = '*ChemicalSubstance'): equivalent_to = onto.search_one(iri = '*SBO_0000003') 
+  
+    # Stabilisator, such as Tween80, as 'NEUTRAL PARTICIPANT' 
+    class Stabilisator(onto.search_one(iri = '*SBO_0000594')): pass
+                        
 
-
-# Add individuals
+# Add individuals (specific information -> EnzymeML docu Rosenthal)
     DepartmentOfBCI = Institution("DepartmentOfBCI")
     TU_Dortmund = Organisation("TU_Dortmund")
     HelicalTubeReactor = Reactor("HelicalTubeReactor")
     StraightTubeReactor = Reactor("StraightTubeReactor")
     Laccase = Oxidoreductases("Laccase")
-    Lac_HCR_SCR = Title("Lac_HCR_SCR")
+    Lac_HCR_SCR = Title("Laccase_HCR_SCR")
+    #'REACTION'
+    ABTS_oxidation = [onto.search_one(iri='*SBO_0000201')("ABTS_oxidation")]
+    #'SIDE SUBSTRATE'
+    Oxygen = [onto.search_one(iri = '*SBO_0000604')("Oxygen")]
+    #'SUBSTRATE' 
+    ABTS_reduced = [onto.search_one(iri = '*SBO_0000015')('ABTS_reduced')]
+    # 'PRODUCT'
+    ABTS_oxidized = [onto.search_one(iri = '*SBO_0000015')('ABTS_oxidized')]
+    # Tween80 (Polysorbat 80)
+    Tween80_1 = Stabilisator("Tween80_1%")
+    # Take pH value from Enzyme docu Rosenthal
+    pH_reac = [onto.search_one(iri = '*SBO_0000304')(pH)]
+    
     
     
 # Add properties    
@@ -72,11 +91,13 @@ with onto:
     
 
     # Volume of reactor
-    # SBO_0000465: spatial measure
-    class has_volume_value(onto.search_one(iri = '*Device') >> int): pass
+    # SBO_0000465: 'SPACIAL MEASURE '
+    class has_volume_value(onto.search_one(iri = '*Device') >> float): pass
     class has_value_unit(onto.search_one(iri = '*Device') >> str): pass # not only volume value has a unit
-    class has_value(onto.search_one(iri = '*SBO_0000465') >> int): pass
-
+    class has_value(onto.search_one(iri = '*SBO_0000465') >> float): pass
+    
+    # pH
+    class has_pH_value(onto.search_one(iri = '*SBO_0000304') >> float): pass
 
     # Wether the concentration of reactant and protein is constant or not
     # CONCENTRATION OF AN ENTITY POOL
