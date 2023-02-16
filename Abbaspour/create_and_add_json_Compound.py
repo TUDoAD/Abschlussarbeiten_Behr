@@ -122,7 +122,7 @@ sim.AddCompound("ABTS_red")
 sim.AddCompound("Water")
 sim.AddCompound("Oxygen")
 
-# stoichiometric coefficients
+# Stoichiometric coefficients
 comps = Dictionary[str, float]()
 comps.Add("Laccase", -1.0);
 comps.Add("Water", 2.0);
@@ -130,7 +130,7 @@ comps.Add("Oxygen", -1.0);
 comps.Add("ABTS_ox", 4.0);
 comps.Add("ABTS_red", 4.0);
 
-# direct order coefficients
+# Direct order coefficients
 dorders = Dictionary[str, float]()
 dorders.Add("Laccase", 0.0);
 dorders.Add("Water", 0.0);
@@ -138,7 +138,7 @@ dorders.Add("Oxygen", 0.0);
 dorders.Add("ABTS_ox", 1.0);
 dorders.Add("ABTS_red", 0.0);
 
-# reverse order coefficients
+# Reverse order coefficients
 rorders = Dictionary[str, float]()
 rorders.Add("Laccase", 0.0);
 rorders.Add("Water", 0.0);
@@ -150,7 +150,7 @@ kr1 = sim.CreateKineticReaction("ABTS Oxidation", "ABTS Oxidation using Laccase"
         comps, dorders, rorders, "ABTS_ox", "Mixture", "Molar Concentration", 
         "kmol/m3", "kmol/[m3.h]", 0.5, 0.0, 0.0, 0.0, "", "")
 
-# add objects
+# Add all objects
 m1 = sim.AddObject(ObjectType.MaterialStream, 0, 10, "Oxygen")
 m2 = sim.AddObject(ObjectType.MaterialStream, 0, 30, "Laccase")
 m3 = sim.AddObject(ObjectType.MaterialStream, 0, 60, "ABTS_red")
@@ -169,7 +169,7 @@ e1 = e1.GetAsObject()
 MIX1 = MIX1.GetAsObject()
 pfr = pfr.GetAsObject()
 
-# connect the streams
+# Connect the inlet streams
 sim.ConnectObjects(m1.GraphicObject, MIX1.GraphicObject, -1, -1)
 sim.ConnectObjects(m2.GraphicObject, MIX1.GraphicObject, -1, -1)
 sim.ConnectObjects(m3.GraphicObject, MIX1.GraphicObject, -1, -1)
@@ -185,6 +185,7 @@ pfr.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length
 pfr.Volume = 2.0; # m3
 pfr.Length = 0.5; # m
 
+# Set Property Package
 sim.CreateAndAddPropertyPackage("Raoult's Law")
 
 m1.SetTemperature(311.15) # Kelvin
