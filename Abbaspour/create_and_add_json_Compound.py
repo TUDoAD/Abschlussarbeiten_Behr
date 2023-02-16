@@ -204,9 +204,9 @@ m2.SetOverallCompoundMolarFlow("Oxygen", 0.0) # mol/s
 m2.SetOverallCompoundMolarFlow("Laccase", 1.0)  # mol/s
 m2.SetOverallCompoundMolarFlow("ABTS_red", 0.0)  # mol/s
 
-m2.SetOverallCompoundMolarFlow("Oxygen", 0.0) # mol/s
-m2.SetOverallCompoundMolarFlow("Laccase", 0.0)  # mol/s
-m2.SetOverallCompoundMolarFlow("ABTS_red", 0.0)  # mol/s
+m3.SetOverallCompoundMolarFlow("Oxygen", 0.0) # mol/s
+m3.SetOverallCompoundMolarFlow("Laccase", 0.0)  # mol/s
+m3.SetOverallCompoundMolarFlow("ABTS_red", 1.0)  # mol/s
 
 sim.AddReaction(kr1)
 sim.AddReactionToSet(kr1.ID, "DefaultSet", True, 0)
