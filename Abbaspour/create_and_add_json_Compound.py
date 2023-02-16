@@ -115,15 +115,159 @@ for i in range(0, n):
                                 JsonConvert.SerializeObject(comp_values[0].ConstantProperties, 
                                                             Formatting.Indented))
 
-
 # Add compounds 
 sim.AddCompound("Laccase")
 sim.AddCompound("ABTS_ox")
 sim.AddCompound("ABTS_red")
+sim.AddCompound("Water")
+sim.AddCompound("Oxygen")
 
+# stoichiometric coefficients
+comps = Dictionary[str, float]()
+comps.Add("Laccase", -1.0);
+comps.Add("Water", 2.0);
+comps.Add("Oxygen", -1.0);
+comps.Add("ABTS_ox", 4.0);
+comps.Add("ABTS_red", 4.0);
 
-fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                              "AddComp-test.dwxmz")
+# direct order coefficients
+dorders = Dictionary[str, float]()
+dorders.Add("Laccase", 0.0);
+dorders.Add("Water", 0.0);
+dorders.Add("Oxygen", 0.0);
+dorders.Add("ABTS_ox", 1.0);
+dorders.Add("ABTS_red", 0.0);
+
+# reverse order coefficients
+rorders = Dictionary[str, float]()
+rorders.Add("Laccase", 0.0);
+rorders.Add("Water", 0.0);
+rorders.Add("Oxygen", 0.0);
+rorders.Add("ABTS_ox", 0.0);
+rorders.Add("ABTS_red", 0.0);
+
+kr1 = sim.CreateKineticReaction("ABTS Oxidation", "ABTS Oxidation using Laccase", 
+        comps, dorders, rorders, "ABTS_ox", "Mixture", "Molar Concentration", 
+        "kmol/m3", "kmol/[m3.h]", 0.5, 0.0, 0.0, 0.0, "", "")
+
+# add objects
+m1 = sim.AddObject(ObjectType.MaterialStream, 0, 10, "Oxygen")
+m2 = sim.AddObject(ObjectType.MaterialStream, 0, 30, "Laccase")
+m3 = sim.AddObject(ObjectType.MaterialStream, 0, 60, "ABTS_red")
+m4 = sim.AddObject(ObjectType.MaterialStream, 100, 50, "Mixture")
+m5 = sim.AddObject(ObjectType.MaterialStream, 250, 50, "Product")
+e1 = sim.AddObject(ObjectType.EnergyStream, 100, 90, "Heat")
+pfr = sim.AddObject(ObjectType.RCT_PFR, 150, 50, "PFR")
+MIX1 = sim.AddObject(ObjectType.Mixer, 50, 50, "Mixer")
+ 
+m1 = m1.GetAsObject()
+m2 = m2.GetAsObject()
+m3 = m3.GetAsObject()
+m4 = m4.GetAsObject()
+m5 = m5.GetAsObject()
+e1 = e1.GetAsObject()
+MIX1 = MIX1.GetAsObject()
+pfr = pfr.GetAsObject()
+
+# connect the streams
+sim.ConnectObjects(m1.GraphicObject, MIX1.GraphicObject, -1, -1)
+sim.ConnectObjects(m2.GraphicObject, MIX1.GraphicObject, -1, -1)
+sim.ConnectObjects(m3.GraphicObject, MIX1.GraphicObject, -1, -1)
+sim.ConnectObjects(MIX1.GraphicObject, m4.GraphicObject, -1, -1)
+
+pfr.ConnectFeedMaterialStream(m4, 0)
+pfr.ConnectProductMaterialStream(m5, 0)
+pfr.ConnectFeedEnergyStream(e1, 1)
+
+# PFR properties
+pfr.ReactorOperationMode = Reactors.OperationMode.Isothermic
+pfr.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length
+pfr.Volume = 2.0; # m3
+pfr.Length = 0.5; # m
+
+sim.CreateAndAddPropertyPackage("Raoult's Law")
+
+m1.SetTemperature(311.15) # Kelvin
+m2.SetTemperature(311.15) # Kelvin
+m3.SetTemperature(311.15) # Kelvin
+m4.SetTemperature(311.15) # Kelvin
+m5.SetTemperature(311.15) # Kelvin
+
+m1.SetMolarFlow(0.0) # will set by compound
+
+m1.SetOverallCompoundMolarFlow("Oxygen", 1.0) # mol/s
+m1.SetOverallCompoundMolarFlow("Laccase", 0.0)  # mol/s
+m1.SetOverallCompoundMolarFlow("ABTS_red", 0.0)  # mol/
+
+m2.SetOverallCompoundMolarFlow("Oxygen", 0.0) # mol/s
+m2.SetOverallCompoundMolarFlow("Laccase", 1.0)  # mol/s
+m2.SetOverallCompoundMolarFlow("ABTS_red", 0.0)  # mol/s
+
+m2.SetOverallCompoundMolarFlow("Oxygen", 0.0) # mol/s
+m2.SetOverallCompoundMolarFlow("Laccase", 0.0)  # mol/s
+m2.SetOverallCompoundMolarFlow("ABTS_red", 0.0)  # mol/s
+
+sim.AddReaction(kr1)
+sim.AddReactionToSet(kr1.ID, "DefaultSet", True, 0)
+
+# request a calculation
+errors = interf.CalculateFlowsheet4(sim);
+
+print("Reactor Heat Load: {0:.4g} kW".format(pfr.DeltaQ))
+for c in pfr.ComponentConversions:
+    if (c.Value > 0): print("{0} conversion: {1:.4g}%".format(c.Key, c.Value * 100.0))
+
+if (len(errors) > 0):
+    for e in errors:
+        print("Error: " + e.ToString())
+
+# reactor profiles (temperature, pressure and concentration)
+coordinates = [] # volume coordinate in m3
+names = [] # compound names
+values = [] # concentrations in mol/m3 (0 to j, j = number of compounds - 1), temperature in K (j+1), pressure in Pa (j+2)
+
+for p in pfr.points:
+    coordinates.append(p[0])
+
+for j in range(1, pfr.ComponentConversions.Count + 3):
+    list1 = []
+    for p in pfr.points:
+        list1.append(p[j])
+    values.append(list1)
+
+for k in pfr.ComponentConversions.Keys:
+    names.append(k)
+
+# save file
+fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), 
+                              "ABTS-ox-one.dwxmz")
 interf.SaveFlowsheet(sim, fileNameToSave, True)
-    
-    
+
+# save the pfd to an image and display it
+clr.AddReference(dwsimpath + "SkiaSharp.dll")
+clr.AddReference("System.Drawing")
+
+from SkiaSharp import SKBitmap, SKImage, SKCanvas, SKEncodedImageFormat
+from System.IO import MemoryStream
+from System.Drawing import Image
+from System.Drawing.Imaging import ImageFormat
+
+PFDSurface = sim.GetSurface()
+bmp = SKBitmap(1000, 600)
+canvas = SKCanvas(bmp)
+canvas.Scale(0.5)
+PFDSurface.ZoomAll(bmp.Width, bmp.Height)
+PFDSurface.UpdateCanvas(canvas)
+d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
+str = MemoryStream()
+d.SaveTo(str)
+image = Image.FromStream(str)
+imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "ABTS-ox-one.png")
+image.Save(imgPath, ImageFormat.Png)
+str.Dispose()
+canvas.Dispose()
+bmp.Dispose()
+
+from PIL import Image
+im = Image.open(imgPath)
+im.show()
