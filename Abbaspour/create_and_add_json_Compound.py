@@ -179,7 +179,7 @@ pfr.ConnectFeedMaterialStream(m4, 0)
 pfr.ConnectProductMaterialStream(m5, 0)
 pfr.ConnectFeedEnergyStream(e1, 1)
 
-# PFR properties
+# PFR properties (fix pressure drop inside reactor)
 pfr.ReactorOperationMode = Reactors.OperationMode.Isothermic
 pfr.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length
 pfr.Volume = 2.0; # m3
