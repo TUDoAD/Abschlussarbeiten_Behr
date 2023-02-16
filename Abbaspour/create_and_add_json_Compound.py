@@ -108,7 +108,7 @@ for i in range(0, n):
     comp_values[0].ComponentName = names[i]
     
     # save the compound to a JSON file, which can be loaded back on any simulation
-    # IMPORTANT: Save JSON file into "addcomps" file to be able to import the component into simulation
+    # IMPORTANT: Save JSON file into "addcomps" file to be able to import the compound into simulation
  
     System.IO.File.WriteAllText("C:\\Users\\49157\\AppData\\Local\\DWSIM8\\addcomps\\" 
                                 + str(names[i]) + ".json", 
