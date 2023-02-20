@@ -128,7 +128,7 @@ comps.Add("Laccase", -1.0);
 comps.Add("Water", 2.0);
 comps.Add("Oxygen", -1.0);
 comps.Add("ABTS_ox", 4.0);
-comps.Add("ABTS_red", 4.0);
+comps.Add("ABTS_red", -4.0);
 
 # Direct order coefficients
 dorders = Dictionary[str, float]()
