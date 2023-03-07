@@ -181,27 +181,73 @@ with onto:
     
     class Reaction(Thing): pass
     class Chemical_Reaction(Reaction): pass
-    class Biochemical_Reaction(Reaction): pass
+    class Biochemical_Reaction(Chemical_Reaction): pass
+    class Bio_Catalysed_Reaction(Biochemical_Reaction): pass
+   
+    #https://www.ebi.ac.uk/ols/ontologies/rex/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FREX_0000071&lang=en&viewMode=All&siblings=true
+    class Protein_Catalysed_Reaction(Bio_Catalysed_Reaction): pass
+    class NucleicAcid_Catalysed_Reaction(Bio_Catalysed_Reaction): pass
+    class Abzymatic_Reaction(Protein_Catalysed_Reaction): pass
+    class Enzymatic_Reaction(Protein_Catalysed_Reaction): pass
+
+    AllDisjoint([NucleicAcid_Catalysed_Reaction, Protein_Catalysed_Reaction])
+    AllDisjoint([Abzymatic_Reaction,Enzymatic_Reaction])
 
     class is_a(Chemical_Reaction >> Reaction): pass
-    class is_a(Biochemical_Reaction >> Reaction): pass    
+    class is_a(Biochemical_Reaction >> Chemical_Reaction): pass
+    class is_a(Bio_Catalysed_Reaction >> Biochemical_Reaction): pass
+    class is_a(NucleicAcid_Catalysed_Reaction >> Bio_Catalysed_Reaction): pass
+    class is_a(Protein_Catalysed_Reaction >> Bio_Catalysed_Reaction): pass
+    class is_a(Abzymatic_Reaction >> Protein_Catalysed_Reaction): pass
+    class is_a(Enzymatic_Reaction >> Protein_Catalysed_Reaction): pass
 
+    class Oxidorecductase_Reaction(Enzymatic_Reaction): pass
+    class Transferase_Reaction(Enzymatic_Reaction): pass
+    class Hydrolyse_Reaction(Enzymatic_Reaction): pass
+    class Lyase_Reaction(Enzymatic_Reaction): pass
+    class Isomerase_Reaction(Enzymatic_Reaction): pass
+    class Ligase_Reaction(Enzymatic_Reaction): pass
+
+    AllDisjoint([Oxidorecductase_Reaction, Transferase_Reaction, Hydrolyse_Reaction, Lyase_Reaction, Isomerase_Reaction, Ligase_Reaction])    
+    AllDifferent([Oxidorecductase_Reaction, Transferase_Reaction, Hydrolyse_Reaction, Lyase_Reaction, Isomerase_Reaction, Ligase_Reaction])
+    
     class Reaction_Participant(Reaction): pass
     class Substrate(Reaction_Participant): pass
     class Product(Reaction_Participant): pass
     class Protein(Reaction_Participant): pass
-
+    
+    AllDisjoint([Substrate, Product, Protein])
+    
     class is_part_of(Reaction_Participant >> Reaction): pass
     class is_a(Substrate >> Reaction_Participant): pass
     class is_a(Product >> Reaction_Participant): pass
     class is_a(Protein >> Reaction_Participant): pass
     
+    class Enzyme(Protein): pass
+    class Oxidoreductase(Enzyme): pass
+    class Transferase(Enzyme): pass
+    class Hydrolyse(Enzyme): pass
+    class Lyase(Enzyme): pass
+    class Isomerase(Enzyme): pass
+    class Ligase(Enzyme): pass
+
+    AllDisjoint([Oxidoreductase, Transferase, Hydrolyse, Lyase, Isomerase, Ligase])
+    AllDifferent([Oxidoreductase, Transferase, Hydrolyse, Lyase, Isomerase, Ligase])
+
+    class catalyses(Oxidoreductase >> Oxidorecductase_Reaction): pass
+    class catalyses(Transferase >> Transferase_Reaction): pass
+    #class catalyses(Hydrolyse >> Hydrolyse_Reaction): pass
+    #class catalyses(Lyase >> Lyase_Reaction): pass
+    #class catalyses(Isomerase >> Isomerase_Reaction): pass
+    #class catalyses(Ligase >> Ligase_Reaction): pass
+    
+    AllDisjoint([catalyses, is_a, is_part_of])
+
     class Has_Name(Reaction >> str): pass
     class Has_Stoichometric_Coeff(Reaction_Participant >> float): pass
 
-Oxidation = Reaction('Oxidation')
-
-Laccase = Protein('Laccase')
+ABTS_Oxidation = Oxidorecductase_Reaction('ABTS_Oxidation')
+Laccase = Oxidoreductase('Laccase')
 ABTS_red = Substrate('ABTS_red')
 ABTS_ox = Product('ABTS_ox')
 Water = Product('Water')
@@ -499,7 +545,7 @@ with onto:
     class Has_Stabilizer_Concentration(Stabilizer >> float): pass
 
 Tween80 = Stabilizer('Tween80') #(Polysorbat 80)
-Tween80.Has_Stabilizer_Concentration.append('1.0')
+Tween80.Has_Stabilizer_Concentration.append(1.0)
 
 with onto:
     
@@ -523,7 +569,7 @@ with onto:
 Laccase_Conc_Curve = Protein_Conc_Curve('Laccase_Conc_Curve')
 ABTS_red_Conc_Curve = Reactant_Conc_Curve('ABTS_red_Conc_Curve')
 
-#with onto:
-#    sync_reasoner()
+with onto:
+    sync_reasoner()
     
 onto.save("Class Hierarchy.owl")    
