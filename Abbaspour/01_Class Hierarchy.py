@@ -201,15 +201,15 @@ with onto:
     class is_a(Abzymatic_Reaction >> Protein_Catalysed_Reaction): pass
     class is_a(Enzymatic_Reaction >> Protein_Catalysed_Reaction): pass
 
-    class Oxidorecductase_Reaction(Enzymatic_Reaction): pass
+    class Oxidoreductase_Reaction(Enzymatic_Reaction): pass
     class Transferase_Reaction(Enzymatic_Reaction): pass
     class Hydrolyse_Reaction(Enzymatic_Reaction): pass
     class Lyase_Reaction(Enzymatic_Reaction): pass
     class Isomerase_Reaction(Enzymatic_Reaction): pass
     class Ligase_Reaction(Enzymatic_Reaction): pass
 
-    AllDisjoint([Oxidorecductase_Reaction, Transferase_Reaction, Hydrolyse_Reaction, Lyase_Reaction, Isomerase_Reaction, Ligase_Reaction])    
-    AllDifferent([Oxidorecductase_Reaction, Transferase_Reaction, Hydrolyse_Reaction, Lyase_Reaction, Isomerase_Reaction, Ligase_Reaction])
+    AllDisjoint([Oxidoreductase_Reaction, Transferase_Reaction, Hydrolyse_Reaction, Lyase_Reaction, Isomerase_Reaction, Ligase_Reaction])    
+    AllDifferent([Oxidoreductase_Reaction, Transferase_Reaction, Hydrolyse_Reaction, Lyase_Reaction, Isomerase_Reaction, Ligase_Reaction])
     
     class Reaction_Participant(Reaction): pass
     class Substrate(Reaction_Participant): pass
@@ -234,19 +234,19 @@ with onto:
     AllDisjoint([Oxidoreductase, Transferase, Hydrolyse, Lyase, Isomerase, Ligase])
     AllDifferent([Oxidoreductase, Transferase, Hydrolyse, Lyase, Isomerase, Ligase])
 
-    class catalyses(Oxidoreductase >> Oxidorecductase_Reaction): pass
+    class catalyses(Oxidoreductase >> Oxidoreductase_Reaction): pass
     class catalyses(Transferase >> Transferase_Reaction): pass
-    #class catalyses(Hydrolyse >> Hydrolyse_Reaction): pass
-    #class catalyses(Lyase >> Lyase_Reaction): pass
-    #class catalyses(Isomerase >> Isomerase_Reaction): pass
-    #class catalyses(Ligase >> Ligase_Reaction): pass
+    class catalyses(Hydrolyse >> Hydrolyse_Reaction): pass
+    class catalyses(Lyase >> Lyase_Reaction): pass
+    class catalyses(Isomerase >> Isomerase_Reaction): pass
+    class catalyses(Ligase >> Ligase_Reaction): pass
     
     AllDisjoint([catalyses, is_a, is_part_of])
 
     class Has_Name(Reaction >> str): pass
     class Has_Stoichometric_Coeff(Reaction_Participant >> float): pass
 
-ABTS_Oxidation = Oxidorecductase_Reaction('ABTS_Oxidation')
+ABTS_Oxidation = Oxidoreductase_Reaction('ABTS_Oxidation')
 Laccase = Oxidoreductase('Laccase')
 ABTS_red = Substrate('ABTS_red')
 ABTS_ox = Product('ABTS_ox')
@@ -265,7 +265,7 @@ with onto:
     class Irreversible_Reaction(Reaction): pass
     class Has_Direct_OrderCoeff(Irreversible_Reaction >> float): pass
     class Reversible_Reaction(Reaction): pass
-    class Has_Reverse_OrderCoeff(Irreversible_Reaction >> float): pass
+    class Has_Reverse_OrderCoeff(Reversible_Reaction >> float): pass
 
 Laccase.Has_Direct_OrderCoeff.append(0.0)
 ABTS_red.Has_Direct_OrderCoeff.append(0.0)
@@ -572,4 +572,4 @@ ABTS_red_Conc_Curve = Reactant_Conc_Curve('ABTS_red_Conc_Curve')
 with onto:
     sync_reasoner()
     
-onto.save("Class Hierarchy.owl")    
+onto.save("Class Hierarchy.owl") 
