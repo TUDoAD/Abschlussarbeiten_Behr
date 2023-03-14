@@ -8,433 +8,307 @@
 
 <owl:Ontology rdf:about="http://www.semanticweb.org/49157/ontologies/2023/02/Class_Hierarchy"/>
 
-<owl:ObjectProperty rdf:about="#is_a">
-  <owl:equivalentProperty rdf:resource="http://www.w3.org/2002/07/owl#bottomObjectProperty"/>
+<owl:ObjectProperty rdf:about="#provides">
   <rdfs:range rdf:resource="#Substance"/>
-  <rdfs:domain rdf:resource="#Chemical_Substance"/>
-  <rdfs:domain rdf:resource="#Biological_Substance"/>
-  <rdfs:range rdf:resource="#Default_Substance_Database"/>
-  <rdfs:domain rdf:resource="#DWSIM_Compounds"/>
-  <rdfs:domain rdf:resource="#ChemSep"/>
-  <rdfs:domain rdf:resource="#Biodiesel"/>
-  <rdfs:domain rdf:resource="#CoolProp"/>
-  <rdfs:domain rdf:resource="#ChEDL"/>
-  <rdfs:domain rdf:resource="#Electrolytes"/>
-  <rdfs:range rdf:resource="#User_Defined_Compounds"/>
-  <rdfs:domain rdf:resource="#XML_file"/>
-  <rdfs:domain rdf:resource="#JSON_file"/>
-  <rdfs:range rdf:resource="#Activity_Coefficient_Model"/>
-  <rdfs:range rdf:resource="#Ideal_Model"/>
-  <rdfs:domain rdf:resource="#RaoultsLaw"/>
-  <rdfs:domain rdf:resource="#NRTL"/>
-  <rdfs:domain rdf:resource="#UNIQUAC"/>
-  <rdfs:range rdf:resource="#Substance_Property"/>
-  <rdfs:domain rdf:resource="#Substancename"/>
-  <rdfs:range rdf:resource="#Reaction"/>
-  <rdfs:domain rdf:resource="#Chemical_Reaction"/>
-  <rdfs:range rdf:resource="#Chemical_Reaction"/>
-  <rdfs:domain rdf:resource="#Biochemical_Reaction"/>
-  <rdfs:range rdf:resource="#Biochemical_Reaction"/>
-  <rdfs:domain rdf:resource="#Bio_Catalysed_Reaction"/>
-  <rdfs:range rdf:resource="#Bio_Catalysed_Reaction"/>
-  <rdfs:domain rdf:resource="#Protein_Catalysed_Reaction"/>
-  <rdfs:range rdf:resource="#Protein_Catalysed_Reaction"/>
-  <rdfs:domain rdf:resource="#NucleicAcid_Catalysed_Reaction"/>
-  <rdfs:domain rdf:resource="#Abzymatic_Reaction"/>
-  <rdfs:domain rdf:resource="#Enzymatic_Reaction"/>
-  <rdfs:range rdf:resource="#Reaction_Participant"/>
-  <rdfs:domain rdf:resource="#Substrate"/>
-  <rdfs:domain rdf:resource="#Product"/>
-  <rdfs:domain rdf:resource="#Protein"/>
-  <owl:equivalentProperty rdf:resource="#catalyses"/>
-  <rdfs:domain rdf:resource="#Conversion"/>
-  <rdfs:domain rdf:resource="#Equbrilium"/>
-  <rdfs:domain rdf:resource="#Kinetic"/>
-  <rdfs:domain rdf:resource="#Heterogeneous"/>
-  <rdfs:domain rdf:resource="#User_Defined_Reaction"/>
-  <rdfs:range rdf:resource="#User_Defined_Reaction"/>
-  <rdfs:domain rdf:resource="#Michaelis_Menten_Kinetic"/>
-  <rdfs:range rdf:resource="#Modeled_Element"/>
-  <rdfs:domain rdf:resource="#s_0"/>
-  <rdfs:domain rdf:resource="#s_1"/>
-  <rdfs:domain rdf:resource="#s_2"/>
-  <rdfs:domain rdf:resource="#s_3"/>
-  <rdfs:domain rdf:resource="#s_4"/>
-  <rdfs:domain rdf:resource="#s_5"/>
-  <rdfs:domain rdf:resource="#s_6"/>
-  <rdfs:domain rdf:resource="#s_7"/>
-  <rdfs:domain rdf:resource="#s_8"/>
-  <rdfs:domain rdf:resource="#s_9"/>
-  <rdfs:domain rdf:resource="#s_10"/>
-  <rdfs:domain rdf:resource="#s_11"/>
-  <rdfs:domain rdf:resource="#s_12"/>
-  <rdfs:domain rdf:resource="#s_13"/>
-  <rdfs:domain rdf:resource="#s_14"/>
-  <rdfs:domain rdf:resource="#s_15"/>
-  <rdfs:domain rdf:resource="#s_16"/>
-  <rdfs:domain rdf:resource="#s_17"/>
-  <rdfs:domain rdf:resource="#s_18"/>
-  <rdfs:domain rdf:resource="#s_19"/>
-  <rdfs:domain rdf:resource="#p_0"/>
-  <rdfs:domain rdf:resource="#p_1"/>
-  <rdfs:domain rdf:resource="#p_2"/>
-  <rdfs:domain rdf:resource="#p_3"/>
-  <rdfs:domain rdf:resource="#p_4"/>
-  <rdfs:domain rdf:resource="#p_5"/>
-  <rdfs:domain rdf:resource="#p_6"/>
-  <rdfs:domain rdf:resource="#p_7"/>
-  <rdfs:domain rdf:resource="#p_8"/>
-  <rdfs:domain rdf:resource="#p_9"/>
-  <rdfs:domain rdf:resource="#p_10"/>
-  <rdfs:domain rdf:resource="#p_11"/>
-  <rdfs:domain rdf:resource="#p_12"/>
-  <rdfs:domain rdf:resource="#p_13"/>
-  <rdfs:domain rdf:resource="#p_14"/>
-  <rdfs:domain rdf:resource="#p_15"/>
-  <rdfs:domain rdf:resource="#p_16"/>
-  <rdfs:domain rdf:resource="#p_17"/>
-  <rdfs:domain rdf:resource="#p_18"/>
-  <rdfs:domain rdf:resource="#p_19"/>
-  <rdfs:range rdf:resource="#Reaction_Property"/>
-  <rdfs:domain rdf:resource="#Temperature"/>
-  <rdfs:domain rdf:resource="#pH"/>
-  <rdfs:domain rdf:resource="#Pressure"/>
-  <rdfs:range rdf:resource="#MaterialFlow"/>
-  <rdfs:domain rdf:resource="#InletFlow"/>
-  <rdfs:domain rdf:resource="#OutletFlow"/>
-  <rdfs:domain rdf:resource="#Mixture"/>
-  <rdfs:range rdf:resource="#Equipment"/>
-  <rdfs:domain rdf:resource="#Reactor"/>
-  <rdfs:range rdf:resource="#Reactor"/>
-  <rdfs:domain rdf:resource="#Reactortype"/>
-  <rdfs:range rdf:resource="#UnitOperation"/>
-  <rdfs:domain rdf:resource="#Mixing"/>
-  <rdfs:range rdf:resource="#Engineering_Step"/>
-  <rdfs:domain rdf:resource="#Processdesign"/>
-  <rdfs:range rdf:resource="#Documentation"/>
-  <rdfs:domain rdf:resource="#ElectronicLabNotebook"/>
-  <rdfs:range rdf:resource="#ElectronicLabNotebook"/>
-  <rdfs:domain rdf:resource="#EnzymeML_Documentation"/>
-  <rdfs:range rdf:resource="#Measurement"/>
-  <rdfs:domain rdf:resource="#Concentration_Curve"/>
-  <rdfs:range rdf:resource="#Concentration_Curve"/>
-  <rdfs:domain rdf:resource="#Reactant_Conc_Curve"/>
-  <rdfs:domain rdf:resource="#Protein_Conc_Curve"/>
-  <rdfs:domain rdf:resource="#Absorption"/>
-  <rdfs:domain rdf:resource="#Time_Measurement"/>
+  <rdfs:domain rdf:resource="#Substance_Database"/>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#is_part_of">
-  <rdfs:range rdf:resource="#Devianting_Database"/>
-  <rdfs:domain rdf:resource="#Online_Source"/>
-  <rdfs:domain rdf:resource="#User_Defined_Compounds"/>
-  <rdfs:range rdf:resource="#Reaction"/>
-  <rdfs:domain rdf:resource="#Reaction_Participant"/>
-  <rdfs:range rdf:resource="#ProcessFlowDiagram"/>
-  <rdfs:domain rdf:resource="#MaterialFlow"/>
-  <rdfs:domain rdf:resource="#Equipment"/>
-  <rdfs:range rdf:resource="#Project"/>
-  <rdfs:range rdf:resource="#Institution"/>
-  <rdfs:domain rdf:resource="#Organisation"/>
-  <rdfs:domain rdf:resource="#Agent"/>
-  <rdfs:domain rdf:resource="#Engineering_Step"/>
-  <rdfs:range rdf:resource="#Engineering_Step"/>
-  <rdfs:domain rdf:resource="#Processsimulation"/>
-  <rdfs:domain rdf:resource="#Documentation"/>
-  <rdfs:range rdf:resource="#EnzymeML_Documentation"/>
-  <rdfs:domain rdf:resource="#Experimental_Data"/>
-  <rdfs:domain rdf:resource="#Measurement"/>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#contains">
-  <rdfs:range rdf:resource="#Substance"/>
-  <rdfs:domain rdf:resource="#Default_Substance_Database"/>
-  <rdfs:domain rdf:resource="#Devianting_Database"/>
-  <rdfs:range rdf:resource="#User_Defined_Compounds"/>
-  <rdfs:domain rdf:resource="#AddCompound_file"/>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#is_composed_of_a">
-  <rdfs:range rdf:resource="#Thermodynamic_Model"/>
-  <rdfs:domain rdf:resource="#PropertyPackage"/>
+<owl:ObjectProperty rdf:about="#must_include">
+  <rdfs:range rdf:resource="#User_Defined_Compound"/>
+  <rdfs:domain rdf:resource="#AddCompound_File"/>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#catalyses">
-  <owl:equivalentProperty rdf:resource="http://www.w3.org/2002/07/owl#bottomObjectProperty"/>
-  <owl:equivalentProperty rdf:resource="#is_a"/>
-  <rdfs:range rdf:resource="#Oxidoreductase_Reaction"/>
-  <rdfs:range rdf:resource="#Transferase_Reaction"/>
-  <rdfs:range rdf:resource="#Hydrolyse_Reaction"/>
-  <rdfs:range rdf:resource="#Lyase_Reaction"/>
-  <rdfs:range rdf:resource="#Isomerase_Reaction"/>
-  <rdfs:range rdf:resource="#Ligase_Reaction"/>
-  <rdfs:domain rdf:resource="#Oxidoreductase"/>
-  <rdfs:domain rdf:resource="#Transferase"/>
-  <rdfs:domain rdf:resource="#Hydrolyse"/>
-  <rdfs:domain rdf:resource="#Lyase"/>
-  <rdfs:domain rdf:resource="#Isomerase"/>
-  <rdfs:domain rdf:resource="#Ligase"/>
+  <rdfs:range rdf:resource="#Enzymatic_Reaction"/>
+  <rdfs:domain rdf:resource="#Enzyme"/>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#is_parameter_of">
-  <rdfs:range rdf:resource="#Michaelis_Menten_Kinetic"/>
-  <rdfs:domain rdf:resource="#KM"/>
-  <rdfs:domain rdf:resource="#kCAT"/>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#has_a">
-  <rdfs:range rdf:resource="#Project"/>
-  <rdfs:domain rdf:resource="#Institution"/>
-</owl:ObjectProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_DWSIM_ID">
+<owl:DatatypeProperty rdf:about="#has_DWSIM_ID">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_CAS_Number">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_SMILES">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_Formula">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_Molecular_Weight">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_Curve_For_VaporPressure">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_Ideal_gas_HeatCapacity">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_Critical_Compressibility">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_Critical_Pressure">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_Critical_Temperature">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_Critical_Volume">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_Normal_Boiling_Point">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_Acentric_Factor">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_Chao_Seader_Acentricity">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_Chao_Seader_Liquid_Molar_Volume">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_Chao_Seader_Solubility_Parameter">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_IG_Enthalpy_of_Formation_25C">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_IG_Entropy_of_Formation_25C">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_IG_Gibbs_Energy_of_Formation_25C">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#Substance_Property"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_InteractionParameter">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:domain rdf:resource="#NRTL"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#IsBlackOil">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
   <rdfs:domain rdf:resource="#Substance"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Is_COOL_PROP_Supported">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-  <rdfs:domain rdf:resource="#Substance"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Is_F_PROPS_Supported">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-  <rdfs:domain rdf:resource="#Substance"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Is_Hydrated_Salt">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-  <rdfs:domain rdf:resource="#Substance"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Is_Ion">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-  <rdfs:domain rdf:resource="#Substance"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Is_Modified">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-  <rdfs:domain rdf:resource="#Substance"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Is_Salt">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-  <rdfs:domain rdf:resource="#Substance"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Is_Solid">
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-  <rdfs:domain rdf:resource="#Substance"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#Has_Elements">
+<owl:DatatypeProperty rdf:about="#has_CAS_Number">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:domain rdf:resource="#Substance"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Name">
+<owl:DatatypeProperty rdf:about="#has_SMILES">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  <rdfs:domain rdf:resource="#Reaction"/>
+  <rdfs:domain rdf:resource="#Substance"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Stoichometric_Coeff">
+<owl:DatatypeProperty rdf:about="#has_Formula">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Molecular_Weight">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Curve_For_VaporPressure">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Ideal_gas_HeatCapacity">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Critical_Compressibility">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Critical_Pressure">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Critical_Temperature">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Critical_Volume">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Normal_Boiling_Point">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Acentric_Factor">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Chao_Seader_Acentricity">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Chao_Seader_Liquid_Molar_Volume">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Chao_Seader_Solubility_Parameter">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_IG_Enthalpy_of_Formation_25C">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_IG_Entropy_of_Formation_25C">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_IG_Gibbs_Energy_of_Formation_25C">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_InteractionParameter">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#isBlackOil">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#is_COOL_PROP_Supported">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#is_F_PROPS_Supported">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#is_Hydrated_Salt">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#is_Ion">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#is_Modified">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#is_Salt">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#is_Solid">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Elements">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:domain rdf:resource="#Substance"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Stoichometric_Coeff">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
   <rdfs:domain rdf:resource="#Reaction_Participant"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Direct_OrderCoeff">
+<owl:DatatypeProperty rdf:about="#has_Direct_OrderCoeff">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
   <rdfs:domain rdf:resource="#Irreversible_Reaction"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Reverse_OrderCoeff">
+<owl:DatatypeProperty rdf:about="#has_Reverse_OrderCoeff">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
   <rdfs:domain rdf:resource="#Reversible_Reaction"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Value">
+<owl:DatatypeProperty rdf:about="#has_KM_Value">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
   <rdfs:domain rdf:resource="#KM"/>
-  <rdfs:domain rdf:resource="#Temperature"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Value_Unit">
+<owl:DatatypeProperty rdf:about="#has_KM_Unit">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:domain rdf:resource="#KM"/>
-  <rdfs:domain rdf:resource="#Temperature"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Sequence">
+<owl:DatatypeProperty rdf:about="#has_kCAT_Value">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#kCAT"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_kCAT_Unit">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:domain rdf:resource="#kCAT"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Sequence">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:domain rdf:resource="#Protein"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Source_Organism">
+<owl:DatatypeProperty rdf:about="#has_Source_Organism">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:domain rdf:resource="#Protein"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_EC_Number">
+<owl:DatatypeProperty rdf:about="#has_EC_Number">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:domain rdf:resource="#Protein"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_UniProt_ID">
+<owl:DatatypeProperty rdf:about="#has_UniProt_ID">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:domain rdf:resource="#Protein"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Const_Concentration">
+<owl:DatatypeProperty rdf:about="#has_Const_Concentration">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
   <rdfs:domain rdf:resource="#Protein"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Volume_Value">
+<owl:DatatypeProperty rdf:about="#has_Temperature_Value">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Temperature"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_pH_Value">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#pH"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Pressure_Value">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#Pressure"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Rate_Value">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:domain rdf:resource="#ReactionRate"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Temperature_Unit">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:domain rdf:resource="#Temperature"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Pressure_Unit">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:domain rdf:resource="#Pressure"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Rate_Unit">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:domain rdf:resource="#ReactionRate"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#has_Volume_Value">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
   <rdfs:domain rdf:resource="#Equipment"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Volume_Unit">
+<owl:DatatypeProperty rdf:about="#has_Volume_Unit">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:domain rdf:resource="#Equipment"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Lenght_Value">
+<owl:DatatypeProperty rdf:about="#has_Lenght_Value">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
   <rdfs:domain rdf:resource="#Equipment"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Lenght_Unit">
+<owl:DatatypeProperty rdf:about="#has_Lenght_Unit">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:domain rdf:resource="#Equipment"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Compound_MolarFlow">
+<owl:DatatypeProperty rdf:about="#has_Compound_MolarFlow">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
   <rdfs:domain rdf:resource="#MaterialFlow"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Projectstart">
+<owl:DatatypeProperty rdf:about="#has_Projectstart">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:domain rdf:resource="#Project"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Titel">
+<owl:DatatypeProperty rdf:about="#has_Titel">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:domain rdf:resource="#EnzymeML_Documentation"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Author">
+<owl:DatatypeProperty rdf:about="#has_Author">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:domain rdf:resource="#EnzymeML_Documentation"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Date_of_Creation">
+<owl:DatatypeProperty rdf:about="#has_Date_of_Creation">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:domain rdf:resource="#EnzymeML_Documentation"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#Has_Stabilizer_Concentration">
+<owl:DatatypeProperty rdf:about="#has_Stabilizer_Concentration">
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
   <rdfs:domain rdf:resource="#Stabilizer"/>
 </owl:DatatypeProperty>
@@ -447,68 +321,72 @@
   <rdfs:subClassOf rdf:resource="#Substance"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Biological_Substance">
+<owl:Class rdf:about="#Biochemical_Substance">
+  <rdfs:subClassOf rdf:resource="#Chemical_Substance"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Substance_Database">
   <rdfs:subClassOf rdf:resource="#Substance"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Default_Substance_Database">
-  <rdfs:subClassOf rdf:resource="#Substance"/>
+<owl:Class rdf:about="#Default_Database">
+  <rdfs:subClassOf rdf:resource="#Substance_Database"/>
 </owl:Class>
 
 <owl:Class rdf:about="#DWSIM_Compounds">
-  <rdfs:subClassOf rdf:resource="#Default_Substance_Database"/>
+  <rdfs:subClassOf rdf:resource="#Default_Database"/>
 </owl:Class>
 
 <owl:Class rdf:about="#ChemSep">
-  <rdfs:subClassOf rdf:resource="#Default_Substance_Database"/>
+  <rdfs:subClassOf rdf:resource="#Default_Database"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Biodiesel">
-  <rdfs:subClassOf rdf:resource="#Default_Substance_Database"/>
+  <rdfs:subClassOf rdf:resource="#Default_Database"/>
 </owl:Class>
 
 <owl:Class rdf:about="#CoolProp">
-  <rdfs:subClassOf rdf:resource="#Default_Substance_Database"/>
+  <rdfs:subClassOf rdf:resource="#Default_Database"/>
 </owl:Class>
 
 <owl:Class rdf:about="#ChEDL">
-  <rdfs:subClassOf rdf:resource="#Default_Substance_Database"/>
+  <rdfs:subClassOf rdf:resource="#Default_Database"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Electrolytes">
-  <rdfs:subClassOf rdf:resource="#Default_Substance_Database"/>
+  <rdfs:subClassOf rdf:resource="#Default_Database"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Devianting_Database">
-  <rdfs:subClassOf rdf:resource="#Substance"/>
+  <rdfs:subClassOf rdf:resource="#Substance_Database"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Online_Source">
   <rdfs:subClassOf rdf:resource="#Devianting_Database"/>
 </owl:Class>
 
-<owl:Class rdf:about="#User_Defined_Compounds">
+<owl:Class rdf:about="#User_Defined_Compound">
   <rdfs:subClassOf rdf:resource="#Devianting_Database"/>
 </owl:Class>
 
+<owl:Class rdf:about="#AddCompound_File">
+  <rdfs:subClassOf rdf:resource="#User_Defined_Compound"/>
+</owl:Class>
+
 <owl:Class rdf:about="#XML_file">
-  <rdfs:subClassOf rdf:resource="#User_Defined_Compounds"/>
+  <rdfs:subClassOf rdf:resource="#AddCompound_File"/>
 </owl:Class>
 
 <owl:Class rdf:about="#JSON_file">
-  <rdfs:subClassOf rdf:resource="#User_Defined_Compounds"/>
+  <rdfs:subClassOf rdf:resource="#AddCompound_File"/>
 </owl:Class>
 
-<owl:Class rdf:about="#AddCompound_file">
-  <rdfs:subClassOf rdf:resource="#User_Defined_Compounds"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Thermodynamic_Model">
+<owl:Class rdf:about="#Thermodynamic">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
 </owl:Class>
 
 <owl:Class rdf:about="#PropertyPackage">
-  <rdfs:subClassOf rdf:resource="#Thermodynamic_Model"/>
+  <rdfs:subClassOf rdf:resource="#Thermodynamic"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Activity_Coefficient_Model">
@@ -539,8 +417,68 @@
   <rdfs:subClassOf rdf:resource="#Substance"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Substancename">
+<owl:Class rdf:about="#Physico_chemical_propertiy">
   <rdfs:subClassOf rdf:resource="#Substance_Property"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Molarmass">
+  <rdfs:subClassOf rdf:resource="#Physico_chemical_propertiy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#MeltingPoint">
+  <rdfs:subClassOf rdf:resource="#Physico_chemical_propertiy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BoilingPoint">
+  <rdfs:subClassOf rdf:resource="#Physico_chemical_propertiy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Density">
+  <rdfs:subClassOf rdf:resource="#Physico_chemical_propertiy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Solubility">
+  <rdfs:subClassOf rdf:resource="#Physico_chemical_propertiy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Solubility_in_Water">
+  <rdfs:subClassOf rdf:resource="#Physico_chemical_propertiy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Solubility_in_OrganicSolvent">
+  <rdfs:subClassOf rdf:resource="#Physico_chemical_propertiy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Enzymatic_SubstanceProperty">
+  <rdfs:subClassOf rdf:resource="#Substance_Property"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Enzymatic_Substrate_Specificity">
+  <rdfs:subClassOf rdf:resource="#Enzymatic_SubstanceProperty"/>
+</owl:Class>
+
+<owl:Class rdf:about="#pH_Optimum">
+  <rdfs:subClassOf rdf:resource="#Enzymatic_SubstanceProperty"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Temp_Optimum">
+  <rdfs:subClassOf rdf:resource="#Enzymatic_SubstanceProperty"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Catalytic_Efficiency">
+  <rdfs:subClassOf rdf:resource="#Enzymatic_SubstanceProperty"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Kinetic_Parameter">
+  <rdfs:subClassOf rdf:resource="#Catalytic_Efficiency"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Substrate_Affinity">
+  <rdfs:subClassOf rdf:resource="#Enzymatic_SubstanceProperty"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Inhibitor_Sensitivity">
+  <rdfs:subClassOf rdf:resource="#Enzymatic_SubstanceProperty"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Reaction">
@@ -622,26 +560,62 @@
 </owl:Class>
 
 <owl:Class rdf:about="#Oxidoreductase">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom rdf:resource="#Oxidoreductase_Reaction"/>
+      <owl:onProperty rdf:resource="#catalyses"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#Enzyme"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Transferase">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom rdf:resource="#Transferase_Reaction"/>
+      <owl:onProperty rdf:resource="#catalyses"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#Enzyme"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Hydrolyse">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom rdf:resource="#Hydrolyse_Reaction"/>
+      <owl:onProperty rdf:resource="#catalyses"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#Enzyme"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Lyase">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom rdf:resource="#Lyase_Reaction"/>
+      <owl:onProperty rdf:resource="#catalyses"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#Enzyme"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Isomerase">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom rdf:resource="#Isomerase_Reaction"/>
+      <owl:onProperty rdf:resource="#catalyses"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#Enzyme"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Ligase">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom rdf:resource="#Ligase_Reaction"/>
+      <owl:onProperty rdf:resource="#catalyses"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#Enzyme"/>
 </owl:Class>
 
@@ -717,62 +691,6 @@
   <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
 </owl:Class>
 
-<owl:Class rdf:about="#s_6">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#s_7">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#s_8">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#s_9">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#s_10">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#s_11">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#s_12">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#s_13">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#s_14">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#s_15">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#s_16">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#s_17">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#s_18">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#s_19">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
 <owl:Class rdf:about="#p_0">
   <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
 </owl:Class>
@@ -797,113 +715,58 @@
   <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
 </owl:Class>
 
-<owl:Class rdf:about="#p_6">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#p_7">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#p_8">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#p_9">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#p_10">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#p_11">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#p_12">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#p_13">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#p_14">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#p_15">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#p_16">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#p_17">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#p_18">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#p_19">
-  <rdfs:subClassOf rdf:resource="#Modeled_Element"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Reaction_Property">
+<owl:Class rdf:about="#Reaction_Conditions">
   <rdfs:subClassOf rdf:resource="#Reaction"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Temperature">
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#Has_Value_Unit"/>
+      <owl:onProperty rdf:resource="#has_Temperature_Unit"/>
       <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C</owl:hasValue>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#Has_Value"/>
+      <owl:onProperty rdf:resource="#has_Temperature_Value"/>
       <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">38.0</owl:hasValue>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#KM"/>
-  <rdfs:subClassOf rdf:resource="#Reaction_Property"/>
+  <rdfs:subClassOf rdf:resource="#Reaction_Conditions"/>
 </owl:Class>
 
 <owl:Class rdf:about="#pH">
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#Has_Value"/>
+      <owl:onProperty rdf:resource="#has_pH_Value"/>
       <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.2</owl:hasValue>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#Reaction_Property"/>
-  <rdfs:subClassOf rdf:resource="#Temperature"/>
+  <rdfs:subClassOf rdf:resource="#Reaction_Conditions"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Pressure">
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#Has_Value_Unit"/>
+      <owl:onProperty rdf:resource="#has_Pressure_Unit"/>
       <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bar</owl:hasValue>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#Has_Value"/>
+      <owl:onProperty rdf:resource="#has_Pressure_Value"/>
       <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.013</owl:hasValue>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#Reaction_Property"/>
-  <rdfs:subClassOf rdf:resource="#Temperature"/>
+  <rdfs:subClassOf rdf:resource="#Reaction_Conditions"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Solvent">
+  <rdfs:subClassOf rdf:resource="#Reaction_Conditions"/>
 </owl:Class>
 
 <owl:Class rdf:about="#ReactionRate">
-  <rdfs:subClassOf rdf:resource="#Reaction"/>
+  <rdfs:subClassOf rdf:resource="#Reaction_Conditions"/>
 </owl:Class>
 
 <owl:Class rdf:about="#ProcessFlowDiagram">
@@ -974,6 +837,14 @@
   <rdfs:subClassOf rdf:resource="#Processdesign"/>
 </owl:Class>
 
+<owl:Class rdf:about="#Simulation_for_Automatition">
+  <rdfs:subClassOf rdf:resource="#Processsimulation"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Simulation_Tool">
+  <rdfs:subClassOf rdf:resource="#Simulation_for_Automatition"/>
+</owl:Class>
+
 <owl:Class rdf:about="#Documentation">
   <rdfs:subClassOf rdf:resource="#Project"/>
 </owl:Class>
@@ -1022,110 +893,93 @@
   <rdfs:subClassOf rdf:resource="#Measurement"/>
 </owl:Class>
 
-<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#bottomObjectProperty">
-  <owl:equivalentProperty rdf:resource="#is_a"/>
-  <owl:equivalentProperty rdf:resource="#catalyses"/>
-</rdf:Description>
-
-<User_Defined_Compounds rdf:about="#Laccase">
+<JSON_file rdf:about="#Laccase">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Substance_Property"/>
   <rdf:type rdf:resource="#Oxidoreductase"/>
   <rdf:type rdf:resource="#Irreversible_Reaction"/>
-  <rdf:type rdf:resource="#Reversible_Reaction"/>
   <rdf:type rdf:resource="#p_0"/>
-  <Has_Stoichometric_Coeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1.0</Has_Stoichometric_Coeff>
-  <Has_DWSIM_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</Has_DWSIM_ID>
-  <Has_Direct_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</Has_Direct_OrderCoeff>
-  <Has_Reverse_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</Has_Reverse_OrderCoeff>
-  <Has_Molecular_Weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1072.08</Has_Molecular_Weight>
-  <Has_EC_Number rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1.10.3.2</Has_EC_Number>
-  <Has_CAS_Number rdf:datatype="http://www.w3.org/2001/XMLSchema#string">80498-15-3</Has_CAS_Number>
-  <Has_Formula rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C66H109N19O25</Has_Formula>
-  <Has_SMILES rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CC[C@H](C)[C@@H](C(N1CCC[C@H]1C(=O)O)=O)N=C([C@H](CCC(=N)O)N=C([C@H](CCC(=O)O)N=C([C@H](C)N=C([C@H](CC(=O)O)N=C([C@H](CC(=O)O)N=C([C@H](CC(=O)O)N=C([C@H](C(C)C)N=C([C@H](C)N)O)O)O)O)O)O)O)</Has_SMILES>
-  <Has_UniProt_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D2CSE5</Has_UniProt_ID>
-  <Has_Sequence rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MGLQRFSFFVTLALVARSLAAIGPVASFVVANAPVSPDGFLRDAIVVNGVVPSPLIRAKKGDRFQLNVVDTLTNHSMLKSTSIHWHGFFQAGTNWADGPAFVNQCPIASGHSFLYDFHVPDQAGTFWYHSHLSTQYCDGLRGPFVVYDPKDPHASRYDVDNESTVITLTDWYHTAARLGPRFPLGADATVINGLGRSASTPTAALAVINVQHGKRYRFRLVSISCDPNYTFSIDGHNLTVIEVDGINSQPLLVDSIQIFAAQRYSFVLNANQTVGNYWVRANPNFGTVGFAGGINSAILRYQGAPVAEPTTTQTPSVIPLIETNLHPLARMPVPGTRTPGGVDKALKLAFNFNGTNFFINNASFTPPTVPVLLQILSGAQTAQELLPAGSVYPLPAHSTIEITLPATALAPGAPHPFHLHGHAFAVVRSAGSTTYNYNDPIFRDVVSTGTPAAGDNVTIRFQTDNLGPWFLHCHIDFHLEAGFAIVFAEDVADVKAANPVPKAWSDLCPIYDGLSEADQ</Has_Sequence>
-  <Has_Source_Organism rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Trametes versicolor</Has_Source_Organism>
-  <IsBlackOil rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</IsBlackOil>
-  <Is_COOL_PROP_Supported rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_COOL_PROP_Supported>
-  <Is_F_PROPS_Supported rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_F_PROPS_Supported>
-  <Is_Hydrated_Salt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Hydrated_Salt>
-  <Is_Ion rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Ion>
-  <Is_Modified rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Modified>
-  <Is_Salt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Salt>
-  <Is_Solid rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Solid>
-  <Has_Const_Concentration rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</Has_Const_Concentration>
-</User_Defined_Compounds>
+  <has_Stoichometric_Coeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1.0</has_Stoichometric_Coeff>
+  <has_DWSIM_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</has_DWSIM_ID>
+  <has_Direct_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</has_Direct_OrderCoeff>
+  <has_Molecular_Weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1072.08</has_Molecular_Weight>
+  <has_EC_Number rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1.10.3.2</has_EC_Number>
+  <has_CAS_Number rdf:datatype="http://www.w3.org/2001/XMLSchema#string">80498-15-3</has_CAS_Number>
+  <has_Formula rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C66H109N19O25</has_Formula>
+  <has_SMILES rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CC[C@H](C)[C@@H](C(N1CCC[C@H]1C(=O)O)=O)N=C([C@H](CCC(=N)O)N=C([C@H](CCC(=O)O)N=C([C@H](C)N=C([C@H](CC(=O)O)N=C([C@H](CC(=O)O)N=C([C@H](CC(=O)O)N=C([C@H](C(C)C)N=C([C@H](C)N)O)O)O)O)O)O)O)</has_SMILES>
+  <has_UniProt_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D2CSE5</has_UniProt_ID>
+  <has_Sequence rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MGLQRFSFFVTLALVARSLAAIGPVASFVVANAPVSPDGFLRDAIVVNGVVPSPLIRAKKGDRFQLNVVDTLTNHSMLKSTSIHWHGFFQAGTNWADGPAFVNQCPIASGHSFLYDFHVPDQAGTFWYHSHLSTQYCDGLRGPFVVYDPKDPHASRYDVDNESTVITLTDWYHTAARLGPRFPLGADATVINGLGRSASTPTAALAVINVQHGKRYRFRLVSISCDPNYTFSIDGHNLTVIEVDGINSQPLLVDSIQIFAAQRYSFVLNANQTVGNYWVRANPNFGTVGFAGGINSAILRYQGAPVAEPTTTQTPSVIPLIETNLHPLARMPVPGTRTPGGVDKALKLAFNFNGTNFFINNASFTPPTVPVLLQILSGAQTAQELLPAGSVYPLPAHSTIEITLPATALAPGAPHPFHLHGHAFAVVRSAGSTTYNYNDPIFRDVVSTGTPAAGDNVTIRFQTDNLGPWFLHCHIDFHLEAGFAIVFAEDVADVKAANPVPKAWSDLCPIYDGLSEADQ</has_Sequence>
+  <has_Source_Organism rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Trametes versicolor</has_Source_Organism>
+  <isBlackOil rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</isBlackOil>
+  <is_COOL_PROP_Supported rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_COOL_PROP_Supported>
+  <is_F_PROPS_Supported rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_F_PROPS_Supported>
+  <is_Hydrated_Salt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Hydrated_Salt>
+  <is_Ion rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Ion>
+  <is_Modified rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Modified>
+  <is_Salt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Salt>
+  <is_Solid rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Solid>
+  <has_Const_Concentration rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</has_Const_Concentration>
+</JSON_file>
 
-<User_Defined_Compounds rdf:about="#ABTS_red">
+<JSON_file rdf:about="#ABTS_red">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Substance_Property"/>
   <rdf:type rdf:resource="#Substrate"/>
   <rdf:type rdf:resource="#Irreversible_Reaction"/>
-  <rdf:type rdf:resource="#Reversible_Reaction"/>
   <rdf:type rdf:resource="#s_0"/>
-  <Has_Stoichometric_Coeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-4.0</Has_Stoichometric_Coeff>
-  <Has_Direct_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</Has_Direct_OrderCoeff>
-  <Has_Reverse_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</Has_Reverse_OrderCoeff>
-  <Has_Molecular_Weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">514.619</Has_Molecular_Weight>
-  <Has_DWSIM_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10000</Has_DWSIM_ID>
-  <Has_CAS_Number rdf:datatype="http://www.w3.org/2001/XMLSchema#string">28752-68-3</Has_CAS_Number>
-  <Has_Formula rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C18H18N4O6S4</Has_Formula>
-  <Has_SMILES rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CCN1\C(SC2=C1C=CC(=C2)[S]([O-])(=O)=O)=N\N=C4/SC3=C(C=CC(=C3)[S]([O-])(=O)=O)N4CC</Has_SMILES>
-  <IsBlackOil rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</IsBlackOil>
-  <Is_COOL_PROP_Supported rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_COOL_PROP_Supported>
-  <Is_F_PROPS_Supported rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_F_PROPS_Supported>
-  <Is_Hydrated_Salt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Hydrated_Salt>
-  <Is_Ion rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Ion>
-  <Is_Modified rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Modified>
-  <Is_Salt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Salt>
-  <Is_Solid rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Solid>
-</User_Defined_Compounds>
+  <has_Stoichometric_Coeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-4.0</has_Stoichometric_Coeff>
+  <has_Direct_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</has_Direct_OrderCoeff>
+  <has_Molecular_Weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">514.619</has_Molecular_Weight>
+  <has_DWSIM_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10000</has_DWSIM_ID>
+  <has_CAS_Number rdf:datatype="http://www.w3.org/2001/XMLSchema#string">28752-68-3</has_CAS_Number>
+  <has_Formula rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C18H18N4O6S4</has_Formula>
+  <has_SMILES rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CCN1\C(SC2=C1C=CC(=C2)[S]([O-])(=O)=O)=N\N=C4/SC3=C(C=CC(=C3)[S]([O-])(=O)=O)N4CC</has_SMILES>
+  <isBlackOil rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</isBlackOil>
+  <is_COOL_PROP_Supported rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_COOL_PROP_Supported>
+  <is_F_PROPS_Supported rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_F_PROPS_Supported>
+  <is_Hydrated_Salt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Hydrated_Salt>
+  <is_Ion rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Ion>
+  <is_Modified rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Modified>
+  <is_Salt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Salt>
+  <is_Solid rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Solid>
+</JSON_file>
 
-<User_Defined_Compounds rdf:about="#ABTS_ox">
+<JSON_file rdf:about="#ABTS_ox">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Substance_Property"/>
   <rdf:type rdf:resource="#Product"/>
   <rdf:type rdf:resource="#Irreversible_Reaction"/>
-  <rdf:type rdf:resource="#Reversible_Reaction"/>
   <rdf:type rdf:resource="#s_2"/>
-  <Has_Reverse_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</Has_Reverse_OrderCoeff>
-  <Has_Direct_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</Has_Direct_OrderCoeff>
-  <Has_Stoichometric_Coeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.0</Has_Stoichometric_Coeff>
-  <Has_Molecular_Weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">513.619</Has_Molecular_Weight>
-  <Has_DWSIM_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">20000</Has_DWSIM_ID>
-  <Has_CAS_Number rdf:datatype="http://www.w3.org/2001/XMLSchema#string">28752-68-3</Has_CAS_Number>
-  <Has_Formula rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C18H17N4O6S4</Has_Formula>
-  <Has_SMILES rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CC[N+]1\C(SC2=C1C=CC(=C2)[S]([O-])(=O)=O)=N\N=C4/SC3=C(C=CC(=C3)[S]([O-])(=O)=O)N4CC</Has_SMILES>
-  <IsBlackOil rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</IsBlackOil>
-  <Is_COOL_PROP_Supported rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_COOL_PROP_Supported>
-  <Is_F_PROPS_Supported rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_F_PROPS_Supported>
-  <Is_Hydrated_Salt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Hydrated_Salt>
-  <Is_Ion rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Ion>
-  <Is_Modified rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Modified>
-  <Is_Salt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Salt>
-  <Is_Solid rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</Is_Solid>
-</User_Defined_Compounds>
+  <has_Direct_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</has_Direct_OrderCoeff>
+  <has_Direct_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</has_Direct_OrderCoeff>
+  <has_Stoichometric_Coeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.0</has_Stoichometric_Coeff>
+  <has_Molecular_Weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">513.619</has_Molecular_Weight>
+  <has_DWSIM_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">20000</has_DWSIM_ID>
+  <has_CAS_Number rdf:datatype="http://www.w3.org/2001/XMLSchema#string">28752-68-3</has_CAS_Number>
+  <has_Formula rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C18H17N4O6S4</has_Formula>
+  <has_SMILES rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CC[N+]1\C(SC2=C1C=CC(=C2)[S]([O-])(=O)=O)=N\N=C4/SC3=C(C=CC(=C3)[S]([O-])(=O)=O)N4CC</has_SMILES>
+  <isBlackOil rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</isBlackOil>
+  <is_COOL_PROP_Supported rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_COOL_PROP_Supported>
+  <is_F_PROPS_Supported rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_F_PROPS_Supported>
+  <is_Hydrated_Salt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Hydrated_Salt>
+  <is_Ion rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Ion>
+  <is_Modified rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Modified>
+  <is_Salt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Salt>
+  <is_Solid rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</is_Solid>
+</JSON_file>
 
 <DWSIM_Compounds rdf:about="#Water">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Product"/>
   <rdf:type rdf:resource="#Irreversible_Reaction"/>
-  <rdf:type rdf:resource="#Reversible_Reaction"/>
-  <Has_Direct_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</Has_Direct_OrderCoeff>
-  <Has_Reverse_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</Has_Reverse_OrderCoeff>
-  <Has_Stoichometric_Coeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.0</Has_Stoichometric_Coeff>
+  <has_Direct_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</has_Direct_OrderCoeff>
+  <has_Stoichometric_Coeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.0</has_Stoichometric_Coeff>
 </DWSIM_Compounds>
 
 <DWSIM_Compounds rdf:about="#Oxygen">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Substrate"/>
   <rdf:type rdf:resource="#Irreversible_Reaction"/>
-  <rdf:type rdf:resource="#Reversible_Reaction"/>
   <rdf:type rdf:resource="#s_1"/>
-  <Has_Stoichometric_Coeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1.0</Has_Stoichometric_Coeff>
-  <Has_Direct_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</Has_Direct_OrderCoeff>
-  <Has_Reverse_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</Has_Reverse_OrderCoeff>
+  <has_Stoichometric_Coeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1.0</has_Stoichometric_Coeff>
+  <has_Direct_OrderCoeff rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</has_Direct_OrderCoeff>
 </DWSIM_Compounds>
 
 <Oxidoreductase_Reaction rdf:about="#ABTS_Oxidation">
@@ -1134,48 +988,47 @@
 
 <KM rdf:about="#KM_ABTS_ox">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Temperature"/>
-  <Has_Value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.2</Has_Value>
-  <Has_Value_Unit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mmol/l</Has_Value_Unit>
+  <has_KM_Value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.2</has_KM_Value>
+  <has_KM_Unit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mmol/l</has_KM_Unit>
 </KM>
 
 <KM rdf:about="#kCAT_ABTS_ox">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Temperature"/>
-  <Has_Value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.67</Has_Value>
-  <Has_Value_Unit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1/s</Has_Value_Unit>
+  <rdf:type rdf:resource="#kCAT"/>
+  <has_kCAT_Value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.67</has_kCAT_Value>
+  <has_kCAT_Unit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1/s</has_kCAT_Unit>
 </KM>
 
 <Reactortype rdf:about="#SCR">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <Has_Volume_Value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.0</Has_Volume_Value>
-  <Has_Volume_Unit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ml</Has_Volume_Unit>
+  <has_Volume_Value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.0</has_Volume_Value>
+  <has_Volume_Unit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ml</has_Volume_Unit>
 </Reactortype>
 
 <Reactortype rdf:about="#HTR">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <Has_Volume_Value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.0</Has_Volume_Value>
-  <Has_Volume_Unit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ml</Has_Volume_Unit>
+  <has_Volume_Value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.0</has_Volume_Value>
+  <has_Volume_Unit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ml</has_Volume_Unit>
 </Reactortype>
 
 <InletFlow rdf:about="#Inlet_Laccase">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <Has_Compound_MolarFlow rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</Has_Compound_MolarFlow>
+  <has_Compound_MolarFlow rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</has_Compound_MolarFlow>
 </InletFlow>
 
 <InletFlow rdf:about="#Inlet_ABTS_ox">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <Has_Compound_MolarFlow rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</Has_Compound_MolarFlow>
+  <has_Compound_MolarFlow rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</has_Compound_MolarFlow>
 </InletFlow>
 
 <InletFlow rdf:about="#Inlet_Oxygen">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <Has_Compound_MolarFlow rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</Has_Compound_MolarFlow>
+  <has_Compound_MolarFlow rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</has_Compound_MolarFlow>
 </InletFlow>
 
 <Project rdf:about="#ABTS_Oxidation_by_Laccase">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <Has_Projectstart rdf:datatype="http://www.w3.org/2001/XMLSchema#string">12.12.2022</Has_Projectstart>
+  <has_Projectstart rdf:datatype="http://www.w3.org/2001/XMLSchema#string">12.12.2022</has_Projectstart>
 </Project>
 
 <Institution rdf:about="#TU_Dortmund">
@@ -1188,14 +1041,14 @@
 
 <EnzymeML_Documentation rdf:about="#EnzymeML_Document_1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <Has_Date_of_Creation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">18.08.2021</Has_Date_of_Creation>
-  <Has_Author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Katrin Rosenthal</Has_Author>
-  <Has_Titel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Laccase; Helically Coiled Reactor (HCR) &amp; Straight Capillary Reactor (SCR)</Has_Titel>
+  <has_Date_of_Creation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">18.08.2021</has_Date_of_Creation>
+  <has_Author rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Katrin Rosenthal</has_Author>
+  <has_Titel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Laccase; Helically Coiled Reactor (HCR) &amp; Straight Capillary Reactor (SCR)</has_Titel>
 </EnzymeML_Documentation>
 
 <Stabilizer rdf:about="#Tween80">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <Has_Stabilizer_Concentration rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</Has_Stabilizer_Concentration>
+  <has_Stabilizer_Concentration rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</has_Stabilizer_Concentration>
 </Stabilizer>
 
 <Protein_Conc_Curve rdf:about="#Laccase_Conc_Curve">
@@ -1205,14 +1058,6 @@
 <Reactant_Conc_Curve rdf:about="#ABTS_red_Conc_Curve">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </Reactant_Conc_Curve>
-
-<owl:AllDisjointProperties>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#catalyses"/>
-    <rdf:Description rdf:about="#is_a"/>
-    <rdf:Description rdf:about="#is_part_of"/>
-  </owl:members>
-</owl:AllDisjointProperties>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
