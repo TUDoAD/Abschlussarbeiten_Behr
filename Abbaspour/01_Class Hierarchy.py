@@ -257,8 +257,8 @@ with onto:
     class ReactionType(Reaction): pass
     class Conversion(ReactionType): pass
     class Equbrilium(ReactionType): pass
-    class Kinetic(ReactionType): pass
-    class Heterogeneous(ReactionType): pass
+    class Arrhenius_Kinetic(ReactionType): pass
+    class Heterogeneous_Catalytic(ReactionType): pass
     class User_Defined_Reaction(ReactionType): pass
     class Michaelis_Menten_Kinetic(User_Defined_Reaction): pass
     class KM(Michaelis_Menten_Kinetic): pass
@@ -423,7 +423,10 @@ with onto:
     class Experimental_Data(EnzymeML_Documentation): pass
     class Measurement(Experimental_Data): pass
     # 12 Messungen im EnzymeML Dokument
-    class Concentration_Curve(Measurement): pass # mit Initialkonzentrationswerten für oxygen laccase und red
+    class Initial_Concentration(Measurement): pass
+    class Reactant_Initial_Conc(Initial_Concentration): pass
+    class Protein_Initial_Conc(Initial_Concentration): pass
+    class Concentration_Curve(Measurement): pass 
     class Reactant_Conc_Curve(Concentration_Curve): pass
     class Protein_Conc_Curve(Concentration_Curve): pass
     class Absorption(Measurement): pass
