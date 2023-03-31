@@ -185,7 +185,7 @@ for k in pfr.ComponentConversions.Keys:
 
 # save file
 fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), 
-                              "01_ABTS Oxidation.dwxmz")
+                              "04_ABTS Oxidation.dwxmz")
 interf.SaveFlowsheet(sim, fileNameToSave, True)
 
 # save the pfd to an image and display it
@@ -207,7 +207,7 @@ d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
 str = MemoryStream()
 d.SaveTo(str)
 image = Image.FromStream(str)
-imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "01_ABTS Oxidation.png")
+imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "04_ABTS Oxidation.png")
 image.Save(imgPath, ImageFormat.Png)
 str.Dispose()
 canvas.Dispose()
