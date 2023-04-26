@@ -74,7 +74,7 @@ for protein in enzmldoc.protein_dict.values():
     Protein_Constant = protein.constant #True
    
 with onto:
-    class BiochamicalSubstance(onto.search_one(iri = '*ChemicalSubstance')): pass
+    class BiochemicalSubstance(onto.search_one(iri = '*ChemicalSubstance')): pass
    
 # available components (or compounds): DWSIM comes with six default compound databases (DWSIM, ChemSep, Biodiesel, CoolProp, ChEDL and Electrolytes), with a total of more than 1500 compounds available for your simulation.
     class SubstanceDatabase(onto.search_one(iri = '*ChemicalSubstance')): pass
