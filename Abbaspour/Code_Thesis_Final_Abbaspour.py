@@ -290,7 +290,7 @@ test_dict = {"Laccase": { "hasRelativeDensities": None,
                           "isSalt": False,
                           "isSolid": False},
              
-             "ABTS_ox": { "has_relative_densities": None,
+             "ABTS_ox": { "hasRelativeDensities": None,
                           "has_nbps": 375.15, # in K (Normal Boiling Point von Wasser)
                           "has_nbps_Unit": 'K',
                           
@@ -339,7 +339,7 @@ test_dict = {"Laccase": { "hasRelativeDensities": None,
                           "isSalt": False,
                           "isSolid": False},
              
-             "ABTS_red": {"has_relative_densities": None,
+             "ABTS_red": {"hasRelativeDensities": None,
                           "has_nbps": 375.15, # in K (Normal Boiling Point von Wasser)
                           "has_nbps_Unit": 'K',
                           
@@ -493,6 +493,12 @@ with onto:
         # Es gibt aber auch Nukleinsäuren die bioreaktionen katalysieren können
         class NucleicAcidCatalysedReaction(BioCatalysedReaction):pass
         
+        # Disjunktion von Klassen
+        # Klassen sind disjunkt, wenn es kein Individuum gibt, das allen Klassen angehört
+        # Eine Klassen-Disjointness wird mit der Funktion AllDisjoint() erzeugt, die eine Liste von Klassen als Parameter annimmt
+        # Enzyme in der regel Proteine, RNA und DNA können aber auch katalysieren
+        AllDisjoint([ProteinCatalysedReaction, NucleicAcidCatalysedReaction])
+        
         # Das EnzymeML vergibt jeder aufgezeichneten Reaktion eine ID
         # Data Property
         class hasReaction_ID(BioCatalysedReaction >> str): pass     
@@ -507,6 +513,9 @@ with onto:
         class IsomeraseReaction(EnzymaticReaction): pass
         class LigaseReaction(EnzymaticReaction): pass
 
+         # ABTS-Oxidation ist nur ein Individuum der Klasse Oxidationsreaktion
+        AllDisjoint([OxidoreductaseReaction, TransferaseReaction, HydrolyseReaction, LyaseReaction, IsomeraseReaction, LigaseReaction])
+        
 # Die betrachtete Reaktion als spezifische Information in der Ontologie hinterlegen
 # Dafür Übergabe als Individual 
 ABTS_Oxidation = OxidoreductaseReaction(Reaction_Name)
@@ -529,6 +538,9 @@ with onto:
         # Triplett ließt sich: 'Enzymkatalysator katalysiert einzymatische Reaktion' 
         class catalyses(onto.search_one(iri = '*SBO_0000460') >> EnzymaticReaction): pass
 
+        # Wenn ein Enzym der Klasse Oxidoreduktase angehört, dann nicht mehr der Klasse Transferasen
+        AllDisjoint([Oxidoreductase, Transferase, Hydrolyse, Lyase, Isomerase, Ligase])  
+        
         # Damit aber nicht jedes Enzym plötzlich jede Reaktion umsetzt die Object Property über SubClass Of zuteilen
         # some? oder only?
         class Oxidoreductase(onto.search_one(iri = '*SBO_0000460')):
