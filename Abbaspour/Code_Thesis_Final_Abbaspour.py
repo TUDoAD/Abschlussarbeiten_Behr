@@ -496,7 +496,7 @@ with onto:
         # Disjunktion von Klassen
         # Klassen sind disjunkt, wenn es kein Individuum gibt, das allen Klassen angehört
         # Eine Klassen-Disjointness wird mit der Funktion AllDisjoint() erzeugt, die eine Liste von Klassen als Parameter annimmt
-        # Enzyme in der regel Proteine, RNA und DNA können aber auch katalysieren
+        # Enzyme in der Regel Proteine, RNA und DNA können aber auch katalysieren
         AllDisjoint([ProteinCatalysedReaction, NucleicAcidCatalysedReaction])
         
         # Das EnzymeML vergibt jeder aufgezeichneten Reaktion eine ID
