@@ -41,7 +41,7 @@ from pyenzyme.enzymeml.models import KineticModel, KineticParameter
 enzmldoc = pe.EnzymeMLDocument.fromTemplate("./EnzymeML_Template_18-8-2021_KR.xlsm")
 
 # Lade alle relevanten Informationen aus der EnzymeML Dokumentation
-# Und zwar relevant für die DWSIM Simulation
+# Relevant für die DWSIM Simulation
 
 # Infos zum Dokument-Autor
 for Creator in enzmldoc.creator_dict.values():
@@ -50,10 +50,12 @@ for Creator in enzmldoc.creator_dict.values():
     Creator_Mail = Creator.mail # katrin.rosenthal@tu-dortmund.de
 
 # Infos zum Reaktor
+# 
 for vessel in enzmldoc.vessel_dict.values():
-    Vessel_Name = vessel.name # Straight tube reactor
-    Vessel_ID = vessel.id # v1
-    Vessel_Volume = vessel.volume # 8.0 
+    Vessel_Name = vessel.name # Straight tube reactor, für die Simualtion wird ein PFR genommen
+    Vessel_ID = vessel.id # v2
+    # Reaktorvolumen eig 8, aber wurde für die Simulation angepasst (tau=64s)
+    Vessel_Volume = vessel.volume # 5.38E-01
     Vessel_Unit = vessel.unit # ml
 
 # Das Volumen wird in EnzyeML in ml angegeben
@@ -64,29 +66,30 @@ for vessel in enzmldoc.vessel_dict.values():
 for reaction in enzmldoc.reaction_dict.values():
     Reaction_Name = reaction.name # ABTS Oxidation
     Reaction_ID = reaction.id # r2
-    Reaction_SBO = reaction.ontology # SBO_0000176 = Biochemical_Reaction
-    Reaction_Educts = reaction.educts # Substrate-list
-    Reaction_Products = reaction.products # Product-list
     pH_Value = reaction.ph # 5.2
     Temperature_Value = reaction.temperature # 311.15
     Temperature_Unit = reaction.temperature_unit # K
-    Reversible_Reaction = reaction.reversible # False
-    
-# Infos zu Reaktanten
-# Ausgabe: Reaktant, der in der letzten Zeile steht, daher nur Infos zu einem Reaktanten
-for reactant in enzmldoc.reactant_dict.values():
-    Reactant_SBO = reactant.ontology # SBO_0000247 used to be 'SMALL_MOLECULE'? Now -> 'simple chemical'
 
 # Infos zum Protein
 for protein in enzmldoc.protein_dict.values():
     Protein_Name = protein.name # Laccase
-    Protein_ID = protein.id # p2
     Protein_SBO = protein.ontology # SBO_0000252 = Protein
     Protein_Sequence = protein.sequence # wichtig für das Molekulargewicht später
     Protein_EC_Number = protein.ecnumber # 1.10.3.2
     Protein_Organism = protein.organism # Trametes versicolor
     Protein_UniProtID = protein.uniprotid # None, should be 'D2CSE5'
-    Protein_Constant = protein.constant # True
+
+# Da das EnzymeML Dokument nicht alle notwendigen Informationen beinhaltet,
+# soll ein weiteres Excel Sheet ausgefüllt werden (im Labor)
+import pandas as pd
+
+# Excel Datei 'Ergänzendes Laborbuch' laden
+# Sheet0 beinhaltet Reaktionsteilnehmer und -koeffizienten
+# Sheet1 beinhaltet die Stoffdaten, die für den Compound Creator relevant sind
+# Sheet2 beinhaltet zusätzliche Stoffdaten
+sheet0 = pd.read_excel("./Ergänzendes Laborbuch.xlsx", sheet_name=0)
+sheet1 = pd.read_excel("./Ergänzendes Laborbuch.xlsx", sheet_name=1)
+sheet2 = pd.read_excel("./Ergänzendes Laborbuch.xlsx", sheet_name=2)
     
 # Ontologie Design
 # Relevante Entitäten der bestehenden Ontologie hinzufügen
@@ -143,23 +146,6 @@ def class_creation(substance_list, onto):
                 pass
             """.format(substance,substance)
         
-        # ABTS_ox und ABTS_red der Klasse ABTS unterordnen
-        if substance == "ABTS_ox" or substance == "ABTS_red":
-            codestring = """with onto:
-            class {}({}):
-                label = '{}'
-                pass
-            """.format(substance,"ABTS",substance)
-        
-        # Die Komponenten Wasser und Sauerstoff sind bereits in DWSIM hinterlegt
-        # Daher der Oberklasse DWSIM-Komponenten zuordnen
-        if substance == "Water" or substance == "Oxygen":
-            codestring = """with onto:
-            class {}(onto.search_one(iri = '*DWSIMCompound')):
-                label = '{}'
-                pass
-            """.format(substance,substance)
-        
         # Code, der im codestring enthalten ist compilieren
         code = compile(codestring, "<string>","exec")
         
@@ -210,194 +196,66 @@ def set_relations(dataProp_dict, onto):
             # Code ausführen
             exec(code)       
 
-# Stoffliste
-test_substances = ["Laccase", "ABTS", "ABTS_ox", "ABTS_red", "Oxygen", "Water"]
+# Stoffliste aus dem ergänzenden Laborbuch
+# Laccase, ABTS_red, ABTS_ox, Oxygen, Water
+test_substances = [sheet0.iloc[2,1], sheet0.iloc[2,2], sheet0.iloc[2,3], sheet0.iloc[2,4], sheet0.iloc[2,5]]
+
 
 # Wörterbuch mit Stoffeigenschaften erstellen
 # Eigenschaften beachten, die relevant sind für die Simulation in DWSIM
-# Die relative Dicht und der Normalsiedepunkt, werden gebraucht für 'bulk c7+ pseudocompound creator setting'
+# Die relative Dichte und der Normalsiedepunkt, werden gebraucht für 'bulk c7+ pseudocompound creator setting'
 # Auf diese Weise können Stoffe direkt über einen Code erstellt werden
 # und DWSIM schätzt durch entsprechende Modelle fehlende Stoffeigenschaften ab
 # z.B. wird das Molekulargewicht oder die chemische Strukturformel abgeschätzt
 # Im vorliegenden Fall weichen die abgeschätzten Werte zu weit von den Literaturwerten ab
 # Weshalb Stoffeigenschaften manuell in der JSON-datei korrigiert wurden
 # und fehlende Stoffdaten durch die des Lösemittels ersetzt
-test_dict = {"Laccase": { "hasRelativeDensities": None,
-                          "has_nbps": 375.15, # in K (Normal Boiling Point von Wasser)
-                          "has_nbps_Unit": 'K',
-                          
-                          # Brauche ich für den DWSIM Code später
-                          "isCatalyst": True,
-                          
-                          # Koeffizienten sind wichtig für die Definition der Reaktion in DWSIM
-                          # Stöchiometrie ist für Laccase mit DWSIM abgeschätzt, sodass die 'Balance' passte
-                          "hasStoichiometriCoefficient": -7.5219E-05,
-                          "hasDirect_OrderCoefficient": 0.0,
-                          "hasReverse_OrderCoefficient": 0.0,
-                         
-                          # DWSIM benötigt eine Basiskomponente, die ein Reaktionspartner sein muss
-                          # Diese Basiskomponente wird als Referenz für die Berechnung der Reaktionswärme
-                          # In der Regel ein Reaktant
-                          "isBaseComponent": False,
-                         
-                          # Die AS-Sequenz ist aus dem zuvor geladenen EnzymeML-Dokument
-                          # Daraus lässt sich das Molekulargewicht ermitteln
-                          "hasSequence": Protein_Sequence,
 
-                          # https://nebiocalculator.neb.com/#!/protamt
-                          "hasMolecularWeight": 56000, # in kg/kmol
-                          "hasMolecularWeight_Unit": 'kg/kmol',
-                         
-                          # Der Organismus ist aus dem zuvor geladenen EnzymeMl-Dokument
-                          "hasSourceOrganism": Protein_Organism,
-                         
-                          # Die ID wude von DWSIM vergeben
-                          "hasDWSIM_ID": -6497,
-                          "hasCAS_Number": '80498-15-3',
-                          "hasEC_Number": Protein_EC_Number,
-                          "hasSMILES": 'CC[C@H](C)[C@@H](C(N1CCC[C@H]1C(=O)O)=O)N=C([C@H](CCC(=N)O)N=C([C@H](CCC(=O)O)N=C([C@H](C)N=C([C@H](CC(=O)O)N=C([C@H](CC(=O)O)N=C([C@H](CC(=O)O)N=C([C@H](C(C)C)N=C([C@H](C)N)O)O)O)O)O)O)O)',
-                          "hasFormula":'C66H109N19O25',
-                          "has_pH_Optimum":'4.5-5.0 with ABTS as substrate',
-                          "hasTempOptimum":'35-55 °C with ABTS as substrate',
+# Dict, in dem alle Eigenschaften von Laccase hinterlegt sind
+data0 = {}
+for row in sheet0.iloc[3:7].iterrows():
+    data0[row[1][0]] = row[1][1]
 
-                          # Werte, die vom LöMi (Wasser) übernommen wurden
-                          "hasCriticalTemperature": 647.14, # in K
-                          "hasCriticalPressure": 2.2064E+07, # in Pa                          
-                          "hasCriticalVolume": 0.05595, # in m3/kmol
-                          "hascriticalCompressibility": 0.229, # dimensionslos
-                          "hasAcentricFactor": 0.344, # dimensionslos
-                          "hasIdealGasEnthalpyOfFormation_25Celsius": -13422.7, # in kJ/kg
-                          "hasIdealGasGibbsEnergyOfFormation_25Celsius": -12688.7, # in kJ/kg
-                          "hasChao_SeaderAcentricFactor": 0.328, # dimensionslos
-                          "hasChao_SeaderSolubilityParameter": 0.0114199, # in (cal/mL)^0.5
-                          "hasChao_SeaderLiquidMolarVolume": 18.0674, # in mL/mol
-                          
-                          "hasCriticalTemperature_Unit": 'K',
-                          "hasCriticalPressure_Unit": 'Pa',                          
-                          "hasCriticalVolume_Unit": 'm3/kmol',
-                          "hasIdealGasEnthalpyOfFormation_25Celsius_Unit": 'kJ/kg',
-                          "hasIdealGasGibbsEnergyOfFormation_25Celsius_Unit": 'in kJ/kg',
-                          "hasChao_SeaderSolubilityParameter_Unit": '(cal/mL)^0.5',
-                          "hasChao_SeaderLiquidMolarVolume_Unit": 'mL/mol',
-                          
-                          "hasRackettCompressibility": 0.2338, # dimensionslos                          
-                          "isBlackOil": False,
-                          "isCoolPropSupported": False,
-                          "isF_PropsSupported": False,
-                          "isHydratedSalt": False,
-                          "isIon": False,
-                          "isModified": False,
-                          "isSalt": False,
-                          "isSolid": False},
-             
-             "ABTS_ox": { "hasRelativeDensities": None,
-                          "has_nbps": 375.15, # in K (Normal Boiling Point von Wasser)
-                          "has_nbps_Unit": 'K',
-                          
-                          "isMainProduct": True,
-                          
-                          # Sind aus dem Paper: From Coiled Flow Inverter to Stirred Tank Reactor - Bioprocess Development and Ontology Design
-                          "hasStoichiometriCoefficient": 4,
-                          "hasDirect_OrderCoefficient": 0.0,
-                          "hasReverse_OrderCoefficient": 0.0,
+for row in sheet1.iloc[3:31].iterrows():
+    data0[row[1][0]] = row[1][1]
 
-                          "isBaseComponent": False,
-                           
-                          "hasMolecularWeight": 514.619, # in kg/kmol
-                          "hasDWSIM_ID": -4356,
-                          "hasCAS_Number": '28752-68-3',
-                          #"hasSMILES": 'CCN1\\C(SC2=C1C=CC(=C2)[S]([O-])(=O)=O)=N\\N=C4/SC3=C(C=CC(=C3)[S]([O-])(=O)=O)N4CC',
-                          "hasFormula":'C18H18N4O6S4',
-                           
-                          # Werte, die vom LöMi (Wasser) übernommen wurden
-                          "hasCriticalTemperature": 647.14, # in K
-                          "hasCriticalPressure": 2.2064E+07, # in Pa
-                          "hasCriticalVolume": 0.05595, # in m3/kmol
-                          "hascriticalCompressibility": 0.229, # dimensionslos
-                          "hasAcentricFactor": 0.344, # dimensionslos
-                          "hasIdealGasEnthalpyOfFormation_25Celsius": -13422.7, # in kJ/kg
-                          "hasIdealGasGibbsEnergyOfFormation_25Celsius": -12688.7, # in kJ/kg
-                          "hasChao_SeaderAcentricFactor": 0.328, # dimensionslos
-                          "hasChao_SeaderSolubilityParameter": 0.0114199, # in (cal/mL)^0.5
-                          "hasChao_SeaderLiquidMolarVolume": 18.0674, # in mL/mol
+for row in sheet2.iloc[3:14].iterrows():
+    data0[row[1][0]] = row[1][1]
 
-                          "hasCriticalTemperature_Unit": 'K',
-                          "hasCriticalPressure_Unit": 'Pa',                          
-                          "hasCriticalVolume_Unit": 'm3/kmol',
-                          "hasIdealGasEnthalpyOfFormation_25Celsius_Unit": 'kJ/kg',
-                          "hasIdealGasGibbsEnergyOfFormation_25Celsius_Unit": 'in kJ/kg',
-                          "hasChao_SeaderSolubilityParameter_Unit": '(cal/mL)^0.5',
-                          "hasChao_SeaderLiquidMolarVolume_Unit": 'mL/mol',                          
-                                                   
-                          "hasRackettCompressibility": 0.2338, # dimensionslos
-                          "isBlackOil": False,
-                          "isCoolPropSupported": False,
-                          "isF_PropsSupported": False,
-                          "isHydratedSalt": False,
-                          "isIon": False,
-                          "isModified": False,
-                          "isSalt": False,
-                          "isSolid": False},
-             
-             "ABTS_red": {"hasRelativeDensities": None,
-                          "has_nbps": 375.15, # in K (Normal Boiling Point von Wasser)
-                          "has_nbps_Unit": 'K',
-                          
-                          "isMainSubstrate": True,
-                          
-                          "hasStoichiometriCoefficient": -4,
-                          "hasDirect_OrderCoefficient": 1.0,
-                          "hasReverse_OrderCoefficient": 0.0,
+# Dict, in dem alle Eigenschaften von ABTS_red hinterlegt sind
+data1 = {}
+for row in sheet0.iloc[3:7].iterrows():
+    data1[row[1][0]] = row[1][2]
+    
+for row in sheet1.iloc[3:31].iterrows():
+    data1[row[1][0]] = row[1][2]
 
-                          "isBaseComponent": True,
-                          "hasMolecularWeight": 513.619, # in kg/kmol
-                          
-                          "hasDWSIM_ID": -9626,
-                          "hasCAS_Number": '28752-68-3',
-                          #"hasSMILES": 'CC[N+]1\\C(SC2=C1C=CC(=C2)[S]([O-])(=O)=O)=N\\N=C4/SC3=C(C=CC(=C3)[S]([O-])(=O)=O)N4CC',
-                          "hasFormula":'C18H17N4O6S4',
-                          "hasWaterSolubilityValue": 50.0, # in g/l
-                         
-                          # Werte, die vom LöMi (Wasser) übernommen wurden
-                          "hasCriticalTemperature": 647.14, # in K
-                          "hasCriticalPressure": 2.2064E+07, # in Pa
-                          "hasCriticalVolume": 0.05595, # in m3/kmol
-                          "hascriticalCompressibility": 0.229, # dimensionslos
-                          "hasAcentricFactor": 0.344, # dimensionslos
-                          "hasIdealGasEnthalpyOfFormation_25Celsius": -13422.7, # in kJ/kg
-                          "hasIdealGasGibbsEnergyOfFormation_25Celsius": -12688.7, # in kJ/kg
-                          "hasChao_SeaderAcentricFactor": 0.328, # dimensionslos
-                          "hasChao_SeaderSolubilityParameter": 0.0114199, # in (cal/mL)^0.5
-                          "hasChao_SeaderLiquidMolarVolume": 18.0674, # in mL/mol
-                          
-                          "hasCriticalTemperature_Unit": 'K',
-                          "hasCriticalPressure_Unit": 'Pa',                          
-                          "hasCriticalVolume_Unit": 'm3/kmol',
-                          "hasIdealGasEnthalpyOfFormation_25Celsius_Unit": 'kJ/kg',
-                          "hasIdealGasGibbsEnergyOfFormation_25Celsius_Unit": 'in kJ/kg',
-                          "hasChao_SeaderSolubilityParameter_Unit": '(cal/mL)^0.5',
-                          "hasChao_SeaderLiquidMolarVolume_Unit": 'mL/mol',                          
-                          
-                          "hasRackettCompressibility": 0.2338, # dimensionslos
-                          "isBlackOil": False,
-                          "isCoolPropSupported": False,
-                          "isF_PropsSupported": False,
-                          "isHydratedSalt": False,
-                          "isIon": False,
-                          "isModified": False,
-                          "isSalt": False,
-                          "isSolid": False},
-             
-             "Oxygen": {  "isReactant": True,
-                          "hasStoichiometriCoefficient": -1,
-                          "hasDirect_OrderCoefficient": 0.0,
-                          "hasReverse_OrderCoefficient": 0.0},
-                       
-             "Water": {   "isReactant": True,
-                          "hasStoichiometriCoefficient": 2,
-                          "hasDirect_OrderCoefficient": 0.0,
-                          "hasReverse_OrderCoefficient": 0.0}
-             }
+for row in sheet2.iloc[3:14].iterrows():
+    data1[row[1][0]] = row[1][2]
+
+# Dict, in dem alle Eigenschaften von ABTS_ox hinterlegt sind     
+data2 = {}
+for row in sheet0.iloc[3:7].iterrows():
+    data2[row[1][0]] = row[1][3]
+    
+for row in sheet1.iloc[3:31].iterrows():
+    data2[row[1][0]] = row[1][3]
+
+for row in sheet2.iloc[3:14].iterrows():
+    data2[row[1][0]] = row[1][3]
+
+# Dict, in dem alle Eigenschaften von Oxygen hinterlegt sind
+data3 = {}
+for row in sheet0.iloc[3:7].iterrows():
+    data3[row[1][0]] = row[1][4]
+
+# Dict, in dem alle Eigenschaften von Oxygen hinterlegt sind
+data4 = {}
+for row in sheet0.iloc[3:7].iterrows():
+    data4[row[1][0]] = row[1][5]
+    
+test_dict = {sheet0.iloc[2,1]: data0, sheet0.iloc[2,2]: data1, sheet0.iloc[2,3]: data2,
+             sheet0.iloc[2,4]: data3, sheet0.iloc[2,5]: data4}
 
 # Aufrufen von Funktion class_creation(), um alle Strings aus Liste test_substances
 # in Ontologie einzubauen
@@ -410,41 +268,27 @@ set_relations(test_dict, onto)
 # Ontologie zwischenspeichern
 onto.save(file="Zwischenstand_Onto_.owl", format="rdfxml")
 
-
 # Erstellen von leeren Listen, um Namen der Substanzen, die Katalysator, Hauptprodukt oder Hauptsustrat sind, zu speichern
 catalysts = []
-main_products = []
 main_substrates = []
+main_products = []
 reactants = []
 
-# Iterieren durch jede Substanz in test_dict
-for substance in test_dict:
-    
-    # Überprüfen, ob die Substanz als Katalysator markiert ist
-    if "isCatalyst" in test_dict[substance] and test_dict[substance]["isCatalyst"] == True:
-        
-        # Wenn ja, den Namen der Substanz zur Liste der Katalysatoren hinzufügen
-        catalysts.append(substance)
-        
-    # Überprüfen, ob die Substanz als Hauptprodukt markiert ist
-    elif "isMainProduct" in test_dict[substance] and test_dict[substance]["isMainProduct"] == True:
-        
-        # Wenn ja, den Namen der Substanz zur Liste der Hauptprodukte hinzufügen
-        main_products.append(substance)
-        
-    # Überprüfen, ob die Substanz als Hauptsustrat markiert ist
-    elif "isMainSubstrate" in test_dict[substance] and test_dict[substance]["isMainSubstrate"] == True:
-        
-        # Wenn ja, den Namen der Substanz zur Liste der Hauptsustrate hinzufügen
-        main_substrates.append(substance)
-    
-    # Überprüfen, ob die Substanz als Reaktant markiert ist
-    elif "isReactant" in test_dict[substance] and test_dict[substance]["isReactant"] == True:
-        
-        # Wenn ja, den Namen der Substanz zur Liste der Hauptsustrate hinzufügen
-        reactants.append(substance)
-
-
+for index, row in sheet0.iterrows():
+    if row[0] == "hasTask":
+        for i in range(1, len(row)):
+            if row[i] == "Catalyst":
+                catalysts.append(sheet0.iloc[2, i])                
+            elif row[i] == "MainSubstrate":
+                main_substrates.append(sheet0.iloc[2, i])                
+            elif row[i] == "MainProduct":               
+                main_products.append(sheet0.iloc[2, i])                
+            elif row[i] == "Reactant":
+                reactants.append(sheet0.iloc[2,i])
+        print(catalysts)
+        print(main_substrates)
+        print(main_products)
+        print(reactants)
 
 # Ontologie mit den gespeicherten Stoffen laden
 # Um Object properties hinzuzufügen
@@ -516,7 +360,6 @@ with onto:
         # ABTS-Oxidation ist nur ein Individuum der Klasse Oxidationsreaktion
         AllDisjoint([OxidoreductaseReaction, TransferaseReaction, HydrolyseReaction, LyaseReaction, IsomeraseReaction, LigaseReaction])    
 
-
 # Die betrachtete Reaktion als spezifische Information in der Ontologie hinterlegen
 # Dafür Übergabe als Individual 
 ABTS_Oxidation = OxidoreductaseReaction(Reaction_Name)
@@ -541,7 +384,6 @@ with onto:
 
         # Wenn ein Enzym der Klasse Oxidoreduktase angehört, dann nicht mehr der Klasse Transferasen
         AllDisjoint([Oxidoreductase, Transferase, Hydrolyse, Lyase, Isomerase, Ligase])  
-
 
     # Damit aber nicht jedes Enzym plötzlich jede Reaktion umsetzt die Object Property über SubClass Of zuteilen
     # some? oder only?
@@ -632,13 +474,13 @@ with onto:
         class hasTemperatureValue(Temperature >> float): pass
         class has_pH_Value(pH >> float): pass
         class hasPressureValue(Pressure >> float):pass
-        class hasConstantPressureDropValue(PressureDrop >> float): pass
+        class hasDeltaP(PressureDrop >> float): pass
         
         # fluid rate schon in Ontochem
         class hasRateValue(ReactionRate >> float): pass
         class hasTemperatureUnit(Temperature >> str): pass
         class hasPressureUnit(Pressure >> str): pass
-        class hasConstantPressureDropUnit(PressureDrop >> str): pass
+        class hasDeltaP_Unit(PressureDrop >> str): pass
         class hasFluidRateUnit(ReactionRate >> str): pass
 
 # Werden teilweise aus dem EnzymeML-Dokument geladen
@@ -646,9 +488,14 @@ Temperature.hasTemperatureValue.append(Temperature_Value)
 Temperature.hasTemperatureUnit.append(Temperature_Unit)
 pH.has_pH_Value.append(pH_Value)
 
+# Excel 'Ergänzendes Laborbuch' Sheet3 laden für fehlende Parameter
+sheet3 = pd.read_excel("./Ergänzendes Laborbuch.xlsx", sheet_name=3)
+
 # Druckangabe fehlt im EnzymeML-Dokument
-Pressure.hasPressureValue.append(1.01325)
-Pressure.hasPressureUnit.append('bar')
+Pressure.hasPressureValue.append(sheet3.iloc[1,1])
+Pressure.hasPressureUnit.append(sheet3.iloc[2,1])
+PressureDrop.hasDeltaP.append(sheet3.iloc[3,1])
+PressureDrop.hasDeltaP_Unit.append(sheet3.iloc[4,1])
 
 with onto:
         class ProcessFlowDiagram(Thing): pass
@@ -661,28 +508,46 @@ with onto:
         
         class hasLengthValue(onto.search_one(iri = '*Device')>> float): pass
         class hasLengthUnit(onto.search_one(iri = '*Device') >> str): pass
+    
+        class hasDiameter(onto.search_one(iri = '*Device')>> float): pass
+        class hasDiameterUnit(onto.search_one(iri = '*Device') >> str): pass
+    
+        class hasResidenceTime(onto.search_one(iri = '*Device')>> float): pass
+        class hasResidenceTimeUnit(onto.search_one(iri = '*Device') >> str): pass
+    
         class hasCompoundMolarFlow(onto.search_one(iri = '*ChemicalMaterialStaged') >> float): pass       
         
-SCR = Reactortype(Vessel_Name)
+SCR = Reactortype('StraightTubeReactor')
 HTR = Reactortype('HelicalTubeReactor')
+PFR = Reactortype(Vessel_Name)
 
 # Reaktorvolumen im EzymeMl Dokument in ml
 # Für DWSIM in m3 angeben
-SCR.hasVolumeValue.append(reacV)
-SCR.hasVolumeUnit.append('m³')
-HTR.hasVolumeValue.append(reacV)
-HTR.hasVolumeUnit.append('m³')
+SCR.hasVolumeValue.append(8.0)
+SCR.hasVolumeUnit.append('ml')
+HTR.hasVolumeValue.append(8.0)
+HTR.hasVolumeUnit.append('ml')
+PFR.hasVolumeValue.append(reacV)
+PFR.hasVolumeUnit.append('m3')
 
 # Die Reaktorlänge fehlt im EnzymeMl Dokument
-# Ist laut Paper 4 m -> hier aber in DWSIM: Zu hoher Druckabfall
-# Druckabfall kann festgelegt werden (siehe oben)
-# 0.004 Wert der Simuliert werden kann und mit Druckabfall von 11 Pa
-reacL = 0.004
+# SCR und HTR 4 m -> hier aber in DWSIM: Zu hoher Druckabfall
+# neue Länge für die Simulation bestimmt
+reacL = 4
 
 SCR.hasLengthValue.append(reacL)
-SCR.hasLengthUnit.append('m')
+SCR.hasLengthUnit.append(sheet3.iloc[8,1])
 HTR.hasLengthValue.append(reacL)
-HTR.hasLengthUnit.append('m')
+HTR.hasLengthUnit.append(sheet3.iloc[8,1])
+PFR.hasLengthUnit.append(sheet3.iloc[7,1])
+PFR.hasLengthUnit.append(sheet3.iloc[8,1])
+
+# Reaktordurchmesser fehlt im EnzymeML Dokument
+# SCR und HTR 1.6 mm Innendurchmesser
+PFR.hasDiameter.append(sheet3.iloc[9,1])
+PFR.hasDiameterUnit.append(sheet3.iloc[10,1])
+PFR.hasResidenceTime.append(sheet3.iloc[5,1])
+PFR.hasResidenceTimeUnit.append(sheet3.iloc[6,1])
 
 # InletFlow comparable with ontochem class 'ChemicalMaterialInput_Manual'
 InletLaccase = (onto.search_one(iri = '*ChemicalMaterialInput_Manual'))('InletLaccase')
@@ -691,9 +556,10 @@ InletOxygen = (onto.search_one(iri = '*ChemicalMaterialInput_Manual'))('InletOxy
 
 # Die Inletströme wurden über die Konzentration und Volumenstrom ermittelt
 # In DWSIM kann der Molstrom in mol/s festgelegt werden
-InletLaccase.hasCompoundMolarFlow.append(9.66667E-07) # mol/s
-InletABTS_red.hasCompoundMolarFlow.append(8.08333E-05) # mol/s
-InletOxygen.hasCompoundMolarFlow.append( 1.655E-07) # mol/s
+# Aus der Excel 'Ergänzendes Laborbuch' importieren -> Sheet0
+InletLaccase.hasCompoundMolarFlow.append(sheet0.iloc[8,1]) # mol/s
+InletABTS_red.hasCompoundMolarFlow.append(sheet0.iloc[8,2]) # mol/s
+InletOxygen.hasCompoundMolarFlow.append(sheet0.iloc[8,4]) # mol/s
 
 with onto:
     
@@ -859,37 +725,28 @@ compounds = [catalysts[0], main_substrates[0], main_products[0], reactants[0], r
 
 for comp in compounds:
     sim.AddCompound(comp)
-
          
-# Stoichiometric Koeffizienten den Komponenten zuordnen
-# Koeffizienten aus der Ontologie ziehen   
-stoich_coeffs = {
-    catalysts[0]: onto.search_one(label = 'Laccase').hasStoichiometriCoefficient.first(),
-    main_substrates[0]: onto.search_one(label = 'ABTS_red').hasStoichiometriCoefficient.first(),
-    main_products[0]: onto.search_one(label = 'ABTS_ox').hasStoichiometriCoefficient.first(),
-    reactants[0]: onto.search_one(label = 'Oxygen').hasStoichiometriCoefficient.first(),
-    reactants[1]: onto.search_one(label = 'Water').hasStoichiometriCoefficient.first()
-    }
+# Zugriff auf die Koeffizienten
+# Komponentenliste kann beliebig lang sein
+stoich_coeffs = {}  
+direct_order_coeffs = {}  
+reverse_order_coeffs = {}   
 
-# Direct order Koeffizienten den Komponenten zuordnen
-# Koeffizienten aus der Ontologie ziehen  
-direct_order_coeffs = {
-    catalysts[0]: onto.search_one(label = 'Laccase').hasDirect_OrderCoefficient.first(),
-    main_substrates[0]: onto.search_one(label = 'ABTS_red').hasDirect_OrderCoefficient.first(),
-    main_products[0]: onto.search_one(label = 'ABTS_ox').hasDirect_OrderCoefficient.first(),
-    reactants[0]: onto.search_one(label = 'Oxygen').hasDirect_OrderCoefficient.first(),
-    reactants[1]: onto.search_one(label = 'Water').hasDirect_OrderCoefficient.first()
-    }
+for comp in compounds:
+    stoich_coeffs[comp] = onto.search_one(label=comp).hasStoichiometriCoefficient.first()
+    direct_order_coeffs[comp] = onto.search_one(label=comp).hasDirect_OrderCoefficient.first()
+    reverse_order_coeffs[comp] = onto.search_one(label=comp).hasReverse_OrderCoefficient.first()
 
-# Reverse order Koeffizienten den Komponenten zuordnen
-# Koeffizienten aus der Ontologie ziehen  
-reverse_order_coeffs = {
-    catalysts[0]: onto.search_one(label = 'Laccase').hasReverse_OrderCoefficient.first(),
-    main_substrates[0]: onto.search_one(label = 'ABTS_red').hasReverse_OrderCoefficient.first(),
-    main_products[0]: onto.search_one(label = 'ABTS_ox').hasReverse_OrderCoefficient.first(),
-    reactants[0]: onto.search_one(label = 'Oxygen').hasReverse_OrderCoefficient.first(),
-    reactants[1]: onto.search_one(label = 'Water').hasReverse_OrderCoefficient.first()
-    }   
+# Dictionary, um Komponentennamen und Koeff zu sichern
+# Mit der zweiten Zeile können die jeweiligen Koeff geupdatet werden
+comps = {}
+comps.update(stoich_coeffs)
+
+dorders = {}
+dorders.update(direct_order_coeffs)
+
+rorders = {}
+rorders.update(reverse_order_coeffs)
 
 # Dictionary festlegen   
 comps = Dictionary[str, float]()
@@ -900,7 +757,7 @@ rorders = Dictionary[str, float]()
 for comp in compounds:
     comps.Add(comp, stoich_coeffs[comp])
     dorders.Add(comp, direct_order_coeffs[comp])
-    rorders.Add(comp, reverse_order_coeffs[comp])    
+    rorders.Add(comp, reverse_order_coeffs[comp])   
 
 # Arrhenius Kinetik für den Testdurchlauf
 # Ideale Kinetik   
@@ -943,7 +800,7 @@ for s in stream_info:
 # Annahme Turbulente Strömung
 devices_info = [
     {'type': ObjectType.Mixer, 'x': 50, 'y': 50, 'name': 'Mixer'},
-    {'type': ObjectType.RCT_PFR, 'x': 150, 'y': 50, 'name': 'PFR'}
+    {'type': ObjectType.RCT_PFR, 'x': 150, 'y': 50, 'name': Vessel_Name}
     ]
 
 devices = []
@@ -951,7 +808,7 @@ for d in devices_info:
     device = sim.AddObject(d['type'], d['x'], d['y'], d['name'])
     # Save devices in variable 
     devices.append(device)
-    if d['name'] == 'PFR':
+    if d['name'] == Vessel_Name:
         pfr = device
     elif d['name'] == 'Mixer':
         MIX1 = device
@@ -966,7 +823,7 @@ MIX1 = MIX1.GetAsObject()
 pfr = pfr.GetAsObject()
 
 # Die Knoten werden über Kanten verbunden
-# Reaktant 1 un 2 führen in den Mixer
+# Reaktant 1 und 2 führen in den Mixer
 sim.ConnectObjects(m1.GraphicObject, MIX1.GraphicObject, -1, -1)
 sim.ConnectObjects(m2.GraphicObject, MIX1.GraphicObject, -1, -1)
 # Mixtur führt aus dem Mixer
@@ -975,9 +832,9 @@ sim.ConnectObjects(MIX1.GraphicObject, m3.GraphicObject, -1, -1)
 pfr.ConnectFeedMaterialStream(m3, 0)
 # Produktstrom führt aus dem PFR
 pfr.ConnectProductMaterialStream(m4, 0)
-# Energiestrom führt zum PFR, weil ihm für die Reaktion Wärmezugeführt wird
+# Energiestrom führt zum PFR, weil ihm für die Reaktion Wärme zugeführt wird
 # Allerdings Reaktion bei Raumtemperatur
-# Daher eigentlich keine hohe Wärmezufuhr 
+# Daher ~0 
 pfr.ConnectFeedEnergyStream(e1, 1)
 
 # PFR Eigenschaften
@@ -985,12 +842,19 @@ pfr.ConnectFeedEnergyStream(e1, 1)
 pfr.ReactorOperationMode = Reactors.OperationMode.Adiabatic
 # Dimensionierung festlegen: Volumen und Länge
 # In jedem Fall muss das Volumen festgelegt werden
-# Optiional kann zusätzlich die Reaktorlänge ODER Durchmesser angegeben werden
+# Optiional kann zusätzlich die Reaktorlänge oder Durchmesser angegeben werden
 pfr.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length    
 
-# Dimensionierung aus der Ontologie ziehen    
+# Dimensionierung aus der Ontologie ziehen
 pfr.Volume = reacV; # m3
-pfr.Length = reacL; # m
+pfr.Length = sheet3.iloc[7,1]
+
+# DeltaP im Reaktor einstellen
+# das Feld 'Constant Linear Pressure Drop' anklicken
+pfr.UseUserDefinedPressureDrop = True;
+# Wert für DeltaP aus dem ergänzenden Laborbuch importieren
+pfr.UserDefinedPressureDrop = sheet3.iloc[3,1]; 
+
 
 # Für die Thermodynamik ein Property Package festlegen
 # Raoult's Law ideal
@@ -1016,10 +880,10 @@ m1.SetMolarFlow(0.0) # will set by compound
 # Molstrom der Inletströme wurden über die Anfangskonzentrationen und über den jeweiligen Volumenstrom ermittelt
 # Klasse für Anfangskonzentrationen integrieren?
 m1.SetOverallCompoundMolarFlow(reactants[0], InletOxygen.hasCompoundMolarFlow.first()) # mol/s
-m1.SetOverallCompoundMolarFlow(main_substrates[0], 0.0)  # mol/s
+m1.SetOverallCompoundMolarFlow(main_substrates[0], sheet0.iloc[8,3])  # mol/s
 m1.SetOverallCompoundMolarFlow(catalysts[0], 0.0) # mol/s
 
-m2.SetOverallCompoundMolarFlow(reactants[0], 0.0) # mol/s
+m2.SetOverallCompoundMolarFlow(reactants[0], sheet0.iloc[8,5]) # mol/s
 m2.SetOverallCompoundMolarFlow(main_substrates[0], InletABTS_red.hasCompoundMolarFlow.first())  # mol/s
 m2.SetOverallCompoundMolarFlow(catalysts[0], InletLaccase.hasCompoundMolarFlow.first()) # mol/s
 
@@ -1057,9 +921,9 @@ myscript.ScriptText = str("import math\n"
 "Km = {} # mol/m3\n"
 "kcat = {} # 1/s\n"
 '\n'
-'pfr = Flowsheet.GetFlowsheetSimulationObject("""{}""")\n'
-'T = pfr.OutletTemperature\n'
-'Flowsheet = pfr.FlowSheet\n'
+'reactor = Flowsheet.GetFlowsheetSimulationObject("""{}""")\n'
+'T = reactor.OutletTemperature\n'
+'Flowsheet = reactor.FlowSheet\n'
 '\n'
 'obj = Flowsheet.GetFlowsheetSimulationObject("""Mixture""")\n'
 '\n'
@@ -1067,23 +931,23 @@ myscript.ScriptText = str("import math\n"
 'value = obj.GetOverallComposition()\n'
 '\n'
 '# Access to compound amound\n'
-'z_Laccase = value[0]\n'
-'z_ABTS_red = value[2]\n'
+'z_Protein = value[{}]\n'
+'z_Substrate = value[{}]\n'
 '\n'
 'n = obj.GetPhase("""Overall""").Properties.molarflow # mol/s\n'
 'Q = obj.GetPhase("""Overall""").Properties.volumetric_flow # m3/s\n'
 '\n'
-'Conc_Laccase = z_Laccase*n/Q # mol/m3\n'
-'Conc_ABTS_red = z_ABTS_red*n/Q # mol/m3\n'
+'Conc_Protein = z_Protein*n/Q # mol/m3\n'
+'Conc_Substrate = z_Substrate*n/Q # mol/m3\n'
 '\n'
-'r = ((Conc_Laccase * kcat * Conc_ABTS_red)/(Km + Conc_ABTS_red)) # mol/(m3*s)'.format(Km_LA.hasKmValue.first(), kcat_LA.has_kcatValue.first(), 'PFR'))   
+'r = ((Conc_Protein * kcat * Conc_Substrate)/(Km + Conc_Substrate)) # mol/(m3*s)'.format(
+    Km_LA.hasKmValue.first(), kcat_LA.has_kcatValue.first(), Vessel_Name, 0, 1))  
     
-# Mit dieser Zeile wird in Settings das Skript im Dropdown Feld ausgewählt
+# Mit dieser Zeile wird in Settings das Skript im Dropdown-Feld ausgewählt
 myreaction.ScriptTitle = myscripttitle
 
-# Über diese Zeile wird glaube ich das Skript ausgeführt
-#myreaction.ReactionKinetics = 1 # script
-
+# Über diese Zeile wird das Skript ausgeführt
+# myreaction.ReactionKinetics = 1 -> TypeError: since Python.NET 3.0 int can not be converted to Enum implicitly. Use Enum(int_value)
 
 
 # Anfrage: Kalkulation des Flowsheets
