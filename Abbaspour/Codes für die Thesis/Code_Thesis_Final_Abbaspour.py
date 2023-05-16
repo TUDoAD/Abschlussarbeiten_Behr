@@ -55,12 +55,8 @@ for vessel in enzmldoc.vessel_dict.values():
     Vessel_Name = vessel.name # Straight tube reactor, für die Simualtion wird ein PFR genommen
     Vessel_ID = vessel.id # v2
     # Reaktorvolumen eig 8, aber wurde für die Simulation angepasst (tau=64s)
-    Vessel_Volume = vessel.volume # 5.38E-01
+    Vessel_Volume = vessel.volume # 8
     Vessel_Unit = vessel.unit # ml
-
-# Das Volumen wird in EnzyeML in ml angegeben
-# DWSIM benötigt m3 (voreingestellt sind SI Units, manuelle Umstellung möglich)    
-    reacV = Vessel_Volume*1e-6
     
 # Infos zur Reaktion
 for reaction in enzmldoc.reaction_dict.values():
@@ -147,7 +143,7 @@ def class_creation(sheet: pd.DataFrame, onto):
     for index, row in sheet.iterrows():
         if row[0] == "inDWSIMdatabase":
             for j in range(1, len(row)):
-                # Namen des Reaktant der aktuellen Spalte auslesen
+                # Namen des Reaktanten der aktuellen Spalte auslesen
                 substance = sheet.iloc[reaktantRow, j]
                 if row[j] == "True":
                     # Falls 'inDWSIMdatabase' = "True"/"true", Klasse mit 'DWSIMCompound' erzeugen:
@@ -539,12 +535,12 @@ with onto:
         
 SCR = Reactortype('StraightTubeReactor')
 HTR = Reactortype('HelicalTubeReactor')
-PFR = Reactortype(Vessel_Name)
+PFR = Reactortype(sheet3.iloc[11,1])
 
 # Reaktorvolumen im EzymeMl Dokument in ml
 # Für DWSIM in m3 angeben
-PFR.hasVolumeValue.append(reacV)
-PFR.hasVolumeUnit.append('m3')
+PFR.hasVolumeValue.append(sheet3.iloc[12,1])
+PFR.hasVolumeUnit.append(sheet3.iloc[13,1])
 
 # Die Reaktorlänge fehlt im EnzymeMl Dokument
 # SCR und HTR 4 m -> hier aber in DWSIM: Zu hoher Druckabfall
@@ -616,7 +612,7 @@ with onto:
         class hasDateOfCreation(EnzymeML_Documentation >> str): pass
 
 ABTSOxidationbyLaccase = Project('ABTS_OxidationByLaccase')
-Chair_of_EquipmentDesign = Institution('TU_Dortmund_ChairOfEquipmentDesign')
+Chair_of_EquipmentDesign = Institution('TU_Dortmund_LaboratoryOfEquipmentDesign')
 EnzymeML_Document1 = EnzymeML_Documentation('EnzymeML_Document1')
 Agent1 = Agent('Abbaspour')
 
@@ -810,7 +806,7 @@ for s in stream_info:
 # Annahme Turbulente Strömung
 devices_info = [
     {'type': ObjectType.Mixer, 'x': 50, 'y': 50, 'name': 'Mixer'},
-    {'type': ObjectType.RCT_PFR, 'x': 150, 'y': 50, 'name': Vessel_Name}
+    {'type': ObjectType.RCT_PFR, 'x': 150, 'y': 50, 'name': sheet3.iloc[11,1]}
     ]
 
 devices = []
@@ -818,7 +814,7 @@ for d in devices_info:
     device = sim.AddObject(d['type'], d['x'], d['y'], d['name'])
     # Save devices in variable 
     devices.append(device)
-    if d['name'] == Vessel_Name:
+    if d['name'] == sheet3.iloc[11,1]:
         pfr = device
     elif d['name'] == 'Mixer':
         MIX1 = device
@@ -856,7 +852,7 @@ pfr.ReactorOperationMode = Reactors.OperationMode.Adiabatic
 pfr.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length    
 
 # Dimensionierung aus der Ontologie ziehen
-pfr.Volume = reacV; # m3
+pfr.Volume = sheet3.iloc[12,1]; # m3
 pfr.Length = sheet3.iloc[7,1]
 
 # DeltaP im Reaktor einstellen
@@ -951,7 +947,7 @@ myscript.ScriptText = str("import math\n"
 'Conc_Substrate = z_Substrate*n/Q # mol/m3\n'
 '\n'
 'r = ((Conc_Protein * kcat * Conc_Substrate)/(Km + Conc_Substrate)) # mol/(m3*s)'.format(
-    Km_LA.hasKmValue.first(), kcat_LA.has_kcatValue.first(), Vessel_Name, 0, 1))  
+    Km_LA.hasKmValue.first(), kcat_LA.has_kcatValue.first(), sheet3.iloc[11,1], 0, 1))  
     
 # Über diese Zeile wird das Skript ausgeführt in dem das Feld 'Advanced' ausgewählt wird
 myreaction.ReactionKinetics = ReactionKinetics(1)
@@ -989,7 +985,7 @@ for k in pfr.ComponentConversions.Keys:
 
 # Datei speichern
 fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), 
-                              "Final_ABTS_Oxidation.dwxmz")
+                              "ScaleUP_ABTS_Oxidation.dwxmz")
 interf.SaveFlowsheet(sim, fileNameToSave, True)
 
 # PDF als Bild speichern und direkt ausgeben
@@ -1011,7 +1007,7 @@ d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
 str = MemoryStream()
 d.SaveTo(str)
 image = Image.FromStream(str)
-imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Final_ABTS_Oxidation.png")
+imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "ScaleUP_ABTS_Oxidation.png")
 image.Save(imgPath, ImageFormat.Png)
 str.Dispose()
 canvas.Dispose()
