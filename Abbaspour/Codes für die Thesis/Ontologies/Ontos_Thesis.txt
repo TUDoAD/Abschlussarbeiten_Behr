@@ -1,0 +1,3 @@
+BaseOnto.owl => Zusammengesetzte Onto aus metadata4Ing und SBO
+Zwischenstand_Onto_ => Beinhaltet Stoffe und Stoffeigenschaften, wird gespeichert und erneut aufgerufen, um weitere Klassen hinzuzufügen
+Finale_Onto_ => Resultat am Ende
