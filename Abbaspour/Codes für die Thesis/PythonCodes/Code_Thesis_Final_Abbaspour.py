@@ -591,8 +591,8 @@ InletWater.hasCompoundMolarFlow.append(sheet0.iloc[8,5])
 InletWater.hasCompoundMolarFlowUnit.append(sheet0.iloc[9,5]) # LöMi
 
 # Volumenstrom
-InletABTS_red.hasVolumetricFlow.append(sheet0.iloc[10,2])
-InletABTS_red.hasVolumetricFlowUnit.append(sheet0.iloc[11,2]) # m3/s 
+InletWater.hasVolumetricFlow.append(sheet0.iloc[10,1])
+InletWater.hasVolumetricFlowUnit.append(sheet0.iloc[11,1]) # m3/s 
 
 InletOxygen.hasVolumetricFlow.append(sheet0.iloc[10,4])
 InletOxygen.hasVolumetricFlowUnit.append(sheet0.iloc[11,4]) # m3/s 
@@ -927,7 +927,7 @@ m2.SetOverallCompoundMolarFlow(catalysts[0], InletLaccase.hasCompoundMolarFlow.f
 m2.SetOverallCompoundMolarFlow(reactants[1], InletWater.hasCompoundMolarFlow.first())
 
 m1.SetVolumetricFlow(InletOxygen.hasVolumetricFlow.first())
-m2.SetVolumetricFlow(InletABTS_red.hasVolumetricFlow.first())
+m2.SetVolumetricFlow(InletWater.hasVolumetricFlow.first())
 
 # Arrhenius Gleichung hinzufügen
 sim.AddReaction(kr1)
