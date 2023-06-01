@@ -40,6 +40,9 @@ from pyenzyme.enzymeml.models import KineticModel, KineticParameter
 
 enzmldoc = pe.EnzymeMLDocument.fromTemplate("./EnzymeML_Template_18-8-2021_KR.xlsm")
 
+# Die erste Messung visualisieren lassen
+fig = enzmldoc.visualize(use_names=True, trendline=True, measurement_ids=["m0"])
+
 # Lade alle relevanten Informationen aus der EnzymeML Dokumentation
 # Relevant für die DWSIM Simulation
 
@@ -53,7 +56,7 @@ for Creator in enzmldoc.creator_dict.values():
 # 
 for vessel in enzmldoc.vessel_dict.values():
     Vessel_Name = vessel.name # Straight tube reactor, für die Simualtion wird ein PFR genommen
-    Vessel_ID = vessel.id # v2
+    Vessel_ID = vessel.id # v1
     # Reaktorvolumen eig 8, aber wurde für die Simulation angepasst (tau=64s)
     Vessel_Volume = vessel.volume # 8
     Vessel_Unit = vessel.unit # ml
@@ -132,11 +135,11 @@ with onto:
 # Die Elemente einer Stoffliste werden entweder der Oberklasse JSON-Datei oder DWSIM-Komponente subsumiert
 
 def class_creation(sheet: pd.DataFrame, onto):
-    reaktantRow = -1
+    reactantRow = -1
     # Die Zeile ermitteln, in der die Labels der Reaktanten stehen
     for i in range(len(sheet.index)):
-        if sheet.iloc[i, 0] == "Reaktant":
-            reaktantRow = i
+        if sheet.iloc[i, 0] == "hasCompoundName":
+            reactantRow = i
             break
 
     # Das sheet durchsuchen nach der Zeile mit 'inDWSIMdatabase', dann die Spalten in dieser Zeile auslesen
@@ -144,7 +147,7 @@ def class_creation(sheet: pd.DataFrame, onto):
         if row[0] == "inDWSIMdatabase":
             for j in range(1, len(row)):
                 # Namen des Reaktanten der aktuellen Spalte auslesen
-                substance = sheet.iloc[reaktantRow, j]
+                substance = sheet.iloc[reactantRow, j]
                 if row[j] == "True":
                     # Falls 'inDWSIMdatabase' = "True"/"true", Klasse mit 'DWSIMCompound' erzeugen:
                     # codestring aufsetzen, .format(substance,substance) am Ende ersetzt jeden {}-Teil des Strings mit Inhalt der Variablen substance
@@ -291,7 +294,7 @@ main_products = []
 reactants = []
 
 for index, row in sheet0.iterrows():
-    if row[0] == "hasTask":
+    if row[0] == "hasRole":
         for i in range(1, len(row)):
             if row[i] == "Catalyst":
                 catalysts.append(sheet0.iloc[2, i])                
@@ -333,13 +336,13 @@ with onto:
         class ThermodynamicModel(Thing): pass
         class PropertyPackage(ThermodynamicModel): pass
         class ActivityCoefficientModel(PropertyPackage): pass
+        class EquationOfState(PropertyPackage): pass
         class IdealModel(PropertyPackage): pass
         class RaoultsLaw(IdealModel): pass
-        class NRTL(ActivityCoefficientModel): pass
-        class UNIQUAC(ActivityCoefficientModel): pass
+
     
         # Hinweis für später: Die Interaktionsparameter können notfalls in DWSIM ignoriert werden
-        class hasInteractionParameter(ActivityCoefficientModel >> float): pass
+        class hasBinaryInteractionParameter(ActivityCoefficientModel >> float): pass
 
     # Klasse für die enzymatische Reaktion erstellen
     # Die metadata4Ing Ontologie beinhaltet die Klasse 'chemical reaction'
@@ -483,20 +486,17 @@ with onto:
         class Pressure(ReactionConditions): pass
         
         # Der Druckabfall kann in DWSIM auf einen konstanten wert eingestellt werden
-        class PressureDrop(Pressure): pass
         class Solvent(ReactionConditions): pass
         class ReactionRate(ReactionConditions): pass
     
         class hasTemperatureValue(Temperature >> float): pass
         class has_pH_Value(pH >> float): pass
         class hasPressureValue(Pressure >> float):pass
-        class hasDeltaP(PressureDrop >> float): pass
         
         # fluid rate schon in Ontochem
         class hasRateValue(ReactionRate >> float): pass
         class hasTemperatureUnit(Temperature >> str): pass
         class hasPressureUnit(Pressure >> str): pass
-        class hasDeltaP_Unit(PressureDrop >> str): pass
         class hasFluidRateUnit(ReactionRate >> str): pass
 
 # Werden teilweise aus dem EnzymeML-Dokument geladen
@@ -510,8 +510,6 @@ sheet3 = pd.read_excel("./Ergänzendes Laborbuch.xlsx", sheet_name=3)
 # Druckangaben fehlen im EnzymeML-Dokument
 Pressure.hasPressureValue.append(sheet3.iloc[1,1])
 Pressure.hasPressureUnit.append(sheet3.iloc[2,1])
-PressureDrop.hasDeltaP.append(sheet3.iloc[3,1])
-PressureDrop.hasDeltaP_Unit.append(sheet3.iloc[4,1])
 
 with onto:
         class ProcessFlowDiagram(Thing): pass
@@ -531,7 +529,10 @@ with onto:
         class hasResidenceTime(onto.search_one(iri = '*Device')>> float): pass
         class hasResidenceTimeUnit(onto.search_one(iri = '*Device') >> str): pass
     
-        class hasTypeOf_ThermodynamicProcess(onto.search_one(iri = '*Device') >> str): pass
+        class hasDeltaP(onto.search_one(iri = '*Device')>> float): pass
+        class hasDeltaP_Unit(onto.search_one(iri = '*Device') >> str): pass
+    
+        class hasTypeOf_OperationMode(onto.search_one(iri = '*Device') >> int): pass
     
         class hasCompoundMolarFlow(onto.search_one(iri = '*ChemicalMaterialStaged') >> float): pass       
         class hasCompoundMolarFlowUnit(onto.search_one(iri = '*ChemicalMaterialStaged') >> str): pass
@@ -551,7 +552,7 @@ Reactor.hasVolumeUnit.append(sheet3.iloc[13,1])
 # Die Reaktorlänge fehlt im EnzymeMl Dokument
 # SCR und HTR 4 m -> hier aber in DWSIM: Zu hoher Druckabfall
 # neue Länge für die Simulation bestimmt
-Reactor.hasLengthUnit.append(sheet3.iloc[7,1])
+Reactor.hasLengthValue.append(sheet3.iloc[7,1])
 Reactor.hasLengthUnit.append(sheet3.iloc[8,1])
 
 # Reaktordurchmesser fehlt im EnzymeML Dokument
@@ -560,12 +561,18 @@ Reactor.hasDiameter.append(sheet3.iloc[9,1])
 Reactor.hasDiameterUnit.append(sheet3.iloc[10,1])
 Reactor.hasResidenceTime.append(sheet3.iloc[5,1])
 Reactor.hasResidenceTimeUnit.append(sheet3.iloc[6,1])
-Reactor.hasTypeOf_ThermodynamicProcess.append(sheet3.iloc[14,1])
+Reactor.hasDeltaP.append(sheet3.iloc[3,1])
+Reactor.hasDeltaP_Unit.append(sheet3.iloc[4,1])
+Reactor.hasTypeOf_OperationMode.append(sheet3.iloc[14,1])
 
 # InletFlow comparable with ontochem class 'ChemicalMaterialInput_Manual'
-InletLaccase = (onto.search_one(iri = '*ChemicalMaterialInput_Manual'))('InletLaccase')
-InletABTS_red = (onto.search_one(iri = '*ChemicalMaterialInput_Manual'))('InletABTS_red')
-InletOxygen = (onto.search_one(iri = '*ChemicalMaterialInput_Manual'))('InletOxygen')
+InletLaccase = (onto.search_one(iri = '*ChemicalMaterialInput_CF'))('InletLaccase')
+InletABTS_red = (onto.search_one(iri = '*ChemicalMaterialInput_CF'))('InletABTS_red')
+InletOxygen = (onto.search_one(iri = '*ChemicalMaterialInput_CF'))('InletOxygen')
+InletWater = (onto.search_one(iri = '*ChemicalMaterialInput_CF'))('InletWater') # LöMi
+
+OutletWater = (onto.search_one(iri = '*ChemicalMaterialOutput_CF'))('OutletWater')
+OutletABTS_ox = (onto.search_one(iri = '*ChemicalMaterialOutput_CF'))('OutletABTS_ox')
 
 
 # Die Inletströme wurden über die Konzentration und Volumenstrom ermittelt
@@ -573,13 +580,20 @@ InletOxygen = (onto.search_one(iri = '*ChemicalMaterialInput_Manual'))('InletOxy
 # Aus der Excel 'Ergänzendes Laborbuch' importieren -> Sheet0
 InletLaccase.hasCompoundMolarFlow.append(sheet0.iloc[8,1])
 InletLaccase.hasCompoundMolarFlowUnit.append(sheet0.iloc[9,1]) # mol/s
+
 InletABTS_red.hasCompoundMolarFlow.append(sheet0.iloc[8,2])
 InletABTS_red.hasCompoundMolarFlowUnit.append(sheet0.iloc[9,2]) # mol/s 
-InletOxygen.hasCompoundMolarFlow.append(sheet0.iloc[8,4])
-InletOxygen.hasCompoundMolarFlow.append(sheet0.iloc[9,4]) # mol/s
 
+InletOxygen.hasCompoundMolarFlow.append(sheet0.iloc[8,4])
+InletOxygen.hasCompoundMolarFlowUnit.append(sheet0.iloc[9,4]) # mol/s
+
+InletWater.hasCompoundMolarFlow.append(sheet0.iloc[8,5])
+InletWater.hasCompoundMolarFlowUnit.append(sheet0.iloc[9,5]) # LöMi
+
+# Volumenstrom
 InletABTS_red.hasVolumetricFlow.append(sheet0.iloc[10,2])
 InletABTS_red.hasVolumetricFlowUnit.append(sheet0.iloc[11,2]) # m3/s 
+
 InletOxygen.hasVolumetricFlow.append(sheet0.iloc[10,4])
 InletOxygen.hasVolumetricFlowUnit.append(sheet0.iloc[11,4]) # m3/s 
 
@@ -864,26 +878,21 @@ pfr.ConnectFeedEnergyStream(e1, 1)
 # Für die Operation Mode wird das ergänzende ELN durchsucht nach 
 # 'hasTypeOf_ThermodynamicProcess'
 # DWSIM braucht Integer als input, daher: 1 == Adiabatic, 0 == Isothermic
-operationMode = []
-for index, row in sheet3.iterrows():
-    if row[0] == "hasTypeOf_ThermodynamicProcess":
-        operationMode.append(sheet3.iloc[14,1])
-
-pfr.ReactorOperationMode = Reactors.OperationMode(operationMode[0])
+pfr.ReactorOperationMode = Reactors.OperationMode(Reactor.hasTypeOf_OperationMode.first())
 # Dimensionierung festlegen: Volumen und Länge
 # In jedem Fall muss das Volumen festgelegt werden
 # Optiional kann zusätzlich die Reaktorlänge oder Durchmesser angegeben werden
 pfr.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length    
 
 # Dimensionierung aus der Ontologie ziehen
-pfr.Volume = sheet3.iloc[12,1]; # m3
-pfr.Length = sheet3.iloc[7,1]
+pfr.Volume = Reactor.hasVolumeValue.first(); # m3
+pfr.Length = Reactor.hasLengthValue.first();
 
 # DeltaP im Reaktor einstellen
 # das Feld 'Constant Linear Pressure Drop' anklicken
 pfr.UseUserDefinedPressureDrop = True;
 # Wert für DeltaP aus dem ergänzenden Laborbuch importieren
-pfr.UserDefinedPressureDrop = sheet3.iloc[3,1]; 
+pfr.UserDefinedPressureDrop = Reactor.hasDeltaP.first(); 
 
 
 # Für die Thermodynamik ein Property Package festlegen
@@ -915,6 +924,7 @@ m1.SetOverallCompoundMolarFlow(catalysts[0], 0.0) # mol/s
 m2.SetOverallCompoundMolarFlow(reactants[0], 0.0) # mol/s
 m2.SetOverallCompoundMolarFlow(main_substrates[0], InletABTS_red.hasCompoundMolarFlow.first())  # mol/s
 m2.SetOverallCompoundMolarFlow(catalysts[0], InletLaccase.hasCompoundMolarFlow.first()) # mol/s
+m2.SetOverallCompoundMolarFlow(reactants[1], InletWater.hasCompoundMolarFlow.first())
 
 m1.SetVolumetricFlow(InletOxygen.hasVolumetricFlow.first())
 m2.SetVolumetricFlow(InletABTS_red.hasVolumetricFlow.first())
