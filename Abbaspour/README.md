@@ -1,1 +1,0 @@
-Code, der im Rahmen der Masterarbeit von Elnaz Abbaspour erzeugt wurde.
