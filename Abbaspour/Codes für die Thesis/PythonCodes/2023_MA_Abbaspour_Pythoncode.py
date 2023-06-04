@@ -78,8 +78,6 @@ for protein in enzmldoc.protein_dict.values():
     Protein_Organism = protein.organism # Trametes versicolor
     Protein_UniProtID = protein.uniprotid # None, should be 'D2CSE5'
 
-KCAT = 0.777174055712183
-KM = 0.2
 
 # Da das EnzymeML Dokument nicht alle notwendigen Informationen beinhaltet,
 # soll ein weiteres Excel Sheet ausgefüllt werden (im Labor)
@@ -457,11 +455,11 @@ kcat_LA = kcat('kcat_Laccase_ABTS')
 
 # Im EnzymeML Dokument in mmol/l
 # Für das Reaktionsskript im Skript Manager in mol/m3 angeben
-Km_LA.hasKmValue.append(KM)
-Km_LA.hasKmUnit.append('mol/m3')
+Km_LA.hasKmValue.append(sheet0.iloc[12,1])
+Km_LA.hasKmUnit.append(sheet0.iloc[13,1])
 
-kcat_LA.has_kcatValue.append(KCAT)
-kcat_LA.has_kcatUnit.append('1/s')
+kcat_LA.has_kcatValue.append(sheet0.iloc[14,1])
+kcat_LA.has_kcatUnit.append(sheet0.iloc[15,1])
 
 with onto:
     # EnzymeML: Dokumentation von 19 Reaktanten und 19 Proteinen möglich
