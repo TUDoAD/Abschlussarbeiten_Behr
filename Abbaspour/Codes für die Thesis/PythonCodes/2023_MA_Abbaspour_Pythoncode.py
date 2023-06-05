@@ -87,10 +87,12 @@ import pandas as pd
 # Sheet0 beinhaltet Reaktionsteilnehmer und -koeffizienten
 # Sheet1 beinhaltet die Stoffdaten, die für den Compound Creator relevant sind
 # Sheet2 beinhaltet zusätzliche Stoffdaten
-sheet0 = pd.read_excel("./Ergänzendes Laborbuch.xlsx", sheet_name=0)
-sheet1 = pd.read_excel("./Ergänzendes Laborbuch.xlsx", sheet_name=1)
-sheet2 = pd.read_excel("./Ergänzendes Laborbuch.xlsx", sheet_name=2)
-    
+sheet0 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_2.xlsx", sheet_name=0)
+sheet1 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_2.xlsx", sheet_name=1)
+sheet2 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_2.xlsx", sheet_name=2)
+# Excel 'Ergänzendes Laborbuch' Sheet3 laden für fehlende Parameter
+sheet3 = pd.read_excel("././Ergänzendes Laborbuch_Kinetik_2.xlsx", sheet_name=3)
+   
 # Ontologie Design
 # Relevante Entitäten der bestehenden Ontologie hinzufügen
 # (Klassen, Individuen und Relationen definieren)
@@ -446,8 +448,10 @@ with onto:
     
         class hasKmValue(Km >> float): pass
         class hasKmUnit(Km >> str): pass
-        class has_kcatValue(kcat >> float): pass
-        class has_kcatUnit(kcat >> str): pass            
+        class has_kcatValue(kcat >> str): pass
+        class has_kcatUnit(kcat >> str): pass 
+        class hasConstant_Km(Km >> str): pass
+        class hasConstant_kcat(kcat >> str): pass           
 
 # Werte von Km und kcat sind abhängig vom Enzym und vom Substrat
 Km_LA = Km('Km_Laccase_ABTS')
@@ -455,11 +459,13 @@ kcat_LA = kcat('kcat_Laccase_ABTS')
 
 # Im EnzymeML Dokument in mmol/l
 # Für das Reaktionsskript im Skript Manager in mol/m3 angeben
-Km_LA.hasKmValue.append(sheet0.iloc[12,1])
-Km_LA.hasKmUnit.append(sheet0.iloc[13,1])
+Km_LA.hasKmValue.append(sheet0.iloc[13,1])
+Km_LA.hasKmUnit.append(sheet0.iloc[14,1])
+Km_LA.hasConstant_Km.append(sheet0.iloc[17,1])
 
-kcat_LA.has_kcatValue.append(sheet0.iloc[14,1])
-kcat_LA.has_kcatUnit.append(sheet0.iloc[15,1])
+kcat_LA.has_kcatValue.append(sheet0.iloc[15,1])
+kcat_LA.has_kcatUnit.append(sheet0.iloc[16,1])
+Km_LA.hasConstant_kcat.append(sheet0.iloc[18,1])
 
 with onto:
     # EnzymeML: Dokumentation von 19 Reaktanten und 19 Proteinen möglich
@@ -504,9 +510,6 @@ with onto:
 Temperature.hasTemperatureValue.append(Temperature_Value)
 Temperature.hasTemperatureUnit.append(Temperature_Unit)
 pH.has_pH_Value.append(pH_Value)
-
-# Excel 'Ergänzendes Laborbuch' Sheet3 laden für fehlende Parameter
-sheet3 = pd.read_excel("./Ergänzendes Laborbuch.xlsx", sheet_name=3)
 
 # Druckangaben fehlen im EnzymeML-Dokument
 Pressure.hasPressureValue.append(sheet3.iloc[1,1])
@@ -960,8 +963,6 @@ myscripttitle = 'ABTS_kinetics'
 myscript = sim.Scripts[myscripttitle]
 
 myscript.ScriptText = str("import math\n"
-"Km = {} # mol/m3\n"
-"kcat = {} # 1/s\n"
 '\n'
 'reactor = Flowsheet.GetFlowsheetSimulationObject("""{}""")\n'
 'T = reactor.OutletTemperature\n'
@@ -982,8 +983,11 @@ myscript.ScriptText = str("import math\n"
 'c_Protein = z_Protein*n/Q # mol/m3\n'
 'c_Substrate = z_Substrate*n/Q # mol/m3\n'
 '\n'
+"Km = {} # mol/m3\n"
+"kcat = {} # 1/s\n"
+'\n'
 'r = ((c_Protein * kcat * c_Substrate)/(Km + c_Substrate)) # mol/(m3*s)'.format(
-    Km_LA.hasKmValue.first(), kcat_LA.has_kcatValue.first(), sheet3.iloc[11,1], 0, 1))  
+    sheet3.iloc[11,1], 0, 1,Km_LA.hasKmValue.first(), kcat_LA.has_kcatValue.first()))  
     
 myreaction.ReactionKinetics = ReactionKinetics(1)
 myreaction.ScriptTitle = myscripttitle
