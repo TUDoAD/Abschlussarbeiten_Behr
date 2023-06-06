@@ -1,0 +1,4 @@
+Folgende Ontologien entanden im Rahmen der Masterarbeit
+- BaseOnto.owl
+- Zwischenstand_Onto_
+- Finale_Onto_
