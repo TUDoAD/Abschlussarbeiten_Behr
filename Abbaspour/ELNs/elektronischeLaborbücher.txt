@@ -1,0 +1,4 @@
+Folgende ELNs wurden verwendet oder entwickelt:
+- EnzymeML Template
+- Ergänzendes Laborbuch_Kinetik_1
+- Ergänzendes_Laborbuch_Kinetik_2
