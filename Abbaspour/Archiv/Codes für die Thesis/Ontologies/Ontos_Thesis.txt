@@ -1,0 +1,4 @@
+Step1Thesis_Klassenhierarchie.owl => Erste Onto, um relevante Klassen für die Simu abzuleiten
+BaseOnto.owl => Zusammengesetzte Onto aus metadata4Ing und SBO
+Zwischenstand_Onto_.owl => Beinhaltet Stoffe und Stoffeigenschaften, wird gespeichert und erneut aufgerufen, um weitere Klassen hinzuzufügen
+Finale_Onto_.owl => Resultat am Ende
