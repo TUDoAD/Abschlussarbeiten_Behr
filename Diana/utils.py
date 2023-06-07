@@ -746,7 +746,7 @@ def concept_extractor(ontology_filenames = ["Allotrope_OWL"],
     return concept_dict,statistics_dict_res
 
 def ontology_class_extender(ontology_filenames = ["SBO"], 
-                            use_IUPAC_goldbook = True,
+                            use_IUPAC_goldbook = False,
                             extend_ontology_name = 'Allotrope_OWL',
                             min_count_list = [1],
                             preprocessed_text_pickle_name = "methanation_only_text",
@@ -845,7 +845,7 @@ def ontology_class_extender(ontology_filenames = ["SBO"],
                     #print('class not included:{}'.format(i))
                     count += 1
                     pass
-            #print('Not able to include {} classes due to missing label'.format(count))
+            #print('Not able to include {} classes due to missing label'.format(count))"""
             
             # allocate resultDictionary (only gets important, when more than 1 ontology is loaded)
             resDict = {}
@@ -871,9 +871,8 @@ def ontology_class_extender(ontology_filenames = ["SBO"],
             # List of classes in vectorspace and 
             # current selected ontology (onto_local) = resDict[extend_ontology_name]
             # dump found classes in json file for later checkup, metrics, etc.
-            with open('./json-files/FoundClasses_'+ extend_ontology_name +'_' + model_name +'_' +str(similarity_threshold) + '.json', 'w') as jsonfile:
-                json.dump(resDict, jsonfile)
-                
+            # with open('./json-files/FoundClasses_'+ extend_ontology_name +'_' + model_name +'_' +str(similarity_threshold) + '.json', 'w') as jsonfile:
+                #json.dump(resDict, jsonfile)
             ## 
             # Extension of ontology with classes
             # start with definining superclass "w2vConcept" that gathers all automatically added classes 
