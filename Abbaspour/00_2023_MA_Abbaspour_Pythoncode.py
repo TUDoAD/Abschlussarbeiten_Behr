@@ -87,11 +87,11 @@ import pandas as pd
 # Sheet0 beinhaltet Reaktionsteilnehmer und -koeffizienten
 # Sheet1 beinhaltet die Stoffdaten, die für den Compound Creator relevant sind
 # Sheet2 beinhaltet zusätzliche Stoffdaten
-sheet0 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_2.xlsx", sheet_name=0)
-sheet1 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_2.xlsx", sheet_name=1)
-sheet2 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_2.xlsx", sheet_name=2)
+sheet0 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=0)
+sheet1 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=1)
+sheet2 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=2)
 # Excel 'Ergänzendes Laborbuch' Sheet3 laden für fehlende Parameter
-sheet3 = pd.read_excel("././Ergänzendes Laborbuch_Kinetik_2.xlsx", sheet_name=3)
+sheet3 = pd.read_excel("././Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=3)
    
 # Ontologie Design
 # Relevante Entitäten der bestehenden Ontologie hinzufügen
@@ -117,12 +117,12 @@ with onto:
     # DWSIM bietet die Möhlichkeit Komponenten zu importieren über: Online-Quellen, Json- oder XML_Dateien
     # Zusätzlich kann der User über den 'Compound Creator' Stoffe erstellen
     # So entsteht eine von DWSIM 'abweichende Datenbank'
-        class DeviantingDatabase(SubstanceDatabase): pass
-        class OnlineSource(DeviantingDatabase): pass
-        class UserDefinedCompound(DeviantingDatabase): pass
+        class DeviatingDatabase(SubstanceDatabase): pass
+        class OnlineSource(DeviatingDatabase): pass
+        class UserDefinedCompound(DeviatingDatabase): pass
 
         # Object property -> Triplett liest sich: 'User-definierte Komponente schafft abweichende Datenbank'
-        class creates(UserDefinedCompound >> DeviantingDatabase): pass 
+        class creates(UserDefinedCompound >> DeviatingDatabase): pass 
     
     # Um selbst erstellte Komponenten der Simulation verfügbar zu machen, müssen diese in dem spezifischen Ordner 'addcomps' hinterlegt sein
     # Ordner findet sich unter: "C:\Users\49157\AppData\Local\DWSIM8\addcomps"
@@ -152,7 +152,7 @@ def class_creation(sheet: pd.DataFrame, onto):
                 # Namen des Reaktanten der aktuellen Spalte auslesen
                 substance = sheet.iloc[reactantRow, j]
                 if row[j] == "True":
-                    # Falls 'inDWSIMdatabase' = "True"/"true", Klasse mit 'DWSIMCompound' erzeugen:
+                    # Falls 'inDWSIMdatabase' = "True", Klasse mit 'DWSIMCompound' erzeugen:
                     # codestring aufsetzen, .format(substance,substance) am Ende ersetzt jeden {}-Teil des Strings mit Inhalt der Variablen substance
                     # Neue Komponenten müssen als JSON-file über den AddCompoumd-Ordner hinzugefügt werden
                     # Sind die Komponenten einmal hinzugefügt worden, stehen sie für jede anschließende Simulation zur Verfügung
