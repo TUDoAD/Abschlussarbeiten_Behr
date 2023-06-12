@@ -465,7 +465,7 @@ Km_LA.hasConstant_Km.append(sheet0.iloc[17,1])
 
 kcat_LA.has_kcatValue.append(sheet0.iloc[15,1])
 kcat_LA.has_kcatUnit.append(sheet0.iloc[16,1])
-Km_LA.hasConstant_kcat.append(sheet0.iloc[18,1])
+kcat_LA.hasConstant_kcat.append(sheet0.iloc[18,1])
 
 with onto:
     # EnzymeML: Dokumentation von 19 Reaktanten und 19 Proteinen möglich
@@ -958,7 +958,7 @@ def createScript(obj_name):
 # Skript def ausführen
 createScript('ABTS_kinetics')
 
-myreaction = sim.GetReaction('ABTS Oxidation')
+myreaction = sim.GetReaction('ABTS-Oxidation')
 myscripttitle = 'ABTS_kinetics'
 myscript = sim.Scripts[myscripttitle]
 
@@ -974,19 +974,19 @@ myscript.ScriptText = str("import math\n"
 'value = obj.GetOverallComposition()\n'
 '\n'
 '# Access to compound amount\n'
-'z_Protein = value[{}]\n'
+'z_Enzyme = value[{}]\n'
 'z_Substrate = value[{}]\n'
 '\n'
 'n = obj.GetPhase("""Overall""").Properties.molarflow # mol/s\n'
 'Q = obj.GetPhase("""Overall""").Properties.volumetric_flow # m3/s\n'
 '\n'
-'c_Protein = z_Protein*n/Q # mol/m3\n'
+'c_Enzyme = z_Enzyme*n/Q # mol/m3\n'
 'c_Substrate = z_Substrate*n/Q # mol/m3\n'
 '\n'
 "Km = {} # mol/m3\n"
 "kcat = {} # 1/s\n"
 '\n'
-'r = ((c_Protein * kcat * c_Substrate)/(Km + c_Substrate)) # mol/(m3*s)'.format(
+'r = ((c_Enzyme * kcat * c_Substrate)/(Km + c_Substrate)) # mol/(m3*s)'.format(
     sheet3.iloc[11,1], 0, 1,Km_LA.hasKmValue.first(), kcat_LA.has_kcatValue.first()))  
     
 myreaction.ReactionKinetics = ReactionKinetics(1)
