@@ -23,7 +23,7 @@ owlready2.JAVA_EXE = "C://Users//49157//Downloads//Protege-5.5.0-win//Protege-5.
 # Irrelevante Klassen wurden manuell entfernt, sowie Extraklassen, die durch das Mergen entstanden sind
 
 onto_world = owlready2.World()
-onto = onto_world.get_ontology("./BaseOnto.owl").load()
+onto = onto_world.get_ontology("./ontologies/BaseOnto.owl").load()
 
 # Ohne diese Definition wird die Ontologie für set_relations(test_dict, onto) nicht gefunden
 BaseOnto = onto
@@ -38,7 +38,7 @@ from pyenzyme.enzymeml.models import KineticModel, KineticParameter
 # EnzymeML Dokument laden
 # Stelle vorher die Macros aus, da sonst der pH Wert nicht erkannt wird
 
-enzmldoc = pe.EnzymeMLDocument.fromTemplate("./EnzymeML_Template_18-8-2021_KR.xlsm")
+enzmldoc = pe.EnzymeMLDocument.fromTemplate("./ELNs/EnzymeML_Template_18-8-2021_KR.xlsm")
 
 # Die erste Messung visualisieren lassen
 fig = enzmldoc.visualize(use_names=True, trendline=True, measurement_ids=["m0"])
@@ -87,11 +87,11 @@ import pandas as pd
 # Sheet0 beinhaltet Reaktionsteilnehmer und -koeffizienten
 # Sheet1 beinhaltet die Stoffdaten, die für den Compound Creator relevant sind
 # Sheet2 beinhaltet zusätzliche Stoffdaten
-sheet0 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=0)
-sheet1 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=1)
-sheet2 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=2)
+sheet0 = pd.read_excel("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=0)
+sheet1 = pd.read_excel("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=1)
+sheet2 = pd.read_excel("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=2)
 # Excel 'Ergänzendes Laborbuch' Sheet3 laden für fehlende Parameter
-sheet3 = pd.read_excel("././Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=3)
+sheet3 = pd.read_excel("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=3)
    
 # Ontologie Design
 # Relevante Entitäten der bestehenden Ontologie hinzufügen
@@ -315,7 +315,7 @@ for index, row in sheet0.iterrows():
 # Ontologie mit den gespeicherten Stoffen laden
 # Um Object properties hinzuzufügen
 onto_world = owlready2.World()
-onto = onto_world.get_ontology("./Zwischenstand_Onto_.owl").load()
+onto = onto_world.get_ontology("./ELNs/Zwischenstand_Onto_.owl").load()
 
 with onto:
         # Object Property -> Triplett liest sich: 'Laacase ist importiert als JSON-Datei'   
