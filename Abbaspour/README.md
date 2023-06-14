@@ -20,7 +20,7 @@ Bevor der der Code **00_2023_MA_Abbaspour_Pythoncode.py abgespielt** werden kann
 
 ![Workflow_Pythoncode](https://github.com/TUDoAD/Abschlussarbeiten_Behr/assets/117766304/a44f3dfd-f1a4-46ea-8a86-9e4070a97a5b)
 
-(1) Zunächst wird das Python-Modul *PyEnzyme* importiert und die gewünschte Datei **EnzymeML_Template_18-8-2021_KR.xlsm** über die Methode *fromTemplate* in die Python-Umgebung geladen. Anschließend wird über vier *for-Schleifen* durch das Dokument iteriert und Informationen zum Benutzer, zum Behälter, zur Reaktion und zum Protein in entsprechende Variablen gespeichert.
+(1) Zunächst wird das Python-Modul *PyEnzyme* importiert und die gewünschte Datei **EnzymeML_Template_18-8-2021_KR.xlsm** über die Methode *fromTemplate* in die Python-Umgebung geladen. Anschließend wird über vier *for-Schleifen* durch das Dokument iteriert und Informationen zum Benutzer, zum Behälter, zur Reaktion und zum Protein in entsprechende Variablen gespeichert.\n
 (2) Danach werden die Dateien **BaseOnto.owl** und **Ergänzendes Laborbuch_Kinetik_1.xlsx** aufgerufen.
 (3) Es folgt die Entwicklung der Ontologie, wobei über die Funktionen *class_creaction* und *dataProp_creation* erst Substanzklassen und dann Stoffeigenschaften als Data Properties erstellt werden. Die Data Properties werden über die Funktion *set_relation* den Substanzklassen zugewiesen.
 (4) Die Ontologie wird zwischengespeichert als **Zwischenstand_Onto_.owl** (siehe GitHub-Unterordner *ontologies*) und wieder aufgerufen.
