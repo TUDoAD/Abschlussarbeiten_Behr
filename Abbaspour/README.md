@@ -15,3 +15,5 @@ Bevor der der Code **00_2023_MA_Abbaspour_Pythoncode.py abgespielt** werden kann
 ### (2) Alle Dateien, auf die der **Code 00_2023_MA_Abbaspour_Pythoncode.py** zugreift müssen zusammen im selben Ordner wie der Code abgelegt sein:
 - Die zusammengeführte Ontologie **BaseOnto.owl**, die im GitHub-Unterordner *ontologies* abgelegt ist
 - Das EnzymeML-Excel-ELN **EnzymeML_Template_18-8-2021_KR.xlsm** und das ergänzende ELN **Ergänzendes Laborbuch_Kinetik_1.xlsx** oder **Ergänzendes Laborbuch_Kinetik_1.xlsx**, die im GitHub-Unterordner *ELNs* abgespeichert sind
+
+![Workflow_MA](https://github.com/TUDoAD/Abschlussarbeiten_Behr/assets/117766304/75aeae87-175b-43a1-93b1-4788fd17f472)
