@@ -315,7 +315,7 @@ for index, row in sheet0.iterrows():
 # Ontologie mit den gespeicherten Stoffen laden
 # Um Object properties hinzuzufügen
 onto_world = owlready2.World()
-onto = onto_world.get_ontology("./ELNs/Zwischenstand_Onto_.owl").load()
+onto = onto_world.get_ontology("./ontologies/Zwischenstand_Onto_.owl").load()
 
 with onto:
         # Object Property -> Triplett liest sich: 'Laacase ist importiert als JSON-Datei'   
