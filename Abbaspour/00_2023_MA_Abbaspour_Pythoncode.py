@@ -16,7 +16,7 @@ from owlready2 import *
 # Reasoner HermiT ist in Java geschrieben
 # Unter Windows muss der Speicherort des Java-Interpreters wie folgt konfiguriert werden
 
-owlready2.JAVA_EXE = "C://Users//49157//Downloads//Protege-5.5.0-win//Protege-5.5.0//jre//bin//java.exe"
+#owlready2.JAVA_EXE = "C://Users//49157//Downloads//Protege-5.5.0-win//Protege-5.5.0//jre//bin//java.exe"
 
 # Ontologie laden, in der Entitäten der Thesis verabreitet werden sollen
 # Diese Ontologie ist ein Zusammenschluss zweier bestehenden Ontologien: metadata4Ing + SBO
@@ -676,7 +676,7 @@ with onto:
 # Reasoner: HermiT
         sync_reasoner()
 
-onto.save(file="Finale_Onto_.owl", format="rdfxml")
+onto.save(file="./ontologies/Finale_Onto_.owl", format="rdfxml")
 
 # Alle Pakete für die Simulation in DWSIM importieren
 # Das os-Modul Das os-Modul ist das wichtigste Modul zur Interaktion mit dem Betriebssystem
@@ -700,7 +700,7 @@ from System import String, Environment
 from System.Collections.Generic import Dictionary
  
 # Pfad, wo DWSIM-Ordner mit allen Paketen hinterlegt ist
-dwsimpath = "C:\\Users\\49157\\AppData\\Local\\DWSIM8\\"
+dwsimpath = "C:\\Users\\smaxbehr\\AppData\\Local\\DWSIM8\\"
 
 clr.AddReference(dwsimpath + "DWSIM")
 clr.AddReference(dwsimpath + "CapeOpen.dll")
@@ -735,7 +735,7 @@ from System import *
 
 from System.Linq import *
 from DWSIM import *
-from DWSIM import FormPCBulk
+#from DWSIM import FormPCBulk
 from DWSIM.Interfaces import *
 from DWSIM.Interfaces.Enums import*
 
@@ -958,7 +958,7 @@ def createScript(obj_name):
 # Skript def ausführen
 createScript('ABTS_kinetics')
 
-myreaction = sim.GetReaction('ABTS-Oxidation')
+myreaction = sim.GetReaction(Reaction_Name)
 myscripttitle = 'ABTS_kinetics'
 myscript = sim.Scripts[myscripttitle]
 
