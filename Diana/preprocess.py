@@ -18,9 +18,6 @@ import nltk
 
 doc = lib(u'My sister has a dog. She loves him.')
 
-neuralcoref.add_to_pipe(lib)
-doc._.has_coref
-doc._.coref_clusters
 file = open('file.txt', 'a')
 sentences = []
 for sentence in doc.sents:
