@@ -16,6 +16,7 @@ from copy import deepcopy
 #from CatalysisIE.utils import *
 import requests
 import json
+import os
 
 API_URL = "https://rel.cs.ru.nl/api"
 
@@ -211,49 +212,46 @@ def pred_model_dataset (model,sent):
     return pred_dataset.output_pred()
 
 
-def CatalysisIE_search (model, test_sents):
-    catalysts  = []         #Identified as “metal/support” or with keywords like “metal-catalyst”. If details about the catalyst composition are 
-                            #provided, then they are included in the catalyst text span (e.g., Ru/CeO2, CeO2-supported metal catalysts, and Pt/H-USY 
-                            #(Pt:1 wt %) catalysts).
-    reactions  = []         #Processes that involve the transformation of a chemical species via interactions with a catalyst (e.g., hydrogenation, 
-                            #isomerization, and hydrocracking).
-    treatments = []         #Any technique that is used to yield useful information about the catalyst (e.g., gas chromatography mass spectroscopy 
-                            #(GC–MS), powder X-ray diffraction (XRD), and infrared spectrometry (IR)).
-    reactants  = []         #Species that interact with the catalyst to create a product (e.g., polyethylene, plastics, and PE). Reagents for catalyst 
-                            #synthesis are not included in this category.
-    products   = []         #Species that are produced from a chemical reaction between the reactant and the catalyst (e.g., C1–C4, coke, and liquid 
-                            #fuel). Intermediate species that go on to react further are not considered in this category unless there is substantial 
-                            #characterization/quantification of those species.
-    characterisations = []  #Any intermediate steps taken to prepare the catalyst (e.g., heating, calcination, and refluxing).
+def CatalysisIE_search(model, test_sents):
+    categories = {
+        "Catalyst": [],         #Identified as “metal/support” or with keywords like “metal-catalyst”. If details about the catalyst composition are 
+                                #provided, then they are included in the catalyst text span (e.g., Ru/CeO2, CeO2-supported metal catalysts, and Pt/H-USY 
+                                #(Pt:1 wt %) catalysts).
+        "Reaction": [],         #Processes that involve the transformation of a chemical species via interactions with a catalyst (e.g., hydrogenation, 
+                                #isomerization, and hydrocracking).
+        "Treatment": [],        #Any technique that is used to yield useful information about the catalyst (e.g., gas chromatography mass spectroscopy 
+                                #(GC–MS), powder X-ray diffraction (XRD), and infrared spectrometry (IR)).       
+        "Reactant": [],         #Species that interact with the catalyst to create a product (e.g., polyethylene, plastics, and PE). Reagents for catalyst 
+                                #synthesis are not included in this category.
+        "Product": [],          #Species that are produced from a chemical reaction between the reactant and the catalyst (e.g., C1–C4, coke, and liquid 
+                                #fuel). Intermediate species that go on to react further are not considered in this category unless there is substantial 
+                                #characterization/quantification of those species.
+        "Characterisation": []  #Any intermediate steps taken to prepare the catalyst (e.g., heating, calcination, and refluxing).
+    }
 
     output_sents = pred_model_dataset(model, test_sents)
     for sent in output_sents:
         sent_tag = [t['pred'] for t in sent]
         print(assemble_token_text(sent))
         pattern = r'/([\w]+)\b'
-        for i,j,l in get_bio_spans(sent_tag):
-            print(assemble_token_text(sent[i:j+1]), l)
-            if l == "Catalyst":
-                support_match = re.search(pattern,sent[i:j+1])
-                support = support_match.group(1)
-                catalysts.append(l)
-            elif l == "Reactant":
-                reactants.append(l)
-            elif l == "Treatment":
-                treatments.append(l)
-            elif l == "Reaction":
-                reactions.append(l)
-            elif l == "Product":
-                products.append(l)
-            else:
-                characterisations.append(l)
-        print('\n\n')
+        for i, j, l in get_bio_spans(sent_tag):
+            print(assemble_token_text(sent[i:j + 1]), l)
+            if l in categories:
+                if l == "Catalyst":
+                    support_match = re.search(pattern, sent[i:j + 1])
+                    support = support_match.group(1)
+                    categories[l].append(l)
+                else:
+                    categories[l].append(l)
+        
 
 ...
 
 def create_list_IRIs(class_list,IRI_json_filename = 'iriDictionary'):
-        f= open('{}.json'.format(IRI_json_filename))
-        txt= open('Class_IRIs.txt', 'a')
+        f = open('{}.json'.format(IRI_json_filename))
+        txt_rxno = open('class_lists/IRIs_rxno.txt', 'a')
+        txt_chebi = open('class_lists/IRIs_chebi.txt', 'a')
+        txt_chmo = open('IRIs_chebi.txt', 'a')
         onto_dict = json.load(f)
         f.close()
         match_dict={}
@@ -262,24 +260,50 @@ def create_list_IRIs(class_list,IRI_json_filename = 'iriDictionary'):
             match_dict = search_value_in_nested_dict(entity,onto_dict,match_dict)
             
         for key,value in match_dict.items():
-            iri_class = key + '  # ' + value +'\n'
-            txt.write(iri_class) 
-        txt.close()               
+            if re.match(r'CHEBI', key) is not None:
+                O = 'CHEBI'
+                write_in_txt(key,value,O)
+            elif re.match(r'RXNO', key) is not None:
+                O = 'RXNO'
+                write_in_txt(key,value,O)
+            elif re.match(r'CHMO',key) is not None:
+                O = 'CHMO'
+                write_in_txt(key,value,O)
+            else:
+                continue
         return match_dict
-    
+
+def write_in_txt(key,value,onto_name):
+    path ='class_lists/IRIs_'+ onto_name +'.txt'
+    txt = open(path, 'a')
+    iri_class = key + '  # ' + value +'\n'
+    txt.write(iri_class) 
+    txt.close()    
     
 def search_value_in_nested_dict(value, onto_dict, match_dict):
-
+    
     for k in onto_dict.keys():
         for IRI in onto_dict[k].keys() :
             for key, val in onto_dict[k][IRI].items():
                 if value == val:
-                    match_dict[IRI]=val
+                    match_dict[IRI] = val
                 else:
                     continue
             
     return match_dict
 
-            
+
+#create new properties in ontology: support_of and supported_by
+
+def extend_ontology()
+
+# Der erste Pfad führt zur robot.jar und muss evtl. vom Nutzer angepasst werden.
+# --input: ist die Ontologie in der nach den gewünschten IRI's gesucht werden soll.
+# --method: kann nach Bedarf abgewandelt werden [http://robot.obolibrary.org/extract]
+# --term-file: ist die Textdatei, in der die IRI's abgelegt sind welche gesucht werden sollen
+# --output: selbsterklärend
+bashCommand = "java -jar c://Windows/robot.jar extract --input Ontologien/pizza.owl --method BOT --term-file Ontologien/termfile.txt --output Ontologien/result.owl"
+
+os.system(bashCommand)            
 
 #    onto_class = [k_o for k, v in comp_dict.items() for comp in v for k_o, v_o in onto_dict.items() for syn_comp in v_o if comp == syn_comp]
