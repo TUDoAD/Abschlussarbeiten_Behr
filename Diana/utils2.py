@@ -158,6 +158,7 @@ def cem_onto_ext (chem_list, ontology_name='chebi_matom', new_onto_name ='chebi_
     onto_class_list = list(onto.classes())
     cem_dicts = synonym_dicts(onto_class_list)
     onto_new_dict = chemical_prep(chem_list, cem_dicts)
+
     for k,v in onto_new_dict.items():
         class_name = k
         SuperClasses = v
@@ -246,8 +247,10 @@ def CatalysisIE_search(model, test_sents, onto_list):
                 ...
             if l in categories:
                 if l == "Catalyst":
-                    
-                    support_match = re.search(r'/([\w]+)\b', entity).group(1)
+                    spans=Document(entity).cems
+                        for c in spans:
+                            support = re.search(r'/([\w]+)\b', c).group(1)
+                            catalyst = re.search(r'\b([\w]+)/', c).group(1)
                     
                     categories[l].append(assemble_token_text(sent[i:j + 1]))
                     
