@@ -1,0 +1,4 @@
+http://purl.obolibrary.org/obo/CHEBI_26708  # sodium atom
+http://purl.obolibrary.org/obo/CHEBI_32594  # barium atom
+http://purl.obolibrary.org/obo/CHEBI_24870  # ion
+http://purl.obolibrary.org/obo/CHEBI_36341  # boson

@@ -17,6 +17,8 @@ from copy import deepcopy
 import requests
 import json
 import os
+import glob
+import pandas
 
 API_URL = "https://rel.cs.ru.nl/api"
 
@@ -163,6 +165,7 @@ def cem_onto_ext (chem_list, ontology_name='chebi_matom', new_onto_name ='chebi_
             NewMolecule = types.new_class(class_name, tuple(SuperClasses))
 ...
 
+
 def REL_search (text):
     nlp = spacy.load('en_core_web_sm')
     doc= nlp.text
@@ -212,7 +215,8 @@ def pred_model_dataset (model,sent):
     return pred_dataset.output_pred()
 
 
-def CatalysisIE_search(model, test_sents):
+def CatalysisIE_search(model, test_sents, onto_list):
+    class_list =[]
     categories = {
         "Catalyst": [],         #Identified as “metal/support” or with keywords like “metal-catalyst”. If details about the catalyst composition are 
                                 #provided, then they are included in the catalyst text span (e.g., Ru/CeO2, CeO2-supported metal catalysts, and Pt/H-USY 
@@ -233,44 +237,47 @@ def CatalysisIE_search(model, test_sents):
     for sent in output_sents:
         sent_tag = [t['pred'] for t in sent]
         print(assemble_token_text(sent))
-        pattern = r'/([\w]+)\b'
         for i, j, l in get_bio_spans(sent_tag):
             print(assemble_token_text(sent[i:j + 1]), l)
+            entity = assemble_token_text(sent[i:j + 1]
+            if entity not in class_list:
+                class_list.append(entity)
+                class_list.append(entity.split())
+                ...
             if l in categories:
                 if l == "Catalyst":
-                    support_match = re.search(pattern, sent[i:j + 1])
-                    support = support_match.group(1)
-                    categories[l].append(l)
+                    
+                    support_match = re.search(r'/([\w]+)\b', entity).group(1)
+                    
+                    categories[l].append(assemble_token_text(sent[i:j + 1]))
+                    
                 else:
-                    categories[l].append(l)
-        
-
+                    categories[l].append(assemble_token_text(sent[i:j + 1]))
 ...
 
-def create_list_IRIs(class_list,IRI_json_filename = 'iriDictionary'):
+spans=doc.cems
+
+def create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary'):
         f = open('{}.json'.format(IRI_json_filename))
-        txt_rxno = open('class_lists/IRIs_rxno.txt', 'a')
-        txt_chebi = open('class_lists/IRIs_chebi.txt', 'a')
-        txt_chmo = open('IRIs_chebi.txt', 'a')
         onto_dict = json.load(f)
         f.close()
         match_dict={}
-        
         for entity in class_list:
             match_dict = search_value_in_nested_dict(entity,onto_dict,match_dict)
             
         for key,value in match_dict.items():
-            if re.match(r'CHEBI', key) is not None:
-                O = 'CHEBI'
-                write_in_txt(key,value,O)
-            elif re.match(r'RXNO', key) is not None:
-                O = 'RXNO'
-                write_in_txt(key,value,O)
-            elif re.match(r'CHMO',key) is not None:
-                O = 'CHMO'
-                write_in_txt(key,value,O)
-            else:
-                continue
+            for O in onto_list.keys():
+                try:
+                    df= pandas.read_excel('./AFO_{}.xlsx'.format(O),sheet_name=0)
+                    double_afo=df['{}_IRI'.format(O)].to_list()
+                except:
+                    print('List with common ontology classes for {} is not provided'.format(O))
+                if key in double_afo:
+                    continue
+                elif re.match(O, key) is not None and :
+                    write_in_txt(key,value,O)
+                else:
+                    write_in_ixt(key, value, 'diverse')
         return match_dict
 
 def write_in_txt(key,value,onto_name):
@@ -281,7 +288,6 @@ def write_in_txt(key,value,onto_name):
     txt.close()    
     
 def search_value_in_nested_dict(value, onto_dict, match_dict):
-    
     for k in onto_dict.keys():
         for IRI in onto_dict[k].keys() :
             for key, val in onto_dict[k][IRI].items():
@@ -292,18 +298,22 @@ def search_value_in_nested_dict(value, onto_dict, match_dict):
             
     return match_dict
 
-
+def onto_extender (onto_list):
+    for o,iri in onto_list:
+        # Der erste Pfad führt zur robot.jar und muss evtl. vom Nutzer angepasst werden.
+        # --input: ist die Ontologie in der nach den gewünschten IRI's gesucht werden soll.
+        # --method: kann nach Bedarf abgewandelt werden [http://robot.obolibrary.org/extract]
+        # --term-file: ist die Textdatei, in der die IRI's abgelegt sind welche gesucht werden sollen
+        # --output: selbsterklärend
+        os.system('java -jar c://Windows/robot.jar extract --input-iri {} --method BOT --term-file class_lists/IRIs_{}.txt --output ontology_sniplet/{}_classes.owl'.format(iri,o,o))
+    for filepath in glob.iglob('ontology_sniplet/*.owl'):
+        os.system('robot merge --input {} --input ontologies/afo_upd.owl --output ontologies/afo_upd.owl'.format(filepath))
+        
 #create new properties in ontology: support_of and supported_by
 
-def extend_ontology()
 
-# Der erste Pfad führt zur robot.jar und muss evtl. vom Nutzer angepasst werden.
-# --input: ist die Ontologie in der nach den gewünschten IRI's gesucht werden soll.
-# --method: kann nach Bedarf abgewandelt werden [http://robot.obolibrary.org/extract]
-# --term-file: ist die Textdatei, in der die IRI's abgelegt sind welche gesucht werden sollen
-# --output: selbsterklärend
-bashCommand = "java -jar c://Windows/robot.jar extract --input Ontologien/pizza.owl --method BOT --term-file Ontologien/termfile.txt --output Ontologien/result.owl"
 
-os.system(bashCommand)            
+
+          
 
 #    onto_class = [k_o for k, v in comp_dict.items() for comp in v for k_o, v_o in onto_dict.items() for syn_comp in v_o if comp == syn_comp]

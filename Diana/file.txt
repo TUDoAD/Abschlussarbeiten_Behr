@@ -1,1 +1,0 @@
-{"Token": ["My", "sister", "has", "a", "dog."]}{"Token": ["She", "loves", "him."]}

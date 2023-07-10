@@ -8,7 +8,7 @@ Created on Mon Jun 19 09:49:10 2023
 # load Ontology and search for classes/subclasses/individuals/Description
 
 from owlready2 import *
-import utils2
+#import utils2
 import os
 #from CatalysisIE.model import *
 #from CatalysisIE.utils import * 
@@ -30,6 +30,12 @@ print("Loading {} done. Imported {} classes.".format(ontology_name, len(onto_cla
 synonyms=utils2.synonym_dicts(onto_class_list2)
 chem_list= ['RhCaO', 'Rh2O3@S-1','rhodium', 'BeCa']
 """
-bashCommand = "java -jar c://Windows/robot.jar extract --input-iri http://purl.obolibrary.org/obo/rxno.owl --method BOT --term-file CLass_IRIs.txt --output ontologies/new_onto.owl"
+bashCommand = 'java -jar c://Windows/robot.jar extract --input ontologies/chebi.owl --method BOT --term-file CLass_IRIs.txt --output ontologies/rxno.owl'
+os.system(bashCommand)    
 
-os.system(bashCommand)        
+onto_list ={
+            'chebi': 'http://purl.obolibrary.org/obo/chebi.owl',
+            'BFO'  : 'http://purl.obolibrary.org/obo/bfo/2.0/bfo.owl',
+            'AFO'  : 'http://purl.allotrope.org/voc/afo/merged-OLS/REC/2019/05/10',
+            'REX'  : 'http://ontologies.berkeleybop.org/rex.owl'
+            }  
