@@ -18,7 +18,6 @@ import requests
 import json
 import os
 import glob
-import pandas
 
 API_URL = "https://rel.cs.ru.nl/api"
 
@@ -132,39 +131,62 @@ def chemical_prep(chem_list, onto_dict):
 
     """
     comp_dict = {}
-    for entity in chem_list:
+    new_world = owlready2.World()
+    onto = new_world.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
+    onto_class_list = list(onto.classes())
+    onto_dict = synonym_dicts(onto_class_list)
+    
+    for molecule in chem_list:
         entity_split = entity.split()
-        if len(entity_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', entity) is not None:
-            comp_dict[entity] = entity_split  
+        if len(entity_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) is not None:
+            comp_dict[molecule] = entity_split  
         else:
-            comp = re.findall(r'([A-Z](?:[a-z])?)',entity)
-            comp_dict[entity] = comp
-   
+            comp = re.findall(r'([A-Z](?:[a-z])?)',molecule)
+            comp_dict[molecule] = comp
+    class_list=[]        
     onto_new_dict ={}
     for k,v in comp_dict.items():
+        
         onto_super=[]
         for comp in v:
             for k_o, v_o in onto_dict.items():
                 for syn_comp in v_o: 
                     if comp == syn_comp:
                         onto_super.append(k_o)
+                        
         onto_new_dict[k] = onto_super
+    create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
     return onto_new_dict
 
 
-def cem_onto_ext (chem_list, ontology_name='chebi_matom', new_onto_name ='chebi_new' ):
-    new_world = owlready2.World()
-    onto = new_world.get_ontology("./ontologies/{}.owl".format(ontology_name)).load()
-    onto_class_list = list(onto.classes())
-    cem_dicts = synonym_dicts(onto_class_list)
-    onto_new_dict = chemical_prep(chem_list, cem_dicts)
+def cem_onto_ext (chem_list):
+    """
+    check in chebi ontology for synonyms
 
+    Parameters
+    ----------
+    chem_list : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    None.
+
+    """
+    new_world = owlready2.World()
+    onto = new_world.get_ontology('./ontologies/afo.owl').load()
+    onto_class_list = list(onto.classes())
+    onto_new_dict = chemical_prep(chem_list, cem_dicts)
+    class_list=[]
     for k,v in onto_new_dict.items():
-        class_name = k
-        SuperClasses = v
-        with onto:
-            NewMolecule = types.new_class(class_name, tuple(SuperClasses))
-...
+        found_class = onto.search_one(label = k)
+        #if found_class:
+            
+            
+        #with onto:
+        #NewMolecule = types.new_class(k, tuple(v))
+
+      
 
 
 def REL_search (text):
@@ -217,7 +239,8 @@ def pred_model_dataset (model,sent):
 
 
 def CatalysisIE_search(model, test_sents, onto_list):
-    class_list =[]
+    chem_list =[]
+    cat_sup ={}
     categories = {
         "Catalyst": [],         #Identified as “metal/support” or with keywords like “metal-catalyst”. If details about the catalyst composition are 
                                 #provided, then they are included in the catalyst text span (e.g., Ru/CeO2, CeO2-supported metal catalysts, and Pt/H-USY 
@@ -232,7 +255,7 @@ def CatalysisIE_search(model, test_sents, onto_list):
                                 #fuel). Intermediate species that go on to react further are not considered in this category unless there is substantial 
                                 #characterization/quantification of those species.
         "Characterisation": []  #Any intermediate steps taken to prepare the catalyst (e.g., heating, calcination, and refluxing).
-    }
+        }
 
     output_sents = pred_model_dataset(model, test_sents)
     for sent in output_sents:
@@ -240,25 +263,32 @@ def CatalysisIE_search(model, test_sents, onto_list):
         print(assemble_token_text(sent))
         for i, j, l in get_bio_spans(sent_tag):
             print(assemble_token_text(sent[i:j + 1]), l)
-            entity = assemble_token_text(sent[i:j + 1]
-            if entity not in class_list:
-                class_list.append(entity)
-                class_list.append(entity.split())
-                ...
+            entity = assemble_token_text(sent[i:j + 1])
+            spans=Document(entity).cems
+                
             if l in categories:
                 if l == "Catalyst":
-                    spans=Document(entity).cems
-                        for c in spans:
-                            support = re.search(r'/([\w]+)\b', c).group(1)
+                    for c in spans:
+                        support = re.search(r'/([\w]+)\b', c)
+                        if support is not None:
+                            support=support.group(1)
                             catalyst = re.search(r'\b([\w]+)/', c).group(1)
-                    
-                    categories[l].append(assemble_token_text(sent[i:j + 1]))
+                            chem_list.extend([catalyst,support])
+                            if catalyst in cat_sup.keys():
+                                    cat_sup[catalyst].append(support)
+                            else:
+                                    cat_sup[catalyst] = []
+                                    cat_sup[catalyst].append(support)
+                        else:
+                            chem_list.append(c) 
+                    categories[l].append(entity)
                     
                 else:
-                    categories[l].append(assemble_token_text(sent[i:j + 1]))
-...
+                    categories[l].append(entity)
+                    chem_list.append([c for c in spans])
+    return categories,chem_list, cat_sup
 
-spans=doc.cems
+
 
 def create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary'):
         f = open('{}.json'.format(IRI_json_filename))
@@ -271,24 +301,26 @@ def create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary'):
         for key,value in match_dict.items():
             for O in onto_list.keys():
                 try:
-                    df= pandas.read_excel('./AFO_{}.xlsx'.format(O),sheet_name=0)
+                    df= pd.read_excel('./AFO_{}.xlsx'.format(O),sheet_name=0)
                     double_afo=df['{}_IRI'.format(O)].to_list()
+                    if key in double_afo:
+                        continue
                 except:
                     print('List with common ontology classes for {} is not provided'.format(O))
-                if key in double_afo:
-                    continue
-                elif re.match(O, key) is not None and :
+
+                if re.search(O, key) is not None:
                     write_in_txt(key,value,O)
                 else:
-                    write_in_ixt(key, value, 'diverse')
+                    write_in_txt(key, value, 'diverse')
         return match_dict
-
+        
 def write_in_txt(key,value,onto_name):
     path ='class_lists/IRIs_'+ onto_name +'.txt'
     txt = open(path, 'a')
     iri_class = key + '  # ' + value +'\n'
     txt.write(iri_class) 
-    txt.close()    
+    txt.close() 
+   
     
 def search_value_in_nested_dict(value, onto_dict, match_dict):
     for k in onto_dict.keys():
@@ -302,7 +334,7 @@ def search_value_in_nested_dict(value, onto_dict, match_dict):
     return match_dict
 
 def onto_extender (onto_list):
-    for o,iri in onto_list:
+    for o,iri in onto_list.items():
         # Der erste Pfad führt zur robot.jar und muss evtl. vom Nutzer angepasst werden.
         # --input: ist die Ontologie in der nach den gewünschten IRI's gesucht werden soll.
         # --method: kann nach Bedarf abgewandelt werden [http://robot.obolibrary.org/extract]
@@ -313,7 +345,6 @@ def onto_extender (onto_list):
         os.system('robot merge --input {} --input ontologies/afo_upd.owl --output ontologies/afo_upd.owl'.format(filepath))
         
 #create new properties in ontology: support_of and supported_by
-
 
 
 
