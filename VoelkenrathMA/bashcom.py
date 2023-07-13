@@ -7,11 +7,20 @@ Created on Wed Jul  5 10:27:42 2023
 
 import os
 
-# Der erste Pfad führt zur robot.jar und muss evtl. vom Nutzer angepasst werden.
-# --input: ist die Ontologie in der nach den gewünschten IRI's gesucht werden soll.
-# --method: kann nach Bedarf abgewandelt werden [http://robot.obolibrary.org/extract]
-# --term-file: ist die Textdatei, in der die IRI's abgelegt sind welche gesucht werden sollen
-# --output: selbsterklärend
-bashCommand = "java -jar c://Windows/robot.jar extract --input Ontologien/pizza.owl --method BOT --term-file Ontologien/termfile.txt --output Ontologien/result.owl"
+# URL: link to ontologie
+# IRI-file: txt-file with the IRI's
+# onto: name of the output-file
+URL = "https://raw.githubusercontent.com/nfdi4cat/Ontology-Overview-of-NFDI4Cat/main/ontologies/AFO.ttl"
+IRI_file = "ontologies/robot_top_iri.txt"
+onto = "ontologies/top.owl"
+
+# meth: methods can be found here [http://robot.obolibrary.org/extract]
+meth = "TOP"
+"""
+bashCommand = "java -jar c://Windows/robot.jar extract --input-iri {} --method {} --term-file {} --output {} ".format(URL, meth, IRI_file, onto)
+"""
+
+bashCommand = "java -jar c://Windows/robot.jar merge --input ontologies/bot.owl --input ontologies/top.owl --output ontologies/MV-Ontology.owl"
+
 
 os.system(bashCommand)
