@@ -16,11 +16,11 @@ onto = "ontologies/top.owl"
 
 # meth: methods can be found here [http://robot.obolibrary.org/extract]
 meth = "TOP"
-"""
+
 bashCommand = "java -jar c://Windows/robot.jar extract --input-iri {} --method {} --term-file {} --output {} ".format(URL, meth, IRI_file, onto)
+
 """
-
 bashCommand = "java -jar c://Windows/robot.jar merge --input ontologies/bot.owl --input ontologies/top.owl --output ontologies/MV-Ontology.owl"
-
+"""
 
 os.system(bashCommand)

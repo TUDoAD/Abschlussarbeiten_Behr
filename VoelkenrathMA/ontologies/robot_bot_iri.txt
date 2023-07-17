@@ -7,3 +7,7 @@ http://purl.allotrope.org/ontologies/result#AFR_0002176
 http://purl.allotrope.org/ontologies/role#AFRL_0000249
 http://purl.obolibrary.org/obo/CHMO_0000993
 http://purl.allotrope.org/ontologies/process#AFP_0003711
+http://purl.allotrope.org/ontologies/quality#AFQ_0000172
+http://purl.allotrope.org/ontologies/result#AFR_0001918
+http://purl.allotrope.org/ontologies/role#AFRL_0000249
+http://purl.obolibrary.org/obo/CHMO_0000993
