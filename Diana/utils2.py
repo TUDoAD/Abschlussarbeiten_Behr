@@ -18,6 +18,8 @@ import requests
 import json
 import os
 import glob
+from chemdataextractor import Document
+from pubchempy import get_compounds
 
 API_URL = "https://rel.cs.ru.nl/api"
 
@@ -108,7 +110,7 @@ def synonym_dicts(class_list):
     print("Done.")
     return desc_dict
 
-def chemical_prep(chem_list, onto_dict):
+def chemical_prep(chem_list, onto_list):
 
     """
     From list with chemicals Differentiation between long and short chemical entities for different preprocessing; 
@@ -131,8 +133,8 @@ def chemical_prep(chem_list, onto_dict):
 
     """
     comp_dict = {}
-    new_world = owlready2.World()
-    onto = new_world.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
+    new_world3 = owlready2.World()
+    onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
     onto_class_list = list(onto.classes())
     onto_dict = synonym_dicts(onto_class_list)
     
@@ -146,20 +148,23 @@ def chemical_prep(chem_list, onto_dict):
     class_list=[]        
     onto_new_dict ={}
     for k,v in comp_dict.items():
-        
-        onto_super=[]
+        onto_new_dict[k]=[]
+        class_list.append(k)
         for comp in v:
             for k_o, v_o in onto_dict.items():
                 for syn_comp in v_o: 
                     if comp == syn_comp:
-                        onto_super.append(k_o)
-                        
-        onto_new_dict[k] = onto_super
-    create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
-    return onto_new_dict
+                        onto_new_dict[k].append(k_o)
+                        class_list.append(k_o)
+    missing = create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
 
 
-def cem_onto_ext (chem_list):
+            
+    return onto_new_dict, missing
+
+#create snip and merge ontologies...
+
+def cem_onto_ext (onto_new_dict, missing):
     """
     check in chebi ontology for synonyms
 
@@ -174,7 +179,12 @@ def cem_onto_ext (chem_list):
 
     """
     new_world = owlready2.World()
-    onto = new_world.get_ontology('./ontologies/afo.owl').load()
+    onto = new_world.get_ontology('./ontologies/afo_upd.owl').load()
+    with onto:
+        for k in onto_new_dict.keys():
+            if k in missing:
+               ... 
+
     onto_class_list = list(onto.classes())
     onto_new_dict = chemical_prep(chem_list, cem_dicts)
     class_list=[]
@@ -189,7 +199,7 @@ def cem_onto_ext (chem_list):
 
 def REL_search (text):
     nlp = spacy.load('en_core_web_sm')
-    doc= nlp.text
+    doc= nlp(text)
     """
     sentences = []
     for sentence in doc.sents:
@@ -237,8 +247,8 @@ def pred_model_dataset (model,sent):
 
 
 def CatalysisIE_search(model, test_sents, onto_list):
-    chem_list =[]
-    cat_sup ={}
+    chem_list = []
+    abbreviation = {}
     categories = {
         "Catalyst": [],         #Identified as “metal/support” or with keywords like “metal-catalyst”. If details about the catalyst composition are 
                                 #provided, then they are included in the catalyst text span (e.g., Ru/CeO2, CeO2-supported metal catalysts, and Pt/H-USY 
@@ -263,87 +273,134 @@ def CatalysisIE_search(model, test_sents, onto_list):
             print(assemble_token_text(sent[i:j + 1]), l)
             entity = assemble_token_text(sent[i:j + 1])
             spans=Document(entity).cems
-                
-            if l in categories:
-                if l == "Catalyst":
-                    for c in spans:
-                        support = re.search(r'/([\w]+)\b', c)
-                        if support is not None:
-                            support=support.group(1)
-                            catalyst = re.search(r'\b([\w]+)/', c).group(1)
-                            chem_list.extend([catalyst,support])
-                            if catalyst in cat_sup.keys():
-                                    cat_sup[catalyst].append(support)
-                            else:
-                                    cat_sup[catalyst] = []
-                                    cat_sup[catalyst].append(support)
-                        else:
-                            chem_list.append(c) 
-                    categories[l].append(entity)
-                    
+            if i == a+1 and '({})'.format(entity) in assemble_token_text(sent):
+                if entity in abbreviation.keys():
+                    abbreviation[entity].append(entity_old)
                 else:
-                    categories[l].append(entity)
-                    chem_list.append([c for c in spans])
-    return categories,chem_list, cat_sup
+                    abbreviation[entity]=[]
+                    abbreviation[entity].append(entity_old)
+            if l in categories:
+                categories[l].append(entity)
+                for c in spans:
+                    mol = re.findall(r'\b([\w@—–-]+)/(([\w@—–-]+)+)\b', c)
+                    if mol:
+                        for i in mol[0]:
+                            chem_list.append(i)
+                        else:
+                            chem_list.append(c)
+            entity_old=entity
+            a=j+1
+    return categories,chem_list,abbreviations
 
+def catalyst_support(cat_sup,onto):
+    for k,v in cat_sup.items():
+        cat=onto.search_one(label=k)
+        for i in v:
+            ...#carrier_role
 
-
-def create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary'):
+def catalyst_entity(categories):
+    nlp = spacy.load('en_core_web_sm')
+    
+    for k,v in categories.items():
+        if k =='Catalyst':
+            for entity in v:
+                spans = Document(entity).cems
+                doc = nlp.entity
+                entity_n = " ".join([token.lemma_ for token in doc])
+                for c in spans:
+                    support = re.search(r'/([\w@—–-]+)\b', c)
+                    entity_wo_cems = entity.replace(c,'')
+                    if support:
+                        support = support.group(1)
+                        catalyst = re.search(r'\b([\w@—–-]+)/', c).group(1)
+                        if catalyst in cat_sup.keys():
+                                cat_sup[catalyst].append(support)
+                        else:
+                                cat_sup[catalyst] = []
+                                cat_sup[catalyst].append(support)
+                           
+                entity.split()
+                ...
+                
+def search_entity (entity_full, onto_list):
+    nlp = spacy.load('en_core_web_sm')
+    doc = nlp(entity_full)
+    process=['source','lemma']
+    tags=['NOUN','PROPN', 'VERB', 'ADJ' ]
+    for l in process:
+        if l == 'lemma':
+            entity_full = " ".join([token.lemma_ for token in doc])
+        sub=[]
+        super_class=None
+        entity_old = ""
+        word_list = entity_full.split()
+        i = len(word_list) - 1
+        while i>=0:
+            i -= 1
+            entity= word_list[i] + entity_old
+            doc=nlp(word_list[i])
+            if doc[0].pos_ not in tags:
+                entity_old= entity
+                continue
+            else:
+                dict_onto,_= create_list_IRIs([entity], onto_list, IRI_json_filename = 'iriDictionary')
+                if entity in sub:
+                    sub = list(entity.subclasses())
+                elif dict_onto:
+                    super_class = onto.search_one(iri=list(dict_onto.keys())[0]) 
+                    class_list
+                    sub = list(super_class.subclasses())
+             
+            
+                
+def create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary', include_main= False):
         f = open('{}.json'.format(IRI_json_filename))
         onto_dict = json.load(f)
         f.close()
-        match_dict={}
-        onto_names=list(onto_list.keys()) 
+        match_dict = {}
+        onto_names = list(onto_list.keys()) 
+        if include_main == False:
+            onto_names.remove('AFO')
         for entity in class_list:
-            match_dict = search_value_in_nested_dict(entity,onto_names,onto_dict,match_dict)
+            match_dict, missing = search_value_in_nested_dict(entity,onto_names,onto_dict,match_dict)
         print(match_dict)   
         for key,value in match_dict.items():
             x=[]
             for O in onto_names:
-                list_IRIs= onto_dict[O].keys()
+                list_IRIs = onto_dict[O].keys()
                 try:
-                    df= pd.read_excel('./AFO_{}.xlsx'.format(O),sheet_name=0)
+                    df = pd.read_excel('./AFO_{}.xlsx'.format(O),sheet_name=0)
                 except:
                     print('List with common ontology classes for {} is not provided'.format(O))
                 double_afo=df['{}_IRI'.format(O)].to_list()
-                if key in double_afo:
+                if key in double_afo or key in x or O == 'AFO':
                         continue
-                if key in list_IRIs and key not in x:
+                elif key in list_IRIs:
                     write_in_txt(key,value,O)
                     x.append(key)
-                elif key in x:
-                    continue
                 else:
                     write_in_txt(key, value, 'diverse')
-        return match_dict
+        return missing, match_dict
         
 def write_in_txt(key,value,onto_name):
-    path ='class_lists/IRIs_'+ onto_name +'.txt'
+    path = 'class_lists/IRIs_'+ onto_name +'.txt'
     txt = open(path, 'a')
     iri_class = key + '  # ' + value +'\n'
     txt.write(iri_class) 
     txt.close() 
    
     
-def search_value_in_nested_dict(value, onto_names, onto_dict, match_dict):
-    
+def search_value_in_nested_dict(value, onto_names, missing, onto_dict, match_dict):
     for k in onto_names:
         for IRI in onto_dict[k].keys() :
             for key, val in onto_dict[k][IRI].items():
                 if val and value.lower() == val.lower():
                     match_dict[IRI] = val
                 else:
-                    continue
+                    missing.append()
             
-    return match_dict
-onto_list ={
-            'ChEBI': 'http://purl.obolibrary.org/obo/chebi.owl',
-            #'BFO'  : 'http://purl.obolibrary.org/obo/bfo/2.0/bfo.owl',
-            'RXNO' : 'http://purl.obolibrary.org/obo/rxno.owl',
-            'CHMO' : 'http://purl.obolibrary.org/obo/chmo.owl'
-            } 
-class_list=['atom', 'ion', 'barium atom','oxidation', 'aldehyde reduction', 'rhodium atom','enolisability','Pictet-Spengler reaction']
-match =create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
+    return match_dict, missing
+
 def onto_extender (onto_list):
     for o,iri in onto_list.items():
         # Der erste Pfad führt zur robot.jar und muss evtl. vom Nutzer angepasst werden.
@@ -361,58 +418,123 @@ def equality( onto_list,onto_name='AFO'):
     onto =new_world.get_ontology("./ontologies/{}_upd.owl".format(onto_name.lower())).load()
     new_world1=owlready2.World()
     onto_old=new_world1.get_ontology("./ontologies/{}.owl".format(onto_name.lower())).load()
-    for c_1 in list(onto_old.classes()):
-        labels_old.append(c.label[0])
-    for o in onto_list.keys():
-        new_world2 = owlready2.World()
-        onto_snip = new_world2.get_ontology("./ontology_sniplet/{}_classes.owl".format(o)).load()
+    for c_1 in onto_old.classes():
+        if c_1.label:
+            labels_old.append(c_1.label[0])
+    for o in list(onto_list.keys()):
+        try:
+            new_world2 = owlready2.World()
+            onto_snip = new_world2.get_ontology("./ontology_sniplet/{}_classes.owl".format(o)).load()
+        except:
+            print('no entity from {} ontology found'.format(o))
         for c_2 in list(onto_snip.classes()):
             if c_2.label[0] in labels_old:
                 iri_snip=c_2.iri
                 iri_old=onto_old.search_one(label=c_2.label[0]).iri
                 onto.search_one(iri=iri_old).equivalent_to.append(onto.search_one(iri=iri_snip))
-                onto.search_one(iri=iri_old).comment.append([
-                    'Equivalence with {} added automatically'.format(c_2.id[0])])
-                onto.search_one(iri=iri_snip).comment.append([
-                    'Equivalence with {} added automatically'.format(onto.search_one(iri=iri_old).id[0])]
+                onto.search_one(iri=iri_old).comment=([
+                    'Equivalence with {} added automatically'.format(c_2.iri)])
+                onto.search_one(iri=iri_snip).comment=([
+                    'Equivalence with {} added automatically'.format(onto.search_one(iri=iri_old).iri)]) 
     onto.save('./ontologies/{}_upd1.owl'.format(onto_name.lower()))        
         
         
     
       
-'''        
+"""       
 class expand_onto:
     
-    def __init__(self,onto_list):
+    def __init__(self,onto_list, onto_name):
         self.onto_list=onto_list
+        new_world= owlready2.World()
+        self.onto =new_world.get_ontology("./ontologies/{}_upd.owl".format(onto_name.lower())).load()
+        new_world1=owlready2.World()
+        self.onto_old=new_world1.get_ontology("./ontologies/{}.owl".format(onto_name.lower())).load()
+    
+    def write_in_txt(key,value,onto_name):
+        path ='class_lists/IRIs_'+ onto_name +'.txt'
+        txt = open(path, 'a')
+        iri_class = key + '  # ' + value +'\n'
+        txt.write(iri_class) 
+        txt.close() 
+    
+    def search_value_in_nested_dict(value, onto_names, onto_dict, match_dict):
         
-    def create_list_IRIs(self, onto_list,IRI_json_filename = 'iriDictionary'):
-            f = open('{}.json'.format(IRI_json_filename))
-            onto_dict = json.load(f)
-            f.close()
-            match_dict={}
-            
-            for entity in self.class_list:
-                match_dict = search_value_in_nested_dict(entity,onto_list,onto_dict,match_dict)
-                
-            for key,value in match_dict.items():
-                for O in onto_list.keys():
-                    try:
-                        df= pd.read_excel('./AFO_{}.xlsx'.format(O),sheet_name=0)
-                        double_afo=df['{}_IRI'.format(O)].to_list()
-                        if key in double_afo:
-                            continue
-                    except:
-                        print('List with common ontology classes for {} is not provided'.format(O))
-
-                    if re.search(O, key) is not None:
-                        write_in_txt(key,value,O)
+        for k in onto_names:
+            for IRI in onto_dict[k].keys() :
+                for key, val in onto_dict[k][IRI].items():
+                    if val and value.lower() == val.lower():
+                        match_dict[IRI] = val
                     else:
-                        write_in_txt(key, value, 'diverse')
+                        continue
+                
+        return match_dict
+    
+    def create_list_IRIs(self,class_list,IRI_json_filename = 'iriDictionary'):
+        f = open('{}.json'.format(IRI_json_filename))
+        onto_dict = json.load(f)
+        f.close()
+        match_dict={}
+        onto_names=list(self.onto_list.keys()) 
+        for entity in class_list:
+            match_dict = self.search_value_in_nested_dict(entity,onto_names,onto_dict,match_dict)
+        print(match_dict)   
+        for key,value in match_dict.items():
+            x=[]
+            for O in onto_names:
+                list_IRIs= onto_dict[O].keys()
+                try:
+                    df= pd.read_excel('./AFO_{}.xlsx'.format(O),sheet_name=0)
+                except:
+                    print('List with common ontology classes for {} is not provided'.format(O))
+                double_afo=df['{}_IRI'.format(O)].to_list()
+                if key in double_afo:
+                        continue
+                if key in list_IRIs and key not in x:
+                    self.write_in_txt(key,value,O)
+                    x.append(key)
+                elif key in x:
+                    continue
+                else:
+                    self.write_in_txt(key, value, 'diverse')
             
-            return match_dict
+      
+    def onto_extender (self):
+        for o,iri in self.onto_list.items():
+            # Der erste Pfad führt zur robot.jar und muss evtl. vom Nutzer angepasst werden.
+            # --input: ist die Ontologie in der nach den gewünschten IRI's gesucht werden soll.
+            # --method: kann nach Bedarf abgewandelt werden [http://robot.obolibrary.org/extract]
+            # --term-file: ist die Textdatei, in der die IRI's abgelegt sind welche gesucht werden sollen
+            # --output: selbsterklärend
+            os.system('java -jar c://Windows/robot.jar extract --input-iri {} --method BOT --term-file class_lists/IRIs_{}.txt --output ontology_sniplet/{}_classes.owl'.format(iri,o,o))
+        for filepath in glob.iglob('ontology_sniplet/*.owl'):
+            os.system('robot merge --input {} --input ontologies/afo_upd.owl --output ontologies/afo_upd.owl'.format(filepath))
+    
+         
+    def equality(self):
+        labels_old=[]
+        for c_1 in self.onto_old.classes():
+            if c_1.label:
+                labels_old.append(c_1.label[0])
+        for o in list(self.onto_list.keys()):
+            try:
+                new_world2 = owlready2.World()
+                onto_snip = new_world2.get_ontology("./ontology_sniplet/{}_classes.owl".format(o)).load()
+            except:
+                print('no entity from {} ontology found'.format(o))
+            for c_2 in list(onto_snip.classes()):
+                if c_2.label[0] in labels_old:
+                    iri_snip=c_2.iri
+                    iri_old=self.onto_old.search_one(label=c_2.label[0]).iri
+                    self.onto.search_one(iri=iri_old).equivalent_to.append(self.onto.search_one(iri=iri_snip))
+                    self.onto.search_one(iri=iri_old).comment=([
+                        'Equivalence with {} added automatically'.format(c_2.iri)])
+                    self.onto.search_one(iri=iri_snip).comment=([
+                        'Equivalence with {} added automatically'.format(self.onto.search_one(iri=iri_old).iri)]) 
+        self.onto.save('./ontologies/{}_upd.owl'.format(onto_name.lower()))           
+
 #create new properties in ontology: support_of and supported_by
-'''
+"""
 
           
 

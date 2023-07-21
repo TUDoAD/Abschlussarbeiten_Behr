@@ -34,12 +34,17 @@ chem_list= ['RhCaO', 'Rh2O3@S-1','rhodium', 'BeCa']
 #os.system(bashCommand)    
 
 onto_list ={
-            'CHEBI': 'http://purl.obolibrary.org/obo/chebi.owl',
-            'BFO'  : 'http://purl.obolibrary.org/obo/bfo/2.0/bfo.owl',
+            'ChEBI': 'http://purl.obolibrary.org/obo/chebi.owl',
+            #'BFO'  : 'http://purl.obolibrary.org/obo/bfo/2.0/bfo.owl',
             'RXNO' : 'http://purl.obolibrary.org/obo/rxno.owl',
+            'CHMO' : 'http://purl.obolibrary.org/obo/chmo.owl',
+            'AFO'  :
             }  
-class_list=['atom', 'ion', 'barium atom','oxidation', 'aldehyde reduction', 'rhodium atom']
+class_list=['atom', 'ion', 'barium atom','oxidation', 'aldehyde reduction', 'rhodium atom','enolisability','Pictet-Spengler reaction']
 
-#create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
+#match =create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
 
-onto_extender(onto_list)
+#onto_extender(onto_list)
+equality( onto_list,onto_name='AFO')
+
+c= expand_onto(onto_list, onto_name)
