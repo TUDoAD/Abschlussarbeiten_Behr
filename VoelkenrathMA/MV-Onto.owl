@@ -140,12 +140,6 @@
     
 
 
-    <!-- http://purl.org/dc/terms/replaces -->
-
-    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/replaces"/>
-    
-
-
     <!-- http://purl.org/dc/terms/rights -->
 
     <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/rights"/>
@@ -263,25 +257,6 @@
     
 
 
-    <!-- http://purl.allotrope.org/ontologies/property#AFX_0000365 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.allotrope.org/ontologies/property#AFX_0000365">
-        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0002793"/>
-        <owl:inverseOf rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0002845"/>
-        <rdfs:domain rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001038"/>
-        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/CHMO_0000993"/>
-        <property:AFX_0002811 rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000249"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/relation"/>
-        <rdfs:label>has ingredient</rdfs:label>
-        <skos:altLabel>component</skos:altLabel>
-        <skos:altLabel>has component</skos:altLabel>
-        <skos:altLabel>ingredient</skos:altLabel>
-        <skos:definition>An ingredient is a material that enters into a compound or is part of any combination or mixture. [Allotrope]</skos:definition>
-        <skos:prefLabel>has ingredient</skos:prefLabel>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://purl.allotrope.org/ontologies/property#AFX_0000388 -->
 
     <owl:ObjectProperty rdf:about="http://purl.allotrope.org/ontologies/property#AFX_0000388">
@@ -334,41 +309,6 @@
         <rdfs:label>has data output</rdfs:label>
         <skos:definition>Relates a process with an information object that participates in the process and exists the end of the process. [Allotrope]</skos:definition>
         <skos:prefLabel>has data output</skos:prefLabel>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/property#AFX_0000939 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.allotrope.org/ontologies/property#AFX_0000939">
-        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0002846"/>
-        <owl:inverseOf rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0000972"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
-        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/BFO_0000040"/>
-        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/BFO_0000040"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/relation"/>
-        <rdfs:label>component of</rdfs:label>
-        <skos:altLabel>is component of</skos:altLabel>
-        <skos:definition>A physical object that is a component that is a physical part of another physical object that is a system. [Allotrope]</skos:definition>
-        <skos:editorialNote>part of relation in the system perspective</skos:editorialNote>
-        <skos:prefLabel>component of</skos:prefLabel>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/property#AFX_0000972 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.allotrope.org/ontologies/property#AFX_0000972">
-        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0002793"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
-        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/RO_0002577"/>
-        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/BFO_0000040"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/relation"/>
-        <rdfs:label>has component</rdfs:label>
-        <skos:altLabel>has physical part</skos:altLabel>
-        <skos:definition>A physical object that forms a system that has as part a physical entity that is one of its components. [Allotrope]</skos:definition>
-        <skos:editorialNote>has part relation in the system perspective</skos:editorialNote>
-        <skos:prefLabel>has component</skos:prefLabel>
     </owl:ObjectProperty>
     
 
@@ -575,19 +515,6 @@
     
 
 
-    <!-- http://purl.allotrope.org/ontologies/property#AFX_0002845 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.allotrope.org/ontologies/property#AFX_0002845">
-        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0002846"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/relation"/>
-        <rdfs:label>ingredient of</rdfs:label>
-        <skos:altLabel>is ingredient of</skos:altLabel>
-        <skos:definition>Inverse of has ingredient. [Allotrope]</skos:definition>
-        <skos:prefLabel>ingredient of</skos:prefLabel>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://purl.allotrope.org/ontologies/property#AFX_0002846 -->
 
     <owl:ObjectProperty rdf:about="http://purl.allotrope.org/ontologies/property#AFX_0002846">
@@ -597,36 +524,6 @@
         <skos:altLabel>is proper part of</skos:altLabel>
         <skos:definition>Inverse of has proper part. [Allotrope]</skos:definition>
         <skos:prefLabel>proper part of</skos:prefLabel>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/property#AFX_0002875 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.allotrope.org/ontologies/property#AFX_0002875">
-        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/RO_0000056"/>
-        <owl:inverseOf rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0002876"/>
-        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/BFO_0000002"/>
-        <rdfs:range rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003374"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/relation"/>
-        <rdfs:label>has state</rdfs:label>
-        <skos:definition>Has state is a relation between an continuant c and a state s where the c participates in s and s is expressed in the same way in terms of c at all times during s. [Allotrope]</skos:definition>
-        <skos:prefLabel>has state</skos:prefLabel>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/property#AFX_0002876 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.allotrope.org/ontologies/property#AFX_0002876">
-        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/RO_0000057"/>
-        <rdfs:domain rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003374"/>
-        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/BFO_0000002"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/relation"/>
-        <rdfs:label>state of</rdfs:label>
-        <skos:altLabel>is state of</skos:altLabel>
-        <skos:definition>A relation between a state s and a continuant c where the c is a participant of s and s is expressed in the same way in terms of c at all times during s. [Allotrope]</skos:definition>
-        <skos:prefLabel>state of</skos:prefLabel>
     </owl:ObjectProperty>
     
 
@@ -1110,19 +1007,6 @@
     
 
 
-    <!-- http://purl.allotrope.org/ontologies/equipment#AFE_0000340 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/equipment#AFE_0000340">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000718"/>
-        <property:AFX_0002808 rdf:resource="http://purl.obolibrary.org/obo/OMIT_0027733"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>capillary</rdfs:label>
-        <skos:definition>A capillary is a tube with a small diameter. [Allotrope]</skos:definition>
-        <skos:prefLabel>capillary</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.allotrope.org/ontologies/equipment#AFE_0000354 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/equipment#AFE_0000354">
@@ -1136,20 +1020,6 @@
         <skos:definition>A device is an artifact that is designed to perform a function primarily by means of its mechanical or electrical nature. [Allotrope]</skos:definition>
         <skos:note>A device has a designed form or physical structure.  This distinguishes a device from a chemical and a biological artifact, that are typical bulk or portions of materials without a designed form. [Allotrope]</skos:note>
         <skos:prefLabel>device</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/equipment#AFE_0000378 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/equipment#AFE_0000378">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000407"/>
-        <property:AFX_0002798 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002798>
-        <property:AFX_0002808 rdf:resource="http://purl.obolibrary.org/obo/NCIT_C50140"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>reservoir</rdfs:label>
-        <skos:definition>The reservoir is a container that stores solutions. [Allotrope]</skos:definition>
-        <skos:prefLabel>reservoir</skos:prefLabel>
     </owl:Class>
     
 
@@ -1181,20 +1051,6 @@
         <skos:example>box, can, plate, rack</skos:example>
         <skos:example>tray, flask, vial</skos:example>
         <skos:prefLabel>container</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/equipment#AFE_0000718 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/equipment#AFE_0000718">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000407"/>
-        <property:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002818>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>tube</rdfs:label>
-        <skos:altLabel>tubing</skos:altLabel>
-        <skos:definition>A tube, or tubing, is a long hollow cylinder used for moving fluids (liquids or gases) or to protect electrical or optical cables and wires. [Wikipedia]</skos:definition>
-        <skos:prefLabel>tube</skos:prefLabel>
     </owl:Class>
     
 
@@ -1489,124 +1345,6 @@
     
 
 
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0000012 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000012">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001035"/>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001223"/>
-        <terms:license rdf:resource="http://purl.allotrope.org/voc/iupac-license"/>
-        <terms:replaces rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0002103"/>
-        <terms:rights rdf:resource="http://purl.allotrope.org/voc/iupac-copyright"/>
-        <terms:source>Orange Book: IUPAC Compendium of Analytical Nomenclature. Second Edition, Blackwell Scientific Publications, Oxford, 1987.</terms:source>
-        <terms:source>PAC, 1994, 66, 533 (Standard quantities in chemical thermodynamics. Fugacities, activities and equilibrium constants for pure and mixed phases (IUPAC Recommendations 1994))</terms:source>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/portion-of-material"/>
-        <rdfs:label>solution</rdfs:label>
-        <skos:definition>A solution is a homogeneous mixture composed of one phase where particles  are not visible to the naked eye and the solution does not scatter a light beam. [Allotrope]</skos:definition>
-        <skos:prefLabel>solution</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0000077 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000077">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_23367"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000086"/>
-                <owl:someValuesFrom>
-                    <owl:Class>
-                        <owl:unionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/PATO_0002195"/>
-                            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/PATO_0002196"/>
-                        </owl:unionOf>
-                    </owl:Class>
-                </owl:someValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001222"/>
-        <terms:license rdf:resource="http://purl.allotrope.org/voc/iupac-license"/>
-        <terms:rights rdf:resource="http://purl.allotrope.org/voc/iupac-copyright"/>
-        <terms:source>IUPAC. Compendium of Chemical Terminology, 2nd ed. (the &quot;Gold Book&quot;). Compiled by A. D. McNaught and A. Wilkinson. Blackwell Scientific Publications, Oxford (1997).</terms:source>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>ion</rdfs:label>
-        <skos:definition>An ion is an atomic or molecular particle having a net electric charge. [IUPAC]</skos:definition>
-        <skos:prefLabel>ion</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0000105 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000105">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001060"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_15377"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001223"/>
-        <property:AFX_0002808 rdf:resource="http://purl.obolibrary.org/obo/CHEBI_15377"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/portion-of-material"/>
-        <rdfs:label>portion of water</rdfs:label>
-        <skos:altLabel>water</skos:altLabel>
-        <skos:definition>Water is a transparent fluid which forms the world&apos;s streams, lakes, oceans and rain, and is the major constituent of the fluids of living things. [Wikipedia]</skos:definition>
-        <skos:prefLabel>portion of water</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0000154 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000154">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000394"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000086"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000114"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000394"/>
-        <property:AFX_0002798 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002798>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>gas</rdfs:label>
-        <skos:definition>A gas is an airlike material that expands freely to fill any space available. It can be transported in compressed gas cylinders and acts as a gas upon release at normal temperatures and pressure. [Allotrope]</skos:definition>
-        <skos:prefLabel>gas</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0000161 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000161">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000077"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>anion</rdfs:label>
-        <skos:altLabel>negative ion</skos:altLabel>
-        <skos:definition>An anion (-) is an ion with more electrons than protons, giving it a net negative charge (since electrons are negatively charged and protons are positively charged). [Wikipedia]</skos:definition>
-        <skos:prefLabel>anion</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0000189 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000189">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000077"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>cation</rdfs:label>
-        <skos:altLabel>positive ion</skos:altLabel>
-        <skos:definition>A cation (+) is an ion with fewer electrons than protons, giving it a positive charge. [Wikipedia]</skos:definition>
-        <skos:prefLabel>cation</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.allotrope.org/ontologies/material#AFM_0000275 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000275">
@@ -1631,330 +1369,6 @@
     
 
 
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0000386 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000386">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/CHMO_0000993"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000086"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000112"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHMO_0000993"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>solid</rdfs:label>
-        <skos:definition>A solid is a substance that is in the solid material state. [Allotrope]</skos:definition>
-        <skos:prefLabel>solid</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0000394 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000394">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/CHMO_0000993"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000086"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000118"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHMO_0000993"/>
-        <property:AFX_0002798 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002798>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>fluid</rdfs:label>
-        <skos:definition>A fluid is a substance that continually deforms (flows) under an applied shear stress. Fluids are a subset of the phases of matter and include liquids, gases, plasmas and, to some extent, plastic solids. [Wikipedia]</skos:definition>
-        <skos:prefLabel>fluid</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0000404 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000404">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000394"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000086"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000115"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000394"/>
-        <property:AFX_0002798 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002798>
-        <terms:source rdf:resource="https://en.wikipedia.org/wiki/Plasma_(physics)"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>plasma</rdfs:label>
-        <skos:definition>Plasma is a state of matter in which an ionized gaseous substance becomes highly electrically conductive to the point that long-range electric and magnetic fields dominate the behavior of the matter. [Wikipedia]</skos:definition>
-        <skos:prefLabel>plasma</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0000418 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000418">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36338"/>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001492"/>
-        <terms:license rdf:resource="http://purl.allotrope.org/voc/iupac-license"/>
-        <terms:rights rdf:resource="http://purl.allotrope.org/voc/iupac-copyright"/>
-        <terms:source rdf:resource="https://en.wikipedia.org/wiki/Electron"/>
-        <terms:source>Green Book, 2nd ed., p. 93</terms:source>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>electron</rdfs:label>
-        <skos:altLabel>e−</skos:altLabel>
-        <skos:altLabel>β−</skos:altLabel>
-        <skos:definition>Elementary particle not affected by the strong force having a spin quantum number 1/2, a negative elementary charge and a rest mass of 0.000 548 579 903(13) u. [IUPAC]</skos:definition>
-        <skos:prefLabel>electron</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0000877 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000877">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000275"/>
-        <property:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002818>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>natural material</rdfs:label>
-        <skos:definition>A natural material is any product or physical matter that comes from plants, animals, or the ground. Minerals and the metals that can be extracted from them (without further modification) are also considered to belong into this category. [Wikipedia]</skos:definition>
-        <skos:prefLabel>natural material</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001023 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001023">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33253"/>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36347"/>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001492"/>
-        <terms:license rdf:resource="http://purl.allotrope.org/voc/iupac-license"/>
-        <terms:rights rdf:resource="http://purl.allotrope.org/voc/iupac-copyright"/>
-        <terms:source>Green Book, 2nd ed.: IUPAC Quantities, Units and Symbols in Physical Chemistry. Second Edition, Blackwell Scientific Publications, Oxford, 1993.</terms:source>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>proton</rdfs:label>
-        <skos:altLabel>hydrogen nucleus</skos:altLabel>
-        <skos:definition>A proton is a nuclear particle of charge number +1, spin quantum number of 1/2 and rest mass of 1.00727647012 u. [IUPAC]</skos:definition>
-        <skos:prefLabel>proton</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001027 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001027">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33253"/>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36347"/>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001222"/>
-        <terms:license rdf:resource="http://purl.allotrope.org/voc/iupac-license"/>
-        <terms:rights rdf:resource="http://purl.allotrope.org/voc/iupac-copyright"/>
-        <terms:source>IUPAC Green Book, 2nd ed., p. 93</terms:source>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>neutron</rdfs:label>
-        <skos:definition>A neutron is a nuclear particle of zero charge, spin quantum number 1/2 and a mass of 1.00866490414 u. [IUPAC]</skos:definition>
-        <skos:prefLabel>neutron</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001028 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001028">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_23367"/>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33253"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
-                <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000418"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
-                <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001023"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001222"/>
-        <property:AFX_0002809 rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33250"/>
-        <terms:license rdf:resource="http://purl.allotrope.org/voc/iupac-license"/>
-        <terms:rights rdf:resource="http://purl.allotrope.org/voc/iupac-copyright"/>
-        <terms:source>IUPAC Red Book, p. 35</terms:source>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>atom</rdfs:label>
-        <skos:definition>An atom is a smallest particle still characterizing a chemical element. It consists of a nucleus of a positive charge carrying almost all its mass (more than 99.9%) and Z electrons determining its size. [IUPAC]</skos:definition>
-        <skos:prefLabel>atom</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001034 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001034">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001038"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/portion-of-material"/>
-        <rdfs:label>heterogeneous mixture</rdfs:label>
-        <skos:definition>A heterogeneous mixture is a portion of mixed material that is not uniform in composition, but proportions of its components vary throughout the sample. [Wikipedia]</skos:definition>
-        <skos:example>sea water with sand</skos:example>
-        <skos:prefLabel>heterogeneous mixture</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001035 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001035">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001038"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/portion-of-material"/>
-        <rdfs:label>homogeneous mixture</rdfs:label>
-        <skos:definition>A homogeneous mixture is a portion of mixed material that has the same proportions of its components throughout a given sample. Homogeneous mixture can have a variable composition. [Wikipedia]</skos:definition>
-        <skos:example>air</skos:example>
-        <skos:example>sea water</skos:example>
-        <skos:prefLabel>homogeneous mixture</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001038 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001038">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHMO_0000993"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/portion-of-material"/>
-        <rdfs:label>portion of mixed material</rdfs:label>
-        <skos:altLabel>blend</skos:altLabel>
-        <skos:altLabel>mixture</skos:altLabel>
-        <skos:altLabel>portion of mixture</skos:altLabel>
-        <skos:definition>An portion of mixed material is a material entity that consists of different kinds of grains if you inspect it at a higher level of granularity. [Allotrope]</skos:definition>
-        <skos:example>portion of milk</skos:example>
-        <skos:example>sand</skos:example>
-        <skos:example>sea water</skos:example>
-        <skos:example>sea water with sand</skos:example>
-        <skos:prefLabel>portion of mixed material</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001039 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001039">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHMO_0000993"/>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001223"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/portion-of-material"/>
-        <rdfs:label>portion of pure substance</rdfs:label>
-        <skos:definition>An portion of pure substance is a material entity that consists of one kind of grains if you inspect it at a higher level of granularity. [Allotrope]</skos:definition>
-        <skos:example>solution of distilled water</skos:example>
-        <skos:prefLabel>portion of pure substance</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001042 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001042">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001034"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000086"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000112"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000386"/>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001034"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>solid heterogeneous mixture</rdfs:label>
-        <skos:definition>A solid heterogeneous mixture is a heterogeneous mixture in solid state. [Allotrope]</skos:definition>
-        <skos:prefLabel>solid heterogeneous mixture</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001060 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001060">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001039"/>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001097"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/portion-of-material"/>
-        <rdfs:label>portion of compound</rdfs:label>
-        <skos:altLabel>compound</skos:altLabel>
-        <skos:definition>A portion of material that has grain only the same kind of molecules, ignoring minor impurities. [Allotrope]</skos:definition>
-        <skos:example>portion of tablesugar</skos:example>
-        <skos:example>portion of water</skos:example>
-        <skos:prefLabel>portion of compound</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001065 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001065">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000012"/>
-        <rdfs:subClassOf>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
-                        <owl:someValuesFrom>
-                            <owl:Class>
-                                <owl:intersectionOf rdf:parseType="Collection">
-                                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/CHMO_0000993"/>
-                                    <owl:Restriction>
-                                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000086"/>
-                                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000114"/>
-                                    </owl:Restriction>
-                                    <owl:Restriction>
-                                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000087"/>
-                                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000271"/>
-                                    </owl:Restriction>
-                                </owl:intersectionOf>
-                            </owl:Class>
-                        </owl:someValuesFrom>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
-                        <owl:someValuesFrom>
-                            <owl:Class>
-                                <owl:intersectionOf rdf:parseType="Collection">
-                                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/CHMO_0000993"/>
-                                    <owl:Restriction>
-                                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000086"/>
-                                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000114"/>
-                                    </owl:Restriction>
-                                    <owl:Restriction>
-                                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000087"/>
-                                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000272"/>
-                                    </owl:Restriction>
-                                </owl:intersectionOf>
-                            </owl:Class>
-                        </owl:someValuesFrom>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </rdfs:subClassOf>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/portion-of-material"/>
-        <rdfs:label>gas mixture</rdfs:label>
-        <skos:definition>A gas mixture is a solution where the continuous phase is a gas and the dispersed phase is a gas. [Allotrope]</skos:definition>
-        <skos:example>air</skos:example>
-        <skos:prefLabel>gas mixture</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.allotrope.org/ontologies/material#AFM_0001097 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001097">
@@ -1966,93 +1380,6 @@
         <rdfs:label>chemical substance</rdfs:label>
         <skos:definition>A chemical substance is a portion of material that is matter of constant composition best characterized by the entities (molecules, formula units, atoms) it is composed of. [IUPAC]</skos:definition>
         <skos:prefLabel>chemical substance</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001099 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001099">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001038"/>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001097"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0000365"/>
-                <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001097"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <terms:source rdf:resource="https://en.wikipedia.org/wiki/Chemical_substance"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>chemical mixture</rdfs:label>
-        <skos:altLabel>mixed chemical substances</skos:altLabel>
-        <skos:altLabel>portion of mixed chemical substances</skos:altLabel>
-        <skos:definition>A portion of chemical mixture is a chemical substance that is composed of chemical substances. [Allotrope]</skos:definition>
-        <skos:prefLabel>chemical mixture</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001105 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001105">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001060"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
-                <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000161"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
-                <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000189"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <terms:source rdf:resource="https://en.wikipedia.org/wiki/Ionic_compound"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/portion-of-material"/>
-        <rdfs:label>portion of salt</rdfs:label>
-        <skos:altLabel>ionic compound</skos:altLabel>
-        <skos:altLabel>salt</skos:altLabel>
-        <skos:definition>A portion of salt is a portion of compound where the compound is composed of ions held together by electrostatic forces termed ionic bonding. [Wikipedia]</skos:definition>
-        <skos:prefLabel>portion of salt</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001116 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001116">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_16526"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>carbon dioxide gas</rdfs:label>
-        <skos:altLabel>carbon dioxide</skos:altLabel>
-        <skos:definition>Carbon dioxide gas is a gas that is composed of carbon dioxide molecules. [Allotrope]</skos:definition>
-        <skos:prefLabel>carbon dioxide gas</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001129 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001129">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_17245"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>carbon monoxide gas</rdfs:label>
-        <skos:altLabel>carbon monoxide</skos:altLabel>
-        <skos:definition>Carbon monoxide gas is a gas that is composed of carbon monoxide molecules. [Allotrope]</skos:definition>
-        <skos:prefLabel>carbon monoxide gas</skos:prefLabel>
     </owl:Class>
     
 
@@ -2126,36 +1453,6 @@
     
 
 
-    <!-- http://purl.allotrope.org/ontologies/process#AFP_0002294 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/process#AFP_0002294">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0002849"/>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003305"/>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/OBI_0000011"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0000395"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0000399"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/BFO_0000001"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <property:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002818>
-        <terms:source rdf:resource="https://jcgm.bipm.org/vim/en/2.1.html"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>measuring</rdfs:label>
-        <skos:altLabel>measurement</skos:altLabel>
-        <skos:changeNote>2018-08-09 Changed definition [Allotrope]</skos:changeNote>
-        <skos:definition>Measuring is observing a property of an entity called a quantity, that has a magnitude that can be expressed as a number and a reference to another entity, and obtaining one or more quantity values for it. The observed entity is a quality or a disposition for a continuant, for a process it is a process property such as duration. [Allotrope]</skos:definition>
-        <skos:prefLabel>measuring</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.allotrope.org/ontologies/process#AFP_0002849 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/process#AFP_0002849">
@@ -2214,28 +1511,6 @@
         <rdfs:label>material process</rdfs:label>
         <skos:definition>A process that affects the physical qualities of materials or creates, destroys or converts materials. [Allotrope]</skos:definition>
         <skos:prefLabel>material process</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/process#AFP_0003305 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/process#AFP_0003305">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0000307"/>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003315"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0000544"/>
-                <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000922"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <property:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002818>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>observing</rdfs:label>
-        <skos:altLabel>observation</skos:altLabel>
-        <skos:altLabel>sensing</skos:altLabel>
-        <skos:definition>Observation is the active acquisition of information from a primary source. In living beings, observation employs the senses. [Wikipedia]</skos:definition>
-        <skos:prefLabel>observing</skos:prefLabel>
     </owl:Class>
     
 
@@ -2492,18 +1767,6 @@
     
 
 
-    <!-- http://purl.allotrope.org/ontologies/process#AFP_0003640 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/process#AFP_0003640">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003824"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>dispersed state</rdfs:label>
-        <skos:definition>Dispersed state is a state of a system in which discrete particles of one material are dispersed in a continuous phase of another material. [Allotrope]</skos:definition>
-        <skos:prefLabel>dispersed state</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.allotrope.org/ontologies/process#AFP_0003711 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/process#AFP_0003711">
@@ -2518,30 +1781,6 @@
         <skos:definition>A chemical reaction is a process that results in the interconversion of chemical species. [IUPAC]</skos:definition>
         <skos:prefLabel>chemical reaction (molecular)</skos:prefLabel>
         <skos:scopeNote>Chemical reactions may be elementary reactions or stepwise reactions. (It should be noted that this definition includes experimentally observable interconversions of conformers.) Detectable chemical reactions normally involve sets of molecular entities as indicated by this definition, but it is often conceptually convenient to use the term also for changes involving single molecular entities (i.e. &apos;microscopic chemical events&apos;). [IUPAC]</skos:scopeNote>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/process#AFP_0003712 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/process#AFP_0003712">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.allotrope.org/ontologies/process#AFP_0003711"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000057"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000077"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003711"/>
-        <property:AFX_0002798 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002798>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>ion reaction</rdfs:label>
-        <skos:definition>An ion reaction is a chemical reaction that has ion participants. [Allotrope]</skos:definition>
-        <skos:prefLabel>ion reaction</skos:prefLabel>
     </owl:Class>
     
 
@@ -2571,38 +1810,6 @@
         <skos:altLabel>material combination</skos:altLabel>
         <skos:definition>Combining material is a combing process that combines two or more materials in to a new material. [Allotrope]</skos:definition>
         <skos:prefLabel>combining material</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/process#AFP_0003765 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/process#AFP_0003765">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0002294"/>
-        <terms:source rdf:resource="https://en.wikipedia.org/wiki/Dynamic_vapor_sorption"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/domain/REC/2023/03/dynamic-vapor-sorption"/>
-        <rdfs:label>dynamic vapor sorption</rdfs:label>
-        <skos:altLabel>DVS</skos:altLabel>
-        <skos:definition>Dynamic vapor sorption is a gravimetric technique that measures how quickly and how much of a solvent is absorbed by a sample. It does this by varying the vapor concentration surrounding the sample and measuring the change in mass which this produces. [Wikipedia]</skos:definition>
-        <skos:prefLabel>dynamic vapor sorption</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/process#AFP_0003824 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/process#AFP_0003824">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003374"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0002876"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/BFO_0000040"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>mereotopological state</rdfs:label>
-        <skos:definition>A mereotopological state is a state that is expressed by the mereotopological connectedness or parthood of participants in the state. [Allotrope]</skos:definition>
-        <skos:prefLabel>mereotopological state</skos:prefLabel>
     </owl:Class>
     
 
@@ -2684,102 +1891,6 @@
     
 
 
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000111 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000111">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0000051"/>
-        <property:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002818>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>state of matter</rdfs:label>
-        <skos:altLabel>material state</skos:altLabel>
-        <skos:definition>A state of matter is a quality of material that is one of the distinct forms in which matter can exist. Four states of matter are observable in everyday life: solid, liquid, gas, and plasma. Many other states are known to exist only in extreme situations, such as Bose-Einstein condensates, neutron-degenerate matter, and quark-gluon plasma, which only occur in situations of extreme cold, extreme density, and extremely high-energy color-charged matter respectively. [Wikipedia]</skos:definition>
-        <skos:prefLabel>state of matter</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000112 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000112">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000111"/>
-        <property:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002818>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>solid</rdfs:label>
-        <skos:altLabel>solid state of matter</skos:altLabel>
-        <skos:definition>A state of matter, in which particles are closely packed together. The forces between particles are strong so that the particles cannot move freely but can only vibrate. As a result, a solid has a stable, definite shape, and a definite volume. Solids can only change their shape by force, as when broken or cut. [Wikipedia]</skos:definition>
-        <skos:prefLabel>solid</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000114 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000114">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000111"/>
-        <property:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002818>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>gas</rdfs:label>
-        <skos:altLabel>gaseous</skos:altLabel>
-        <skos:altLabel>gaseous state of matter</skos:altLabel>
-        <skos:definition>A state of matter that is a compressible fluid. Not only will a gas conform to the shape of its container but it will also expand to fill the container. In a gas, the molecules have enough kinetic energy so that the effect of intermolecular forces is small (or zero for an ideal gas), and the typical distance between neighboring molecules is much greater than the molecular size. A gas has no definite shape or volume, but occupies the entire container in which it is confined. [Wikipedia]</skos:definition>
-        <skos:prefLabel>gas</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000115 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000115">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000111"/>
-        <property:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002818>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>plasma</rdfs:label>
-        <skos:altLabel>plasma state of matter</skos:altLabel>
-        <skos:definition>A physical quality that inheres in a bearer by virtue of its plasma is a state of matter, that is, it does not have definite shape or volume. Unlike gases, plasmas are electrically conductive, produce magnetic fields and electric currents, and respond strongly to electromagnetic forces. Positively charged nuclei swim in a &quot;sea&quot; of freely-moving disassociated electrons, similar to the way such charges exist in conductive metal. [Wikipedia]</skos:definition>
-        <skos:prefLabel>plasma</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000116 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000116">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000005"/>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000210"/>
-        <rdfs:subClassOf>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000005"/>
-                    <rdf:Description rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000210"/>
-                </owl:intersectionOf>
-            </owl:Class>
-        </rdfs:subClassOf>
-        <property:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002818>
-        <terms:source rdf:resource="https://en.wikipedia.org/wiki/Shear_modulus"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>shear modulus (quality)</rdfs:label>
-        <skos:altLabel>shear modulus</skos:altLabel>
-        <skos:changeNote>2021-12-01 Changed pref label. [Allotrope]</skos:changeNote>
-        <skos:definition>Shear modulus is a ratio of shear stress to the shear strain. It is a quantity for measuring the stiffness of materials. The shear modulus is concerned with the deformation of a material. [Wikipedia]</skos:definition>
-        <skos:prefLabel>shear modulus (quality)</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000118 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000118">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000116"/>
-        <property:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002818>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>shear modulus of zero magnitude</rdfs:label>
-        <skos:altLabel>zero shear modulus</skos:altLabel>
-        <skos:definition>A zero shear modulus is a determinate shear modulus with zero magnitude. [Allotrope]</skos:definition>
-        <skos:prefLabel>shear modulus of zero magnitude</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000138 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000138">
@@ -2789,23 +1900,6 @@
         <rdfs:label>acoustic quality</rdfs:label>
         <skos:definition>Property that inheres in an independent continuant having to do with sound or hearing. [NCI]</skos:definition>
         <skos:prefLabel>acoustic quality</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000169 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000169">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000172"/>
-        <property:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002818>
-        <terms:source>Green Book, 2nd ed.: IUPAC Quantities, Units and Symbols in Physical Chemistry. Second Edition, Blackwell Scientific Publications, Oxford, 1993.</terms:source>
-        <terms:source>PAC, 1996, 68, 957 (Glossary of terms in quantities and units in Clinical Chemistry (IUPAC-IFCC Recommendations 1996))</terms:source>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>volume fraction (quality)</rdfs:label>
-        <skos:altLabel>volume fraction</skos:altLabel>
-        <skos:changeNote>2020-06-22 Changed labels. [Allotrope]</skos:changeNote>
-        <skos:definition>The volume fraction is a fraction pertaining the volume of a constituent divided by the total volume of all constituents in the mixture. [Allotrope]</skos:definition>
-        <skos:prefLabel>volume fraction (quality)</skos:prefLabel>
     </owl:Class>
     
 
@@ -2827,40 +1921,6 @@
     
 
 
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000173 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000173">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000172"/>
-        <terms:source>Green Book, 2nd ed.: IUPAC Quantities, Units and Symbols in Physical Chemistry. Second Edition, Blackwell Scientific Publications, Oxford, 1993.</terms:source>
-        <terms:source>PAC, 1996, 68, 957 (Glossary of terms in quantities and units in Clinical Chemistry (IUPAC-IFCC Recommendations 1996))</terms:source>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>mass fraction (quality)</rdfs:label>
-        <skos:altLabel>mass fraction</skos:altLabel>
-        <skos:changeNote>2020-06-22 Changed labels. [Allotrope]</skos:changeNote>
-        <skos:definition>The mass fraction is a fraction pertaining the mass of a constituent divided by the total mass of all constituents in the mixture. [Allotrope]</skos:definition>
-        <skos:prefLabel>mass fraction (quality)</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000174 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000174">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000172"/>
-        <terms:source>Green Book, 2nd ed.: IUPAC Quantities, Units and Symbols in Physical Chemistry. Second Edition, Blackwell Scientific Publications, Oxford, 1993.</terms:source>
-        <terms:source>PAC, 1996, 68, 957 (Glossary of terms in quantities and units in Clinical Chemistry (IUPAC-IFCC Recommendations 1996))</terms:source>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>amount fraction (quality)</rdfs:label>
-        <skos:altLabel>amount fraction</skos:altLabel>
-        <skos:altLabel>mole fraction</skos:altLabel>
-        <skos:altLabel>mole fraction (quality)</skos:altLabel>
-        <skos:changeNote>2020-06-22 Changed labels. [Allotrope]</skos:changeNote>
-        <skos:definition>The amount fraction is the ratio of the amount of a constituent divided by the total amount of all constituents in the mixture. [Allotrope]</skos:definition>
-        <skos:prefLabel>amount fraction (quality)</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000210 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000210">
@@ -2870,51 +1930,6 @@
         <skos:altLabel>mechanics quality</skos:altLabel>
         <skos:definition>A physical quality that inheres in an bearer by virtue of how that bearer behaves when subjected to forces or displacements and the effect of their bodies on their environment. [Wikipedia]</skos:definition>
         <skos:prefLabel>mechanical quality</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000225 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000225">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0000025"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>reaction composition</rdfs:label>
-        <skos:definition>Reaction composition is a composition quality of a reaction mixture. [Allotrope]</skos:definition>
-        <skos:prefLabel>reaction composition</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000227 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000227">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000005"/>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000225"/>
-        <property:AFX_0002808 rdf:resource="http://purl.obolibrary.org/obo/CHMO_0002855"/>
-        <terms:source rdf:resource="https://en.wikipedia.org/wiki/Conversion_(chemistry)"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>yield (quality)</rdfs:label>
-        <skos:altLabel>percentage yield</skos:altLabel>
-        <skos:altLabel>yield</skos:altLabel>
-        <skos:definition>Reaction yield is a reaction composition quality expressed as a percentage of the theoretical maximum mass of the product given the masses of the reactants. [CHMO, Allotrope]</skos:definition>
-        <skos:note>Often there is an assumption that the product and starting materials have the same relative response in the analytical method being used.</skos:note>
-        <skos:prefLabel>yield (quality)</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000228 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000228">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000005"/>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000225"/>
-        <terms:source rdf:resource="https://en.wikipedia.org/wiki/Conversion_(chemistry)"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>reaction selectivity</rdfs:label>
-        <skos:altLabel>selectivity</skos:altLabel>
-        <skos:definition>Reaction selectivity is a reaction composition that is expressed as the number of moles of desired product per the number of moles of undesired product. [Wikipedia]</skos:definition>
-        <skos:prefLabel>reaction selectivity</skos:prefLabel>
     </owl:Class>
     
 
@@ -2961,53 +1976,6 @@
     
 
 
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000252 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000252">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000019"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000080"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_23367"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>molecular entity quality</rdfs:label>
-        <skos:altLabel>molecular quality</skos:altLabel>
-        <skos:definition>A molecular quality is a chemical quality which inheres in a molecular entity, a single molecule, atom, ion, radical etc. [Allotrope]</skos:definition>
-        <skos:prefLabel>molecular entity quality</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000275 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000275">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0001025"/>
-        <terms:license rdf:resource="http://purl.allotrope.org/voc/iupac-license"/>
-        <terms:rights rdf:resource="http://purl.allotrope.org/voc/iupac-copyright"/>
-        <terms:source>PAC, 1990, 62, 2167. (Glossary of atmospheric chemistry terms (Recommendations 1990)) on page 2212</terms:source>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>saturation vapor pressure (quality)</rdfs:label>
-        <skos:altLabel>saturation vapor pressure</skos:altLabel>
-        <skos:definition>The pressure exerted by a pure substance (at a given temperature) in a system containing only the vapor and condensed phase (liquid or solid) of the substance. [IUPAC]</skos:definition>
-        <skos:prefLabel>saturation vapor pressure (quality)</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000276 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000276">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0001574"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>evacuation rate (quality)</rdfs:label>
-        <skos:definition>An evacuation rate is a flow rate indicating the rate at which gas is removed from a chamber. [Allotrope]</skos:definition>
-        <skos:prefLabel>evacuation rate (quality)</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000279 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000279">
@@ -3017,18 +1985,6 @@
         <rdfs:label>hygroscopicity</rdfs:label>
         <skos:definition>Hygroscopicity is a quality inhered in a compound by virtue of its ability to readily take up and retain water, especially from the atmosphere. [Wikipedia]</skos:definition>
         <skos:prefLabel>hygroscopicity</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/quality#AFQ_0000291 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/quality#AFQ_0000291">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000172"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>count fraction (quality)</rdfs:label>
-        <skos:definition>The count fraction is a quality pertaining the number of particles of a constituent divided by the total number of particles of all constituents in the mixture. [Allotrope]</skos:definition>
-        <skos:prefLabel>count fraction (quality)</skos:prefLabel>
     </owl:Class>
     
 
@@ -3151,26 +2107,6 @@
         <skos:definition>A facet that is part of a quantification of a quality, aggregate or process. [Allotrope]</skos:definition>
         <skos:note>A quantification facet is usually a quantity value or a categorization into some group.  It is described by a numeric value together with a unit or a categorical value. [Allotrope]</skos:note>
         <skos:prefLabel>quantification facet</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/result#AFR_0001142 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0001142">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001583"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0002816"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/PATO_0001842"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>pH</rdfs:label>
-        <skos:altLabel>pH (datum)</skos:altLabel>
-        <skos:altLabel>pondus hydrogenii</skos:altLabel>
-        <skos:definition>pH (datum) is a quantity facet that quantifies the acidity or basicity of an aqueous solution, defined as the decadic logarithm of the reciprocal activity of hydrogen ions. [Allotrope]</skos:definition>
-        <skos:prefLabel>pH</skos:prefLabel>
     </owl:Class>
     
 
@@ -3343,51 +2279,6 @@
     
 
 
-    <!-- http://purl.allotrope.org/ontologies/result#AFR_0002119 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0002119">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0002816"/>
-                <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000275"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>saturation vapor pressure</rdfs:label>
-        <skos:altLabel>saturation pressure</skos:altLabel>
-        <skos:altLabel>saturation pressure result</skos:altLabel>
-        <skos:altLabel>saturation vapor pressure (datum)</skos:altLabel>
-        <skos:altLabel>saturation vapor pressure result</skos:altLabel>
-        <skos:definition>A saturation pressure (datum) is a quality quantification facet that quantifies the saturation vapor pressure of a substance. [Allotrope]</skos:definition>
-        <skos:prefLabel>saturation vapor pressure</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/result#AFR_0002158 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0002158">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0002816"/>
-                <owl:someValuesFrom>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000087"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000532"/>
-                    </owl:Restriction>
-                </owl:someValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/domain/REC/2023/03/dynamic-vapor-sorption"/>
-        <rdfs:label>inlet gas pressure</rdfs:label>
-        <skos:definition>An inlet gas pressure is a quality qualification facet that quantifies the pressure of the inlet gas. [Allotrope]</skos:definition>
-        <skos:prefLabel>inlet gas pressure</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.allotrope.org/ontologies/result#AFR_0002176 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0002176">
@@ -3396,22 +2287,6 @@
         <rdfs:label>heat flow</rdfs:label>
         <skos:definition>Heat flow is a quantification of the heat transferred per time. [Allotrope]</skos:definition>
         <skos:prefLabel>heat flow</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/result#AFR_0002198 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0002198">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>partial pressure</rdfs:label>
-        <skos:altLabel>partial pressure (datum)</skos:altLabel>
-        <skos:altLabel>partial pressure result</skos:altLabel>
-        <skos:changeNote>2020-12-01 Changed labels and definition. [Allotrope]</skos:changeNote>
-        <skos:changeNote>2020-12-01 Moved under pressure (datum). [Allotrope]</skos:changeNote>
-        <skos:definition>A partial pressure (datum) is a quality quantification facet that quantifies the notional pressure of a gas in a mixture of gases, if it alone occupied the entire volume of the original mixture at the same temperature. [Allotrope]</skos:definition>
-        <skos:prefLabel>partial pressure</skos:prefLabel>
     </owl:Class>
     
 
@@ -3500,18 +2375,6 @@
         <rdfs:label>sampling orientation code</rdfs:label>
         <skos:definition>A sampling orientation code is a code that indicates a sampling orientation. [Allotrope]</skos:definition>
         <skos:prefLabel>sampling orientation code</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/result#AFR_0002613 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0002613">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>ambient pressure</rdfs:label>
-        <skos:definition>An ambient pressure is a quantity facet that quantifies the pressure of the surrounding atmosphere. [Allotrope]</skos:definition>
-        <skos:prefLabel>ambient pressure</skos:prefLabel>
     </owl:Class>
     
 
@@ -3949,38 +2812,6 @@
     
 
 
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000217 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000217">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/OBI_0000086"/>
-        <property:AFX_0002798 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</property:AFX_0002798>
-        <property:AFX_0002809 rdf:resource="http://purl.obolibrary.org/obo/CHEBI_35223"/>
-        <terms:license rdf:resource="http://purl.allotrope.org/voc/iupac-license"/>
-        <terms:rights rdf:resource="http://purl.allotrope.org/voc/iupac-copyright"/>
-        <terms:source>PAC, 1996, 68, 155 (Glossary of terms used in chemical kinetics, including reaction dynamics.)</terms:source>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>catalyst role</rdfs:label>
-        <skos:altLabel>catalyst</skos:altLabel>
-        <skos:definition>A catalyst role is a reagent role of a substance that increases the rate of a reaction without modifying the overall standard Gibbs energy change in the reaction; the process is called catalysis. The catalyst is both a reactant and product of the reaction. [IUPAC]</skos:definition>
-        <skos:prefLabel>catalyst role</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000231 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000231">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/OBI_0000086"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>reactant role</rdfs:label>
-        <skos:altLabel>reactant</skos:altLabel>
-        <skos:altLabel>starting material</skos:altLabel>
-        <skos:definition>Reactant role is a role of a chemical entity that is present at the start of a reaction. [Allotrope]</skos:definition>
-        <skos:prefLabel>reactant role</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000249 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000249">
@@ -4005,88 +2836,6 @@
     
 
 
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000271 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000271">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000273"/>
-        <terms:source rdf:resource="https://ws680.nist.gov/publication/get_pdf.cfm?pub_id=850489"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>dispersed phase role</rdfs:label>
-        <skos:altLabel>discontinuous phase</skos:altLabel>
-        <skos:altLabel>dispersed phase</skos:altLabel>
-        <skos:definition>The dispersed phase role is the dispersion role of a portion of material in a dispersion, that is distributed in the form of discrete discontinuities
-(particles, droplets or bubbles), in a second immiscible phase that is
-continuous. [NIST]</skos:definition>
-        <skos:prefLabel>dispersed phase role</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000272 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000272">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000273"/>
-        <terms:source rdf:resource="https://ws680.nist.gov/publication/get_pdf.cfm?pub_id=850489"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>continuous phase role</rdfs:label>
-        <skos:altLabel>continuous medium</skos:altLabel>
-        <skos:altLabel>continuous medium role</skos:altLabel>
-        <skos:altLabel>continuous phase</skos:altLabel>
-        <skos:definition>The continuous phase role is the dispersion role of a portion of material constituting the medium, a phase that exhibits continuity throughout the
-dispersion. [NIST]</skos:definition>
-        <skos:prefLabel>continuous phase role</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000273 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000273">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000023"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000054"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003640"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>dispersion role</rdfs:label>
-        <skos:changeNote>2022-06-23 Change to subclasses to equivalent class. [Allotrope]</skos:changeNote>
-        <skos:definition>The role of a portion of material that participates in a dispersion process to form a colloid. [Allotrope]</skos:definition>
-        <skos:prefLabel>dispersion role</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000294 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000294">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000023"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000054"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0002294"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>measurement role</rdfs:label>
-        <skos:changeNote>2022-06-23 Change to subclasses to equivalent class. [Allotrope]</skos:changeNote>
-        <skos:definition>A role of a participant in a measurement. [Allotrope]</skos:definition>
-        <skos:prefLabel>measurement role</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000344 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000344">
@@ -4107,185 +2856,6 @@ dispersion. [NIST]</skos:definition>
         <skos:changeNote>2022-06-23 Change to subclasses to equivalent class. [Allotrope]</skos:changeNote>
         <skos:definition>A synthesis role is a role of a material that is participating in a synthesis (material conversion) process. [Allotrope]</skos:definition>
         <skos:prefLabel>synthesis role</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000360 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000360">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000344"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000081"/>
-                <owl:someValuesFrom>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0000353"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0001348"/>
-                    </owl:Restriction>
-                </owl:someValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>product role</rdfs:label>
-        <skos:altLabel>chemical product</skos:altLabel>
-        <skos:altLabel>product</skos:altLabel>
-        <skos:definition>A role of a material that is intended and desired to be  produced in a synthesis. [Allotrope]</skos:definition>
-        <skos:prefLabel>product role</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000361 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000361">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000360"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>batch role</rdfs:label>
-        <skos:altLabel>batch</skos:altLabel>
-        <skos:altLabel>lot</skos:altLabel>
-        <skos:altLabel>lot role</skos:altLabel>
-        <skos:definition>Batch role is a product role of a portion of material that is intended to have uniform character and quality, within specified limits, and is produced according to a single manufacturing order during the same cycle of manufacture. [Allotrope, CFR21]</skos:definition>
-        <skos:prefLabel>batch role</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000420 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000420">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000231"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>starting material role</rdfs:label>
-        <skos:definition>A role for a material used in the synthesis of a new drug substance that is incorporated as an element into the structure of an intermediate and/or of the new drug substance. [ICH-Q3A]</skos:definition>
-        <skos:note>Starting materials are normally commercially available and of defined chemical and physical properties and structure. [ICH-Q3A]</skos:note>
-        <skos:prefLabel>starting material role</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000421 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000421">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/OBI_0000086"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>limiting reagent role</rdfs:label>
-        <skos:definition>A reagent role of the material with the least mole quantity in a chemical process and as such limits the amount of product that can be formed. [Allotrope]</skos:definition>
-        <skos:prefLabel>limiting reagent role</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000479 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000479">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000231"/>
-        <property:AFX_0002808 rdf:resource="http://purl.obolibrary.org/obo/CHEBI_63248"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>oxidant role</rdfs:label>
-        <skos:altLabel>oxidant</skos:altLabel>
-        <skos:altLabel>oxidizer</skos:altLabel>
-        <skos:altLabel>oxidizer role</skos:altLabel>
-        <skos:altLabel>oxidizing agent</skos:altLabel>
-        <skos:definition>An oxidant role is a chemical reactant role whereby the substance removes electrons from another reactant in a redox reaction. [Allotrope]</skos:definition>
-        <skos:prefLabel>oxidant role</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000480 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000480">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000231"/>
-        <property:AFX_0002808 rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33292"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>fuel role</rdfs:label>
-        <skos:altLabel>fuel</skos:altLabel>
-        <skos:definition>A fuel role is a chemical reactant role whereby an energy-rich substance is transformed with release of usable energy. [Allotrope]</skos:definition>
-        <skos:prefLabel>fuel role</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000499 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000499">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000023"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000081"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000077"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
-        <property:AFX_0002798 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002798>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>ion role</rdfs:label>
-        <skos:definition>An ion role is a role inhered in an ion. [Allotrope]</skos:definition>
-        <skos:prefLabel>ion role</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000528 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000528">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000294"/>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000054"/>
-                <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003765"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/domain/REC/2023/03/dynamic-vapor-sorption"/>
-        <rdfs:label>dynamic vapor sorption role</rdfs:label>
-        <skos:definition>A dynamic vapor sorption role is a role that is realized in some dynamic vapor sorption process. [Allotrope]</skos:definition>
-        <skos:prefLabel>dynamic vapor sorption role</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000532 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000532">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000528"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/domain/REC/2023/03/dynamic-vapor-sorption"/>
-        <rdfs:label>inlet gas role (DVS)</rdfs:label>
-        <skos:altLabel>inlet gas</skos:altLabel>
-        <skos:altLabel>inlet gas role</skos:altLabel>
-        <skos:definition>An inlet gas role is the role of the gas led into the system in the dynamic vapor sorption process. [Allotrope]</skos:definition>
-        <skos:prefLabel>inlet gas role (DVS)</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/ontologies/role#AFRL_0000533 -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/role#AFRL_0000533">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000231"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000054"/>
-                <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/process#AFP_0003711"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000081"/>
-                <owl:someValuesFrom rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001099"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <property:AFX_0002798 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002798>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>reaction mixture role</rdfs:label>
-        <skos:altLabel>reaction mixture</skos:altLabel>
-        <skos:definition>A reaction mixture role is a role of a chemical mixture undergoing some chemical reaction. [Allotrope]</skos:definition>
-        <skos:prefLabel>reaction mixture role</skos:prefLabel>
     </owl:Class>
     
 
@@ -4987,43 +3557,6 @@ dispersion. [NIST]</skos:definition>
     
 
 
-    <!-- http://purl.obolibrary.org/obo/BFO_0000024 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000024">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000040"/>
-        <obo:BFO_0000179>fiat-object-part</obo:BFO_0000179>
-        <obo:BFO_0000180>FiatObjectPart</obo:BFO_0000180>
-        <obo:IAO_0000112 xml:lang="en">or with divisions drawn by cognitive subjects for practical reasons, such as the division of a cake (before slicing) into (what will become) slices (and thus member parts of an object aggregate). However, this does not mean that fiat object parts are dependent for their existence on divisions or delineations effected by cognitive subjects. If, for example, it is correct to conceive geological layers of the Earth as fiat object parts of the Earth, then even though these layers were first delineated in recent times, still existed long before such delineation and what holds of these layers (for example that the oldest layers are also the lowest layers) did not begin to hold because of our acts of delineation.Treatment of material entity in BFOExamples viewed by some as problematic cases for the trichotomy of fiat object part, object, and object aggregate include: a mussel on (and attached to) a rock, a slime mold, a pizza, a cloud, a galaxy, a railway train with engine and multiple carriages, a clonal stand of quaking aspen, a bacterial community (biofilm), a broken femur. Note that, as Aristotle already clearly recognized, such problematic cases – which lie at or near the penumbra of instances defined by the categories in question – need not invalidate these categories. The existence of grey objects does not prove that there are not objects which are black and objects which are white; the existence of mules does not prove that there are not objects which are donkeys and objects which are horses. It does, however, show that the examples in question need to be addressed carefully in order to show how they can be fitted into the proposed scheme, for example by recognizing additional subdivisions [29</obo:IAO_0000112>
-        <obo:IAO_0000112 xml:lang="en">the FMA:regional parts of an intact human body.</obo:IAO_0000112>
-        <obo:IAO_0000112 xml:lang="en">the Western hemisphere of the Earth</obo:IAO_0000112>
-        <obo:IAO_0000112 xml:lang="en">the division of the brain into regions</obo:IAO_0000112>
-        <obo:IAO_0000112 xml:lang="en">the division of the planet into hemispheres</obo:IAO_0000112>
-        <obo:IAO_0000112 xml:lang="en">the dorsal and ventral surfaces of the body</obo:IAO_0000112>
-        <obo:IAO_0000112>the upper and lower lobes of the left lung</obo:IAO_0000112>
-        <obo:IAO_0000116>BFO 2 Reference: Most examples of fiat object parts are associated with theoretically drawn divisions</obo:IAO_0000116>
-        <obo:IAO_0000600>b is a fiat object part = Def. b is a material entity which is such that for all times t, if b exists at t then there is some object c such that b proper continuant_part of  c at t and c is demarcated from the remainder of c by a two-dimensional continuant fiat boundary. (axiom label in BFO2 Reference: [027-004])</obo:IAO_0000600>
-        <obo:IAO_0000602>(forall (x) (if (FiatObjectPart x) (and (MaterialEntity x) (forall (t) (if (existsAt x t) (exists (y) (and (Object y) (properContinuantPartOfAt x y t)))))))) // axiom label in BFO2 CLIF: [027-004] </obo:IAO_0000602>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/bfo/REC/2018/04/bfo-2-0"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.obolibrary.org/obo/bfo.owl"/>
-        <rdfs:label>fiat object part</rdfs:label>
-        <skos:definition>B is a fiat object part if b is a material entity which is such that for all times t, if b exists at t then there is some object c such that b is a proper continuant part of c at t and c is demarcated from the remainder of c by a two-dimensional continuant fiat boundary. [BFO]</skos:definition>
-        <skos:prefLabel>fiat object part</skos:prefLabel>
-    </owl:Class>
-    <owl:Axiom>
-        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/BFO_0000024"/>
-        <owl:annotatedProperty rdf:resource="http://purl.obolibrary.org/obo/IAO_0000600"/>
-        <owl:annotatedTarget>b is a fiat object part = Def. b is a material entity which is such that for all times t, if b exists at t then there is some object c such that b proper continuant_part of  c at t and c is demarcated from the remainder of c by a two-dimensional continuant fiat boundary. (axiom label in BFO2 Reference: [027-004])</owl:annotatedTarget>
-        <obo:IAO_0010000 rdf:resource="http://purl.obolibrary.org/obo/bfo/axiom/027-004"/>
-    </owl:Axiom>
-    <owl:Axiom>
-        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/BFO_0000024"/>
-        <owl:annotatedProperty rdf:resource="http://purl.obolibrary.org/obo/IAO_0000602"/>
-        <owl:annotatedTarget>(forall (x) (if (FiatObjectPart x) (and (MaterialEntity x) (forall (t) (if (existsAt x t) (exists (y) (and (Object y) (properContinuantPartOfAt x y t)))))))) // axiom label in BFO2 CLIF: [027-004] </owl:annotatedTarget>
-        <obo:IAO_0010000 rdf:resource="http://purl.obolibrary.org/obo/bfo/axiom/027-004"/>
-    </owl:Axiom>
-    
-
-
     <!-- http://purl.obolibrary.org/obo/BFO_0000031 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000031">
@@ -5217,46 +3750,6 @@ dispersion. [NIST]</skos:definition>
     
 
 
-    <!-- http://purl.obolibrary.org/obo/CHEBI_15377 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_15377">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>water (molecule)</rdfs:label>
-        <skos:altLabel>water</skos:altLabel>
-        <skos:definition>An oxygen hydride consisting of an oxygen atom that is covalently bonded to two hydrogen atoms. [CHEBI]</skos:definition>
-        <skos:prefLabel>water (molecule)</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/CHEBI_16526 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_16526">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>carbon dioxide (molecule)</rdfs:label>
-        <skos:definition>A one-carbon compound with formula CO2 in which the carbon is attached to each oxygen atom by a double bond. [CHEBI]</skos:definition>
-        <skos:prefLabel>carbon dioxide (molecule)</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/CHEBI_17245 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_17245">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>carbon monoxide (molecule)</rdfs:label>
-        <skos:definition>A one-carbon compound in which the carbon is joined only to a single oxygen. [CHEBI]</skos:definition>
-        <skos:prefLabel>carbon monoxide (molecule)</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.obolibrary.org/obo/CHEBI_23367 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_23367">
@@ -5281,86 +3774,6 @@ dispersion. [NIST]</skos:definition>
     
 
 
-    <!-- http://purl.obolibrary.org/obo/CHEBI_25367 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_25367">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_23367"/>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001222"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>
-        <terms:license rdf:resource="http://purl.allotrope.org/voc/iupac-license"/>
-        <terms:rights rdf:resource="http://purl.allotrope.org/voc/iupac-copyright"/>
-        <terms:source>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1143</terms:source>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>molecule</rdfs:label>
-        <skos:definition>A molecule is a polyatomic molecular entity that is an electrically neutral entity consisting of more than one atom. [Allotrope]</skos:definition>
-        <skos:prefLabel>molecule</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/CHEBI_33253 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_33253">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001027"/>
-                    <rdf:Description rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001028"/>
-                </owl:unionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36339"/>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001492"/>
-        <terms:source rdf:resource="https://en.wikipedia.org/wiki/Nucleon"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>nucleon</rdfs:label>
-        <skos:definition>A nucleon is either a proton or a neutron. [Wikipedia]</skos:definition>
-        <skos:prefLabel>nucleon</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/CHEBI_36338 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_36338">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36340"/>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001492"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>lepton</rdfs:label>
-        <skos:definition>Lepton is a fermion that does not experience the strong force (strong interaction). [CHEBI]</skos:definition>
-        <skos:prefLabel>lepton</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/CHEBI_36339 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_36339">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36340"/>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001492"/>
-        <terms:source rdf:resource="https://en.wikipedia.org/wiki/Baryon"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>baryon</rdfs:label>
-        <skos:definition>Baryon is a fermion that does experience the strong force (strong interaction). [CHEBI]</skos:definition>
-        <skos:prefLabel>baryon</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/CHEBI_36340 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_36340">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36342"/>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001492"/>
-        <terms:source rdf:resource="https://en.wikipedia.org/wiki/Fermion"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>fermion</rdfs:label>
-        <skos:definition>Particle of half-integer spin quantum number following Fermi-Dirac statistics. [CHEBI]</skos:definition>
-        <skos:prefLabel>fermion</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.obolibrary.org/obo/CHEBI_36342 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_36342">
@@ -5370,20 +3783,6 @@ dispersion. [NIST]</skos:definition>
         <rdfs:label>subatomic particle</rdfs:label>
         <skos:definition>A subatomic particle is a material that is below the scale of an atom. [Allotrope]</skos:definition>
         <skos:prefLabel>subatomic particle</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/CHEBI_36347 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_36347">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36342"/>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001492"/>
-        <property:AFX_0002798 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002798>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>nuclear particle</rdfs:label>
-        <skos:definition>A nuclear particle is a nucleus or any of its constituents in any of their energy states. [CHEBI]</skos:definition>
-        <skos:prefLabel>nuclear particle</skos:prefLabel>
     </owl:Class>
     
 
@@ -5402,55 +3801,6 @@ dispersion. [NIST]</skos:definition>
         <rdfs:label>portion of material</rdfs:label>
         <skos:definition>An independent material continuant that is self-connected and retains its identity over time. [CHMO]</skos:definition>
         <skos:prefLabel>portion of material</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/ENVO_00002005 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ENVO_00002005">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000877"/>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001065"/>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_00010483"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/envo.owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>air</rdfs:label>
-        <skos:definition>The mixture of gases (roughly (by molar content/volume: 78% nitrogen, 20.95% oxygen, 0.93% argon, 0.038% carbon dioxide, trace amounts of other gases, and a variable amount (average around 1%) of water vapor) that surrounds the planet Earth. [ENVO]</skos:definition>
-        <skos:prefLabel>air</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/ENVO_00010483 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ENVO_00010483">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000275"/>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000024"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0000939"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/ENVO_01000254"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/envo.owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>environmental material</rdfs:label>
-        <skos:definition>An environmental material is a fiat object which forms the medium or part of the medium of an environmental system. [ENVO]</skos:definition>
-        <skos:prefLabel>environmental material</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/ENVO_01000254 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ENVO_01000254">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/RO_0002577"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/envo.owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-        <rdfs:label>environmental system</rdfs:label>
-        <skos:definition>A system which has the disposition to environ one or more material entities. [ENVO]</skos:definition>
-        <skos:prefLabel>environmental system</skos:prefLabel>
     </owl:Class>
     
 
@@ -5541,21 +3891,6 @@ dispersion. [NIST]</skos:definition>
         <skos:definition>A processual entity that realizes a plan which is the concretization of a plan specification. [IAO]</skos:definition>
         <skos:example>Injecting mice with a vaccine in order to test its efficacy</skos:example>
         <skos:prefLabel>planned process</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/OBI_0000086 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/OBI_0000086">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/role#AFRL_0000249"/>
-        <property:AFX_0002809 rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33893"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/obi.owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>reagent role</rdfs:label>
-        <skos:altLabel>reagent</skos:altLabel>
-        <skos:definition>A role inhering in a biological or chemical entity that is intended to be applied in a scientific technique to participate (or have molecular components that participate) in a chemical reaction that facilitates the generation of data about some entity distinct from the bearer, or the generation of some specified material output distinct from the bearer. [OBI]</skos:definition>
-        <skos:prefLabel>reagent role</skos:prefLabel>
     </owl:Class>
     
 
@@ -5726,24 +4061,6 @@ dispersion. [NIST]</skos:definition>
     
 
 
-    <!-- http://purl.obolibrary.org/obo/PATO_0001842 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/PATO_0001842">
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000250"/>
-        <property:AFX_0002808 rdf:resource="http://semanticscience.org/resource/CHEMINF_000442"/>
-        <property:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002818>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/pato-owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>pH (quality)</rdfs:label>
-        <skos:altLabel>pH</skos:altLabel>
-        <skos:changeNote>2019-08-19 Changed pref label. [Allotrope]</skos:changeNote>
-        <skos:changeNote>2019-08-29 Changed definition. [Allotrope]</skos:changeNote>
-        <skos:definition>A concentration quality inhering in a bearer by virtue of the bearer&apos;s containing acid (hydrogen ions). [PATO]</skos:definition>
-        <skos:prefLabel>pH (quality)</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.obolibrary.org/obo/PATO_0001906 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/PATO_0001906">
@@ -5753,107 +4070,6 @@ dispersion. [NIST]</skos:definition>
         <rdfs:label>movement quality</rdfs:label>
         <skos:definition>A physical quality inhering in a bearer by virtue of the bearer&apos;s participation in movement. [PATO]</skos:definition>
         <skos:prefLabel>movement quality</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/PATO_0002193 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/PATO_0002193">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/PATO_0002194"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/PATO_0002195"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/PATO_0002196"/>
-                </owl:unionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000252"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/pato-owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>electric charge (molecular quality)</rdfs:label>
-        <skos:altLabel>charge</skos:altLabel>
-        <skos:altLabel>electric charge</skos:altLabel>
-        <skos:definition>Electric charge is a molecular quality that inheres in a molecular entity by virtue of the overall electric charge of the molecule, which is due to a comparison between the total number of electrons and the total number of protons. [PATO]</skos:definition>
-        <skos:prefLabel>electric charge (molecular quality)</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/PATO_0002194 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/PATO_0002194">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0002193"/>
-        <owl:disjointWith rdf:resource="http://purl.obolibrary.org/obo/PATO_0002195"/>
-        <owl:disjointWith rdf:resource="http://purl.obolibrary.org/obo/PATO_0002196"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/pato-owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>neutral charge</rdfs:label>
-        <skos:altLabel>neutral</skos:altLabel>
-        <skos:definition>Neutral charge is a quality which inheres in a molecular entity by virtue of the molecular entity possessing the same amount of electrons overall as protons, thus having an overall neutral charge. [PATO]</skos:definition>
-        <skos:prefLabel>neutral charge</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/PATO_0002195 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/PATO_0002195">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0002193"/>
-        <owl:disjointWith rdf:resource="http://purl.obolibrary.org/obo/PATO_0002196"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/pato-owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>positive charge</rdfs:label>
-        <skos:altLabel>positive</skos:altLabel>
-        <skos:definition>Positive charge is a quality which inheres in a molecular entity by virtue of the molecular entity possessing more protons overall than electrons, thus having an overall positive charge. [PATO]</skos:definition>
-        <skos:prefLabel>positive charge</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/PATO_0002196 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/PATO_0002196">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0002193"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/pato-owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>negative charge</rdfs:label>
-        <skos:altLabel>negative</skos:altLabel>
-        <skos:definition>Negative charge is a quality which inheres in a molecular entity by virtue of the molecular entity possessing more electrons overall than protons, thus having an overall negative charge. [PATO]</skos:definition>
-        <skos:prefLabel>negative charge</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/PATO_0002243 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/PATO_0002243">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0001574"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/pato-owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>fluid flow rate (quality)</rdfs:label>
-        <skos:altLabel>fluid flow rate</skos:altLabel>
-        <skos:altLabel>volume flow rate</skos:altLabel>
-        <skos:altLabel>volumetric flow rate</skos:altLabel>
-        <skos:changeNote>2019-09-20 Changed pref label for uniqueness. [Allotrope]</skos:changeNote>
-        <skos:definition>A physical quality inhering in a fluid (liquid or gas) by virtue of the amount of fluid which passes through a given surface per unit time. [PATO]</skos:definition>
-        <skos:prefLabel>fluid flow rate (quality)</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/PATO_0002244 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/PATO_0002244">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0001574"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/pato-owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-        <rdfs:label>mass flow rate (quality)</rdfs:label>
-        <skos:altLabel>mass flow rate</skos:altLabel>
-        <skos:changeNote>2019-09-20 Changed pref label for uniqueness. [Allotrope]</skos:changeNote>
-        <skos:definition>A flow rate quality inhering in a substance by virtue of the mass of substance which passes through a given surface per unit time. [PATO]</skos:definition>
-        <skos:prefLabel>mass flow rate (quality)</skos:prefLabel>
     </owl:Class>
     
 

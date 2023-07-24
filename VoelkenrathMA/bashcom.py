@@ -11,11 +11,11 @@ import os
 # IRI-file: txt-file with the IRI's
 # onto: name of the output-file
 URL = "https://raw.githubusercontent.com/nfdi4cat/Ontology-Overview-of-NFDI4Cat/main/ontologies/AFO.ttl"
-IRI_file = "ontologies/robot_top_iri.txt"
+IRI_file = "ontologies/robot_bot_iri.txt"
 onto = "ontologies/top.owl"
 
 # meth: methods can be found here [http://robot.obolibrary.org/extract]
-meth = "TOP"
+meth = "BOT"
 
 bashCommand = "java -jar c://Windows/robot.jar extract --input-iri {} --method {} --term-file {} --output {} ".format(URL, meth, IRI_file, onto)
 
