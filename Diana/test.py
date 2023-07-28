@@ -94,13 +94,14 @@ of [RhI(Ph3P)3]+, the benchmark of homogeneous catalysts in liquid-phase
 hydroformylation. For this reason, a fitted synthetic strategy is required to develop
 catalysts based exclusively on Rh2P NPs.'''
 
-test_sents= text_prep(test_txt)
+test_sents = text_prep(test_txt)
 
 
 #new_world= owlready2.World()
 #for k,value in onto_list.items():
 #    onto= new_world.get_ontology(value).load()
 #    print('{} loaded'.format(k))
-categories,chem_list,abbreviations=CatalysisIE_search(model, test_sents, onto_list)
+categories,chem_list,abbreviations, cat_sup = CatalysisIE_search(model, test_sents, onto_list)
 #entity= 'heterogeneous rhodium oxide catalyst encapsulated within microporous silicalite-1 (S-1) zeolite'
 #is_s_dict=search_entity(onto=onto, entity_full= entity, category= 'Catalyst', onto_list=onto_list,IRI_json_filename='iriDictionary')
+new_dict, missing, match_dict= chemical_prep(chem_list, onto_list, onto)

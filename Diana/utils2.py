@@ -78,13 +78,12 @@ def synonym_dicts(class_list):
 
     """
     print("Extracting formulae...")
-    desc_dict = {}
-    N_cl = len(class_list)
+    desc_dict = {} 
     temp_class_label = []
     
     def_id = "hasRelatedSynonym"
 
-    for i in range(N_cl):
+    for i in range(len(class_list)):
         temp_class = class_list[i]
         #check, if label and definition are not empty:
         #Definition: IAO_0000115, comment
@@ -112,6 +111,7 @@ def synonym_dicts(class_list):
     print("Done.")
     return desc_dict
 
+
 def chemical_prep(chem_list, onto_list):
 
     """
@@ -119,7 +119,7 @@ def chemical_prep(chem_list, onto_list):
     separation in components and creation of dictionary:
         comp_dict = {'molecule1': ['comp1', 'comp2'],
                      'molecule2': ['comp3', 'comp1']}
-    Serch in ontology for classes-synonyms: compare synonyms of ontology-entities with values of comp_dict, save them in dictionary
+    Search in ontology for classes-synonyms: compare synonyms of ontology-entities with values of comp_dict, save them in dictionary
     
     Parameters
     ----------
@@ -135,34 +135,55 @@ def chemical_prep(chem_list, onto_list):
 
     """
     comp_dict = {}
+    
     new_world3 = owlready2.World()
     onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
+    
     onto_class_list = list(onto.classes())
     onto_dict = synonym_dicts(onto_class_list)
     
     for molecule in chem_list:
-        entity_split = entity.split()
-        if len(entity_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) is not None:
-            comp_dict[molecule] = entity_split  
+        molecule_split = molecule.split()
+        if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) is not None:
+            comp_dict[molecule] = molecule_split  
         else:
             comp = re.findall(r'([A-Z](?:[a-z])?)',molecule)
             comp_dict[molecule] = comp
     class_list=[]        
     onto_new_dict ={}
     for k,v in comp_dict.items():
-        onto_new_dict[k]=[]
-        class_list.append(k)
-        for comp in v:
-            for k_o, v_o in onto_dict.items():
-                for syn_comp in v_o: 
-                    if comp == syn_comp:
+
+        for k_o, v_o in onto_dict.items():
+
+            if k not in onto_new_dict.keys():
+                onto_new_dict[k]=[]
+                if k not in class_list:
+                    class_list.append(k)
+                done=False
+                for c in v:
+                    
+                    if k_o in onto_new_dict[k]:
+                        done = True
+                        break
+                    elif c in v_o:
                         onto_new_dict[k].append(k_o)
-                        class_list.append(k_o)
-    _, missing = create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
+                        if k_o not in class_list:
+                            class_list.append(k_o)       
+                    else:
+                        print(c)
+                        onto_new_dict[k].append(c)
+                        if c not in class_list:
+                            class_list.append(c)
+                if done:
+                    break
+    print(class_list)
+    missing, match_dict = create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
 
 
             
-    return onto_new_dict, missing
+    return onto_new_dict, missing, match_dict
+
+
 
 #create snip and merge ontologies...
 
@@ -334,20 +355,26 @@ def CatalysisIE_search(model, test_sents, onto_list):
                         chem_list.append(c)
             entity_old=entity
             a=j+1
-    return categories,chem_list,abbreviation
+    return categories,chem_list,abbreviation, cat_sup
 
 def catalyst_support(cat_sup,onto):
     for k,v in cat_sup.items():
         cat=onto.search_one(label=k)
         for i in v:
             ...#carrier_role
-
+    
 def catalyst_entity(categories):
     nlp = spacy.load('en_core_web_sm')
-    
+    based_cems={}
     for k,v in categories.items():
         if k =='Catalyst':
             for entity in v:
+                if "based" in entity:
+                     based_m= re.search('based',entity)
+                     e_snip= entity[0:based_m.span()[0]-1]
+                     spans = Document(e_snip).cems
+                     for c in spans:
+                         based_cems[c]
                 spans = Document(entity).cems
                 doc = nlp.entity
                 entity_n = " ".join([token.lemma_ for token in doc])
@@ -366,19 +393,29 @@ def search_entity (onto, entity_full, category, onto_list,IRI_json_filename='iri
     #for value in onto_list.values():
         #onto= new_world.get_ontology(value).load()
     nlp = spacy.load('en_core_web_sm')
-    doc = nlp(entity_full)
+    
     #process=['source','lemma']
-    tags=['NOUN','PROPN', 'VERB', 'ADJ' ]
+    tags=['NOUN', 'ADJ','PNOUN']
     spans = Document(entity_full).cems
     chemicals=[]
     for c in spans:
         c=str(c).split()
         chemicals.extend(c)
-    entity_full = re.sub(r'\[\d+\]', '', entity_full)
-    brackets = re.findall('([\(].*?[\)])[\s,.]', entity_full)
+    entity_full = re.sub(r'\[\d+\]', '', entity_full)  #delete all numbers in square brackets
+    brackets = re.findall('([\(].*?[\)])[\s,.]', entity_full)  #delete all abbreviations in brackets
     for e in brackets:
         entity_full=entity_full.replace(e,'') 
-    entity_lemma = " ".join([token.lemma_ for token in doc])
+    doc = nlp(entity_full)
+    i=0
+    while i < len(doc):
+        if i!=len(doc)-1 and doc[i].text=='[' and doc[i+1].text[-1]=='+':
+                entity_lemma =entity_lemma + " " + doc[i].text + doc[i+1].text
+                i += 1
+        elif doc[i].pos_=='NOUN':
+            entity_lemma = entity_lemma+" "+doc[i].lemma_
+        else:
+            entity_lemma = entity_lemma+" "+doc[i].text
+        i += 1    
     sub = {}
     super_class = None
     entity_old = ""
@@ -428,8 +465,7 @@ def search_entity (onto, entity_full, category, onto_list,IRI_json_filename='iri
         
     return is_a_dict
              
-            
-                
+
 def create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary', include_main= False):
         f = open('{}.json'.format(IRI_json_filename))
         onto_dict = json.load(f)
@@ -474,7 +510,7 @@ def search_in_nested_dict_val(value, onto_names, missing, onto_dict, match_dict)
             for key, val in onto_dict[k][IRI].items():
                 if val and value.lower() == val.lower():
                     match_dict[val] = [IRI,k]
-                else:
+                elif value not in missing:
                     missing.append(value)
             
     return match_dict, missing    
@@ -484,7 +520,7 @@ def search_value_in_nested_dict(value, onto_names, missing, onto_dict, match_dic
             for key, val in onto_dict[k][IRI].items():
                 if val and value.lower() == val.lower():
                     match_dict[IRI] = val
-                else:
+                elif value not in missing:
                     missing.append(value)
             
     return match_dict, missing
@@ -537,10 +573,37 @@ def equality( onto_list,onto_name='AFO'):
                         'Equivalence with {} added automatically'.format(onto.search_one(iri=iri_old).iri)]) 
     onto.save('./ontologies/{}_upd1.owl'.format(onto_name.lower())) 
     return eq   
-        
-        
-    
-      
+
+ckpt_name = 'CatalysisIE/checkpoint/CV_0.ckpt'
+bert_name = 'CatalysisIE/pretrained/scibert_domain_adaption'
+model = BERTSpan.load_from_checkpoint(ckpt_name, model_name=bert_name, train_dataset=[], val_dataset=[], test_dataset=[])
+
+onto_list ={
+            'ChEBI': 'http://purl.obolibrary.org/obo/chebi.owl',
+            #'BFO'  : 'http://purl.obolibrary.org/obo/bfo/2.0/bfo.owl',
+            'RXNO' : 'http://purl.obolibrary.org/obo/rxno.owl',
+            'CHMO' : 'http://purl.obolibrary.org/obo/chmo.owl',
+            'AFO'  : "./ontologies/afo.owl"
+            }          
+test_txt='''In order to reveal the influences of metal-incorporation and regeneration of ZSM-5 zeolites on naphtha catalytic cracking, the fresh and regenerated Sr, Zr and La-loaded ZSM-5 zeolites have been prepared and evaluated using n-pentane catalytic cracking as a model reaction.
+It was found that the metal-incorporated ZSM-5 zeolites promoted hydride transfer reactions, and the Zr-incorporation helped to promote and maintain the catalytic activity while reduced alkenes selectivity;
+the regenerated ZSM-5 zeolites promoted C–H bond breaking that increased alkenes selectivity and n-pentane conversion but accelerated catalyst deactivation.
+The regenerated metal-incorporated ZSM-5 zeolites combined the feature roles of metal-incorporation and regeneration in modulating reaction pathways, and seemed a promising way to balance the activity, stability and alkenes selectivity, facilitating the optimal production for light olefins.
+Within the research scope, the regenerated Zr-loaded ZSM-5 zeolites reached an optimal production (0.97 g) for light olefins in n-pentane catalytic cracking at 550 °C with a weight hourly space velocity of 3.7 h−1 in 3 h, which was 24% higher than that of the parent HZSM-5 (0.78 g).
+RhCo/SiO2 catalyst.This work reported the heterogeneous rhodium oxide catalyst encapsulated within microporous silicalite-1 (S-1) zeolite (Rh2O3@S-1) through epitaxial growth of S-1 seeds pre-anchored with rhodium species.
+RhCl3 • nH2O, Co(NO3)2 • 6H2O and 
+Co2(CO)8 were purchased commercially. 
+Supported catalysts based on the Rh-Co couple, mainly derived from the decomposition of 
+bimetallic carbonylic clusters, were found particularly active and selective in the vapor phase 
+hydroformylation of simple olefins provided that 
+the two metals were in intimate contact 
+Rh4(CO)12, and RhCo3(CO)12, were synthesized 
+according to literature [14,15]. SiO2 was a silica 
+‘Aerosil’ supplied by Degussa with a surface 
+area of 380 m2/g.'''
+test_sents = text_prep(test_txt)        
+categories,chem_list,abbreviations, cat_sup = CatalysisIE_search(model, test_sents, onto_list)    
+new_dict, missing, match_dict= chemical_prep(chem_list, onto_list)      
 """       
 class expand_onto:
     
