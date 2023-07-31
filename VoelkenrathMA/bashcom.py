@@ -10,9 +10,11 @@ import os
 # URL: link to ontologie
 # IRI-file: txt-file with the IRI's
 # onto: name of the output-file
-URL = "https://raw.githubusercontent.com/nfdi4cat/Ontology-Overview-of-NFDI4Cat/main/ontologies/AFO.ttl"
-IRI_file = "ontologies/robot_bot_iri.txt"
-onto = "ontologies/top.owl"
+
+#URL = "https://raw.githubusercontent.com/nfdi4cat/Ontology-Overview-of-NFDI4Cat/main/ontologies/AFO.ttl"
+URL = r"C:\OntoCAPE\chemical_process_system\CPS_behavior\behavior.owl"
+IRI_file = "ontologies/OntoCAPE-IRI.txt"
+onto = "ontologies/onto-test.owl"
 
 # meth: methods can be found here [http://robot.obolibrary.org/extract]
 meth = "BOT"

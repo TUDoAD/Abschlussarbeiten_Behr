@@ -1081,6 +1081,464 @@
     
 
 
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponent -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponent">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Substance"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>The class ChemicalComponent subsumes ChemicalSpecies and PseudoComponents.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponentConstant -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponentConstant">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalReaction -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalReaction">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#System"/>
+        <skos:definition>A ChemicalReaction converts some ChemicalSpecies (or MolecularEntities) into some other ChemicalSpecies (or MolecularEntities).</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalSpecies -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalSpecies">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponent"/>
+        <skos:definition>A ChemicalSpecies represents pure Substances at the macroscopic scale. It consists of an “ensemble of chemically identical molecular entities […]. The term is applied equally to a set of chemically identical atomic or molecular structural units in a solid array. […] The wording of the definition […] is intended to embrace both cases such as graphite, sodium chloride or a surface oxide, where the basic structural units may not be capable of isolated existence, as well as those cases where they are.” (McNaught &amp; Wilkinson, 1997).</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CompositeReaction -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CompositeReaction">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#SingleReaction"/>
+        <skos:definition>A CompositeReaction is a ChemicalReaction that can be decomposed into several ElementaryReactions. Examples are parallel reactions (simultaneously occurring ElementaryReactions that form different products from a single set of reactants) and stepwise reactions (a set of consecutive ElementaryReactions with at least one reaction intermediate).</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CriticalMolarVolume -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CriticalMolarVolume">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponentConstant"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>The CriticalMolarVolume is the volume of one mole of a substance at the CriticalTemperature and CriticalPressure.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CriticalPressure -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CriticalPressure">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponentConstant"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>The minimum pressure which would suffice to liquefy a Substance at its CriticalTemperature. Above the CriticalPressure, increasing the temperature will not cause a fluid to vaporize to give a two-phase system (McNaught &amp; Wilkinson, 1997).</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CriticalTemperature -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CriticalTemperature">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponentConstant"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>That temperature, characteristic of each gas, above which it is not possible to liquefy a given gas (McNaught &amp; Wilkinson, 1997). 
+The CriticalTemperature of a material is the temperature above which distinct liquid and gas phases do not exist. As the CriticalTemperature is approached, the properties of the gas and liquid phases become the same. Above the CriticalTemperature, there is only one phase. [Wikipedia, 2006]</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Density -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Density">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ThermodynamicStateProperty"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>The mass of a PhaseSystem divided by its volume. It is the reciprocal of SpecificVolume.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Device -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Device">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#System"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>Devices are the crucial elements of a NetworkSystem, holding the major functionality.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Diameter -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Diameter">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>The length of a line segment between two points on a Disk or Sphere which passes through the center of the Disk or Sphere.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#DiffusionCoefficient -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#DiffusionCoefficient">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TransportPhenomenaProperty"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>Proportionality constant, relating the flux of amount of some PhaseComponent to its concentration gradient.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#DynamicViscosity -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#DynamicViscosity">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TransportPhenomenaProperty"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>For a laminar flow of a fluid, the ratio of the shear stress to the VelocityGradient perpendicular to the plane of shear (McNaught &amp; Wilkinson, 1997).</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ElementaryReaction -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ElementaryReaction">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#SingleReaction"/>
+        <skos:definition>An ElementaryReaction is a ChemicalReaction for which no reaction intermediates have been detected or need to be postulated in order to describe the ChemicalReaction on a molecular scale. An ElementaryReaction is assumed to occur in a single step and to pass through a single transition state (McNaught &amp; Wilkinson, 1997).</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Height -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Height">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>The shortest distance between the base of a geometric figure and its top, whether that top is an opposite vertex, an apex, or another base.
+[http://www.mathwords.com/a/altitude.htm]</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#HeterogeneousMaterialAmount -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#HeterogeneousMaterialAmount">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MaterialAmount"/>
+        <skos:definition>A HeterogeneousMaterialAmount is a composite material amount that involves mate-rial amounts with different dispersion states due to phases or particle size.</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#HomogeneousMaterialAmount -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#HomogeneousMaterialAmount">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MaterialAmount"/>
+        <skos:definition>A HomogeneousMaterialAmount represents a MaterialAmount with a continuous, single phase which is not part of another more complex material amount.</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#IntensiveProperty -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#IntensiveProperty">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhysicalQuantity"/>
+        <skos:definition>An IntensiveProperty is a PhysicalQuantity, the Value of which does not depend on the system size or the amount of material in the system.</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#IrreversibleReaction -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#IrreversibleReaction">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#SingleReaction"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MaterialAmount -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MaterialAmount">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Device"/>
+        <skos:definition>A MaterialAmount characterizes the time-variant behavior of a chunk of material.</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Mixture -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Mixture">
+        <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001099"/>
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Substance"/>
+        <skos:definition>A Mixture is a Substance that contains two or more ChemicalComponents. The mixture class can represent two different things: 
+(a) a loose collection of segregate chemical components, or 
+(b) a compound material formed by several blended chemical components. 
+The composition of a Mixture is not fixed.</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MolecularWeight -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MolecularWeight">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponentConstant"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>Ratio of the mass of one molecule of a Substance, relative to the unified atomic mass unit (which is equal to 1/12 the mass of one atom of carbon-12). Also known as (relative) molar mass or (relative) molecular mass.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Object -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Object">
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ParticulateMaterialAmount -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ParticulateMaterialAmount">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#HeterogeneousMaterialAmount"/>
+        <skos:definition>A ParticulateMaterialAmount represents the dispersed material amount in a hetero-geneous system which is composed of single particles which typically hold uneven characteristics.</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhaseSystemProperty -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhaseSystemProperty">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#IntensiveProperty"/>
+        <skos:definition>A PhaseSystemProperty is an IntensiveProperty that characterizes a PhaseSystem. It can be described or calculated without reference to the shape, size, or amount of a particular occurrence of a material. In the case of calculation, this is consistent with the usage of general-purpose physical property packages, where such information is not required as the input for the calculation.</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhysicalQuantity -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhysicalQuantity">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Property"/>
+        <skos:definition>A PhysicalQuantity is a Property that has quantifiable Values. The concept includes scalars as well as vectors and higher-order tensors. Moreover, it comprises both physical quantities, such as mass or velocity, and nonphysical quantities, such as amount of money or rate of inflation</skos:definition>
+        <skos:definition>Class originally comes from OntoCape.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Pressure -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Pressure">
+        <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ThermodynamicStateProperty"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>The (total absolute) pressure of a PhaseSystem</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Property -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Property">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Object"/>
+        <skos:definition>Class originally comes from OntoCape.</skos:definition>
+        <skos:definition>The Property class represents the individual properties (traits, qualities) of a System, which distinguish the System from others. Typical examples are Size, Color, or Weight, which are modeled as subclasses of Property.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PseudoComponent -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PseudoComponent">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponent"/>
+        <skos:definition>A PseudoComponent is an auxiliary concept, which represents the averaged properties of a number of ChemicalSpecies. PseudoComponents are often assumed to exist in the context of physical property calculations of complex multicomponent mixtures, such as petroleum, fatty alcohols, or polymers.</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#QuasiHomogeneousMaterialAmount -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#QuasiHomogeneousMaterialAmount">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#HeterogeneousMaterialAmount"/>
+        <skos:definition>A QuasiHomogeneousMaterialAmount assumes at least two parts, a dispersed material amount and a continuous material amount, where one is dispersed in the other. It is characterized by average physical quantities of both parts.</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Radius -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Radius">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>The length of the line segment between the center and a point on a circle or Sphere.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ReactionNetwork -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ReactionNetwork">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalReaction"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ReversibleReaction -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ReversibleReaction">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#SingleReaction"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhysicalQuantity"/>
+        <skos:definition>A ScalarQuantity is a scalar-valued PhysicalQuantity.</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#SingleReaction -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#SingleReaction">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalReaction"/>
+        <skos:definition>Class originally comes from OntoCPAE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#StoichiometricCoefficient -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#StoichiometricCoefficient">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#UniqueOriginN-aryRelation"/>
+        <skos:definition>A StoichiometricCoefficient indicates the multiplicity of a ChemicalSpecies or MolecularEntity that participates in a ChemicalReaction.</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Substance -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Substance">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#System"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#System -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#System">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Object"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>The System class denotes all kind of systems, which may be physical or abstract</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Temperature -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Temperature">
+        <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001584"/>
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ThermodynamicStateProperty"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>The temperature of a PhaseSystem</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ThermalConductivity -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ThermalConductivity">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TransportPhenomenaProperty"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>TheThermalConductivity is the coefficient relating the heat flux to the temperature gradient.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ThermodynamicStateProperty -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ThermodynamicStateProperty">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhaseSystemProperty"/>
+        <skos:definition>A ThermodynamicStateProperty is a PhaseSystemProperty that can serve as an IntensiveThermodynamicStateVariable (i.e., characterize the thermodynamic state of a PhaseSystem).</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TimePeriod -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TimePeriod">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity"/>
+        <skos:definition>A TimePeriod is a ScalarQuantity that denotes the temporal duration of a period of time. Optionally, the starting time of the TimePeriod can be indicated.</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TotalSurfaceArea -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TotalSurfaceArea">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>The total area of a Surface or of (all) the exterior surface(s) of a Solid.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TransportPhenomenaProperty -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TransportPhenomenaProperty">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhaseSystemProperty"/>
+        <skos:definition>A TransportPhenomenaProperty is a PhaseSystemProperty that subsumes DynamicViscosity, HeatConductivity, and Diffusion Coefficient.</skos:definition>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#UniqueOriginN-aryRelation -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#UniqueOriginN-aryRelation">
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Volume -->
+
+    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Volume">
+        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity"/>
+        <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
+        <skos:definition>The total amount of space enclosed in a Solid [http://www.mathwords.com/v/volume.htm]</skos:definition>
+    </owl:Class>
+    
+
+
     <!-- http://purl.allotrope.org/ontologies/common#AFC_0000050 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/common#AFC_0000050">
@@ -4341,10 +4799,10 @@ dispersion. [NIST]</skos:definition>
         <obo:IAO_0000116 xml:lang="en">BFO 2 Reference: Continuant entities are entities which can be sliced to yield parts only along the spatial dimension, yielding for example the parts of your table which we call its legs, its top, its nails. ‘My desk stretches from the window to the door. It has spatial parts, and can be sliced (in space) in two. With respect to time, however, a thing is a continuant.’ [60, p. 240</obo:IAO_0000116>
         <obo:IAO_0000116>Continuant doesn&apos;t have a closure axiom because the subclasses don&apos;t necessarily exhaust all possibilites. For example, in an expansion involving bringing in some of Ceuster&apos;s other portions of reality, questions are raised as to whether universals are continuants</obo:IAO_0000116>
         <obo:IAO_0000600>A continuant is an entity that persists, endures, or continues to exist through time while maintaining its identity. (axiom label in BFO2 Reference: [008-002])</obo:IAO_0000600>
-        <obo:IAO_0000601 xml:lang="en">if b is a continuant and if, for some t, c has_continuant_part b at t, then c is a continuant. (axiom label in BFO2 Reference: [126-001])</obo:IAO_0000601>
-        <obo:IAO_0000601 xml:lang="en">if b is a continuant and if, for some t, cis continuant_part of b at t, then c is a continuant. (axiom label in BFO2 Reference: [009-002])</obo:IAO_0000601>
         <obo:IAO_0000601>if b is a continuant and if, for some t, c has_continuant_part b at t, then c is a continuant. (axiom label in BFO2 Reference: [126-001])</obo:IAO_0000601>
+        <obo:IAO_0000601 xml:lang="en">if b is a continuant and if, for some t, c has_continuant_part b at t, then c is a continuant. (axiom label in BFO2 Reference: [126-001])</obo:IAO_0000601>
         <obo:IAO_0000601>if b is a continuant and if, for some t, cis continuant_part of b at t, then c is a continuant. (axiom label in BFO2 Reference: [009-002])</obo:IAO_0000601>
+        <obo:IAO_0000601 xml:lang="en">if b is a continuant and if, for some t, cis continuant_part of b at t, then c is a continuant. (axiom label in BFO2 Reference: [009-002])</obo:IAO_0000601>
         <obo:IAO_0000601>if b is a material entity, then there is some temporal interval (referred to below as a one-dimensional temporal region) during which b exists. (axiom label in BFO2 Reference: [011-002])</obo:IAO_0000601>
         <obo:IAO_0000602>(forall (x y) (if (and (Continuant x) (exists (t) (continuantPartOfAt y x t))) (Continuant y))) // axiom label in BFO2 CLIF: [009-002] </obo:IAO_0000602>
         <obo:IAO_0000602>(forall (x y) (if (and (Continuant x) (exists (t) (hasContinuantPartOfAt y x t))) (Continuant y))) // axiom label in BFO2 CLIF: [126-001] </obo:IAO_0000602>
@@ -4421,12 +4879,12 @@ dispersion. [NIST]</skos:definition>
         <obo:BFO_0000180>Occurrent</obo:BFO_0000180>
         <obo:IAO_0000116 xml:lang="en">BFO 2 Reference: every occurrent that is not a temporal or spatiotemporal region is s-dependent on some independent continuant that is not a spatial region</obo:IAO_0000116>
         <obo:IAO_0000116 xml:lang="en">BFO 2 Reference: s-dependence obtains between every process and its participants in the sense that, as a matter of necessity, this process could not have existed unless these or those participants existed also. A process may have a succession of participants at different phases of its unfolding. Thus there may be different players on the field at different times during the course of a football game; but the process which is the entire game s-depends_on all of these players nonetheless. Some temporal parts of this process will s-depend_on on only some of the players.</obo:IAO_0000116>
-        <obo:IAO_0000116 xml:lang="en">Occurrent doesn&apos;t have a closure axiom because the subclasses don&apos;t necessarily exhaust all possibilites. An example would be the sum of a process and the process boundary of another process.</obo:IAO_0000116>
         <obo:IAO_0000116>Occurrent doesn&apos;t have a closure axiom because the subclasses don&apos;t necessarily exhaust all possibilites. An example would be the sum of a process and the process boundary of another process.</obo:IAO_0000116>
+        <obo:IAO_0000116 xml:lang="en">Occurrent doesn&apos;t have a closure axiom because the subclasses don&apos;t necessarily exhaust all possibilites. An example would be the sum of a process and the process boundary of another process.</obo:IAO_0000116>
         <obo:IAO_0000116>Simons uses different terminology for relations of occurrents to regions: Denote the spatio-temporal location of a given occurrent e by &apos;spn[e]&apos; and call this region its span. We may say an occurrent is at its span, in any larger region, and covers any smaller region. Now suppose we have fixed a frame of reference so that we can speak not merely of spatio-temporal but also of spatial regions (places) and temporal regions (times). The spread of an occurrent, (relative to a frame of reference) is the space it exactly occupies, and its spell is likewise the time it exactly occupies. We write &apos;spr[e]&apos; and `spl[e]&apos; respectively for the spread and spell of e, omitting mention of the frame.</obo:IAO_0000116>
         <obo:IAO_0000600>An occurrent is an entity that unfolds itself in time or it is the instantaneous boundary of such an entity (for example a beginning or an ending) or it is a temporal or spatiotemporal region which such an entity occupies_temporal_region or occupies_spatiotemporal_region. (axiom label in BFO2 Reference: [077-002])</obo:IAO_0000600>
-        <obo:IAO_0000601 xml:lang="en">Every occurrent occupies_spatiotemporal_region some spatiotemporal region. (axiom label in BFO2 Reference: [108-001])</obo:IAO_0000601>
         <obo:IAO_0000601>Every occurrent occupies_spatiotemporal_region some spatiotemporal region. (axiom label in BFO2 Reference: [108-001])</obo:IAO_0000601>
+        <obo:IAO_0000601 xml:lang="en">Every occurrent occupies_spatiotemporal_region some spatiotemporal region. (axiom label in BFO2 Reference: [108-001])</obo:IAO_0000601>
         <obo:IAO_0000601>b is an occurrent entity iff b is an entity that has temporal parts. (axiom label in BFO2 Reference: [079-001])</obo:IAO_0000601>
         <obo:IAO_0000602>(forall (x) (if (Occurrent x) (exists (r) (and (SpatioTemporalRegion r) (occupiesSpatioTemporalRegion x r))))) // axiom label in BFO2 CLIF: [108-001] </obo:IAO_0000602>
         <obo:IAO_0000602>(forall (x) (iff (Occurrent x) (and (Entity x) (exists (y) (temporalPartOf y x))))) // axiom label in BFO2 CLIF: [079-001] </obo:IAO_0000602>
@@ -4501,8 +4959,8 @@ dispersion. [NIST]</skos:definition>
         <obo:IAO_0000112 xml:lang="en">the bottom right portion of a human torso</obo:IAO_0000112>
         <obo:IAO_0000112>the interior of your mouth</obo:IAO_0000112>
         <obo:IAO_0000115>b is an independent continuant = Def. b is a continuant which is such that there is no c and no t such that b s-depends_on c at t. (axiom label in BFO2 Reference: [017-002])</obo:IAO_0000115>
-        <obo:IAO_0000601 xml:lang="en">For any independent continuant b and any time t there is some spatial region r such that b is located_in r at t. (axiom label in BFO2 Reference: [134-001])</obo:IAO_0000601>
         <obo:IAO_0000601>For any independent continuant b and any time t there is some spatial region r such that b is located_in r at t. (axiom label in BFO2 Reference: [134-001])</obo:IAO_0000601>
+        <obo:IAO_0000601 xml:lang="en">For any independent continuant b and any time t there is some spatial region r such that b is located_in r at t. (axiom label in BFO2 Reference: [134-001])</obo:IAO_0000601>
         <obo:IAO_0000601>For every independent continuant b and time t during the region of time spanned by its life, there are entities which s-depends_on b during t. (axiom label in BFO2 Reference: [018-002])</obo:IAO_0000601>
         <obo:IAO_0000602>(forall (x t) (if (IndependentContinuant x) (exists (r) (and (SpatialRegion r) (locatedInAt x r t))))) // axiom label in BFO2 CLIF: [134-001] </obo:IAO_0000602>
         <obo:IAO_0000602>(forall (x t) (if (and (IndependentContinuant x) (existsAt x t)) (exists (y) (and (Entity y) (specificallyDependsOnAt y x t))))) // axiom label in BFO2 CLIF: [018-002] </obo:IAO_0000602>
@@ -4613,8 +5071,8 @@ dispersion. [NIST]</skos:definition>
         <obo:BFO_0000180>TemporalRegion</obo:BFO_0000180>
         <obo:IAO_0000116>Temporal region doesn&apos;t have a closure axiom because the subclasses don&apos;t exhaust all possibilites. An example would be the mereological sum of a temporal instant and a temporal interval that doesn&apos;t overlap the instant. In this case the resultant temporal region is neither 0-dimensional nor 1-dimensional</obo:IAO_0000116>
         <obo:IAO_0000600>A temporal region is an occurrent entity that is part of time as defined relative to some reference frame. (axiom label in BFO2 Reference: [100-001])</obo:IAO_0000600>
-        <obo:IAO_0000601 xml:lang="en">All parts of temporal regions are temporal regions. (axiom label in BFO2 Reference: [101-001])</obo:IAO_0000601>
         <obo:IAO_0000601>All parts of temporal regions are temporal regions. (axiom label in BFO2 Reference: [101-001])</obo:IAO_0000601>
+        <obo:IAO_0000601 xml:lang="en">All parts of temporal regions are temporal regions. (axiom label in BFO2 Reference: [101-001])</obo:IAO_0000601>
         <obo:IAO_0000601>Every temporal region t is such that t occupies_temporal_region t. (axiom label in BFO2 Reference: [119-002])</obo:IAO_0000601>
         <obo:IAO_0000602>(forall (r) (if (TemporalRegion r) (occupiesTemporalRegion r r))) // axiom label in BFO2 CLIF: [119-002] </obo:IAO_0000602>
         <obo:IAO_0000602>(forall (x y) (if (and (TemporalRegion x) (occurrentPartOf y x)) (TemporalRegion y))) // axiom label in BFO2 CLIF: [101-001] </obo:IAO_0000602>
@@ -5118,8 +5576,8 @@ dispersion. [NIST]</skos:definition>
         <obo:IAO_0000116 xml:lang="en">BFO 2 Reference: Object, Fiat Object Part and Object Aggregate are not intended to be exhaustive of Material Entity. Users are invited to propose new subcategories of Material Entity.</obo:IAO_0000116>
         <obo:IAO_0000116>BFO 2 Reference: ‘Matter’ is intended to encompass both mass and energy (we will address the ontological treatment of portions of energy in a later version of BFO). A portion of matter is anything that includes elementary particles among its proper or improper parts: quarks and leptons, including electrons, as the smallest particles thus far discovered; baryons (including protons and neutrons) at a higher level of granularity; atoms and molecules at still higher levels, forming the cells, organs, organisms and other material entities studied by biologists, the portions of rock studied by geologists, the fossils studied by paleontologists, and so on.Material entities are three-dimensional entities (entities extended in three spatial dimensions), as contrasted with the processes in which they participate, which are four-dimensional entities (entities extended also along the dimension of time).According to the FMA, material entities may have immaterial entities as parts – including the entities identified below as sites; for example the interior (or ‘lumen’) of your small intestine is a part of your body. BFO 2.0 embodies a decision to follow the FMA here.</obo:IAO_0000116>
         <obo:IAO_0000600>A material entity is an independent continuant that has some portion of matter as proper or improper continuant part. (axiom label in BFO2 Reference: [019-002])</obo:IAO_0000600>
-        <obo:IAO_0000601 xml:lang="en">Every entity which has a material entity as continuant part is a material entity. (axiom label in BFO2 Reference: [020-002])</obo:IAO_0000601>
         <obo:IAO_0000601>Every entity which has a material entity as continuant part is a material entity. (axiom label in BFO2 Reference: [020-002])</obo:IAO_0000601>
+        <obo:IAO_0000601 xml:lang="en">Every entity which has a material entity as continuant part is a material entity. (axiom label in BFO2 Reference: [020-002])</obo:IAO_0000601>
         <obo:IAO_0000601>every entity of which a material entity is continuant part is also a material entity. (axiom label in BFO2 Reference: [021-002])</obo:IAO_0000601>
         <obo:IAO_0000602>(forall (x) (if (MaterialEntity x) (IndependentContinuant x))) // axiom label in BFO2 CLIF: [019-002] </obo:IAO_0000602>
         <obo:IAO_0000602>(forall (x) (if (and (Entity x) (exists (y t) (and (MaterialEntity y) (continuantPartOfAt x y t)))) (MaterialEntity x))) // axiom label in BFO2 CLIF: [021-002] </obo:IAO_0000602>
@@ -6498,5 +6956,5 @@ Copyright © 2015-2022 Allotrope Foundation
 
 
 
-<!-- Generated by the OWL API (version 4.5.25) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
 
