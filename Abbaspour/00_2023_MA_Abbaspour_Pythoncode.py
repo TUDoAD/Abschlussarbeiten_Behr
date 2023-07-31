@@ -2,8 +2,16 @@
 """
 Created on Tue Apr 25 17:11:11 2023
 
-@author: 49157
+@author: Elnaz Abbaspour
+@author: Alexander Behr
 """
+
+
+##################################################################################### 
+#
+#                       Ontology-manipulation
+#
+##################################################################################### 
 
 # Masterthesis Abbaspour
 # Zusammenfügen des Codes
@@ -677,6 +685,13 @@ with onto:
         sync_reasoner()
 
 onto.save(file="./ontologies/Finale_Onto_.owl", format="rdfxml")
+
+##################################################################################### 
+#
+#                       END: Ontology-manipulation
+#
+##################################################################################### 
+
 
 # Alle Pakete für die Simulation in DWSIM importieren
 # Das os-Modul Das os-Modul ist das wichtigste Modul zur Interaktion mit dem Betriebssystem
