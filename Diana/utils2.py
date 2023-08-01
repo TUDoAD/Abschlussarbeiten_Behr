@@ -79,10 +79,12 @@ def synonym_dicts(class_list):
     """
     print("Extracting formulae...")
     desc_dict = {} 
+    smiles_dict = {}
+    inchikey = {}
     temp_class_label = []
     
-    def_id = "hasRelatedSynonym"
-
+    def_id = ["hasRelatedSynonym", "smiles","inchikey"]
+    
     for i in range(len(class_list)):
         temp_class = class_list[i]
         #check, if label and definition are not empty:
@@ -103,16 +105,21 @@ def synonym_dicts(class_list):
         
         if temp_class_label:
             # if class got a label which is not empty, search for definition                    
-            desc_dict[temp_class_label] = getattr(temp_class,def_id)
+            desc_dict[temp_class_label] = getattr(temp_class,def_id[0])
             if desc_dict[temp_class_label]: 
                 desc_dict[temp_class_label].append(temp_class_label)
-            else:
+            else:    
                 desc_dict[temp_class_label] = [temp_class_label]
+            smiles_dict[temp_class_label] =getattr(temp_class,def_id[1])
+            
+            #if temp_class_label in smiles_dict[temp_class_label]:
+                #smiles_dict[temp_class_label].remove(temp_class_label)
+            inchikey[temp_class_label] =getattr(temp_class,def_id[2])
     print("Done.")
-    return desc_dict
+    return desc_dict,smiles_dict, inchikey
 
 
-def chemical_prep(chem_list, onto_list):
+def chemical_prep(chem_list, onto_list, onto):
 
     """
     From list with chemicals Differentiation between long and short chemical entities for different preprocessing; 
@@ -135,12 +142,13 @@ def chemical_prep(chem_list, onto_list):
 
     """
     comp_dict = {}
-    
-    new_world3 = owlready2.World()
-    onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
+    class_list=[]        
+    onto_new_dict ={}
+    #new_world3 = owlready2.World()
+    #onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
     
     onto_class_list = list(onto.classes())
-    onto_dict = synonym_dicts(onto_class_list)
+    onto_dict,smiles_dict = synonym_dicts(onto_class_list)
     
     for molecule in chem_list:
         molecule_split = molecule.split()
@@ -149,44 +157,180 @@ def chemical_prep(chem_list, onto_list):
         else:
             comp = re.findall(r'([A-Z](?:[a-z])?)',molecule)
             comp_dict[molecule] = comp
-    class_list=[]        
-    onto_new_dict ={}
+
     for k,v in comp_dict.items():
-
-        for k_o, v_o in onto_dict.items():
-
-            if k not in onto_new_dict.keys():
-                onto_new_dict[k]=[]
-                if k not in class_list:
-                    class_list.append(k)
-                done=False
-                for c in v:
-                    
+        if k not in onto_new_dict.keys():
+            if k not in class_list:
+                class_list.append(k)
+            synonyms={}
+            for c in v:
+                if c not in class_list:
+                    class_list.append(c)
+                for k_o, v_o in onto_dict.items():              #erstellen von synonym-dictionary für molekül und ihre Komponenten 
+                    if k in v_o and k_o not in synonyms[k]:
+                        if k in synonyms.keys():
+                            synonyms[k].append(k_o)
+                        else: 
+                            synonyms[k]=[]
+                            synonyms[k].append(k_o)
                     if k_o in onto_new_dict[k]:
-                        done = True
-                        break
+                        continue
                     elif c in v_o:
-                        onto_new_dict[k].append(k_o)
-                        if k_o not in class_list:
-                            class_list.append(k_o)       
-                    else:
-                        print(c)
+                        synonyms[c].append(k_o)
+            comp_smiles,same= search_in_smiles(smiles_dict, k)
+            if k not in comp_smiles:
+                key = compare_synonyms(k,comp_smiles, synonyms)
+                onto_new_dict[key] =[]
+                if k not in class_list:
+                    class_list.remove(k)
+                    class_list.append(key)
+            elif same == True:
+                onto_new_dict[k] =[]
+            
+            
+            for c in v:            
+                    if comp_smiles not in class_list:
+                        class_list.remove(k)
+                        
+            comp_smiles,same = search_in_smiles(smiles_dict, c)   #to do: integrieren Überprüfung mit synonyms
+            if same:
+                    onto_new_dict[k].append(c)
+                    continue                
+                
+            elif c not in comp_smiles:
+                    if comp_smiles[0] not in class_list:
+                        class_list.remove(c)
+                        class_list.append(str(comp_smiles[0]))
+                    
+                    onto_new_dict[k].append(str(comp_smiles[0]))    
+                    continue
+                
+                        #onto_new_dict[k].append(k_o)
+                        #onto_new_dict[k].remove(c)
+                        #if k_o not in class_list:
+                            #class_list.append(k_o)
+                        
+            elif c not in onto_new_dict[k]:
                         onto_new_dict[k].append(c)
-                        if c not in class_list:
-                            class_list.append(c)
-                if done:
-                    break
+
     print(class_list)
     missing, match_dict = create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
 
 
             
-    return onto_new_dict, missing, match_dict
+    return onto_new_dict, missing, match_dict, class_list
 
-
-
+def search_in_smiles(smiles_dict, c):
+    same = False
+    try:
+        mol = get_compounds(c, 'formula')    
+    except:
+        try:
+           mol = get_compounds(c, 'name')       
+        except:
+            mol = [c]
+    print('{}:{}'.format(mol,c))        
+    if not mol:
+        mol_smiles = [c]
+    else:
+        if c not in mol:
+            mol_smiles = [k for k,v in smiles_dict.items() for compound in mol if compound.isomeric_smiles in v]
+            print(mol_smiles)
+            if mol_smiles:
+                for i in mol_smiles:
+                    if str(i.iupac_name)==c:
+                        same = True
+                        mol_smiles= [mol_smiles[i]]
+            else:
+                mol_smiles = mol  
+        else:
+            mol_smiles = mol    
+    return mol_smiles, same
+def compare_synonyms(k,comp_inch, synonyms):
+    done=False
+    for s in synonyms[k]:
+        for i in comp_inch:
+            if i == s:
+                output = k
+                done= True
+                break
+            else:
+                ouput = s
+        if done == True:
+            break
+    return output
 #create snip and merge ontologies...
 
+# und neu anfangen chemicals search 2.0....
+def chemical_prep_2(chem_list, onto_list, onto):
+    comp_dict = {}
+    class_list=[]        
+    onto_new_dict ={}
+    
+    #new_world3 = owlready2.World()
+    #onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
+    
+    onto_class_list = list(onto.classes())
+    onto_dict,smiles_dict, inchikey = synonym_dicts(onto_class_list)
+    for molecule in chem_list:
+         molecule_split = molecule.split()
+         if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) is not None:
+             comp_dict[molecule] = molecule_split  
+         else:
+             comp = re.findall(r'([A-Z](?:[a-z])?)',molecule)
+             comp_dict[molecule] = comp
+    for k,v in comp_dict.items():
+        if k not in onto_new_dict.keys():
+            synonyms={}
+            if k not in class_list:
+                class_list.append(k)
+            comp_check, same= search_inchikey(inchikey, k)
+            for c in v:
+                if c not in class_list:
+                    class_list.append(c)
+                for k_o, v_o in onto_dict.items():             
+                    if k in v_o:
+                        if k not in synonyms.keys():
+                            synonyms[k]=[]
+                            synonyms[k].append(k_o)
+                        elif k_o not in synonyms[k]:
+                            synonyms[k].append(k_o)
+
+                    if k_o in onto_new_dict[k]:
+                        continue
+                    elif c in synonyms.keys():
+                        synonyms[c].append(k_o)
+                    else: 
+                        synonyms[c]=[]
+                        synonyms[c].append(k_o)
+
+
+
+
+def search_inchikey(inchikey, c):
+    same = False
+    
+    try:
+        mol = get_compounds(c, 'formula')    
+    except:
+        try:
+            mol = get_compounds(c, 'name')       
+        except:
+            mol = [c]        
+    if not mol or c in mol:
+        mol_out = [c]
+    else:
+        mol_inch = [k for k, v in inchikey.items() for compound in mol if compound.inchikey in v]
+        if mol_inch:
+            for i in mol_inch:
+                if mol_inch[0] == c:
+                    same = True
+                    mol_out= mol_inch
+                    break
+                else: mol_out= mol_inch
+        else:
+            mol_out = mol          
+    return mol_out, same
 def cem_onto_ext (onto_new_dict, missing):
     """
     check in chebi ontology for synonyms
@@ -573,7 +717,7 @@ def equality( onto_list,onto_name='AFO'):
                         'Equivalence with {} added automatically'.format(onto.search_one(iri=iri_old).iri)]) 
     onto.save('./ontologies/{}_upd1.owl'.format(onto_name.lower())) 
     return eq   
-
+'''
 ckpt_name = 'CatalysisIE/checkpoint/CV_0.ckpt'
 bert_name = 'CatalysisIE/pretrained/scibert_domain_adaption'
 model = BERTSpan.load_from_checkpoint(ckpt_name, model_name=bert_name, train_dataset=[], val_dataset=[], test_dataset=[])
@@ -585,7 +729,8 @@ onto_list ={
             'CHMO' : 'http://purl.obolibrary.org/obo/chmo.owl',
             'AFO'  : "./ontologies/afo.owl"
             }          
-test_txt='''In order to reveal the influences of metal-incorporation and regeneration of ZSM-5 zeolites on naphtha catalytic cracking, the fresh and regenerated Sr, Zr and La-loaded ZSM-5 zeolites have been prepared and evaluated using n-pentane catalytic cracking as a model reaction.
+test_txt='''
+'''In order to reveal the influences of metal-incorporation and regeneration of ZSM-5 zeolites on naphtha catalytic cracking, the fresh and regenerated Sr, Zr and La-loaded ZSM-5 zeolites have been prepared and evaluated using n-pentane catalytic cracking as a model reaction.
 It was found that the metal-incorporated ZSM-5 zeolites promoted hydride transfer reactions, and the Zr-incorporation helped to promote and maintain the catalytic activity while reduced alkenes selectivity;
 the regenerated ZSM-5 zeolites promoted C–H bond breaking that increased alkenes selectivity and n-pentane conversion but accelerated catalyst deactivation.
 The regenerated metal-incorporated ZSM-5 zeolites combined the feature roles of metal-incorporation and regeneration in modulating reaction pathways, and seemed a promising way to balance the activity, stability and alkenes selectivity, facilitating the optimal production for light olefins.
@@ -601,9 +746,11 @@ Rh4(CO)12, and RhCo3(CO)12, were synthesized
 according to literature [14,15]. SiO2 was a silica 
 ‘Aerosil’ supplied by Degussa with a surface 
 area of 380 m2/g.'''
+'''
 test_sents = text_prep(test_txt)        
 categories,chem_list,abbreviations, cat_sup = CatalysisIE_search(model, test_sents, onto_list)    
-new_dict, missing, match_dict= chemical_prep(chem_list, onto_list)      
+new_dict, missing, match_dict= chemical_prep(chem_list, onto_list)     
+''' 
 """       
 class expand_onto:
     

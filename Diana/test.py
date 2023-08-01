@@ -50,7 +50,18 @@ onto_list ={
 
 #c= expand_onto(onto_list, onto_name)
 
-test_txt='''In order to reveal the influences of metal-incorporation and regeneration of ZSM-5 zeolites on naphtha catalytic cracking, the fresh and regenerated Sr, Zr and La-loaded ZSM-5 zeolites have been prepared and evaluated using n-pentane catalytic cracking as a model reaction.
+test_txt='''Intrinsic hydroformylation kinetics have been measured in a high-throughput kinetic test setup at
+temperatures varying from 448 to 498K, with the total pressure ranging from 1 to 3 MPa. A gaseous
+feed containing CO, C2H4 and H2 was used with space times varying from 2.7 kgcat s/molC2H4,in to
+149 kgcat s/molC2H4,in. Three catalysts have been investigated, i.e., 5%Rh on Al2O3, 1%Co on Al2O3 and
+0.5%Co–0.5%Rh on Al2O3. The main products observed were ethane, propanal and propanol. The Rh catalyst showed the highest hydroformylation and hydrogenation site time conversions in the investigated
+range of operating conditions. Moreover it was found on all investigated catalysts that the hydrogenation
+activation energy was about 15–20 kJ mol−1 higher than that for hydroformylation. On the Rh catalyst,
+higher ethylene feed concentrations have a more pronounced effect on CO conversion and production of
+propanal and propanol compared with an increase in the inlet concentration of the other reactants.'''
+
+'''
+In order to reveal the influences of metal-incorporation and regeneration of ZSM-5 zeolites on naphtha catalytic cracking, the fresh and regenerated Sr, Zr and La-loaded ZSM-5 zeolites have been prepared and evaluated using n-pentane catalytic cracking as a model reaction.
 It was found that the metal-incorporated ZSM-5 zeolites promoted hydride transfer reactions, and the Zr-incorporation helped to promote and maintain the catalytic activity while reduced alkenes selectivity;
 the regenerated ZSM-5 zeolites promoted C–H bond breaking that increased alkenes selectivity and n-pentane conversion but accelerated catalyst deactivation.
 The regenerated metal-incorporated ZSM-5 zeolites combined the feature roles of metal-incorporation and regeneration in modulating reaction pathways, and seemed a promising way to balance the activity, stability and alkenes selectivity, facilitating the optimal production for light olefins.
