@@ -1,0 +1,12 @@
+http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000134
+http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000088
+http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000130
+http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000131
+http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000113
+http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000096
+http://www.sarala.bioeng.auckland.ac.nz/Physical.owl#Constant
+http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000458
+http://purl.org/obo/owl/SBO#SBO_0000546
+http://purl.org/obo/owl/SBO#SBO_0000002
+http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000916
+http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000872

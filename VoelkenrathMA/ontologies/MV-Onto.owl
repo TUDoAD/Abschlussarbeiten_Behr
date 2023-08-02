@@ -9,7 +9,9 @@
      xmlns:foaf="http://xmlns.com/foaf/0.1/"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:chebi="http://purl.obolibrary.org/obo/chebi/"
      xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:oboInOwl="http://www.geneontology.org/formats/oboInOwl#"
      xmlns:property="http://purl.allotrope.org/ontologies/property#">
     <owl:Ontology rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred"/>
     
@@ -128,6 +130,48 @@
     
 
 
+    <!-- http://purl.obolibrary.org/obo/chebi/charge -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/chebi/charge"/>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/chebi/formula -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/chebi/formula"/>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/chebi/inchi -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/chebi/inchi"/>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/chebi/inchikey -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/chebi/inchikey"/>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/chebi/mass -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/chebi/mass"/>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/chebi/monoisotopicmass -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/chebi/monoisotopicmass"/>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/chebi/smiles -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/chebi/smiles"/>
+    
+
+
     <!-- http://purl.org/dc/terms/description -->
 
     <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/description"/>
@@ -167,6 +211,78 @@
     <!-- http://purl.org/dc/terms/title -->
 
     <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/title"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#hasAlternativeId -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#hasAlternativeId"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#hasDbXref -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#hasDbXref"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#hasExactSynonym -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#hasOBONamespace -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#hasOBONamespace"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#hasSynonymType -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#hasSynonymType"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#id -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#id"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#inSubset -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#inSubset"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#is_cyclic -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#is_cyclic"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#is_transitive -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#is_transitive"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#shorthand -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#shorthand"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#source -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#source"/>
     
 
 
@@ -648,6 +764,11 @@
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/BFO_0000051">
         <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/RO_0002131"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <oboInOwl:hasDbXref>BFO:0000051</oboInOwl:hasDbXref>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:id>has_part</oboInOwl:id>
+        <oboInOwl:is_cyclic rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</oboInOwl:is_cyclic>
+        <oboInOwl:shorthand>has_part</oboInOwl:shorthand>
         <rdfs:label>has part</rdfs:label>
         <skos:prefLabel>has part</skos:prefLabel>
     </owl:ObjectProperty>
@@ -921,6 +1042,12 @@
         <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/RO_0000053"/>
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/BFO_0000004"/>
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
+        <oboInOwl:hasDbXref>RO:0000087</oboInOwl:hasDbXref>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:id>has_role</oboInOwl:id>
+        <oboInOwl:is_cyclic rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</oboInOwl:is_cyclic>
+        <oboInOwl:is_transitive rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</oboInOwl:is_transitive>
+        <oboInOwl:shorthand>has_role</oboInOwl:shorthand>
         <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/relation"/>
         <rdfs:label>has role</rdfs:label>
         <skos:definition>A relation between an independent continuant (the bearer) and a role, in which the role specifically depends on the bearer for its existence [RO]</skos:definition>
@@ -1081,79 +1208,79 @@
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponent -->
+    <!-- http://example.org#ChemicalComponent -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponent">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Substance"/>
+    <owl:Class rdf:about="http://example.org#ChemicalComponent">
+        <rdfs:subClassOf rdf:resource="http://example.org#Substance"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>The class ChemicalComponent subsumes ChemicalSpecies and PseudoComponents.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponentConstant -->
+    <!-- http://example.org#ChemicalComponentConstant -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponentConstant">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity"/>
+    <owl:Class rdf:about="http://example.org#ChemicalComponentConstant">
+        <rdfs:subClassOf rdf:resource="http://example.org#ScalarQuantity"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalReaction -->
+    <!-- http://example.org#ChemicalReaction -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalReaction">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#System"/>
+    <owl:Class rdf:about="http://example.org#ChemicalReaction">
+        <rdfs:subClassOf rdf:resource="http://example.org#System"/>
         <skos:definition>A ChemicalReaction converts some ChemicalSpecies (or MolecularEntities) into some other ChemicalSpecies (or MolecularEntities).</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalSpecies -->
+    <!-- http://example.org#ChemicalSpecies -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalSpecies">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponent"/>
+    <owl:Class rdf:about="http://example.org#ChemicalSpecies">
+        <rdfs:subClassOf rdf:resource="http://example.org#ChemicalComponent"/>
         <skos:definition>A ChemicalSpecies represents pure Substances at the macroscopic scale. It consists of an “ensemble of chemically identical molecular entities […]. The term is applied equally to a set of chemically identical atomic or molecular structural units in a solid array. […] The wording of the definition […] is intended to embrace both cases such as graphite, sodium chloride or a surface oxide, where the basic structural units may not be capable of isolated existence, as well as those cases where they are.” (McNaught &amp; Wilkinson, 1997).</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CompositeReaction -->
+    <!-- http://example.org#CompositeReaction -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CompositeReaction">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#SingleReaction"/>
+    <owl:Class rdf:about="http://example.org#CompositeReaction">
+        <rdfs:subClassOf rdf:resource="http://example.org#SingleReaction"/>
         <skos:definition>A CompositeReaction is a ChemicalReaction that can be decomposed into several ElementaryReactions. Examples are parallel reactions (simultaneously occurring ElementaryReactions that form different products from a single set of reactants) and stepwise reactions (a set of consecutive ElementaryReactions with at least one reaction intermediate).</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CriticalMolarVolume -->
+    <!-- http://example.org#CriticalMolarVolume -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CriticalMolarVolume">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponentConstant"/>
+    <owl:Class rdf:about="http://example.org#CriticalMolarVolume">
+        <rdfs:subClassOf rdf:resource="http://example.org#ChemicalComponentConstant"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>The CriticalMolarVolume is the volume of one mole of a substance at the CriticalTemperature and CriticalPressure.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CriticalPressure -->
+    <!-- http://example.org#CriticalPressure -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CriticalPressure">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponentConstant"/>
+    <owl:Class rdf:about="http://example.org#CriticalPressure">
+        <rdfs:subClassOf rdf:resource="http://example.org#ChemicalComponentConstant"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>The minimum pressure which would suffice to liquefy a Substance at its CriticalTemperature. Above the CriticalPressure, increasing the temperature will not cause a fluid to vaporize to give a two-phase system (McNaught &amp; Wilkinson, 1997).</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CriticalTemperature -->
+    <!-- http://example.org#CriticalTemperature -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#CriticalTemperature">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponentConstant"/>
+    <owl:Class rdf:about="http://example.org#CriticalTemperature">
+        <rdfs:subClassOf rdf:resource="http://example.org#ChemicalComponentConstant"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>That temperature, characteristic of each gas, above which it is not possible to liquefy a given gas (McNaught &amp; Wilkinson, 1997). 
 The CriticalTemperature of a material is the temperature above which distinct liquid and gas phases do not exist. As the CriticalTemperature is approached, the properties of the gas and liquid phases become the same. Above the CriticalTemperature, there is only one phase. [Wikipedia, 2006]</skos:definition>
@@ -1161,70 +1288,70 @@ The CriticalTemperature of a material is the temperature above which distinct li
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Density -->
+    <!-- http://example.org#Density -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Density">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ThermodynamicStateProperty"/>
+    <owl:Class rdf:about="http://example.org#Density">
+        <rdfs:subClassOf rdf:resource="http://example.org#ThermodynamicStateProperty"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>The mass of a PhaseSystem divided by its volume. It is the reciprocal of SpecificVolume.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Device -->
+    <!-- http://example.org#Device -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Device">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#System"/>
+    <owl:Class rdf:about="http://example.org#Device">
+        <rdfs:subClassOf rdf:resource="http://example.org#System"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>Devices are the crucial elements of a NetworkSystem, holding the major functionality.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Diameter -->
+    <!-- http://example.org#Diameter -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Diameter">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity"/>
+    <owl:Class rdf:about="http://example.org#Diameter">
+        <rdfs:subClassOf rdf:resource="http://example.org#ScalarQuantity"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>The length of a line segment between two points on a Disk or Sphere which passes through the center of the Disk or Sphere.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#DiffusionCoefficient -->
+    <!-- http://example.org#DiffusionCoefficient -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#DiffusionCoefficient">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TransportPhenomenaProperty"/>
+    <owl:Class rdf:about="http://example.org#DiffusionCoefficient">
+        <rdfs:subClassOf rdf:resource="http://example.org#TransportPhenomenaProperty"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>Proportionality constant, relating the flux of amount of some PhaseComponent to its concentration gradient.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#DynamicViscosity -->
+    <!-- http://example.org#DynamicViscosity -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#DynamicViscosity">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TransportPhenomenaProperty"/>
+    <owl:Class rdf:about="http://example.org#DynamicViscosity">
+        <rdfs:subClassOf rdf:resource="http://example.org#TransportPhenomenaProperty"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>For a laminar flow of a fluid, the ratio of the shear stress to the VelocityGradient perpendicular to the plane of shear (McNaught &amp; Wilkinson, 1997).</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ElementaryReaction -->
+    <!-- http://example.org#ElementaryReaction -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ElementaryReaction">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#SingleReaction"/>
+    <owl:Class rdf:about="http://example.org#ElementaryReaction">
+        <rdfs:subClassOf rdf:resource="http://example.org#SingleReaction"/>
         <skos:definition>An ElementaryReaction is a ChemicalReaction for which no reaction intermediates have been detected or need to be postulated in order to describe the ChemicalReaction on a molecular scale. An ElementaryReaction is assumed to occur in a single step and to pass through a single transition state (McNaught &amp; Wilkinson, 1997).</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Height -->
+    <!-- http://example.org#Height -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Height">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity"/>
+    <owl:Class rdf:about="http://example.org#Height">
+        <rdfs:subClassOf rdf:resource="http://example.org#ScalarQuantity"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>The shortest distance between the base of a geometric figure and its top, whether that top is an opposite vertex, an apex, or another base.
 [http://www.mathwords.com/a/altitude.htm]</skos:definition>
@@ -1232,60 +1359,60 @@ The CriticalTemperature of a material is the temperature above which distinct li
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#HeterogeneousMaterialAmount -->
+    <!-- http://example.org#HeterogeneousMaterialAmount -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#HeterogeneousMaterialAmount">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MaterialAmount"/>
+    <owl:Class rdf:about="http://example.org#HeterogeneousMaterialAmount">
+        <rdfs:subClassOf rdf:resource="http://example.org#MaterialAmount"/>
         <skos:definition>A HeterogeneousMaterialAmount is a composite material amount that involves mate-rial amounts with different dispersion states due to phases or particle size.</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#HomogeneousMaterialAmount -->
+    <!-- http://example.org#HomogeneousMaterialAmount -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#HomogeneousMaterialAmount">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MaterialAmount"/>
+    <owl:Class rdf:about="http://example.org#HomogeneousMaterialAmount">
+        <rdfs:subClassOf rdf:resource="http://example.org#MaterialAmount"/>
         <skos:definition>A HomogeneousMaterialAmount represents a MaterialAmount with a continuous, single phase which is not part of another more complex material amount.</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#IntensiveProperty -->
+    <!-- http://example.org#IntensiveProperty -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#IntensiveProperty">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhysicalQuantity"/>
+    <owl:Class rdf:about="http://example.org#IntensiveProperty">
+        <rdfs:subClassOf rdf:resource="http://example.org#PhysicalQuantity"/>
         <skos:definition>An IntensiveProperty is a PhysicalQuantity, the Value of which does not depend on the system size or the amount of material in the system.</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#IrreversibleReaction -->
+    <!-- http://example.org#IrreversibleReaction -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#IrreversibleReaction">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#SingleReaction"/>
+    <owl:Class rdf:about="http://example.org#IrreversibleReaction">
+        <rdfs:subClassOf rdf:resource="http://example.org#SingleReaction"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MaterialAmount -->
+    <!-- http://example.org#MaterialAmount -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MaterialAmount">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Device"/>
+    <owl:Class rdf:about="http://example.org#MaterialAmount">
+        <rdfs:subClassOf rdf:resource="http://example.org#Device"/>
         <skos:definition>A MaterialAmount characterizes the time-variant behavior of a chunk of material.</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Mixture -->
+    <!-- http://example.org#Mixture -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Mixture">
+    <owl:Class rdf:about="http://example.org#Mixture">
         <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001099"/>
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Substance"/>
+        <rdfs:subClassOf rdf:resource="http://example.org#Substance"/>
         <skos:definition>A Mixture is a Substance that contains two or more ChemicalComponents. The mixture class can represent two different things: 
 (a) a loose collection of segregate chemical components, or 
 (b) a compound material formed by several blended chemical components. 
@@ -1295,244 +1422,244 @@ The composition of a Mixture is not fixed.</skos:definition>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MolecularWeight -->
+    <!-- http://example.org#MolecularWeight -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MolecularWeight">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponentConstant"/>
+    <owl:Class rdf:about="http://example.org#MolecularWeight">
+        <rdfs:subClassOf rdf:resource="http://example.org#ChemicalComponentConstant"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>Ratio of the mass of one molecule of a Substance, relative to the unified atomic mass unit (which is equal to 1/12 the mass of one atom of carbon-12). Also known as (relative) molar mass or (relative) molecular mass.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Object -->
+    <!-- http://example.org#Object -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Object">
+    <owl:Class rdf:about="http://example.org#Object">
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ParticulateMaterialAmount -->
+    <!-- http://example.org#ParticulateMaterialAmount -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ParticulateMaterialAmount">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#HeterogeneousMaterialAmount"/>
+    <owl:Class rdf:about="http://example.org#ParticulateMaterialAmount">
+        <rdfs:subClassOf rdf:resource="http://example.org#HeterogeneousMaterialAmount"/>
         <skos:definition>A ParticulateMaterialAmount represents the dispersed material amount in a hetero-geneous system which is composed of single particles which typically hold uneven characteristics.</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhaseSystemProperty -->
+    <!-- http://example.org#PhaseSystemProperty -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhaseSystemProperty">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#IntensiveProperty"/>
+    <owl:Class rdf:about="http://example.org#PhaseSystemProperty">
+        <rdfs:subClassOf rdf:resource="http://example.org#IntensiveProperty"/>
         <skos:definition>A PhaseSystemProperty is an IntensiveProperty that characterizes a PhaseSystem. It can be described or calculated without reference to the shape, size, or amount of a particular occurrence of a material. In the case of calculation, this is consistent with the usage of general-purpose physical property packages, where such information is not required as the input for the calculation.</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhysicalQuantity -->
+    <!-- http://example.org#PhysicalQuantity -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhysicalQuantity">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Property"/>
+    <owl:Class rdf:about="http://example.org#PhysicalQuantity">
+        <rdfs:subClassOf rdf:resource="http://example.org#Property"/>
         <skos:definition>A PhysicalQuantity is a Property that has quantifiable Values. The concept includes scalars as well as vectors and higher-order tensors. Moreover, it comprises both physical quantities, such as mass or velocity, and nonphysical quantities, such as amount of money or rate of inflation</skos:definition>
         <skos:definition>Class originally comes from OntoCape.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Pressure -->
+    <!-- http://example.org#Pressure -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Pressure">
+    <owl:Class rdf:about="http://example.org#Pressure">
         <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ThermodynamicStateProperty"/>
+        <rdfs:subClassOf rdf:resource="http://example.org#ThermodynamicStateProperty"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>The (total absolute) pressure of a PhaseSystem</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Property -->
+    <!-- http://example.org#Property -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Property">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Object"/>
+    <owl:Class rdf:about="http://example.org#Property">
+        <rdfs:subClassOf rdf:resource="http://example.org#Object"/>
         <skos:definition>Class originally comes from OntoCape.</skos:definition>
         <skos:definition>The Property class represents the individual properties (traits, qualities) of a System, which distinguish the System from others. Typical examples are Size, Color, or Weight, which are modeled as subclasses of Property.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PseudoComponent -->
+    <!-- http://example.org#PseudoComponent -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PseudoComponent">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalComponent"/>
+    <owl:Class rdf:about="http://example.org#PseudoComponent">
+        <rdfs:subClassOf rdf:resource="http://example.org#ChemicalComponent"/>
         <skos:definition>A PseudoComponent is an auxiliary concept, which represents the averaged properties of a number of ChemicalSpecies. PseudoComponents are often assumed to exist in the context of physical property calculations of complex multicomponent mixtures, such as petroleum, fatty alcohols, or polymers.</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#QuasiHomogeneousMaterialAmount -->
+    <!-- http://example.org#QuasiHomogeneousMaterialAmount -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#QuasiHomogeneousMaterialAmount">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#HeterogeneousMaterialAmount"/>
+    <owl:Class rdf:about="http://example.org#QuasiHomogeneousMaterialAmount">
+        <rdfs:subClassOf rdf:resource="http://example.org#HeterogeneousMaterialAmount"/>
         <skos:definition>A QuasiHomogeneousMaterialAmount assumes at least two parts, a dispersed material amount and a continuous material amount, where one is dispersed in the other. It is characterized by average physical quantities of both parts.</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Radius -->
+    <!-- http://example.org#Radius -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Radius">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity"/>
+    <owl:Class rdf:about="http://example.org#Radius">
+        <rdfs:subClassOf rdf:resource="http://example.org#ScalarQuantity"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>The length of the line segment between the center and a point on a circle or Sphere.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ReactionNetwork -->
+    <!-- http://example.org#ReactionNetwork -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ReactionNetwork">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalReaction"/>
+    <owl:Class rdf:about="http://example.org#ReactionNetwork">
+        <rdfs:subClassOf rdf:resource="http://example.org#ChemicalReaction"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ReversibleReaction -->
+    <!-- http://example.org#ReversibleReaction -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ReversibleReaction">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#SingleReaction"/>
+    <owl:Class rdf:about="http://example.org#ReversibleReaction">
+        <rdfs:subClassOf rdf:resource="http://example.org#SingleReaction"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity -->
+    <!-- http://example.org#ScalarQuantity -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhysicalQuantity"/>
+    <owl:Class rdf:about="http://example.org#ScalarQuantity">
+        <rdfs:subClassOf rdf:resource="http://example.org#PhysicalQuantity"/>
         <skos:definition>A ScalarQuantity is a scalar-valued PhysicalQuantity.</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#SingleReaction -->
+    <!-- http://example.org#SingleReaction -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#SingleReaction">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ChemicalReaction"/>
+    <owl:Class rdf:about="http://example.org#SingleReaction">
+        <rdfs:subClassOf rdf:resource="http://example.org#ChemicalReaction"/>
         <skos:definition>Class originally comes from OntoCPAE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#StoichiometricCoefficient -->
+    <!-- http://example.org#StoichiometricCoefficient -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#StoichiometricCoefficient">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#UniqueOriginN-aryRelation"/>
+    <owl:Class rdf:about="http://example.org#StoichiometricCoefficient">
+        <rdfs:subClassOf rdf:resource="http://example.org#UniqueOriginN-aryRelation"/>
         <skos:definition>A StoichiometricCoefficient indicates the multiplicity of a ChemicalSpecies or MolecularEntity that participates in a ChemicalReaction.</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Substance -->
+    <!-- http://example.org#Substance -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Substance">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#System"/>
+    <owl:Class rdf:about="http://example.org#Substance">
+        <rdfs:subClassOf rdf:resource="http://example.org#System"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#System -->
+    <!-- http://example.org#System -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#System">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Object"/>
+    <owl:Class rdf:about="http://example.org#System">
+        <rdfs:subClassOf rdf:resource="http://example.org#Object"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>The System class denotes all kind of systems, which may be physical or abstract</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Temperature -->
+    <!-- http://example.org#Temperature -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Temperature">
+    <owl:Class rdf:about="http://example.org#Temperature">
         <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001584"/>
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ThermodynamicStateProperty"/>
+        <rdfs:subClassOf rdf:resource="http://example.org#ThermodynamicStateProperty"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>The temperature of a PhaseSystem</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ThermalConductivity -->
+    <!-- http://example.org#ThermalConductivity -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ThermalConductivity">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TransportPhenomenaProperty"/>
+    <owl:Class rdf:about="http://example.org#ThermalConductivity">
+        <rdfs:subClassOf rdf:resource="http://example.org#TransportPhenomenaProperty"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>TheThermalConductivity is the coefficient relating the heat flux to the temperature gradient.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ThermodynamicStateProperty -->
+    <!-- http://example.org#ThermodynamicStateProperty -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ThermodynamicStateProperty">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhaseSystemProperty"/>
+    <owl:Class rdf:about="http://example.org#ThermodynamicStateProperty">
+        <rdfs:subClassOf rdf:resource="http://example.org#PhaseSystemProperty"/>
         <skos:definition>A ThermodynamicStateProperty is a PhaseSystemProperty that can serve as an IntensiveThermodynamicStateVariable (i.e., characterize the thermodynamic state of a PhaseSystem).</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TimePeriod -->
+    <!-- http://example.org#TimePeriod -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TimePeriod">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity"/>
+    <owl:Class rdf:about="http://example.org#TimePeriod">
+        <rdfs:subClassOf rdf:resource="http://example.org#ScalarQuantity"/>
         <skos:definition>A TimePeriod is a ScalarQuantity that denotes the temporal duration of a period of time. Optionally, the starting time of the TimePeriod can be indicated.</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TotalSurfaceArea -->
+    <!-- http://example.org#TotalSurfaceArea -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TotalSurfaceArea">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity"/>
+    <owl:Class rdf:about="http://example.org#TotalSurfaceArea">
+        <rdfs:subClassOf rdf:resource="http://example.org#ScalarQuantity"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>The total area of a Surface or of (all) the exterior surface(s) of a Solid.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TransportPhenomenaProperty -->
+    <!-- http://example.org#TransportPhenomenaProperty -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#TransportPhenomenaProperty">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#PhaseSystemProperty"/>
+    <owl:Class rdf:about="http://example.org#TransportPhenomenaProperty">
+        <rdfs:subClassOf rdf:resource="http://example.org#PhaseSystemProperty"/>
         <skos:definition>A TransportPhenomenaProperty is a PhaseSystemProperty that subsumes DynamicViscosity, HeatConductivity, and Diffusion Coefficient.</skos:definition>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#UniqueOriginN-aryRelation -->
+    <!-- http://example.org#UniqueOriginN-aryRelation -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#UniqueOriginN-aryRelation">
+    <owl:Class rdf:about="http://example.org#UniqueOriginN-aryRelation">
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Volume -->
+    <!-- http://example.org#Volume -->
 
-    <owl:Class rdf:about="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Volume">
-        <rdfs:subClassOf rdf:resource="http://example.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#ScalarQuantity"/>
+    <owl:Class rdf:about="http://example.org#Volume">
+        <rdfs:subClassOf rdf:resource="http://example.org#ScalarQuantity"/>
         <skos:definition>Class originally comes from OntoCAPE.</skos:definition>
         <skos:definition>The total amount of space enclosed in a Solid [http://www.mathwords.com/v/volume.htm]</skos:definition>
     </owl:Class>
@@ -2477,6 +2604,44 @@ The composition of a Mixture is not fixed.</skos:definition>
     
 
 
+    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001112 -->
+
+    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001112">
+        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
+                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_18276"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
+        <rdfs:label>hydrogen gas</rdfs:label>
+        <skos:altLabel>hydrogen</skos:altLabel>
+        <skos:definition>Hydrogen gas is a gas that is composed of hydrogen molecules. [Allotrope]</skos:definition>
+        <skos:prefLabel>hydrogen gas</skos:prefLabel>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001113 -->
+
+    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001113">
+        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
+                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_15379"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
+        <rdfs:label>oxygen gas</rdfs:label>
+        <skos:altLabel>oxygen</skos:altLabel>
+        <skos:definition>Oxygen gas is a gas that is composed of dioxygen molecules. [Allotrope]</skos:definition>
+        <skos:prefLabel>oxygen gas</skos:prefLabel>
+    </owl:Class>
+    
+
+
     <!-- http://purl.allotrope.org/ontologies/material#AFM_0001116 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001116">
@@ -2492,6 +2657,25 @@ The composition of a Mixture is not fixed.</skos:definition>
         <skos:altLabel>carbon dioxide</skos:altLabel>
         <skos:definition>Carbon dioxide gas is a gas that is composed of carbon dioxide molecules. [Allotrope]</skos:definition>
         <skos:prefLabel>carbon dioxide gas</skos:prefLabel>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.allotrope.org/ontologies/material#AFM_0001118 -->
+
+    <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001118">
+        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
+                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_16183"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
+        <rdfs:label>methane gas</rdfs:label>
+        <skos:altLabel>methane</skos:altLabel>
+        <skos:definition>Methane gas is a gas that is composed of methane molecules. [Allotrope]</skos:definition>
+        <skos:prefLabel>methane gas</skos:prefLabel>
     </owl:Class>
     
 
@@ -4748,6 +4932,19 @@ dispersion. [NIST]</skos:definition>
     
 
 
+    <!-- http://purl.obofoundry.org/obo/IAO_0000030 -->
+
+    <owl:Class rdf:about="http://purl.obofoundry.org/obo/IAO_0000030">
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/snap#GenericallyDependentContinuant"/>
+        <rdfs:label>information content entity</rdfs:label>
+        <skos:definition>an information content entity is an entity that is generically dependent on some artifact and stands in relation of aboutness to some entity
+source: obo:IAO_0000030</skos:definition>
+        <skos:example>example: Examples of information content entites include journal articles, data, graphical layouts, and graphs.
+source: obo:IAO_0000030</skos:example>
+    </owl:Class>
+    
+
+
     <!-- http://purl.obolibrary.org/obo/BFO_0000001 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000001">
@@ -5675,6 +5872,107 @@ dispersion. [NIST]</skos:definition>
     
 
 
+    <!-- http://purl.obolibrary.org/obo/CHEBI_10545 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_10545">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36338"/>
+        <obo:IAO_0000115>Elementary particle not affected by the strong force having a spin 1/2, a negative elementary charge and a rest mass of 0.000548579903(13) u, or 0.51099906(15) MeV.</obo:IAO_0000115>
+        <chebi:charge>-1</chebi:charge>
+        <chebi:mass>0.000548579903</chebi:mass>
+        <chebi:monoisotopicmass>0.0</chebi:monoisotopicmass>
+        <oboInOwl:hasDbXref>KEGG:C05359</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>PMID:21614077</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>Wikipedia:Electron</oboInOwl:hasDbXref>
+        <oboInOwl:hasExactSynonym>electron</oboInOwl:hasExactSynonym>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>Elektron</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>beta</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>beta(-)</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>beta-particle</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>e</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>e(-)</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>e-</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>negatron</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:10545</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>electron</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_10545"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasDbXref"/>
+        <owl:annotatedTarget>PMID:21614077</owl:annotatedTarget>
+        <oboInOwl:source>Europe PMC</oboInOwl:source>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_10545"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+        <owl:annotatedTarget>electron</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_10545"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+        <owl:annotatedTarget>electron</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+        <oboInOwl:hasSynonymType rdf:resource="http://purl.obolibrary.org/obo/chebi#IUPAC_NAME"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_10545"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+        <owl:annotatedTarget>electron</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>KEGG_COMPOUND</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_10545"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>Elektron</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_10545"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>beta</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_10545"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>beta(-)</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_10545"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>beta-particle</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_10545"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>e</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_10545"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>e(-)</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>UniProt</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_10545"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>e-</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>KEGG_COMPOUND</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_10545"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>negatron</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
     <!-- http://purl.obolibrary.org/obo/CHEBI_15377 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_15377">
@@ -5685,6 +5983,32 @@ dispersion. [NIST]</skos:definition>
         <skos:altLabel>water</skos:altLabel>
         <skos:definition>An oxygen hydride consisting of an oxygen atom that is covalently bonded to two hydrogen atoms. [CHEBI]</skos:definition>
         <skos:prefLabel>water (molecule)</skos:prefLabel>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_15379 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_15379">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
+        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>
+        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
+        <rdfs:label>dioxygen (molecule)</rdfs:label>
+        <skos:definition>An elemental molecule consisting of two bivalently-bonded oxygen atoms. [Allotrope]</skos:definition>
+        <skos:prefLabel>dioxygen (molecule)</skos:prefLabel>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_16183 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_16183">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
+        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>
+        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
+        <rdfs:label>methane (molecule)</rdfs:label>
+        <skos:definition>A one-carbon compound in which the carbon is attached by single bonds to four hydrogen atoms. [CHEBI]</skos:definition>
+        <skos:prefLabel>methane (molecule)</skos:prefLabel>
     </owl:Class>
     
 
@@ -5715,6 +6039,19 @@ dispersion. [NIST]</skos:definition>
     
 
 
+    <!-- http://purl.obolibrary.org/obo/CHEBI_18276 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_18276">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
+        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>
+        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
+        <rdfs:label>dihydrogen (molecule)</rdfs:label>
+        <skos:definition>An elemental molecule consisting of two hydrogens joined by a single bond. [CHEBI]</skos:definition>
+        <skos:prefLabel>dihydrogen (molecule)</skos:prefLabel>
+    </owl:Class>
+    
+
+
     <!-- http://purl.obolibrary.org/obo/CHEBI_23367 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_23367">
@@ -5739,6 +6076,45 @@ dispersion. [NIST]</skos:definition>
     
 
 
+    <!-- http://purl.obolibrary.org/obo/CHEBI_24431 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_24431">
+        <obo:IAO_0000115>A chemical entity is a physical entity of interest in chemistry including molecular entities, parts thereof, and chemical substances.</obo:IAO_0000115>
+        <oboInOwl:hasExactSynonym>chemical entity</oboInOwl:hasExactSynonym>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:id>CHEBI:24431</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>chemical entity</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_24431"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+        <owl:annotatedTarget>chemical entity</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>UniProt</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_24432 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_24432">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_50906"/>
+        <obo:IAO_0000115>A role played by the molecular entity or part thereof within a biological context.</obo:IAO_0000115>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>biological function</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:24432</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>biological role</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_24432"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>biological function</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
     <!-- http://purl.obolibrary.org/obo/CHEBI_25367 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_25367">
@@ -5756,6 +6132,285 @@ dispersion. [NIST]</skos:definition>
     
 
 
+    <!-- http://purl.obolibrary.org/obo/CHEBI_27081 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_27081">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33521"/>
+        <obo:IAO_0000115>An element whose atom has an incomplete d sub-shell, or which can give rise to cations with an incomplete d sub-shell.</obo:IAO_0000115>
+        <oboInOwl:hasExactSynonym>transition element</oboInOwl:hasExactSynonym>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>Uebergangselement</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>Uebergangsmetalle</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>metal de transicion</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>metal de transition</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>metales de transicion</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>metaux de transition</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>transition element</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>transition elements</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>transition metal</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>transition metals</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:27081</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>transition element atom</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_27081"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+        <owl:annotatedTarget>transition element</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+        <oboInOwl:hasSynonymType rdf:resource="http://purl.obolibrary.org/obo/chebi#IUPAC_NAME"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_27081"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>Uebergangselement</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_27081"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>Uebergangsmetalle</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_27081"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>metal de transicion</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_27081"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>metal de transition</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_27081"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>metales de transicion</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_27081"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>metaux de transition</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_27081"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>transition element</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_27081"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>transition elements</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_27081"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>transition metal</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_27081"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>transition metals</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_33233 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_33233">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36342"/>
+        <obo:IAO_0000115>A particle not known to have substructure.</obo:IAO_0000115>
+        <oboInOwl:hasExactSynonym>elementary particle</oboInOwl:hasExactSynonym>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>elementary particles</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:33233</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>fundamental particle</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33233"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+        <owl:annotatedTarget>elementary particle</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+        <oboInOwl:hasSynonymType rdf:resource="http://purl.obolibrary.org/obo/chebi#IUPAC_NAME"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33233"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>elementary particles</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_33250 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_33250">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_24431"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
+                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_10545"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
+                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33252"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <obo:IAO_0000115>A chemical entity constituting the smallest component of an element having the chemical properties of the element.</obo:IAO_0000115>
+        <oboInOwl:hasAlternativeId>CHEBI:22671</oboInOwl:hasAlternativeId>
+        <oboInOwl:hasAlternativeId>CHEBI:23907</oboInOwl:hasAlternativeId>
+        <oboInOwl:hasExactSynonym>atom</oboInOwl:hasExactSynonym>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>atome</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>atomo</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>atoms</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>atomus</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>element</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>elements</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:33250</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>atom</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33250"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+        <owl:annotatedTarget>atom</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+        <oboInOwl:hasSynonymType rdf:resource="http://purl.obolibrary.org/obo/chebi#IUPAC_NAME"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33250"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>atome</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33250"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>atomo</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33250"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>atoms</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33250"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>atomus</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33250"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>element</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33250"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>elements</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_33252 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_33252">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36347"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
+                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33253"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <obo:IAO_0000115>A nucleus is the positively charged central portion of an atom, excluding the orbital electrons.</obo:IAO_0000115>
+        <oboInOwl:hasExactSynonym>nucleus</oboInOwl:hasExactSynonym>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>Atomkern</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>Kern</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>noyau</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>noyau atomique</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>nuclei</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>nucleo</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>nucleo atomico</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>nucleus atomi</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:33252</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>atomic nucleus</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33252"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+        <owl:annotatedTarget>nucleus</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+        <oboInOwl:hasSynonymType rdf:resource="http://purl.obolibrary.org/obo/chebi#IUPAC_NAME"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33252"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>Atomkern</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33252"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>Kern</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33252"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>noyau</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33252"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>noyau atomique</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33252"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>nuclei</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33252"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>nucleo</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33252"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>nucleo atomico</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33252"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>nucleus atomi</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
     <!-- http://purl.obolibrary.org/obo/CHEBI_33253 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_33253">
@@ -5768,26 +6423,340 @@ dispersion. [NIST]</skos:definition>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36339"/>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36347"/>
         <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001492"/>
+        <obo:IAO_0000115>Heavy nuclear particle: proton or neutron.</obo:IAO_0000115>
         <terms:source rdf:resource="https://en.wikipedia.org/wiki/Nucleon"/>
+        <oboInOwl:hasExactSynonym>nucleon</oboInOwl:hasExactSynonym>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>Nukleon</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>Nukleonen</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>nucleons</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:33253</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
         <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
         <rdfs:label>nucleon</rdfs:label>
         <skos:definition>A nucleon is either a proton or a neutron. [Wikipedia]</skos:definition>
         <skos:prefLabel>nucleon</skos:prefLabel>
     </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33253"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+        <owl:annotatedTarget>nucleon</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33253"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+        <owl:annotatedTarget>nucleon</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+        <oboInOwl:hasSynonymType rdf:resource="http://purl.obolibrary.org/obo/chebi#IUPAC_NAME"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33253"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>Nukleon</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33253"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>Nukleonen</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33253"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>nucleons</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_33362 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_33362">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_27081"/>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33561"/>
+        <oboInOwl:hasExactSynonym>group 10 elements</oboInOwl:hasExactSynonym>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>nickel group element</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>nickel group elements</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:33362</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>nickel group element atom</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33362"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+        <owl:annotatedTarget>group 10 elements</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+        <oboInOwl:hasSynonymType rdf:resource="http://purl.obolibrary.org/obo/chebi#IUPAC_NAME"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33362"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>nickel group element</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33362"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>nickel group elements</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_33363 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_33363">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33362"/>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33365"/>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_88184"/>
+        <obo:IAO_0000115>Chemical element (nickel group element atom) with atomic number 46.</obo:IAO_0000115>
+        <chebi:charge>0</chebi:charge>
+        <chebi:formula>Pd</chebi:formula>
+        <chebi:inchi>InChI=1S/Pd</chebi:inchi>
+        <chebi:inchikey>KDLHZDBZIXYQEI-UHFFFAOYSA-N</chebi:inchikey>
+        <chebi:mass>106.42000</chebi:mass>
+        <chebi:monoisotopicmass>105.90348</chebi:monoisotopicmass>
+        <chebi:smiles>[Pd]</chebi:smiles>
+        <oboInOwl:hasDbXref>CAS:7440-05-3</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>PMID:25097477</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>Reaxys:4937491</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>WebElements:Pd</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>Wikipedia:Palladium</oboInOwl:hasDbXref>
+        <oboInOwl:hasExactSynonym>palladium</oboInOwl:hasExactSynonym>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>46Pd</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>Pd</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>paladio</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:33363</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>palladium</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33363"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasDbXref"/>
+        <owl:annotatedTarget>CAS:7440-05-3</owl:annotatedTarget>
+        <oboInOwl:source>ChemIDplus</oboInOwl:source>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33363"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasDbXref"/>
+        <owl:annotatedTarget>CAS:7440-05-3</owl:annotatedTarget>
+        <oboInOwl:source>NIST Chemistry WebBook</oboInOwl:source>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33363"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasDbXref"/>
+        <owl:annotatedTarget>PMID:25097477</owl:annotatedTarget>
+        <oboInOwl:source>Europe PMC</oboInOwl:source>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33363"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasDbXref"/>
+        <owl:annotatedTarget>Reaxys:4937491</owl:annotatedTarget>
+        <oboInOwl:source>Reaxys</oboInOwl:source>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33363"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+        <owl:annotatedTarget>palladium</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+        <oboInOwl:hasSynonymType rdf:resource="http://purl.obolibrary.org/obo/chebi#IUPAC_NAME"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33363"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>46Pd</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33363"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>Pd</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33363"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>paladio</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_33365 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_33365">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_27081"/>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>PGM</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>Platinmetalle</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>Platinoide</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>platinoid</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>platinum group metal</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>platinum group metals</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>platinum metals</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:33365</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>platinum group metal atom</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33365"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>PGM</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33365"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>Platinmetalle</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33365"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>Platinoide</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33365"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>platinoid</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33365"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>platinum group metal</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33365"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>platinum group metals</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33365"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>platinum metals</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_33521 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_33521">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33250"/>
+        <obo:IAO_0000115>An atom of an element that exhibits typical metallic properties, being typically shiny, with high electrical and thermal conductivity.</obo:IAO_0000115>
+        <oboInOwl:hasAlternativeId>CHEBI:25217</oboInOwl:hasAlternativeId>
+        <oboInOwl:hasAlternativeId>CHEBI:6788</oboInOwl:hasAlternativeId>
+        <oboInOwl:hasDbXref>KEGG:C00050</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>PMID:21784043</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>Wikipedia:Metal</oboInOwl:hasDbXref>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>elemental metal</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>elemental metals</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>metal element</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>metal elements</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>metals</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:33521</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>metal atom</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33521"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasDbXref"/>
+        <owl:annotatedTarget>PMID:21784043</owl:annotatedTarget>
+        <oboInOwl:source>Europe PMC</oboInOwl:source>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33521"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>elemental metal</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33521"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>elemental metals</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33521"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>metal element</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33521"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>metal elements</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33521"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>metals</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_33561 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_33561">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_27081"/>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33521"/>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>d-block element</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>d-block elements</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:33561</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>d-block element atom</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33561"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>d-block element</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33561"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>d-block elements</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
     
 
 
     <!-- http://purl.obolibrary.org/obo/CHEBI_36338 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_36338">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33233"/>
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36340"/>
         <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001492"/>
+        <obo:IAO_0000115>Lepton is a fermion that does not experience the strong force (strong interaction). The term is derived from the Greek lambdaepsilonpitauomicronsigma (small, thin).</obo:IAO_0000115>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>leptons</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:36338</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
         <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
         <rdfs:label>lepton</rdfs:label>
         <skos:definition>Lepton is a fermion that does not experience the strong force (strong interaction). [CHEBI]</skos:definition>
         <skos:prefLabel>lepton</skos:prefLabel>
     </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36338"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>leptons</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
     
 
 
@@ -5795,13 +6764,25 @@ dispersion. [NIST]</skos:definition>
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_36339">
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36340"/>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36344"/>
         <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001492"/>
+        <obo:IAO_0000115>Baryon is a fermion that does experience the strong force (strong interaction). The term is derived from the Greek betaalpharhoupsilonsigma (heavy).</obo:IAO_0000115>
         <terms:source rdf:resource="https://en.wikipedia.org/wiki/Baryon"/>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>baryons</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:36339</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
         <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
         <rdfs:label>baryon</rdfs:label>
         <skos:definition>Baryon is a fermion that does experience the strong force (strong interaction). [CHEBI]</skos:definition>
         <skos:prefLabel>baryon</skos:prefLabel>
     </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36339"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>baryons</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
     
 
 
@@ -5810,12 +6791,31 @@ dispersion. [NIST]</skos:definition>
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_36340">
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36342"/>
         <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001492"/>
+        <obo:IAO_0000115>Particle of half-integer spin quantum number following Fermi-Dirac statistics. Fermions are named after Enrico Fermi.</obo:IAO_0000115>
         <terms:source rdf:resource="https://en.wikipedia.org/wiki/Fermion"/>
+        <oboInOwl:hasExactSynonym>fermion</oboInOwl:hasExactSynonym>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>fermions</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:36340</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
         <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
         <rdfs:label>fermion</rdfs:label>
         <skos:definition>Particle of half-integer spin quantum number following Fermi-Dirac statistics. [CHEBI]</skos:definition>
         <skos:prefLabel>fermion</skos:prefLabel>
     </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36340"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+        <owl:annotatedTarget>fermion</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+        <oboInOwl:hasSynonymType rdf:resource="http://purl.obolibrary.org/obo/chebi#IUPAC_NAME"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36340"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>fermions</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
     
 
 
@@ -5824,11 +6824,63 @@ dispersion. [NIST]</skos:definition>
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_36342">
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000040"/>
         <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001492"/>
+        <obo:IAO_0000115>A particle smaller than an atom.</obo:IAO_0000115>
+        <oboInOwl:hasDbXref>Wikipedia:Subatomic_particle</oboInOwl:hasDbXref>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>subatomic particles</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:36342</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
         <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
         <rdfs:label>subatomic particle</rdfs:label>
         <skos:definition>A subatomic particle is a material that is below the scale of an atom. [Allotrope]</skos:definition>
         <skos:prefLabel>subatomic particle</skos:prefLabel>
     </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36342"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>subatomic particles</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_36343 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_36343">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36342"/>
+        <obo:IAO_0000115>A subatomic particle known to have substructure (i.e. consisting of smaller particles).</obo:IAO_0000115>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>composite particles</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:36343</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>composite particle</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36343"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>composite particles</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_36344 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_36344">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36343"/>
+        <obo:IAO_0000115>Hadron is a subatomic particle which experiences the strong force.</obo:IAO_0000115>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>hadrons</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:36344</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>hadron</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36344"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>hadrons</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
     
 
 
@@ -5838,11 +6890,137 @@ dispersion. [NIST]</skos:definition>
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36342"/>
         <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001492"/>
         <property:AFX_0002798 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</property:AFX_0002798>
+        <obo:IAO_0000115>A nucleus or any of its constituents in any of their energy states.</obo:IAO_0000115>
+        <oboInOwl:hasExactSynonym>nuclear particle</oboInOwl:hasExactSynonym>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:id>CHEBI:36347</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
         <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
         <rdfs:label>nuclear particle</rdfs:label>
         <skos:definition>A nuclear particle is a nucleus or any of its constituents in any of their energy states. [CHEBI]</skos:definition>
         <skos:prefLabel>nuclear particle</skos:prefLabel>
     </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36347"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"/>
+        <owl:annotatedTarget>nuclear particle</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>IUPAC</oboInOwl:hasDbXref>
+        <oboInOwl:hasSynonymType rdf:resource="http://purl.obolibrary.org/obo/chebi#IUPAC_NAME"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_50904 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_50904">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_52209"/>
+        <obo:IAO_0000115>A chemical compound, or part thereof, which causes the onset of an allergic reaction by interacting with any of the molecular pathways involved in an allergy.</obo:IAO_0000115>
+        <oboInOwl:hasDbXref>Wikipedia:Allergen</oboInOwl:hasDbXref>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>alergeno</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>allergene</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>allergenic agent</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:50904</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>allergen</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_50904"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>alergeno</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_50904"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>allergene</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_50904"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>allergenic agent</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_50906 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_50906">
+        <obo:IAO_0000115>A role is particular behaviour which a material entity may exhibit.</obo:IAO_0000115>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:id>CHEBI:50906</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>role</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_52209 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_52209">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_24432"/>
+        <obo:IAO_0000115>A role played by the molecular entity or part thereof which causes the development of a pathological process.</obo:IAO_0000115>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>etiopathogenetic agent</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>etiopathogenetic role</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:52209</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>aetiopathogenetic role</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_52209"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>etiopathogenetic agent</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_52209"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>etiopathogenetic role</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/CHEBI_88184 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_88184">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33521"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000087"/>
+                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_50904"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <obo:IAO_0000115>Any metal which causes the onset of an allergic reaction.</obo:IAO_0000115>
+        <oboInOwl:hasOBONamespace>chebi_ontology</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym>allergenic metal</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>allergenic metals</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>metal allergens</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id>CHEBI:88184</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
+        <rdfs:label>metal allergen</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_88184"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>allergenic metal</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_88184"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>allergenic metals</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/CHEBI_88184"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>metal allergens</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
+    </owl:Axiom>
     
 
 
@@ -6337,6 +7515,310 @@ dispersion. [NIST]</skos:definition>
     <!-- http://purl.org/dc/terms/RightsStatement -->
 
     <owl:Class rdf:about="http://purl.org/dc/terms/RightsStatement"/>
+    
+
+
+    <!-- http://purl.org/obo/owl/SBO#SBO_0000002 -->
+
+    <owl:Class rdf:about="http://purl.org/obo/owl/SBO#SBO_0000002">
+        <rdfs:subClassOf rdf:resource="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000457"/>
+        <rdfs:label>quantitative systems description parameter</rdfs:label>
+        <skos:definition>A number representing a quantity that defines certain characteristics of systems or functions. A parameter may be part of a calculation, but its value is not determined by the form of the equation itself, and may be arbitrarily assigned.
+
+source: SBO</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/obo/owl/SBO#SBO_0000064 -->
+
+    <owl:Class rdf:about="http://purl.org/obo/owl/SBO#SBO_0000064">
+        <rdfs:subClassOf rdf:resource="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00001054"/>
+        <rdfs:comment>for a list of equations see: http://en.wikipedia.org/wiki/List_of_equations</rdfs:comment>
+        <rdfs:label>equation</rdfs:label>
+        <skos:definition>A statement asserting the equality of two expressions, usually written as a linear array of symbols that are separated into left and right sides and joined by an equal sign.
+source: http://www.answers.com/topic/equation</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/obo/owl/SBO#SBO_0000546 -->
+
+    <owl:Class rdf:about="http://purl.org/obo/owl/SBO#SBO_0000546">
+        <rdfs:subClassOf rdf:resource="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000457"/>
+        <rdfs:label>qualitative systems description parameter</rdfs:label>
+        <skos:definition>A non-numerical value that defines certain characteristics of systems of system functions.
+
+source: SBO#qualitative systems description parameter</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000088 -->
+
+    <owl:Class rdf:about="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000088">
+        <rdfs:subClassOf rdf:resource="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000486"/>
+        <rdfs:label>Boltzmann equation</rdfs:label>
+        <skos:definition>The Boltzmann equation is an equation used in the study of a collection of particles in nonequilibrium statistical mechanics, particularly their transport properties. The Boltzmann equation describes a quantity called the distribution function, f, which gives a mathematical description of the state and how it is changing. The distribution function depends on a position vector r, a velocity vector v, and the time t; it thus provides a statistical statement about the positions and velocities of the particles at any time. In the case of one species of particle being present, Boltzmann&apos;s equation can be written
+, where a is the acceleration of bodies between collisions and 
+source: http://www.answers.com/topic/boltzmann-equation-1</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000096 -->
+
+    <owl:Class rdf:about="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000096">
+        <rdfs:subClassOf rdf:resource="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000112"/>
+        <rdfs:label>Newtonian fluid dynamic equation</rdfs:label>
+        <skos:definition>Equation written for Newtonian fluids, i.e., fluids &quot;whose stress versus strain rate curve is linear and passes through the origin.
+
+    \tau=\mu\frac{du}{dy}
+
+where
+
+       is the shear stress exerted by the fluid (&quot;drag&quot;) [Pa]
+     is the fluid viscosity - a constant of proportionality [Pa
+    \frac{du}{dy} is the velocity gradient perpendicular to the direction of shear, or equivalently the strain rate [s1]
+
+In common terms, this means the fluid continues to flow, regardless of the forces acting on it. For example, water is Newtonian, because it continues to exemplify fluid properties no matter how fast it is stirred or mixed. Other examples may be aqueous solutions, emulsions. Contrast this with a non-Newtonian fluid, in which stirring can either leave a &quot;hole&quot; behind (that gradually fills up over time - this behavior is seen in materials such as pudding and oobleck, or, to a less rigorous extent, sand), or climb the stirring rod (the Weissenberg effect) because of shear thinning, the drop in viscosity causing it to flow more (this is seen in non-drip paints, which brush on easily but become more viscous when on walls).&quot;
+
+source: http://en.wikipedia.org/wiki/Newtonian_fluid</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000112 -->
+
+    <owl:Class rdf:about="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000112">
+        <rdfs:subClassOf rdf:resource="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000486"/>
+        <rdfs:label>equation of fluid dynamics</rdfs:label>
+        <skos:definition>The foundational axioms of fluid dynamics are the conservation laws, specifically, conservation of mass, conservation of linear momentum (also known as Newton&apos;s Second Law of Motion), and conservation of energy (also known as First Law of Thermodynamics). These are based on classical mechanics and are modified in quantum mechanics and general relativity. They are expressed using the Reynolds Transport Theorem.
+source: http://en.wikipedia.org/wiki/Fluid_dynamics</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000113 -->
+
+    <owl:Class rdf:about="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000113">
+        <rdfs:subClassOf rdf:resource="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000112"/>
+        <rdfs:label>Navier-Stokes equation</rdfs:label>
+        <skos:definition>In physics the Navier Stokes equations, named after Claude-Louis Navier and George Gabriel Stokes, describe the motion of fluid substances. These equations arise from applying Newton&apos;s second law to fluid motion, together with the assumption that the fluid stress is the sum of a diffusing viscous term (proportional to the gradient of velocity), plus a pressure term.
+...
+The derivation of the Navier Stokes equations begins with an application of Newton&apos;s second law: conservation of momentum (often alongside mass and energy conservation) being written for an arbitrary portion of the fluid. In an inertial frame of reference, the general form of the equations of fluid motion is:[2]
+
+    \rho \left(\frac{\partial \mathbf{v}}{\partial t} + \mathbf{v} \cdot \nabla \mathbf{v} \right) = -\nabla p + \nabla \cdot\mathbb{T} + \mathbf{f},
+
+where \mathbf{v} is the flow velocity,  is the fluid density, p is the pressure, \mathbb{T} is the (deviatoric) stress tensor, and \mathbf{f} represents body forces (per unit volume) acting on the fluid and \nabla is the del operator. This is a statement of the conservation of momentum in a fluid and it is an application of Newton&apos;s second law to a continuum; in fact this equation is applicable to any non-relativistic continuum and is known as the Cauchy momentum equation.
+
+source: http://en.wikipedia.org/wiki/Navier-Stokes_equations</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000130 -->
+
+    <owl:Class rdf:about="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000130">
+        <rdfs:subClassOf rdf:resource="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000486"/>
+        <rdfs:label>Michaelis-Menten equation</rdfs:label>
+        <skos:definition>the Michaelis Menten equation describes the rates of irreversible enzymatic reactions by relating reaction rate to the concentration of the substrate.
+...
+The validity of the following derivation rests on the reaction scheme given below and two key assumptions: that the total enzyme concentration and the concentration of the intermediate complex do not change over time. The most convenient derivation of the Michaelis Menten equation, described by Briggs and Haldane, is obtained as follows (Note that often the experimental parameter kcat is used but in this simple case it is equal to the kinetic parameter k2):
+
+The enzymatic reaction is assumed to be irreversible, and the product does not bind to the enzyme.
+
+    E + S \overset{k_1}\underset{k_{-1}}{\begin{smallmatrix}\displaystyle\longrightarrow \\ \displaystyle\longleftarrow \end{smallmatrix}} ES \overset{k_2} {\longrightarrow} E + P \qquad \qquad (1) 
+
+The first key assumption in this derivation is the quasi-steady-state assumption (or pseudo-steady-state hypothesis), namely that the concentration of the substrate-bound enzyme ([ES]) changes much more slowly than those of the product ([P]) and substrate ([S]). 
+
+source: http://en.wikipedia.org/wiki/Michaelis-Menten_equation</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000131 -->
+
+    <owl:Class rdf:about="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000131">
+        <rdfs:subClassOf rdf:resource="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000112"/>
+        <rdfs:label>Hagen Poiseuille equation</rdfs:label>
+        <skos:definition>In fluid dynamics, the Hagen Poiseuille equation is a physical law that gives the pressure drop in a fluid flowing through a long cylindrical pipe. The assumptions of the equation are that the flow is laminar viscous and incompressible and the flow is through a constant circular cross-section that is substantially longer than its diameter. The equation is also known as the Hagen Poiseuille law, Poiseuille law and Poiseuille equation. ...
+In standard fluid dynamics notation:
+
+    \Delta P = \frac{8 \mu L Q}{ \pi r^4} 
+
+or
+
+    \Delta P = \frac{128 \mu L Q}{ \pi d^4}
+
+where:
+
+    P is the pressure drop
+    L is the length of pipe
+      is the dynamic viscosity
+    Q is the volumetric flow rate
+    r is the radius
+    d is the diameter
+   
+
+ Physics notation
+
+    \Phi = \frac{dV}{dt} = v \pi R^{2} = \frac{\pi R^{4}}{8 \eta} \left( \frac{- \Delta P}{\Delta x}\right) = \frac{\pi R^{4}}{8 \eta} \frac{ |\Delta P|}{L} 
+
+where:
+
+    
+    V is a volume of the liquid poured (cubic meters)
+    t is the time (seconds)
+    v is mean fluid velocity along the length of the tube (meters/second)
+    x is a distance in direction of flow (meters)
+    R is the internal radius of the tube (meters)
+    P is the pressure difference between the two ends (pascals)
+    L is the total length of the tube in the x direction (meters). 
+
+source: http://en.wikipedia.org/wiki/Poiseuille_equation</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000134 -->
+
+    <owl:Class rdf:about="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000134">
+        <rdfs:subClassOf rdf:resource="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000486"/>
+        <rdfs:label>Arrhenius equation</rdfs:label>
+        <skos:definition>The Arrhenius equation is a simple, but remarkably accurate, formula for the temperature dependence of the reaction rate constant, and therefore, rate of a chemical reaction.... It can be used to model the temperature-variance of diffusion coefficients, population of crystal vacancies, creep rates, and many other thermally-induced processes/reactions.
+
+A historically useful generalization supported by the Arrhenius equation is that, for many common chemical reactions at room temperature, the reaction rate doubles for every 10 degree Celsius increase in temperature.
+...
+In short, the Arrhenius equation gives &quot;the dependence of the rate constant k of chemical reactions on the temperature T (in absolute temperature, such as kelvins or degrees Rankine) and activation energy[3] Ea&quot;, as shown below:[1]
+
+    k = A e^{{-E_a}/{RT}}
+
+where A is the pre-exponential factor or simply the prefactor and R is the gas constant. 
+source: http://en.wikipedia.org/wiki/Arrhenius_equation</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000457 -->
+
+    <owl:Class rdf:about="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000457">
+        <rdfs:subClassOf rdf:resource="http://www.sarala.bioeng.auckland.ac.nz/Physical.owl#Parameter"/>
+        <rdfs:label>physiological parameter</rdfs:label>
+        <skos:definition>parameter that is specific to the system</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000458 -->
+
+    <owl:Class rdf:about="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000458">
+        <rdfs:subClassOf rdf:resource="http://www.sarala.bioeng.auckland.ac.nz/Physical.owl#Parameter"/>
+        <rdfs:label>model parameter</rdfs:label>
+        <skos:definition>parameter that is specific to a model</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000486 -->
+
+    <owl:Class rdf:about="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000486">
+        <rdfs:subClassOf rdf:resource="http://purl.org/obo/owl/SBO#SBO_0000064"/>
+        <rdfs:label>kinetics equation</rdfs:label>
+        <skos:definition>Equation used for the calculation of motion and its cause.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000872 -->
+
+    <owl:Class rdf:about="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000872">
+        <rdfs:subClassOf rdf:resource="http://www.sarala.bioeng.auckland.ac.nz/CellMLOntology.owl#Variable"/>
+        <rdfs:label>quantitative variable</rdfs:label>
+        <skos:definition>Variable that has a quantitative value, i.e., a measurable property such as weight, length etc.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000916 -->
+
+    <owl:Class rdf:about="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000916">
+        <rdfs:subClassOf rdf:resource="http://www.sarala.bioeng.auckland.ac.nz/CellMLOntology.owl#Variable"/>
+        <rdfs:label>qualitative variable</rdfs:label>
+        <skos:definition>A variable that cannot be measured but can be categorized, such as &quot;male / female&quot; or &quot;0 / 1&quot;.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://scai.fraunhofer.de/HuPSON#SCAIVPH_00001054 -->
+
+    <owl:Class rdf:about="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00001054">
+        <rdfs:subClassOf rdf:resource="http://purl.obofoundry.org/obo/IAO_0000030"/>
+        <rdfs:label>mathematical entity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ifomis.org/bfo/1.1/snap#DependentContinuant -->
+
+    <owl:Class rdf:about="http://www.ifomis.org/bfo/1.1/snap#DependentContinuant">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000002"/>
+        <rdfs:label>dependent_continuant</rdfs:label>
+        <skos:definition>Definition: A continuant [snap:Continuant] that is either dependent on one or other independent continuant [snap:IndependentContinuant] bearers or inheres in or is borne by other entities.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ifomis.org/bfo/1.1/snap#GenericallyDependentContinuant -->
+
+    <owl:Class rdf:about="http://www.ifomis.org/bfo/1.1/snap#GenericallyDependentContinuant">
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/snap#DependentContinuant"/>
+        <rdfs:label>generically_dependent_continuant</rdfs:label>
+        <skos:definition>Definition: A continuant [snap:Continuant] that is dependent on one or other independent continuant [snap:IndependentContinuant] bearers. For every instance of A requires some instance of (an independent continuant [snap:IndependentContinuant] type) B but which instance of B serves can change from time to time.</skos:definition>
+        <skos:example>Examples: a certain PDF file that exists in different and in several hard drives</skos:example>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sarala.bioeng.auckland.ac.nz/CellMLOntology.owl#Variable -->
+
+    <owl:Class rdf:about="http://www.sarala.bioeng.auckland.ac.nz/CellMLOntology.owl#Variable">
+        <rdfs:subClassOf rdf:resource="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00001054"/>
+        <rdfs:label>variable</rdfs:label>
+        <skos:definition>A characteristic or attribute of an object, event, or other entity under observation, that could be measured or categorized and could assume more than one of a set of values to which a numerical measure or a category from a classification can be assigned.
+source: NCI Thesaurus</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sarala.bioeng.auckland.ac.nz/Physical.owl#Constant -->
+
+    <owl:Class rdf:about="http://www.sarala.bioeng.auckland.ac.nz/Physical.owl#Constant">
+        <rdfs:subClassOf rdf:resource="http://www.sarala.bioeng.auckland.ac.nz/CellMLOntology.owl#Variable"/>
+        <rdfs:label>constant</rdfs:label>
+        <skos:definition>In mathematics, a constant is a non-varying value, i.e. completely fixed or fixed in the context of use. The term usually occurs in opposition to variable (i.e. variable quantity), which is a symbol that stands for a value that may vary.
+
+In polynomials, polynomial function of degree 2 is generally denoted as
+
+        a x^2 + b x + c,\ 
+
+where a, b and c are constants (or parameters), while x is the variable, a placeholder for the argument of the function being studied.
+
+source: http://en.wikipedia.org/wiki/Constant_%28mathematics%29</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sarala.bioeng.auckland.ac.nz/Physical.owl#Parameter -->
+
+    <owl:Class rdf:about="http://www.sarala.bioeng.auckland.ac.nz/Physical.owl#Parameter">
+        <rdfs:subClassOf rdf:resource="http://www.sarala.bioeng.auckland.ac.nz/CellMLOntology.owl#Variable"/>
+        <rdfs:comment>There is a clear difference between variables and parameters. A variable represents a model state, and may change during simulation. A parameter is commonly used to describe objects statically. A parameter is normally a constant in a single simulation, and is changed only when you need to adjust your model behavior. 
+source: http://www.xjtek.com/anylogic/help/index.jsp?topic=/com.xj.anylogic.help/html/data/Parameters%20and%20Variables.html</rdfs:comment>
+        <rdfs:label>parameter</rdfs:label>
+        <skos:definition>Any value passed to a program by the user or by another program in order to customize the program for a particular purpose. A parameter may be anything; for example, a file name, a coordinate, a range of values, a money amount or a code of some kind. Parameters may be required as in parameter-driven software (see below) or they may be optional. Parameters are often entered as a series of values following the program name when the program is loaded.
+source: http://computer.yourdictionary.com/parameter</skos:definition>
+    </owl:Class>
     
 
 
@@ -6956,5 +8438,5 @@ Copyright © 2015-2022 Allotrope Foundation
 
 
 
-<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi -->
 
