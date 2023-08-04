@@ -79,11 +79,11 @@ def synonym_dicts(class_list):
     """
     print("Extracting formulae...")
     desc_dict = {} 
-    smiles_dict = {}
+    formula_dict = {}
     inchikey = {}
     temp_class_label = []
     
-    def_id = ["hasRelatedSynonym", "smiles","inchikey"]
+    def_id = ["hasRelatedSynonym", "formula","inchikey"]
     
     for i in range(len(class_list)):
         temp_class = class_list[i]
@@ -103,209 +103,111 @@ def synonym_dicts(class_list):
                 print("Label for class {} not determined!".format(str(temp_class)))
                 return()
         
-        if temp_class_label:
+        if temp_class_label and temp_class_label not in desc_dict.keys():
+            
             # if class got a label which is not empty, search for definition                    
             desc_dict[temp_class_label] = getattr(temp_class,def_id[0])
-            if desc_dict[temp_class_label]: 
+            if desc_dict[temp_class_label] and temp_class_label not in desc_dict[temp_class_label]: 
                 desc_dict[temp_class_label].append(temp_class_label)
-            else:    
+            elif not desc_dict[temp_class_label]:    
                 desc_dict[temp_class_label] = [temp_class_label]
-            smiles_dict[temp_class_label] =getattr(temp_class,def_id[1])
+            formula_dict[temp_class_label] =getattr(temp_class,def_id[1])
             
             #if temp_class_label in smiles_dict[temp_class_label]:
                 #smiles_dict[temp_class_label].remove(temp_class_label)
             inchikey[temp_class_label] =getattr(temp_class,def_id[2])
+            if temp_class_label == 'silicon dioxide':
+                print(desc_dict[temp_class_label])
     print("Done.")
-    return desc_dict,smiles_dict, inchikey
+    return desc_dict,  inchikey, formula_dict
 
 
-def chemical_prep(chem_list, onto_list, onto):
-
-    """
-    From list with chemicals Differentiation between long and short chemical entities for different preprocessing; 
-    separation in components and creation of dictionary:
-        comp_dict = {'molecule1': ['comp1', 'comp2'],
-                     'molecule2': ['comp3', 'comp1']}
-    Search in ontology for classes-synonyms: compare synonyms of ontology-entities with values of comp_dict, save them in dictionary
-    
-    Parameters
-    ----------
-    chem_list : list
-        DESCRIPTION.
-    onto_dict : dict
-        DESCRIPTION.
-
-    Returns
-    -------
-    onto_new_dict : dict
-        DESCRIPTION.
-
-    """
-    comp_dict = {}
-    class_list=[]        
-    onto_new_dict ={}
-    #new_world3 = owlready2.World()
-    #onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
-    
-    onto_class_list = list(onto.classes())
-    onto_dict,smiles_dict = synonym_dicts(onto_class_list)
-    
-    for molecule in chem_list:
-        molecule_split = molecule.split()
-        if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) is not None:
-            comp_dict[molecule] = molecule_split  
-        else:
-            comp = re.findall(r'([A-Z](?:[a-z])?)',molecule)
-            comp_dict[molecule] = comp
-
-    for k,v in comp_dict.items():
-        if k not in onto_new_dict.keys():
-            if k not in class_list:
-                class_list.append(k)
-            synonyms={}
-            for c in v:
-                if c not in class_list:
-                    class_list.append(c)
-                for k_o, v_o in onto_dict.items():              #erstellen von synonym-dictionary für molekül und ihre Komponenten 
-                    if k in v_o and k_o not in synonyms[k]:
-                        if k in synonyms.keys():
-                            synonyms[k].append(k_o)
-                        else: 
-                            synonyms[k]=[]
-                            synonyms[k].append(k_o)
-                    if k_o in onto_new_dict[k]:
-                        continue
-                    elif c in v_o:
-                        synonyms[c].append(k_o)
-            comp_smiles,same= search_in_smiles(smiles_dict, k)
-            if k not in comp_smiles:
-                key = compare_synonyms(k,comp_smiles, synonyms)
-                onto_new_dict[key] =[]
-                if k not in class_list:
-                    class_list.remove(k)
-                    class_list.append(key)
-            elif same == True:
-                onto_new_dict[k] =[]
-            
-            
-            for c in v:            
-                    if comp_smiles not in class_list:
-                        class_list.remove(k)
-                        
-            comp_smiles,same = search_in_smiles(smiles_dict, c)   #to do: integrieren Überprüfung mit synonyms
-            if same:
-                    onto_new_dict[k].append(c)
-                    continue                
-                
-            elif c not in comp_smiles:
-                    if comp_smiles[0] not in class_list:
-                        class_list.remove(c)
-                        class_list.append(str(comp_smiles[0]))
-                    
-                    onto_new_dict[k].append(str(comp_smiles[0]))    
-                    continue
-                
-                        #onto_new_dict[k].append(k_o)
-                        #onto_new_dict[k].remove(c)
-                        #if k_o not in class_list:
-                            #class_list.append(k_o)
-                        
-            elif c not in onto_new_dict[k]:
-                        onto_new_dict[k].append(c)
-
-    print(class_list)
-    missing, match_dict = create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
-
-
-            
-    return onto_new_dict, missing, match_dict, class_list
-
-def search_in_smiles(smiles_dict, c):
-    same = False
-    try:
-        mol = get_compounds(c, 'formula')    
-    except:
-        try:
-           mol = get_compounds(c, 'name')       
-        except:
-            mol = [c]
-    print('{}:{}'.format(mol,c))        
-    if not mol:
-        mol_smiles = [c]
-    else:
-        if c not in mol:
-            mol_smiles = [k for k,v in smiles_dict.items() for compound in mol if compound.isomeric_smiles in v]
-            print(mol_smiles)
-            if mol_smiles:
-                for i in mol_smiles:
-                    if str(i.iupac_name)==c:
-                        same = True
-                        mol_smiles= [mol_smiles[i]]
-            else:
-                mol_smiles = mol  
-        else:
-            mol_smiles = mol    
-    return mol_smiles, same
-def compare_synonyms(k,comp_inch, synonyms):
-    done=False
-    for s in synonyms[k]:
-        for i in comp_inch:
-            if i == s:
-                output = k
-                done= True
-                break
-            else:
-                ouput = s
-        if done == True:
-            break
-    return output
 #create snip and merge ontologies...
 
 # und neu anfangen chemicals search 2.0....
-def chemical_prep_2(chem_list, onto_list, onto):
+def chemical_prep_2(chem_list, onto_list, onto, cat_sup):
+    rel_synonym={}
     comp_dict = {}
     class_list=[]        
     onto_new_dict ={}
-    
+    synonyms={}
     #new_world3 = owlready2.World()
     #onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
-    
+    nlp=spacy.load('en_core_web_sm')
     onto_class_list = list(onto.classes())
-    onto_dict,smiles_dict, inchikey = synonym_dicts(onto_class_list)
-    for molecule in chem_list:
-         molecule_split = molecule.split()
-         if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) is not None:
+    onto_dict,inchikey, formula_dict = synonym_dicts(onto_class_list)
+    for m in chem_list:
+        match_hyph=re.search(r'([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?)', m)
+        if  match_hyph:
+             m = match_hyph.group(1)+match_hyph.group(2)  
+        doc_list=[]
+        doc = nlp(m)
+        for i in range(len(doc)):
+            if doc[i].tag_ == 'NNS':
+                doc_list.append(str(doc[i].lemma_))
+            else:
+                doc_list.append(str(doc[i]))
+        
+        molecule= " ".join(doc_list)
+        molecule_split = molecule.split()
+
+        '''
+        check if support with sup_dict?
+        '''
+        if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) is not None:
              comp_dict[molecule] = molecule_split  
-         else:
+        else:
              comp = re.findall(r'([A-Z](?:[a-z])?)',molecule)
              comp_dict[molecule] = comp
     for k,v in comp_dict.items():
+        print('{}:{}'.format(k,v))
+        i=0
         if k not in onto_new_dict.keys():
-            synonyms={}
-            if k not in class_list:
-                class_list.append(k)
-            comp_check, same= search_inchikey(inchikey, k)
             for c in v:
-                if c not in class_list:
-                    class_list.append(c)
-                for k_o, v_o in onto_dict.items():             
-                    if k in v_o:
-                        if k not in synonyms.keys():
-                            synonyms[k]=[]
-                            synonyms[k].append(k_o)
-                        elif k_o not in synonyms[k]:
-                            synonyms[k].append(k_o)
 
-                    if k_o in onto_new_dict[k]:
-                        continue
-                    elif c in synonyms.keys():
-                        synonyms[c].append(k_o)
-                    else: 
-                        synonyms[c]=[]
-                        synonyms[c].append(k_o)
-
-
-
+                print(c)
+                for k_o, v_o in onto_dict.items():
+                    synonyms= fill_synonyms(synonyms,k,v_o,k_o, formula_dict)
+                    synonyms= fill_synonyms(synonyms,c,v_o,k_o, formula_dict)
+                
+                if i==0:
+                    class_list, key ,rel_synonym= compare_synonyms(synonyms,inchikey, class_list, k, rel_synonym)
+                    onto_new_dict[key]=[]
+                    i+=1
+                class_list, comp, rel_synonym = compare_synonyms(synonyms,inchikey, class_list, c, rel_synonym) 
+                onto_new_dict[key].append(comp)
+                
+    print(synonyms)
+    print(class_list)
+    missing, match_dict = create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
+    return onto_new_dict, missing, match_dict, rel_synonyms
+            
+def fill_synonyms(synonyms,c,v,k, formula_dict):
+    pattern= r'^{}$'.format(c)
+    for s in v:
+        if re.search(pattern,s):
+            if c not in synonyms.keys():
+                synonyms[c]=[]
+                synonyms[c].append(k)
+            elif k not in synonyms[c]: 
+                synonyms[c].append(k)
+        elif k in formula_dict.keys():
+            if c == formula_dict[k]:
+                print ('found formula for {}'.format(c))
+                if c not in synonyms.keys():
+                    synonyms[c]=[]
+                    synonyms[c].append(k)
+                elif k not in synonyms[c]: 
+                    synonyms[c].append(k)
+    
+    if c not in synonyms.keys():
+        synonyms[c]=[]
+    
+    for i in synonyms[c]:
+        if re.search(pattern,i):
+            synonyms[c]=[i]
+                        
+    return synonyms
 
 def search_inchikey(inchikey, c):
     same = False
@@ -316,8 +218,8 @@ def search_inchikey(inchikey, c):
         try:
             mol = get_compounds(c, 'name')       
         except:
-            mol = [c]        
-    if not mol or c in mol:
+            mol = []        
+    if not mol:
         mol_out = [c]
     else:
         mol_inch = [k for k, v in inchikey.items() for compound in mol if compound.inchikey in v]
@@ -329,39 +231,70 @@ def search_inchikey(inchikey, c):
                     break
                 else: mol_out= mol_inch
         else:
-            mol_out = mol          
-    return mol_out, same
-def cem_onto_ext (onto_new_dict, missing):
-    """
-    check in chebi ontology for synonyms
+            mol_out = [c]          
+    return mol_out, same, mol
 
-    Parameters
-    ----------
-    chem_list : TYPE
-        DESCRIPTION.
+def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
+    if len(synonyms[k]) == 1:
+            key= synonyms[k][0]
+    else: 
+            comp_check, same ,mol= search_inchikey(inchikey, k)
+            if same: 
+                key = k
+            elif k in comp_check:
+                if len(synonyms[k]) == 0:
+                    if not mol:
+                        print('no synonyms and entities for {}, key = k'.format(k))
+                        key = k
+                    else:
+                        while True:
+                            mol_new= [i for i in mol if i.iupac_name]
+                            print('choose iupac name for {}:{}'.format(k,[i.iupac_name for i in mol_new]))
+                            idx= input('write number of fitting iupac name or "none"\n')
+                            if idx =='none':
+                                key = k
+                                break
+                            else:
+                                try:
+                                    idx= int(idx)
+                                except:
+                                    print('error: write a number between 1 and {} or "none"'.format(len(mol_new)))
+                                else:
+                                    rel_synonym[mol_new[idx-1].iupac_name]=k
+                                    key= mol_new[idx-1].iupac_name
+                                    break
+                else:
+                    while True:
+                            print('choose synonyms for {}:{}'.format(k,synonyms[k]))
+                            idx= input('write number of fitting synonym or "none"\n')
+                            
+                            if idx =='none':
+                                key = k
+                                break
+                            else:
+                                try:
+                                    idx= int(idx)
+                                except:
+                                    print('error: write a number between 1 and {} or "none"'.format(len(synonyms[k])))
+                                else:
+                                    key= synonyms[k][idx-1]
+                                    break
+            elif len(comp_check) == 1:
+                key= comp_check[0]                  
+            else:
+                key = None
+                for i in comp_check:
+                    if i in synonyms[k]:
+                        key = i
+                if not key:
+                    print('no synonyms but some matches in inchikey for {}:{}'.format(k, comp_check))
+                    key = k                  
+    if key not in class_list:               
+        class_list.append(key)
+    return class_list, key, rel_synonym
+                 
+                 
 
-    Returns
-    -------
-    None.
-
-    """
-    new_world = owlready2.World()
-    onto = new_world.get_ontology('./ontologies/afo_upd.owl').load()
-    with onto:
-        for k in onto_new_dict.keys():
-            if k in missing:
-               ... 
-
-    onto_class_list = list(onto.classes())
-    onto_new_dict = chemical_prep(chem_list, cem_dicts)
-    class_list=[]
-    for k,v in onto_new_dict.items():
-        found_class = onto.search_one(label = k)
-        #if found_class:
-            
-            
-        #with onto:
-        #NewMolecule = types.new_class(k, tuple(v))
 
 
 def REL_search (text):
@@ -620,7 +553,9 @@ def create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary', 
         if include_main == False:
             onto_names.remove('AFO')
         for entity in class_list:
-            match_dict, missing = search_value_in_nested_dict(entity, onto_names,missing, onto_dict, match_dict)
+            match_dict = search_value_in_nested_dict(entity, onto_names, onto_dict, match_dict)
+            if entity not in match_dict:
+                missing.append(entity)
         print(match_dict)   
         for key,value in match_dict.items():
             x=[]
@@ -648,26 +583,24 @@ def write_in_txt(IRI,label,onto_name):
     txt.close() 
    
 
-def search_in_nested_dict_val(value, onto_names, missing, onto_dict, match_dict):
+def search_in_nested_dict_val(value, onto_names, onto_dict, match_dict):
     for k in onto_names:
         for IRI in onto_dict[k].keys() :
             for key, val in onto_dict[k][IRI].items():
                 if val and value.lower() == val.lower():
                     match_dict[val] = [IRI,k]
-                elif value not in missing:
-                    missing.append(value)
+
             
-    return match_dict, missing    
-def search_value_in_nested_dict(value, onto_names, missing, onto_dict, match_dict):
+    return match_dict   
+def search_value_in_nested_dict(value, onto_names, onto_dict, match_dict):
     for k in onto_names:
         for IRI in onto_dict[k].keys() :
             for key, val in onto_dict[k][IRI].items():
                 if val and value.lower() == val.lower():
                     match_dict[IRI] = val
-                elif value not in missing:
-                    missing.append(value)
+
             
-    return match_dict, missing
+    return match_dict
 
 def onto_extender (onto_list):
     new_world= owlready2.World()
