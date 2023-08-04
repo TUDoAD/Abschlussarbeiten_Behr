@@ -31,4 +31,4 @@ def get_class_info_list():
         
     return classes_info
 
-get_class_info_list()
+#get_class_info_list()
