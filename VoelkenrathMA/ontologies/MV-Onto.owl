@@ -7597,7 +7597,7 @@ source: http://en.wikipedia.org/wiki/Newtonian_fluid</skos:definition>
     <!-- http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000112 -->
 
     <owl:Class rdf:about="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000112">
-        <rdfs:subClassOf rdf:resource="http://scai.fraunhofer.de/HuPSON#SCAIVPH_00000486"/>
+        <rdfs:subClassOf rdf:resource="http://purl.org/obo/owl/SBO#SBO_0000064"/>
         <rdfs:label>equation of fluid dynamics</rdfs:label>
         <skos:definition>The foundational axioms of fluid dynamics are the conservation laws, specifically, conservation of mass, conservation of linear momentum (also known as Newton&apos;s Second Law of Motion), and conservation of energy (also known as First Law of Thermodynamics). These are based on classical mechanics and are modified in quantum mechanics and general relativity. They are expressed using the Reynolds Transport Theorem.
 source: http://en.wikipedia.org/wiki/Fluid_dynamics</skos:definition>
