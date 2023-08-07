@@ -8,7 +8,7 @@ Created on Tue Jul 25 10:33:27 2023
 import subprocess
 
 def call_subprocess(compounds):
-    command = ['python', 'DWSIMWork.py']
+    command = ['python', 'DWSIMWork.py', "create_compound"]
     
     process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     
