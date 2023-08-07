@@ -44,6 +44,8 @@ def load_ontologies(ontology_name):
     new_world = owlready2.World()
     onto = new_world.get_ontology("./ontologies/{}.owl".format(ontology_name)).load()
     onto_class_list = list(onto.classes())
+
+
     print("Loading {} done. Imported {} classes.".format(ontology_name, len(onto_class_list)))
     return onto_class_list 
 
@@ -115,9 +117,7 @@ def synonym_dicts(class_list):
             
             #if temp_class_label in smiles_dict[temp_class_label]:
                 #smiles_dict[temp_class_label].remove(temp_class_label)
-            inchikey[temp_class_label] =getattr(temp_class,def_id[2])
-            if temp_class_label == 'silicon dioxide':
-                print(desc_dict[temp_class_label])
+            inchikey[temp_class_label] = getattr(temp_class,def_id[2])
     print("Done.")
     return desc_dict,  inchikey, formula_dict
 
@@ -135,6 +135,10 @@ def chemical_prep_2(chem_list, onto_list, onto, cat_sup):
     #onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
     nlp=spacy.load('en_core_web_sm')
     onto_class_list = list(onto.classes())
+    set_org_mol = onto.search_one(label='organic molecular entity').descendants()     #todo exclude "organic molecular entity"
+    for i in set_org_mol:
+        if i in onto_class_list:
+            onto_class_list.remove(i)
     onto_dict,inchikey, formula_dict = synonym_dicts(onto_class_list)
     for m in chem_list:
         match_hyph=re.search(r'([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?)', m)
@@ -151,9 +155,6 @@ def chemical_prep_2(chem_list, onto_list, onto, cat_sup):
         molecule= " ".join(doc_list)
         molecule_split = molecule.split()
 
-        '''
-        check if support with sup_dict?
-        '''
         if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) is not None:
              comp_dict[molecule] = molecule_split  
         else:
@@ -191,6 +192,7 @@ def fill_synonyms(synonyms,c,v,k, formula_dict):
                 synonyms[c].append(k)
             elif k not in synonyms[c]: 
                 synonyms[c].append(k)
+        '''
         elif k in formula_dict.keys():
             if c == formula_dict[k]:
                 print ('found formula for {}'.format(c))
@@ -199,7 +201,7 @@ def fill_synonyms(synonyms,c,v,k, formula_dict):
                     synonyms[c].append(k)
                 elif k not in synonyms[c]: 
                     synonyms[c].append(k)
-    
+        '''
     if c not in synonyms.keys():
         synonyms[c]=[]
     
