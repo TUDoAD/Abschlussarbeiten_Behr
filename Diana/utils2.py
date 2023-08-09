@@ -85,7 +85,7 @@ def synonym_dicts(class_list):
     inchikey = {}
     temp_class_label = []
     
-    def_id = ["hasRelatedSynonym", "formula","inchikey"]
+    def_id = ["hasRelatedSynonym", "hasExactSynonym","inchikey"]
     
     for i in range(len(class_list)):
         temp_class = class_list[i]
@@ -109,52 +109,66 @@ def synonym_dicts(class_list):
             
             # if class got a label which is not empty, search for definition                    
             desc_dict[temp_class_label] = getattr(temp_class,def_id[0])
+            desc_dict[temp_class_label].extend(getattr(temp_class,def_id[1]))
             if desc_dict[temp_class_label] and temp_class_label not in desc_dict[temp_class_label]: 
                 desc_dict[temp_class_label].append(temp_class_label)
             elif not desc_dict[temp_class_label]:    
                 desc_dict[temp_class_label] = [temp_class_label]
-            formula_dict[temp_class_label] =getattr(temp_class,def_id[1])
+            #formula_dict[temp_class_label] =getattr(temp_class,def_id[2])
             
             #if temp_class_label in smiles_dict[temp_class_label]:
                 #smiles_dict[temp_class_label].remove(temp_class_label)
             inchikey[temp_class_label] = getattr(temp_class,def_id[2])
     print("Done.")
-    return desc_dict,  inchikey, formula_dict
+    return desc_dict,  inchikey
 
 
 #create snip and merge ontologies...
-
+def load_classes_chebi():
+    
+    new_world3 = owlready2.World()
+    onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
+    onto_class_list = list(onto.classes())
+    set_org_mol = onto.search_one(label='organic molecular entity').descendants()#todo exclude "organic molecular entity
+    set_org_mol= set_org_mol.union(onto.search_one(label='organic group').descendants())
+    for i in set_org_mol:
+        if i in onto_class_list:
+            onto_class_list.remove(i)
+    return onto_class_list
+        
 # und neu anfangen chemicals search 2.0....
-def chemical_prep_2(chem_list, onto_list, onto, cat_sup):
+def chemical_prep_2(chem_list, onto_list,onto_class_list):
     rel_synonym={}
     comp_dict = {}
     class_list=[]        
     onto_new_dict ={}
     synonyms={}
+    old=[]
+    nlp=spacy.load('en_core_web_sm')
+    '''
     #new_world3 = owlready2.World()
     #onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
-    nlp=spacy.load('en_core_web_sm')
+    
     onto_class_list = list(onto.classes())
-    set_org_mol = onto.search_one(label='organic molecular entity').descendants()     #todo exclude "organic molecular entity"
+    #set_org_mol = onto.search_one(label='organic molecular entity').descendants()     #todo exclude "organic molecular entity"
     for i in set_org_mol:
         if i in onto_class_list:
             onto_class_list.remove(i)
-    onto_dict,inchikey, formula_dict = synonym_dicts(onto_class_list)
-    for m in chem_list:
-        match_hyph=re.search(r'([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?)', m)
-        if  match_hyph:
-             m = match_hyph.group(1)+match_hyph.group(2)  
-        doc_list=[]
-        doc = nlp(m)
-        for i in range(len(doc)):
-            if doc[i].tag_ == 'NNS':
-                doc_list.append(str(doc[i].lemma_))
-            else:
-                doc_list.append(str(doc[i]))
+    '''
+    onto_dict,inchikey= synonym_dicts(onto_class_list)
+    for m in chem_list:  
+        non_chem = False
+        pattern= '('+m+')[—–-][\d]+' #ex: 'ZSM-5' with m='ZSM'
+        for i in chem_list:
+            match_hyph=re.search(pattern,i)
+            if match_hyph:
+                non_chem = True
+                break
+        if non_chem ==True:
+            continue        
         
-        molecule= " ".join(doc_list)
+        molecule= comp_prep(m)
         molecule_split = molecule.split()
-
         if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) is not None:
              comp_dict[molecule] = molecule_split  
         else:
@@ -168,22 +182,58 @@ def chemical_prep_2(chem_list, onto_list, onto, cat_sup):
 
                 print(c)
                 for k_o, v_o in onto_dict.items():
-                    synonyms= fill_synonyms(synonyms,k,v_o,k_o, formula_dict)
-                    synonyms= fill_synonyms(synonyms,c,v_o,k_o, formula_dict)
+                    synonyms= fill_synonyms(synonyms,k,v_o,k_o)
+                    synonyms= fill_synonyms(synonyms,c,v_o,k_o)
                 
                 if i==0:
-                    class_list, key ,rel_synonym= compare_synonyms(synonyms,inchikey, class_list, k, rel_synonym)
+                    non_comp,class_list, key ,rel_synonym= compare_synonyms(synonyms,inchikey, class_list, k, rel_synonym,comp= False)
+                    #if non_comp = key:
+                    #    break
                     onto_new_dict[key]=[]
                     i+=1
-                class_list, comp, rel_synonym = compare_synonyms(synonyms,inchikey, class_list, c, rel_synonym) 
-                onto_new_dict[key].append(comp)
+                if c == k:
+                    comp = key
+                    non_comp = False
+                else:
+                    non_comp, class_list, comp, rel_synonym = compare_synonyms(synonyms,inchikey, class_list, c, rel_synonym,comp= True) 
                 
-    print(synonyms)
-    print(class_list)
-    missing, match_dict = create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
-    return onto_new_dict, missing, match_dict, rel_synonyms
+                if non_comp == True:
+                    break
+                
+                onto_new_dict[key].append(comp)
             
-def fill_synonyms(synonyms,c,v,k, formula_dict):
+            if len(onto_new_dict[key]) != len(v):#remove components if one of the components (atoms) doesn't exist (ex.ZMS- Z,M don't exist, S-exists) -wrong: mb delete
+                    print('not all components found {}:{}'.format(key,onto_new_dict[key]))
+                    for i in onto_new_dict[key]:
+                        if i in class_list:
+                            class_list.remove(i) 
+               
+               
+    print(synonyms)
+    class_list= [*set(class_list)] #remove duplicates
+    print(class_list)
+    print(onto_new_dict)
+    missing, match_dict = create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
+    
+    return onto_new_dict, missing, match_dict, rel_synonym
+
+def comp_prep(m): 
+    doc_list=[]
+    doc = nlp(m)
+    for i in range(len(doc)):
+        if doc[i].tag_ == 'NNS':
+            doc_list.append(str(doc[i].lemma_))
+        else:
+            doc_list.append(str(doc[i]))
+    
+    molecule= " ".join(doc_list)
+    old.append(m)
+    match_hyph=re.search(r'([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?)', m)
+    if  match_hyph:
+         molecule = match_hyph.group(1)+match_hyph.group(2)
+    return molecule
+           
+def fill_synonyms(synonyms,c,v,k):
     pattern= r'^{}$'.format(c)
     for s in v:
         if re.search(pattern,s):
@@ -192,16 +242,7 @@ def fill_synonyms(synonyms,c,v,k, formula_dict):
                 synonyms[c].append(k)
             elif k not in synonyms[c]: 
                 synonyms[c].append(k)
-        '''
-        elif k in formula_dict.keys():
-            if c == formula_dict[k]:
-                print ('found formula for {}'.format(c))
-                if c not in synonyms.keys():
-                    synonyms[c]=[]
-                    synonyms[c].append(k)
-                elif k not in synonyms[c]: 
-                    synonyms[c].append(k)
-        '''
+
     if c not in synonyms.keys():
         synonyms[c]=[]
     
@@ -212,7 +253,6 @@ def fill_synonyms(synonyms,c,v,k, formula_dict):
     return synonyms
 
 def search_inchikey(inchikey, c):
-    same = False
     
     try:
         mol = get_compounds(c, 'formula')    
@@ -226,28 +266,27 @@ def search_inchikey(inchikey, c):
     else:
         mol_inch = [k for k, v in inchikey.items() for compound in mol if compound.inchikey in v]
         if mol_inch:
-            for i in mol_inch:
-                if mol_inch[0] == c:
-                    same = True
-                    mol_out= mol_inch
-                    break
-                else: mol_out= mol_inch
+            mol_out= mol_inch
         else:
             mol_out = [c]          
-    return mol_out, same, mol
+    return mol_out,  mol
 
-def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
+def compare_synonyms(synonyms, inchikey, class_list, k,rel_synonym, comp):
+    none_comp= False
     if len(synonyms[k]) == 1:
             key= synonyms[k][0]
     else: 
-            comp_check, same ,mol= search_inchikey(inchikey, k)
-            if same: 
-                key = k
-            elif k in comp_check:
+            comp_check, mol= search_inchikey(inchikey, k)
+            
+            if k in comp_check:
                 if len(synonyms[k]) == 0:
                     if not mol:
                         print('no synonyms and entities for {}, key = k'.format(k))
                         key = k
+                        none_comp =True
+                        return none_comp, class_list, key, rel_synonym
+                    elif len(mol)==1:
+                        key=mol[0].iupac_name
                     else:
                         while True:
                             mol_new= [i for i in mol if i.iupac_name]
@@ -255,16 +294,19 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                             idx= input('write number of fitting iupac name or "none"\n')
                             if idx =='none':
                                 key = k
+                                if comp==True:
+                                    none_comp = True
+                                    return none_comp, class_list, key, rel_synonym
+                                
                                 break
                             else:
                                 try:
                                     idx= int(idx)
-                                except:
-                                    print('error: write a number between 1 and {} or "none"'.format(len(mol_new)))
-                                else:
-                                    rel_synonym[mol_new[idx-1].iupac_name]=k
                                     key= mol_new[idx-1].iupac_name
                                     break
+                                except:
+                                    print('error: write a number between 1 and {} or "none"'.format(len(mol_new)))
+                                    
                 else:
                     while True:
                             print('choose synonyms for {}:{}'.format(k,synonyms[k]))
@@ -272,15 +314,18 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                             
                             if idx =='none':
                                 key = k
+                                if comp==True:
+                                    none_comp =True
+                                    return none_comp, class_list, key, rel_synonym
                                 break
                             else:
                                 try:
                                     idx= int(idx)
-                                except:
-                                    print('error: write a number between 1 and {} or "none"'.format(len(synonyms[k])))
-                                else:
                                     key= synonyms[k][idx-1]
                                     break
+                                except:
+                                    print('error: write a number between 1 and {} or "none"'.format(len(synonyms[k])))
+                                
             elif len(comp_check) == 1:
                 key= comp_check[0]                  
             else:
@@ -291,9 +336,9 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                 if not key:
                     print('no synonyms but some matches in inchikey for {}:{}'.format(k, comp_check))
                     key = k                  
-    if key not in class_list:               
-        class_list.append(key)
-    return class_list, key, rel_synonym
+    rel_synonym[k]=key             
+    class_list.append(key)
+    return none_comp,class_list, key, rel_synonym
                  
                  
 
@@ -417,16 +462,16 @@ def CatalysisIE_search(model, test_sents, onto_list):
                     c=str(c)
                     mol = re.findall(r'/([\w@—–-]+)\b', c)
                     if mol:
-                        catalyst= re.search(r'\b([\w@—–-]+)/', c).group(1)
-                        chem_list.append(catalyst)
+                        support = mol[0]
+                        chem_list.append(support)
                         if l=='Catalyst':
-                            support = mol[0]
-                            chem_list.append(support)    
-                            if catalyst in cat_sup.keys():
-                                    cat_sup[catalyst].append(support)
+                            catalyst= re.search(r'\b([\w@—–-]+)/', c).group(1)
+                            chem_list.append(catalyst)    
+                            if support in cat_sup.keys():
+                                    sup_cat[support].append(catalyst)
                             else:
-                                    cat_sup[catalyst] = []
-                                    cat_sup[catalyst].append(support)
+                                    sup_cat[support] = []
+                                    sup_cat[support].append(catalyst)
                         else:
                             for i in range(len(mol)):
                                 chem_list.append(i)
@@ -434,27 +479,52 @@ def CatalysisIE_search(model, test_sents, onto_list):
                         chem_list.append(c)
             entity_old=entity
             a=j+1
-    return categories,chem_list,abbreviation, cat_sup
+            chem_list= [*set(chem_list)]
+    return categories,chem_list,abbreviation, sup_cat
 
-def catalyst_support(cat_sup,onto):
+def catalyst_support(sup_cat,onto):
     for k,v in cat_sup.items():
         cat=onto.search_one(label=k)
         for i in v:
             ...#carrier_role
     
-def catalyst_entity(categories):
+def catalyst_entity(categories, rel_synonym):
     nlp = spacy.load('en_core_web_sm')
     based_cems={}
+    
     for k,v in categories.items():
         if k =='Catalyst':
             for entity in v:
                 if "based" in entity:
-                     based_m= re.search('based',entity)
-                     e_snip= entity[0:based_m.span()[0]-1]
-                     spans = Document(e_snip).cems
-                     for c in spans:
-                         based_cems[c]
-                spans = Document(entity).cems
+                    support=[]
+                    spans_n=[]
+                    based_m = re.search('based',entity)
+                    e_snip = entity[0:based_m.span()[0]-1]
+                    spans = Document(e_snip).cems
+                    if spans:
+                         for c in spans:
+                             e_btwn= e_snip[c.end:-1]
+                             c = comp_prep(c.text)
+                             try:
+                                 c = rel_synonym[c.text]
+                             except:
+                                 c = c.text
+                             if "supported" in e_btwn:
+                                 support.append(c)
+                                 continue
+                             spans_n.append(c)
+                         for i in support:
+                             sup_cat[i]=[c for c in spans_n and c not in support]
+                    else:
+                        e_snip = entity[based_m.span()[1]:-1]
+                        spans = Document(e_snip).cems
+                        c = comp_prep(c)
+                        try:
+                            c = rel_synonym[c]
+                        except:
+                            c = c
+                            
+            
                 doc = nlp.entity
                 entity_n = " ".join([token.lemma_ for token in doc])
 
@@ -472,8 +542,7 @@ def search_entity (onto, entity_full, category, onto_list,IRI_json_filename='iri
     #for value in onto_list.values():
         #onto= new_world.get_ontology(value).load()
     nlp = spacy.load('en_core_web_sm')
-    
-    #process=['source','lemma']
+
     tags=['NOUN', 'ADJ','PNOUN']
     spans = Document(entity_full).cems
     chemicals=[]
@@ -606,17 +675,17 @@ def search_value_in_nested_dict(value, onto_names, onto_dict, match_dict):
 
 def onto_extender (onto_list):
     new_world= owlready2.World()
-    onto = new_world.get_ontology("ontologies/afo.owl").load()
-    onto.save('./ontologies/afo_upd.owl')
+    onto = new_world.get_ontology("ontologies/Reac4Cat.owl").load()
+    onto.save('./ontologies/Reac4Cat_upd.owl')
     for o,iri in onto_list.items():
         # Der erste Pfad führt zur robot.jar und muss evtl. vom Nutzer angepasst werden.
         # --input: ist die Ontologie in der nach den gewünschten IRI's gesucht werden soll.
         # --method: kann nach Bedarf abgewandelt werden [http://robot.obolibrary.org/extract]
         # --term-file: ist die Textdatei, in der die IRI's abgelegt sind welche gesucht werden sollen
-        # --output: selbsterklärend
+
         os.system('java -jar c://Windows/robot.jar extract --input-iri {} --method BOT --term-file class_lists/IRIs_{}.txt --output ontology_sniplet/{}_classes.owl'.format(iri,o,o))
     for filepath in glob.iglob('ontology_sniplet/*.owl'):
-        os.system('robot merge --input {} --input ontologies/afo_upd.owl --output ontologies/afo_upd.owl'.format(filepath))
+        os.system('robot merge --input {} --input ontologies/Reac4Cat_upd.owl --output ontologies/Reac4Cat_upd.owl'.format(filepath))
 
 def equality( onto_list,onto_name='AFO'):
     eq=[]
