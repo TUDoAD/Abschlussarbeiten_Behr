@@ -1,0 +1,64 @@
+SURFACE MECHANISM OF THE H2-O2 REACTIONS ON PALLADIUM
+****
+***********************************************************************
+****                                                                  *
+****     H2-O2 SURFACE MECHANISM  ON Pd                               *
+****                                                                  *
+****     Version 1.0   Summer 1994                                    *
+****                                                                  *
+****     O. Deutschmann, IWR, Heidelberg University, Germany          *
+****     Contact: mail@detchem.com (O. Deutschmann)                   *
+****                                                                  *
+****     Reference:                                                   *
+****     O. Deutschmann, R. Schmidt, F. Behrendt, J. Warnatz.         *
+****     Proc. Combust. Inst. 26 (1996) 1747-1754.                    *
+****     www.detchem.com/mechanisms                                   *                                                             *
+****                                                                  *
+****     Kinetic data format: DETCHEM                                 *
+****      k = A * T**b * exp (-Ea/RT)         A          b       Ea   *
+****                                       (cm,mol,s)    -     kJ/mol *
+****                                                                  *
+****      STICK: A in next reaction is initial sticking coefficient   *
+****                                                                  *
+****      $..  : additional coverage dependence of Ea (3rd column)    *
+****               or changed reaction order (2nd column)             *
+****                                                                  *
+****      see manuals on www.detchem.com for details                  *
+****                                                                  *
+****      The kinetic data of the backward reactions of               *
+****      reactions in Section 2 are calculated                       *
+****      from thermodynamics (k_b = k_f /K)                          *
+****                                                                  *
+****     Surface site density: 1.55E-9 mol/cm**2                      *
+****                                                                  *
+****     DETCHEM format                                               *
+****                                                                  *
+***********************************************************************
+**** 1.  ADSORPTION / DESORPTION
+***********************************************************************
+STICK
+H2      +_Pd_    +_Pd_    >H_Pd    +H_Pd      0.700E-00  0.0       0.0
+H_Pd    +H_Pd    >_Pd_    +_Pd_    +H2        4.800E+21  0.0      84.0
+$H_Pd                                         0.0        0.0      15.0
+STICK
+H       +_Pd_    >H_Pd                        1.000E-00  0.0       0.0
+STICK
+O2      +_Pd_    +_Pd_    >O_Pd    +O_Pd      0.400E-00  0.0       0.0
+O_Pd    +O_Pd    >_Pd_    +_Pd_    +O2        7.100E+21  0.0     230.0
+STICK
+O       +_Pd_    >O_Pd                        1.000E-00  0.0       0.0
+STICK
+H2O     +_Pd_    >H2O_Pd                      0.750E+00  0.0       0.0
+H2O_Pd           >H2O     +_Pd_               1.300E+13  0.0      44.0
+STICK
+OH      +_Pd_    >OH_Pd                       1.000E-00  0.0       0.0
+OH_Pd            >OH      +_Pd_               1.300E+13  0.0     213.0
+***********************************************************************
+**** 2.  SURFACE REACTIONS
+***********************************************************************
+H_Pd    +O_Pd    =OH_Pd   +_Pd_               6.500E+21  0.0      11.5
+H_Pd    +OH_Pd   =H2O_Pd  +_Pd_               6.500E+21  0.0      17.4
+OH_Pd   +OH_Pd   =H2O_Pd  +O_Pd               6.500E+21  0.0      48.2
+****
+END
+======================================================================
