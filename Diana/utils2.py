@@ -166,7 +166,7 @@ def chemical_prep_2(chem_list, onto_list,onto_class_list):
                 break
         if non_chem ==True:
             continue        
-        molecule= comp_prep(m)
+        
         if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) is not None:
              comp_dict[molecule] = molecule_split  
         else:
@@ -214,24 +214,7 @@ def chemical_prep_2(chem_list, onto_list,onto_class_list):
     missing, match_dict = create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
     
     return onto_new_dict, missing, match_dict, rel_synonym
-
-def comp_prep(m): 
-    nlp=spacy.load('en_core_web_sm')
-    doc_list=[]
-    doc = nlp(m)
-    for i in range(len(doc)):
-        if doc[i].tag_ == 'NNS':
-            doc_list.append(str(doc[i].lemma_))
-        else:
-            doc_list.append(str(doc[i]))
-    
-    molecule= " ".join(doc_list)
-    
-    match_hyph=re.search(r'([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?)', m)
-    if  match_hyph:
-         molecule = match_hyph.group(1)+match_hyph.group(2)
-    return molecule
-           
+     
 def fill_synonyms(synonyms,c,v,k):
     pattern= r'^{}$'.format(c)
     for s in v:
@@ -415,6 +398,7 @@ def text_prep(test_txt):
 
 
 def CatalysisIE_search(model, test_sents, onto_list):
+    nlp = spacy.load('en_core_web_sm')
     chem_list = []
     sup_cat={}
     abbreviation = {}
@@ -445,6 +429,7 @@ def CatalysisIE_search(model, test_sents, onto_list):
         for i, j, l in get_bio_spans(sent_tag):
             print(assemble_token_text(sent[i:j + 1]), l)
             entity = assemble_token_text(sent[i:j + 1])
+            
             spans=Document(entity).cems
             if i == a+1 and '({})'.format(entity) in assemble_token_text(sent):
                 if entity in abbreviation.keys():
@@ -452,13 +437,36 @@ def CatalysisIE_search(model, test_sents, onto_list):
                 else:
                     abbreviation[entity]=[]
                     abbreviation[entity].append(entity_old)
-            
+            doc_list=[]
+            doc = nlp(entity)
+            for i in range(len(doc)):
+                if doc[i].tag_ == 'NNS':
+                    doc_list.append(str(doc[i].lemma_))
+                else:
+                    doc_list.append(str(doc[i]))
+            entity= " ".join(doc_list)         # plural to singular
+            doc = nlp(entity)
+            for token in doc:
+                if token.pos_ in ['PUNCT','SYM']:
+                    entity= entity.replace(entity[token.idx-1],'')
+                    entity= entity.replace(entity[token.idx+1],'')
             if entity in categories[l]:
                 continue
             else:
-                categories[l].append(entity)
-                for c in spans:
-                    c=str(c)
+                for i,c in enumerate(spans):
+                    c=str(c)       
+                    match_hyph=re.search(r'([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?)', c) # Rh-Co --> RhCo
+                    if match_hyph:
+                        entity.replace(c,match_hyph.group(1)+match_hyph.group(2))
+                        c = match_hyph.group(1)+match_hyph.group(2)
+                    if i != 0:
+                        e_btwn= entity[spans[i].end:spans[i-1].start]
+                        if 'loaded' in e_btwn:    #Zr-loaded ZSM-5 zeolites
+                            if spans[i-1] in sup_cat.keys():
+                                    sup_cat[spans[i-1].text].append(spans[i].text)
+                            else:
+                                    sup_cat[spans[i-1].text] = []
+                                    sup_cat[spans[i-1].text].append(spans[i].text)
                     mol = re.findall(r'/([\w@—–-]+)\b', c)
                     if mol:
                         support = mol[0]
@@ -466,7 +474,7 @@ def CatalysisIE_search(model, test_sents, onto_list):
                         if l=='Catalyst':
                             catalyst= re.search(r'\b([\w@—–-]+)/', c).group(1)
                             chem_list.append(catalyst)    
-                            if support in cat_sup.keys():
+                            if support in sup_cat.keys():
                                     sup_cat[support].append(catalyst)
                             else:
                                     sup_cat[support] = []
@@ -477,6 +485,9 @@ def CatalysisIE_search(model, test_sents, onto_list):
                                 chem_list.append(i)
                     else:
                         chem_list.append(c)
+            if entity not in categories[l]:
+                        categories[l].append(entity)    
+            
             entity_old=entity
             a=j+1
             chem_list= [*set(chem_list)]
@@ -491,78 +502,98 @@ def catalyst_support(sup_cat,onto):
 def catalyst_entity(categories, rel_synonym, sup_cat):
     nlp = spacy.load('en_core_web_sm')
     based_cems={}
-    
+    pos_del=['CCONJ','PUNCT','PROPN' ]
+    classes={}
     for k,v in categories.items():
         if k =='Catalyst':
-            for entity in v:
-                doc_list=[]
-                doc = nlp(entity)
-                for i in range(len(doc)):
-                    if doc[i].tag_ == 'NNS':
-                        doc_list.append(str(doc[i].lemma_))
-                    else:
-                        doc_list.append(str(doc[i]))
-                entity= " ".join(doc_list)
-                if "based" in entity:
-                    support=[]
-                    spans_n=[]
-                    
-                    based_m = re.search('based',entity)
-                    if based_m.start() != 0:
-                        e_snip = entity[0:based_m.start()-1]
-                        spans = Document(e_snip).cems
-                        e_cleaned=e_snip
-                        for c in spans:
-                                 e_btwn= e_snip[c.end+1:-1]
-                                 match_hyph=re.search(r'([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?)', c)
-                                 if  match_hyph:
-                                     c_t = match_hyph.group(1)+match_hyph.group(2)
-                                 try:
-                                     c_t = rel_synonym[c_t]
-                                 except:
-                                     c_t = c_t
-                                 if "supported" in e_btwn:
-                                     e_cleaned = e_btwn[re.search('supported',e_btwn).end():]
-                                     support.append(c_t)
-                                     continue
-                                 spans_n.append(c_t)  
-                                 e_cleaned = e_btwn[re.search(c.text,e_btwn).end()+1:]                             
-                    if entity[based_m.end()+1:] !='catalyst' or entity[based_m.end()+1:]!='system':
-                        s_on=False
-                        if 'on' in e_snip: #based on/ based exclusivelly on
-                            if re.search('supported on', e_snip):
-                                s_on= True
-                                sup_i= re.search('supported on', e_snip).end()#Rh-Co based system supported on alumina, titania and silica
-                            else:
-                                based_m = re.search('on',entity)
-                        e_snip = entity[based_m.end()+1:]
-                        doc = nlp(e_snip)
-                        spans = Document(e_snip).cems
-                        cleaned= e_snip
-                        if re.search('supported', e_snip) and s_on==False: 
-                            sup_i= re.search('supported', e_snip).start() #based on silica supported bimetallic catalysts
-                            
-                           
-                        else:
-                            sup_i == None
-                        if spans:
-                            support_raw=[]
-                            for i,c in enumerate(spans):
-                                c_t = comp_prep(c.text)
-                                try:
-                                    c_t = rel_synonym[c_t]
-                                except:
-                                    c_t = c_t
-                                if sup_i:
-                                    if s_on== False and sup_i == re.search(c.text,e_snip).end() +1:
-                                        support_raw.extend([comp.text for comp in spans[0:i+1]]) #based on silica supported bimetallic catalysts
-                                        for c in support_raw:
-                                            support.append(comp_prep(c))
-                                    elif s_on==True and s_on == re.search(c.text,e_snip).start()-1:
-                                        support_raw.extend([comp.text for comp in spans[i:]]) #Rh-Co based system supported on alumina, titania and silica
+            if entity in classes:
+                continue
+            else:
+                for entity in v:
+                    if 'system' in entity or 'surface' in entity:
+                        entity=entity.replace('system','catalyst')
+                        entity=entity.replace('surface', 'catalyst')
+                    if "based" in entity:
+                        support=[]
+                        spans_n=[]
+                        
+                        based_m = re.search('based',entity)
+                        if based_m.start() != 0 or entity[:based_m.start()-1] != 'catalyst': 
+                                e_snip = entity[:based_m.start()-1]
+                                spans = Document(e_snip).cems
+                                e_cleaned = e_snip
+                                doc = nlp(e_snip)
+                                
+                                for c in spans:
+                                         e_btwn= e_snip[c.end+1:]
                                         
-                                    continue
-                                spans_n.append(c_t)  
+                                         c_t= c.text
+                                         mol = re.search(r'/([\w@—–-]+)\b', c_t)
+                                         if mol:
+                                             c_t=c.text.replace(mol[0],"") # remove '/molecule'; already in sup_cat
+                                         try:
+                                             c_t = rel_synonym[c_t] #search in preprocessed chem entities dict
+                                         except:
+                                             c_t = c_t 
+                                         if "supported" in e_btwn:
+                                             e_cleaned = e_btwn[re.search('supported',e_btwn).end():]
+                                             support.append(c_t)
+                                             continue
+                                         elif c in sup_cat.keys():
+                                             continue
+                                         spans_n.append(c_t)
+                                         e_snip=e_snip.replace(c.text,'')
+                                if 'catalyst' in e_snip:
+                                    for token in doc:
+                                        if token.text in e_snip and token.pos_ in pos_del:
+                                            e_snip=e_snip.replace(token.text,'')
+                                    doc_snip= nlp(e_snip)
+                                    for token in doc:
+                                        if token.head.text == 'catalyst':
+                                            classes[entity]=['catalyst']
+                                            token_new=token.text+'catalyst'
+                                            classes[entity].append[token_new]
+                                            if token.children:
+                                                for i in reversed(range(len(token.children)+1)):
+                                                    token_new=token.children[i]+token_new
+                                                    classes[entity].append[token_new]
+                                    
+                        if entity[based_m.start()+1:] != 'catalyst':
+                            s_on=False
+                            if 'on' in e_snip: #based on/ based exclusivelly on
+                                if re.search('supported on', e_snip):
+                                    s_on= True
+                                    sup_i= re.search('supported on', e_snip).end()#Rh-Co based system supported on alumina, titania and silica
+                                else:
+                                    based_m = re.search('on',entity)
+                            e_snip = entity[based_m.end()+1:]
+                            doc = nlp(e_snip)
+                            spans = Document(e_snip).cems
+                            cleaned= e_snip
+                            if re.search('supported', e_snip) and s_on==False: 
+                                sup_i= re.search('supported', e_snip).start() #based on silica supported bimetallic catalysts
+                            else:
+                                sup_i == None
+                            if spans:
+                                support_raw=[]
+                                for i,c in enumerate(spans):
+                                    mol = re.search(r'/([\w@—–-]+)\b', c.text)
+                                    if mol:
+                                        c_t=c.text.replace(mol[0],"")
+                                    try:
+                                        c_t = rel_synonym[c_t]
+                                    except:
+                                        c_t = c_t
+                                    if sup_i:
+                                        if s_on== False and sup_i == re.search(c.text,e_snip).end() +1:
+                                            support_raw.extend([comp.text for comp in spans[0:i+1]]) #based on titania, silica supported bimetallic catalysts
+                                            for c in support_raw:
+                                                support.append(comp_prep(c))
+                                        elif s_on==True and s_on == re.search(c.text,e_snip).start()-1:
+                                            support_raw.extend([comp.text for comp in spans[i:]]) #Rh-Co based system supported on alumina, titania and silica
+                                            
+                                        
+                                    spans_n.append(c_t)  
                                 #e_cleaned = [re.search(c.text,e_btwn).end()+1:]
                                 
                         
@@ -575,9 +606,15 @@ def catalyst_entity(categories, rel_synonym, sup_cat):
                 doc = nlp.entity
                 entity_n = " ".join([token.lemma_ for token in doc])
 
-                          
-                
-                ...
+                ...          
+def doc_token(entity, j):
+    doc = nlp(entity)
+    for token in doc:
+        if token.pos_ in ['PUNCT','SYM']:
+            
+            entity= entity.replace(entity[token.idx-1],'')
+            entity= entity.replace(entity[token.idx],'')                
+...
                 
 def search_entity (onto, entity_full, category, onto_list,IRI_json_filename='iriDictionary'):
     f = open('{}.json'.format(IRI_json_filename)) # evtl in class aufnehmen und abrufen
