@@ -429,7 +429,8 @@ def CatalysisIE_search(model, test_sents, onto_list):
         for i, j, l in get_bio_spans(sent_tag):
             print(assemble_token_text(sent[i:j + 1]), l)
             entity = assemble_token_text(sent[i:j + 1])
-            
+            if entity[-1]=='.':
+                entity= entity[:-1]
             spans=Document(entity).cems
             if i == a+1 and '({})'.format(entity) in assemble_token_text(sent):
                 if entity in abbreviation.keys():
@@ -446,10 +447,8 @@ def CatalysisIE_search(model, test_sents, onto_list):
                     doc_list.append(str(doc[i]))
             entity= " ".join(doc_list)         # plural to singular
             doc = nlp(entity)
-            for token in doc:
-                if token.pos_ in ['PUNCT','SYM']:
-                    entity= entity.replace(entity[token.idx-1],'')
-                    entity= entity.replace(entity[token.idx+1],'')
+            e_split= entity.split()
+            entity = doc_token(doc, entity, e_split)  
             if entity in categories[l]:
                 continue
             else:
@@ -462,6 +461,7 @@ def CatalysisIE_search(model, test_sents, onto_list):
                     if i != 0:
                         e_btwn= entity[spans[i].end:spans[i-1].start]
                         if 'loaded' in e_btwn:    #Zr-loaded ZSM-5 zeolites
+                            entity.replace('loaded','supported on')    
                             if spans[i-1] in sup_cat.keys():
                                     sup_cat[spans[i-1].text].append(spans[i].text)
                             else:
@@ -502,17 +502,17 @@ def catalyst_support(sup_cat,onto):
 def catalyst_entity(categories, rel_synonym, sup_cat):
     nlp = spacy.load('en_core_web_sm')
     based_cems={}
-    pos_del=['CCONJ','PUNCT','PROPN' ]
+
     classes={}
     for k,v in categories.items():
         if k =='Catalyst':
-            if entity in classes:
+            if entity in classes.keys():
                 continue
             else:
                 for entity in v:
                     if 'system' in entity or 'surface' in entity:
                         entity=entity.replace('system','catalyst')
-                        entity=entity.replace('surface', 'catalyst')
+                        entity=entity.replace('surface','catalyst')
                     if "based" in entity:
                         support=[]
                         spans_n=[]
@@ -523,10 +523,9 @@ def catalyst_entity(categories, rel_synonym, sup_cat):
                                 spans = Document(e_snip).cems
                                 e_cleaned = e_snip
                                 doc = nlp(e_snip)
-                                
-                                for c in spans:
+                                if spans:
+                                    for c in spans:
                                          e_btwn= e_snip[c.end+1:]
-                                        
                                          c_t= c.text
                                          mol = re.search(r'/([\w@—–-]+)\b', c_t)
                                          if mol:
@@ -539,13 +538,14 @@ def catalyst_entity(categories, rel_synonym, sup_cat):
                                              e_cleaned = e_btwn[re.search('supported',e_btwn).end():]
                                              support.append(c_t)
                                              continue
-                                         elif c in sup_cat.keys():
+                                         elif c_t in sup_cat.keys():
                                              continue
                                          spans_n.append(c_t)
                                          e_snip=e_snip.replace(c.text,'')
                                 if 'catalyst' in e_snip:
                                     for token in doc:
-                                        if token.text in e_snip and token.pos_ in pos_del:
+                                        if token.text in e_snip and token.pos_ in ['PUNCT','PROPN'] and token.text not in ['(',')']:
+                                            #e_snip=[:]
                                             e_snip=e_snip.replace(token.text,'')
                                     doc_snip= nlp(e_snip)
                                     for token in doc:
@@ -607,15 +607,52 @@ def catalyst_entity(categories, rel_synonym, sup_cat):
                 entity_n = " ".join([token.lemma_ for token in doc])
 
                 ...          
-def doc_token(entity, j):
-    doc = nlp(entity)
-    for token in doc:
-        if token.pos_ in ['PUNCT','SYM']:
-            
-            entity= entity.replace(entity[token.idx-1],'')
-            entity= entity.replace(entity[token.idx],'')                
-...
+
+def doc_token(doc,entity, e_split, j=0):
+    nlp = spacy.load('en_core_web_sm')
+    brackets =False
+    for i,token  in enumerate(doc[j:]):          
+            if token == doc[-1]:
+                break
+            elif token.pos_ in ['CCONJ','PUNCT','SYM'] and entity[token.idx-1]==' ':
+                    j=j+i
+                    if token.pos_ =='CCONJ':
+                        e_new = ''.join([e_split[j-1],',',e_split[j+1]])   
+                    elif token.text=='(' and doc[j+2].text==')':
+                        e_new = "".join(e_split[j:j+3])
+                        brackets= True
+                        j=j+1
+                    elif token.text=='(' and brackets ==False:
+                        e_new = "".join([e_split[j],e_split[j+1]])
+                    elif token.text==')' and brackets ==False:
+                        e_new = "".join([e_split[j-1],e_split[j]])
+                    else:
+                        e_new = "".join(e_split[j-1:j+2])
+                    if brackets==False:
+                        e_after = entity[doc[j+1].idx+len(doc[j+1].text)+1:]
+                    
+                    else:
+                        e_after = entity[doc[j+2].idx+len(doc[j+2].text)+1:]
+                    if j == 1:
+                        entity= " ".join([e_new,e_after])
+                    else:
+                        e_before = entity[:doc[j-1].idx-1]
+                        entity= " ".join([e_before,e_new,e_after])
+                    
+                    doc = nlp(entity)
+                    entity= doc_token(doc,entity, e_split, j=j+1) 
+
                 
+            else:
+                continue
+    return entity
+entity='silica and ZSM-5 supported catalyst based ( S-1 ) on the Rh-Co'
+nlp = spacy.load('en_core_web_sm')
+doc = nlp(entity)
+e_split= entity.split()
+entity = doc_token(doc, entity, e_split)
+             
+ 
 def search_entity (onto, entity_full, category, onto_list,IRI_json_filename='iriDictionary'):
     f = open('{}.json'.format(IRI_json_filename)) # evtl in class aufnehmen und abrufen
     onto_dict = json.load(f) #
@@ -833,11 +870,12 @@ the two metals were in intimate contact
 Rh4(CO)12, and RhCo3(CO)12, were synthesized 
 according to literature [14,15]. SiO2 was a silica 
 ‘Aerosil’ supplied by Degussa with a surface 
-area of 380 m2/g.'''
+area of 380 m2/g.
+'''
 '''
 test_sents = text_prep(test_txt)        
 categories,chem_list,abbreviations, cat_sup = CatalysisIE_search(model, test_sents, onto_list)    
-new_dict, missing, match_dict= chemical_prep(chem_list, onto_list)     
+#new_dict, missing, match_dict= chemical_prep(chem_list, onto_list)     
 ''' 
 """       
 class expand_onto:
