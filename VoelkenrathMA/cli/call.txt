@@ -1,0 +1,7 @@
+Skript generiert im Endeffekt den Input für DETCHEM
+
+Methanisierung:
+node dist/cli.js --dci dist/input/Methanation_Ni_DETCHEM.txt --ckt dist/input/Methanation_thermdata.txt --moldata dist/input/moldata.txt --surface Ni=2.55e-5
+
+Wasserstoff:
+node dist/cli.js --dci dist/input/sm_H2_O2_Pd_1996_detchem.txt --ckt dist/input/td_H2_O2_Pd_1996.txt --moldata dist/input/moldata.txt --surface Ni=2.55e-5

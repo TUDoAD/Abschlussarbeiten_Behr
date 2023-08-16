@@ -1,0 +1,542 @@
+{ "pbr.inp": "<SPECIES>
+  <PARAMETERS>
+    DCSGMAX = 40
+    DCSMMAX = 0
+    DCSSMAX = 14
+  </PARAMETERS>
+  <GASPHASE>
+    O2
+    H2
+    CH4
+    H2O
+    CO2
+    CO
+  </GASPHASE>
+  <SURFACE name=Ni mol/m2=2.5500e-5>
+    Ni
+    H-Ni
+    CH4-Ni
+    H2O-Ni
+    CO2-Ni
+    CO-Ni
+    O-Ni
+    C-Ni
+    OH-Ni
+    HCO-Ni
+    CH-Ni
+    CH2-Ni
+    CH3-Ni
+    COOH-Ni
+    <INITIAL>
+      Ni = 1
+    </INITIAL>
+  </SURFACE>
+</SPECIES>
+<MECHANISM>
+  <PARAMETERS>
+    DCRSMAX = 42
+  </PARAMETERS>
+  <SURFACE>
+    #id = 1
+    <STICK>
+      Ni + Ni + H2   >  H-Ni + H-Ni
+      S0 = 0.01458
+      beta = 0
+      Ea = 0 [kJ/mol]
+    </STICK>
+    #id = 2
+    <REACTION>
+      H-Ni + H-Ni   >  Ni + Ni + H2
+      A/cm_units = 4.538000e+21
+      beta = -0.138
+      Ea = 96.108 [kJ/mol]
+    </REACTION>
+    #id = 3
+    <STICK>
+      CH4 + Ni   >  CH4-Ni
+      S0 = 0.01064
+      beta = 0
+      Ea = 0 [kJ/mol]
+    </STICK>
+    #id = 4
+    <REACTION>
+      CH4-Ni   >  CH4 + Ni
+      A/cm_units = 2.793000e+15
+      beta = 0.085
+      Ea = 36.977 [kJ/mol]
+    </REACTION>
+    #id = 5
+    <STICK>
+      H2O + Ni   >  H2O-Ni
+      S0 = 0.1163
+      beta = 0
+      Ea = 0 [kJ/mol]
+    </STICK>
+    #id = 6
+    <REACTION>
+      H2O-Ni   >  Ni + H2O
+      A/cm_units = 2.035000e+12
+      beta = -0.031
+      Ea = 61.038 [kJ/mol]
+    </REACTION>
+    #id = 7
+    <STICK>
+      CO2 + Ni   >  CO2-Ni
+      S0 = 0.00006288
+      beta = 0
+      Ea = 0 [kJ/mol]
+    </STICK>
+    #id = 8
+    <REACTION>
+      CO2-Ni   >  CO2 + Ni
+      A/cm_units = 4.993000e+7
+      beta = 0.018
+      Ea = 25.831 [kJ/mol]
+    </REACTION>
+    #id = 9
+    <STICK>
+      CO + Ni   >  CO-Ni
+      S0 = 0.3737
+      beta = 0
+      Ea = 0 [kJ/mol]
+    </STICK>
+    #id = 10
+    <REACTION>
+      CO-Ni   >  CO + Ni
+      A/cm_units = 1.144000e+12
+      beta = -0.103
+      Ea = 111.992 [kJ/mol]
+      <COV>
+        CO-Ni
+        epsilon/J_mol = 50000
+        mu = 0
+      </COV>
+    </REACTION>
+    #id = 11
+    <REACTION>
+      Ni + CO2-Ni   >  O-Ni + CO-Ni
+      A/cm_units = 1.601000e+23
+      beta = -1.001
+      Ea = 89.324 [kJ/mol]
+    </REACTION>
+    #id = 12
+    <REACTION>
+      O-Ni + CO-Ni   >  Ni + CO2-Ni
+      A/cm_units = 5.806000e+19
+      beta = 0
+      Ea = 123.596 [kJ/mol]
+      <COV>
+        CO-Ni
+        epsilon/J_mol = 50000
+        mu = 0
+      </COV>
+    </REACTION>
+    #id = 13
+    <REACTION>
+      Ni + CO-Ni   >  O-Ni + C-Ni
+      A/cm_units = 2.355000e+14
+      beta = 0
+      Ea = 116.163 [kJ/mol]
+      <COV>
+        CO-Ni
+        epsilon/J_mol = 50000
+        mu = 0
+      </COV>
+    </REACTION>
+    #id = 14
+    <REACTION>
+      O-Ni + C-Ni   >  Ni + CO-Ni
+      A/cm_units = 2.541000e+18
+      beta = 0
+      Ea = 148.077 [kJ/mol]
+      <COV>
+        C-Ni
+        epsilon/J_mol = 104999.99999999999
+        mu = 0
+      </COV>
+    </REACTION>
+    #id = 15
+    <REACTION>
+      CO-Ni + H-Ni   >  OH-Ni + C-Ni
+      A/cm_units = 3.045000e+18
+      beta = -0.223
+      Ea = 105.272 [kJ/mol]
+      <COV>
+        CO-Ni
+        epsilon/J_mol = 50000
+        mu = 0
+      </COV>
+    </REACTION>
+    #id = 16
+    <REACTION>
+      OH-Ni + C-Ni   >  CO-Ni + H-Ni
+      A/cm_units = 2.184000e+18
+      beta = 0.128
+      Ea = 62.778 [kJ/mol]
+      <COV>
+        C-Ni
+        epsilon/J_mol = 104999.99999999999
+        mu = 0
+      </COV>
+    </REACTION>
+    #id = 17
+    <REACTION>
+      CO-Ni + H-Ni   >  HCO-Ni + Ni
+      A/cm_units = 6.823000e+21
+      beta = -0.979
+      Ea = 132.079 [kJ/mol]
+    </REACTION>
+    #id = 18
+    <REACTION>
+      HCO-Ni + Ni   >  CO-Ni + H-Ni
+      A/cm_units = 2.179000e+20
+      beta = -0.021
+      Ea = 0.151 [kJ/mol]
+      <COV>
+        CO-Ni
+        epsilon/J_mol = -50000
+        mu = 0
+      </COV>
+    </REACTION>
+    #id = 19
+    <REACTION>
+      HCO-Ni + Ni   >  O-Ni + CH-Ni
+      A/cm_units = 5.104000e+15
+      beta = 0.023
+      Ea = 81.719 [kJ/mol]
+    </REACTION>
+    #id = 20
+    <REACTION>
+      O-Ni + CH-Ni   >  HCO-Ni + Ni
+      A/cm_units = 3.421000e+19
+      beta = -0.023
+      Ea = 110.161 [kJ/mol]
+    </REACTION>
+    #id = 21
+    <REACTION>
+      H-Ni + C-Ni   >  Ni + CH-Ni
+      A/cm_units = 1.327000e+24
+      beta = -0.456
+      Ea = 157.655 [kJ/mol]
+      <COV>
+        C-Ni
+        epsilon/J_mol = 104999.99999999999
+        mu = 0
+      </COV>
+    </REACTION>
+    #id = 22
+    <REACTION>
+      Ni + CH-Ni   >  H-Ni + C-Ni
+      A/cm_units = 2.633000e+22
+      beta = 0.456
+      Ea = 22.255 [kJ/mol]
+    </REACTION>
+    #id = 23
+    <REACTION>
+      CH-Ni + H-Ni   >  CH2-Ni + Ni
+      A/cm_units = 3.210000e+25
+      beta = -0.084
+      Ea = 81.051 [kJ/mol]
+    </REACTION>
+    #id = 24
+    <REACTION>
+      CH2-Ni + Ni   >  CH-Ni + H-Ni
+      A/cm_units = 6.156000e+24
+      beta = 0.084
+      Ea = 95.229 [kJ/mol]
+    </REACTION>
+    #id = 25
+    <REACTION>
+      CH2-Ni + H-Ni   >  CH3-Ni + Ni
+      A/cm_units = 7.778000e+22
+      beta = -0.048
+      Ea = 59.452 [kJ/mol]
+    </REACTION>
+    #id = 26
+    <REACTION>
+      CH3-Ni + Ni   >  CH2-Ni + H-Ni
+      A/cm_units = 6.157000e+24
+      beta = 0.048
+      Ea = 95.878 [kJ/mol]
+    </REACTION>
+    #id = 27
+    <REACTION>
+      CH3-Ni + H-Ni   >  Ni + CH4-Ni
+      A/cm_units = 3.628000e+21
+      beta = -0.048
+      Ea = 65.702 [kJ/mol]
+    </REACTION>
+    #id = 28
+    <REACTION>
+      Ni + CH4-Ni   >  CH3-Ni + H-Ni
+      A/cm_units = 6.156000e+21
+      beta = 0.048
+      Ea = 53.578 [kJ/mol]
+    </REACTION>
+    #id = 29
+    <REACTION>
+      O-Ni + H-Ni   >  OH-Ni + Ni
+      A/cm_units = 1.158000e+24
+      beta = -0.176
+      Ea = 104.199 [kJ/mol]
+    </REACTION>
+    #id = 30
+    <REACTION>
+      OH-Ni + Ni   >  O-Ni + H-Ni
+      A/cm_units = 7.696000e+19
+      beta = 0.176
+      Ea = 29.791 [kJ/mol]
+    </REACTION>
+    #id = 31
+    <REACTION>
+      OH-Ni + H-Ni   >  Ni + H2O-Ni
+      A/cm_units = 2.342000e+20
+      beta = 0.075
+      Ea = 44.095 [kJ/mol]
+    </REACTION>
+    #id = 32
+    <REACTION>
+      Ni + H2O-Ni   >  OH-Ni + H-Ni
+      A/cm_units = 2.907000e+21
+      beta = -0.075
+      Ea = 90.365 [kJ/mol]
+    </REACTION>
+    #id = 33
+    <REACTION>
+      OH-Ni + OH-Ni   >  O-Ni + H2O-Ni
+      A/cm_units = 1.011000e+20
+      beta = 0.251
+      Ea = 95.091 [kJ/mol]
+    </REACTION>
+    #id = 34
+    <REACTION>
+      O-Ni + H2O-Ni   >  OH-Ni + OH-Ni
+      A/cm_units = 1.889000e+25
+      beta = -0.251
+      Ea = 215.769 [kJ/mol]
+    </REACTION>
+    #id = 35
+    <REACTION>
+      H-Ni + CO2-Ni   >  COOH-Ni + Ni
+      A/cm_units = 1.287000e+25
+      beta = -0.46
+      Ea = 117.2 [kJ/mol]
+    </REACTION>
+    #id = 36
+    <REACTION>
+      COOH-Ni + Ni   >  H-Ni + CO2-Ni
+      A/cm_units = 1.288000e+20
+      beta = 0.46
+      Ea = 33.8 [kJ/mol]
+    </REACTION>
+    #id = 37
+    <REACTION>
+      COOH-Ni + Ni   >  OH-Ni + CO-Ni
+      A/cm_units = 6.032000e+23
+      beta = -0.216
+      Ea = 54.368 [kJ/mol]
+    </REACTION>
+    #id = 38
+    <REACTION>
+      OH-Ni + CO-Ni   >  COOH-Ni + Ni
+      A/cm_units = 1.453000e+21
+      beta = 0.216
+      Ea = 97.632 [kJ/mol]
+      <COV>
+        CO-Ni
+        epsilon/J_mol = 50000
+        mu = 0
+      </COV>
+    </REACTION>
+    #id = 39
+    <REACTION>
+      COOH-Ni + H-Ni   >  HCO-Ni + OH-Ni
+      A/cm_units = 4.220000e+23
+      beta = -1.145
+      Ea = 104.732 [kJ/mol]
+    </REACTION>
+    #id = 40
+    <REACTION>
+      HCO-Ni + OH-Ni   >  COOH-Ni + H-Ni
+      A/cm_units = 3.246000e+19
+      beta = 0.245
+      Ea = 16.068 [kJ/mol]
+    </REACTION>
+    #id = 41
+    <REACTION>
+      CO-Ni + CO-Ni   >  C-Ni + CO2-Ni
+      A/cm_units = 6.312000e+13
+      beta = 0.5
+      Ea = 241.679 [kJ/mol]
+      <COV>
+        CO-Ni
+        epsilon/J_mol = 100000
+        mu = 0
+      </COV>
+    </REACTION>
+    #id = 42
+    <REACTION>
+      C-Ni + CO2-Ni   >  CO-Ni + CO-Ni
+      A/cm_units = 1.878000e+21
+      beta = -0.5
+      Ea = 239.321 [kJ/mol]
+      <COV>
+        C-Ni
+        epsilon/J_mol = 104999.99999999999
+        mu = 0
+      </COV>
+    </REACTION>
+  </SURFACE>
+</MECHANISM>
+<SURFACE-MODEL>
+  <CHEMSURF>
+    time = 10
+    analytical = n
+    write_file = n
+  </CHEMSURF>
+  Fcatgeo = 1
+</SURFACE-MODEL>
+<PBR>
+  <GEOMETRY>
+    reactor = cylindrical
+    radius = 0.2
+    <SECTION>
+      length = 1
+      particle_geometry = sphere
+      particle_diameter = 0.01
+      wall_temp = 400
+      gas_chem = n
+      surf_chem = y
+      particle_therm_conductivity = 0.3
+      radial_thermal_conductivity_solid = 0.2
+      Fcat/geo = 1
+      porosity = 0.3
+      area_to_volume_ratio = 400
+    </SECTION>
+    <WALL>
+      wall_thickness = 0.03
+      thermal_conductivity_wall = 50
+      heat_trans_coeff_outside = 1
+      overall_heat_trans_coeff = 2
+      heat_flux = 5
+    </WALL>
+  </GEOMETRY>
+  <INITIAL>
+    T = 420
+    P = 100000
+    velocity = 0.2
+    <MOLEFRAC>
+      O2 = 0.5
+      H2 = 0.5
+    </MOLEFRAC>
+  </INITIAL>
+  <PROCESS>
+    isothermal = y
+    adiabatic = n
+    mass_transfer = n
+    cov_relax = 1
+    pseudo_homogeneous = n
+    T_solid_balance = n
+  </PROCESS>
+  <SOLVER>
+    atol = 1e-18
+    rtol = 0.000001
+    h = 1e-16
+    hmax = 10
+    max_iter = 100000
+    IPos = 1
+  </SOLVER>
+  <OUTPUT>
+    fileNr = 1
+    write_molefractions = y
+    write_massfractions = y
+    write_coverages = y
+  </OUTPUT>
+</PBR>",
+  "moldata": "O2       1    -1     107.40000  3.4580000  0.0000000  1.6000000  3.800
+H2       1    -1     38.000000  2.9200000  0.0000000  0.7900000  280.0
+CH4      2    -1     141.40000  3.7460000  0.0000000  2.6000000  13.00
+H2O      2    -1     572.40000  2.6050000  1.8440000  0.0000000  4.000
+CO2      1    -1     244.00000  3.7630000  0.0000000  2.6500000  2.100
+CO       1    -1     98.100000  3.6500000  0.0000000  1.9500000  1.800",
+  "thermdata": "O2                      O   2               G 300.00000 5000.0000 1000.00      1
+ 3.61221390e+00 7.48531660e-04-1.98206470e-07 3.37490080e-11-2.39073740e-15    2
+-1.19781510e+03 3.67033070e+00 3.78371350e+00-3.02336340e-03 9.94927510e-06    3
+-9.81891010e-09 3.30318250e-12-1.06381070e+03 3.64163450e+00                   4
+H2                      H   2               G 300.00000 5000.0000 1000.00      1
+ 3.06670950e+00 5.74737550e-04 1.39383190e-08-2.54835180e-11 2.90985740e-15    2
+-8.65474120e+02-1.77984240e+00 3.35535140e+00 5.01361440e-04-2.30069080e-07    3
+-4.79053240e-10 4.85225850e-13-1.01916260e+03-3.54772280e+00                   4
+Ni                      Ni  1               S 300.00000 3000.0000 1000.00      1
+ 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00    2
+ 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00    3
+ 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00                   4
+H-Ni                    H   1Ni  1          S 500.00000 2000.0000 2000.00      1
+ 1.38522350e+00-3.60291510e-05 1.01482880e-06-6.39234050e-10 1.26064640e-13    2
+-5.45886570e+03-5.04262900e+00 1.38522350e+00-3.60291510e-05 1.01482880e-06    3
+-6.39234050e-10 1.26064640e-13-5.45886570e+03-5.04262900e+00                   4
+CH4                     C   1H   4          G 300.00000 5000.0000 1000.00      1
+ 1.68347880e+00 1.02372360e-02-3.87512860e-06 6.78558490e-10-4.50342310e-14    2
+-1.00807870e+04 9.62339500e+00 7.78741480e-01 1.74766830e-02-2.78340900e-05    3
+ 3.04970800e-08-1.22393070e-11-9.82522850e+03 1.37221950e+01                   4
+CH4-Ni                  C   1H   4Ni  1     S 500.00000 2000.0000 2000.00      1
+ 3.47651460e-01 9.92277360e-03-2.01747490e-06-1.06404580e-09 4.18759380e-13    2
+-1.38997270e+04-4.61646250e+00 3.47651460e-01 9.92277360e-03-2.01747490e-06    3
+-1.06404580e-09 4.18759380e-13-1.38997270e+04-4.61646250e+00                   4
+H2O                     H   2O   1          G 300.00000 5000.0000 1000.00      1
+ 2.61104720e+00 3.15631300e-03-9.29854380e-07 1.33315380e-10-7.46893510e-15    2
+-2.98681670e+04 7.20912680e+00 4.16772340e+00-1.81149700e-03 5.94712880e-06    3
+-4.86920210e-09 1.52919910e-12-3.02899690e+04-7.31354740e-01                   4
+H2O-Ni                  H   2O   1Ni  1     S 500.00000 2000.0000 2000.00      1
+ 3.50421380e+00 6.68594840e-04 1.76268740e-06-1.17030150e-09 2.26185360e-13    2
+-3.79129170e+04-1.05582530e+01 3.50421380e+00 6.68594840e-04 1.76268740e-06    3
+-1.17030150e-09 2.26185360e-13-3.79129170e+04-1.05582530e+01                   4
+CO2                     C   1O   2          G 300.00000 5000.0000 1000.00      1
+ 4.45362280e+00 3.14016870e-03-1.27841050e-06 2.39399670e-10-1.66903320e-14    2
+-4.89669610e+04-9.55395880e-01 2.27572460e+00 9.92207230e-03-1.04091130e-05    3
+ 6.86668680e-09-2.11728010e-12-4.83731410e+04 1.01884880e+01                   4
+CO2-Ni                  C   1O   2Ni  1     S 500.00000 2000.0000 2000.00      1
+ 2.15782080e+00 8.85798100e-03-7.33295570e-06 3.01455470e-09-4.83617410e-13    2
+-5.17211370e+04-3.96778200e-01 2.15782080e+00 8.85798100e-03-7.33295570e-06    3
+ 3.01455470e-09-4.83617410e-13-5.17211370e+04-3.96778200e-01                   4
+CO                      C   1O   1          G 300.00000 5000.0000 1000.00      1
+ 3.02507810e+00 1.44268850e-03-5.63082780e-07 1.01858130e-10-6.91095160e-15    2
+-1.42683500e+04 6.10821770e+00 3.26245170e+00 1.51194090e-03-3.88175520e-06    3
+ 5.58194420e-09-2.47495120e-12-1.43105390e+04 4.84889700e+00                   4
+CO-Ni                   C   1O   1Ni  1     S 500.00000 2000.0000 2000.00      1
+ 1.04958400e+00 5.37825550e-03-3.51895910e-06 1.06323430e-09-1.12689240e-13    2
+-2.73744390e+04 7.60559020e+00 1.04958400e+00 5.37825550e-03-3.51895910e-06    3
+ 1.06323430e-09-1.12689240e-13-2.73744390e+04 7.60559020e+00                   4
+O-Ni                    O   1Ni  1          S 500.00000 2000.0000 2000.00      1
+ 9.33885770e-01 1.49287490e-03-1.51153810e-06 7.60133450e-10-1.42499390e-13    2
+-2.88011880e+04-3.47247500e+00 9.33885770e-01 1.49287490e-03-1.51153810e-06    3
+ 7.60133450e-10-1.42499390e-13-2.88011880e+04-3.47247500e+00                   4
+C-Ni                    C   1Ni  1          S 500.00000 2000.0000 2000.00      1
+-3.49330910e+00 5.23524690e-03-3.03308920e-06 6.55611040e-10-1.40966550e-14    2
+-2.23124730e+03 7.68421240e+00-3.49330910e+00 5.23524690e-03-3.03308920e-06    3
+ 6.55611040e-10-1.40966550e-14-2.23124730e+03 7.68421240e+00                   4
+OH-Ni                   H   1O   1Ni  1     S 500.00000 2000.0000 2000.00      1
+ 2.08905500e+00 1.71443900e-03-4.27838550e-07 9.11211410e-12 1.13760370e-14    2
+-2.67334300e+04-3.86138840e+00 2.08905500e+00 1.71443900e-03-4.27838550e-07    3
+ 9.11211410e-12 1.13760370e-14-2.67334300e+04-3.86138840e+00                   4
+HCO-Ni                  C   1H   1O   1Ni  1S 500.00000 2000.0000 2000.00      1
+ 1.42054860e+00 6.41898600e-03-3.25611220e-06 6.60406470e-10-1.25958800e-14    2
+-1.72299590e+04-1.34060410e+00 1.42054860e+00 6.41898600e-03-3.25611220e-06    3
+ 6.60406470e-10-1.25958800e-14-1.72299590e+04-1.34060410e+00                   4
+CH-Ni                   C   1H   1Ni  1     S 500.00000 2000.0000 2000.00      1
+-2.52762350e+00 6.00297400e-03-2.49669460e-06 1.36758700e-10 1.03915800e-13    2
+ 9.56681070e+03 7.44010150e+00-2.52762350e+00 6.00297400e-03-2.49669460e-06    3
+ 1.36758700e-10 1.03915800e-13 9.56681070e+03 7.44010150e+00                   4
+CH2-Ni                  C   1H   2Ni  1     S 500.00000 2000.0000 2000.00      1
+-1.56917590e+00 7.30948880e-03-2.33684000e-06-2.63575390e-10 2.08877320e-13    2
+ 1.94307500e+03 4.44265980e+00-1.56917590e+00 7.30948880e-03-2.33684000e-06    3
+-2.63575390e-10 2.08877320e-13 1.94307500e+03 4.44265980e+00                   4
+CH3-Ni                  C   1H   3Ni  1     S 500.00000 2000.0000 2000.00      1
+-6.10760600e-01 8.61612510e-03-2.17714930e-06-6.63815290e-10 3.13819320e-13    2
+-8.89792080e+03-2.00828700e+00-6.10760600e-01 8.61612510e-03-2.17714930e-06    3
+-6.63815290e-10 3.13819320e-13-8.89792080e+03-2.00828700e+00                   4
+COOH-Ni                 C   1H   1O   2Ni  1S 200.00000 2000.0000 2000.00      1
+ 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00    2
+ 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00    3
+ 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00                   4"}
+
