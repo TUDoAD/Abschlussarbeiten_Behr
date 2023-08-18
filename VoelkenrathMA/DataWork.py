@@ -4,13 +4,14 @@ Created on Wed Aug 16 10:22:35 2023
 
 @author: smmcvoel
 """
-
 import json
+import xmltodict
 import subprocess
-    
+import regex as re    
+
 
 def ExecDetchemDriver():
-    ## Calling DETCHEM Driver
+    ## Calling DETCHEM Driver and formatting data 
     # define file path
     path = "C://Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/cli/dist/"
     cli = path + "cli.js"
@@ -24,23 +25,30 @@ def ExecDetchemDriver():
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     
     if result.stderr:
-        print("ExecDetchemDriver Fehlerausgabe", result.stderr)
+        print("ExecDETCHEMDriver Fehlerausgabe", result.stderr)
         
     # convert from bytes to dict
     data_decode = result.stdout.decode("utf8")
-    data_dict = json.loads(data_decode)
+    data = json.loads(data_decode)
     
-    """
-    Dict muss aufgrund merkwürdiger Formatfusionen noch angepasst werden durch <Main> & <\MAIN>.
-    Bevor der erhaltene String dann weiter in ein Dict umgewandelt wird, sollte die ids eine Ebene nach "innen"
-    verschoben werden um später die Reihenfolge der Reaktionen festzulegen.
-    --> ids müssen nicht verschoben werden, wenn ich STICK durch REACTION ersetzt sollten sie in der richtigen 
-        Reihenfolge ins Dict geladen werden
-    --> ersetze name=Ni mit name='Ni' & mol/m3=255... mit mol_m3='2,5555'
-    """
-    # WARNING: the following section maybe needs to be reworked with the next DETCHEM Driver and other mechanism
+    # the subdict "pbr.inp" is here still in xml format, formatting and converting into dict
+    pbr_xml = data["pbr.inp"]
+    pbr_main = "<MAIN>" + pbr_xml + "</MAIN>"
+    pbr_rep_1 = pbr_main.replace("<STICK>", "<REACTION>")
+    pbr_rep_2 = pbr_rep_1.replace("</STICK>", "</REACTION>")
+    pbr_rep_3 = pbr_rep_2.replace("mol/m2", "mol_m2")
     
-    return data_dict
+    # replace two pattern: e.g. name=Ni --> name='Ni' & mol_m2=2.5500e-5 --> mol_m2='2.5500e-5'
+    pattern_1 = re.compile(r"name=([A-Za-z0-9]+)")
+    pattern_2 = re.compile(r"mol_m2=([\d.e+-]+)")
+    
+    pbr_rep_4 = re.sub(pattern_1, r"name='\1'", pbr_rep_3)
+    pbr_rep_5 = re.sub(pattern_2, r"mol_m2='\1'", pbr_rep_4)
+    
+    pbr_dict = xmltodict.parse(pbr_rep_5)
+    data["pbr.inp"] = pbr_dict
+    
+    return data
     
 
 def run():
