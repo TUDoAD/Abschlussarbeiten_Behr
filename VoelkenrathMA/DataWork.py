@@ -5,9 +5,11 @@ Created on Wed Aug 16 10:22:35 2023
 @author: smmcvoel
 """
 import json
+import owlready2
 import xmltodict
 import subprocess
 import regex as re    
+import pubchempy as pcp
 
 
 def ExecDetchemDriver():
@@ -51,6 +53,47 @@ def ExecDetchemDriver():
     return data
     
 
+def AddSubstance(data):
+    ## Search Species in Ontolgie and adds them as class and individuum if not found
+    # load ontology
+    onto = owlready2.get_ontology("ontologies/MV-Onto.owl").load()
+    
+    # get substances and format (string --> list)
+    substance_string = data["pbr.inp"]["MAIN"]["SPECIES"]["GASPHASE"]
+    substance_list = substance_string.split("\n")
+    
+    substances = []
+    for sub in substance_list:
+        substances.append(sub.replace(" ",""))
+        
+    # check if substance is in onto or not
+    substance_not_found = []
+    for sub in substances:
+        found = False
+        substance = "Sub_" + sub
+        for individual in onto.individuals():
+            if substance.lower() == individual.name.lower():
+                print(f"Substance {sub} found in individual: {individual.name}")
+                found = True
+                break
+        if not found:
+            substance_not_found.append(sub)
+    
+    print(" ")
+    print("Substances not found:", substance_not_found)
+    print("Searching substance in PubChem...")
+    
+    # extract iupac-names of substances_not_found from Pubchem-API
+    for sub in substance_not_found:
+        compounds = pcp.get_compounds(sub, 'formula')
+        if compounds:
+            compound = compounds[0]
+            print(f"{sub} found in PubChem as {compound.iupac_name}")
+        else:
+            print(f"No Information found for {sub}!")
+    
+
 def run():
     data = ExecDetchemDriver()
-    return data
+    AddSubstance(data)
+    #return data
