@@ -19,9 +19,9 @@ onto = "ontologies/kinetics.owl"
 # meth: methods can be found here [http://robot.obolibrary.org/extract]
 meth = "BOT"
 
-bashCommand = "java -jar C://Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/robot/robot.jar extract --input-iri {} --method {} --term-file {} --output {} ".format(URL, meth, IRI_file, onto)
+#bashCommand = "java -jar C://Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/robot/robot.jar extract --input-iri {} --method {} --term-file {} --output {} ".format(URL, meth, IRI_file, onto)
 
-#bashCommand = "java -jar C://Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/robot/robot.jar merge --input ontologies/MV-Ontology.owl --input ontologies/palladium.owl --output ontologies/MV-Ontology.owl"
+bashCommand = "java -jar C://Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/robot/robot.jar merge --input ontologies/MV-Onto.owl --input ontologies/Reac4Cat_Folgereaktion.owl --output ontologies/MV-Ontology.owl"
 
 
 os.system(bashCommand)
