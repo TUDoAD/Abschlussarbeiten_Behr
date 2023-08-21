@@ -5,22 +5,25 @@ Created on Wed Aug 16 10:22:35 2023
 @author: smmcvoel
 """
 import json
+import types
 import owlready2
 import xmltodict
 import subprocess
 import regex as re    
 import pubchempy as pcp
 
+from collections import Counter
+
 
 def ExecDetchemDriver():
-    ## Calling DETCHEM Driver and formatting data 
+    ## Calling DETCHEM driver and formatting data 
     # define file path
     path = "C://Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/cli/dist/"
     cli = path + "cli.js"
     dci = path + "input/Methanation_Ni_DETCHEM.txt"
     ckt = path + "input/Methanation_thermdata.txt"
     mol = path + "input/moldata.txt"
-    sur = "Ni=2.55e-5" # maybe variable with future "DETCHEM Driver"
+    sur = "Ni=2.55e-5" # ATTENTION: maybe variable with future "DETCHEM Driver"
     
     command = ["node", cli, "--dci", dci, "--ckt", ckt, "--moldata", mol, "--surface", sur]
     
@@ -51,8 +54,8 @@ def ExecDetchemDriver():
     return data
     
 
-def AddSubstance(data):
-    ## Search Species in Ontolgie and adds them as class and individuum if not found
+def AddSubstanceToOWL(data):
+    ## Search species in ontolgie and adds them as class and individuum if not found
     # load ontology
     onto = owlready2.get_ontology("ontologies/MV-Onto.owl").load()
     
@@ -74,15 +77,16 @@ def AddSubstance(data):
         substance = "Sub_" + sub
         for individual in onto.individuals():
             if substance.lower() == individual.name.lower():
-                print(f"Substance {sub} found in individual: {individual.name}")
+                print(f"Substance {sub} found as individual: {individual.name}")
                 found = True
                 break
         if not found:
             substance_not_found.append(sub)
     
-    print(" ")
-    print("Substances not found:", substance_not_found)
-    print("Searching substance in PubChem...")
+    if len(substance_not_found) > 0:
+        print(" ")
+        print("Substances not found:", substance_not_found)
+        print("Searching substance in PubChem...")
     
     # extract iupac-names of substances_not_found from Pubchem-API (and format names)
     substance_pubchem = []
@@ -91,18 +95,6 @@ def AddSubstance(data):
         if compounds:
             compound = compounds[0]
             iupac = compound.iupac_name
-            
-            """
-            if "molecular" in iupac:
-                compound_split = iupac.split(" ")
-                for i in compound_split:
-                    if i != "molecular":
-                        compound_name = i.capitalize() + " (molecular)" 
-                        substance_pubchem.append([sub, compound_name])
-            else:
-                substance_pubchem.append([sub, iupac.capitalize()]) 
-            """
-            
             substance_pubchem.append([sub, iupac.title()])
             print(f"{sub} found in PubChem as {compound.iupac_name}")
         else:
@@ -110,13 +102,100 @@ def AddSubstance(data):
     #print(substance_pubchem)
     
     # adding substances as class and individuum to ontologie
+    with onto:
+        # set iri for class "molecule", cause its the superclass for all added molecules
+        if len(substance_pubchem) > 0:
+            super_class = onto.search(iri="*molecule")[0] 
+            print(" ")
+            print("Adding missing Substances to Ontologie...")
+            for formula, iupac in substance_pubchem:
+                # create the substance class
+                class_name = iupac.replace(" ", "_")
+                class_iri = "example.org#" + class_name
+
+                molecule_class = types.new_class(class_name, (super_class,))
+                
+                molecule_class.comment.append("Substance-Class is created automatically")
+                
+                # create the substance individual and connect it to its class
+                individual_name = "Sub_" + formula
+                individual = molecule_class(individual_name)
+                
+                print(f"Class {class_name} created with its individuum {individual_name}")
+                
+                onto.save("ontologies/MV-Onto.owl")
+                
+
+def AddReactionToOWL(data):
+    ## Checks if the given reactionsystem is allready in the ontology and creates them if not
+    # getting every educt and product
+    reactions = []
+    for index, reaction in enumerate(data["pbr.inp"]["MAIN"]["MECHANISM"]["SURFACE"]["REACTION"]):
+        if type(reaction) == str:
+            reac_eqn = reaction.splitlines()[0]
+            reactions.append(reac_eqn)
+        elif type(reaction) == dict:
+            reac_dict = reac_dict =  data["pbr.inp"]["MAIN"]["MECHANISM"]["SURFACE"]["REACTION"][index]
+            reac_eqn = reac_dict["#text"].splitlines()[0]
+            reactions.append(reac_eqn)
+    
+    # create list with educts and product
+    educt_eqn = []
+    product_eqn = []
+    for reaction in reactions:
+        equation_split = reaction.split(">")
+        educt_eqn.append(equation_split[0])
+        product_eqn.append(equation_split[1])
+    
+    educt_all = [] # list with all possible educts
+    for reaction in educt_eqn:
+        re = reaction.replace(" ", "")
+        educts = re.split("+")
+        for i in educts:
+            if "-" not in i:
+                educt_all.append(i)
+            
+    product_all = [] # list with all possible products
+    for reaction in product_eqn:
+        re = reaction.replace(" ", "")
+        products = re.split("+")
+        for i in products:
+            if "-" not in i:
+                product_all.append(i)
+    "AB HIER MUSS DER CODE ÜBERARBEITET WERDEN; BISHER BLEIBT LISTE PRODUKTE LEER UND PRODUKTE STEHEN IN EDUKTLISTE"        
+    counter_educt = Counter(educt_all)
+    counter_product = Counter(product_all)
+    
+    min_counts = {element: min(counter_educt[element], counter_product[element]) for element in counter_educt}
+    
+    educt = []
+    product = []
+    
+    for element in educt_all:
+        if min_counts[element] > 0:
+            educt.append(element)
+            min_counts[element] -= 1
+            
+    for element in product_all:
+        if min_counts[element] > 0:
+            product.append(element)
+            min_counts[element] -= 1        
+    
+    print(educt)
     print(" ")
-    print("Adding missing Substances to Ontologie...")
-    # classes
-    
-    
+    print(product)
+        
+"""
+    - Auslesen aller Reaktionsteilnehmer ohne "-" --> Alle Katalysatorkomplexe fallen weg
+    - Je eine Liste mit Teilnehmer links und recht von Reaktionsgleichung
+    - Abgleich Listen und doppelte Elemente löschen
+    --> Tada Liste mit Edukten und Liste mit Produkte, so die Theory/Idee...
+"""
+
 
 def run():
     data = ExecDetchemDriver()
-    AddSubstance(data)
-    return data
+    AddSubstanceToOWL(data)
+    #AddReactionToOWL
+    
+    
