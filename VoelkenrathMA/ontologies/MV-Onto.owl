@@ -7754,6 +7754,7 @@ source: obo:IAO_0000030</skos:example>
     <!-- http://purl.obolibrary.org/obo/CHEBI_25367 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_25367">
+        <owl:equivalentClass rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#molecule"/>
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_23367"/>
         <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001222"/>
         <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>

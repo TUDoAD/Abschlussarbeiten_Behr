@@ -65,8 +65,11 @@ def AddSubstance(data):
     substances = []
     for sub in substance_list:
         substances.append(sub.replace(" ",""))
-        
-    # check if substance is in onto or not
+    
+    # adding catalyst to substance list
+    substances.append(data["pbr.inp"]["MAIN"]["SPECIES"]["SURFACE"]["@name"])
+    
+    # check if substance (individuals) is in onto or not
     substance_not_found = []
     for sub in substances:
         found = False
@@ -83,17 +86,36 @@ def AddSubstance(data):
     print("Substances not found:", substance_not_found)
     print("Searching substance in PubChem...")
     
-    # extract iupac-names of substances_not_found from Pubchem-API
+    # extract iupac-names of substances_not_found from Pubchem-API (and format names)
+    substance_pubchem = []
     for sub in substance_not_found:
         compounds = pcp.get_compounds(sub, 'formula')
         if compounds:
             compound = compounds[0]
+            iupac = compound.iupac_name
+            
+            if "molecular" in iupac:
+                compound_split = iupac.split(" ")
+                for i in compound_split:
+                    if i != "molecular":
+                        compound_name = i.capitalize() + " (molecular)" 
+                        substance_pubchem.append([sub, compound_name])
+            else:
+                substance_pubchem.append([sub, iupac.capitalize()]) 
+                
             print(f"{sub} found in PubChem as {compound.iupac_name}")
         else:
             print(f"No Information found for {sub}!")
+    #print(substance_pubchem)
+    
+    # adding substances as class and individuum to ontologie
+    print(" ")
+    print("Adding Substances to Ontologie...")
+    # classes
+    classes = onto.classes()
     
 
 def run():
     data = ExecDetchemDriver()
     AddSubstance(data)
-    #return data
+    return data
