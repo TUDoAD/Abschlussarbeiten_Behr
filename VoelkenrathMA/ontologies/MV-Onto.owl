@@ -11424,6 +11424,7 @@ source: http://computer.yourdictionary.com/parameter</skos:definition>
 
     <owl:Class rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Carbondioxid">
         <rdfs:subClassOf rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#molecule"/>
+        <skos:prefLabel>Carbon Dioxid</skos:prefLabel>
     </owl:Class>
     
 
@@ -11443,7 +11444,7 @@ source: http://computer.yourdictionary.com/parameter</skos:definition>
         <obo:IAO_0000412>http://purl.obolibrary.org/obo/chebi.owl</obo:IAO_0000412>
         <rdfs:isDefinedBy>http://purl.obolibrary.org/obo/CHEBI_17997</rdfs:isDefinedBy>
         <skos:definition>An elemental molecule consisting of two trivalently-bonded nitrogen atoms. [CHEBI]</skos:definition>
-        <skos:prefLabel>dinitrogen (molecule)</skos:prefLabel>
+        <skos:prefLabel>Molecular Nitrogen</skos:prefLabel>
     </owl:Class>
     
 
