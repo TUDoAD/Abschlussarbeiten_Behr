@@ -2507,14 +2507,7 @@ The composition of a Mixture is not fixed.</skos:definition>
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000105">
         <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001060"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_15377"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001223"/>
-        <property:AFX_0002808 rdf:resource="http://purl.obolibrary.org/obo/CHEBI_15377"/>
         <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/portion-of-material"/>
         <rdfs:label>portion of water</rdfs:label>
         <skos:altLabel>water</skos:altLabel>
@@ -2527,7 +2520,6 @@ The composition of a Mixture is not fixed.</skos:definition>
     <!-- http://purl.allotrope.org/ontologies/material#AFM_0000154 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000154">
-        <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000114"/>
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -2602,7 +2594,6 @@ The composition of a Mixture is not fixed.</skos:definition>
     <!-- http://purl.allotrope.org/ontologies/material#AFM_0000386 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000386">
-        <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000112"/>
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -2650,7 +2641,6 @@ The composition of a Mixture is not fixed.</skos:definition>
     <!-- http://purl.allotrope.org/ontologies/material#AFM_0000404 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000404">
-        <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000115"/>
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -2995,12 +2985,6 @@ The composition of a Mixture is not fixed.</skos:definition>
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001112">
         <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_18276"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
         <rdfs:label>hydrogen gas</rdfs:label>
         <skos:altLabel>hydrogen</skos:altLabel>
@@ -3014,12 +2998,6 @@ The composition of a Mixture is not fixed.</skos:definition>
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001113">
         <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_15379"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
         <rdfs:label>oxygen gas</rdfs:label>
         <skos:altLabel>oxygen</skos:altLabel>
@@ -3033,12 +3011,6 @@ The composition of a Mixture is not fixed.</skos:definition>
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001116">
         <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_16526"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
         <rdfs:label>carbon dioxide gas</rdfs:label>
         <skos:altLabel>carbon dioxide</skos:altLabel>
@@ -3052,12 +3024,6 @@ The composition of a Mixture is not fixed.</skos:definition>
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001118">
         <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_16183"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
         <rdfs:label>methane gas</rdfs:label>
         <skos:altLabel>methane</skos:altLabel>
@@ -3071,12 +3037,6 @@ The composition of a Mixture is not fixed.</skos:definition>
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001129">
         <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000154"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000643"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/CHEBI_17245"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
         <rdfs:label>carbon monoxide gas</rdfs:label>
         <skos:altLabel>carbon monoxide</skos:altLabel>
@@ -7607,85 +7567,6 @@ source: obo:IAO_0000030</skos:example>
     
 
 
-    <!-- http://purl.obolibrary.org/obo/CHEBI_15377 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_15377">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>water (molecule)</rdfs:label>
-        <skos:altLabel>water</skos:altLabel>
-        <skos:definition>An oxygen hydride consisting of an oxygen atom that is covalently bonded to two hydrogen atoms. [CHEBI]</skos:definition>
-        <skos:prefLabel>water (molecule)</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/CHEBI_15379 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_15379">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>dioxygen (molecule)</rdfs:label>
-        <skos:definition>An elemental molecule consisting of two bivalently-bonded oxygen atoms. [Allotrope]</skos:definition>
-        <skos:prefLabel>dioxygen (molecule)</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/CHEBI_16183 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_16183">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>methane (molecule)</rdfs:label>
-        <skos:definition>A one-carbon compound in which the carbon is attached by single bonds to four hydrogen atoms. [CHEBI]</skos:definition>
-        <skos:prefLabel>methane (molecule)</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/CHEBI_16526 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_16526">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>carbon dioxide (molecule)</rdfs:label>
-        <skos:definition>A one-carbon compound with formula CO2 in which the carbon is attached to each oxygen atom by a double bond. [CHEBI]</skos:definition>
-        <skos:prefLabel>carbon dioxide (molecule)</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/CHEBI_17245 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_17245">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>carbon monoxide (molecule)</rdfs:label>
-        <skos:definition>A one-carbon compound in which the carbon is joined only to a single oxygen. [CHEBI]</skos:definition>
-        <skos:prefLabel>carbon monoxide (molecule)</skos:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/CHEBI_18276 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_18276">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>dihydrogen (molecule)</rdfs:label>
-        <skos:definition>An elemental molecule consisting of two hydrogens joined by a single bond. [CHEBI]</skos:definition>
-        <skos:prefLabel>dihydrogen (molecule)</skos:prefLabel>
-    </owl:Class>
-    
-
-
     <!-- http://purl.obolibrary.org/obo/CHEBI_23367 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_23367">
@@ -7748,24 +7629,6 @@ source: obo:IAO_0000030</skos:example>
         <owl:annotatedTarget>biological function</owl:annotatedTarget>
         <oboInOwl:hasDbXref>ChEBI</oboInOwl:hasDbXref>
     </owl:Axiom>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/CHEBI_25367 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_25367">
-        <owl:equivalentClass rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#molecule"/>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_23367"/>
-        <property:AFX_0002796 rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001222"/>
-        <property:AFX_0002865 rdf:resource="http://purl.obolibrary.org/obo/chebi.owl"/>
-        <terms:license rdf:resource="http://purl.allotrope.org/voc/iupac-license"/>
-        <terms:rights rdf:resource="http://purl.allotrope.org/voc/iupac-copyright"/>
-        <terms:source>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1143</terms:source>
-        <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/molecular-scale"/>
-        <rdfs:label>molecule</rdfs:label>
-        <skos:definition>A molecule is a polyatomic molecular entity that is an electrically neutral entity consisting of more than one atom. [Allotrope]</skos:definition>
-        <skos:prefLabel>molecule</skos:prefLabel>
-    </owl:Class>
     
 
 
