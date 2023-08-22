@@ -52,13 +52,10 @@ def ExecDetchemDriver():
     data["pbr.inp"] = pbr_dict
     
     return data
-    
 
-def AddSubstanceToOWL(data):
-    ## Search species in ontolgie and adds them as class and individuum if not found
-    # load ontology
-    onto = owlready2.get_ontology("ontologies/MV-Onto.owl").load()
-    
+
+def GetSubstances(data):
+    ## Extract every (ontology relevant) substance and format them
     # get substances and format (string --> list)
     substance_string = data["pbr.inp"]["MAIN"]["SPECIES"]["GASPHASE"]
     substance_list = substance_string.split("\n")
@@ -70,7 +67,70 @@ def AddSubstanceToOWL(data):
     # adding catalyst to substance list
     substances.append(data["pbr.inp"]["MAIN"]["SPECIES"]["SURFACE"]["@name"])
     
-    # check if substance (individuals) is in onto or not
+    return substances
+
+
+def GetEductAndProduct(data):
+    ## Extract educts and products as seperate lists
+    # getting every educt and product
+    reactions = []
+    for index, reaction in enumerate(data["pbr.inp"]["MAIN"]["MECHANISM"]["SURFACE"]["REACTION"]):
+        if type(reaction) == str:
+            reac_eqn = reaction.splitlines()[0]
+            reactions.append(reac_eqn)
+        elif type(reaction) == dict:
+            reac_dict = reac_dict =  data["pbr.inp"]["MAIN"]["MECHANISM"]["SURFACE"]["REACTION"][index]
+            reac_eqn = reac_dict["#text"].splitlines()[0]
+            reactions.append(reac_eqn)
+    
+    # create list with educts and product
+    educt_eqn = []
+    product_eqn = []
+    for reaction in reactions:
+        equation_split = reaction.split(">")
+        educt_eqn.append(equation_split[0])
+        product_eqn.append(equation_split[1])
+    
+    educt_all = [] # list with all possible educts
+    for reaction in educt_eqn:
+        re = reaction.replace(" ", "")
+        educts = re.split("+")
+        for i in educts:
+            if "-" not in i:
+                educt_all.append(i)
+    print(educt_all)
+    product_all = [] # list with all possible products
+    for reaction in product_eqn:
+        re = reaction.replace(" ", "")
+        products = re.split("+")
+        for i in products:
+            if "-" not in i:
+                product_all.append(i)
+    print(product_all)            
+    counter_educt = Counter(educt_all)
+    counter_product = Counter(product_all)
+        
+    educt = []
+    product = []
+    
+    # compare lists 
+    for element, count in counter_educt.items():
+        if element in counter_product:
+            min_count = min(count, counter_product[element])
+            educt.extend([element] * (count - min_count))
+            product.extend([element] * (counter_product[element] - min_count))
+    
+    print(educt)
+    print(product)    
+    "Siehe Kommentar am Funtkionsaufruf am Ende vom Skript"
+
+    
+def AddSubstanceToOWL(substances):
+    ## Search species in ontolgie and adds them as class and individuum if not found
+    # load ontology
+    onto = owlready2.get_ontology("ontologies/MV-Onto.owl").load()
+    
+    # check if substance (individual) is in onto or not
     substance_not_found = []
     for sub in substances:
         found = False
@@ -93,7 +153,7 @@ def AddSubstanceToOWL(data):
     for sub in substance_not_found:
         compounds = pcp.get_compounds(sub, 'formula')
         if compounds:
-            compound = compounds[0]
+            compound = compounds[0] # 
             iupac = compound.iupac_name
             substance_pubchem.append([sub, iupac.title()])
             print(f"{sub} found in PubChem as {compound.iupac_name}")
@@ -126,76 +186,32 @@ def AddSubstanceToOWL(data):
                 onto.save("ontologies/MV-Onto.owl")
                 
 
-def AddReactionToOWL(data):
+def AddReactionToOWL(educts, products, cat):
     ## Checks if the given reactionsystem is allready in the ontology and creates them if not
     # getting every educt and product
-    reactions = []
-    for index, reaction in enumerate(data["pbr.inp"]["MAIN"]["MECHANISM"]["SURFACE"]["REACTION"]):
-        if type(reaction) == str:
-            reac_eqn = reaction.splitlines()[0]
-            reactions.append(reac_eqn)
-        elif type(reaction) == dict:
-            reac_dict = reac_dict =  data["pbr.inp"]["MAIN"]["MECHANISM"]["SURFACE"]["REACTION"][index]
-            reac_eqn = reac_dict["#text"].splitlines()[0]
-            reactions.append(reac_eqn)
+    print("")
     
-    # create list with educts and product
-    educt_eqn = []
-    product_eqn = []
-    for reaction in reactions:
-        equation_split = reaction.split(">")
-        educt_eqn.append(equation_split[0])
-        product_eqn.append(equation_split[1])
-    
-    educt_all = [] # list with all possible educts
-    for reaction in educt_eqn:
-        re = reaction.replace(" ", "")
-        educts = re.split("+")
-        for i in educts:
-            if "-" not in i:
-                educt_all.append(i)
-            
-    product_all = [] # list with all possible products
-    for reaction in product_eqn:
-        re = reaction.replace(" ", "")
-        products = re.split("+")
-        for i in products:
-            if "-" not in i:
-                product_all.append(i)
-    "AB HIER MUSS DER CODE ÜBERARBEITET WERDEN; BISHER BLEIBT LISTE PRODUKTE LEER UND PRODUKTE STEHEN IN EDUKTLISTE"        
-    counter_educt = Counter(educt_all)
-    counter_product = Counter(product_all)
-    
-    min_counts = {element: min(counter_educt[element], counter_product[element]) for element in counter_educt}
-    
-    educt = []
-    product = []
-    
-    for element in educt_all:
-        if min_counts[element] > 0:
-            educt.append(element)
-            min_counts[element] -= 1
-            
-    for element in product_all:
-        if min_counts[element] > 0:
-            product.append(element)
-            min_counts[element] -= 1        
-    
-    print(educt)
-    print(" ")
-    print(product)
-        
-"""
-    - Auslesen aller Reaktionsteilnehmer ohne "-" --> Alle Katalysatorkomplexe fallen weg
-    - Je eine Liste mit Teilnehmer links und recht von Reaktionsgleichung
-    - Abgleich Listen und doppelte Elemente löschen
-    --> Tada Liste mit Edukten und Liste mit Produkte, so die Theory/Idee...
-"""
-
 
 def run():
+    ## run complete script
+    # Execute KIT's DETHCHEM driver
     data = ExecDetchemDriver()
-    AddSubstanceToOWL(data)
-    #AddReactionToOWL
+    
+    # Extract Substances and add them to ontology
+    substances = GetSubstances(data)
+    AddSubstanceToOWL(substances)
+    
+    # Extract educts and products and add reaction (individual) to ontology
+    """
+    In Detchem Daten sind zu jeder Reaktion Hin- sowie Rückreaktion gegeben, d.h. Vergleich linke/rechte Seite zum Erhalt von Edukte und Produkten liefert leere Listen.
+    Falls bis dahin keine eigene Idee, Alex fragen ob er ne Idee zum auslesen hat und falls nicht könnte man hier den ersten User Input einbauen.
+    Für weitere Entwicklung des Codes werden Edukte und Produkte zunächst in den folgenden Zeilen Hardcoded.
+    educts, products, cat = GetEductAndProduct(data)
+    
+    """
+    educts = ["CO", "CO2", "H2"]
+    products = ["CH4", "H2O"]
+    cat = ["Ni"]
+    #AddReactionToOWL(educts, products, cat)
     
     
