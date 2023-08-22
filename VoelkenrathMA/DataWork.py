@@ -23,7 +23,7 @@ def ExecDetchemDriver():
     dci = path + "input/Methanation_Ni_DETCHEM.txt"
     ckt = path + "input/Methanation_thermdata.txt"
     mol = path + "input/moldata.txt"
-    sur = "Ni=2.55e-5" # ATTENTION: maybe variable with future "DETCHEM Driver"
+    sur = "Ni=2.55e-5" # ACHTUNG: maybe variable with future "DETCHEM Driver"
     
     command = ["node", cli, "--dci", dci, "--ckt", ckt, "--moldata", mol, "--surface", sur]
     
@@ -98,7 +98,7 @@ def GetEductAndProduct(data):
         for i in educts:
             if "-" not in i:
                 educt_all.append(i)
-    print(educt_all)
+
     product_all = [] # list with all possible products
     for reaction in product_eqn:
         re = reaction.replace(" ", "")
@@ -106,7 +106,7 @@ def GetEductAndProduct(data):
         for i in products:
             if "-" not in i:
                 product_all.append(i)
-    print(product_all)            
+            
     counter_educt = Counter(educt_all)
     counter_product = Counter(product_all)
         
@@ -119,10 +119,8 @@ def GetEductAndProduct(data):
             min_count = min(count, counter_product[element])
             educt.extend([element] * (count - min_count))
             product.extend([element] * (counter_product[element] - min_count))
-    
-    print(educt)
-    print(product)    
-    "Siehe Kommentar am Funtkionsaufruf am Ende vom Skript"
+     
+    "Siehe Kommentar am Funtkionsaufruf 'run' am Ende vom Skript"
 
     
 def AddSubstanceToOWL(substances):
@@ -158,7 +156,7 @@ def AddSubstanceToOWL(substances):
             substance_pubchem.append([sub, iupac.title()])
             print(f"{sub} found in PubChem as {compound.iupac_name}")
         else:
-            print(f"No Information found for {sub}!")
+            print(f"No information found for {sub}!")
     #print(substance_pubchem)
     
     # adding substances as class and individuum to ontologie
@@ -167,7 +165,7 @@ def AddSubstanceToOWL(substances):
         if len(substance_pubchem) > 0:
             super_class = onto.search(iri="*molecule")[0] 
             print(" ")
-            print("Adding missing Substances to Ontologie...")
+            print("Adding missing substances to ontologie...")
             for formula, iupac in substance_pubchem:
                 # create the substance class
                 class_name = iupac.replace(" ", "_")
@@ -188,9 +186,57 @@ def AddSubstanceToOWL(substances):
 
 def AddReactionToOWL(educts, products, cat):
     ## Checks if the given reactionsystem is allready in the ontology and creates them if not
-    # getting every educt and product
-    print("")
+    # load ontology
+    onto = owlready2.get_ontology("ontologies/MV-Onto.owl").load()
     
+    mixture_class = onto.search(iri="https://nfdi4cat.org/ontologies/reac4cat#Mixture")[0]
+    reaction_class = onto.search(iri="http://example.org#ChemicalReaction")[0]
+    #prop = onto.search(iri="*hasComponent")[0]
+    
+    print(" ")
+    print("Adding reaction to ontologie...")
+    
+    # create feed/product mixture individuum
+    with onto:
+        # create individuum Mix_...
+        """
+        ACHTUNG: Namensgebung wenn möglich variabel gestalten, sodass zukünftig nichts überschrieben wird.
+        """
+        mix_feed = mixture_class("MV_01_Mix_Feed")
+        mix_product = mixture_class("MV_01_Mix_Product")
+        
+        print("Generate feed composition as individuum...")
+        # combine educt-individuums with mix-feed individuum
+        for educt in educts:
+            ind_iri = "*Sub_" + educt
+            ind = onto.search(iri=ind_iri)[0]
+            
+            mix_feed.hasComponent.append(ind)
+        
+        # combine cat-individuum with mix-feed individuum
+        for c in cat:
+            ind_iri = "*Sub_" + c
+            ind = onto.search(iri=ind_iri)[0]
+            
+            mix_feed.hasComponent.append(ind)
+        
+        print("Generate product composition as individuum...")
+        # combine product-individuum with mix-product individuum
+        for product in products:
+            ind_iri = "*Sub_" + product
+            ind = onto.search(iri=ind_iri)[0]
+            
+            mix_product.hasComponent.append(ind)
+        
+        print("Generate reaction as individuum...")
+        # create reaction individuum
+        reaction = reaction_class("MV_01_Reac")
+        reaction.hasInitialMixture.append(mix_feed)
+        reaction.hasProduct.append(mix_product)
+        
+        
+    onto.save("ontologies/MV-Onto.owl")          
+            
 
 def run():
     ## run complete script
@@ -201,7 +247,7 @@ def run():
     substances = GetSubstances(data)
     AddSubstanceToOWL(substances)
     
-    # Extract educts and products and add reaction (individual) to ontology
+    # Extract educts and products and add reaction (individuum) to ontology
     """
     In Detchem Daten sind zu jeder Reaktion Hin- sowie Rückreaktion gegeben, d.h. Vergleich linke/rechte Seite zum Erhalt von Edukte und Produkten liefert leere Listen.
     Falls bis dahin keine eigene Idee, Alex fragen ob er ne Idee zum auslesen hat und falls nicht könnte man hier den ersten User Input einbauen.
@@ -212,6 +258,6 @@ def run():
     educts = ["CO", "CO2", "H2"]
     products = ["CH4", "H2O"]
     cat = ["Ni"]
-    #AddReactionToOWL(educts, products, cat)
+    AddReactionToOWL(educts, products, cat)
     
     
