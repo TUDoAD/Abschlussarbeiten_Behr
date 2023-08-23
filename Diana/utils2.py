@@ -5,7 +5,7 @@ Created on Mon Jun 19 14:51:27 2023
 @author: chern
 """
 import stanza
-#stanza.download('en', package='craft', processors='tokenize')
+stanza.download('en', package='craft', processors='tokenize')
 import spacy
 from owlready2 import *
 import pickle
@@ -14,13 +14,13 @@ import logging
 import pandas as pd
 import pytorch_lightning as pl
 from copy import deepcopy
-#from CatalysisIE.model import *
-#from CatalysisIE.utils import *
+from CatalysisIE.model import *
+from CatalysisIE.utils import *
 import requests
 import json
 import os
 import glob
-#from chemdataextractor import Document
+from chemdataextractor import Document
 from pubchempy import get_compounds
 
 API_URL = "https://rel.cs.ru.nl/api"
@@ -136,37 +136,30 @@ def load_classes_chebi():
             onto_class_list.remove(i)
     return onto_class_list
         
-# und neu anfangen chemicals search 2.0....
-def chemical_prep_2(chem_list, onto_list,onto_class_list):
+def chemical_prep(chem_list, onto_list,onto_class_list, chem_list_all):
     rel_synonym={}
     comp_dict = {}
     class_list=[]        
     onto_new_dict ={}
     synonyms={}
 
-    
-    '''
-    #new_world3 = owlready2.World()
-    #onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
-    
-    onto_class_list = list(onto.classes())
-    #set_org_mol = onto.search_one(label='organic molecular entity').descendants()     #todo exclude "organic molecular entity"
-    for i in set_org_mol:
-        if i in onto_class_list:
-            onto_class_list.remove(i)
-    '''
     onto_dict,inchikey= synonym_dicts(onto_class_list)
-    for m in chem_list:  
+    for molecule in chem_list:  
         non_chem = False
-        pattern= '('+m+')[—–-][\d]+' #ex: 'ZSM-5' with m='ZSM'
-        for i in chem_list:
+        print(molecule)
+        pattern= '('+molecule+')[—–-][\d]+' #ex: 'ZSM-5' with m='ZSM'
+        for i in chem_list_all:
             match_hyph=re.search(pattern,i)
             if match_hyph:
                 non_chem = True
+                chem_list=chem_list[:chem_list.index(molecule)]+[i]+chem_list[chem_list.index(molecule)+1:]
+                molecule= i
                 break
-        if non_chem ==True:
+        if non_chem ==True or re.search(r'[A-Z]+[—–-][\d]+', molecule):
+            onto_new_dict[molecule]=[]
+            class_list.append(molecule)
             continue        
-        
+        molecule_split= molecule.split()
         if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) is not None:
              comp_dict[molecule] = molecule_split  
         else:
@@ -176,6 +169,7 @@ def chemical_prep_2(chem_list, onto_list,onto_class_list):
         print('{}:{}'.format(k,v))
         i=0
         if k not in onto_new_dict.keys():
+           
             for c in v:
 
                 print(c)
@@ -200,17 +194,11 @@ def chemical_prep_2(chem_list, onto_list,onto_class_list):
                 
                 onto_new_dict[key].append(comp)
             
-            if len(onto_new_dict[key]) != len(v):#remove components if one of the components (atoms) doesn't exist (ex.ZMS- Z,M don't exist, S-exists) -wrong: mb delete
-                    print('not all components found {}:{}'.format(key,onto_new_dict[key]))
-                    for i in onto_new_dict[key]:
-                        if i in class_list:
-                            class_list.remove(i) 
-               
-               
-    print(synonyms)
+            if len(key) ==1:#remove components if one of the components (atoms) doesn't exist (ex.ZMS- Z,M don't exist, S-exists) -wrong: mb delete
+                    #print('not all components found {}:{}'.format(key,onto_new_dict[key]))
+                    class_list.remove(key)
+                    onto_new_dict.pop(key)
     class_list= [*set(class_list)] #remove duplicates
-    print(class_list)
-    print(onto_new_dict)
     missing, match_dict = create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary')
     
     return onto_new_dict, missing, match_dict, rel_synonym
@@ -318,43 +306,13 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym, comp):
                 if not key:
                     print('no synonyms but some matches in inchikey for {}:{}'.format(k, comp_check))
                     key = k                  
-    rel_synonym[k]=key             
+    
+    if not key:  
+        key=k
+    rel_synonym[k]=key          
     class_list.append(key)
     return none_comp,class_list, key, rel_synonym
-                 
-                 
-
-
-
-def REL_search (text):
-    nlp = spacy.load('en_core_web_sm')
-    doc= nlp(text)
-    """
-    sentences = []
-    for sentence in doc.sents:
-        sentences.append(str(sentence))
-    """
-    sentence_n = " ".join([token.lemma_ for token in doc]) 
-    doc2 = nlp(sentence_n) 
-    for i in range(len(doc2)-1):         
-        if (doc2[i].tag_=="NN" and doc2[i+1].tag_ =="NN") or (doc2[i].tag_=="JJ" and doc2[i+1].tag_ =="NN"):         
-            ent = doc[i].text + " " + doc[i+1].text         
-            print(ent)         
-            start_i = doc[i].idx         
-            print(start_i)         
-            end_i = len(ent)         
-            ed_result = requests.post(API_URL, json={
-            "text": text,             
-            "spans": [(start_i, end_i)]         
-            }).json()         
-            if ed_result:             
-                print("Found Entity: %s \n%.03f\n"%(ed_result[0][3], ed_result[0][4]))     
-                #print(doc[i])  
-    tags = [word.tag_ for word in doc] 
-    tags2 = [word.tag_ for word in doc2] 
-    tokens=[i for i in doc]
-...    
-
+                                  
 def pred_model_dataset (model,sent): 
     # CUDA and Pytorch are necessary for execution of function !    
     #use the checkpoint trained on first fold
@@ -396,10 +354,11 @@ def text_prep(test_txt):
     test_sents = stanza_fix(test_sents)
     return test_sents
 
-
 def CatalysisIE_search(model, test_sents, onto_list):
     nlp = spacy.load('en_core_web_sm')
+    chem_list_all = []
     chem_list = []
+    cat_sup_list=[]
     sup_cat={}
     abbreviation = {}
     a=0
@@ -416,81 +375,110 @@ def CatalysisIE_search(model, test_sents, onto_list):
         "Product": [],          #Species that are produced from a chemical reaction between the reactant and the catalyst (e.g., C1–C4, coke, and liquid 
                                 #fuel). Intermediate species that go on to react further are not considered in this category unless there is substantial 
                                 #characterization/quantification of those species.
-        "Characterisation": []  #Any intermediate steps taken to prepare the catalyst (e.g., heating, calcination, and refluxing).
+        "Characterization": []  #Any intermediate steps taken to prepare the catalyst (e.g., heating, calcination, and refluxing).
         }
 
     output_sents = pred_model_dataset(model, test_sents)
     for sent in output_sents:
         sent_tag = [t['pred'] for t in sent]
         print(assemble_token_text(sent))
+        chem_list_all.extend([c.text for c in Document(assemble_token_text(sent)).cems])
         abb_list=Document(assemble_token_text(sent)).abbreviation_definitions
         for i in range(len(abb_list)):
             abbreviation[abb_list[i][0][0]]=abb_list[i][1][0]
         for i, j, l in get_bio_spans(sent_tag):
             print(assemble_token_text(sent[i:j + 1]), l)
             entity = assemble_token_text(sent[i:j + 1])
+            
             if entity[-1]=='.':
                 entity= entity[:-1]
-            spans=Document(entity).cems
+            
             if i == a+1 and '({})'.format(entity) in assemble_token_text(sent):
                 if entity in abbreviation.keys():
                     abbreviation[entity].append(entity_old)
                 else:
-                    abbreviation[entity]=[]
-                    abbreviation[entity].append(entity_old)
+                    abbreviation[entity]=[entity_old]
+            
             doc_list=[]
+            match_hyph=re.findall(r'(([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?))', entity) # Rh-Co --> RhCo
+            if match_hyph:
+                for i in range(len(match_hyph)):
+                    entity = entity.replace(match_hyph[i][0],match_hyph[i][1]+match_hyph[i][2])
+                    print(entity)
+                
             doc = nlp(entity)
             for i in range(len(doc)):
                 if doc[i].tag_ == 'NNS':
                     doc_list.append(str(doc[i].lemma_))
+                #elif i!=doc[-1].i and ''.join([doc[i-1,i,i+1]]) in spans_list:
+                    
                 else:
                     doc_list.append(str(doc[i]))
             entity= " ".join(doc_list)         # plural to singular
             e_split= entity.split()
             entity = doc_token(entity, e_split)
+             
             if entity in categories[l]:
                 continue
             else:
-                for i,c in enumerate(spans):
-                    c=str(c)       
-                    match_hyph=re.search(r'([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?)', c) # Rh-Co --> RhCo
-                    if match_hyph:
-                        entity.replace(c,match_hyph.group(1)+match_hyph.group(2))
-                        c = match_hyph.group(1)+match_hyph.group(2)
-                    if i != 0:
-                        e_btwn= entity[spans[i].end:spans[i-1].start]
-                        if 'loaded' in e_btwn:    #Zr-loaded ZSM-5 zeolites
-                            entity.replace('loaded','supported on')    
-                            if spans[i-1] in sup_cat.keys():
-                                    sup_cat[spans[i-1].text].append(spans[i].text)
-                            else:
-                                    sup_cat[spans[i-1].text] = []
-                                    sup_cat[spans[i-1].text].append(spans[i].text)
-                    mol = re.findall(r'/([\w@—–-]+)\b', c)
-                    if mol:
-                        support = mol[0]
-                        chem_list.append(support)
+                
+                mol = re.findall(r'([\w@—–-]+[\s]?(?:/[\s]?[\w@—–-]+)+)', entity)
+                if mol:
+                    for i in range(len(mol)):
+                        print(mol)
+                        mol_part = [(mol[i],) + tuple(mol[i].split('/'))]
+                        cat_sup_list.append(mol[0][0])
                         if l=='Catalyst':
-                            catalyst= re.search(r'\b([\w@—–-]+)/', c).group(1)
-                            chem_list.append(catalyst)    
+                            support = mol_part[0][2]
+                            chem_list.append(support)
+                            catalyst= mol_part[0][1]
+                            chem_list.append(catalyst)
+                            entity = entity.replace('/'+support,'')# remove '/molecule'; already in sup_cat
                             if support in sup_cat.keys():
+                                if catalyst not in sup_cat[support]:
                                     sup_cat[support].append(catalyst)
                             else:
-                                    sup_cat[support] = []
-                                    sup_cat[support].append(catalyst)
-                            
+                                    sup_cat[support] = [catalyst]
+                    
                         else:
-                            for i in range(len(mol)):
-                                chem_list.append(i)
-                    else:
-                        chem_list.append(c)
-            if entity not in categories[l]:
-                        categories[l].append(entity)    
-            
+                                for k in range(1, len(mol_part[o])):
+                                    chem_list.append(mol[i][k])
+                                    entity= entity.replace('/',',')
+                 
+                spans=Document(entity).cems
+                chem_list.extend([c.text for c in spans if c.text not in cat_sup_list])
+                if 'loaded' in entity:
+                    for i,c in enumerate(spans):
+                        c=str(c) 
+                        if i != 0:
+                            e_btwn = entity[spans[i].end:spans[i-1].start]
+                            if e_btwn!= ' ' and 'loaded' in e_btwn:    #Zr-loaded ZSM-5 zeolites
+                                loaded_end =  entity.index('loaded')+len('loaded')+1
+                                for c in chem_list:
+                                        try:
+                                            idx=entity.index(c)
+                                        except:
+                                            continue
+                                        else:
+                                            if idx == loaded_end:
+                                                if c in sup_cat.keys():
+                                                    if spans[i].text not in sup_cat[c]:
+                                                        sup_cat[c].append(spans[i].text)
+                                                else:
+                                                    sup_cat[c] = [spans[i].text]
+                    entity=entity.replace('loaded','supported on')
+                                            
+                
+                
+                #e_split= entity.split()
+                #entity = doc_token(entity, e_split)
+                categories[l].append(entity)    
+              
             entity_old=entity
             a=j+1
             chem_list= [*set(chem_list)]
-    return categories,chem_list,abbreviation, sup_cat
+            chem_list_all=[*set(chem_list_all)]
+    return categories,chem_list,abbreviation, sup_cat, chem_list_all
 
 def catalyst_support(sup_cat,onto):
     for k,v in sup_cat.items():
@@ -498,118 +486,130 @@ def catalyst_support(sup_cat,onto):
         for i in v:
             ...#carrier_role
     
-def catalyst_entity(categories, rel_synonym, sup_cat):
+def catalyst_entity(categories, rel_synonym, sup_cat,chem_list):
     nlp = spacy.load('en_core_web_sm')
     based_cems={}
     classes={}
+    spans_dict={}
+    support=[]
     for k,v in categories.items():
         if k =='Catalyst':
-            if entity in classes.keys():
-                continue
-            else:
-                for entity in v:
+            for entity in v:
+                
+                if entity in classes.keys():
+                    continue
+                else:
+                    spans_dict[entity]=[]
                     if 'system' in entity or 'surface' in entity:
                         entity=entity.replace('system','catalyst')
                         entity=entity.replace('surface','catalyst')
-                    mol = re.findall(r'/([\w@—–-]+)\b', entity)
-                    if mol:
-                        for c in mol:
-                            c_t=entity.replace(c,"")
+                    
                     
                     if "based" in entity:
                         support=[]
                         spans_n=[]
-                        
+                        e_snip=None
                         based_m = re.search('based',entity)
                         if based_m.start() != 0 or entity[:based_m.start()-1] != 'catalyst': 
                             e_snip = entity[:based_m.start()-1]
-                            spans = Document(e_snip).cems
+                            #spans = Document(e_snip).cems
                             e_cleaned = e_snip
-                            doc = nlp(e_snip)
-                            if spans:
-                                for c in spans:
-                                         e_btwn= e_snip[c.end+1:]
-                                         c_t= c.text
-                                         mol = re.search(r'/([\w@—–-]+)\b', c_t)
-                                         if mol:
-                                             c_t=c.text.replace(mol[0],"") # remove '/molecule'; already in sup_cat
-                                         try:
-                                             c_t = rel_synonym[c_t] #search in preprocessed chem entities dict
-                                         except:
-                                             c_t = c_t 
-                                         if "supported" in e_btwn:
+                            for c in chem_list:
+                                pattern='\\b'+c+'\\b'
+                                if re.search(pattern,e_snip):
+                                    e_btwn= e_snip[e_snip.index(c)+len(c)+1:]
+                                    try:
+                                        c_t = rel_synonym[c] #search in preprocessed chem entities dict
+                                    except:
+                                        c_t = c
+                                    if c_t in sup_cat.keys():
+                                             continue
+                                    elif "supported" in e_btwn:
                                              e_cleaned = e_btwn[re.search('supported',e_btwn).end():]
                                              support.append(c_t)
                                              continue
-                                         elif c_t in sup_cat.keys():
-                                             continue
-                                         spans_n.append(c_t)
-                                         e_snip=e_snip.replace(c.text,'')
-                                if 'catalyst' in e_snip:
                                     
-                                    doc_snip= nlp(e_snip)
-                                    for token in doc_snip:
-                                        if token.head.text == 'catalyst':
-                                            classes[entity]=['catalyst role']
-                                            token_new=token.text+'catalyst role'
-                                            classes[entity].append[token_new]
-                                            if token.children:
-                                                for i in reversed(range(len(token.children)+1)):
-                                                    token_new=token.children[i]+token_new
-                                                    classes[entity].append[token_new]
-                                    
+                                    if c_t not in spans_n:    
+                                        spans_n.append(c_t)
+                                    print(spans_n)
+                                    e_snip=e_snip.replace(c,'')
+                            
+                            if 'catalyst' in e_cleaned:
+                                classes= check_in_snip(e_cleaned, classes,nlp, entity)
+                                   
                         if entity[based_m.end()+1:] != 'catalyst':
                             s_on=False
                             if 'on' in e_snip: #based on/ based exclusivelly on
                                 if re.search('supported on', e_snip):
                                     s_on= True
-                                    sup_i= re.search('supported on', e_snip).end()#Rh-Co based system supported on alumina, titania and silica
+                                    #Rh-Co based system supported on alumina, titania and silica
+                                    e_btwn=e_snip[re.search('supported on', e_snip).end():]
                                 else:
                                     based_m = re.search('on',entity)
                             e_snip = entity[based_m.end()+1:]
-                            doc = nlp(e_snip)
-                            spans = Document(e_snip).cems
+                            #spans = Document(e_snip).cems
                             #cleaned= e_snip
                             if re.search('supported', e_snip) and s_on==False: 
-                                sup_i= re.search('supported', e_snip).start() #based on silica supported bimetallic catalysts
+                                #based on silica supported bimetallic catalysts
+                                e_btwn=e_snip[:re.search('supported', e_snip).start()+1]
                             else:
-                                sup_i == None
-                            if spans:
-                                support_raw=[]
-                                for i,c in enumerate(spans):
-                                    
+                                sup_i = None
+                            for c in chem_list:
+                                pattern='\b'+c+'\b'
+                                if re.search(pattern,e_snip):
                                     try:
                                         c_t = rel_synonym[c_t]
                                     except:
-                                        c_t = c_t
-                                    if sup_i:
-                                        if s_on== False and sup_i == re.search(c.text,e_snip).end() +1:
-                                            support.extend([comp.text for comp in spans[0:i+1]]) #based on titania, silica supported bimetallic catalysts
+                                        c_t = c
+                                    if sup_i and c in e_btwn:
+                                            support.append(c) 
 
-                                        elif s_on==True and s_on == re.search(c.text,e_snip).start()-1:
-                                            support.extend([comp.text for comp in spans[i:]]) #Rh-Co based system supported on alumina, titania and silica
                                                             
-                                        
-                                    spans_n.append(c_t)  
+                                    if c_t not in spans_n:    
+                                        spans_n.append(c_t)  
+                                 
                                 #e_cleaned = [re.search(c.text,e_btwn).end()+1:]
-                                
+                            
+                            if 'catalyst' in e_snip:
+                                classes= check_in_snip(e_snip, classes,nlp, entity)
+                        
                     else:
                         spans = Document(entity).cems
-                        entity_s= entity.split()
-                        if len(entity_s)==1 and entity_s[0]==spans[0].text:
-                            spans_n.append[spans[0].text]
-                        else:
-                            continue
+                        if spans:
+                            entity_s = entity.split()
+                            if len(entity_s) == 1 and entity_s[0] == spans[0].text:
+                                spans_n.append(spans[0].text)
+                        
                     if support:
                         snaps_n=[c for c in spans_n and c not in support]  
                         for i in support:
-                             sup_cat[i]=[snaps_n]
-                            
-            
-                doc = nlp.entity
-                entity_n = " ".join([token.lemma_ for token in doc])
+                            if i in sup_cat.keys():
+                                sup_cat[c].extend([c for c in snaps_n and c not in sup_cat[i]])
+                            else:
+                                sup_cat[i] = snaps_n
+                    spans_dict[entity].extend(spans_n) 
+    return sup_cat, classes, spans_dict
 
-    return sup_cat, classes
+
+def check_in_snip(e_snip, classes,nlp, entity):
+    
+    doc_snip= nlp(e_snip)
+    for token in doc_snip:
+        if token.head.text == 'catalyst' and token.text !='supported':
+            classes[entity] = ['catalyst role']
+            if token.text != 'catalyst':
+                token_new=token.text+' catalyst role'
+                classes[entity].append(token_new)
+            else:
+                token_new='catalyst role'
+            if token.children:
+                for i in reversed(range(len([t.text for t in token.children]))):
+                    token_new=[t.text for t in token.children][i] +' ' + token_new
+                    if re.search(r'[Ss]upported',token_new):
+                        continue
+                    classes[entity].append(token_new)      
+            classes[entity] = [*set(classes[entity])] 
+    return classes
 
 def doc_token(entity, e_split, j=0):
     nlp = spacy.load('en_core_web_sm')
@@ -618,11 +618,16 @@ def doc_token(entity, e_split, j=0):
     for i,token  in enumerate(doc[j:]):   
         if token == doc[-1]:
             break
-        elif token.pos_ in ['CCONJ','PUNCT','SYM'] and entity[token.idx-1]==' ':
+        elif token.pos_ in ['CCONJ','PUNCT','SYM','PRON'] and entity[token.idx-1]==' ' and token.text !="=":
             j=j+i
-            if token.pos_ in ['CCONJ','PUNCT','PRON']:
-                e_new = ''.join([e_split[j-1],e_split[j+1]])
-
+            if token.pos_ =='CCONJ':
+                e_new = ''.join([e_split[j-1],',',e_split[j+1]])
+            #if doc[j+1].pos_ in ['CCONJ','PRON']:
+            #    e_new= ' '.join([e_split[j-1],',',e_split[j+2]])
+                
+            elif token.pos_=='PRON':
+                e_new= ' '.join([e_split[j-1],e_split[j+1]])
+                del e_split[j]
             elif token.text=='(' and doc[j+2].text==')':
                 e_new = "".join(e_split[j:j+3])
                 brackets= True
@@ -641,15 +646,15 @@ def doc_token(entity, e_split, j=0):
             if j == 1:
                 entity= " ".join([e_new,e_after])
             else:
-                e_before = entity[:doc[j-1].idx-1]
+                e_before = entity[:doc[j-1].idx]
                 entity= " ".join([e_before,e_new,e_after])
-                    
+                   
             entity= doc_token(entity, e_split, j=j+1)
             break
         else:
             continue
     return entity
-
+"""
 for v_1,k_1 in classes.items():
     for k,v in classes.items():
         for i in reversed(v_1):
@@ -657,8 +662,13 @@ for v_1,k_1 in classes.items():
             if k_1 != k:
                 if v_1==v[-1]:
                     class_new
-             
-            
+if "catalyst role" in v_1:
+    for k,v in classes.items():
+        if k_1!= k:
+            for i,e in enumerated(v_1):
+                if 
+        
+"""            
             
 def search_entity (onto, entity_full, category, onto_list,IRI_json_filename='iriDictionary'):
     f = open('{}.json'.format(IRI_json_filename)) # evtl in class aufnehmen und abrufen
@@ -706,7 +716,6 @@ def search_entity (onto, entity_full, category, onto_list,IRI_json_filename='iri
         if doc[0].pos_ not in tags:
                 print('pass')  
                 entity_old=entity
-                
                 continue
         elif i == len(word_list) and entity_n in chemicals:
                 is_a_dict[category].append(entity)
@@ -753,7 +762,7 @@ def create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary', 
             onto_names.remove('AFO')
         for entity in class_list:
             match_dict = search_value_in_nested_dict(entity, onto_names, onto_dict, match_dict)
-            if entity not in match_dict:
+            if entity not in match_dict.values():
                 missing.append(entity)
         print(match_dict)   
         for key,value in match_dict.items():
@@ -849,7 +858,7 @@ def equality( onto_list,onto_name='AFO'):
                         'Equivalence with {} added automatically'.format(onto.search_one(iri=iri_old).iri)]) 
     onto.save('./ontologies/{}_upd1.owl'.format(onto_name.lower())) 
     return eq   
-'''
+""" 
 ckpt_name = 'CatalysisIE/checkpoint/CV_0.ckpt'
 bert_name = 'CatalysisIE/pretrained/scibert_domain_adaption'
 model = BERTSpan.load_from_checkpoint(ckpt_name, model_name=bert_name, train_dataset=[], val_dataset=[], test_dataset=[])
@@ -860,9 +869,15 @@ onto_list ={
             'RXNO' : 'http://purl.obolibrary.org/obo/rxno.owl',
             'CHMO' : 'http://purl.obolibrary.org/obo/chmo.owl',
             'AFO'  : "./ontologies/afo.owl"
-            }          
+            } 
+
+onto_class_list=load_classes_chebi()
+onto_new_dict, missing, match_dict, rel_synonym=chemical_prep_2(chem_list, onto_list,onto_class_list)
+
+"""
+"""       
 test_txt='''
-'''In order to reveal the influences of metal-incorporation and regeneration of ZSM-5 zeolites on naphtha catalytic cracking, the fresh and regenerated Sr, Zr and La-loaded ZSM-5 zeolites have been prepared and evaluated using n-pentane catalytic cracking as a model reaction.
+In order to reveal the influences of metal-incorporation and regeneration of ZSM-5 zeolites on naphtha catalytic cracking, the fresh and regenerated Sr, Zr and La-loaded ZSM-5 zeolites have been prepared and evaluated using n-pentane catalytic cracking as a model reaction.
 It was found that the metal-incorporated ZSM-5 zeolites promoted hydride transfer reactions, and the Zr-incorporation helped to promote and maintain the catalytic activity while reduced alkenes selectivity;
 the regenerated ZSM-5 zeolites promoted C–H bond breaking that increased alkenes selectivity and n-pentane conversion but accelerated catalyst deactivation.
 The regenerated metal-incorporated ZSM-5 zeolites combined the feature roles of metal-incorporation and regeneration in modulating reaction pathways, and seemed a promising way to balance the activity, stability and alkenes selectivity, facilitating the optimal production for light olefins.
@@ -877,14 +892,37 @@ the two metals were in intimate contact
 Rh4(CO)12, and RhCo3(CO)12, were synthesized 
 according to literature [14,15]. SiO2 was a silica 
 ‘Aerosil’ supplied by Degussa with a surface 
-area of 380 m2/g.
-'''
-'''
+area of 380 m2/g. Cobalt
+complexes had been the main industrial hydroformylation catalysts until the early 1970s, i.e., prior to the commercialization of
+rhodium based catalysts. The present work concentrates on heterogeneous ethylene
+hydroformylation on a series of Rh and Co based catalysts. Supported catalysts based on the Rh-Co couple, mainly derived from the decomposition of 
+bimetallic carbonylic clusters, were found particularly active and selective in the vapor phase 
+hydroformylation of simple olefins provided that 
+the two metals were in intimate contact. Here we report the preparation, characterization and reactivity studies on propene hydroformylation of Rh-Co based catalysts, with various Rh/Co ratios, obtained by the reduction of 
+the metal salts coadsorbed on silica with NaBH, 
+in anaerobic conditions. When the Rh/Al based catalysts were subjected to the same 
+experimental conditions only the v(C0) absorption at 2015 cm-’ was observed and appears to be involved in the catalytic process. Based on the DRC 
+analysis of the reaction orders and apparent activation energies, we propose that the first step of 
+propylene hydrogenation to produce propyl species, which is often considered as a kinetically 
+non-relevant step, may play a more important role and should draw more attention for future 
+improvement of Rh-based heterogeneous catalysts for propylene hydroformylation. However, detailed mechanisms on
+the promotion effect of alloying secondary metals with Rh
+still remain elusive, which can be of great importance leading
+to the rational optimization of Rh-based alloy catalysts for
+active and selective heterogeneous hydroformylation. In this communication, systematic studies of catalytic
+behaviors from monometallic Rh supported on MCM-41 (Rh/
+MCM-41) to Rh-based bimetallic catalysts with the addition of
+a secondary 3rd row transition metal M (RhM3/MCM-41, M =
+Fe, Co, Ni, Cu, or Zn) for the heterogeneous hydroformylation
+of ethylene were reported by combining experiments and
+density functional theory (DFT) calculations.'''
+
 test_sents = text_prep(test_txt)        
-categories,chem_list,abbreviations, cat_sup = CatalysisIE_search(model, test_sents, onto_list)    
-#new_dict, missing, match_dict= chemical_prep(chem_list, onto_list)     
-''' 
-"""       
+categories,chem_list,abbreviations, sup_cat = CatalysisIE_search(model, test_sents, onto_list)    
+onto_new_dict, missing, match_dict, rel_synonym= chemical_prep(chem_list, onto_list,onto_class_list)     
+sup_cat, classes, spans_dict=catalyst_entity(categories, rel_synonym, sup_cat, chem_list)
+"""  
+"""     
 class expand_onto:
     
     def __init__(self,onto_list, onto_name):
