@@ -589,6 +589,7 @@ def catalyst_entity(categories, rel_synonym, sup_cat,chem_list):
                             else:
                                 sup_cat[i] = snaps_n
                     spans_dict[entity].extend(spans_n)
+    '''
     for v_1,k_1 in classes.items():
         stop=False
         if len(v_1)==1:
@@ -606,8 +607,9 @@ def catalyst_entity(categories, rel_synonym, sup_cat,chem_list):
                     if k_1 != k:
                         if v_1==v[-1]:
                             class_new
+    '''
     return sup_cat, classes, spans_dict
-
+'''
 def deep(v,k,i=0):
     old=False
     ele_old=v[i]
@@ -621,12 +623,12 @@ def deep(v,k,i=0):
             
             for v_1,k_1 in classes.items():
                 if k!=k_1 and 
-
+'''
 def check_in_snip(e_snip, classes, nlp, entity):
     classes[entity]=[]
     doc_snip= nlp(e_snip)
     for token in doc_snip:
-        if token.head.text == 'catalyst' :
+        if token.head.text == 'catalyst' or token.pos_=='VERB':
             if 'catalyst role' not in classes[entity]:
                 classes[entity] = ['catalyst role']
             if token.text != 'catalyst':
@@ -634,15 +636,16 @@ def check_in_snip(e_snip, classes, nlp, entity):
                     token_new=token.text+' catalyst role'
                     classes[entity].append(token_new)
                 if token.children:
-                    print([t.text for t in token.children])
-                    for i in reversed(range(len([t.text for t in token.children]))):
+                    print([t.text for t in token.children ])
+                    for i in reversed(range(len([t.text for t in token.children if t.text != "catalyst"]))):
                         token_new=[t.text for t in token.children][i] +' ' + token_new
-                        classes[entity].append(token_new)      
+                        classes[entity].append(token_new) 
+        
     classes[entity] = [*set(classes[entity])] 
     if len(classes[entity])>1:
         classes[entity].remove('catalyst role')
     return classes
-
+#classes={'Rh-based atomically dispersed heterogenous catalyst':['atomically dispersed catalyst role','dispersed catalyst role','heterogenous catalyst role']}
 def doc_token(entity, e_split, j=0):
     nlp = spacy.load('en_core_web_sm')
     brackets =False
