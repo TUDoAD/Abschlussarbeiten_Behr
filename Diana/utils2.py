@@ -500,6 +500,7 @@ def catalyst_entity(categories, rel_synonym, sup_cat,chem_list):
                     continue
                 else:
                     spans_dict[entity]=[]
+                    spans_n=[]
                     if 'system' in entity or 'surface' in entity:
                         entity=entity.replace('system','catalyst')
                         entity=entity.replace('surface','catalyst')
@@ -507,7 +508,6 @@ def catalyst_entity(categories, rel_synonym, sup_cat,chem_list):
                     
                     if "based" in entity:
                         support=[]
-                        spans_n=[]
                         e_snip=None
                         based_m = re.search('based',entity)
                         if based_m.start() != 0 or entity[:based_m.start()-1] != 'catalyst': 
@@ -575,11 +575,12 @@ def catalyst_entity(categories, rel_synonym, sup_cat,chem_list):
                         
                     else:
                         spans = Document(entity).cems
+                        
                         if spans:
                             entity_s = entity.split()
                             if len(entity_s) == 1 and entity_s[0] == spans[0].text:
                                 spans_n.append(spans[0].text)
-                        
+
                     if support:
                         snaps_n=[c for c in spans_n and c not in support]  
                         for i in support:
@@ -587,28 +588,59 @@ def catalyst_entity(categories, rel_synonym, sup_cat,chem_list):
                                 sup_cat[c].extend([c for c in snaps_n and c not in sup_cat[i]])
                             else:
                                 sup_cat[i] = snaps_n
-                    spans_dict[entity].extend(spans_n) 
+                    spans_dict[entity].extend(spans_n)
+    for v_1,k_1 in classes.items():
+        stop=False
+        if len(v_1)==1:
+            continue
+        ele_list
+        for i, ele in enumerate(v_1):
+            for k,v in classes.items():
+                if k!=k_1 and ele in v_1:
+                    
+                    list_words=i.split()
+                    try:
+                        ele_n= v_1[i+1]
+                    except:
+                        d
+                    if k_1 != k:
+                        if v_1==v[-1]:
+                            class_new
     return sup_cat, classes, spans_dict
 
+def deep(v,k,i=0):
+    old=False
+    ele_old=v[i]
+    try:ele_n=v[i+1]
+    except:
+        old=True
+        ele_n=ele_old
+    if 
+    else:
+        if len(ele_old.split())<len(ele_n.split()):
+            
+            for v_1,k_1 in classes.items():
+                if k!=k_1 and 
 
-def check_in_snip(e_snip, classes,nlp, entity):
-    
+def check_in_snip(e_snip, classes, nlp, entity):
+    classes[entity]=[]
     doc_snip= nlp(e_snip)
     for token in doc_snip:
-        if token.head.text == 'catalyst' and token.text !='supported':
-            classes[entity] = ['catalyst role']
+        if token.head.text == 'catalyst' :
+            if 'catalyst role' not in classes[entity]:
+                classes[entity] = ['catalyst role']
             if token.text != 'catalyst':
-                token_new=token.text+' catalyst role'
-                classes[entity].append(token_new)
-            else:
-                token_new='catalyst role'
-            if token.children:
-                for i in reversed(range(len([t.text for t in token.children]))):
-                    token_new=[t.text for t in token.children][i] +' ' + token_new
-                    if re.search(r'[Ss]upported',token_new):
-                        continue
-                    classes[entity].append(token_new)      
-            classes[entity] = [*set(classes[entity])] 
+                if not  re.search(r'[Ss]upported',token.text):
+                    token_new=token.text+' catalyst role'
+                    classes[entity].append(token_new)
+                if token.children:
+                    print([t.text for t in token.children])
+                    for i in reversed(range(len([t.text for t in token.children]))):
+                        token_new=[t.text for t in token.children][i] +' ' + token_new
+                        classes[entity].append(token_new)      
+    classes[entity] = [*set(classes[entity])] 
+    if len(classes[entity])>1:
+        classes[entity].remove('catalyst role')
     return classes
 
 def doc_token(entity, e_split, j=0):
@@ -655,13 +687,7 @@ def doc_token(entity, e_split, j=0):
             continue
     return entity
 """
-for v_1,k_1 in classes.items():
-    for k,v in classes.items():
-        for i in reversed(v_1):
-        
-            if k_1 != k:
-                if v_1==v[-1]:
-                    class_new
+
 if "catalyst role" in v_1:
     for k,v in classes.items():
         if k_1!= k:
@@ -918,8 +944,8 @@ of ethylene were reported by combining experiments and
 density functional theory (DFT) calculations.'''
 
 test_sents = text_prep(test_txt)        
-categories,chem_list,abbreviations, sup_cat = CatalysisIE_search(model, test_sents, onto_list)    
-onto_new_dict, missing, match_dict, rel_synonym= chemical_prep(chem_list, onto_list,onto_class_list)     
+categories,chem_list,abbreviations, sup_cat,chem_list_all = CatalysisIE_search(model, test_sents, onto_list)    
+onto_new_dict, missing, match_dict, rel_synonym= chemical_prep(chem_list, onto_list,onto_class_list, chem_list_all)     
 sup_cat, classes, spans_dict=catalyst_entity(categories, rel_synonym, sup_cat, chem_list)
 """  
 """     
