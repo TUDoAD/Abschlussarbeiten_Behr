@@ -2527,7 +2527,6 @@ The composition of a Mixture is not fixed.</skos:definition>
     <!-- http://purl.allotrope.org/ontologies/material#AFM_0000154 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000154">
-        <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000114"/>
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -2602,7 +2601,6 @@ The composition of a Mixture is not fixed.</skos:definition>
     <!-- http://purl.allotrope.org/ontologies/material#AFM_0000386 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000386">
-        <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000112"/>
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -2650,7 +2648,6 @@ The composition of a Mixture is not fixed.</skos:definition>
     <!-- http://purl.allotrope.org/ontologies/material#AFM_0000404 -->
 
     <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0000404">
-        <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000115"/>
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
