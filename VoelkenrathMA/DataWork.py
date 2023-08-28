@@ -69,59 +69,6 @@ def GetSubstances(data):
     
     return substances
 
-
-def GetEductAndProduct(data):
-    ## Extract educts and products as seperate lists
-    # getting every educt and product
-    reactions = []
-    for index, reaction in enumerate(data["pbr.inp"]["MAIN"]["MECHANISM"]["SURFACE"]["REACTION"]):
-        if type(reaction) == str:
-            reac_eqn = reaction.splitlines()[0]
-            reactions.append(reac_eqn)
-        elif type(reaction) == dict:
-            reac_dict = reac_dict =  data["pbr.inp"]["MAIN"]["MECHANISM"]["SURFACE"]["REACTION"][index]
-            reac_eqn = reac_dict["#text"].splitlines()[0]
-            reactions.append(reac_eqn)
-    
-    # create list with educts and product
-    educt_eqn = []
-    product_eqn = []
-    for reaction in reactions:
-        equation_split = reaction.split(">")
-        educt_eqn.append(equation_split[0])
-        product_eqn.append(equation_split[1])
-    
-    educt_all = [] # list with all possible educts
-    for reaction in educt_eqn:
-        re = reaction.replace(" ", "")
-        educts = re.split("+")
-        for i in educts:
-            if "-" not in i:
-                educt_all.append(i)
-
-    product_all = [] # list with all possible products
-    for reaction in product_eqn:
-        re = reaction.replace(" ", "")
-        products = re.split("+")
-        for i in products:
-            if "-" not in i:
-                product_all.append(i)
-            
-    counter_educt = Counter(educt_all)
-    counter_product = Counter(product_all)
-        
-    educt = []
-    product = []
-    
-    # compare lists 
-    for element, count in counter_educt.items():
-        if element in counter_product:
-            min_count = min(count, counter_product[element])
-            educt.extend([element] * (count - min_count))
-            product.extend([element] * (counter_product[element] - min_count))
-     
-    "Siehe Kommentar am Funtkionsaufruf 'run' am Ende vom Skript"
-
     
 def AddSubstanceToOWL(substances):
     ## Search species in ontolgie and adds them as class and individuum if not found
@@ -181,10 +128,10 @@ def AddSubstanceToOWL(substances):
                 
                 print(f"Class {class_name} created with its individuum {individual_name}")
                 
-                onto.save("ontologies/MV-Onto.owl")
+    onto.save("ontologies/MV-Onto.owl")
                 
 
-def AddReactionToOWL(educts, products, cat):
+def AddReactionToOWL(name, educts, products, cat):
     ## Checks if the given reactionsystem is allready in the ontology and creates them if not
     # load ontology
     onto = owlready2.get_ontology("ontologies/MV-Onto.owl").load()
@@ -199,11 +146,8 @@ def AddReactionToOWL(educts, products, cat):
     # create feed/product mixture individuum
     with onto:
         # create individuum Mix_...
-        """
-        ACHTUNG: Namensgebung wenn möglich variabel gestalten, sodass zukünftig nichts überschrieben wird.
-        """
-        mix_feed = mixture_class("MV_01_Mix_Feed")
-        mix_product = mixture_class("MV_01_Mix_Product")
+        mix_feed = mixture_class("MV_Mix_Feed_" + name)
+        mix_product = mixture_class("MV_Mix_Product_" + name)
         
         print("Generate feed composition as individuum...")
         # combine educt-individuums with mix-feed individuum
@@ -230,15 +174,16 @@ def AddReactionToOWL(educts, products, cat):
         
         print("Generate reaction as individuum...")
         # create reaction individuum
-        reaction = reaction_class("MV_01_Reac")
+        reaction = reaction_class("MV_Reac_" + name)
         reaction.hasInitialMixture.append(mix_feed)
         reaction.hasProduct.append(mix_product)
         
-        
-    onto.save("ontologies/MV-Onto.owl")          
+    # execute reasoner
+    owlready2.sync_reasoner(onto)
+    onto.save("ontologies/MV-Onto.owl")
             
 
-def run():
+def run(name):
     ## run complete script
     # Execute KIT's DETHCHEM driver
     data = ExecDetchemDriver()
@@ -246,18 +191,12 @@ def run():
     # Extract Substances and add them to ontology
     substances = GetSubstances(data)
     AddSubstanceToOWL(substances)
-    
-    # Extract educts and products and add reaction (individuum) to ontology
-    """
-    In Detchem Daten sind zu jeder Reaktion Hin- sowie Rückreaktion gegeben, d.h. Vergleich linke/rechte Seite zum Erhalt von Edukte und Produkten liefert leere Listen.
-    Falls bis dahin keine eigene Idee, Alex fragen ob er ne Idee zum auslesen hat und falls nicht könnte man hier den ersten User Input einbauen.
-    Für weitere Entwicklung des Codes werden Edukte und Produkte zunächst in den folgenden Zeilen Hardcoded.
-    educts, products, cat = GetEductAndProduct(data)
-    
-    """
+
+    # Adding reaction as individual to ontology and start reasoner
     educts = ["CO", "CO2", "H2"]
     products = ["CH4", "H2O"]
     cat = ["Ni"]
-    AddReactionToOWL(educts, products, cat)
+    AddReactionToOWL(name, educts, products, cat)
+    
     
     
