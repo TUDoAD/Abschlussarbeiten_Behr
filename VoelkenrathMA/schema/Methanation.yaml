@@ -1,9 +1,0 @@
-name: MethanationScheme
-description: A scheme for the process-simulation of a methanation-reaction in DWSIM
-prefixes:
-    dwsim: "http://example.com/dwsim#"
-imports: []
-
-types:
-    # entities for process simulation
-    

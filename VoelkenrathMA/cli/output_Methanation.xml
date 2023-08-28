@@ -1,4 +1,6 @@
-{ "pbr.inp": "<SPECIES>
+{ "pbr.inp": "
+<MAIN>
+<SPECIES>
   <PARAMETERS>
     DCSGMAX = 40
     DCSMMAX = 0
@@ -12,7 +14,7 @@
     CO2
     CO
   </GASPHASE>
-  <SURFACE name=Ni mol/m2=2.5500e-5>
+  <SURFACE name=Ni mol_m2="2.5500e-5">
     Ni
     H-Ni
     CH4-Ni
@@ -426,7 +428,7 @@
     P = 100000
     velocity = 0.2
     <MOLEFRAC>
-      O2 = 0.5
+      CO2 = 0.5
       H2 = 0.5
     </MOLEFRAC>
   </INITIAL>
@@ -452,7 +454,8 @@
     write_massfractions = y
     write_coverages = y
   </OUTPUT>
-</PBR>",
+</PBR>
+</MAIN>",
   "moldata": "O2       1    -1     107.40000  3.4580000  0.0000000  1.6000000  3.800
 H2       1    -1     38.000000  2.9200000  0.0000000  0.7900000  280.0
 CH4      2    -1     141.40000  3.7460000  0.0000000  2.6000000  13.00

@@ -5,6 +5,7 @@ Created on Wed Aug 16 10:22:35 2023
 @author: smmcvoel
 """
 import json
+import yaml
 import types
 import owlready2
 import xmltodict
@@ -13,6 +14,8 @@ import regex as re
 import pubchempy as pcp
 
 from collections import Counter
+from linkml_runtime.loaders import yaml_loader
+from linkml_runtime.utils.yamlutils import as_dict
 
 
 def ExecDetchemDriver():
@@ -179,10 +182,47 @@ def AddReactionToOWL(name, educts, products, cat):
         reaction.hasProduct.append(mix_product)
         
     # execute reasoner
+    print(" ")
+    print("Execute reasoner...")
     owlready2.sync_reasoner(onto)
     onto.save("ontologies/MV-Onto.owl")
-            
-
+    
+    
+def CreateDataSheet(name, data):
+    print(" ")
+    print("Creating LinkML datasheet...")
+    
+    onto = owlready2.get_ontology("ontologies/MV-Onto.owl").load()
+    
+    # get reaction-type
+    individual_name = "MV_Reac_" + name
+    individual = onto[individual_name]
+    individual_classes = individual.is_a
+    if len(individual_classes) > 0:
+        reaction_class = str(individual_classes[1])
+        reaction_type = reaction_class.split(".")[1]
+        print(f"The implemented reaction is a {reaction_type}")
+        
+    else:
+        print("Reasoner not found a reaction-type for the implemented reaction. Check if reaction is in ontology and define it if not")
+        return False
+    
+    # load reaction scheme
+    scheme_name = reaction_type + "Scheme.yaml"
+    scheme_data= open(scheme_name, "r").read()
+    scheme = yaml_loader.loads(scheme_data)
+    
+    # get feed parameters
+    TPV = data["pbr.inp"]["MAIN"]["PBR"]["INITIAL"]["#text"]
+    inlet_temperature = TPV.split("\n")[0].split("=")[1].replace(" ", "")
+    inlet_pressure = TPV.split("\n")[1].split("=")[1].replace(" ", "")
+    inlet_velocity = TPV.split("\n")[2].split("=")[1].replace(" ", "")
+    
+    mole_frac = data["pbr.inp"]["MAIN"]["PBR"]["INITIAL"]["MOLEFRAC"].split("\n")
+    for i in range(len(mole_frac)):
+        mole_frac[i] = mole_frac[i].split("=")[1].replace(" ", "")
+    
+    
 def run(name):
     ## run complete script
     # Execute KIT's DETHCHEM driver
@@ -193,10 +233,14 @@ def run(name):
     AddSubstanceToOWL(substances)
 
     # Adding reaction as individual to ontology and start reasoner
+    # ACHTUNG: auslesen von Edukt, Produkt und Kat. muss noch automatisiert werden!
+    # Frage Alex ob er eine Idee dazu hat!
     educts = ["CO", "CO2", "H2"]
     products = ["CH4", "H2O"]
     cat = ["Ni"]
     AddReactionToOWL(name, educts, products, cat)
     
+    # Creating LinkML-datasheet for simulation
+    CreateDataSheet(data)
     
     

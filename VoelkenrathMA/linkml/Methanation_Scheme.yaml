@@ -1,0 +1,80 @@
+# ACHTUNG: bisher nur ein Muster, die Types müssen noch mit den "realen" Klassen der MV-Onto zugeordnet/abgeglichen werden.
+# Nutzung von IRI's ist hier sinnvoll um den verweis auf "falsche" Klassen mit dem selben Namen zu verhindern
+id: http://example.com/schemas/methanation
+name: Methanation
+description: A scheme for the process-simulation of a methanation-reaction in DWSIM
+prefixes:
+    dwsim: "http://example.com/dwsim#"
+    linkml: "https://w3id.org/linkml/"
+
+types:      
+    - name: Inlet
+      parent: Property
+      description: Inlet properties of the chemical process
+     
+    - name: Reactor
+      parent: Property
+      description: Reactor properties of a chemical process
+      
+properties:
+    - name: temperature # <INITIAL>
+      domain: Inlet
+      range: float
+      description: Temperature of the inlet
+      
+    - name: pressure # <INITIAL>
+      domain: Inlet
+      range: float
+      description: Pressure of the inlet
+      
+    - name: velocity # ACHTUNG dient zur bestimmung von Massen-/Molfluss
+      domain: Inlet
+      range: float
+      description: Mass flow rate of the inlet
+      
+    - name: mole_fraction # <MOLEFRAC>
+      domain: Inlet
+      range: list[float]
+      description: Mole fraction of a compound in the inlet
+      
+    - name: calculation_mode # <PROCESS>
+      domain: Reactor
+      range: float
+      description: Calculation mode for the reactor
+      
+    - name: reactive_volume # ACHTUNG! Ergibt sich aus tube_length und tube_diameter!
+      domain: Reactor
+      range: float
+      description: Volume of the reactive space in the reactor
+      
+    - name: tube_length # <SECTION>
+      domain: Reactor
+      range: float
+      description: Length of the reactor tube
+      
+    - name: tube_diameter # <GEOMETRY>
+      domain: Reactor
+      range: float
+      description: Diameter of the reacotr tube
+      
+    - name: num_tubes # nicht gegeben --> als 1 fuer die Simulation annehmen
+      domain: Reactor
+      range: integer
+      description: Number of tubes in the reactor
+      
+    - name: catalyst_loading # nicht gegeben (je nach Reaktion nicht benoetigt)
+      domain: Reactor
+      range: float
+      description: Loading of the catalyst in the reactor
+      
+    - name: catalyst_particle_diameter # <SECTION>
+      domain: Reactor
+      range: float
+      description: Diameter of the catalyst particles
+      
+    - name: catalyst_void_fraction # <SECTION> --> allerdings nur porositaet
+      domain: Reactor
+      range: float
+      description: Void fraction in the catalyst bed
+
+    
