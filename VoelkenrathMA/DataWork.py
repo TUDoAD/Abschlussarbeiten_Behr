@@ -5,6 +5,7 @@ Created on Wed Aug 16 10:22:35 2023
 @author: smmcvoel
 """
 import json
+import math
 import yaml
 import types
 import owlready2
@@ -16,6 +17,7 @@ import pubchempy as pcp
 from collections import Counter
 from linkml_runtime.loaders import yaml_loader
 from linkml_runtime.utils.yamlutils import as_dict
+from linkml_runtime.linkml_model import SchemaDefinition
 
 
 def ExecDetchemDriver():
@@ -189,6 +191,7 @@ def AddReactionToOWL(name, educts, products, cat):
     
     
 def CreateDataSheet(name, data):
+    ## Extracting all simulation parameter from data and creates a yaml-file with the scheme
     print(" ")
     print("Creating LinkML datasheet...")
     
@@ -207,20 +210,73 @@ def CreateDataSheet(name, data):
         print("Reasoner not found a reaction-type for the implemented reaction. Check if reaction is in ontology and define it if not")
         return False
     
-    # load reaction scheme
-    scheme_name = reaction_type + "Scheme.yaml"
-    scheme_data= open(scheme_name, "r").read()
-    scheme = yaml_loader.loads(scheme_data)
+   
     
-    # get feed parameters
+    # load reaction scheme
+    scheme_name = "linkml/" + reaction_type + "_Scheme.yaml"
+    try:    
+        #scheme_data = open(scheme_name, "r").read()
+        with open(scheme_name, 'r') as scheme_file:
+            scheme_data = scheme_file.read()
+        scheme = yaml_loader.load(scheme_data, target_class=SchemaDefinition)
+    except FileNotFoundError:
+        print(f"Scheme {scheme_name} not found and needs to be created!")
+        return False
+        
+    
+    # get feed parameter
     TPV = data["pbr.inp"]["MAIN"]["PBR"]["INITIAL"]["#text"]
-    inlet_temperature = TPV.split("\n")[0].split("=")[1].replace(" ", "")
-    inlet_pressure = TPV.split("\n")[1].split("=")[1].replace(" ", "")
-    inlet_velocity = TPV.split("\n")[2].split("=")[1].replace(" ", "")
+    inlet_temperature = float(TPV.split("\n")[0].split("=")[1].replace(" ", "")) # K
+    inlet_pressure = float(TPV.split("\n")[1].split("=")[1].replace(" ", "")) # Pa
+    inlet_velocity = float(TPV.split("\n")[2].split("=")[1].replace(" ", "")) # m/s
     
     mole_frac = data["pbr.inp"]["MAIN"]["PBR"]["INITIAL"]["MOLEFRAC"].split("\n")
     for i in range(len(mole_frac)):
-        mole_frac[i] = mole_frac[i].split("=")[1].replace(" ", "")
+        mole_frac[i] = mole_frac[i].replace(" ", "").split("=")
+        mole_frac[i][1] = float(mole_frac[i][1])
+        
+    gasphase = data["pbr.inp"]["MAIN"]["SPECIES"]["GASPHASE"].replace(" ","").split("\n")
+    surface = data["pbr.inp"]["MAIN"]["SPECIES"]["SURFACE"]["#text"].replace(" ","").split("\n")
+    components = gasphase + surface
+        
+    # get reactor parameter (reactive volume is calculated with tube length and diameter)
+    process = data["pbr.inp"]["MAIN"]["PBR"]["PROCESS"].split("\n")
+    for i in process:
+        if "= y" in i:
+            calculation_mode = i.replace(" ", "").split("=")[0]
+    
+    tube_length = float(data["pbr.inp"]["MAIN"]["PBR"]["GEOMETRY"]["SECTION"].replace(" ", "").split("\n")[0].split("=")[1]) # m
+    tube_radius = float(data["pbr.inp"]["MAIN"]["PBR"]["GEOMETRY"]["#text"].replace(" ", "").split("\n")[1].split("=")[1]) # m
+    tube_diameter = tube_radius * 2
+    
+    reactive_volume = math.pi * tube_radius ** 2 * tube_length
+    
+    
+    "EVTL. IN EINER SPÄTEREN VERSION DES DRIVERS VORHANDEN"
+    num_tubes = 1 # not given in detchem-data
+    catalyst_loading = 1 # not given in detchem-data
+    
+    catalyst_diameter = float(data["pbr.inp"]["MAIN"]["PBR"]["GEOMETRY"]["SECTION"].replace(" ", "").split("\n")[2].split("=")[1]) # m
+    catalyst_porosity = float(data["pbr.inp"]["MAIN"]["PBR"]["GEOMETRY"]["SECTION"].replace(" ", "").split("\n")[9].split("=")[1]) # m3/m3
+    
+    # creating data points
+    mixture_class = onto.search(iri="https://nfdi4cat.org/ontologies/reac4cat#Mixture")[0]
+    reactor_class = onto.search(iri="http://purl.allotrope.org/ontologies/equipment#AFE_0000153")[0]
+    
+    data_points = [
+        {'type': mixture_class, 'temperature': inlet_temperature, 'pressure': inlet_pressure, 'velocity': inlet_velocity, 'mole_fraction': mole_frac, 'substances': components},
+        {'type': reactor_class, 'calculation_mode': calculation_mode, 'reactive_volume': reactive_volume, 'tube_length': tube_length, 'tube_diameter': tube_diameter,
+         'num_tubes': num_tubes, 'catalyst_loading': catalyst_loading, 'catalyst_particle_diameter': catalyst_diameter, 'catalyst_void_fraction':  catalyst_porosity}
+        ]
+    
+    # creating data-sheet in yaml-format
+    data_sheet = []
+    for data_point in data_points:
+        data_sheet.append(as_dict(data_point))
+    
+    sheet_name = "linkml/" + name + "_DataSheet.yaml"
+    with open(sheet_name, "w") as output_file:
+        yaml.dump(data_sheet, output_file)
     
     
 def run(name):
@@ -241,6 +297,6 @@ def run(name):
     AddReactionToOWL(name, educts, products, cat)
     
     # Creating LinkML-datasheet for simulation
-    CreateDataSheet(data)
+    CreateDataSheet(name, data)
     
     

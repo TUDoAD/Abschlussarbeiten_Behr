@@ -1083,6 +1083,7 @@
 </owl:Class>
 
 <owl:Class rdf:about="http://purl.allotrope.org/ontologies/equipment#AFE_0000407">
+  <rdfs:subClassOf rdf:resource="http://example.org#Device"/>
   <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/equipment#AFE_0000354"/>
   <rdfs:subClassOf>
     <owl:Class>
@@ -1100,7 +1101,6 @@
   </rdfs:subClassOf>
   <prop:AFX_0002808 rdf:resource="http://purl.obolibrary.org/obo/OBI_0000967"/>
   <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-  <rdfs:subClassOf rdf:resource="http://example.org#Device"/>
   <prop:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</prop:AFX_0002818>
   <rdfs:label>container</rdfs:label>
   <core:altLabel>vessel</core:altLabel>
@@ -1675,6 +1675,17 @@ The CriticalTemperature of a material is the temperature above which distinct li
   <core:prefLabel>device</core:prefLabel>
 </owl:Class>
 
+<owl:Class rdf:about="http://purl.allotrope.org/ontologies/equipment#AFE_0002099">
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000275"/>
+  <prop:AFX_0002865 rdf:resource="http://purl.allotrope.org/voc/afo/REC/2018/07/aft"/>
+  <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
+  <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/system"/>
+  <prop:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</prop:AFX_0002818>
+  <rdfs:label>artifact</rdfs:label>
+  <core:definition>An artifact is a material that is designed and built for a purpose. [Allotrope]</core:definition>
+  <core:prefLabel>artifact</core:prefLabel>
+</owl:Class>
+
 <owl:Class rdf:about="http://example.org#Diameter">
   <rdfs:subClassOf rdf:resource="http://example.org#ScalarQuantity"/>
   <core:definition>Class originally comes from OntoCAPE.</core:definition>
@@ -1758,6 +1769,7 @@ The composition of a Mixture is not fixed.</core:definition>
 </owl:Class>
 
 <owl:Class rdf:about="http://purl.allotrope.org/ontologies/material#AFM_0001099">
+  <rdfs:subClassOf rdf:resource="http://example.org#Substance"/>
   <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001038"/>
   <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001097"/>
   <rdfs:subClassOf>
@@ -1768,7 +1780,6 @@ The composition of a Mixture is not fixed.</core:definition>
   </rdfs:subClassOf>
   <term:source rdf:resource="https://en.wikipedia.org/wiki/Chemical_substance"/>
   <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-  <rdfs:subClassOf rdf:resource="http://example.org#Substance"/>
   <owl:equivalentClass rdf:resource="http://example.org#Mixture"/>
   <rdfs:label>chemical mixture</rdfs:label>
   <core:altLabel>mixed chemical substances</core:altLabel>
@@ -1808,11 +1819,13 @@ The composition of a Mixture is not fixed.</core:definition>
 <owl:Class rdf:about="http://example.org#Pressure">
   <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
   <rdfs:subClassOf rdf:resource="http://example.org#ThermodynamicStateProperty"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001583"/>
   <core:definition>Class originally comes from OntoCAPE.</core:definition>
   <core:definition>The (total absolute) pressure of a PhaseSystem</core:definition>
 </owl:Class>
 
 <owl:Class rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0001918">
+  <rdfs:subClassOf rdf:resource="http://example.org#ThermodynamicStateProperty"/>
   <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001583"/>
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -1821,7 +1834,6 @@ The composition of a Mixture is not fixed.</core:definition>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-  <rdfs:subClassOf rdf:resource="http://example.org#ThermodynamicStateProperty"/>
   <owl:equivalentClass rdf:resource="http://example.org#Pressure"/>
   <rdfs:label>pressure</rdfs:label>
   <core:altLabel>pressure (datum)</core:altLabel>
@@ -1889,6 +1901,26 @@ The composition of a Mixture is not fixed.</core:definition>
   <core:altLabel>temperature (datum)</core:altLabel>
   <core:definition>A temperature (datum) is a quantity facet that quantifies some temperature. [Allotrope]</core:definition>
   <core:prefLabel>temperature</core:prefLabel>
+</owl:Class>
+
+<owl:Class rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0001583">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0001101"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0002816"/>
+          <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/BFO_0000019"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000922"/>
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001101"/>
+  <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
+  <rdfs:label>quality quantification facet</rdfs:label>
+  <core:definition>A quality quantification facet is a quantification facet that is a data output of some measurement and quantifies some measured quality. [Allotrope]</core:definition>
+  <core:prefLabel>quality quantification facet</core:prefLabel>
 </owl:Class>
 
 <owl:Class rdf:about="http://example.org#ThermalConductivity">
@@ -1966,17 +1998,6 @@ The composition of a Mixture is not fixed.</core:definition>
   <core:altLabel>tubing</core:altLabel>
   <core:definition>A tube, or tubing, is a long hollow cylinder used for moving fluids (liquids or gases) or to protect electrical or optical cables and wires. [Wikipedia]</core:definition>
   <core:prefLabel>tube</core:prefLabel>
-</owl:Class>
-
-<owl:Class rdf:about="http://purl.allotrope.org/ontologies/equipment#AFE_0002099">
-  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0000275"/>
-  <prop:AFX_0002865 rdf:resource="http://purl.allotrope.org/voc/afo/REC/2018/07/aft"/>
-  <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-  <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/perspective/REC/2023/03/system"/>
-  <prop:AFX_0002818 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</prop:AFX_0002818>
-  <rdfs:label>artifact</rdfs:label>
-  <core:definition>An artifact is a material that is designed and built for a purpose. [Allotrope]</core:definition>
-  <core:prefLabel>artifact</core:prefLabel>
 </owl:Class>
 
 <owl:Class rdf:about="http://purl.allotrope.org/ontologies/equipment#AFE_0000378">
@@ -2810,7 +2831,9 @@ The composition of a Mixture is not fixed.</core:definition>
 </owl:Class>
 
 <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_33250">
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_23367"/>
   <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_24431"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33253"/>
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
@@ -2824,8 +2847,6 @@ The composition of a Mixture is not fixed.</core:definition>
     </owl:Restriction>
   </rdfs:subClassOf>
   <oboI:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
-  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_23367"/>
-  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33253"/>
   <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001028"/>
   <obo:IAO_0000115>A chemical entity constituting the smallest component of an element having the chemical properties of the element.</obo:IAO_0000115>
   <oboI:hasAlternativeId>CHEBI:22671</oboI:hasAlternativeId>
@@ -3965,26 +3986,6 @@ dispersion. [NIST]</core:definition>
   <core:prefLabel>pH</core:prefLabel>
 </owl:Class>
 
-<owl:Class rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0001583">
-  <owl:equivalentClass>
-    <owl:Class>
-      <owl:intersectionOf rdf:parseType="Collection">
-        <rdf:Description rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0001101"/>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="http://purl.allotrope.org/ontologies/property#AFX_0002816"/>
-          <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/BFO_0000019"/>
-        </owl:Restriction>
-      </owl:intersectionOf>
-    </owl:Class>
-  </owl:equivalentClass>
-  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0000922"/>
-  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001101"/>
-  <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-  <rdfs:label>quality quantification facet</rdfs:label>
-  <core:definition>A quality quantification facet is a quantification facet that is a data output of some measurement and quantifies some measured quality. [Allotrope]</core:definition>
-  <core:prefLabel>quality quantification facet</core:prefLabel>
-</owl:Class>
-
 <owl:Class rdf:about="http://purl.obolibrary.org/obo/PATO_0001842">
   <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/quality#AFQ_0000250"/>
   <prop:AFX_0002808 rdf:resource="http://semanticscience.org/resource/CHEMINF_000442"/>
@@ -4101,6 +4102,7 @@ dispersion. [NIST]</core:definition>
 </owl:Class>
 
 <owl:Class rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0002119">
+  <rdfs:subClassOf rdf:resource="http://example.org#Pressure"/>
   <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -4109,7 +4111,6 @@ dispersion. [NIST]</core:definition>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-  <rdfs:subClassOf rdf:resource="http://example.org#Pressure"/>
   <rdfs:label>saturation vapor pressure</rdfs:label>
   <core:altLabel>saturation pressure</core:altLabel>
   <core:altLabel>saturation pressure result</core:altLabel>
@@ -4120,6 +4121,7 @@ dispersion. [NIST]</core:definition>
 </owl:Class>
 
 <owl:Class rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0002158">
+  <rdfs:subClassOf rdf:resource="http://example.org#Pressure"/>
   <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -4133,7 +4135,6 @@ dispersion. [NIST]</core:definition>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/domain/REC/2023/03/dynamic-vapor-sorption"/>
-  <rdfs:subClassOf rdf:resource="http://example.org#Pressure"/>
   <rdfs:label>inlet gas pressure</rdfs:label>
   <core:definition>An inlet gas pressure is a quality qualification facet that quantifies the pressure of the inlet gas. [Allotrope]</core:definition>
   <core:prefLabel>inlet gas pressure</core:prefLabel>
@@ -4158,9 +4159,9 @@ dispersion. [NIST]</core:definition>
 </owl:Class>
 
 <owl:Class rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0002198">
+  <rdfs:subClassOf rdf:resource="http://example.org#Pressure"/>
   <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
   <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/aft"/>
-  <rdfs:subClassOf rdf:resource="http://example.org#Pressure"/>
   <rdfs:label>partial pressure</rdfs:label>
   <core:altLabel>partial pressure (datum)</core:altLabel>
   <core:altLabel>partial pressure result</core:altLabel>
@@ -4248,9 +4249,9 @@ dispersion. [NIST]</core:definition>
 </owl:Class>
 
 <owl:Class rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0002613">
+  <rdfs:subClassOf rdf:resource="http://example.org#Pressure"/>
   <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
   <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/afo"/>
-  <rdfs:subClassOf rdf:resource="http://example.org#Pressure"/>
   <rdfs:label>ambient pressure</rdfs:label>
   <core:definition>An ambient pressure is a quantity facet that quantifies the pressure of the surrounding atmosphere. [Allotrope]</core:definition>
   <core:prefLabel>ambient pressure</core:prefLabel>
@@ -5403,9 +5404,9 @@ source: obo:IAO_0000030</core:example>
 </owl:Class>
 
 <owl:Class rdf:about="http://purl.obolibrary.org/obo/CHEBI_33521">
+  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001028"/>
   <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33250"/>
   <oboI:inSubset rdf:resource="http://purl.obolibrary.org/obo/chebi#3_STAR"/>
-  <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/material#AFM_0001028"/>
   <obo:IAO_0000115>An atom of an element that exhibits typical metallic properties, being typically shiny, with high electrical and thermal conductivity.</obo:IAO_0000115>
   <oboI:hasAlternativeId>CHEBI:25217</oboI:hasAlternativeId>
   <oboI:hasAlternativeId>CHEBI:6788</oboI:hasAlternativeId>
@@ -6038,13 +6039,13 @@ source: obo:IAO_0000030</core:example>
       </owl:intersectionOf>
     </owl:Class>
   </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/MOP_0000641"/>
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000117"/>
       <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/MOP_0000642"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/MOP_0000641"/>
 </owl:Class>
 
 <owl:Class rdf:about="http://purl.obolibrary.org/obo/MOP_0000644">
@@ -6059,13 +6060,13 @@ source: obo:IAO_0000030</core:example>
       </owl:intersectionOf>
     </owl:Class>
   </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/MOP_0000641"/>
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000117"/>
       <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/MOP_0000627"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/MOP_0000641"/>
 </owl:Class>
 
 <owl:Class rdf:about="http://purl.obolibrary.org/obo/MOP_0000645">
@@ -6080,13 +6081,13 @@ source: obo:IAO_0000030</core:example>
       </owl:intersectionOf>
     </owl:Class>
   </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/MOP_0000634"/>
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000117"/>
       <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/MOP_0000627"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/MOP_0000634"/>
 </owl:Class>
 
 <owl:Class rdf:about="http://purl.obolibrary.org/obo/MOP_0000656">
@@ -6245,13 +6246,13 @@ source: obo:IAO_0000030</core:example>
       </owl:intersectionOf>
     </owl:Class>
   </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/MOP_0000686"/>
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000117"/>
       <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/MOP_0000687"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/MOP_0000686"/>
 </owl:Class>
 
 <owl:Class rdf:about="http://purl.obolibrary.org/obo/MOP_0000687">
@@ -7175,14 +7176,6 @@ source: http://en.wikipedia.org/wiki/Constant_%28mathematics%29</core:definition
   <x_0.1:name>Royal Society of Chemistry</x_0.1:name>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="http://code.google.com/p/bfo">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="http://ifomis.org/bfo">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-</owl:NamedIndividual>
-
 <owl:NamedIndividual rdf:about="http://purl.allotrope.org/ontologies/result#AFR_0001224">
   <rdf:type rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001221"/>
   <rdfs:isDefinedBy rdf:resource="http://purl.allotrope.org/voc/afo/REC/2023/03/curation"/>
@@ -7553,33 +7546,44 @@ Copyright © 2015-2022 Allotrope Foundation
   <term:title>Creative Commons Attribution 4.0 International Public License</term:title>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/bfo-2-0">
-  <x_0.1:homepage rdf:resource="http://code.google.com/p/bfo"/>
-  <x_0.1:homepage rdf:resource="http://ifomis.org/bfo"/>
-  <x_0.1:mbox rdf:resource="mailto:bfo-owl-devel@googlegroups.com"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+<owl:NamedIndividual rdf:about="#MV_Mix_Feed_Methanation_01">
+  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mixture"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CO2"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_Ni"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="mailto:bfo-owl-devel@googlegroups.com">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_CO2">
+  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Carbondioxid"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#CarrierAl">
-  <reac:used_as_carrier_material_by rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CH4"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2">
+  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Hydrogen"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_Ni">
+  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Nickel"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#MV_Mix_Product_Methanation_01">
+  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mixture"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CH4"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2O"/>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_CH4">
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Methane"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Cat_1_MeOH_reac">
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_Ni"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2O">
+  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Water"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_Ni">
-  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Nickel"/>
+<owl:NamedIndividual rdf:about="#MV_Reac_Methanation_01">
+  <rdf:type rdf:resource="http://example.org#ChemicalReaction"/>
+  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Methanation"/>
+  <reac:hasInitialMixture rdf:resource="#MV_Mix_Feed_Methanation_01"/>
+  <reac:hasProduct rdf:resource="#MV_Mix_Product_Methanation_01"/>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Cat_1_NH4_reac">
@@ -7613,26 +7617,8 @@ Copyright © 2015-2022 Allotrope Foundation
   <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_N2"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2">
-  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Hydrogen"/>
-</owl:NamedIndividual>
-
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_N2">
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Dinitrogen"/>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Mix_Educt_HaberBosch1">
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Cat_2_NH4_Reac"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CO2"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_Fe"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_N2"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_Ni"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_CO2">
-  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Carbondioxid"/>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_Fe">
@@ -7643,13 +7629,6 @@ Copyright © 2015-2022 Allotrope Foundation
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mixture"/>
   <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CO2"/>
   <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2"/>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Mix_Educt_Methanation_w_Cat">
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Cat_1_MeOH_reac"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CO2"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Mix_Product_HaberBosch">
@@ -7672,17 +7651,6 @@ Copyright © 2015-2022 Allotrope Foundation
   <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2O"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2O">
-  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Water"/>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Mixture_reac1_in">
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_A"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_B"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_X"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-</owl:NamedIndividual>
-
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_A">
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#A"/>
 </owl:NamedIndividual>
@@ -7696,33 +7664,12 @@ Copyright © 2015-2022 Allotrope Foundation
   <reac:has_carrier_material rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CH4"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Mixture_reac1_out">
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_A"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_C"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-</owl:NamedIndividual>
-
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_C">
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#C"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Mixture_reac2_in">
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_A"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_B"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_D"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_X"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-</owl:NamedIndividual>
-
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_D">
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#D"/>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Mixture_reac2_out">
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_C"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_D"/>
-  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_E"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_E">
@@ -7730,57 +7677,57 @@ Copyright © 2015-2022 Allotrope Foundation
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Reac_1_HaberBosch">
+  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#HaberBosch"/>
   <reac:hasInitialMixture rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Educt_HaberBosch"/>
   <reac:hasProduct rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Product_HaberBosch"/>
-  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#HaberBosch"/>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Reac_1_Methanation">
+  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Methanation"/>
   <reac:hasInitialMixture rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Educt_Methanation"/>
   <reac:hasProduct rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Product_Methanation"/>
-  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Methanation"/>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Reac_2_HaberBosch">
+  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#HaberBosch_2"/>
   <reac:hasInitialMixture rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Educt_HaberBosch"/>
   <reac:hasProduct rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Product_HaberBosch"/>
-  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#HaberBosch_2"/>
   <reac:hasMeanReactionPressure rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">250.0</reac:hasMeanReactionPressure>
   <reac:hasMeanReactionTemperature rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">450.0</reac:hasMeanReactionTemperature>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Reac_2_Methanation">
-  <reac:hasInitialMixture rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Educt_Methanation"/>
-  <reac:hasProduct rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Product_Methanation"/>
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Methanation_1"/>
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Methanation_2"/>
+  <reac:hasInitialMixture rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Educt_Methanation"/>
+  <reac:hasProduct rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Product_Methanation"/>
   <reac:hasMeanReactionPressure rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">250.0</reac:hasMeanReactionPressure>
   <reac:hasMeanReactionTemperature rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">375.0</reac:hasMeanReactionTemperature>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Reac_3_Methanation">
-  <reac:hasInitialMixture rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Educt_Methanation_w_Cat"/>
-  <reac:hasProduct rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Product_Methanation"/>
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Methanation_1"/>
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Methanation_2"/>
+  <reac:hasInitialMixture rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Educt_Methanation_w_Cat"/>
+  <reac:hasProduct rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Product_Methanation"/>
   <reac:hasMeanReactionPressure rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">249.0</reac:hasMeanReactionPressure>
   <reac:hasMeanReactionTemperature rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">374.0</reac:hasMeanReactionTemperature>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Reaktor1">
+  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#TestReaction1"/>
   <reac:hasInitialMixture rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mixture_reac1_in"/>
   <reac:hasProduct rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mixture_reac1_out"/>
-  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#TestReaction1"/>
   <reac:measured_reaction_velocity>0.51644844 [mol/s]</reac:measured_reaction_velocity>
   <x_1.1:date rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://www.example.com/michis_krasses_kuchenrezept</x_1.1:date>
   <core:note>Michi hat die Reaktion nach Vorbild von Publikation DOI:ueahfo8jfai erstellt</core:note>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Reaktor2">
+  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#TestReaction1"/>
+  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#TestReaction2"/>
   <reac:hasInitialMixture rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mixture_reac2_in"/>
   <reac:hasProduct rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mixture_reac2_out"/>
-  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#TestReaction2"/>
-  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#TestReaction1"/>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Sub_Rh">
@@ -7792,9 +7739,9 @@ Copyright © 2015-2022 Allotrope Foundation
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="https://nfdi4cat.org/ontologies/reac4cat#unknown_reaction_1">
+  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#HaberBosch"/>
   <reac:hasInitialMixture rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Educt_HaberBosch1"/>
   <reac:hasProduct rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mix_Product_HaberBosch1"/>
-  <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#HaberBosch"/>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#Sub_O2">
@@ -7805,7 +7752,7 @@ Copyright © 2015-2022 Allotrope Foundation
   <rdf:type rdf:resource="#Carbon_Monoxide"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#MV_Mix_Feed_Methanation_01">
+<owl:NamedIndividual rdf:about="#MV_Mix_Feed_new_System_01">
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mixture"/>
   <reac:hasComponent rdf:resource="#Sub_CO"/>
   <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CO2"/>
@@ -7813,18 +7760,92 @@ Copyright © 2015-2022 Allotrope Foundation
   <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_Ni"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#MV_Mix_Product_Methanation_01">
+<owl:NamedIndividual rdf:about="#MV_Mix_Product_new_System_01">
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mixture"/>
   <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CH4"/>
   <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2O"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#MV_Reac_Methanation_01">
+<owl:NamedIndividual rdf:about="#MV_Reac_new_System_01">
   <rdf:type rdf:resource="http://example.org#ChemicalReaction"/>
-  <reac:hasInitialMixture rdf:resource="#MV_Mix_Feed_Methanation_01"/>
-  <reac:hasProduct rdf:resource="#MV_Mix_Product_Methanation_01"/>
+  <reac:hasInitialMixture rdf:resource="#MV_Mix_Feed_new_System_01"/>
+  <reac:hasProduct rdf:resource="#MV_Mix_Product_new_System_01"/>
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Methanation"/>
 </owl:NamedIndividual>
+
+<owl:Thing rdf:about="http://code.google.com/p/bfo">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</owl:Thing>
+
+<owl:Thing rdf:about="http://ifomis.org/bfo">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</owl:Thing>
+
+<owl:Thing rdf:about="http://purl.obolibrary.org/obo/bfo-2-0">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <x_0.1:homepage rdf:resource="http://code.google.com/p/bfo"/>
+  <x_0.1:homepage rdf:resource="http://ifomis.org/bfo"/>
+  <x_0.1:mbox rdf:resource="mailto:bfo-owl-devel@googlegroups.com"/>
+</owl:Thing>
+
+<owl:Thing rdf:about="mailto:bfo-owl-devel@googlegroups.com">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</owl:Thing>
+
+<owl:Thing rdf:about="https://nfdi4cat.org/ontologies/reac4cat#CarrierAl">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <reac:used_as_carrier_material_by rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CH4"/>
+</owl:Thing>
+
+<owl:Thing rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Cat_1_MeOH_reac">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_Ni"/>
+</owl:Thing>
+
+<owl:Thing rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Mix_Educt_HaberBosch1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Cat_2_NH4_Reac"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CO2"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_Fe"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_N2"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_Ni"/>
+</owl:Thing>
+
+<owl:Thing rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Mix_Educt_Methanation_w_Cat">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Cat_1_MeOH_reac"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CO2"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2"/>
+</owl:Thing>
+
+<owl:Thing rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Mixture_reac1_in">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_A"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_B"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_X"/>
+</owl:Thing>
+
+<owl:Thing rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Mixture_reac1_out">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_A"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_C"/>
+</owl:Thing>
+
+<owl:Thing rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Mixture_reac2_in">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_A"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_B"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_D"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_X"/>
+</owl:Thing>
+
+<owl:Thing rdf:about="https://nfdi4cat.org/ontologies/reac4cat#Mixture_reac2_out">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_C"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_D"/>
+  <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_E"/>
+</owl:Thing>
 
 <owl:Class>
   <owl:unionOf rdf:parseType="Collection">

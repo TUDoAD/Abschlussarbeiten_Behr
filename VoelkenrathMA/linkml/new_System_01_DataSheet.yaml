@@ -1,0 +1,39 @@
+- mole_fraction:
+  - - O2
+    - 0.5
+  - - H2
+    - 0.5
+  pressure: 100000.0
+  substances:
+  - O2
+  - H2
+  - CH4
+  - H2O
+  - CO2
+  - CO
+  - Ni
+  - H-Ni
+  - CH4-Ni
+  - H2O-Ni
+  - CO2-Ni
+  - CO-Ni
+  - O-Ni
+  - C-Ni
+  - OH-Ni
+  - HCO-Ni
+  - CH-Ni
+  - CH2-Ni
+  - CH3-Ni
+  - COOH-Ni
+  temperature: 420.0
+  type: !!python/name:owlready2.entity.Mixture ''
+  velocity: 0.2
+- calculation_mode: isothermal
+  catalyst_loading: 1
+  catalyst_particle_diameter: 0.01
+  catalyst_void_fraction: 0.3
+  num_tubes: 1
+  reactive_volume: 0.12566370614359174
+  tube_diameter: 0.4
+  tube_length: 1.0
+  type: !!python/name:owlready2.entity.AFE_0000153 ''
