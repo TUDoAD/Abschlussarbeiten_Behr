@@ -77,3 +77,55 @@ classes:
         domain: Reactor
         range: float
         description: Void fraction in the catalyst bed
+        
+  - name: ChemicalReaction
+    is_a: entity
+    slots:
+      - name: reaction_mechanism
+        domain: ChemicalReaction
+        range: ReactionMechanism
+        description: The mechanism of a chemical reaction
+  
+  - name: ReactionMechanism
+    is_a: list
+    slots:
+      - name: reactions
+        domain: ReactionMechanism
+        range: Reaction
+        description: List of the reaction and parameter
+
+  - name: Reaction
+    is_a: entitiy
+    slots:
+      - name: id
+        domain: Reaction
+        range: int
+        description: Identifier for the reaction
+      - name: reaction_equation
+        domain: Reaction
+        range: str
+        description: Equation for this step in the Reaction_Mechanism
+      - name: EA
+        domain: Reaction
+        range: float
+        description: Activation Energy of the reaction
+      - name: beta
+        domain: Reaction
+        range: float
+        description: beta value of the reaction
+      - name: S0
+        domain: Reaction
+        range: float
+        description: S0 value of the reaction
+      - name: A_cm_units
+        domain: Reaction
+        range: float
+        description: A/cm value of the reaction
+      - name: epsilon
+        domain: Reaction
+        range: float
+        description: Epsilon value of the reaction
+      - name: mu
+        domain: Reaction
+        range: float
+        description: mu value of the reaction

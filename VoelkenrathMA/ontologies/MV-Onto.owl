@@ -7752,7 +7752,7 @@ Copyright © 2015-2022 Allotrope Foundation
   <rdf:type rdf:resource="#Carbon_Monoxide"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#MV_Mix_Feed_new_System_01">
+<owl:NamedIndividual rdf:about="#MV_Mix_Feed_Methanation_PFR">
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mixture"/>
   <reac:hasComponent rdf:resource="#Sub_CO"/>
   <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CO2"/>
@@ -7760,16 +7760,16 @@ Copyright © 2015-2022 Allotrope Foundation
   <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_Ni"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#MV_Mix_Product_new_System_01">
+<owl:NamedIndividual rdf:about="#MV_Mix_Product_Methanation_PFR">
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mixture"/>
   <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CH4"/>
   <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2O"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#MV_Reac_new_System_01">
+<owl:NamedIndividual rdf:about="#MV_Reac_Methanation_PFR">
   <rdf:type rdf:resource="http://example.org#ChemicalReaction"/>
-  <reac:hasInitialMixture rdf:resource="#MV_Mix_Feed_new_System_01"/>
-  <reac:hasProduct rdf:resource="#MV_Mix_Product_new_System_01"/>
+  <reac:hasInitialMixture rdf:resource="#MV_Mix_Feed_Methanation_PFR"/>
+  <reac:hasProduct rdf:resource="#MV_Mix_Product_Methanation_PFR"/>
   <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Methanation"/>
 </owl:NamedIndividual>
 

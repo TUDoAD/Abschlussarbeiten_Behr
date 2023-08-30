@@ -14,7 +14,7 @@ import subprocess
 import regex as re    
 import pubchempy as pcp
 
-from collections import Counter
+from collections import Counter, OrderedDict
 from linkml_runtime.loaders import yaml_loader
 from linkml_runtime.utils.yamlutils import as_dict
 from linkml_runtime.linkml_model import SchemaDefinition
@@ -191,10 +191,7 @@ def AddReactionToOWL(name, educts, products, cat):
     
     
 def CreateDataSheet(name, data):
-    ## Extracting all simulation parameter from data and creates a yaml-file with the scheme
-    print(" ")
-    print("Creating LinkML datasheet...")
-    
+    ## Extracting all simulation parameter from data and creates a yaml-file with the scheme   
     onto = owlready2.get_ontology("ontologies/MV-Onto.owl").load()
     
     # get reaction-type
@@ -204,7 +201,9 @@ def CreateDataSheet(name, data):
     if len(individual_classes) > 0:
         reaction_class = str(individual_classes[1])
         reaction_type = reaction_class.split(".")[1]
+        print(" ")
         print(f"The implemented reaction is a {reaction_type}")
+        print("Creating LinkML datasheet...")
         
     else:
         print("Reasoner not found a reaction-type for the implemented reaction. Check if reaction is in ontology and define it if not")
@@ -259,19 +258,106 @@ def CreateDataSheet(name, data):
     catalyst_diameter = float(data["pbr.inp"]["MAIN"]["PBR"]["GEOMETRY"]["SECTION"].replace(" ", "").split("\n")[2].split("=")[1]) # m
     catalyst_porosity = float(data["pbr.inp"]["MAIN"]["PBR"]["GEOMETRY"]["SECTION"].replace(" ", "").split("\n")[9].split("=")[1]) # m3/m3
     
+    # get reaction mechanism (1. create a list with ids, parameters as strings ; 2. format list for datapoints)
+    mechanism_list = []
+    
+    for i in range(len(data["pbr.inp"]["MAIN"]["MECHANISM"]["SURFACE"]["REACTION"])):
+        if type(data["pbr.inp"]["MAIN"]["MECHANISM"]["SURFACE"]["REACTION"][i]) == str:
+            mecha = data["pbr.inp"]["MAIN"]["MECHANISM"]["SURFACE"]["REACTION"][i]
+            mechanism_list.append(mecha)
+        elif type(data["pbr.inp"]["MAIN"]["MECHANISM"]["SURFACE"]["REACTION"][i]) == dict:
+            mecha_1 = data["pbr.inp"]["MAIN"]["MECHANISM"]["SURFACE"]["REACTION"][i]["#text"]
+            mecha_2 = data["pbr.inp"]["MAIN"]["MECHANISM"]["SURFACE"]["REACTION"][i]["COV"]
+            mecha = mecha_1 + "\n" + mecha_2
+            mechanism_list.append(mecha)
+        else:
+            (f"Fehler bei Index {i}")
+    
+    for i in range(len(mechanism_list)):
+        mechanism_list[i] = mechanism_list[i].replace(" ", "").split("\n")
+        
+    mechanism_data_points = []
+    
+    for i in range(len(mechanism_list)):
+        S0 = None
+        A_cm = None
+        epsilon = None
+        mu = None
+        
+        reaction_id = i
+        reaction_equation = mechanism_list[i][0]
+        beta = float(mechanism_list[i][2].split("=")[1])
+        EA = float(mechanism_list[i][3].split("=")[1].split("[")[0])
+        
+        if "S0=" in mechanism_list[i][1]:
+            S0 = float(mechanism_list[i][1].split("=")[1])
+        
+        elif "A/cm_units=" in mechanism_list[i][1]:
+            A_cm = float(mechanism_list[i][1].split("=")[1])
+        else:
+            print("An unexpected error accured during the parameter-extraction for the mechanism")
+            
+        if len(mechanism_list[i]) > 4:
+            epsilon = float(mechanism_list[i][5].split("=")[1])
+            mu = float(mechanism_list[i][6].split("=")[1])
+        
+            
+        if S0 and len(mechanism_list[i]) > 4:
+            mech_data_point = {'id': i, 
+                               'reactions': [{'reaction_equation': reaction_equation,
+                                             'S0': S0,
+                                             'beta': beta,
+                                             'EA': EA,
+                                             'epsilon': epsilon,
+                                             'mu': mu}]}
+            mechanism_data_points.append(mech_data_point)
+            
+        elif A_cm and len(mechanism_list[i]) > 4:
+            mech_data_point = {'id': i, 
+                               'reactions': [{'reaction_equation': reaction_equation,
+                                             'A_cm_units': A_cm,
+                                             'beta': beta,
+                                             'EA': EA,
+                                             'epsilon': epsilon,
+                                             'mu': mu}]}
+            mechanism_data_points.append(mech_data_point)
+            
+        elif S0 and len(mechanism_list[i]) == 4:
+            mech_data_point = {'id': i, 
+                               'reactions': [{'reaction_equation': reaction_equation,
+                                             'S0': S0,
+                                             'beta': beta,
+                                             'EA': EA}]}
+            mechanism_data_points.append(mech_data_point)
+            
+        elif A_cm and len(mechanism_list[i]) == 4:
+            mech_data_point = {'id': i, 
+                               'reactions': [{'reaction_equation': reaction_equation,
+                                             'A_cm_units': A_cm,
+                                             'beta': beta,
+                                             'EA': EA}]}
+            mechanism_data_points.append(mech_data_point)
+
+        else:
+            print("An unexpected error accured during the datapoint creation for reaction mechanism")            
+    
+    mechanism = [{'ChemicalReaction': [mechanism_data_points]}]
+    
     # creating data points
     mixture_class = onto.search(iri="https://nfdi4cat.org/ontologies/reac4cat#Mixture")[0]
     reactor_class = onto.search(iri="http://purl.allotrope.org/ontologies/equipment#AFE_0000153")[0]
     
     data_points = [
-        {'type': mixture_class, 'temperature': inlet_temperature, 'pressure': inlet_pressure, 'velocity': inlet_velocity, 'mole_fraction': mole_frac, 'substances': components},
-        {'type': reactor_class, 'calculation_mode': calculation_mode, 'reactive_volume': reactive_volume, 'tube_length': tube_length, 'tube_diameter': tube_diameter,
-         'num_tubes': num_tubes, 'catalyst_loading': catalyst_loading, 'catalyst_particle_diameter': catalyst_diameter, 'catalyst_void_fraction':  catalyst_porosity}
+        {'Mixture':[{'type': mixture_class, 'temperature': inlet_temperature, 'pressure': inlet_pressure, 'velocity': inlet_velocity, 'mole_fraction': mole_frac, 'substances': components}]},
+        {'Reactor':[{'type': reactor_class, 'calculation_mode': calculation_mode, 'reactive_volume': reactive_volume, 'tube_length': tube_length, 'tube_diameter': tube_diameter,
+         'num_tubes': num_tubes, 'catalyst_loading': catalyst_loading, 'catalyst_particle_diameter': catalyst_diameter, 'catalyst_void_fraction':  catalyst_porosity}]}
         ]
+    
+    data_points_all = data_points + mechanism
     
     # creating data-sheet in yaml-format
     data_sheet = []
-    for data_point in data_points:
+    for data_point in data_points_all:
         data_sheet.append(as_dict(data_point))
     
     sheet_name = "linkml/" + name + "_DataSheet.yaml"
