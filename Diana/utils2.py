@@ -526,7 +526,7 @@ def catalyst_entity(categories, rel_synonym, sup_cat,chem_list,missing_all,onto_
     chem_list.extend([str(i) for i in rel_synonym.values()]) 
     for entity,l in categories.items():
         if l =='Catalyst':
-                
+
                 if entity in classes.keys():
                     continue
                 else:
@@ -600,13 +600,8 @@ def catalyst_entity(categories, rel_synonym, sup_cat,chem_list,missing_all,onto_
                             if 'catalyst' in e_snip:
                                 classes= check_in_snip(e_snip, classes,nlp, entity)
                         
-                    else:
-                        spans = Document(entity).cems
-                        
-                        if spans:
-                            entity_s = entity.split()
-                            if len(entity_s) == 1 and entity_s[0] == spans[0].text:
-                                spans_n.append(spans[0].text)
+                    elif entity in chem_list or set(entity.split()).issubset(chem_list):
+                        list_all.append([None,[],[entity],categories[entity]])
 
                     if support:
                         snaps_n=[c for c in spans_n and c not in support]  
@@ -736,95 +731,137 @@ def doc_token(entity, e_split, j=0):
         else:
             continue
     return entity
-        
+      
 def create_classes_onto(missing, df_entity, onto_name='afo_upd1'):
+    num=0
     sup_sub_df=pd.DataFrame(columns=['super_class','subclass'])
     new_world= owlready2.World()
     created_classes=[]
     onto= new_world.get_ontology('./ontologies/{}.owl'.format(onto_name)).load()
     for row in df_entity.itertuples():
         classes_parent=[]
+        classes= sorted(list(row.classes),reverse=False, key=len)
+        print(classes)
         if row.category =='Catalyst':
             k = 0
             while k<len(row.classes):
-                classes_parent.append(row.classes[k])
+                classes_parent.append(classes[k])
                 if k != 0:
-                    if len(row.classes[k-1].split())<len(row.classes[k].split()):
-                        sup_sub_df=sup_sub_df.append({'super_class':row.classes[k-1],'subclass':row.classes[k]},ignore_index=True)
-                        classes_parent.remove(row.classes[k-1]) 
+                    if len(classes[k-1].split())<len(classes[k].split()):
+                        sup_sub_df=sup_sub_df.append({'super_class':classes[k-1],'subclass':classes[k]},ignore_index=True)
+                        classes_parent.remove(classes[k-1]) 
                     else:                        
-                        sup_sub_df=sup_sub_df.append({'super_class':'catalyst_role','subclass':row.classes[k]},ignore_index=True)
+                        sup_sub_df=sup_sub_df.append({'super_class':'catalyst role','subclass':classes[k]},ignore_index=True)
                         #super_class = onto.search_one(label='catalyst role')
                 elif row.classes[k]!='catalyst role':
-                        sup_sub_df=sup_sub_df.append({'super_class':'catalyst_role','subclass':row.classes[k]},ignore_index=True)
+                        sup_sub_df=sup_sub_df.append({'super_class':'catalyst role','subclass':classes[k]},ignore_index=True)
                 k+=1  
             #if 'based' not in row.entity:
             for i in classes_parent:
                 sup_sub_df=sup_sub_df.append({'super_class':i, 'subclass':row.entity},ignore_index=True)
         if row.cems:
             for c in row.cems:
+                if c in sup_cat.keys():
+                    catalyst_support(c,sup_cat,onto)
                 if c not in missing:
                     continue
-                elif c in sup_cat.keys(): 
-                    sup_sub_df= sup_sub_df.append({'super_class':'mineral', 'subclass': c},ignore_index=True)
-                    catalyst_support(c,sup_cat,onto)
+                elif c in sup_cat.keys():
+                    sup_sub_df= sup_sub_df.append({'super_class':'mineral', 'subclass': c},ignore_index=True)    
                 else:
                     sup_sub_df= sup_sub_df.append({'super_class':'molecule', 'subclass': c},ignore_index=True)
-                    
-                    
+      
     with onto:
-            indecies=[]
-            for s in sup_sub_df.itertuples():
-            
-                if s.index in indecies:# or s.super_class.lower() in created_classes:
-                    continue                                 
-                elif s.super_class== 'molecule' or s.super_class== 'material':
-                    indecies, onto,_,created_classes= create_sub_super(missing, onto,s.super_class, indecies, sup_sub_df,created_classes, s.subclass)
-                else:
-                    indecies, onto,_,created_classes= create_sub_super(missing, onto,s.super_class, indecies, sup_sub_df,created_classes)
-            
+        indecies=[]
+        for s in sup_sub_df.itertuples():            
+            if s.index in indecies:# or s.super_class.lower() in created_classes:
+                continue                                 
+            elif s.super_class== 'molecule' or s.super_class== 'material':
+                indecies, onto,_,created_classes,num= create_sub_super(num,missing, onto,s.Index, indecies,list(df_entity['entity']), sup_sub_df,created_classes,s.subclass)
+                
+            else:
+                indecies, onto,_,created_classes,num= create_sub_super(num,missing, onto,s.Index, indecies,list(df_entity['entity']), sup_sub_df,created_classes)
+        for row in entity_df.itertuples():
+            if row.cems:
+                for c in row.cems:
+                    if c in sup_cat.keys():
+                        catalyst_support(c,sup_cat,onto)
+            if s.category== 'Product':
+                ...
     #print(list(onto.classes()))                    
     onto.save('./ontologies/{}_1.owl'.format(onto_name))
     return created_classes                   
-                           
-def create_sub_super(missing, onto, super_class_l, indecies, sup_sub_df,created_classes,subclass=None ):
+def create_subclass(onto,subclass,entities,super_class,num,created_classes):
+      new_sub=None  
+      if "based" in subclass:
+          return onto, created_classes, num
+      elif subclass in entities: #überdenken. "based" nicht includieren
+          
+          if subclass not in created_classes:
+              new_sub =  super_class('DC_{:04d}'.format(num))
+              num+=1
+              new_sub.label.append(subclass)
+              created_classes.append(subclass.lower())
+          elif subclass.lower() in created_classes:
+              new_sub=onto.search_one(label=subclass)
+              new_sub.is_a.append(super_class)
+      
+      elif subclass.lower() not in created_classes:
+          class_name= 'DC_{:04d}'.format(num)
+          num +=1
+          new_sub = types.new_class(class_name,(super_class,))      
+          new_sub.label.append(subclass)
+          created_classes.append(subclass.lower())
+                
+      if new_sub:
+          new_sub.comment.append('created automatically')      
+          
+      return onto, created_classes,num                             
+def create_sub_super(num,missing, onto, idx, indecies,entities, sup_sub_df,created_classes,subclass=None ):
+    super_class_l=sup_sub_df.loc[idx, 'super_class']
     with onto:
-        if super_class_l not in missing:
+        if super_class_l not in missing or super_class_l in created_classes:
             super_class= onto.search_one(label=super_class_l)
             if not super_class:
                 super_class= onto.search_one(prefLabel=super_class_l)
-        
+            if not subclass:
+                onto, created_classes,num=create_subclass(onto,sup_sub_df.loc[idx, 'subclass'],entities,super_class,num,created_classes)
         elif super_class_l in list(sup_sub_df['subclass']):
             query = sup_sub_df.query('subclass == "{}"'.format(super_class_l))
+            idx=query.index[0]
+            print(idx)
             subclass=super_class_l
-            super_class_l=query['super_class'].iloc[0] # only for the list with single super class
+            #super_class_l=query['super_class'].iloc[0] # only for the list with single super class
             indecies.extend(list(query.index))
-            indecies, onto, super_class,created_classes= create_sub_super(missing, onto, super_class_l, indecies,sup_sub_df,created_classes,subclass=subclass)
+            indecies, onto, super_class,created_classes,num= create_sub_super(num,missing, onto, idx, indecies,entities,sup_sub_df,created_classes,subclass=subclass)
             query= sup_sub_df.query('super_class == "{}"'.format(super_class_l))
             if query.empty==False:
                 indecies.extend(list(query.index))
                 for q in range(len(query)):
                     subclass=query['subclass'].iloc[q]
-                    if subclass.lower() not in created_classes:
-                        new_sub= types.new_class(subclass.replace(' ','_'),(super_class,))        
-                        new_sub.comment.append('created automatically') 
-                        created_classes.append(subclass.lower())
-                        subclass=None
+                    onto, created_classes,num=create_subclass(onto,subclass,entities,super_class,num,created_classes)
+                    subclass=None 
         else: 
-            super_class = types.new_class(super_class_l.replace(' ','_'), (Thing,))
+            class_name= 'DC_{:04d}'.format(num)
+            num+=1
+            super_class = types.new_class(class_name, (Thing,))
             super_class.comment.append('created automatically') 
             super_class.label.append(super_class_l)
             created_classes.append(super_class_l.lower())
         if subclass:
-            new_sub= types.new_class(subclass.replace(' ','_'),(super_class,))        
-            new_sub.comment.append('created automatically') 
-            
-            new_sub.label.append(subclass)
-            created_classes.append(subclass.lower())
+            if subclass.lower() not in created_classes:
+                class_name= 'DC_{:04d}'.format(num)
+                num+=1
+                new_sub= types.new_class( class_name,(super_class,))        
+                new_sub.comment.append('created automatically') 
+                new_sub.label.append(subclass)
+                created_classes.append(subclass.lower())
+            else:
+                new_sub=onto.search_one(label= subclass)
+            super_class=new_sub
         if super_class_l.lower() not in created_classes:
             created_classes.append(super_class_l.lower())      
-    return  indecies, onto,super_class, created_classes
-            
+    return  indecies, onto,super_class, created_classes,num
+ 
 def search_entity (onto, entity_full, category, onto_list,IRI_json_filename='iriDictionary'):
     f = open('{}.json'.format(IRI_json_filename)) # evtl in class aufnehmen und abrufen
     onto_dict = json.load(f) #
@@ -1009,6 +1046,7 @@ def equality( onto_list,onto_name='AFO'):
     onto.save('./ontologies/{}_upd1.owl'.format(onto_name.lower())) 
     return eq   
 
+
 """
 ckpt_name = 'CatalysisIE/checkpoint/CV_0.ckpt'
 bert_name = 'CatalysisIE/pretrained/scibert_domain_adaption'
@@ -1081,7 +1119,6 @@ onto_extender (onto_list)
 eq=equality( onto_list,onto_name='AFO')
 created_classes=create_classes_onto(missing_all, df_entity)
 
-
 categories={'ZSM-5 zeolite': 'Catalyst', 'naphtha': 'Reactant', 'catalytic cracking': 'Reaction', 'Sr, Zr, La-supported on ZSM-5 zeolite': 'Catalyst', 'metal-incorporated ZSM-5 zeolite': 'Catalyst', 'hydride transfer reaction': 'Reaction', 'alkene': 'Product', 'light olefin': 'Product', 'Zr-supported on ZSM-5 zeolite': 'Catalyst', 'HZSM-5': 'Catalyst', 'RhCo catalyst': 'Catalyst', 'heterogeneous rhodium oxide catalyst encapsulated within microporous silicalite-1  (S-1) ': 'Catalyst', 'Rh2O3@S-1': 'Catalyst', 'Supported catalyst based on the RhCo': 'Catalyst', 'vapor phase hydroformylation': 'Reaction', 'olefin': 'Reactant', 'RhCo3(CO)12': 'Catalyst', 'Cobalt complex': 'Catalyst', 'rhodium based catalyst': 'Catalyst', 'heterogeneous ethylene': 'Reactant', 'hydroformylation': 'Reaction', 'Rh,Co based catalyst': 'Catalyst', 'Supported catalyst based on the RhCo cou\x02ple': 'Catalyst', 'propene': 'Reactant', 'RhCo based catalyst': 'Catalyst', 'reduction': 'Treatment', 'Rh based catalyst': 'Catalyst', 'DRC': 'Characterization', 'propylene': 'Reactant', 'hydrogenation': 'Reaction', 'propyl specie': 'Product', 'Rh-based heterogeneous catalyst': 'Catalyst', 'Rh': 'Catalyst', 'Rh-based alloy catalyst': 'Catalyst', 'heterogeneous hydroformylation': 'Reaction', 'monometallic Rh supported on MCM-41': 'Catalyst', 'Rh-based bimetallic catalyst': 'Catalyst', 'RhM3,M =  M= ,Co Co, Ni,Cu Zn': 'Catalyst', 'ethylene': 'Reactant', 'Bimetallic heterogeneous catalyst based on rhodium supported on various oxide': 'Catalyst', 'Rh, Ir-based atomically dispersed catalyst': 'Catalyst', 'dimerization': 'Reaction', '1,3- butadiene': 'Reactant', 'methane': 'Reactant', 'acetic acid': 'Product'}
 rel_synonym={'Zr': 'zirconium atom', 'Cobalt': 'cobalt atom', 'oxide': 'oxide', 'Ir': 'iridium atom', 'RhCo': 'cobalt(2+);rhodium(3+)', 'Rh': 'rhodium atom', 'Co': 'cobalt atom', 'La': 'lanthanum atom', 'SiO2': 'silicon dioxide', 'Si': 'silicon atom', 'O': 'oxygen atom', 'hydride': 'hydride', 'Zn': 'zinc atom', 'Rh2O3': 'oxygen(2-);rhodium(3+)', 'Sr': 'strontium atom', 'propene': 'prop-1-ene', 'Ni': 'nickel atom', 'propyl': 'propyl', 'Cu': 'copper atom', 'C': 'carbon atom', 'Al': 'aluminium atom', 'propylene': 'prop-1-ene', 'acetic acid': 'acetic acid', 'rhodium': 'rhodium atom', 'zeolite': 'zeolite', 'rhodium oxide': 'oxorhodium'}
 sup_cat={'SiO2': ['RhCo'], 'Al': ['Rh'], ' MCM-41': ['Rh'], 'MCM-41': ['RhM3']}
@@ -1090,7 +1127,7 @@ missing=[]
 """
 #onto_new_dict, missing, match_dict, rel_synonym= chemical_prep(chem_list, onto_list,onto_class_list, chem_list_all)  
 #sup_cat, df_entity,_=catalyst_entity(categories, rel_synonym, sup_cat,chem_list,missing)
-'''
+
 missing_all=['prop-1-ene',
  'RhCo3(CO)12',
  'MCM-41',
@@ -1139,13 +1176,13 @@ classes=[[],
  [],
  [],
  [],
- ['catalyst_role'],
- ['catalyst_role'],
- ['heterogeneous_catalyst_role'],
- ['alloy_catalyst_role'],
- ['bimetallic_catalyst_role'],
- ['heterogeneous_catalyst_role'],
- ['atomically_dispersed_catalyst_role', 'dispersed_catalyst_role']]
+ ['catalyst role'],
+ ['catalyst role'],
+ ['heterogeneous catalyst role'],
+ ['alloy catalyst role'],
+ ['bimetallic catalyst role'],
+ ['heterogeneous catalyst role', 'bimetallic catalyst role'],
+ ['atomically dispersed catalyst role', 'dispersed catalyst role']]
 category=['Product',
  'Reactant',
  'Reactant',
@@ -1162,7 +1199,8 @@ category=['Product',
 d={'entity':entity,'classes':classes,'cems':cems, 'category':category}
 df_entity=pd.DataFrame(data=d)
 created_classes=create_classes_onto(missing_all, df_entity)
-'''   
+''' 
+'''  
 """  
 class expand_onto:
     
