@@ -23,8 +23,42 @@ import glob
 from chemdataextractor import Document
 from pubchempy import get_compounds
 import types
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.layout import LAParams
+from pdfminer.converter import TextConverter
+from pdfminer.pdfpage import PDFPage
+from io import StringIO
 API_URL = "https://rel.cs.ru.nl/api"
 import pandas as pd
+
+def get_pdf_file_content(pdf_file):
+    resource_manager = PDFResourceManager(caching=True)
+    out_text = StringIO()
+    la_params = LAParams()
+    text_converter = TextConverter(resource_manager, out_text, laparams=la_params)
+    fp = open(pdf_file, mode='rb')
+    interpreter = PDFPageInterpreter(resource_manager, text_converter)
+    #for page in PDFPage.get_pages(fp, pagenos=set(), maxpages=0, password='', caching=True, check_extractable=True):
+    #    interpreter.process_page(page)
+    interpreter.process_page(PDFPage.get_pages(fp, pagenos=set(), maxpages=0, password='', caching=True, check_extractable=True)[0])
+    text = out_text.getvalue()
+    fp.close()
+    text_converter.close()
+    out_text.close()
+    return text
+    
+def get_globed_content():
+    # opens all PDF file, hands it to get_pdf_file_content function and converts it into string
+    pdf_globed = glob2.glob('./import/*.pdf')
+    pdf_text = []
+    for i in range(len(pdf_globed)):
+        pdf_text.append(get_pdf_file_content(pdf_globed[i]))
+    pdf_text_string = ''.join(pdf_text)
+    return pdf_text_string
+
+def text_load(name, mincount):
+    name_raw = name + "_raw"
+    
 def load_ontologies(ontology_name):
     """
     loads an ontology from subfolder ontologies defined by its name 
