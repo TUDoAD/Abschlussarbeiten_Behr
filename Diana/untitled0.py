@@ -14,7 +14,7 @@ onto =new_world2.get_ontology("./ontologies/{}.owl".format(onto_name)).load()
 a = list(onto_test.classes().label)
 """
 """
-from habanero import Crossref
+
 cr = Crossref()
 
 result = cr.works(query = 'Vapour phase propene hydroformylation catalyzed by the Rh/Al system on silica')
@@ -29,6 +29,7 @@ Limitations:
     blocks of text being consider bigger than title text.
     - Heuristics are used to judge invalid titles, implying the possibility of
     false positives.
+    https://gist.github.com/Zeqiang-Lai/576940bcffd5816d695c65b4b6c13e98
     """
 import getopt
 import os
@@ -38,14 +39,14 @@ import subprocess
 import sys
 import unidecode
 
-from pypdf import PdfFileReader
+from pypdf import PdfReader
 from pdfminer.pdfdocument import PDFDocument
 from pdfminer.pdfpage import PDFPage
 from pdfminer.pdfparser import PDFParser 
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import PDFPageAggregator
 from pdfminer.layout import LAParams, LTChar, LTFigure, LTTextBox, LTTextLine
-
+from habanero import Crossref
 __all__ = ['pdf_title']
 
 def make_parsing_state(*sequential, **named):
@@ -91,9 +92,9 @@ def sanitize(filename):
     return ''.join([c for c in filename if c in valid_chars])
 
 def meta_title(filename):
-    """Title from pdf metadata.
+    """Title from pdf metadata. 
     """
-    docinfo = PdfFileReader(file(filename, 'rb')).getDocumentInfo()
+    docinfo = PdfReader(open(filename, 'rb')).getDocumentInfo()
     if docinfo is None:
         return ''
     return docinfo.title if docinfo.title else ''
@@ -371,6 +372,17 @@ def pdf_title(filename):
         return title
     return os.path.basename(os.path.splitext(filename)[0])
 
-filename= ''
-title = pdf_title(filename)
-title = sanitize(' '.join(title.split()))
+def get_DOI(filename):
+    title = pdf_title(filename)
+    title = sanitize(' '.join(title.split()))
+    
+    cr = Crossref()
+    result = cr.works(query = title)
+    title=result['message']['items'][0]['Title']
+    doi=result['message']['items'][0]['DOI']
+    return title, doi
+
+
+
+filename= './import/1-s2.0-S1381116997000356-main.pdf'
+
