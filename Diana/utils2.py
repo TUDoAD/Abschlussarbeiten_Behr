@@ -181,7 +181,7 @@ def chemical_prep(chem_list, onto_list,onto_class_list, chem_list_all):
     onto_dict,inchikey= synonym_dicts(onto_class_list)
     for molecule in chem_list:  
         non_chem = False
-        print(molecule)
+        #print(molecule)
         pattern= '('+molecule+')[—–-][\d]+' #ex: 'ZSM-5' with m='ZSM'
         for i in chem_list_all:
             match_hyph=re.search(pattern,i)
@@ -192,7 +192,7 @@ def chemical_prep(chem_list, onto_list,onto_class_list, chem_list_all):
                 break
         pattern = '[\d,]+[—–-] [a-z]+'
         if re.search('^ [A-Za-z\d—–-]+',molecule):
-            print(molecule)
+            #print(molecule)
             molecule=molecule.replace(' ','')
         if non_chem ==True or re.search(r'[A-Z]+[—–-][\d]+', molecule):
             onto_new_dict[molecule]=[]
@@ -204,7 +204,7 @@ def chemical_prep(chem_list, onto_list,onto_class_list, chem_list_all):
         else:
              comp = re.findall(r'([A-Z](?:[a-z])?)',molecule)
              comp_dict[molecule] = comp
-    print(comp_dict)
+    #print(comp_dict)
     for k,v in comp_dict.items():
         print('{}:{}'.format(k,v))
         i=0
@@ -212,7 +212,7 @@ def chemical_prep(chem_list, onto_list,onto_class_list, chem_list_all):
            
             for c in v:
                 
-                print(c)
+                #print(c)
                 for k_o, v_o in onto_dict.items():
                     synonyms= fill_synonyms(synonyms,k,v_o,k_o)
                     synonyms= fill_synonyms(synonyms,c,v_o,k_o)
@@ -545,14 +545,12 @@ def catalyst_entity(categories, rel_synonym, sup_cat,chem_list,missing_all,onto_
     list_all=[]
     chem_list.extend([str(i) for i in rel_synonym.values()]) 
     for entity,l in categories.items():
-        if l =='Catalyst':
-
-                if entity in classes.keys():
+        if entity in classes.keys():
                     continue
-                else:
-                    spans_dict[entity]=[]
-                    spans_n=[]
-
+        else:
+            spans_dict[entity]=[]
+            spans_n=[]
+        if l =='Catalyst':
                     if "based" in entity:
                         support=[]
                         e_snip=None
@@ -575,7 +573,6 @@ def catalyst_entity(categories, rel_synonym, sup_cat,chem_list,missing_all,onto_
                                              e_cleaned = e_btwn[re.search('supported',e_btwn).end():]
                                              support.append(c_t)
                                              continue
-                                    
                                     if c_t not in spans_n:    
                                         spans_n.append(c_t)
                                     
@@ -601,17 +598,16 @@ def catalyst_entity(categories, rel_synonym, sup_cat,chem_list,missing_all,onto_
                                 e_btwn=e_snip[:re.search('supported', e_snip).start()+1]
                             else:
                                 sup_i = None
+                            
                             for c in chem_list:
                                 pattern='\b'+c+'\b'
                                 if re.search(pattern,e_snip):
                                     try:
-                                        c_t = rel_synonym[c_t]
+                                        c_t = rel_synonym[c]
                                     except:
                                         c_t = c
                                     if sup_i and c in e_btwn:
-                                            support.append(c) 
-
-                                                            
+                                            support.append(c_t)                    
                                     if c_t not in spans_n:    
                                         spans_n.append(c_t)  
                                  
@@ -627,18 +623,39 @@ def catalyst_entity(categories, rel_synonym, sup_cat,chem_list,missing_all,onto_
                         snaps_n=[c for c in spans_n and c not in support]  
                         for i in support:
                             if i in sup_cat.keys():
-                                sup_cat[c].extend([c for c in snaps_n and c not in sup_cat[i]])
+                                sup_cat[i].extend([c for c in snaps_n and c not in sup_cat[i]])
                             else:
                                 sup_cat[i] = snaps_n
-                    spans_dict[entity].extend(spans_n)
+                    
                    
         elif entity in chem_list or set(entity.split()).issubset(chem_list):
-            list_all.append([None,[],[entity],categories[entity]])
+            c_list=[]
+            for c in entity.split():
+                try:
+                    c_t = rel_synonym[c]
+                except:
+                    c_t = c
+                c_list.append(c_t)
+            list_all.append([None,[],[' '.join(c_list)],categories[entity]])
         elif l=='Reaction':
-            
+            classes= check_in_snip(entity, classes, nlp, entity,l)
+            for c in chem_list:
+                pattern='\b'+c+'\b'
+                if re.search(pattern,entity):
+                    try:
+                        c_t = rel_synonym[c]
+                    except:
+                        c_t = c
+                    if c_t not in spans_n:    
+                        spans_n.append(c_t) 
+        spans_dict[entity].extend(spans_n)
     not_del=[] 
-    classes_n={} 
+    classes_n=classes 
+    
     for k_1,v_1 in classes.items():
+            
+            #v_1.sort(key=len)
+            #print(v_1)
             classes_n[k_1]=[]
             for k,v in classes.items():
                 i = len(v_1)-1
@@ -678,8 +695,9 @@ def shortcut_add_class(ele_old,classes_n, not_del, value, i, key ):
     if ele_old and ele_old not in not_del:
             classes_n[key].remove(ele_old)
     if i!=0:
-        if len(value[i])<len(value[i-1]):
-            ele_old=value[i]
+        if len(value[i].split())>len(value[i-1].split()):
+            ele_old=value[i-1]
+            print('ele_old:{}'.format(ele_old))
         else:
             ele_old=None
     
@@ -700,23 +718,34 @@ def check_in_snip(e_snip, classes, nlp, entity, l):
                         token_new=token.text.lower()+' catalyst role'
                         classes[entity].append(token_new)
                     if token.children:
-                        
                         for i in reversed(range(len([t.text for t in token.children if t.text != "catalyst"]))):
                             token_new=[t.text.lower() for t in token.children][i] +' ' + token_new
                             classes[entity].append(token_new) 
+    
     elif l=='Reaction':
         if len(doc_snip)>1:
             for token in doc_snip:
                 if token.head.text==token.text:
                     token_new=token.head.text
-                    if token.children:
-                        for i in reversed(range(len([t.text for t in token.children if t.text != "catalyst"]))):
-                            token_new=[t.text.lower() for t in token.children][i] +' ' + token_new
-                            if 
+                else:
+                    continue
+                list_token=[]
+                classes[entity].extend(check_in_children(token, token_new,list_token))
+        else:
+            classes[entity].append(e_snip)         
     classes[entity] = [*set(classes[entity])] 
-    if len(classes[entity])>1:
+    if len(classes[entity])>1 and l=='Catalyst':
         classes[entity].remove('catalyst role')
     return classes
+
+def check_in_children(token, token_new,list_token):
+    if token.children:
+       for t in token.children:
+                token=t
+                token_new=t.text.lower() +' ' + token_new
+                list_token= check_in_children(token, token_new,list_token)
+                list_token.append(token_new)
+    return list_token        
 #classes={'Rh-based atomically dispersed heterogenous catalyst':['atomically dispersed catalyst role','dispersed catalyst role','heterogenous catalyst role']}
 def doc_token(entity, e_split, j=0):
     nlp = spacy.load('en_core_web_sm')
@@ -767,12 +796,13 @@ def create_classes_onto(missing, df_entity, onto_name='afo_upd1'):
     sup_sub_df=pd.DataFrame(columns=['super_class','subclass'])
     new_world= owlready2.World()
     created_classes=[]
+    created_ind=[]
     onto= new_world.get_ontology('./ontologies/{}.owl'.format(onto_name)).load()
     
     for row in df_entity.itertuples():
         classes_parent=[]
         classes= sorted(list(row.classes),reverse=False, key=len)
-        print(classes)
+        #print(classes)
         if row.category =='Catalyst':
             k = 0
             while k<len(row.classes):
@@ -790,31 +820,35 @@ def create_classes_onto(missing, df_entity, onto_name='afo_upd1'):
             #if 'based' not in row.entity:
             for i in classes_parent:
                 sup_sub_df=sup_sub_df.append({'super_class':i, 'subclass':row.entity},ignore_index=True)
+        #elif row.category=='Reaction':
+            
         if row.cems:
             for c in row.cems:
-                if c in sup_cat.keys():
-                    catalyst_support(c,sup_cat,onto)
                 if c not in missing:
                     continue
                 elif c in sup_cat.keys():
                     sup_sub_df= sup_sub_df.append({'super_class':'mineral', 'subclass': c},ignore_index=True)    
                 else:
                     sup_sub_df= sup_sub_df.append({'super_class':'molecule', 'subclass': c},ignore_index=True)
-      
+                    print(c)
     with onto:
         has_role= onto.search_one(label='has role')
+        #print(has_role)
         carrier_role= onto.search_one(label='carrier role')
         supported_on = onto.search_one(label='supported on')
         if 'Product' in list(df_entity.category):
             prod_role= onto.search_one(label='product role')
+        if 'Reactant'  in list(df_entity.category):
+            reac_role= onto.search_one(label='reactant role')
         indecies=[]
         for s in sup_sub_df.itertuples():            
             if s.index in indecies:# or s.super_class.lower() in created_classes:
                 continue                                 
             elif s.super_class== 'molecule' or s.super_class== 'material':
-                indecies, onto,_,created_classes,num= create_sub_super(num,missing, onto,s.Index, indecies,list(df_entity['entity']), sup_sub_df,created_classes,s.subclass)
+                indecies, onto,_,created_classes,num,created_ind= create_sub_super(created_ind,num,missing, onto,s.Index, indecies,list(df_entity['entity']), sup_sub_df,created_classes,s.subclass)
             else:
-                indecies, onto,_,created_classes,num= create_sub_super(num,missing, onto,s.Index, indecies,list(df_entity['entity']), sup_sub_df,created_classes)
+                indecies, onto,_,created_classes,num,created_ind= create_sub_super(created_ind,num,missing, onto,s.Index, indecies,list(df_entity['entity']), sup_sub_df,created_classes)
+            
         for row in df_entity.itertuples():
             if row.cems:
                 for c in row.cems:
@@ -824,14 +858,23 @@ def create_classes_onto(missing, df_entity, onto_name='afo_upd1'):
                         for i in sup_cat[c]:
                             cat= onto.search_one(label=i)
                             cat.supported_on= sup()
-                if s.category== 'Product':
+                    if c not in created_ind:
+                        cem = onto.search_one(label=c)
+                        onto, num,created_ind=add_individum(onto,cem, created_ind,num,c)
+                if row.category== 'Product':
                     for c in row.cems:
-                        prod=onto.search_one(label=c)
+                        prod=onto.search(label=c)[0]
+                        print(prod)
                         prod.has_role=prod_role()
                         
+                if row.category =='Reactant':
+                    for c in row.cems:
+                        reac=onto.search(label=c)[0]
+                        reac.has_role=reac_role()
+                
     #print(list(onto.classes()))                    
     onto.save('./ontologies/{}_1.owl'.format(onto_name))
-    return created_classes                   
+    return created_classes, sup_sub_df                   
 
 def create_subclass(onto,subclass,entities,super_class,num,created_ind,created_classes):
     new_sub=None  
@@ -845,19 +888,24 @@ def create_subclass(onto,subclass,entities,super_class,num,created_ind,created_c
           new_sub.label.append(subclass)
           created_classes.append(subclass.lower())
           if subclass in entities:
-              if subclass not in created_ind:
-                  new_sub_i =  new_sub('DC_{:04d}'.format(num))
-                  num+=1
-                  new_sub.label.append(subclass)
-                  created_ind.append(subclass.lower())
+              if subclass.lower() not in created_ind:
+                  onto, num, created_ind=add_individum(onto,new_sub, created_ind,num,subclass)
               elif subclass.lower() in created_ind:
                   new_sub=onto.search_one(label=subclass)
                   new_sub.is_a.append(super_class)
     if new_sub:
           new_sub.comment.append('created automatically')      
     return onto, created_classes,created_ind,  num 
-                    
-def create_sub_super(num,missing, onto, idx, indecies,entities, sup_sub_df,created_classes,subclass=None ):
+
+def add_individum(onto,super_class, created_ind,num,ind):
+    with onto:
+        new_i =  super_class('DC_{:04d}'.format(num))
+        num+=1
+        new_i.label.append(ind)
+        created_ind.append(ind.lower())            
+    return onto, num, created_ind        
+
+def create_sub_super(created_ind,num,missing, onto, idx, indecies,entities, sup_sub_df,created_classes,subclass=None ):
     super_class_l=sup_sub_df.loc[idx, 'super_class']
     with onto:
         if super_class_l not in missing or super_class_l in created_classes:
@@ -865,21 +913,21 @@ def create_sub_super(num,missing, onto, idx, indecies,entities, sup_sub_df,creat
             if not super_class:
                 super_class= onto.search_one(prefLabel=super_class_l)
             if not subclass:
-                onto, created_classes,num=create_subclass(onto,sup_sub_df.loc[idx, 'subclass'],entities,super_class,num,created_classes)
+                onto, created_classes,created_ind,num=create_subclass(onto,sup_sub_df.loc[idx, 'subclass'],entities,super_class,num,created_ind,created_classes)
         elif super_class_l in list(sup_sub_df['subclass']):
             query = sup_sub_df.query('subclass == "{}"'.format(super_class_l))
             idx=query.index[0]
-            print(idx)
+            #print(idx)
             subclass=super_class_l
             #super_class_l=query['super_class'].iloc[0] # only for the list with single super class
             indecies.extend(list(query.index))
-            indecies, onto, super_class,created_classes,num= create_sub_super(num,missing, onto, idx, indecies,entities,sup_sub_df,created_classes,subclass=subclass)
+            indecies, onto, super_class,created_classes,num,created_ind= create_sub_super(num,missing, onto, idx, indecies,entities,sup_sub_df,created_classes,subclass=subclass)
             query= sup_sub_df.query('super_class == "{}"'.format(super_class_l))
             if query.empty==False:
                 indecies.extend(list(query.index))
                 for q in range(len(query)):
                     subclass=query['subclass'].iloc[q]
-                    onto, created_classes,num=create_subclass(onto,subclass,entities,super_class,num,created_classes)
+                    onto, created_classes,created_ind,num=create_subclass(onto,subclass,entities,super_class,num,created_ind,created_classes)
                     subclass=None 
         else: 
             class_name= 'DC_{:04d}'.format(num)
@@ -901,7 +949,7 @@ def create_sub_super(num,missing, onto, idx, indecies,entities, sup_sub_df,creat
             super_class=new_sub
         if super_class_l.lower() not in created_classes:
             created_classes.append(super_class_l.lower())      
-    return  indecies, onto,super_class, created_classes,num
+    return  indecies, onto,super_class, created_classes,num,created_ind
  
 def search_entity (onto, entity_full, category, onto_list,IRI_json_filename='iriDictionary'):
     f = open('{}.json'.format(IRI_json_filename)) # evtl in class aufnehmen und abrufen
@@ -995,7 +1043,7 @@ def create_list_IRIs(class_list, onto_list,IRI_json_filename = 'iriDictionary', 
             #if entity not in match_dict.values():
             #   missing.append(entity)
         missing=[e for e in class_list if e not in match_dict.values()]        
-        print(missing)   
+        #print(missing)   
         for key,value in match_dict.items():
             x=[]
             for O in onto_names:
@@ -1101,12 +1149,12 @@ onto_list ={
             'AFO'  : "./ontologies/afo.owl"
             } 
 
-onto_class_list=load_classes_chebi()
+#onto_class_list=load_classes_chebi()
 
 #onto_new_dict, missing, match_dict, rel_synonym=chemical_prep_2(chem_list, onto_list,onto_class_list)
 
-
-   
+ 
+"""   
 test_txt='''
 In order to reveal the influences of metal-incorporation and regeneration of ZSM-5 zeolites on naphtha catalytic cracking, the fresh and regenerated Sr, Zr and La-loaded ZSM-5 zeolites have been prepared and evaluated using n-pentane catalytic cracking as a model reaction.
 It was found that the metal-incorporated ZSM-5 zeolites promoted hydride transfer reactions, and the Zr-incorporation helped to promote and maintain the catalytic activity while reduced alkenes selectivity;
@@ -1159,13 +1207,67 @@ sup_cat, df_entity,missing_all=catalyst_entity(categories, rel_synonym, sup_cat,
 #onto_extender (onto_list)
 #eq=equality( onto_list,onto_name='AFO')
 created_classes=create_classes_onto(missing_all, df_entity)
-""" 
-categories={'ZSM-5 zeolite': 'Catalyst', 'naphtha': 'Reactant', 'catalytic cracking': 'Reaction', 'Sr, Zr, La-supported on ZSM-5 zeolite': 'Catalyst', 'metal-incorporated ZSM-5 zeolite': 'Catalyst', 'hydride transfer reaction': 'Reaction', 'alkene': 'Product', 'light olefin': 'Product', 'Zr-supported on ZSM-5 zeolite': 'Catalyst', 'HZSM-5': 'Catalyst', 'RhCo catalyst': 'Catalyst', 'heterogeneous rhodium oxide catalyst encapsulated within microporous silicalite-1  (S-1) ': 'Catalyst', 'Rh2O3@S-1': 'Catalyst', 'Supported catalyst based on the RhCo': 'Catalyst', 'vapor phase hydroformylation': 'Reaction', 'olefin': 'Reactant', 'RhCo3(CO)12': 'Catalyst', 'Cobalt complex': 'Catalyst', 'rhodium based catalyst': 'Catalyst', 'heterogeneous ethylene': 'Reactant', 'hydroformylation': 'Reaction', 'Rh,Co based catalyst': 'Catalyst', 'Supported catalyst based on the RhCo cou\x02ple': 'Catalyst', 'propene': 'Reactant', 'RhCo based catalyst': 'Catalyst', 'reduction': 'Treatment', 'Rh based catalyst': 'Catalyst', 'DRC': 'Characterization', 'propylene': 'Reactant', 'hydrogenation': 'Reaction', 'propyl specie': 'Product', 'Rh-based heterogeneous catalyst': 'Catalyst', 'Rh': 'Catalyst', 'Rh-based alloy catalyst': 'Catalyst', 'heterogeneous hydroformylation': 'Reaction', 'monometallic Rh supported on MCM-41': 'Catalyst', 'Rh-based bimetallic catalyst': 'Catalyst', 'RhM3,M =  M= ,Co Co, Ni,Cu Zn': 'Catalyst', 'ethylene': 'Reactant', 'Bimetallic heterogeneous catalyst based on rhodium supported on various oxide': 'Catalyst', 'Rh, Ir-based atomically dispersed catalyst': 'Catalyst', 'dimerization': 'Reaction', '1,3- butadiene': 'Reactant', 'methane': 'Reactant', 'acetic acid': 'Product'}
+"""
+ 
+categories={'ZSM-5 zeolite': 'Catalyst',
+ 'naphtha': 'Reactant',
+ 'catalytic cracking': 'Reaction',
+ 'Sr, Zr, La-supported on ZSM-5 zeolite': 'Catalyst',
+ 'metal-incorporated ZSM-5 zeolite': 'Catalyst',
+ 'hydride transfer reaction': 'Reaction',
+ 'alkene': 'Product',
+ 'light olefin': 'Product',
+ 'Zr-supported on ZSM-5 zeolite': 'Catalyst',
+ 'HZSM-5': 'Catalyst',
+ 'RhCo catalyst': 'Catalyst',
+ 'heterogeneous rhodium oxide catalyst encapsulated within microporous silicalite-1  (S-1) ': 'Catalyst',
+ 'Rh2O3@S-1': 'Catalyst',
+ 'Supported catalyst based on the RhCo': 'Catalyst',
+ 'vapor phase hydroformylation': 'Reaction',
+ 'olefin': 'Reactant',
+ 'RhCo3(CO)12': 'Catalyst',
+ 'Cobalt complex': 'Catalyst',
+ 'rhodium based catalyst': 'Catalyst',
+ 'heterogeneous ethylene': 'Reactant',
+ 'hydroformylation': 'Reaction',
+ 'Rh,Co based catalyst': 'Catalyst',
+ 'Supported catalyst based on the RhCo couple': 'Catalyst',
+ 'propene': 'Reactant',
+ 'RhCo based catalyst': 'Catalyst',
+ 'reduction': 'Treatment',
+ 'Rh based catalyst': 'Catalyst',
+ 'DRC': 'Characterization',
+ 'propylene': 'Reactant',
+ 'hydrogenation': 'Reaction',
+ 'propyl specie': 'Product',
+ 'Rh-based heterogeneous catalyst': 'Catalyst',
+ 'Rh': 'Catalyst',
+ 'Rh-based alloy catalyst': 'Catalyst',
+ 'heterogeneous hydroformylation': 'Reaction',
+ 'monometallic Rh supported on MCM-41': 'Catalyst',
+ 'Rh-based bimetallic catalyst': 'Catalyst',
+ 'RhM3,M =  M= ,Co Co, Ni,Cu Zn': 'Catalyst',
+ 'ethylene': 'Reactant',
+ 'Bimetallic heterogeneous catalyst based on rhodium supported on various oxide': 'Catalyst',
+ 'Rh, Ir-based atomically dispersed catalyst': 'Catalyst',
+ 'dimerization': 'Reaction',
+ '1,3-butadiene': 'Reactant',
+ 'methane': 'Reactant',
+ 'acetic acid': 'Product'}
 rel_synonym={'Zr': 'zirconium atom', 'Cobalt': 'cobalt atom', 'oxide': 'oxide', 'Ir': 'iridium atom', 'RhCo': 'cobalt(2+);rhodium(3+)', 'Rh': 'rhodium atom', 'Co': 'cobalt atom', 'La': 'lanthanum atom', 'SiO2': 'silicon dioxide', 'Si': 'silicon atom', 'O': 'oxygen atom', 'hydride': 'hydride', 'Zn': 'zinc atom', 'Rh2O3': 'oxygen(2-);rhodium(3+)', 'Sr': 'strontium atom', 'propene': 'prop-1-ene', 'Ni': 'nickel atom', 'propyl': 'propyl', 'Cu': 'copper atom', 'C': 'carbon atom', 'Al': 'aluminium atom', 'propylene': 'prop-1-ene', 'acetic acid': 'acetic acid', 'rhodium': 'rhodium atom', 'zeolite': 'zeolite', 'rhodium oxide': 'oxorhodium'}
 sup_cat={'SiO2': ['RhCo'], 'Al': ['Rh'], ' MCM-41': ['Rh'], 'MCM-41': ['RhM3']}
 chem_list=['MCM-41', 'Zr', 'Cobalt', 'oxide', 'Ir', 'RhCo', 'Co', 'La', ' MCM-41', 'olefin', 'SiO2', 'hydride', 'alkene', 'Zn', 'Rh2O3', 'Sr', 'ZSM', 'propene', 'Ni', 'propyl', 'Cu', 'RhCo3(CO)12', 'RhM3', 'Al', 'propylene', 'acetic acid', '1,3- butadiene', 'rhodium', 'zeolite', 'rhodium oxide', 'Rh']
-missing=[]
-"""
+missing=['oxygen(2-);rhodium(3+)',
+ 'RhCo3(CO)12',
+ 'HZSM-5',
+ 'prop-1-ene',
+ 'oxorhodium',
+ 'MCM-41',
+ 'propyl',
+ 'acetic',
+ 'cobalt(2+);rhodium(3+)']
+sup_cat, df_entity,missing_all=catalyst_entity(categories, rel_synonym, sup_cat,chem_list,missing,onto_list)
+created_classes, sup_sub_df=create_classes_onto(missing_all, df_entity, onto_name='afo_upd1')
 #onto_new_dict, missing, match_dict, rel_synonym= chemical_prep(chem_list, onto_list,onto_class_list, chem_list_all)  
 #sup_cat, df_entity,_=catalyst_entity(categories, rel_synonym, sup_cat,chem_list,missing)
 ''' 

@@ -378,11 +378,13 @@ def get_DOI(filename):
     
     cr = Crossref()
     result = cr.works(query = title)
-    title=result['message']['items'][0]['Title']
+    title=result['message']['items'][0]['title']
     doi=result['message']['items'][0]['DOI']
+    #abstract=result['message']['items'][0]['abstract']
     return title, doi
 
 
 
-filename= './import/1-s2.0-S1381116997000356-main.pdf'
+#filename= './import/1-s2.0-S1381116997000356-main.pdf'
 
+#doi,title= get_DOI(filename)
