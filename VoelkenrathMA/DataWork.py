@@ -191,7 +191,9 @@ def AddReactionToOWL(name, educts, products, cat):
     
     
 def CreateDataSheet(name, data):
-    ## Extracting all simulation parameter from data and creates a yaml-file with the scheme   
+    ## Extracting all simulation parameter from data and creates a yaml-file with the scheme
+    # Achtung: prüfe nochmal wie Edukte und Produkte ins LinkML-Data-file übertragen werden
+    # --> Individuals auslesen
     onto = owlready2.get_ontology("ontologies/MV-Onto.owl").load()
     
     # get reaction-type

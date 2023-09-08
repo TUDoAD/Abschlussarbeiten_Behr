@@ -1,0 +1,316 @@
+- Mixture:
+  - mole_fraction:
+    - - O2
+      - 0.5
+    - - H2
+      - 0.5
+    pressure: 100000.0
+    substances:
+    - O2
+    - H2
+    - CH4
+    - H2O
+    - CO2
+    - CO
+    - Ni
+    - H-Ni
+    - CH4-Ni
+    - H2O-Ni
+    - CO2-Ni
+    - CO-Ni
+    - O-Ni
+    - C-Ni
+    - OH-Ni
+    - HCO-Ni
+    - CH-Ni
+    - CH2-Ni
+    - CH3-Ni
+    - COOH-Ni
+    temperature: 420.0
+    type: !!python/name:owlready2.entity.Mixture ''
+    velocity: 0.2
+- Reactor:
+  - calculation_mode: isothermal
+    catalyst_loading: 1
+    catalyst_particle_diameter: 0.01
+    catalyst_void_fraction: 0.3
+    num_tubes: 1
+    reactive_volume: 0.12566370614359174
+    tube_diameter: 0.4
+    tube_length: 1.0
+    type: !!python/name:owlready2.entity.AFE_0000153 ''
+- ChemicalReaction:
+  - - id: 0
+      reactions:
+      - EA: 0.0
+        S0: 0.01458
+        beta: 0.0
+        reaction_equation: Ni+Ni+H2>H-Ni+H-Ni
+    - id: 1
+      reactions:
+      - A_cm_units: 4.538e+21
+        EA: 96.108
+        beta: -0.138
+        reaction_equation: H-Ni+H-Ni>Ni+Ni+H2
+    - id: 2
+      reactions:
+      - EA: 0.0
+        S0: 0.01064
+        beta: 0.0
+        reaction_equation: CH4+Ni>CH4-Ni
+    - id: 3
+      reactions:
+      - A_cm_units: 2793000000000000.0
+        EA: 36.977
+        beta: 0.085
+        reaction_equation: CH4-Ni>CH4+Ni
+    - id: 4
+      reactions:
+      - EA: 0.0
+        S0: 0.1163
+        beta: 0.0
+        reaction_equation: H2O+Ni>H2O-Ni
+    - id: 5
+      reactions:
+      - A_cm_units: 2035000000000.0
+        EA: 61.038
+        beta: -0.031
+        reaction_equation: H2O-Ni>Ni+H2O
+    - id: 6
+      reactions:
+      - EA: 0.0
+        S0: 6.288e-05
+        beta: 0.0
+        reaction_equation: CO2+Ni>CO2-Ni
+    - id: 7
+      reactions:
+      - A_cm_units: 49930000.0
+        EA: 25.831
+        beta: 0.018
+        reaction_equation: CO2-Ni>CO2+Ni
+    - id: 8
+      reactions:
+      - EA: 0.0
+        S0: 0.3737
+        beta: 0.0
+        reaction_equation: CO+Ni>CO-Ni
+    - id: 9
+      reactions:
+      - A_cm_units: 1144000000000.0
+        EA: 111.992
+        beta: -0.103
+        epsilon: 50000.0
+        mu: 0.0
+        reaction_equation: CO-Ni>CO+Ni
+    - id: 10
+      reactions:
+      - A_cm_units: 1.601e+23
+        EA: 89.324
+        beta: -1.001
+        reaction_equation: Ni+CO2-Ni>O-Ni+CO-Ni
+    - id: 11
+      reactions:
+      - A_cm_units: 5.806e+19
+        EA: 123.596
+        beta: 0.0
+        epsilon: 50000.0
+        mu: 0.0
+        reaction_equation: O-Ni+CO-Ni>Ni+CO2-Ni
+    - id: 12
+      reactions:
+      - A_cm_units: 235500000000000.0
+        EA: 116.163
+        beta: 0.0
+        epsilon: 50000.0
+        mu: 0.0
+        reaction_equation: Ni+CO-Ni>O-Ni+C-Ni
+    - id: 13
+      reactions:
+      - A_cm_units: 2.541e+18
+        EA: 148.077
+        beta: 0.0
+        epsilon: 104999.99999999999
+        mu: 0.0
+        reaction_equation: O-Ni+C-Ni>Ni+CO-Ni
+    - id: 14
+      reactions:
+      - A_cm_units: 3.045e+18
+        EA: 105.272
+        beta: -0.223
+        epsilon: 50000.0
+        mu: 0.0
+        reaction_equation: CO-Ni+H-Ni>OH-Ni+C-Ni
+    - id: 15
+      reactions:
+      - A_cm_units: 2.184e+18
+        EA: 62.778
+        beta: 0.128
+        epsilon: 104999.99999999999
+        mu: 0.0
+        reaction_equation: OH-Ni+C-Ni>CO-Ni+H-Ni
+    - id: 16
+      reactions:
+      - A_cm_units: 6.823e+21
+        EA: 132.079
+        beta: -0.979
+        reaction_equation: CO-Ni+H-Ni>HCO-Ni+Ni
+    - id: 17
+      reactions:
+      - A_cm_units: 2.179e+20
+        EA: 0.151
+        beta: -0.021
+        epsilon: -50000.0
+        mu: 0.0
+        reaction_equation: HCO-Ni+Ni>CO-Ni+H-Ni
+    - id: 18
+      reactions:
+      - A_cm_units: 5104000000000000.0
+        EA: 81.719
+        beta: 0.023
+        reaction_equation: HCO-Ni+Ni>O-Ni+CH-Ni
+    - id: 19
+      reactions:
+      - A_cm_units: 3.421e+19
+        EA: 110.161
+        beta: -0.023
+        reaction_equation: O-Ni+CH-Ni>HCO-Ni+Ni
+    - id: 20
+      reactions:
+      - A_cm_units: 1.327e+24
+        EA: 157.655
+        beta: -0.456
+        epsilon: 104999.99999999999
+        mu: 0.0
+        reaction_equation: H-Ni+C-Ni>Ni+CH-Ni
+    - id: 21
+      reactions:
+      - A_cm_units: 2.633e+22
+        EA: 22.255
+        beta: 0.456
+        reaction_equation: Ni+CH-Ni>H-Ni+C-Ni
+    - id: 22
+      reactions:
+      - A_cm_units: 3.21e+25
+        EA: 81.051
+        beta: -0.084
+        reaction_equation: CH-Ni+H-Ni>CH2-Ni+Ni
+    - id: 23
+      reactions:
+      - A_cm_units: 6.156e+24
+        EA: 95.229
+        beta: 0.084
+        reaction_equation: CH2-Ni+Ni>CH-Ni+H-Ni
+    - id: 24
+      reactions:
+      - A_cm_units: 7.778e+22
+        EA: 59.452
+        beta: -0.048
+        reaction_equation: CH2-Ni+H-Ni>CH3-Ni+Ni
+    - id: 25
+      reactions:
+      - A_cm_units: 6.157e+24
+        EA: 95.878
+        beta: 0.048
+        reaction_equation: CH3-Ni+Ni>CH2-Ni+H-Ni
+    - id: 26
+      reactions:
+      - A_cm_units: 3.628e+21
+        EA: 65.702
+        beta: -0.048
+        reaction_equation: CH3-Ni+H-Ni>Ni+CH4-Ni
+    - id: 27
+      reactions:
+      - A_cm_units: 6.156e+21
+        EA: 53.578
+        beta: 0.048
+        reaction_equation: Ni+CH4-Ni>CH3-Ni+H-Ni
+    - id: 28
+      reactions:
+      - A_cm_units: 1.158e+24
+        EA: 104.199
+        beta: -0.176
+        reaction_equation: O-Ni+H-Ni>OH-Ni+Ni
+    - id: 29
+      reactions:
+      - A_cm_units: 7.696e+19
+        EA: 29.791
+        beta: 0.176
+        reaction_equation: OH-Ni+Ni>O-Ni+H-Ni
+    - id: 30
+      reactions:
+      - A_cm_units: 2.342e+20
+        EA: 44.095
+        beta: 0.075
+        reaction_equation: OH-Ni+H-Ni>Ni+H2O-Ni
+    - id: 31
+      reactions:
+      - A_cm_units: 2.907e+21
+        EA: 90.365
+        beta: -0.075
+        reaction_equation: Ni+H2O-Ni>OH-Ni+H-Ni
+    - id: 32
+      reactions:
+      - A_cm_units: 1.011e+20
+        EA: 95.091
+        beta: 0.251
+        reaction_equation: OH-Ni+OH-Ni>O-Ni+H2O-Ni
+    - id: 33
+      reactions:
+      - A_cm_units: 1.889e+25
+        EA: 215.769
+        beta: -0.251
+        reaction_equation: O-Ni+H2O-Ni>OH-Ni+OH-Ni
+    - id: 34
+      reactions:
+      - A_cm_units: 1.287e+25
+        EA: 117.2
+        beta: -0.46
+        reaction_equation: H-Ni+CO2-Ni>COOH-Ni+Ni
+    - id: 35
+      reactions:
+      - A_cm_units: 1.288e+20
+        EA: 33.8
+        beta: 0.46
+        reaction_equation: COOH-Ni+Ni>H-Ni+CO2-Ni
+    - id: 36
+      reactions:
+      - A_cm_units: 6.032e+23
+        EA: 54.368
+        beta: -0.216
+        reaction_equation: COOH-Ni+Ni>OH-Ni+CO-Ni
+    - id: 37
+      reactions:
+      - A_cm_units: 1.453e+21
+        EA: 97.632
+        beta: 0.216
+        epsilon: 50000.0
+        mu: 0.0
+        reaction_equation: OH-Ni+CO-Ni>COOH-Ni+Ni
+    - id: 38
+      reactions:
+      - A_cm_units: 4.22e+23
+        EA: 104.732
+        beta: -1.145
+        reaction_equation: COOH-Ni+H-Ni>HCO-Ni+OH-Ni
+    - id: 39
+      reactions:
+      - A_cm_units: 3.246e+19
+        EA: 16.068
+        beta: 0.245
+        reaction_equation: HCO-Ni+OH-Ni>COOH-Ni+H-Ni
+    - id: 40
+      reactions:
+      - A_cm_units: 63120000000000.0
+        EA: 241.679
+        beta: 0.5
+        epsilon: 100000.0
+        mu: 0.0
+        reaction_equation: CO-Ni+CO-Ni>C-Ni+CO2-Ni
+    - id: 41
+      reactions:
+      - A_cm_units: 1.878e+21
+        EA: 239.321
+        beta: -0.5
+        epsilon: 104999.99999999999
+        mu: 0.0
+        reaction_equation: C-Ni+CO2-Ni>CO-Ni+CO-Ni
