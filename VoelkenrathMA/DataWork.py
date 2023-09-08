@@ -214,6 +214,7 @@ def CreateDataSheet(name, data):
    
     
     # load reaction scheme
+    """
     scheme_name = "linkml/" + reaction_type + "_Scheme.yaml"
     try:    
         #scheme_data = open(scheme_name, "r").read()
@@ -223,7 +224,11 @@ def CreateDataSheet(name, data):
     except FileNotFoundError:
         print(f"Scheme {scheme_name} not found and needs to be created!")
         return False
-        
+    """
+    scheme_name = "linkml/PFR_Scheme.yaml"
+    with open(scheme_name, 'r') as scheme_file:
+        scheme_data = scheme_file.read()
+    scheme = yaml_loader.load(scheme_data, target_class=SchemaDefinition)
     
     # get feed parameter
     TPV = data["pbr.inp"]["MAIN"]["PBR"]["INITIAL"]["#text"]
