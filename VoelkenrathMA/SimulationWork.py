@@ -106,7 +106,7 @@ def CreateSubstanceJSON(data):
     
 
 
-def CreateSimulation(data):
+def ProcessSimulation(name, data):
     ## Creates a simulation flowsheet for the given reaction system
     
     # create and connect objects
@@ -114,27 +114,54 @@ def CreateSimulation(data):
     water = sim.AvailableCompounds["Water"]
     sim.SelectedCompounds.Add(water.Name, water)
     
-    m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
-    m2 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet")
-    e1 = sim.AddObject(ObjectType.EnergyStream, 100, 50, "power")
-    h1 = sim.AddObject(ObjectType.Heater, 100, 50, "heater")
+    # material
+    m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet_1")
+    m2 = sim.AddObject(ObjectType.MaterialStream, 50, 100, "inlet_2")
+    m3 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "mixture")
+    m4 = sim.AddObject(ObjectType.MaterialStream, 250, 50, "feed")
+    m5 = sim.AddObject(ObjectType.MaterialStream, 450, 50, "outlet")
     
+    # energy
+    e1 = sim.AddObject(ObjectType.EnergyStream, 150, 125, "power_heater")
+    e2 = sim.AddObject(ObjectType.EnergyStream, 250, 125, "power_reactor")
+    
+    # devices
+    d1 = sim.AddObject(ObjectType.Mixer, 100, 75, "mixer")
+    h1 = sim.AddObject(ObjectType.Heater, 200, 75, "heater")
+    r1 = sim.AddObject(ObjectType.RCT_PFR, 300, 75, "reactor")
+     
     m1 = m1.GetAsObject()
     m2 = m2.GetAsObject()
+    m3 = m3.GetAsObject()
+    m4 = m4.GetAsObject()
+    m5 = m5.GetAsObject()
     e1 = e1.GetAsObject()
+    d1 = d1.GetAsObject()
     h1 = h1.GetAsObject()
+    r1 = r1.GetAsObject()
     
-    sim.ConnectObjects(m1.GraphicObject, h1.GraphicObject, -1, -1)
-    sim.ConnectObjects(h1.GraphicObject, m2.GraphicObject, -1, -1)
+    sim.ConnectObjects(m1.GraphicObject, d1.GraphicObject, -1, -1)
+    sim.ConnectObjects(m2.GraphicObject, d1.GraphicObject, -1, -1)
+    sim.ConnectObjects(d1.GraphicObject, m3.GraphicObject, -1, -1)
+    sim.ConnectObjects(m3.GraphicObject, h1.GraphicObject, -1, -1)
+    sim.ConnectObjects(h1.GraphicObject, m4.GraphicObject, -1, -1)
     sim.ConnectObjects(e1.GraphicObject, h1.GraphicObject, -1, -1)
     
-    sim.AutoLayout()
+    r1.ConnectFeedMaterialStream(m4, 0)
+    r1.ConnectProductMaterialStream(m5, 0)
+    r1.ConnectFeedEnergyStream(e2, 1)
+    
+    
+    # sim.AutoLayout() # führt dazu, dass Angabe von x und y bei sim.AddObject unnötig sind
     
     stables = PropertyPackages.SteamTablesPropertyPackage()
     sim.AddPropertyPackage(stables)
     
     m1.SetTemperature(300.0) # Kelvin
     m1.SetMassFlow(100.0) # kg/s --> evtl. VolumeFlow auch möglich
+    
+    m2.SetTemperature(250.0)
+    m2.SetMassFlow(50.0)
     
     h1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature
     h1.OutletTemperature = 400 # Kelvin
@@ -146,7 +173,8 @@ def CreateSimulation(data):
     print(String.Format("Heater Heat Load: {0} kW", h1.DeltaQ))
     
     # save file
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    fileName_dwsim = name + ".dwxmz"
+    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName_dwsim)
     
     interf.SaveFlowsheet(sim, fileNameToSave, True)
     
@@ -162,6 +190,8 @@ def CreateSimulation(data):
     # save the pdf to an image and display it
     PFDSurface = sim.GetSurface()
     
+    fileName_pic = name + ".png"
+    
     bmp = SKBitmap(1024, 768)
     canvas = SKCanvas(bmp)
     canvas.Scale(1.0)
@@ -170,7 +200,7 @@ def CreateSimulation(data):
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName_pic)
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
@@ -182,7 +212,7 @@ def CreateSimulation(data):
     im.show()
     
         
-def run():
+def run(name):
     # load yaml-datafile
     # ACHTUNG: Übergabe des yaml-file zum Ende hin Variabel gestalten, sodass gesamter Workflow
     # mit einem einzigen Befehl ausgeführt werden kann
@@ -193,6 +223,6 @@ def run():
         data = yaml.safe_load(file)
    
     #CreateSubstanceJSON(data)
-    CreateSimulation(data)
+    ProcessSimulation(name, data)
     
     
