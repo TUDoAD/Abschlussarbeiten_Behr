@@ -67,6 +67,9 @@ from DWSIM.Thermodynamics.PropertyPackages.Auxiliary import *
 from DWSIM.Thermodynamics.Utilities.PetroleumCharacterization import GenerateCompounds
 from DWSIM.Thermodynamics.Utilities.PetroleumCharacterization.Methods import *
 
+
+
+
 #Directory.SetCurrentDirectory(dwsimpath)
 
 # create automation manager
@@ -85,6 +88,11 @@ def CreateSubstanceJSON(data):
                                       t1i As Nullable(Of Double), t2i As Nullable(Of Double),
                                       _mw0 As Double, _sg0 As Double, _tb0 As Double) As Dictionary(Of String, ICompound)
     """    
+    
+    # Achtung: Bevor die Substanzen muss noch eine Abfrage durchgeführt werden welche Substanzen bereits in DWSIM vorhanden sind.
+    # Zuordnung in DWSIM leider nur durch CAS möglich, woher bekomme ich diese?
+    # Pubchem-API geht nicht, ChEBI-API läuft nur mit ID's diese habe ich allerdings auch nicht
+    """
     water = sim.AvailableCompounds["Water"]
     compounds = sim.AvailableCompounds
     compounds_list = list(compounds)
@@ -93,17 +101,86 @@ def CreateSubstanceJSON(data):
         value = compounds_list[i].get_Value()
         cas = value.CAS_Number
         if '7732-18-5' == cas:
-            print("Successful")
-    return water
+    """
+    print("")
+    
 
 
-def CreateSimulationFlowsheet(data):
+def CreateSimulation(data):
     ## Creates a simulation flowsheet for the given reaction system
-    # define streams, inlet, outlet, energie
-    stream_info = []
-    for i in range(len(data[0]["Mixture"][0]["mole_fraction"])):    
-        print(i)
+    
+    # create and connect objects
+    # Wasser anschließend durch eigene Edukte ersetzen
+    water = sim.AvailableCompounds["Water"]
+    sim.SelectedCompounds.Add(water.Name, water)
+    
+    m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet")
+    m2 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet")
+    e1 = sim.AddObject(ObjectType.EnergyStream, 100, 50, "power")
+    h1 = sim.AddObject(ObjectType.Heater, 100, 50, "heater")
+    
+    m1 = m1.GetAsObject()
+    m2 = m2.GetAsObject()
+    e1 = e1.GetAsObject()
+    h1 = h1.GetAsObject()
+    
+    sim.ConnectObjects(m1.GraphicObject, h1.GraphicObject, -1, -1)
+    sim.ConnectObjects(h1.GraphicObject, m2.GraphicObject, -1, -1)
+    sim.ConnectObjects(e1.GraphicObject, h1.GraphicObject, -1, -1)
+    
+    sim.AutoLayout()
+    
+    stables = PropertyPackages.SteamTablesPropertyPackage()
+    sim.AddPropertyPackage(stables)
+    
+    m1.SetTemperature(300.0) # Kelvin
+    m1.SetMassFlow(100.0) # kg/s --> evtl. VolumeFlow auch möglich
+    
+    h1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature
+    h1.OutletTemperature = 400 # Kelvin
+    
+    Settings.SolverMode = 0
+    
+    errors = interf.CalculateFlowsheet2(sim)
+    
+    print(String.Format("Heater Heat Load: {0} kW", h1.DeltaQ))
+    
+    # save file
+    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxmz")
+    
+    interf.SaveFlowsheet(sim, fileNameToSave, True)
+    
+    # packages to draw and save the pdf to an image and display it
+    clr.AddReference(dwsimpath + "SkiaSharp.dll")
+    clr.AddReference("System.Drawing")
+    
+    from SkiaSharp import SKBitmap, SKImage, SKCanvas, SKEncodedImageFormat
+    from System.IO import MemoryStream
+    from System.Drawing import Image
+    from System.Drawing.Imaging import ImageFormat
         
+    # save the pdf to an image and display it
+    PFDSurface = sim.GetSurface()
+    
+    bmp = SKBitmap(1024, 768)
+    canvas = SKCanvas(bmp)
+    canvas.Scale(1.0)
+    PFDSurface.UpdateCanvas(canvas)
+    d = SKImage.FromBitmap(bmp).Encode(SKEncodedImageFormat.Png, 100)
+    str = MemoryStream()
+    d.SaveTo(str)
+    image = Image.FromStream(str)
+    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "pfd.png")
+    image.Save(imgPath, ImageFormat.Png)
+    str.Dispose()
+    canvas.Dispose()
+    bmp.Dispose()
+    
+    from PIL import Image
+    
+    im = Image.open(imgPath)
+    im.show()
+    
         
 def run():
     # load yaml-datafile
@@ -114,9 +191,8 @@ def run():
     
     with open("linkml/Methanation_PFR_DataSheet.yaml", "r") as file:
         data = yaml.safe_load(file)
-        
-    water = CreateSubstanceJSON(data)
-    return water
-    #CreateSimulationFlowsheet(data)
+   
+    #CreateSubstanceJSON(data)
+    CreateSimulation(data)
     
     
