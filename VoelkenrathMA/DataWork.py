@@ -205,26 +205,11 @@ def CreateDataSheet(name, data):
         reaction_type = reaction_class.split(".")[1]
         print(" ")
         print(f"The implemented reaction is a {reaction_type}")
-        print("Creating LinkML datasheet...")
-        
     else:
         print("Reasoner not found a reaction-type for the implemented reaction. Check if reaction is in ontology and define it if not")
         return False
-    
-   
-    
-    # load reaction scheme
-    """
-    scheme_name = "linkml/" + reaction_type + "_Scheme.yaml"
-    try:    
-        #scheme_data = open(scheme_name, "r").read()
-        with open(scheme_name, 'r') as scheme_file:
-            scheme_data = scheme_file.read()
-        scheme = yaml_loader.load(scheme_data, target_class=SchemaDefinition)
-    except FileNotFoundError:
-        print(f"Scheme {scheme_name} not found and needs to be created!")
-        return False
-    """
+
+    # load reactor scheme
     scheme_name = "linkml/PFR_Scheme.yaml"
     with open(scheme_name, 'r') as scheme_file:
         scheme_data = scheme_file.read()
@@ -244,7 +229,9 @@ def CreateDataSheet(name, data):
     gasphase = data["pbr.inp"]["MAIN"]["SPECIES"]["GASPHASE"].replace(" ","").split("\n")
     surface = data["pbr.inp"]["MAIN"]["SPECIES"]["SURFACE"]["#text"].replace(" ","").split("\n")
     components = gasphase + surface
-        
+    
+    print(" ")
+    print("Creating LinkML datasheet...")
     # get reactor parameter (reactive volume is calculated with tube length and diameter)
     process = data["pbr.inp"]["MAIN"]["PBR"]["PROCESS"].split("\n")
     for i in process:

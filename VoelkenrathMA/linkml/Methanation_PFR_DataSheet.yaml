@@ -27,7 +27,7 @@
     - CH3-Ni
     - COOH-Ni
     temperature: 420.0
-    type: !!python/name:owlready2.entity.Mixture ''
+    #type: !!python/name:owlready2.entity.Mixture ''
     velocity: 0.2
 - Reactor:
   - calculation_mode: isothermal
@@ -38,7 +38,7 @@
     reactive_volume: 0.12566370614359174
     tube_diameter: 0.4
     tube_length: 1.0
-    type: !!python/name:owlready2.entity.AFE_0000153 ''
+    #type: !!python/name:owlready2.entity.AFE_0000153 ''
 - ChemicalReaction:
   - - id: 0
       reactions:

@@ -1,6 +1,6 @@
 id: http://example.com/schemas/methanation
 name: Methanation
-description: A scheme for the process-simulation of a methanation-reaction in DWSIM
+description: A scheme for the process simulation of a methanation-reaction in DWSIM
 prefixes:
   dwsim: "http://example.com/dwsim#"
   linkml: "https://w3id.org/linkml/"
@@ -39,7 +39,7 @@ classes:
         description: Mole fraction of a compound in the inlet
       - name: substances
         domain: Mixture
-        range: list
+        range: list[]
         description: Every Substance and Pseudocomponent in this reaction System
 
   - name: Reactor
@@ -95,7 +95,7 @@ classes:
         description: List of the reaction and parameter
 
   - name: Reaction
-    is_a: entitiy
+    is_a: entity
     slots:
       - name: id
         domain: Reaction
@@ -128,4 +128,4 @@ classes:
       - name: mu
         domain: Reaction
         range: float
-        description: mu value of the reaction
+        description: Mu value of the reaction
