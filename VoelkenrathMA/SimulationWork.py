@@ -68,8 +68,6 @@ from DWSIM.Thermodynamics.Utilities.PetroleumCharacterization import GenerateCom
 from DWSIM.Thermodynamics.Utilities.PetroleumCharacterization.Methods import *
 
 
-
-
 #Directory.SetCurrentDirectory(dwsimpath)
 
 # create automation manager
@@ -119,62 +117,111 @@ def ProcessSimulation(name, data):
     m2 = sim.AddObject(ObjectType.MaterialStream, 50, 100, "inlet_2")
     m3 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "mixture")
     m4 = sim.AddObject(ObjectType.MaterialStream, 250, 50, "feed")
-    m5 = sim.AddObject(ObjectType.MaterialStream, 450, 50, "outlet")
+    m5 = sim.AddObject(ObjectType.MaterialStream, 400, 50, "outlet")
+    m6 = sim.AddObject(ObjectType.MaterialStream, 500, 50, "gas_liquid")
+    m7 = sim.AddObject(ObjectType.MaterialStream, 650, 50, "gas")
+    m8 = sim.AddObject(ObjectType.MaterialStream, 650, 100, "liquid")
     
     # energy
     e1 = sim.AddObject(ObjectType.EnergyStream, 150, 125, "power_heater")
     e2 = sim.AddObject(ObjectType.EnergyStream, 250, 125, "power_reactor")
+    e3 = sim.AddObject(ObjectType.EnergyStream, 400, 125, "power_cooler")
+    # e4 = sim.AddObject(ObjectType.EnergyStream, 500, 125, "power_separator")
     
     # devices
     d1 = sim.AddObject(ObjectType.Mixer, 100, 75, "mixer")
     h1 = sim.AddObject(ObjectType.Heater, 200, 75, "heater")
     r1 = sim.AddObject(ObjectType.RCT_PFR, 300, 75, "reactor")
+    h2 = sim.AddObject(ObjectType.Heater, 450, 75, "cooler")
+    s1 = sim.AddObject(ObjectType.ComponentSeparator, 550, 75, "gas-liquid separator")
      
     m1 = m1.GetAsObject()
     m2 = m2.GetAsObject()
     m3 = m3.GetAsObject()
     m4 = m4.GetAsObject()
     m5 = m5.GetAsObject()
+    m6 = m6.GetAsObject()
+    m7 = m7.GetAsObject()
+    m8 = m8.GetAsObject()
     e1 = e1.GetAsObject()
+    e2 = e2.GetAsObject()
+    e3 = e3.GetAsObject()
+    #e4 = e4.GetAsObject()
     d1 = d1.GetAsObject()
     h1 = h1.GetAsObject()
+    h2 = h2.GetAsObject()
     r1 = r1.GetAsObject()
+    s1 = s1.GetAsObject()
     
-    sim.ConnectObjects(m1.GraphicObject, d1.GraphicObject, -1, -1)
-    sim.ConnectObjects(m2.GraphicObject, d1.GraphicObject, -1, -1)
-    sim.ConnectObjects(d1.GraphicObject, m3.GraphicObject, -1, -1)
-    sim.ConnectObjects(m3.GraphicObject, h1.GraphicObject, -1, -1)
-    sim.ConnectObjects(h1.GraphicObject, m4.GraphicObject, -1, -1)
-    sim.ConnectObjects(e1.GraphicObject, h1.GraphicObject, -1, -1)
+    sim.ConnectObjects(m1.GraphicObject, d1.GraphicObject, -1, -1) # inlet 1 - mixer
+    sim.ConnectObjects(m2.GraphicObject, d1.GraphicObject, -1, -1) # inlet 2 - mixer
+    sim.ConnectObjects(d1.GraphicObject, m3.GraphicObject, -1, -1) # mixer - mixture
+    sim.ConnectObjects(m3.GraphicObject, h1.GraphicObject, -1, -1) # mixture - heater
+    sim.ConnectObjects(h1.GraphicObject, m4.GraphicObject, -1, -1) # heater - feed
+    sim.ConnectObjects(e1.GraphicObject, h1.GraphicObject, -1, -1) # power_heater - heater
     
-    r1.ConnectFeedMaterialStream(m4, 0)
-    r1.ConnectProductMaterialStream(m5, 0)
-    r1.ConnectFeedEnergyStream(e2, 1)
+    r1.ConnectFeedMaterialStream(m4, 0) # feed - reactor
+    r1.ConnectProductMaterialStream(m5, 0) # reactor - outlet
+    r1.ConnectFeedEnergyStream(e2, 1) # power_reactor - reactor
+    
+    sim.ConnectObjects(m5.GraphicObject, h2.GraphicObject, -1, -1) # outlet - cooler
+    sim.ConnectObjects(e3.GraphicObject, h2.GraphicObject, -1, -1) # power_cooler - cooler
+    sim.ConnectObjects(h2.GraphicObject, m6.GraphicObject, -1, -1) # cooler - gas_liquid
+    sim.ConnectObjects(m6.GraphicObject, s1.GraphicObject, -1, -1) # gas_liquid - gas_liquid_separator
+    #sim.ConnectObjects(e4.GraphicObject, s1.GraphicObject, -1, -1) # power_separator - gas_liquid_separator
+    sim.ConnectObjects(s1.GraphicObject, m7.GraphicObject, -1, -1) # gas_liquid_separator - gas
+    sim.ConnectObjects(s1.GraphicObject, m8.GraphicObject, -1, -1) # gas_liquid_separator - liquid
     
     
-    # sim.AutoLayout() # führt dazu, dass Angabe von x und y bei sim.AddObject unnötig sind
+    #sim.AutoLayout() 
     
     stables = PropertyPackages.SteamTablesPropertyPackage()
     sim.AddPropertyPackage(stables)
     
-    m1.SetTemperature(300.0) # Kelvin
-    m1.SetMassFlow(100.0) # kg/s --> evtl. VolumeFlow auch möglich
+    ## specify simulation parameters via DataSheet
+    m1.SetTemperature(293.0) # room temperature (20°C, 293K)
+    m2.SetTemperature(293.0) # room temperature (20°C, 293K)
     
-    m2.SetTemperature(250.0)
-    m2.SetMassFlow(50.0)
+    # Achtung: Hier wird eine Umrechnung nötig sein: Molanteil -> molare Masse -> Massenstrom !! Evtl. aus Pubchem auslesen, in Ontologie integrieren und mit ins DataFile packen
+    m1.SetMassFlow(100.0) # kg/s
+    m2.SetMassFlow(50.0) # kg/s
     
+    # preheat the mixture up to reaction temperature
+    reaction_temperature = data[0]["Mixture"][0]["temperature"]
     h1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature
-    h1.OutletTemperature = 400 # Kelvin
+    h1.OutletTemperature = reaction_temperature # Kelvin
+    
+    # set calculation mode and specify reactor-geometry
+    if data[1]["Reactor"][0]["calculation_mode"] == "isothermal":
+        r1.ReactorOperationMode = Reactors.OperationMode.Isothermic
+    elif data[1]["Reactor"][0]["calculation_mode"] == "adiabatic":
+        r1.ReactorOperationMode = Reactors.OperationMode.Adiabatic
+    else:
+        print("Error accured while setting the ReactorOperationMode!")
+    
+    # Volume has to be set and you can choose 1 of diameter or length
+    r1.Volume = data[1]["Reactor"][0]["reactive_volume"]
+    r1.Length = data[1]["Reactor"][0]["tube_length"]
+    #r1.Diameter = data[1]["Reactor"][0]["tube_diameter"]
+    r1.NumberOfTubes = data[1]["Reactor"][0]["num_tubes"]
+    
+    # cooling down to room temperature (20°C, 293K)
+    h2.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature
+    h2.OutletTemperature = 293 # Kelvin
     
     Settings.SolverMode = 0
     
     errors = interf.CalculateFlowsheet2(sim)
     
+    # print results
     print(String.Format("Heater Heat Load: {0} kW", h1.DeltaQ))
+    print(String.Format("Cooler Heat Load: {0} kW", h2.DeltaQ))
+    
     
     # save file
     fileName_dwsim = name + ".dwxmz"
-    fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName_dwsim)
+    fileNameToSave = Path.Combine("C:\\Users\\smmcvoel\\Desktop\\Temporäre Ablage", fileName_dwsim)
+    #fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName_dwsim)
     
     interf.SaveFlowsheet(sim, fileNameToSave, True)
     
@@ -200,7 +247,8 @@ def ProcessSimulation(name, data):
     str = MemoryStream()
     d.SaveTo(str)
     image = Image.FromStream(str)
-    imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName_pic)
+    imgPath = Path.Combine("C:\\Users\\smmcvoel\\Desktop\\Temporäre Ablage", fileName_pic)
+    #imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName_pic)
     image.Save(imgPath, ImageFormat.Png)
     str.Dispose()
     canvas.Dispose()
