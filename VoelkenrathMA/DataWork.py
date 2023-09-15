@@ -367,17 +367,30 @@ def run(name):
     # Extract Substances and add them to ontology
     substances = GetSubstances(data)
     AddSubstanceToOWL(substances)
-
+    
     # Adding reaction as individual to ontology and start reasoner
-    # ACHTUNG: auslesen von Edukt, Produkt und Kat. muss noch automatisiert werden!
-    # Frage Alex ob er eine Idee dazu hat!
-    educts = ["CO", "CO2", "H2"]
-    products = ["CH4", "H2O"]
-    cat = ["Ni"]
+    educts = []
+    educts_ = data["pbr.inp"]["MAIN"]["PBR"]["INITIAL"]["MOLEFRAC"]
+    educts_ = educts_.replace(" ","").split("\n")
+    for i in range(len(educts_)):
+        educts.append(educts_[i].split("=")[0])
+    print(f"The educts of the reaction are: {educts}")
     
-    #educts, products = GetInputOutput()
+    products = []
+    products_ = data["pbr.inp"]["MAIN"]["SPECIES"]["GASPHASE"].replace(" ","").split("\n")
+    for prod in products_:
+        if prod not in educts:
+            products.append(prod)
+    print(f"The products of the reaction are: {products}")
     
-    AddReactionToOWL(name, educts, products, cat)
+    catalyst = []
+    catalyst_ = data["pbr.inp"]["MAIN"]["SPECIES"]["SURFACE"]["#text"].replace(" ","").split("\n")
+    for cat in catalyst_:
+        if "-" not in cat:
+            catalyst.append(cat)
+    print(f"The catalyst of the reaction is: {catalyst}")
+    
+    AddReactionToOWL(name, educts, products, catalyst)
     
     # Creating LinkML-datasheet for simulation
     CreateDataSheet(name, data)
