@@ -5,6 +5,7 @@ Created on Fri Sep  8 13:40:14 2023
 @author: smmcvoel
 """
 import yaml
+import math
 import owlready2
 
 ## Import all necessary DWSIM packages
@@ -108,14 +109,17 @@ def ProcessSimulation(name, data):
     ## Creates a simulation flowsheet for the given reaction system
     
     # create and connect objects
-    # Wasser anschließend durch eigene Edukte ersetzen
-    water = sim.AvailableCompounds["Water"]
-    sim.SelectedCompounds.Add(water.Name, water)
+    # Achtung: Wasser anschließend durch eigene Edukte ersetzen
+    co2 = sim.AvailableCompounds["Carbon dioxide"]
+    h2 = sim.AvailableCompounds["Hydrogen"]
+    
+    sim.SelectedCompounds.Add(co2.Name, co2)
+    sim.SelectedCompounds.Add(h2.Name, h2)
     
     # material
-    m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet_1")
-    m2 = sim.AddObject(ObjectType.MaterialStream, 50, 100, "inlet_2")
-    m3 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "mixture")
+    #m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet_1")
+    #m2 = sim.AddObject(ObjectType.MaterialStream, 50, 100, "inlet_2")
+    #m3 = sim.AddObject(ObjectType.MaterialStream, 150, 50, "mixture")
     m4 = sim.AddObject(ObjectType.MaterialStream, 250, 50, "feed")
     m5 = sim.AddObject(ObjectType.MaterialStream, 400, 50, "outlet")
     m6 = sim.AddObject(ObjectType.MaterialStream, 500, 50, "gas_liquid")
@@ -123,42 +127,42 @@ def ProcessSimulation(name, data):
     m8 = sim.AddObject(ObjectType.MaterialStream, 650, 100, "liquid")
     
     # energy
-    e1 = sim.AddObject(ObjectType.EnergyStream, 150, 125, "power_heater")
+    #e1 = sim.AddObject(ObjectType.EnergyStream, 150, 125, "power_heater")
     e2 = sim.AddObject(ObjectType.EnergyStream, 250, 125, "power_reactor")
     e3 = sim.AddObject(ObjectType.EnergyStream, 400, 125, "power_cooler")
-    # e4 = sim.AddObject(ObjectType.EnergyStream, 500, 125, "power_separator")
+    #e4 = sim.AddObject(ObjectType.EnergyStream, 500, 125, "power_separator")
     
     # devices
-    d1 = sim.AddObject(ObjectType.Mixer, 100, 75, "mixer")
-    h1 = sim.AddObject(ObjectType.Heater, 200, 75, "heater")
+    #d1 = sim.AddObject(ObjectType.Mixer, 100, 75, "mixer")
+    #h1 = sim.AddObject(ObjectType.Heater, 200, 75, "heater")
     r1 = sim.AddObject(ObjectType.RCT_PFR, 300, 75, "reactor")
     h2 = sim.AddObject(ObjectType.Heater, 450, 75, "cooler")
     s1 = sim.AddObject(ObjectType.ComponentSeparator, 550, 75, "gas-liquid separator")
      
-    m1 = m1.GetAsObject()
-    m2 = m2.GetAsObject()
-    m3 = m3.GetAsObject()
+    #m1 = m1.GetAsObject()
+    #m2 = m2.GetAsObject()
+    #m3 = m3.GetAsObject()
     m4 = m4.GetAsObject()
     m5 = m5.GetAsObject()
     m6 = m6.GetAsObject()
     m7 = m7.GetAsObject()
     m8 = m8.GetAsObject()
-    e1 = e1.GetAsObject()
+    #e1 = e1.GetAsObject()
     e2 = e2.GetAsObject()
     e3 = e3.GetAsObject()
     #e4 = e4.GetAsObject()
-    d1 = d1.GetAsObject()
-    h1 = h1.GetAsObject()
+    #d1 = d1.GetAsObject()
+    #h1 = h1.GetAsObject()
     h2 = h2.GetAsObject()
     r1 = r1.GetAsObject()
     s1 = s1.GetAsObject()
     
-    sim.ConnectObjects(m1.GraphicObject, d1.GraphicObject, -1, -1) # inlet 1 - mixer
-    sim.ConnectObjects(m2.GraphicObject, d1.GraphicObject, -1, -1) # inlet 2 - mixer
-    sim.ConnectObjects(d1.GraphicObject, m3.GraphicObject, -1, -1) # mixer - mixture
-    sim.ConnectObjects(m3.GraphicObject, h1.GraphicObject, -1, -1) # mixture - heater
-    sim.ConnectObjects(h1.GraphicObject, m4.GraphicObject, -1, -1) # heater - feed
-    sim.ConnectObjects(e1.GraphicObject, h1.GraphicObject, -1, -1) # power_heater - heater
+    #sim.ConnectObjects(m1.GraphicObject, d1.GraphicObject, -1, -1) # inlet 1 - mixer
+    #sim.ConnectObjects(m2.GraphicObject, d1.GraphicObject, -1, -1) # inlet 2 - mixer
+    #sim.ConnectObjects(d1.GraphicObject, m3.GraphicObject, -1, -1) # mixer - mixture
+    #sim.ConnectObjects(m3.GraphicObject, h1.GraphicObject, -1, -1) # mixture - heater
+    #sim.ConnectObjects(h1.GraphicObject, m4.GraphicObject, -1, -1) # heater - feed
+    #sim.ConnectObjects(e1.GraphicObject, h1.GraphicObject, -1, -1) # power_heater - heater
     
     r1.ConnectFeedMaterialStream(m4, 0) # feed - reactor
     r1.ConnectProductMaterialStream(m5, 0) # reactor - outlet
@@ -174,22 +178,25 @@ def ProcessSimulation(name, data):
     
     
     #sim.AutoLayout() 
-    
-    stables = PropertyPackages.SteamTablesPropertyPackage()
-    sim.AddPropertyPackage(stables)
-    
+    sim.CreateAndAddPropertyPackage("Raoult's Law")
+    #stables = PropertyPackages.SteamTablesPropertyPackage()
+    #sim.AddPropertyPackage(stables)
+    """
     ## specify simulation parameters via DataSheet
     m1.SetTemperature(293.0) # room temperature (20°C, 293K)
     m2.SetTemperature(293.0) # room temperature (20°C, 293K)
-    
-    # Achtung: Hier wird eine Umrechnung nötig sein: Molanteil -> molare Masse -> Massenstrom !! Evtl. aus Pubchem auslesen, in Ontologie integrieren und mit ins DataFile packen
     m1.SetMassFlow(100.0) # kg/s
     m2.SetMassFlow(50.0) # kg/s
+    """
+    
+    m4.SetTemperature(data[0]["Mixture"][0]["temperature"])
+    V_flow = math.pi * (data[1]["Reactor"][0]["tube_diameter"]/2) ** 2 * data[0]["Mixture"][0]["velocity"]
+    m4.SetVolumetricFlow(V_flow)
     
     # preheat the mixture up to reaction temperature
-    reaction_temperature = data[0]["Mixture"][0]["temperature"]
-    h1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature
-    h1.OutletTemperature = reaction_temperature # Kelvin
+    #reaction_temperature = data[0]["Mixture"][0]["temperature"]
+    #h1.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature
+    #h1.OutletTemperature = reaction_temperature # Kelvin
     
     # set calculation mode and specify reactor-geometry
     if data[1]["Reactor"][0]["calculation_mode"] == "isothermal":
@@ -214,7 +221,7 @@ def ProcessSimulation(name, data):
     errors = interf.CalculateFlowsheet2(sim)
     
     # print results
-    print(String.Format("Heater Heat Load: {0} kW", h1.DeltaQ))
+    #print(String.Format("Heater Heat Load: {0} kW", h1.DeltaQ))
     print(String.Format("Cooler Heat Load: {0} kW", h2.DeltaQ))
     
     

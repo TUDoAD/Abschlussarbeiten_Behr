@@ -374,6 +374,9 @@ def run(name):
     educts = ["CO", "CO2", "H2"]
     products = ["CH4", "H2O"]
     cat = ["Ni"]
+    
+    #educts, products = GetInputOutput()
+    
     AddReactionToOWL(name, educts, products, cat)
     
     # Creating LinkML-datasheet for simulation
