@@ -385,6 +385,37 @@ def get_DOI(filename):
 
 
 
-#filename= './import/1-s2.0-S1381116997000356-main.pdf'
+filename= './import/1-s2.0-S1381116997000356-main.pdf'
 
-#doi,title= get_DOI(filename)
+title,doi= get_DOI(filename)
+
+pdfFileObj = open('3D Printing in Pharmaceutical Sector: An Overview.pdf', 'rb')
+pdfReader = pypdf.PdfFileReader(pdfFileObj)
+num_pages = pdfReader.numPages      
+count = 0
+pagecontent = ""                                                   
+while count < num_pages: #The while loop will read each page
+    #print(count)
+    pageObj = pdfReader.getPage(count)
+    count +=1
+    pagecontent += pageObj.extractText()
+
+
+def between(value, a, b):
+    # Find and validate before-part.
+    pos_a = value.find(a)
+    if pos_a == -1: return ""
+    # Find and validate after part.
+    pos_b = value.rfind(b)
+    if pos_b == -1: return ""
+    # Return middle part.
+    adjusted_pos_a = pos_a + len(a)
+    if adjusted_pos_a >= pos_b: return ""
+    return value[adjusted_pos_a:pos_b]
+
+desired = between(pagecontent,"Abstract","Keywords")
+print('The abstract of the document is :' + desired)
+
+text = desired.encode('ascii','ignore').lower() # It returns an utf-8 encoded version of the string & Lowercasing each word
+text = text.decode('ISO-8859-1')
+keywords = re.findall(r'[a-zA-Z]\w+',text)
