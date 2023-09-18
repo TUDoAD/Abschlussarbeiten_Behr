@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="Imports Wizard Entry" name="http://biomodels.net/SBO/" uri="https://raw.githubusercontent.com/EBI-BioModels/SBO/master/SBO_OWL.owl"/>
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1694968082164" name="duplicate:http://anonymous" uri="BaseOnto.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1694968082164" name="duplicate:http://anonymous" uri="Finale_Onto_.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1694968082164" name="duplicate:http://anonymous" uri="Finale_Onto_AB.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1694968082164" name="duplicate:http://anonymous" uri="Zwischenstand_Onto_.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1694968082164" name="http://biomodels.net/SBO/" uri="SBO_OWL.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1694968082164" name="http://purl.obolibrary.org/obo/bfo.owl" uri="Finale_Onto_mod_ReacOnto.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1694968082164" name="http://w3id.org/nfdi4ing/metadata4ing" uri="m4ing_SBO.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1694968082164" name="http://www.semanticweb.org/49157/ontologies/2023/04/Step1Thesis_Klassenhierarchies" uri="Klassenhierarchie.owl"/>
+    </group>
+</catalog>
