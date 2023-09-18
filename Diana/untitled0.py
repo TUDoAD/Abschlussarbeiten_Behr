@@ -38,7 +38,8 @@ import string
 import subprocess
 import sys
 import unidecode
-
+import pybliometrics
+from pybliometrics.scopus import AbstractRetrieval
 from pypdf import PdfReader
 from pdfminer.pdfdocument import PDFDocument
 from pdfminer.pdfpage import PDFPage
@@ -389,17 +390,27 @@ filename= './import/1-s2.0-S1381116997000356-main.pdf'
 
 title,doi= get_DOI(filename)
 
-pdfFileObj = open('3D Printing in Pharmaceutical Sector: An Overview.pdf', 'rb')
-pdfReader = pypdf.PdfFileReader(pdfFileObj)
-num_pages = pdfReader.numPages      
-count = 0
-pagecontent = ""                                                   
-while count < num_pages: #The while loop will read each page
-    #print(count)
-    pageObj = pdfReader.getPage(count)
-    count +=1
-    pagecontent += pageObj.extractText()
-
+def get_abstract(filename,doi):
+    reader = PdfReader(open(filename, 'rb'))
+    num_pages = len(reader.pages)     
+    count = 0
+    pagecontent = ""                                                   
+    
+    if 'Elsevier' in reader.pages[0].extract_text():
+        abstract=get_abs_els(doi)
+    else:
+        while count < num_pages: #The while loop will read each page
+            #print(count)
+            pageObj = reader.pages[count]
+            count +=1
+            pagecontent += pageObj.extract_text()
+        desired = between(pagecontent,"Abstract","Keywords")
+        print('The abstract of the document is :' + desired)
+    
+        text = desired.encode('ascii','ignore').lower() # It returns an utf-8 encoded version of the string & Lowercasing each word
+        text = text.decode('ISO-8859-1')
+    #keywords = re.findall(r'[a-zA-Z]\w+',text)
+    return abstract
 
 def between(value, a, b):
     # Find and validate before-part.
@@ -413,9 +424,11 @@ def between(value, a, b):
     if adjusted_pos_a >= pos_b: return ""
     return value[adjusted_pos_a:pos_b]
 
-desired = between(pagecontent,"Abstract","Keywords")
-print('The abstract of the document is :' + desired)
+def get_abs_els(doi):
+    ab = AbstractRetrieval(doi)
+    abstract=ab.abstract
+    if not abstract:
+        abstract=ab.description
+    return abstract
 
-text = desired.encode('ascii','ignore').lower() # It returns an utf-8 encoded version of the string & Lowercasing each word
-text = text.decode('ISO-8859-1')
-keywords = re.findall(r'[a-zA-Z]\w+',text)
+abstract=get_abstract(filename,doi)
