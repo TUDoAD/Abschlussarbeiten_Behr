@@ -110,22 +110,22 @@ with onto:
     # Komponenten: DWSIM stellt 6 Datenbanken zur verfügung (DWSIM, ChemSep, Biodiesel, CoolProp, ChEDL and Electrolytes)
     # Daraus ergeben sich 1500 verfügbare Komponenten für die Simulation
     # Datenbanken werden der metadata4Ing Klasse 'ChemicalSubstance' subsumiert
-        class SubstanceDatabase(onto.search_one(iri = '*ChemicalSubstance')): pass
-        class DefaultDatabase(SubstanceDatabase): pass
+        class modeledSubstance(onto.search_one(iri = '*ChemicalSubstance')): pass
+        class DefaultDatabase(modeledSubstance): pass
         class DWSIMCompound(DefaultDatabase): pass
-        class ChemSep(DefaultDatabase): pass
-        class Biodiesel(DefaultDatabase): pass
-        class CoolProp(DefaultDatabase): pass
-        class ChEDL(DefaultDatabase): pass
-        class Electrolytes(DefaultDatabase): pass
+        #class ChemSep(DefaultDatabase): pass
+        #class Biodiesel(DefaultDatabase): pass
+        #class CoolProp(DefaultDatabase): pass
+        #class ChEDL(DefaultDatabase): pass
+        #class Electrolytes(DefaultDatabase): pass
     
         # Object property -> Triplett liest sich: 'Stoffdatenbank liefert chemische Substanz'
-        class provides(SubstanceDatabase >> onto.search_one(iri = '*ChemicalSubstance')): pass
+        class provides(modeledSubstance >> onto.search_one(iri = '*ChemicalSubstance')): pass
 
     # DWSIM bietet die Möhlichkeit Komponenten zu importieren über: Online-Quellen, Json- oder XML_Dateien
     # Zusätzlich kann der User über den 'Compound Creator' Stoffe erstellen
     # So entsteht eine von DWSIM 'abweichende Datenbank'
-        class DeviatingDatabase(SubstanceDatabase): pass
+        class DeviatingDatabase(modeledSubstance): pass
         class OnlineSource(DeviatingDatabase): pass
         class UserDefinedCompound(DeviatingDatabase): pass
 
