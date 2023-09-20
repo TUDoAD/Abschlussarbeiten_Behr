@@ -154,11 +154,17 @@ r = (k_1 * R1 * R2) - (k_2 * P1 * P2)""")
     
 
 def simulation(name, data):
-    # get compounds from DWISM and add them to Simulation
-    substances = data[0]["Mixture"][0]["substances"]
-    for sub in substances:
-        comp = sim.AvailableCompounds[sub]
-        sim.SelectedCompounds.Add(comp.Name, comp)
+    # get compounds from DWISM
+    carbon_monoxide = sim.AvailableCompounds["Carbon monoxide"] # educt_1
+    hydrogen = sim.AvailableCompounds["Hydrogen"] # educt_2
+    methane = sim.AvailableCompounds["Methane"] # product_1
+    water = sim.AvailableCompounds["Water"] # product_2
+    
+    # add compounds to simulation
+    sim.SelectedCompounds.Add(carbon_monoxide.Name, carbon_monoxide)
+    sim.SelectedCompounds.Add(hydrogen.Name, hydrogen)
+    sim.SelectedCompounds.Add(methane.Name, methane)
+    sim.SelectedCompounds.Add(water.Name, water)
 
     # material
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "feed")
