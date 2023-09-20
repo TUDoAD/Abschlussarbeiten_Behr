@@ -6,6 +6,7 @@ Created on Mon Sep 18 09:19:16 2023
 """
 import yaml
 import math
+import pubchempy as pcp
 #import owlready2
 
 ## Import all necessary DWSIM packages
@@ -155,11 +156,38 @@ r = (k_1 * R1 * R2) - (k_2 * P1 * P2)""")
 
 def simulation(name, data):
     # get compounds from DWISM and add them to Simulation
+    print("Adding substances to Simulation...")
     substances = data[0]["Mixture"][0]["substances"]
     for sub in substances:
-        comp = sim.AvailableCompounds[sub]
-        sim.SelectedCompounds.Add(comp.Name, comp)
-
+        # adding every "real" compound
+        if "-Ni" not in sub:
+            # water is a special case, because it is as Water in DWSIM instead of its iupac-name "oxidane"
+            if sub == "H2O":
+                key = "Water"
+                compound = sim.AvailableCompounds[key]
+                sim.SelectedCompounds.Add(compound.Name, compound)
+            # CO2 is a special case, because pubchempy has no iupac_name for it
+            elif sub == "CO2":
+                key = "Carbon dioxide"        
+                compound = sim.AvailableCompounds[key]
+                sim.SelectedCompounds.Add(compound.Name, compound)
+            else:
+                key = pcp.get_compounds(sub,"formula")[0].iupac_name
+                # check if "molecular" is in iupac_name and split string if it is, because compounds are in DWSIM without the prefix "molecular"
+                if "molecular" in key:
+                    key = key.split("molecular ")[1].capitalize()
+                    compound = sim.AvailableCompounds[key]
+                    sim.SelectedCompounds.Add(compound.Name, compound)
+                else:
+                    key = key.capitalize()
+                    compound = sim.AvailableCompounds[key]
+                    sim.SelectedCompounds.Add(compound.Name, compound)
+        else:
+            key = sub
+            compound = sim.AvailableCompounds[key]
+            sim.SelectedCompounds.Add(compound.Name, compound)
+    print("Done!")
+    
     # material
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "feed")
     m2 = sim.AddObject(ObjectType.MaterialStream, 200, 50, "outlet")
@@ -185,8 +213,18 @@ def simulation(name, data):
     sim.CreateAndAddPropertyPackage("NRTL")
     
     # specify parameter (material)
-    composition = Array[float]((0.75, 0.25, 0.0, 0.0)) # Achtung: Zusammen mit dem Hinzufügen der Komponenten variabel gestalten
+    print("Set mole fractions...")
+    mole_fraction = data[0]["Mixture"][0]["mole_fraction"]
+    composition = [0.0] * len(substances)
+    for entry in mole_fraction:
+        sub, value = entry
+        if sub in substances:
+            index = substances.index(sub)
+            composition[index] = value
+    composition = tuple(composition)
+    composition = Array[float](composition)
     m1.SetOverallComposition(composition)
+    print("Done!")
     
     m1.SetTemperature(data[0]["Mixture"][0]["temperature"])
     V_flow = math.pi * (data[1]["Reactor"][0]["tube_diameter"]/2) ** 2 * data[0]["Mixture"][0]["velocity"]
@@ -205,8 +243,10 @@ def simulation(name, data):
     else:
         print("Error accured while setting the ReactorOperationMode!")
     
+    print("Create reactions and kinetic scripts...")
     reaction_system = createReaction(data)
-
+    print("Done!")
+    
     # set Solver Mode
     Settings.SolveMode = 0
     
