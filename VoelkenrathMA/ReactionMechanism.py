@@ -7,6 +7,7 @@ Created on Mon Sep 18 09:19:16 2023
 import yaml
 import math
 import pubchempy as pcp
+from collections import Counter
 #import owlready2
 
 ## Import all necessary DWSIM packages
@@ -88,44 +89,82 @@ def createReactionScript(obj_name):
     sim.Scripts.TryGetValue(GUID)[1].ScriptText = str()
 
 
-def createReaction(data):
+def createReaction(data, substances):
     # add reaction (Evtl. muss der ganze folgende Abschnitt variabel gestaltet werden)
     # ACHTUNG: Definieren den Reaktionname z.b. als ID_1&2 und übergebe diesen an createReactionScript, sonst wird das Skript nicht verknüpft.
-    comps = Dictionary[str, float]()
-    dorders = Dictionary[str, float]()
-    rorders = Dictionary[str, float]()
+    mechanism = data[2]["ChemicalReaction"][0]
     
-    comps.Add("Carbon monoxide", -1)
-    comps.Add("Hydrogen", -3)
-    comps.Add("Methane", 1)
-    comps.Add("Water", 1)
+    i = 0
+    while i <= len(mechanism):
+        comps = Dictionary[str, float]()
+        dorders = Dictionary[str, float]()
+        rorders = Dictionary[str, float]()
+        
+        reaction_name = "ID_" + str(mechanism[i]["id"]) + "&" + str(mechanism[i+1]["id"])
+        
+        EA_1 = mechanism[i]["reactions"][0]["EA"]
+        beta_1 = mechanism[i]["reactions"][0]["beta"]
+        
+        if "S0" in mechanism[i]["reactions"][0]:
+            A_1 = mechanism[i]["reactions"][0]["S0"]
+        elif "A_cm_units" in mechanism[i]["reactions"][0]:
+            A_1 = mechanism[i]["reactions"][0]["A_cm_units"]
+        else:
+            print("Some unexpected error accured while setting kinetic parameters...")
+            
+        EA_2  = mechanism[i+1]["reactions"][0]["EA"]
+        beta_2  = mechanism[i+1]["reactions"][0]["beta"]
+        
+        if "S0" in mechanism[i+1]["reactions"][0]:
+            A_2 = mechanism[i+1]["reactions"][0]["S0"]
+        elif "A_cm_units" in mechanism[i+1]["reactions"][0]:
+            A_2 = mechanism[i+1]["reactions"][0]["A_cm_units"]
+        else:
+            print("Some unexpected error accured while setting kinetic parameters...")
+            
+        equation = mechanism[i]["reactions"][0]["reaction_equation"]
+        educts_ = equation.split(">")[0].split("+")
+        educts_count = Counter(educts_)
+        products_ = equation.split(">")[1].split("+")
+        products_count = Counter(products_)
+        
+        # set base compound as the first compound in equation
+        base = educts_[0]
+        
+        for compound in educts_count:
+            for j in range(len(substances)):
+                if compound == substances[j][0]:
+                    key = substances[j][1]
+                    coefficient = educts_count[compound] * -1 # educts has a negative stochiometric coefficient
+                    
+                    comps.Add(key, coefficient)
+                    dorders.Add(key, 0) # can be set to zero for every component, because it isn't used with "user defined" kinetic scripts
+                    rorders.Add(key, 0) # can be set to zero for every component, because it isn't used with "user defined" kinetic scripts
+                    
+        for compound in products_count:
+            for j in range(len(substances)):
+                if compound == substances[j][0]:
+                    key = substances[j][1]
+                    coefficient = products_count[compound] # products has a positive stochiometric coefficient
+
+                    comps.Add(key, coefficient)
+                    dorders.Add(key, 0) # can be set to zero for every component, because it isn't used with "user defined" kinetic scripts
+                    rorders.Add(key, 0) # can be set to zero for every component, because it isn't used with "user defined" kinetic scripts
+               
+        # values for A & EA is set to "1" for forward and backward reaction, because it isnt used with "user defined" but has to be given
+        reaction_kinetic = sim.CreateKineticReaction(reaction_name,"This reaction is created fully automatic", comps, dorders, rorders,
+                                                     base, "Mixture", "Fugacities", "Pa", "mol/[m3.s]",
+                                                     1.0, 1.0, 1.0, 1.0, "", "")
+        sim.AddReaction(reaction_kinetic)
+        sim.AddReactionToSet(reaction_kinetic.ID, "DefaultSet", True, 0)
     
-    dorders.Add("Carbon monoxide", 0)
-    dorders.Add("Hydrogen", 0)
-    dorders.Add("Methane", 0)
-    dorders.Add("Water", 0)
-    
-    rorders.Add("Carbon monoxide", 0)
-    rorders.Add("Hydrogen", 0)
-    rorders.Add("Methane", 0)
-    rorders.Add("Water", 0)
-    
-    # "Methanation" --> reaction_name
-    reaction_kinetic = sim.CreateKineticReaction("Methanation","Testing the DWSIM-Python functions in this Simulation", comps, dorders, rorders,
-                                                 "Carbon monoxide", "Mixture", "Fugacities", "Pa", "mol/[m3.s]",
-                                                 10E+20, 200000, 30E+25, 400000, "", "")
-    sim.AddReaction(reaction_kinetic)
-    sim.AddReactionToSet(reaction_kinetic.ID, "DefaultSet", True, 0)
-    
-    createReactionScript("Methanation")
-    myreaction = sim.GetReaction("Methanation")
-    myscripttitle = "Methanation"
-    myscript = sim.Scripts[myscripttitle]
-    
-    #ACHTUNG: kinetik-Gleichung unterscheidet sich teilweise um einen Term, entweder zwei Skripte schreiben und mit if abfragen welches benötigt
-    # oder ein Skript schreiben und falls nicht benötigt eine variable so definieren das Term =0 wird. (Wahrscheinlich ist Methode 2 angenehmer)
-    # indention is stupid but necessary, because script isnt running in DWSIM with the "right" python indention
-    myscript.ScriptText = str("""import math                              
+        createReactionScript(reaction_name)
+        myreaction = sim.GetReaction(reaction_name)
+        myscripttitle = reaction_name
+        myscript = sim.Scripts[myscripttitle]
+
+        # indention is stupid but necessary, because script isnt running in DWSIM with the "right" python indention
+        myscript.ScriptText = str(f"""import math                              
 from System import Array
 from DWSIM.Thermodynamics import *
 
@@ -135,22 +174,24 @@ from DotNumerics.ODE import *
 
 R = 8.314
 
-A_1 = 10E20
-b_1 = -0.5
-EA_1 = 20000
+A_1 = {A_1}
+b_1 = {beta_1}
+EA_1 = {EA_1}
 
-A_2 = 30E25
-b_2 = 0.5
-EA_2 = 40000
+A_2 = {A_2}
+b_2 = {beta_2}
+EA_2 = {EA_2}
 
 k_1 = A_1 * math.pow(T, b_1) * math.exp(-EA_1/(R*T))
 k_2 = A_2 * math.pow(T, b_2) * math.exp(-EA_2/(R*T))
 
 r = (k_1 * R1 * R2) - (k_2 * P1 * P2)""")
                               
-    myreaction.ReactionKinetics = ReactionKinetics(1)
-    myreaction.ScriptTitle = myscripttitle
-    
+        myreaction.ReactionKinetics = ReactionKinetics(1)
+        myreaction.ScriptTitle = myscripttitle
+        
+        i+=2
+        
     return reaction_kinetic    
     
 
@@ -161,33 +202,49 @@ def simulation(name, data):
     for sub in substances:
         # adding every "real" compound
         if "-Ni" not in sub:
-            # water is a special case, because it is as Water in DWSIM instead of its iupac-name "oxidane"
+            # water is a special case, because it is as Water in DWSIM instead with its iupac-name "oxidane"
             if sub == "H2O":
                 key = "Water"
+                #sim.AddCompound(key)
                 compound = sim.AvailableCompounds[key]
                 sim.SelectedCompounds.Add(compound.Name, compound)
+                index = substances.index(sub)
+                substances[index] = [sub, key]
             # CO2 is a special case, because pubchempy has no iupac_name for it
             elif sub == "CO2":
-                key = "Carbon dioxide"        
+                key = "Carbon dioxide"
+                #sim.AddCompound(key)
                 compound = sim.AvailableCompounds[key]
                 sim.SelectedCompounds.Add(compound.Name, compound)
+                index = substances.index(sub)
+                substances[index] = [sub, key]
             else:
                 key = pcp.get_compounds(sub,"formula")[0].iupac_name
                 # check if "molecular" is in iupac_name and split string if it is, because compounds are in DWSIM without the prefix "molecular"
                 if "molecular" in key:
                     key = key.split("molecular ")[1].capitalize()
+                    #sim.AddCompound(key)
                     compound = sim.AvailableCompounds[key]
                     sim.SelectedCompounds.Add(compound.Name, compound)
+                    index = substances.index(sub)
+                    substances[index] = [sub, key]
                 else:
                     key = key.capitalize()
+                    #sim.AddCompound(key)
                     compound = sim.AvailableCompounds[key]
                     sim.SelectedCompounds.Add(compound.Name, compound)
+                    index = substances.index(sub)
+                    substances[index] = [sub, key]
+        # adding every pseudocompound
         else:
             key = sub
+            #sim.AddCompound(key)
             compound = sim.AvailableCompounds[key]
             sim.SelectedCompounds.Add(compound.Name, compound)
+            index = substances.index(sub)
+            substances[index] = [sub, key]
     print("Done!")
-    
+
     # material
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "feed")
     m2 = sim.AddObject(ObjectType.MaterialStream, 200, 50, "outlet")
@@ -218,9 +275,10 @@ def simulation(name, data):
     composition = [0.0] * len(substances)
     for entry in mole_fraction:
         sub, value = entry
-        if sub in substances:
-            index = substances.index(sub)
-            composition[index] = value
+        for i in range(len(substances)):
+            if sub in substances[i]:
+                index = i #substances.index(sub)
+                composition[index] = value
     composition = tuple(composition)
     composition = Array[float](composition)
     m1.SetOverallComposition(composition)
@@ -244,7 +302,7 @@ def simulation(name, data):
         print("Error accured while setting the ReactorOperationMode!")
     
     print("Create reactions and kinetic scripts...")
-    reaction_system = createReaction(data)
+    reaction_system = createReaction(data, substances)
     print("Done!")
     
     # set Solver Mode
@@ -305,4 +363,6 @@ def run(name):
         data = yaml.safe_load(file)
         
     simulation(name, data)
+
+
    

@@ -96,18 +96,18 @@ def createReaction(data):
     
     comps.Add("Carbon monoxide", -1)
     comps.Add("Hydrogen", -3)
-    comps.Add("Methane", 1)
-    comps.Add("Water", 1)
+    comps.Add("H-Ni", 1)
+    comps.Add("Nickel", 1)
     
     dorders.Add("Carbon monoxide", 0)
     dorders.Add("Hydrogen", 0)
-    dorders.Add("Methane", 0)
-    dorders.Add("Water", 0)
+    dorders.Add("H-Ni", 0)
+    dorders.Add("Nickel", 0)
     
     rorders.Add("Carbon monoxide", 0)
     rorders.Add("Hydrogen", 0)
-    rorders.Add("Methane", 0)
-    rorders.Add("Water", 0)
+    rorders.Add("H-Ni", 0)
+    rorders.Add("Nickel", 0)
     
     # "Methanation" --> reaction_name
     reaction_kinetic = sim.CreateKineticReaction("Methanation","Testing the DWSIM-Python functions in this Simulation", comps, dorders, rorders,
@@ -149,16 +149,15 @@ r = (k_1 * R1 * R2) - (k_2 * P1 * P2)""")
                               
     myreaction.ReactionKinetics = ReactionKinetics(1)
     myreaction.ScriptTitle = myscripttitle
-    
     return reaction_kinetic    
     
 
 def simulation(name, data):
     # get compounds from DWISM
-    carbon_monoxide = sim.AvailableCompounds["Carbon monoxide"] # educt_1
-    hydrogen = sim.AvailableCompounds["Hydrogen"] # educt_2
-    methane = sim.AvailableCompounds["Methane"] # product_1
-    water = sim.AvailableCompounds["Water"] # product_2
+    carbon_monoxide = sim.AvailableCompounds["Carbon monoxide"]
+    hydrogen = sim.AvailableCompounds["Hydrogen"]
+    methane = sim.AvailableCompounds["Nickel"]
+    water = sim.AvailableCompounds["H-Ni"] 
     
     # add compounds to simulation
     sim.SelectedCompounds.Add(carbon_monoxide.Name, carbon_monoxide)
@@ -271,4 +270,5 @@ def run(name):
         data = yaml.safe_load(file)
         
     simulation(name, data)
+
    
