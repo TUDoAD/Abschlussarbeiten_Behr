@@ -9,7 +9,10 @@
 					-	Et = SBO:0000505 -> Concentration of Enzyme
 					-	 S = SBO:0000515 -> Concentration of Substrate
 					-   Ks = SBO:0000373 -> Michaelis Constant in Fast Equilibrium situation
-	
-	- Workflow erneut ausführen
+					
 	- Gedanken zu integration in DEXPI machen
 	- Erste Ideen für Paper mit Katrin aufschreiben!
+
+
+	- Vergleiche eigenes ELN/DataProperties mit denen von EnzymeML 
+		- Eliminiere Doppelungen!
