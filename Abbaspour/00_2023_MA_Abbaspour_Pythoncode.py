@@ -397,10 +397,10 @@ with onto:
 
 # Die betrachtete Reaktion als spezifische Information in der Ontologie hinterlegen
 # Dafür Übergabe als Individual 
-ABTS_Oxidation = OxidoreductaseReaction(Reaction_Name)
-
-# Dem Individual eine Data Property zuschreiben
-ABTS_Oxidation.hasReaction_ID.append(Reaction_ID)
+for reaction in enzmldoc.reaction_dict.values():
+    ABTS_Oxidation = OxidoreductaseReaction(reaction.name)
+    # Dem Individual eine Data Property zuschreiben
+    ABTS_Oxidation.hasReaction_ID.append(reaction.id)
 
 with onto:
     # Enzyme werden entsprechend der Reaktion, die sie katalysieren auch in 6 Klassen eingeteilt 
@@ -822,9 +822,10 @@ for comp in compounds:
 # Arrhenius Kinetik für den Testdurchlauf
 # Ideale Kinetik  
 # Hiermit werden aber auch Molar Franctions und Einheit festgelegt für das eigene Skript 
-kr1 = sim.CreateKineticReaction(Reaction_Name, "ABTS Oxidation using Laccase", 
-        comps, dorders, rorders, main_substrates[0], "Mixture", "Molar Fraction", 
-        "", "mol/[m3.s]", 0.5, 0.0, 0.0, 0.0, "", "")    
+for reaction in enzmldoc.reaction_dict.values():
+    kr1 = sim.CreateKineticReaction(reaction.name, "ABTS Oxidation using Laccase", 
+            comps, dorders, rorders, main_substrates[0], "Mixture", "Molar Fraction", 
+            "", "mol/[m3.s]", 0.5, 0.0, 0.0, 0.0, "", "")    
     
 # Ströme definiere => Ströme werden als Kanten betrachtet
 # Zwei Inletströme mit Reaktant 1 und Reaktant 2
