@@ -296,7 +296,7 @@ dataProp_creation(test_dict, onto)
 set_relations(test_dict, onto)
 
 # Ontologie zwischenspeichern
-onto.save(file="Zwischenstand_Onto_.owl", format="rdfxml")
+onto.save(file="./ontologies/Zwischenstand_Onto_.owl", format="rdfxml")
 
 # Erstellen von leeren Listen, um Reaktionsteilnehmer in Abhängigkeit ihrer Funktion zu sichern
 catalysts = []
