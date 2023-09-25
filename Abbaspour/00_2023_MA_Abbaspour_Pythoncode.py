@@ -59,7 +59,8 @@ for Creator in enzmldoc.creator_dict.values():
     Creator_Name = Creator.given_name # Katrin
     Creator_Familyname = Creator.family_name # Rosenthal
     Creator_Mail = Creator.mail # katrin.rosenthal@tu-dortmund.de
-
+    
+Creator_Names = [[i.given_name + i.family_name] for i in enzmldoc.creator_dict.values()]
 # Infos zum Reaktor
 # 
 for vessel in enzmldoc.vessel_dict.values():
@@ -661,7 +662,7 @@ EnzymeML_Document1 = EnzymeML_Documentation('EnzymeML_Document1')
 Agent1 = Agent('Abbaspour')
 
 EnzymeML_Document1.hasTitle.append(enzmldoc.name)
-EnzymeML_Document1.hasCreator.append(enzmldoc.creator_dict.values())
+EnzymeML_Document1.hasCreator.append(Creator_Names)
 EnzymeML_Document1.hasCreatorMail.append(Creator_Mail)
 EnzymeML_Document1.hasDateOfCreation.append(enzmldoc.created)
 
