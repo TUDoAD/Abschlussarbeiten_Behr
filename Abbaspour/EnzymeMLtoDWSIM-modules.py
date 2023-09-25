@@ -34,28 +34,17 @@ def enzymeML_readin(EnzymeML_XLSM_str):
     fig = enzmldoc.visualize(use_names=True, trendline=True, measurement_ids=["m0"])
     """
 
-    # Infos zum Dokument-Autor
-    for Creator in enzmldoc.creator_dict.values():
-        Creator_Name = Creator.given_name # Katrin
-        ### Creator_Familyname = Creator.family_name # Rosenthal
-        ### Creator_Mail = Creator.mail # katrin.rosenthal@tu-dortmund.de
+    Creator_Names = [i.given_name+ i.family_name for i in enzmldoc.creator_dict.values()]
+    Creator_Names = ", ".join(Creator_Names)
 
-    # Infos zum Reaktor
-    # 
-    for vessel in enzmldoc.vessel_dict.values():
-        Vessel_Name = vessel.name # Straight tube reactor, für die Simualtion wird ein PFR genommen
-        Vessel_ID = vessel.id # v1
-        # Reaktorvolumen eig 8, aber wurde für die Simulation angepasst (tau=64s)
-        Vessel_Volume = vessel.volume # 8
-        Vessel_Unit = vessel.unit # ml
         
     # Infos zur Reaktion
     for reaction in enzmldoc.reaction_dict.values():
-        ### Reaction_Name = reaction.name # ABTS Oxidation
-        ### Reaction_ID = reaction.id # r2
-        ### pH_Value = reaction.ph # 5.2
-        ### Temperature_Value = reaction.temperature # 311.15
-        ### Temperature_Unit = reaction.temperature_unit # K
+        Reaction_Name = reaction.name # ABTS Oxidation
+        Reaction_ID = reaction.id # r2
+        pH_Value = reaction.ph # 5.2
+        Temperature_Value = reaction.temperature # 311.15
+        Temperature_Unit = reaction.temperature_unit # K
 
     # Infos zum Protein
     for protein in enzmldoc.protein_dict.values():
