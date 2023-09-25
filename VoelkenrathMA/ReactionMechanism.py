@@ -71,22 +71,23 @@ from DWSIM.Thermodynamics.Utilities.PetroleumCharacterization import GenerateCom
 from DWSIM.Thermodynamics.Utilities.PetroleumCharacterization.Methods import *
 
 
-#Directory.SetCurrentDirectory(dwsimpath)
+Directory.SetCurrentDirectory(dwsimpath)
 
 # create automation manager
 interf = Automation3()
 sim = interf.CreateFlowsheet()
 
-def createReactionScript(obj_name):
-    GUID = obj_name
+def createReactionScript(reaction_name):
+    GUID = reaction_name
     sim.Scripts.Add(GUID, FlowsheetSolver.Script())
+    
     sim.Scripts.TryGetValue(GUID)[1].Linked = True
     sim.Scripts.TryGetValue(GUID)[1].LinkedEventType = Interfaces.Enums.Scripts.EventType.ObjectCalculationStarted
-    sim.Scripts.TryGetValue(GUID)[1].LinkedObjectName = obj_name
+    sim.Scripts.TryGetValue(GUID)[1].LinkedObjectName = reaction_name
     sim.Scripts.TryGetValue(GUID)[1].LinkedObjectType = Interfaces.Enums.Scripts.ObjectType.FlowsheetObject
     sim.Scripts.TryGetValue(GUID)[1].PythonInterpreter = Interfaces.Enums.Scripts.Interpreter.IronPython
-    sim.Scripts.TryGetValue(GUID)[1].Title = obj_name
-    sim.Scripts.TryGetValue(GUID)[1].ScriptText = str()
+    sim.Scripts.TryGetValue(GUID)[1].Title = reaction_name
+    sim.Scripts.TryGetValue(GUID)[1].ScriptText = str("")
 
 
 def createReaction(data, substances):
@@ -95,14 +96,14 @@ def createReaction(data, substances):
     mechanism = data[2]["ChemicalReaction"][0]
     
     i = 0
-    while i <= len(mechanism):
+    while i <= (len(mechanism)-1):
         comps = Dictionary[str, float]()
         dorders = Dictionary[str, float]()
         rorders = Dictionary[str, float]()
         
-        reaction_name = "ID_" + str(mechanism[i]["id"]) + "&" + str(mechanism[i+1]["id"])
+        reaction_name = "ID_" + str(i)  + "&" + str(i+1)
         
-        EA_1 = mechanism[i]["reactions"][0]["EA"]
+        EA_1 = mechanism[i]["reactions"][0]["EA"] * 1000 # kJ/mol --> J/mol
         beta_1 = mechanism[i]["reactions"][0]["beta"]
         
         if "S0" in mechanism[i]["reactions"][0]:
@@ -112,7 +113,7 @@ def createReaction(data, substances):
         else:
             print("Some unexpected error accured while setting kinetic parameters...")
             
-        EA_2  = mechanism[i+1]["reactions"][0]["EA"]
+        EA_2  = mechanism[i+1]["reactions"][0]["EA"] * 1000 # kJ/mol --> J/mol
         beta_2  = mechanism[i+1]["reactions"][0]["beta"]
         
         if "S0" in mechanism[i+1]["reactions"][0]:
@@ -129,14 +130,16 @@ def createReaction(data, substances):
         products_count = Counter(products_)
         
         # set base compound as the first compound in equation
-        base = educts_[0]
+        base_formula = educts_[0]
+        for j in range(len(substances)):
+            if base_formula == substances[j][0]:
+                base_key = substances[j][1]
         
         for compound in educts_count:
             for j in range(len(substances)):
                 if compound == substances[j][0]:
                     key = substances[j][1]
                     coefficient = educts_count[compound] * -1 # educts has a negative stochiometric coefficient
-                    
                     comps.Add(key, coefficient)
                     dorders.Add(key, 0) # can be set to zero for every component, because it isn't used with "user defined" kinetic scripts
                     rorders.Add(key, 0) # can be set to zero for every component, because it isn't used with "user defined" kinetic scripts
@@ -146,22 +149,25 @@ def createReaction(data, substances):
                 if compound == substances[j][0]:
                     key = substances[j][1]
                     coefficient = products_count[compound] # products has a positive stochiometric coefficient
-
                     comps.Add(key, coefficient)
                     dorders.Add(key, 0) # can be set to zero for every component, because it isn't used with "user defined" kinetic scripts
                     rorders.Add(key, 0) # can be set to zero for every component, because it isn't used with "user defined" kinetic scripts
                
         # values for A & EA is set to "1" for forward and backward reaction, because it isnt used with "user defined" but has to be given
         reaction_kinetic = sim.CreateKineticReaction(reaction_name,"This reaction is created fully automatic", comps, dorders, rorders,
-                                                     base, "Mixture", "Fugacities", "Pa", "mol/[m3.s]",
+                                                     base_key, "Mixture", "Fugacities", "Pa", "mol/[m3.s]",
                                                      1.0, 1.0, 1.0, 1.0, "", "")
         sim.AddReaction(reaction_kinetic)
         sim.AddReactionToSet(reaction_kinetic.ID, "DefaultSet", True, 0)
-    
-        createReactionScript(reaction_name)
-        myreaction = sim.GetReaction(reaction_name)
+        
+        # add kinetic script
+        #createReactionScript(reaction_name)
+        sim.Scripts.Add(reaction_name, FlowsheetSolver.Script())
         myscripttitle = reaction_name
+        
         myscript = sim.Scripts[myscripttitle]
+        myscript.Title = myscripttitle
+        myscript.ID = str(i)
 
         # indention is stupid but necessary, because script isnt running in DWSIM with the "right" python indention
         myscript.ScriptText = str(f"""import math                              
@@ -186,14 +192,13 @@ k_1 = A_1 * math.pow(T, b_1) * math.exp(-EA_1/(R*T))
 k_2 = A_2 * math.pow(T, b_2) * math.exp(-EA_2/(R*T))
 
 r = (k_1 * R1 * R2) - (k_2 * P1 * P2)""")
-                              
+        
+        myreaction = sim.GetReaction(reaction_name)                      
         myreaction.ReactionKinetics = ReactionKinetics(1)
         myreaction.ScriptTitle = myscripttitle
         
         i+=2
-        
-    return reaction_kinetic    
-    
+
 
 def simulation(name, data):
     # get compounds from DWISM and add them to Simulation
@@ -302,7 +307,7 @@ def simulation(name, data):
         print("Error accured while setting the ReactorOperationMode!")
     
     print("Create reactions and kinetic scripts...")
-    reaction_system = createReaction(data, substances)
+    createReaction(data, substances)
     print("Done!")
     
     # set Solver Mode
@@ -359,7 +364,7 @@ def run(name):
     # ACHTUNG: Onto-Klassen sind voerst im DataSheet auskommentiert, da sie Probleme beim Import gemacht haben
     # --> Lösung sollte allgemeingültig sein, d.h. die Klassen vorher zu definieren klappt nur wenn es automatisiert geht
     
-    with open("linkml/Methanation_PFR_DataSheet.yaml", "r") as file:
+    with open("C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/Methanation_PFR_DataSheet.yaml", "r") as file:
         data = yaml.safe_load(file)
         
     simulation(name, data)

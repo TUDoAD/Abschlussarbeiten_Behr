@@ -69,7 +69,7 @@ from DWSIM.Thermodynamics.Utilities.PetroleumCharacterization import GenerateCom
 from DWSIM.Thermodynamics.Utilities.PetroleumCharacterization.Methods import *
 
 
-#Directory.SetCurrentDirectory(dwsimpath)
+Directory.SetCurrentDirectory(dwsimpath)
 
 # create automation manager
 interf = Automation3()
@@ -94,24 +94,28 @@ def createReaction(data):
     dorders = Dictionary[str, float]()
     rorders = Dictionary[str, float]()
     
-    comps.Add("Carbon monoxide", -1)
-    comps.Add("Hydrogen", -3)
-    comps.Add("H-Ni", 1)
-    comps.Add("Nickel", 1)
+    sim.AddCompound("Hydrogen")
+    sim.AddCompound("Nickel")
+    sim.AddCompound("H-Ni")
     
-    dorders.Add("Carbon monoxide", 0)
-    dorders.Add("Hydrogen", 0)
-    dorders.Add("H-Ni", 0)
-    dorders.Add("Nickel", 0)
+    #comps.Add("Carbon monoxide", -1)
+    comps.Add("Hydrogen", -1.0)
+    comps.Add("Nickel", -2.0)
+    comps.Add("H-Ni", 2.0)
     
-    rorders.Add("Carbon monoxide", 0)
-    rorders.Add("Hydrogen", 0)
-    rorders.Add("H-Ni", 0)
-    rorders.Add("Nickel", 0)
+    #dorders.Add("Carbon monoxide", 0)
+    dorders.Add("Hydrogen", 0.0)
+    dorders.Add("Nickel", 0.0)
+    dorders.Add("H-Ni", 1.0)
+    
+    #rorders.Add("Carbon monoxide", 0)
+    rorders.Add("Hydrogen", 0.0)
+    rorders.Add("Nickel", 0.0)
+    rorders.Add("H-Ni", 0.0)
     
     # "Methanation" --> reaction_name
     reaction_kinetic = sim.CreateKineticReaction("Methanation","Testing the DWSIM-Python functions in this Simulation", comps, dorders, rorders,
-                                                 "Carbon monoxide", "Mixture", "Fugacities", "Pa", "mol/[m3.s]",
+                                                 "Hydrogen", "Mixture", "Fugacities", "Pa", "mol/[m3.s]",
                                                  10E+20, 200000, 30E+25, 400000, "", "")
     sim.AddReaction(reaction_kinetic)
     sim.AddReactionToSet(reaction_kinetic.ID, "DefaultSet", True, 0)
@@ -154,16 +158,16 @@ r = (k_1 * R1 * R2) - (k_2 * P1 * P2)""")
 
 def simulation(name, data):
     # get compounds from DWISM
-    carbon_monoxide = sim.AvailableCompounds["Carbon monoxide"]
-    hydrogen = sim.AvailableCompounds["Hydrogen"]
-    methane = sim.AvailableCompounds["Nickel"]
-    water = sim.AvailableCompounds["H-Ni"] 
+    #carbon_monoxide = sim.AvailableCompounds["Carbon monoxide"]
+    #hydrogen = sim.AvailableCompounds["Hydrogen"]
+    #methane = sim.AvailableCompounds["Nickel"]
+    #water = sim.AvailableCompounds["H-Ni"] 
     
     # add compounds to simulation
-    sim.SelectedCompounds.Add(carbon_monoxide.Name, carbon_monoxide)
-    sim.SelectedCompounds.Add(hydrogen.Name, hydrogen)
-    sim.SelectedCompounds.Add(methane.Name, methane)
-    sim.SelectedCompounds.Add(water.Name, water)
+    #sim.SelectedCompounds.Add(carbon_monoxide.Name, carbon_monoxide)
+    #sim.SelectedCompounds.Add(hydrogen.Name, hydrogen)
+    #sim.SelectedCompounds.Add(methane.Name, methane)
+    #sim.SelectedCompounds.Add(water.Name, water)
 
     # material
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "feed")
@@ -266,7 +270,7 @@ def run(name):
     # ACHTUNG: Onto-Klassen sind voerst im DataSheet auskommentiert, da sie Probleme beim Import gemacht haben
     # --> Lösung sollte allgemeingültig sein, d.h. die Klassen vorher zu definieren klappt nur wenn es automatisiert geht
     
-    with open("linkml/Methanation_PFR_DataSheet.yaml", "r") as file:
+    with open("C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/Methanation_PFR_DataSheet.yaml", "r") as file:
         data = yaml.safe_load(file)
         
     simulation(name, data)
