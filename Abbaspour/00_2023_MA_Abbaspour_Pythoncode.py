@@ -650,7 +650,7 @@ with onto:
         class ElectronicLabNotebook(Documentation): pass
         class EnzymeML_Documentation(ElectronicLabNotebook): pass
     
-        class hasTitel(EnzymeML_Documentation >> str): pass
+        class hasTitle(EnzymeML_Documentation >> str): pass
         class hasCreator(EnzymeML_Documentation >> str): pass
         class hasCreatorMail(Agent >> str): pass
         class hasDateOfCreation(EnzymeML_Documentation >> str): pass
@@ -660,8 +660,8 @@ Chair_of_EquipmentDesign = Institution('TU_Dortmund_LaboratoryOfEquipmentDesign'
 EnzymeML_Document1 = EnzymeML_Documentation('EnzymeML_Document1')
 Agent1 = Agent('Abbaspour')
 
-EnzymeML_Document1.hasTitel.append(enzmldoc.name)
-EnzymeML_Document1.hasCreator.append(Creator_Familyname)
+EnzymeML_Document1.hasTitle.append(enzmldoc.name)
+EnzymeML_Document1.hasCreator.append(enzmldoc.creator_dict.values())
 EnzymeML_Document1.hasCreatorMail.append(Creator_Mail)
 EnzymeML_Document1.hasDateOfCreation.append(enzmldoc.created)
 
