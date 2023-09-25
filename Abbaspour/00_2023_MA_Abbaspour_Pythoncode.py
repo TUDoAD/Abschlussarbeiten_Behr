@@ -823,7 +823,7 @@ for comp in compounds:
 # Ideale Kinetik  
 # Hiermit werden aber auch Molar Franctions und Einheit festgelegt für das eigene Skript 
 for reaction in enzmldoc.reaction_dict.values():
-    kr1 = sim.CreateKineticReaction(reaction.name, "ABTS Oxidation using Laccase", 
+    kr1 = sim.CreateKineticReaction(reaction.name, "", 
             comps, dorders, rorders, main_substrates[0], "Mixture", "Molar Fraction", 
             "", "mol/[m3.s]", 0.5, 0.0, 0.0, 0.0, "", "")    
     
@@ -1042,8 +1042,10 @@ for k in pfr.ComponentConversions.Keys:
     names.append(k)
 
 # Datei speichern
-fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), 
-                              "ABTS_Oxidation.dwxmz")
+#fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),"ABTS_Oxidation.dwxmz")
+fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"ABTS_Oxidation.dwxmz")
+#fileNameToSave = Path.Combine("./ABTS_Oxidation.dwxmz")
+
 interf.SaveFlowsheet(sim, fileNameToSave, True)
 
 # PDF als Bild speichern und direkt ausgeben
