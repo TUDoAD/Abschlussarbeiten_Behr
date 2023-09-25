@@ -14,5 +14,8 @@
 	- Erste Ideen für Paper mit Katrin aufschreiben!
 
 
+###
+# Important stuff
+###
 	- Vergleiche eigenes ELN/DataProperties mit denen von EnzymeML 
 		- Eliminiere Doppelungen!
