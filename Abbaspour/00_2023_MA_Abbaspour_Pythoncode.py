@@ -60,7 +60,9 @@ for Creator in enzmldoc.creator_dict.values():
     Creator_Familyname = Creator.family_name # Rosenthal
     Creator_Mail = Creator.mail # katrin.rosenthal@tu-dortmund.de
     
-Creator_Names = [[i.given_name + i.family_name] for i in enzmldoc.creator_dict.values()]
+Creator_Names = [i.given_name+ i.family_name for i in enzmldoc.creator_dict.values()]
+
+
 # Infos zum Reaktor
 # 
 for vessel in enzmldoc.vessel_dict.values():
