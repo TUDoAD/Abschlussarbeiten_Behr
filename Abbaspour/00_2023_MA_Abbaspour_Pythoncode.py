@@ -61,7 +61,7 @@ for Creator in enzmldoc.creator_dict.values():
     Creator_Mail = Creator.mail # katrin.rosenthal@tu-dortmund.de
     
 Creator_Names = [i.given_name+ i.family_name for i in enzmldoc.creator_dict.values()]
-
+Creator_Names = ", ".join(Creator_Names)
 
 # Infos zum Reaktor
 # 
