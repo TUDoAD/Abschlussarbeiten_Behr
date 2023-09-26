@@ -6,9 +6,9 @@ Created on Tue Sep 26 13:42:10 2023
 """
 import time
 import numpy as np
-from scipy.integrate import solve_ivp
+from scipy.integrate import solve_ivp, odeint
 
-def ODESolver(x, y):
+def ODESolver(y, x):
     # x - length reactor
     # y - concentration of species i
     k=[0.01458, 2199436443.16846, 0.01064, 117591068549.76498, 0.1163, 43271.93269101587, 6.288e-05, 34126.209306143486, 0.3737,
@@ -51,8 +51,12 @@ y0 = np.array([0.1, 1.0, 0.1, 0.1, 1.0, 0.1, 0.1, 0.1, 0.1, 0.1,
 x_start = 0.0
 x_end = 10.0
 
-solution = solve_ivp(ODESolver, (x_start, x_end), y0, t_eval=np.linspace(x_start, x_end, num=100))
+#solution = solve_ivp(ODESolver, (x_start, x_end), y0, x_eval=np.linspace(x_start, x_end, num=3))
+
+x_eval=np.linspace(x_start, x_end, num=100)
+solution = odeint(ODESolver, y0, x_eval)
 
 end_time = time.time()
 elapsed_time = end_time - start_time
 print(f"Das Skript benötigte {elapsed_time:.2f} Sekunden, um durchzulaufen.")
+
