@@ -12,10 +12,11 @@
 					
 	- Gedanken zu integration in DEXPI machen
 	- Erste Ideen für Paper mit Katrin aufschreiben!
-
+	
+	- measurement .addData ausprobieren bei pyenzyme Dokument
 
 ###
-# Important stuff
+# important stuff
 ###
 	- Vergleiche eigenes ELN/DataProperties mit denen von EnzymeML 
 		- Eliminiere Doppelungen!
