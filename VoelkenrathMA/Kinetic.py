@@ -43,7 +43,7 @@ def calcCoefficient(mechanism):
 def createEquationSystem(substances, mechanism, coefficients):
     equations = []
     for sub in substances:
-        eqn = f"d[{sub}]/dx = "
+        eqn = f"d[{sub}]/dx ="
         
         for i in range(len(mechanism)):
             educts = mechanism[i]["reactions"][0]["reaction_equation"].split(">")[0].split("+")
@@ -53,10 +53,10 @@ def createEquationSystem(substances, mechanism, coefficients):
                 #print("educts: " + sub + " " + str(educts) + str(products))
                 count = Counter(educts)
                 stoichiometry = count[sub]
-                stoichiometry_str = f" - k[{i}]*y[{substances.index(educts[0])}"
+                stoichiometry_str = f" - k[{i}]*y[{substances.index(educts[0])-1}"
                 
                 for educt in educts[1:]:
-                    stoichiometry_str += f"]*y[{substances.index(educt)}"
+                    stoichiometry_str += f"]*y[{substances.index(educt)-1}"
                 
                 stoichiometry_str += "]"
                 
@@ -68,10 +68,10 @@ def createEquationSystem(substances, mechanism, coefficients):
                 #print("product: " + sub + " " + str(educts) + str(products))
                 count = Counter(products)
                 stoichiometry = count[sub]
-                stoichiometry_str = f" + k[{i}]*y[{substances.index(educts[0])}"
+                stoichiometry_str = f" + k[{i}]*y[{substances.index(educts[0])-1}"
                 
                 for educt in educts[1:]:
-                    stoichiometry_str += f"]*y[{substances.index(educt)}"
+                    stoichiometry_str += f"]*y[{substances.index(educt)-1}"
                 
                 stoichiometry_str += "]"
                 
