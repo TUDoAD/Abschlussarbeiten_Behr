@@ -33,52 +33,66 @@ def calcCoefficient(mechanism):
         
         coefficients[coefficient] = value
     
-    for i in range(len(coefficients)):
-        print(f"k{i}: " + str(coefficients[f"k{i}"]) + " J/mol")
-        print(" ")
+    #for i in range(len(coefficients)):
+     #   print(f"k{i}: " + str(coefficients[f"k{i}"]) + " J/mol")
+      #  print(" ")
     
     return coefficients
     
 
 def createEquationSystem(substances, mechanism, coefficients):
+    # setting the equation for the production rate s
     equations = []
     for sub in substances:
-        eqn = f"d[{sub}]/dx ="
+        eqn = f"s_{sub} ="
+        
+        # prüfe ob sub in educt oder produkt und setze -/+
+        # zähle alle Komponenten in der Reaktion
+        # setze alle educte ^- coeff in die Gleichung ein
+        # setze alle produkte ^+coeff in die gleichung ein
+        
         
         for i in range(len(mechanism)):
             educts = mechanism[i]["reactions"][0]["reaction_equation"].split(">")[0].split("+")
             products = mechanism[i]["reactions"][0]["reaction_equation"].split(">")[1].split("+")
             
+            
             if sub in educts:
-                #print("educts: " + sub + " " + str(educts) + str(products))
-                count = Counter(educts)
-                stoichiometry = count[sub]
-                stoichiometry_str = f" - k[{i}]*y[{substances.index(educts[0])-1}"
+                count_e = Counter(educts)
+                stoichiometry = count_e[sub]
+                educts = list(set(educts))
                 
-                for educt in educts[1:]:
-                    stoichiometry_str += f"]*y[{substances.index(educt)-1}"
+                stoichiometry_str = f" - {stoichiometry}*k[{i}]"
                 
-                stoichiometry_str += "]"
+                for educt in educts:
+                    stoichiometry_str += f" * y[{substances.index(educt)}]**-{count_e[educt]}"
                 
-                #print(f"... stoich. coeff. is: {stoichiometry}")
-                #print(educts[0])
+                count_p = Counter(products)
+                products = list(set(products))
+                for product in products:
+                    stoichiometry_str += f" * y[{substances.index(product)}]**{count_p[product]}"
+
                 eqn = eqn + stoichiometry_str
-                
+               
             elif sub in products:
-                #print("product: " + sub + " " + str(educts) + str(products))
-                count = Counter(products)
-                stoichiometry = count[sub]
-                stoichiometry_str = f" + k[{i}]*y[{substances.index(educts[0])-1}"
+                count_p = Counter(products)
+                stoichiometry = count_p[sub]
+                products = list(set(products))
                 
-                for educt in educts[1:]:
-                    stoichiometry_str += f"]*y[{substances.index(educt)-1}"
+                stoichiometry_str = f" + {stoichiometry}*k[{i}]"
                 
-                stoichiometry_str += "]"
-                
-                #print(f"... stoich. coeff. is: {stoichiometry}")
-                #print(products[0])
+                for product in products:
+                    stoichiometry_str += f" * y[{substances.index(product)}]**{count_p[product]}"
+                    
+                count_e = Counter(educts)
+                educts = list(set(educts))
+                print(count_e, educts)
+                for educt in educts:
+                    stoichiometry_str += f" * y[{substances.index(educt)}]**-{count_e[educt]}"
+                     
                 eqn = eqn + stoichiometry_str
-        
+            
+                
         equations.append(eqn)
     
     """
@@ -89,8 +103,15 @@ def createEquationSystem(substances, mechanism, coefficients):
     return equations
 
 
-#def differentialEquations():
-        
+def createThetaSystem(substances, gamma):
+    equations = []
+    for sub in substances:
+        eqn = f"d[Theta_{sub}]/dx ="
+        sigma = 1 # Annahme, jedes Substrat nutzt einen Platz am Kat.        
+        eqn += f"({sigma} * s_{sub})/{gamma}"
+        equations.append(eqn)
+    return equations
+    
 
 def run():
     #with open("E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/Methanation_PFR_DataSheet.yaml", "r") as file:
@@ -100,8 +121,17 @@ def run():
     mechanism = data[2]["ChemicalReaction"][0]
     substances = data[0]["Mixture"][0]["substances"]
     
-    coefficients = calcCoefficient(mechanism)
-    equations = createEquationSystem(substances, mechanism, coefficients)
+    adsorbed_species = []
+    for sub in substances:
+        if "-" in sub:
+            adsorbed_species.append(sub)
     
-    return equations, coefficients
+    coefficients = calcCoefficient(mechanism)
+    s_equations = createEquationSystem(substances, mechanism, coefficients)
+    
+    #ACHTUNG: Gamma muss noch dem YAML-Datenfile ugefügt werden
+    gamma = 2.55e-5
+    t_equations = createThetaSystem(adsorbed_species, gamma)
+    
+    return s_equations, t_equations
     
