@@ -4,9 +4,9 @@ Created on Tue Oct 10 09:11:35 2023
 
 @author: smmcvoel
 """
-import sys
 import yaml
 import math
+import itertools
 import pubchempy as pcp
 from collections import Counter
 #import owlready2
@@ -73,13 +73,13 @@ from DWSIM.Thermodynamics.Utilities.PetroleumCharacterization.Methods import *
 
 
 #Directory.SetCurrentDirectory(dwsimpath)
-
 # create automation manager
 interf = Automation3()
 sim = interf.CreateFlowsheet()
 
 
 def createReaction(data, substances):
+
     mechanism = data[2]["ChemicalReaction"][0]
     
     i = 0
@@ -137,8 +137,12 @@ def createReaction(data, substances):
                     dorders.Add(key, 0)
                     rorders.Add(key, 0)
         
+        print(reaction_name)
+        print(comps)
+        print(base_key)
+        
         # create reaction, set numerator and denominator to 1, because it get overwritten with own kintic skript
-        reaction = sim.CreateHetCatReaction(reaction_name, "This reaction is created automatically!", comps, base_key, "Mixture",
+        reaction = sim.CreateHetCatReaction(reaction_name, "This reaction is created automatically!", comps, base_key, "Vapor",
                                             "Fugacities", "Pa", "mol/[kg.s]", "1", "1" )
         
         sim.AddReaction(reaction)
@@ -173,10 +177,14 @@ r=(K_0 * R2 * math.pow(R1, 1/3))/(1 + K_1 * R2 + K_2 * R1 + K_3 * P2)""")
                     
 
 def simulation(name, data, combination):
-    temperature, pressure, loading = combination
     ## create flowsheet and run simulation
+
+    
+    path_storage = "C:\\Users\\smmcvoel\\Desktop\\Temporäre Ablage\\dice_01"
+    temperature, pressure, loading = combination
+    
     # get compound from DWSIM and add them to the simulation
-    print("Adding substances to Simulation...")
+    #print("Adding substances to Simulation...")
     substances = data[0]["Mixture"][0]["substances"]
     for sub in substances:
         try:
@@ -212,7 +220,7 @@ def simulation(name, data, combination):
                         index = substances.index(sub)
                         substances[index] = [sub, key]
         except: ArgumentException
-    print("Done!")
+    #print("Done!")
         
     # material
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "feed")
@@ -239,7 +247,7 @@ def simulation(name, data, combination):
     sim.CreateAndAddPropertyPackage("NRTL")
     
     # specify material parameter
-    print("Set mole fractions...")
+    #print("Set mole fractions...")
     mole_fraction = data[0]["Mixture"][0]["mole_fraction"]
     composition = [0.0] * len(substances)
     for entry in mole_fraction:
@@ -251,11 +259,11 @@ def simulation(name, data, combination):
     composition = tuple(composition)
     composition = Array[float](composition)
     m1.SetOverallComposition(composition)
-    print("Done!")
+    #print("Done!")
     
-    #m1.SetTemperature(data[0]["Mixture"][0]["temperature"])
     m1.SetTemperature(temperature)
     m1.SetPressure(pressure)
+    
     V_flow = math.pi * (data[1]["Reactor"][0]["tube_diameter"]/2) ** 2 * data[0]["Mixture"][0]["velocity"]
     m1.SetVolumetricFlow(V_flow)
     
@@ -278,9 +286,9 @@ def simulation(name, data, combination):
     #cat_diameter = data[1]['Reactor'][0]["catalyst_particle_diameter"] #m
     r1.CatalystParticleDiameter = data[1]['Reactor'][0]["catalyst_particle_diameter"]
     
-    print("Create reactions and kinetic scripts...")
+    #print("Create reactions and kinetic scripts...")
     createReaction(data, substances)
-    print("Done!")
+    #print("Done!")
 
     # set Solver Mode
     Settings.SolveMode = 0
@@ -289,7 +297,7 @@ def simulation(name, data, combination):
     
     # save file as dwxmz
     fileName_dwsim = name + ".dwxmz"
-    fileNameToSave = Path.Combine("C:\\Users\\smmcvoel\\Desktop\\Temporäre Ablage\\dice_01", fileName_dwsim)
+    fileNameToSave = Path.Combine(path_storage, fileName_dwsim)
     #fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName_dwsim)
     
     interf.SaveFlowsheet(sim, fileNameToSave, True)
@@ -316,7 +324,7 @@ def simulation(name, data, combination):
     stri = MemoryStream()
     d.SaveTo(stri)
     image = Image.FromStream(stri)
-    imgPath = Path.Combine("C:\\Users\\smmcvoel\\Desktop\\Temporäre Ablage\\dice_01", fileName_pic)
+    imgPath = Path.Combine(path_storage, fileName_pic)
     #imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName_pic)
     image.Save(imgPath, ImageFormat.Png)
     stri.Dispose()
@@ -324,19 +332,29 @@ def simulation(name, data, combination):
     bmp.Dispose()
     
     #from PIL import Image
-    
     #im = Image.open(imgPath)
     #im.show()
     
 
+def run():
 
-name = sys.argv[1]
-temperature = sys.argv[2]
-pressure = sys.argv[3]
-loading = sys.argv[4]
-combination = (float(temperature), float(pressure), float(loading))
-
-with open("C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/new_reaction_2023-10-12_DataSheet.yaml", "r") as file:
-    data = yaml.safe_load(file)
     
-simulation(name, data, combination)
+    with open("C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/new_reaction_2023-10-12_DataSheet.yaml", "r") as file:
+        data = yaml.safe_load(file)
+        
+    # Set parameter for simulation-dice
+    # ACHTUNG: In abhängigket der gegebenen Parameter variieren, statt starre Werte vorgeben z.B. geg: 420K --> T1: geg-100; T2: geg-50 ...
+    temperature = [300,350,400,450,500] # K
+    pressure = [100000, 150000, 200000, 250000, 300000] # Pa
+    cat_loading = [1, 10, 100, 1000, 100000] # kg/m3
+    
+    parameter_combinations = list(itertools.product(temperature, pressure, cat_loading))
+    for combination in parameter_combinations:
+
+        
+        print(f"Simulate system with T={combination[0]} K, p={combination[1]} Pa, Loading={combination[2]} kg/m3")
+        name=(f"Methanation_{combination[0]}K_{combination[1]}Pa_{combination[2]}kgm3")
+        simulation(name, data, combination)
+        print(" ")
+    
+    

@@ -1,94 +1,88 @@
-!SURFACE MECHANISM FOR METHANATION OF CO AND CO2 OVER NICKEL
-!***********************************************************************
-!****                                                                  *
-!****     METHANATION OVER NI - SURFACE MECHANISM                      *
-!****     thermodynamically consistent (300 - 2000K)                   *
-!****                                                                  *
-!****     D. SCHMIDER, L. MAIER, O. DEUTSCHMANN                        *
-!****     KIT (Karlsruhe Institute of Technology)                      *
-!****                                                                  *
-!****     References:                                                  *
-!****     D. Schmider, L. Maier, O. Deutschmann. Industrial &          *
-!****     Engineering Chemistry Research (2021).                       *
-!****     www.detchem.com/mechanisms                                   *
-!****     KIT (Karlsruhe Institute of Technology)                      *
-!****     Contact: mail@detchem.com (O. Deutschmann)                    *
-!****                                                                  *
-!****                                                                  *
-!****     Kinetic data:                                                *
-!****      k = A * T**b * exp (-Ea/RT) * exp(eps*theta/RT)             *
-!****                                                                  *
-!****           A          b       Ea        eps                       *
-!****        (cm,mol,s)    -     kJ/mol     kJ/mol                     *
-!****                                                                  *
-!****     STICK: A in next reaction is initial sticking coefficient    *
-!****                                                                  *
-!****                                                                  *
-!****     (CHEMKIN format)                                             *
-!****                                                                  *
-!***********************************************************************
-REACTIONS  KJOULES/MOLE  MWOFF
-H2 + Ni + Ni => H-Ni + H-Ni                   1.458E-02  0.000      0.000
-    STICK
-H-Ni + H-Ni => Ni + Ni + H2                   4.538E+21  -0.138     96.108
-CH4 + Ni => CH4-Ni                            1.064E-02  0.000      0.000
-    STICK
-CH4-Ni => Ni + CH4                            2.793E+15  0.085      36.977
-H2O + Ni => H2O-Ni                            1.163E-01  0.000      0.000
-    STICK
-H2O-Ni => Ni + H2O                            2.035E+12  -0.031     61.038
-CO2 + Ni => CO2-Ni                            6.288E-05  0.000      0.000
-    STICK
-CO2-Ni => Ni + CO2                            4.993E+07  0.018      25.831
-CO + Ni => CO-Ni                              3.737E-01  0.000      0.000
-    STICK
-CO-Ni => Ni + CO                              1.144E+12  -0.103     111.992
-    COV / CO-Ni                               0.000E+00  0.000      -50.000 /
-CO2-Ni + Ni => O-Ni + CO-Ni                   1.601E+23  -1.001     89.324
-O-Ni + CO-Ni => CO2-Ni + Ni                   5.806E+19  0.000      123.596
-    COV / CO-Ni                               0.000E+00  0.000      -50.000 /
-CO-Ni + Ni => C-Ni + O-Ni                     2.355E+14  0.000      116.163
-    COV / CO-Ni                               0.000E+00  0.000      -50.000 /
-C-Ni + O-Ni => CO-Ni + Ni                     2.541E+18  0.000      148.077
-    COV / C-Ni                                0.000E+00  0.000      -105.000 &
-    /
-CO-Ni + H-Ni => C-Ni + OH-Ni                  3.045E+18  -0.223     105.272
-    COV / CO-Ni                               0.000E+00  0.000      -50.000 /
-C-Ni + OH-Ni => CO-Ni + H-Ni                  2.184E+18  0.128      62.778
-    COV / C-Ni                                0.000E+00  0.000      -105.000 &
-    /
-CO-Ni + H-Ni => HCO-Ni + Ni                   6.823E+21  -0.979     132.079
-HCO-Ni + Ni => CO-Ni + H-Ni                   2.179E+20  -0.021     0.151
-    COV / CO-Ni                               0.000E+00  0.000      50.000 /
-HCO-Ni + Ni => CH-Ni + O-Ni                   5.104E+15  0.023      81.719
-CH-Ni + O-Ni => HCO-Ni + Ni                   3.421E+19  -0.023     110.161
-C-Ni + H-Ni => CH-Ni + Ni                     1.327E+24  -0.456     157.655
-    COV / C-Ni                                0.000E+00  0.000      -105.000 &
-    /
-CH-Ni + Ni => C-Ni + H-Ni                     2.633E+22  0.456      22.255
-CH-Ni + H-Ni => CH2-Ni + Ni                   3.210E+25  -0.084     81.051
-CH2-Ni + Ni => CH-Ni + H-Ni                   6.156E+24  0.084      95.229
-CH2-Ni + H-Ni => CH3-Ni + Ni                  7.778E+22  -0.048     59.452
-CH3-Ni + Ni => CH2-Ni + H-Ni                  6.157E+24  0.048      95.878
-CH3-Ni + H-Ni => CH4-Ni + Ni                  3.628E+21  -0.048     65.702
-CH4-Ni + Ni => CH3-Ni + H-Ni                  6.156E+21  0.048      53.578
-O-Ni + H-Ni => OH-Ni + Ni                     1.158E+24  -0.176     104.199
-OH-Ni + Ni => O-Ni + H-Ni                     7.696E+19  0.176      29.791
-OH-Ni + H-Ni => H2O-Ni + Ni                   2.342E+20  0.075      44.095
-H2O-Ni + Ni => OH-Ni + H-Ni                   2.907E+21  -0.075     90.365
-OH-Ni + OH-Ni => O-Ni + H2O-Ni                1.011E+20  0.251      95.091
-O-Ni + H2O-Ni => OH-Ni + OH-Ni                1.889E+25  -0.251     215.769
-CO2-Ni + H-Ni => COOH-Ni + Ni                 1.287E+25  -0.460     117.200
-COOH-Ni + Ni => CO2-Ni + H-Ni                 1.288E+20  0.460      33.800
-COOH-Ni + Ni => OH-Ni + CO-Ni                 6.032E+23  -0.216     54.368
-OH-Ni + CO-Ni => COOH-Ni + Ni                 1.453E+21  0.216      97.632
-    COV / CO-Ni                               0.000E+00  0.000      -50.000 /
-COOH-Ni + H-Ni => HCO-Ni + OH-Ni              4.220E+23  -1.145     104.732
-HCO-Ni + OH-Ni => COOH-Ni + H-Ni              3.246E+19  0.245      16.068
-CO-Ni + CO-Ni => C-Ni + CO2-Ni                6.312E+13  0.500      241.679
-    COV / CO-Ni                               0.000E+00  0.000      -100.000 &
-    /
-C-Ni + CO2-Ni => CO-Ni + CO-Ni                1.878E+21  -0.500     239.321
-    COV / C-Ni                                0.000E+00  0.000      -105.000 &
-    /
+SURFACE MECHANISM FOR METHANATION OF CO AND CO2 OVER NICKEL
+***********************************************************************
+****                                                                  *
+****     METHANATION OVER NI - SURFACE MECHANISM                      *
+****     thermodynamically consistent (300 - 2000K)                   *
+****                                                                  *
+****     D. SCHMIDER, L. MAIER, O. DEUTSCHMANN                        *
+****     KIT (Karlsruhe Institute of Technology)                      *
+****                                                                  *
+****     References:                                                  *
+****     D. Schmider, L. Maier, O. Deutschmann. Industrial &          *
+****     Engineering Chemistry Research (2021).                       *
+****     www.detchem.com/mechanisms                                   *
+****     KIT (Karlsruhe Institute of Technology)                      *
+****     Contact: mail@detchem.com (O. Deutschmann)                   * 
+****                                                                  *
+****                                                                  *
+****     Kinetic data:                                                *
+****      k = A * T**b * exp (-Ea/RT) * exp(eps*theta/RT)             *
+****                                                                  *
+****           A          b       Ea        eps                       *
+****        (cm,mol,s)    -     kJ/mol     kJ/mol                     *
+****                                                                  *
+****     STICK: A in next reaction is initial sticking coefficient    *
+****                                                                  *
+****                                                                  *
+****     (DETCHEM format)                                             *
+****                                                                  *
+***********************************************************************
+STICK
+Ni      +Ni      +H2      >H-Ni    +H-Ni      1.458E-02  0.000     0.000
+H-Ni    +H-Ni    >Ni      +Ni      +H2        4.538E+21 -0.138    96.108
+STICK
+CH4     +Ni      >CH4-Ni                      1.064E-02  0.000     0.000
+CH4-Ni  >CH4     +Ni                          2.793E+15  0.085    36.977
+STICK
+H2O     +Ni      >H2O-Ni                      1.163E-01  0.000     0.000
+H2O-Ni  >Ni      +H2O                         2.035E+12 -0.031    61.038
+STICK
+CO2     +Ni      >CO2-Ni                      6.288E-05  0.000     0.000
+CO2-Ni  >CO2     +Ni                          4.993E+07  0.018    25.831
+STICK
+CO      +Ni      >CO-Ni                       3.737E-01  0.000     0.000
+CO-Ni   >CO      +Ni                          1.144E+12 -0.103   111.992
+$CO-Ni                                                   0.000    50.000
+Ni      +CO2-Ni  >O-Ni    +CO-Ni              1.601E+23 -1.001    89.324
+O-Ni    +CO-Ni   >Ni      +CO2-Ni             5.806E+19  0.000   123.596
+$CO-Ni                                                   0.000    50.000
+Ni      +CO-Ni   >O-Ni    +C-Ni               2.355E+14  0.000   116.163
+$CO-Ni                                                   0.000    50.000
+O-Ni    +C-Ni    >Ni      +CO-Ni              2.541E+18  0.000   148.077
+$C-Ni                                                    0.000   105.000
+CO-Ni   +H-Ni    >OH-Ni   +C-Ni               3.045E+18 -0.223   105.272
+$CO-Ni                                                   0.000    50.000
+OH-Ni   +C-Ni    >CO-Ni   +H-Ni               2.184E+18  0.128    62.778
+$C-Ni                                                    0.000   105.000
+CO-Ni   +H-Ni    >HCO-Ni  +Ni                 6.823E+21 -0.979   132.079
+HCO-Ni  +Ni      >CO-Ni   +H-Ni               2.179E+20 -0.021     0.151
+$CO-Ni                                                   0.000   -50.000
+HCO-Ni  +Ni      >O-Ni    +CH-Ni              5.104E+15  0.023    81.719
+O-Ni    +CH-Ni   >HCO-Ni  +Ni                 3.421E+19 -0.023   110.161
+H-Ni    +C-Ni    >Ni      +CH-Ni              1.327E+24 -0.456   157.655
+$C-Ni                                                    0.000   105.000
+Ni      +CH-Ni   >H-Ni    +C-Ni               2.633E+22  0.456    22.255
+CH-Ni   +H-Ni    >CH2-Ni  +Ni                 3.210E+25 -0.084    81.051
+CH2-Ni  +Ni      >CH-Ni   +H-Ni               6.156E+24  0.084    95.229
+CH2-Ni  +H-Ni    >CH3-Ni  +Ni                 7.778E+22 -0.048    59.452
+CH3-Ni  +Ni      >CH2-Ni  +H-Ni               6.157E+24  0.048    95.878
+CH3-Ni  +H-Ni    >Ni      +CH4-Ni             3.628E+21 -0.048    65.702
+Ni      +CH4-Ni  >CH3-Ni  +H-Ni               6.156E+21  0.048    53.578
+O-Ni    +H-Ni    >OH-Ni   +Ni                 1.158E+24 -0.176   104.199
+OH-Ni   +Ni      >O-Ni    +H-Ni               7.696E+19  0.176    29.791
+OH-Ni   +H-Ni    >Ni      +H2O-Ni             2.342E+20  0.075    44.095
+Ni      +H2O-Ni  >OH-Ni   +H-Ni               2.907E+21 -0.075    90.365
+OH-Ni   +OH-Ni   >O-Ni    +H2O-Ni             1.011E+20  0.251    95.091
+O-Ni    +H2O-Ni  >OH-Ni   +OH-Ni              1.889E+25 -0.251   215.769
+H-Ni    +CO2-Ni  >COOH-Ni +Ni                 1.287E+25 -0.460   117.200
+COOH-Ni +Ni      >H-Ni    +CO2-Ni             1.288E+20  0.460    33.800
+COOH-Ni +Ni      >OH-Ni   +CO-Ni              6.032E+23 -0.216    54.368
+OH-Ni   +CO-Ni   >COOH-Ni +Ni                 1.453E+21  0.216    97.632
+$CO-Ni                                                   0.000    50.000
+COOH-Ni +H-Ni    >HCO-Ni  +OH-Ni              4.220E+23 -1.145   104.732
+HCO-Ni  +OH-Ni   >COOH-Ni +H-Ni               3.246E+19  0.245    16.068
+CO-Ni   +CO-Ni   >C-Ni    +CO2-Ni             6.312E+13  0.500   241.679
+$CO-Ni                                                   0.000   100.000
+C-Ni    +CO2-Ni  >CO-Ni   +CO-Ni              1.878E+21 -0.500   239.321
+$C-Ni                                                    0.000   105.000
 END

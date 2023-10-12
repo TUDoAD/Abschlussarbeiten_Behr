@@ -4,7 +4,6 @@ Created on Tue Oct 10 09:11:35 2023
 
 @author: smmcvoel
 """
-import sys
 import yaml
 import math
 import pubchempy as pcp
@@ -72,7 +71,7 @@ from DWSIM.Thermodynamics.Utilities.PetroleumCharacterization import GenerateCom
 from DWSIM.Thermodynamics.Utilities.PetroleumCharacterization.Methods import *
 
 
-#Directory.SetCurrentDirectory(dwsimpath)
+Directory.SetCurrentDirectory(dwsimpath)
 
 # create automation manager
 interf = Automation3()
@@ -118,12 +117,14 @@ def createReaction(data, substances):
         for j in range(len(substances)):
             if base_formula == substances[j][0]:
                 base_key = substances[j][1]
+                print("Base: " + str(base_key))
                 
         for compound in educts:
             for j in range(len(substances)):
                 if compound[0]  == substances[j][0]:
                     key = substances[j][1]
                     coefficient = compound[1]
+                    print("Educt: " + str(key) + " " + str(coefficient))
                     comps.Add(key, float(coefficient))
                     dorders.Add(key, 0)
                     rorders.Add(key, 0)
@@ -133,12 +134,13 @@ def createReaction(data, substances):
                 if compound[0]  == substances[j][0]:
                     key = substances[j][1]
                     coefficient = compound[1]
+                    print("Product: " + str(key) + " " + str(coefficient))
                     comps.Add(key, float(coefficient))
                     dorders.Add(key, 0)
                     rorders.Add(key, 0)
         
         # create reaction, set numerator and denominator to 1, because it get overwritten with own kintic skript
-        reaction = sim.CreateHetCatReaction(reaction_name, "This reaction is created automatically!", comps, base_key, "Mixture",
+        reaction = sim.CreateHetCatReaction(reaction_name, "This reaction is created automatically!", comps, base_key, "Mixture", 
                                             "Fugacities", "Pa", "mol/[kg.s]", "1", "1" )
         
         sim.AddReaction(reaction)
@@ -173,7 +175,12 @@ r=(K_0 * R2 * math.pow(R1, 1/3))/(1 + K_1 * R2 + K_2 * R1 + K_3 * P2)""")
                     
 
 def simulation(name, data, combination):
+    interf = Automation3()
+    sim = interf.CreateFlowsheet()
+    
+    path_storage = "C:\\Users\\smmcvoel\\Desktop\\Temporäre Ablage\\dice_01"
     temperature, pressure, loading = combination
+    
     ## create flowsheet and run simulation
     # get compound from DWSIM and add them to the simulation
     print("Adding substances to Simulation...")
@@ -253,11 +260,12 @@ def simulation(name, data, combination):
     m1.SetOverallComposition(composition)
     print("Done!")
     
-    #m1.SetTemperature(data[0]["Mixture"][0]["temperature"])
-    m1.SetTemperature(temperature)
-    m1.SetPressure(pressure)
+    m1.SetTemperature(420) #temperature)
+    m1.SetPressure(100000) #pressure)
+    
     V_flow = math.pi * (data[1]["Reactor"][0]["tube_diameter"]/2) ** 2 * data[0]["Mixture"][0]["velocity"]
     m1.SetVolumetricFlow(V_flow)
+    
     
     # specify reactor parameter; doesnt make a difference if diameter or length is choosen
     r1.Volume = data[1]["Reactor"][0]["reactive_volume"]
@@ -273,7 +281,7 @@ def simulation(name, data, combination):
         print("Error accured while setting the ReactorOperationMode!")
         
     # specify catalyst parameter
-    r1.CatalystLoading = loading
+    r1.CatalystLoading = 1000 #loading
     r1.CatalystVoidFraction = data[1]['Reactor'][0]["catalyst_void_fraction"]
     #cat_diameter = data[1]['Reactor'][0]["catalyst_particle_diameter"] #m
     r1.CatalystParticleDiameter = data[1]['Reactor'][0]["catalyst_particle_diameter"]
@@ -289,7 +297,7 @@ def simulation(name, data, combination):
     
     # save file as dwxmz
     fileName_dwsim = name + ".dwxmz"
-    fileNameToSave = Path.Combine("C:\\Users\\smmcvoel\\Desktop\\Temporäre Ablage\\dice_01", fileName_dwsim)
+    fileNameToSave = Path.Combine(path_storage, fileName_dwsim)
     #fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName_dwsim)
     
     interf.SaveFlowsheet(sim, fileNameToSave, True)
@@ -316,27 +324,15 @@ def simulation(name, data, combination):
     stri = MemoryStream()
     d.SaveTo(stri)
     image = Image.FromStream(stri)
-    imgPath = Path.Combine("C:\\Users\\smmcvoel\\Desktop\\Temporäre Ablage\\dice_01", fileName_pic)
+    imgPath = Path.Combine(path_storage, fileName_pic)
     #imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName_pic)
     image.Save(imgPath, ImageFormat.Png)
     stri.Dispose()
     canvas.Dispose()
     bmp.Dispose()
     
-    #from PIL import Image
+    from PIL import Image
     
-    #im = Image.open(imgPath)
+    im = Image.open(imgPath)
     #im.show()
-    
 
-
-name = sys.argv[1]
-temperature = sys.argv[2]
-pressure = sys.argv[3]
-loading = sys.argv[4]
-combination = (float(temperature), float(pressure), float(loading))
-
-with open("C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/new_reaction_2023-10-12_DataSheet.yaml", "r") as file:
-    data = yaml.safe_load(file)
-    
-simulation(name, data, combination)

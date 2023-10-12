@@ -1,0 +1,35 @@
+- Mixture:
+  - mole_fraction:
+    - - CO2
+      - 0.5
+    - - H2
+      - 0.5
+    pressure: 100000.0
+    substances:
+    - CO2
+    - H2
+    - CH4
+    - H2O
+    - CO
+    - Ni
+    temperature: 420.0
+    #type: !!python/name:owlready2.entity.Mixture ''
+    velocity: 0.2
+- Reactor:
+  - calculation_mode: isothermal
+    catalyst_loading: 1
+    catalyst_particle_diameter: 0.00063
+    catalyst_void_fraction: 0.38
+    num_tubes: 1
+    reactive_volume: 5.3784066229457E-6
+    tube_diameter: 0.008
+    tube_length: 0.107
+    #type: !!python/name:owlready2.entity.AFE_0000153 ''
+- ChemicalReaction:
+  - - id: 0
+      reactions:
+      - br: 8.81E-6
+        K_1: 30.3 # here: K_CO2
+        K_2: 3.7 # here: K_H2
+        K_3: 200 # here: K_H2O
+        reaction_equation: CO2+4H2>CH4+2H2O
