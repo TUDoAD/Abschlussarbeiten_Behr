@@ -32,14 +32,13 @@ Limitations:
     https://gist.github.com/Zeqiang-Lai/576940bcffd5816d695c65b4b6c13e98
     """
 from pdfdataextractor import Reader
-import getopt
 import os
 import re
 import string
 import subprocess
 import sys
 import unidecode
-import pybliometrics
+#import pybliometrics
 from pybliometrics.scopus import AbstractRetrieval
 from pypdf import PdfReader
 from pdfminer.pdfdocument import PDFDocument
@@ -377,27 +376,50 @@ def pdf_title(filename):
 def get_metadata(filename):
     title = pdf_title(filename)
     title = sanitize(' '.join(title.split()))
-    
+    ab=None
     cr = Crossref()
     result = cr.works(query = title)
     title=result['message']['items'][0]['title'][0]
     doi=result['message']['items'][0]['DOI']
     publisher=result['message']['items'][0]['publisher']
-    return title, doi,publisher
+    try:
+            ab = AbstractRetrieval(doi)
+    except:
+            file= Reader()
+            pdf= file.read_file(filename)
+            if not pdf:
+                return None,None,None,None
+            title=pdf.title()
+            cr = Crossref()
+            result = cr.works(query = title)
+            doi=result['message']['items'][0]['DOI']
+            title=result['message']['items'][0]['title'][0]
+    return title, doi,publisher,ab
 
-def get_abstract(path, doi, publisher):    
+def get_abstract(path, doi, publisher,ab):    
                                           
     if 'Elsevier' in publisher:
-        ab = AbstractRetrieval(doi)
+        if ab == None:
+            ab = AbstractRetrieval(doi)
         abstract=ab.abstract
+        #keywords=ab.authkeywords
         if not abstract:
             abstract=ab.description     
-    elif 'ACS' or 'American Chemical Society' in publisher:
+    elif ('ACS' or 'American Chemical Society') in publisher:
         file= Reader()
         pdf= file.read_file(path)
         abstract=pdf.abstract()
-    if abstract[0]==':':
-        abstract=abstract[1:]
-        
-    #keywords = re.findall(r'[a-zA-Z]\w+',text)
+    else:
+        return None
+
+    pattern=r'A[Bb][Ss][Tt][Rr][Aa][Cc][Tt][:]?'
+    if re.search(pattern,abstract):
+            abstract=abstract.replace(re.search(pattern,abstract).group(0),'')
+    elif abstract[0]==':':
+            abstract=abstract[1:]
+    
+    #if re.search(r'K[Ee][Yy][Ww][Oo][Rr][Dd][Ss][:]?', abstract):
+        #keywords=abstract[re.search(r'K[Ee][Yy][Ww][Oo][Rr][Dd][Ss][:]?', abstract).end():]
+        #abstract=abstract[re.search(:r'K[Ee][Yy][Ww][Oo][Rr][Dd][Ss][:]?', abstract).start()]
+        #keywords = re.findall(r'[a-zA-Z]\w+',text)
     return abstract
