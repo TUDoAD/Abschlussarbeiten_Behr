@@ -1,0 +1,10 @@
+{
+    "onto_list": {
+            "CHEBI": "http://purl.obolibrary.org/obo/chebi.owl",
+            "RXNO" : "http://purl.obolibrary.org/obo/rxno.owl",
+            "CHMO" : "http://purl.obolibrary.org/obo/chmo.owl",
+            "AFO"  : "./ontologies/afo.owl"
+            } ,
+    "onto_old": "afo",
+    "onto_new": "afo"
+}

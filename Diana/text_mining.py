@@ -15,7 +15,7 @@ import os
 from chemdataextractor import Document
 from pubchempy import get_compounds
 from preprocess_onto import *
-
+import json
 def load_classes_chebi():
     """
     Load Classes from ChEBI Ontology
@@ -123,14 +123,14 @@ def add_publication(onto_new,onto_old,doi,title,abstract):
                     range = [str]
                     label = 'has doi'
             new_pub.has_doi = [doi]
-            has_title=onto.search_one(label='has title')
+            has_title = onto.search_one(label='has title')
             if not has_title:
                 class has_title(DataProperty):
                     range = [str]
                     label ='has title'
             new_pub.has_title = [title]
     onto.save('./ontologies/{}.owl'.format(onto_new))
-    
+    return p_id
 
 def pred_model_dataset (model,sent): 
     """
@@ -158,7 +158,6 @@ def pred_model_dataset (model,sent):
     - The function utilizes a trained model to predict outcomes for sentences, and the predictions are stored in pred_dataset.output_pred().
 
     """
-    #output_tensor_buf = []
     pred_dataset, pred_dataloader = model.gen_pred_dataloader(sent)
     
     model.setup('test')
@@ -274,9 +273,9 @@ def CatalysisIE_search(model, test_sents, onto_list, onto_new, onto_old): #chang
     chem_list = []
     sup_cat = {}
     abbreviation = {}
-    a=0
-    categories={}
-    reac_dict={}
+    a = 0
+    categories = {}
+    reac_dict = {}
 
     entity_old = (0,None,None)
     output_sents = pred_model_dataset(model, test_sents)
@@ -345,13 +344,13 @@ def CatalysisIE_search(model, test_sents, onto_list, onto_new, onto_old): #chang
                         elif l == 'Catalyst':
                             if '/' in mol[i][0]:
                                 entity = entity.replace('/',' supported on ')
-                                sup=True
+                                sup = True
                             elif 'on' in mol[i][0]:
-                                sup= False
+                                sup = False
                                 for c in chem_list_all:
                                     if re.search(mol[i][1],c):
                                         entity = entity.replace('on','supported on')
-                                        sup= True
+                                        sup = True
                                         break    
                             if sup==True:    
                                 support = mol[i][2]
@@ -410,7 +409,7 @@ def CatalysisIE_search(model, test_sents, onto_list, onto_new, onto_old): #chang
             entity_old = (j,entity,l)  
             a = j+1
     chem_list = [*set(chem_list)]
-    return categories,chem_list, reac_dict, sup_cat
+    return categories,chem_list, reac_dict, sup_cat, abbreviation
 
 def doc_token(entity, e_split,  j=0):
     """
@@ -484,7 +483,6 @@ def chemical_prep(chem_list, onto_list,onto_class_list,onto_new,onto_old):
     class_list = []        
     onto_new_dict = {}
     synonyms = {}
-
     onto_dict,inchikey = synonym_dicts(onto_class_list)
     
     for molecule in chem_list:  
@@ -538,7 +536,7 @@ def chemical_prep(chem_list, onto_list,onto_class_list,onto_new,onto_old):
                     class_list.remove(key)
                     onto_new_dict.pop(key)
                     break
-    class_list= [*set(class_list)] #remove duplicates
+    class_list = [*set(class_list)] #remove duplicates
     class_list.extend(['molecule'])
     missing, match_dict = create_list_IRIs(class_list, onto_list,onto_new,onto_old,IRI_json_filename = 'iriDictionary')
 
@@ -630,7 +628,7 @@ def search_inchikey(inchikey, c):
 
 def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym, comp):
     if len(synonyms[k]) == 1:
-            key= synonyms[k][0]
+            key = synonyms[k][0]
     else: 
             comp_check, mol= search_inchikey(inchikey, k)
             if k in comp_check:
@@ -641,17 +639,17 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym, comp):
                         class_list.append(k)
 
                         return class_list, key, rel_synonym  
-                    elif len(mol)==1:
+                    elif len(mol) == 1:
                         key=mol[0].iupac_name #some of the compounds that can be found in pubchem don't have IUPAC names (i.e. "propyl")
                         
                     else:
                         while True:
-                            mol_new= [i for i in mol if i.iupac_name]
+                            mol_new = [i for i in mol if i.iupac_name]
                             print('choose iupac name for {}:{}'.format(k,[i.iupac_name for i in mol_new]))
                             print('components have following SMILES:')
                             for i in mol_new:
                                 print('{}:{}'.format(i.iupac_name, i.isomeric_smiles))
-                            idx= input('write number of fitting iupac name or "none"\n')
+                            idx = input('write number of fitting iupac name or "none"\n')
                             if idx =='none':
                                 key = k
                                 class_list.append(k)
@@ -659,8 +657,8 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym, comp):
                                 return class_list, key, rel_synonym                   
                             else:
                                 try:
-                                    idx= int(idx)
-                                    key= mol_new[idx-1].iupac_name
+                                    idx = int(idx)
+                                    key = mol_new[idx-1].iupac_name
                                     break
                                 except:
                                     print('error: write a number between 1 and {} or "none"'.format(len(mol_new)))
@@ -668,20 +666,20 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym, comp):
                 else:
                     while True:
                             print('choose synonyms for {}:{}'.format(k,synonyms[k]))
-                            idx= input('write number of fitting synonym or "none"\n')                            
+                            idx = input('write number of fitting synonym or "none"\n')                            
                             if idx =='none':
                                 key = k
                                 class_list.append(k)
                                 return class_list, key, rel_synonym 
                             else:
                                 try:
-                                    idx= int(idx)
-                                    key= synonyms[k][idx-1]
+                                    idx = int(idx)
+                                    key = synonyms[k][idx-1]
                                     break
                                 except:
                                     print('error: write a number between 1 and {} or "none"'.format(len(synonyms[k])))                               
             elif len(comp_check) == 1:
-                key= comp_check[0]                  
+                key = comp_check[0]                  
             else:
                 key = None
                 for i in comp_check:
@@ -692,10 +690,9 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym, comp):
                     
     if key == None or not key:
         key = k
-    rel_synonym[k]=key          
+    rel_synonym[k] = key          
     class_list.append(key)
     return class_list, key, rel_synonym
-
 
 
 

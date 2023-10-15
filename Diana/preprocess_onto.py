@@ -9,8 +9,14 @@ from owlready2 import *
 import pandas as pd
 import glob
 import os
-
-def create_list_IRIs(class_list, onto_list,onto_new,onto_old,IRI_json_filename = 'iriDictionary'):
+def set_config_key(key, value):
+     globals()[key] = value
+     
+with open("config.json") as json_config:
+     for key, value in json.load(json_config).items():
+         set_config_key(key, value)
+         
+def create_list_IRIs(class_list, IRI_json_filename = 'iriDictionary'):
     """
     Create List of IRIs for Ontology Entities
 
@@ -123,7 +129,7 @@ def search_value_in_nested_dict(value, onto_names, onto_dict, match_dict):
                     match_dict[IRI] = value            
     return match_dict
 
-def onto_extender (onto_list, onto_new):
+def onto_extender ():
     for o,iri in onto_list.items():
         # The first path leads to robot.jar and may need to be modified by the user.
         # --input: is the ontology in which to search for the desired IRI's.
@@ -133,7 +139,7 @@ def onto_extender (onto_list, onto_new):
     for filepath in glob.iglob('ontology_sniplet/*.owl'):
         os.system('robot merge --input {} --input ontologies/{}.owl --output ontologies/{}.owl'.format(filepath, onto_new, onto_new))
 
-def equality( onto_list,onto_old, onto_new):
+def equality():
     """
     Ontology Equality Function
 

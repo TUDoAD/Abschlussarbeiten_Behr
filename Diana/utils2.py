@@ -21,11 +21,7 @@ from chemdataextractor import Document
 from pubchempy import get_compounds
 import types
 from io import StringIO
-import pandas as pd
 from txt_extract import get_metadata, get_abstract
-#to-do: check again what is with hydroformulation (more than one class built)
-#to do: integrate sup_cat if catalyst not in entities
-# other catalyst entities
 
 def delete_files_in_directory(directory_path):
    try:
