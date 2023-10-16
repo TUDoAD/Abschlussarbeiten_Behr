@@ -68,7 +68,7 @@ def delete_files_in_directory(directory_path):
      print("Error occurred while deleting files.")
      
    
-def add_publication(onto_new,onto_old,doi,title,abstract):
+def add_publication(doi,title,abstract):
     """
     Add Publication to Ontology
 
@@ -217,7 +217,7 @@ def text_prep(test_txt):
     test_sents = stanza_fix(test_sents)
     return test_sents
 
-def CatalysisIE_search(model, test_sents, onto_list, onto_new, onto_old): #change description at the and
+def CatalysisIE_search(model, test_sents): #change description at the and
     """
     Catalysis Information Extraction and Search
 
@@ -312,14 +312,13 @@ def CatalysisIE_search(model, test_sents, onto_list, onto_new, onto_old): #chang
             e_split = entity.split()
             entity = doc_token(entity, e_split)
             
-            pattern = r'([A-Za-z]+[\s]?[—–-] [a-z]+|[A-Za-z]+ [—–-][\s]?[a-z]+)'
+            pattern = r'([A-Za-z]+[\s]?[—–-] [a-z]+|[A-Za-z]+ [—–-][\s]?[a-z]+)' #e_split:['hydro- formylation'] and entity:heterogeneous hydro- formylation or X - ray diffraction
             e_split = re.findall(pattern,entity)
             if e_split:
-                print('e_split:{} and entity:{}'.format(e_split, entity)) # check again for examples!
                 for i in e_split:
                     i_n = i.replace(' ','')
                     entity = re.sub(i,i_n,entity)
-                    missing,_= create_list_IRIs([re.sub(r'[—–-]','',i_n)], onto_list,onto_new,onto_old)
+                    missing,_= create_list_IRIs([re.sub(r'[—–-]','',i_n)])
                     if not missing:
                         entity = re.sub(i_n,re.sub(r'[—–-]','',i_n),entity)
             
@@ -336,22 +335,28 @@ def CatalysisIE_search(model, test_sents, onto_list, onto_new, onto_old): #chang
                 entity_old = (j,entity,l)
                 continue
             else:
-                mol = re.findall(r'(([\w@—–-]+)(?:[\s]?/[\s]?|[\s]on[\s])+([\w@—–-]+))', entity) # 'RhCo on Al2O3' or 'RhCo/Al2O3'
+                mol = re.findall(r'(([\w@—–-]+)(?:[\s]?/[\s]?|[\s]on[\s])+([\w@—–-]+))', entity) # 'RhCo on Al2O3' or 'RhCo/Al2O3' r'((?:([\w@—–-]+)[\s])?([\w@—–-]+)(?:[\s]?/[\s]?|[\s]on[\s])+([\w@—–-]+))', entity
                 if mol:
                     for i in range(len(mol)):
                         if ('supported' or 'Supported') in mol[i][0]:
                             continue
                         elif l == 'Catalyst':
+                            cem=None
                             if '/' in mol[i][0]:
                                 entity = entity.replace('/',' supported on ')
                                 sup = True
                             elif 'on' in mol[i][0]:
                                 sup = False
                                 for c in chem_list_all:
+                                    if c in entity[re.search(r'[\s]on[\s]',entity).end():]:
+                                        
                                     if re.search(mol[i][1],c):
                                         entity = entity.replace('on','supported on')
                                         sup = True
-                                        break    
+                                        
+                                    elif c in entity[:re.search(r'[\s]on[\s]',entity).start()] and 'based' not in entity[:re.search(r'[\s]on[\s]',entity).start()]:  
+                                        cem = c
+                                    
                             if sup==True:    
                                 support = mol[i][2]
                                 chem_list.append(support)
@@ -369,7 +374,7 @@ def CatalysisIE_search(model, test_sents, onto_list, onto_new, onto_old): #chang
                                 entity = entity.replace('/',',')
                 
                 pattern = r'^[\d,]+[—–-] [a-z]+$' #1,3- butadiene -> 1,3-butadiene
-                if re.search(pattern,entity) or re.search(r'^ [A-Za-z\d—–-]+$',entity):
+                if re.search(pattern,entity) or re.search(r'^ [A-Za-z\d—–-]+$|^[A-Za-z\d—–-]+ $',entity):
                     entity=entity.replace(' ','') 
                 
                 spans = sorted(Document(entity).cems, key = lambda span: span.start)
@@ -377,8 +382,8 @@ def CatalysisIE_search(model, test_sents, onto_list, onto_new, onto_old): #chang
                 chem_list.extend([c for c in chem_list_all if c in entity and c not in chem_list]) #add chemicals that wasn't recognized with chemdataextractor like()
                 
                 for c in chem_list: # search if for i.e. ZSM-5 in entity if only ZSM found. replace ZSM with ZSM-5 in chem_list
-                    if re.findall(r'{}[—–-][\d]+[\s]'.format(c), entity):
-                        chem_list[:] = [re.findall(r'{}[—–-][\d]+[\s]'.format(c), entity)[0] if x == c else x for x in chem_list]
+                    if re.findall(r'({}[—–-][\d]+)[\s]'.format(c), entity):
+                        chem_list[:] = [re.findall(r'({}[—–-][\d]+)[\s]'.format(c), entity)[0] if x == c else x for x in chem_list]
                         
                 if 'system' in entity or 'surface' in entity and l=='Catalyst':
                         entity = entity.replace('system','catalyst')
@@ -389,6 +394,7 @@ def CatalysisIE_search(model, test_sents, onto_list, onto_new, onto_old): #chang
                             e_btwn = entity[spans[i-1].end:spans[i].start]
                             if 'loaded' in e_btwn:    
                                 loaded_end =  entity.index('loaded')+len('loaded')+1
+                                """
                                 for c in chem_list:
                                     try:
                                         idx = entity.index(c)
@@ -403,6 +409,7 @@ def CatalysisIE_search(model, test_sents, onto_list, onto_new, onto_old): #chang
                                                 if spans[k].text not in sup_cat[c]:
                                                     sup_cat[c].append(spans[k].text)
                                                 k+=1
+                                """
                     entity = entity.replace('loaded','supported on')                                           
                 #else:
                 categories[entity] = l 
@@ -411,7 +418,7 @@ def CatalysisIE_search(model, test_sents, onto_list, onto_new, onto_old): #chang
     chem_list = [*set(chem_list)]
     return categories,chem_list, reac_dict, sup_cat, abbreviation
 
-def doc_token(entity, e_split,  j=0):
+def doc_token(entity, e_split,  j = 0):
     """
     Entity Tokenization Function
     
@@ -476,7 +483,7 @@ def doc_token(entity, e_split,  j=0):
             continue
     return entity
 
-def chemical_prep(chem_list, onto_list,onto_class_list,onto_new,onto_old):
+def chemical_prep(chem_list, onto_class_list):
     global onto_new_dict
     rel_synonym = {}
     comp_dict = {}
@@ -521,26 +528,32 @@ def chemical_prep(chem_list, onto_list,onto_class_list,onto_new,onto_old):
                     synonyms = fill_synonyms(synonyms,c,v_o,k_o)
                 
                 if i == 0:
-                    class_list, key ,rel_synonym = compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym,comp = False)
+                    class_list, key ,rel_synonym = compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym) #,comp = False
+                    """
+                    if key==False:
+                        break
+                    """
                     onto_new_dict[key] = []
                     i += 1
                 if c == k:
                     comp = key
                     
                 else:
-                    class_list, comp, rel_synonym = compare_synonyms(synonyms, inchikey, class_list, c, rel_synonym,comp = True)                
+                    class_list, comp, rel_synonym = compare_synonyms(synonyms, inchikey, class_list, c, rel_synonym) #,comp = True                
                 onto_new_dict[key].append(comp)
-            for i in onto_new_dict[key]:
-                if len(i) == 1: #remove components if one of the components (atoms) doesn't exist (ex.ZMS- Z,M don't exist, S-exists)                                   
-                    print('deleted key:{}'.format(key))
-                    class_list.remove(key)
-                    onto_new_dict.pop(key)
-                    break
+            if key != False:
+                for i in onto_new_dict[key]:
+                    if len(i) == 1: #remove components if one of the components (atoms) doesn't exist (ex.ZMS- Z,M don't exist, S-exists)                                   
+                        print('deleted key:{}'.format(key))
+                        chem_list.remove(key)
+                        class_list.remove(key)
+                        onto_new_dict.pop(key)
+                        break
     class_list = [*set(class_list)] #remove duplicates
     class_list.extend(['molecule'])
-    missing, match_dict = create_list_IRIs(class_list, onto_list,onto_new,onto_old,IRI_json_filename = 'iriDictionary')
+    missing, match_dict = create_list_IRIs(class_list,IRI_json_filename = 'iriDictionary')
 
-    return missing, match_dict, rel_synonym
+    return missing, match_dict, rel_synonym,onto_new_dict
 
 def synonym_dicts(class_list):
     """
@@ -626,10 +639,15 @@ def search_inchikey(inchikey, c):
             mol_out = [c]          
     return mol_out,  mol
 
-def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym, comp):
+def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
     if len(synonyms[k]) == 1:
             key = synonyms[k][0]
     else: 
+            """    
+            if '/' in k:
+                key=False
+                return class_list, key, rel_synonym 
+            """
             comp_check, mol= search_inchikey(inchikey, k)
             if k in comp_check:
                 if len(synonyms[k]) == 0:
@@ -689,18 +707,17 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym, comp):
                     print('no synonyms but some matches in inchikey for {}:{}'.format(k, comp_check))                 
                     
     if key == None or not key:
-        key = k
+        key = k 
     rel_synonym[k] = key          
     class_list.append(key)
     return class_list, key, rel_synonym
 
-
-
 ckpt_name = 'CatalysisIE/checkpoint/CV_0.ckpt'
 bert_name = 'CatalysisIE/pretrained/scibert_domain_adaption'
 model = BERTSpan.load_from_checkpoint(ckpt_name, model_name=bert_name, train_dataset=[], val_dataset=[], test_dataset=[])
-onto_old = 'afo'
-onto_new = 'afo'
+#onto_old = 'afo'
+#onto_new = 'afo'
+"""
 onto_list ={
             'CHEBI': 'http://purl.obolibrary.org/obo/chebi.owl',
             #'BFO'  : 'http://purl.obolibrary.org/obo/bfo/2.0/bfo.owl',
@@ -708,52 +725,19 @@ onto_list ={
             'CHMO' : 'http://purl.obolibrary.org/obo/chmo.owl',
             'AFO'  : "./ontologies/afo.owl"
             }   
+"""
 #onto_new= onto_name+'_upd'
-test_txt='''
-In order to reveal the influences of metal-incorporation and regeneration of ZSM-5 zeolites on naphtha catalytic cracking, the fresh and regenerated Sr, Zr and La-loaded ZSM-5 zeolites have been prepared and evaluated using n-pentane catalytic cracking as a model reaction.
-It was found that the metal-incorporated ZSM-5 zeolites promoted hydride transfer reactions, and the Zr-incorporation helped to promote and maintain the catalytic activity while reduced alkenes selectivity;
-the regenerated ZSM-5 zeolites promoted C–H bond breaking that increased alkenes selectivity and n-pentane conversion but accelerated catalyst deactivation.
-The regenerated metal-incorporated ZSM-5 zeolites combined the feature roles of metal-incorporation and regeneration in modulating reaction pathways, and seemed a promising way to balance the activity, stability and alkenes selectivity, facilitating the optimal production for light olefins.
-Within the research scope, the regenerated Zr-loaded ZSM-5 zeolites reached an optimal production (0.97 g) for light olefins in n-pentane catalytic cracking at 550 °C with a weight hourly space velocity of 3.7 h−1 in 3 h, which was 24% higher than that of the parent HZSM-5 (0.78 g).
-RhCo/SiO2 catalyst.This work reported the heterogeneous rhodium oxide catalyst encapsulated within microporous silicalite-1 (S-1) zeolite (Rh2O3@S-1) through epitaxial growth of S-1 seeds pre-anchored with rhodium species.
-RhCl3 • nH2O, Co(NO3)2 • 6H2O and 
-Co2(CO)8 were purchased commercially. 
-Supported catalysts based on the Rh-Co couple, mainly derived from the decomposition of 
-bimetallic carbonylic clusters, were found particularly active and selective in the vapor phase 
-hydroformylation of simple olefins provided that 
-the two metals were in intimate contact 
-Rh4(CO)12, and RhCo3(CO)12, were synthesized 
-according to literature [14,15]. SiO2 was a silica 
-‘Aerosil’ supplied by Degussa with a surface 
-area of 380 m2/g. Cobalt
-complexes had been the main industrial hydroformylation catalysts until the early 1970s, i.e., prior to the commercialization of
-rhodium based catalysts. The present work concentrates on heterogeneous ethylene
-hydroformylation on a series of Rh and Co based catalysts. Supported catalysts based on the Rh-Co couple, mainly derived from the decomposition of 
-bimetallic carbonylic clusters, were found particularly active and selective in the vapor phase 
-hydroformylation of simple olefins provided that 
-the two metals were in intimate contact. Here we report the preparation, characterization and reactivity studies on propene hydroformylation of Rh-Co based catalysts, with various Rh/Co ratios, obtained by the reduction of 
-the metal salts coadsorbed on silica with NaBH, 
-in anaerobic conditions. When the Rh/Al based catalysts were subjected to the same 
-experimental conditions only the v(C0) absorption at 2015 cm-’ was observed and appears to be involved in the catalytic process. Based on the DRC 
-analysis of the reaction orders and apparent activation energies, we propose that the first step of 
-propylene hydrogenation to produce propyl species, which is often considered as a kinetically 
-non-relevant step, may play a more important role and should draw more attention for future 
-improvement of Rh-based heterogeneous catalysts for propylene hydroformylation. However, detailed mechanisms on
-the promotion effect of alloying secondary metals with Rh
-still remain elusive, which can be of great importance leading
-to the rational optimization of Rh-based alloy catalysts for
-active and selective heterogeneous hydroformylation. In this communication, systematic studies of catalytic
-behaviors from monometallic Rh supported on MCM-41 (Rh/
-MCM-41) to Rh-based bimetallic catalysts with the addition of
-a secondary 3rd row transition metal M (RhM3/MCM-41, M =
-Fe, Co, Ni, Cu, or Zn) for the heterogeneous hydroformylation
-of ethylene were reported by combining experiments and
-density functional theory (DFT) calculations. Bimetallic heterogeneous catalysts 
-based on rhodium supported on various oxides proved to be the more chemo- and regio-selective systems.Recently, it has been shown that tuning the local environment of Rh and Ir-based atomically dispersed catalysts beyond changing the support composition enables interesting
-chemistry, such as ethylene dimerization, NO reduction, 1,3-
-butadiene hydrogenation, and methane conversion to acetic
-acid with high selectivity.'''
+test_txt=""" 
+ The system resulted inactive for the atmospheric hydroformylation of propene, but actively catalyzed the reaction when a slight pressure (506 kPa) was 
+ applied. The high values of chemoselectivity towards hydroformylation (R = 0.75) and regioselectivity to linear aldehydes (S(L) = 96) can 
+ be due to the electronic and steric effects of the cobalt oxide layer.A Rh/Al system with rhodium nanocrystals was prepared by reducing 
+ rhodium trichloride supported on silica with lithium aluminum hydride at low temperature in THF. After pretreatment in Ar and in CO/H2 the 
+ system was found to be an active catalyst of vapour phase propene hydroformylation at atmospheric pressure. The nature and composition of 
+ the active surface was studied by X-ray diffraction, X-ray photoemission spectroscopy (XPS) and Fourier transform-IR spectroscopy. 
+ Regioselectivity and chemoselectivity data are correlated to the proposed nature and morphology of the active sites of the catalyst derived 
+ from spectroscopic data. The Rh/Al system is compared with the Rh/B system we described in preceding papers."""
 onto_class_list=load_classes_chebi()
 sents = text_prep(test_txt) 
-categories,chem_list, reac_dict, sup_cat= CatalysisIE_search(model, sents, onto_list, onto_new, onto_old)
-missing, match_dict, rel_synonym=chemical_prep(chem_list, onto_list,onto_class_list,onto_new,onto_old)
+categories,chem_list, reac_dict, sup_cat, abbreviation= CatalysisIE_search(model, sents)
+missing, match_dict, rel_synonym, onto_new_dict=chemical_prep(chem_list, onto_class_list)
+

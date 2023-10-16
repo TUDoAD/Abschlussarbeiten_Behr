@@ -31,6 +31,7 @@ Limitations:
     false positives.
     https://gist.github.com/Zeqiang-Lai/576940bcffd5816d695c65b4b6c13e98
     """
+import glob
 from pdfdataextractor import Reader
 import os
 import re
@@ -423,3 +424,14 @@ def get_abstract(path, doi, publisher,ab):
         #abstract=abstract[re.search(:r'K[Ee][Yy][Ww][Oo][Rr][Dd][Ss][:]?', abstract).start()]
         #keywords = re.findall(r'[a-zA-Z]\w+',text)
     return abstract
+abstract_all=''
+path=r'.\import\*.pdf'
+for i in glob.iglob(path):
+    title,doi,publisher,ab = get_metadata(i)
+    if doi==None:
+        continue
+    print(title+' : '+doi)
+    abstract = get_abstract(i, doi, publisher,ab)
+    if abstract==None:
+        abstract=''
+    abstract_all= abstract+abstract_all

@@ -9,6 +9,7 @@ from owlready2 import *
 import pandas as pd
 import glob
 import os
+
 def set_config_key(key, value):
      globals()[key] = value
      
@@ -73,6 +74,8 @@ def create_list_IRIs(class_list, IRI_json_filename = 'iriDictionary'):
     for key,value in match_dict.items():
         x = []
         for O in onto_names:
+            if O=='CHEBI':
+                O='ChEBI'
             list_IRIs = onto_dict[O].keys()
             if O != onto_old.upper():
                 try:

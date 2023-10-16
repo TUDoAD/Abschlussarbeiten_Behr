@@ -89,18 +89,24 @@ def preprocess_classes(categories, sup_cat, rel_synonym, chem_list, missing_all,
                         #Rh-Co based system supported on alumina, titania and silica                                    
                         e_btwn=entity[re.search('supported on ', entity).end():]
                         sup_i=True                            
-                    elif re.search('supported', entity): #bimetallic SiO2-supported RhCo3 cluster catalyst
+                    elif re.search('supported', entity) and re: #bimetallic SiO2-supported RhCo3 cluster catalyst 
                         if '-' in entity and entity.index('-')==re.search('supported',entity).start()-1:
                             entity_n= entity[:entity.index('-')]+ ' '+entity[entity.index('-')+1:]
                             spans_dict
                         e_btwn=entity[:re.search('supported', entity).start()-1]
                         sup_i = True                 
+                    
                     for c in chem_list:
                         pattern='\\b'+c+'\\b'
                         if re.search(pattern,entity_n):
                             c_t = rel_synonym[c] if c in rel_synonym.keys() else c
                             if sup_i==True and c in e_btwn:
-                                support.append(c_t)                    
+                                eq_idx=e_btwn.find('=') #RhM3/MCM-41, M = Fe, Co, Ni, Cu, or Zn
+                                if eq_idx != -1: 
+                                    if re.search(pattern,entity_n).start() < eq_idx:
+                                        support.append(c_t)
+                                else: 
+                                    support.append(c_t)
                             if c_t not in spans_n:    
                                 spans_n.append(c_t)                    
                     classes,_ = check_in_snip(entity, classes,entity,l,chem_list)                 
@@ -134,15 +140,11 @@ def preprocess_classes(categories, sup_cat, rel_synonym, chem_list, missing_all,
                 for c in entity.split():
                     c_t = rel_synonym[c] if c in rel_synonym.keys() else c
                     c_list.append(c_t)
+            
             list_all.append([' '.join(c_list),[],[' '.join(c_list)],categories[entity]])    #changed entity! prop-1-ene instead propylene
-            chem_e.append(' '.join(c_list))
-            for i in range(len(c_list)):
-                if c_list[i] in sup_cat.keys(): #'ZSM-5' instead of 'ZSM-5 zeolite' (change to second)
-                    if c_list[i] not in rel_synonym.keys():
-                        rel_synonym[c_list[i]] = ' '.join(c_list)
-                    sup_cat[' '.join(c_list)] = sup_cat[c_list[i]] 
-                    print('{} was replaced with {} in support-catalyst dictionary'.format(c_list[i],' '.join(c_list)))
-                    del sup_cat[c_list[i]]
+            if len(entity.split()) > 1 and set(entity.split()).issubset(chem_list):    
+                chem_e.append(' '.join(c_list))
+                
         elif entity.split()[-1] in chem_list and entity not in classes.keys():
             #i.e. light olefin
             classes,_ = check_in_snip(entity, classes, entity, l,chem_list)
@@ -150,6 +152,13 @@ def preprocess_classes(categories, sup_cat, rel_synonym, chem_list, missing_all,
             spans_dict[entity].append(c_t)        
     for k,v in spans_dict.items(): #replacement of parts of chemical entities with full name. i.e. ['zeolite', 'ZSM-5']-> ['ZSM-5 zeolite'] if 'ZSM-5 zeolite' is in entity
         for c in chem_e:
+            for i in range(len(c.split())):
+                if c.split()[i] in sup_cat.keys(): #'ZSM-5' instead of 'ZSM-5 zeolite' (change to second)
+                    if c.split()[i] not in rel_synonym.keys():
+                        rel_synonym[c.split()[i]] = c
+                    sup_cat[c] = sup_cat[c.split()[i]] 
+                    print('{} was replaced with {} in support-catalyst dictionary'.format(c.split()[i],c))
+                    sup_cat.pop(c.split()[i],None)
             if c in k:
                 spans_dict[k]=list(filter(lambda x: x not in c.split(), v))
     not_del = [] 
@@ -421,7 +430,7 @@ def create_classes_onto(abbreviation, sub_cat, missing, match_dict, df_entity,re
                                     onto, cat=add_individum(onto,list(onto.search(label=c_t))[0], c_t,p_id)
                                     
                                 cat.supported_on.append(ind)
-                                cat.catalyst_component_of.append(e_ind)
+                                cat.catalytic_component_of.append(e_ind)
                             sup_cat.pop(k) 
                             
                     if row.category== 'Product':
@@ -432,7 +441,7 @@ def create_classes_onto(abbreviation, sub_cat, missing, match_dict, df_entity,re
                         if c==row.entity:
                             ind.RO_0000087.append(cat_role_i) #'has role' = RO_0000087
                         elif e_ind not in ind.support_component_of:                          
-                            ind.catalyst_component_of.append(e_ind)
+                            ind.catalytic_component_of.append(e_ind)
             
             if row.category== 'Reaction':
                 if row.entity in reac_dict.keys():
@@ -517,7 +526,7 @@ def create_comp_relation(onto,match_dict, rel_synonym,p_id):
                             if i not in list(c_i.comment):
                                 c_i.comment.append(i)
                                 
-                    mol.BFO_0000051.append(c_i) #"has part" realtion between classes or individuals? chosen individuals because of reasoning time
+                    mol.BFO_0000051.append(c_i) #"has part" relation between classes or individuals? chosen individuals because of reasoning time
                     c_i.mentioned_in.append(pub_new)
     return onto
 
@@ -614,77 +623,251 @@ def create_sub_super(missing, onto, idx, indecies, entities, sup_sub_df, created
 
     return  indecies, onto,super_class, created_classes
  
-sup_cat={}
-rel_synonym= {'rhodium oxide': 'oxorhodium',
- 'rhodium': 'rhodium atom',
- 'oxide': 'oxide',
+sup_cat={'MCM-41': ['RhCo3', 'Rh', 'RhM3'],
+ 'SiO2': ['RhCo3', 'Rh', 'RhCo'],
+ 'Al2O3': ['Rh', 'Co'],
+ 'Al': ['Rh']}
+rel_synonym= {'Co': 'cobalt atom',
  '1,3-butadiene': 'buta-1,3-diene',
- 'propyl': 'propyl',
+ 'oxide': 'oxide',
+ 'lithium aluminum hydride': 'lithium tetrahydroaluminate',
+ 'lithium': 'lithium atom',
+ 'aluminum': 'aluminium atom',
  'hydride': 'hydride',
+ 'olefin': 'olefin',
  'Zn': 'zinc atom',
- 'propene': 'prop-1-ene',
- 'La': 'lanthanum atom',
- 'SiO2': 'silicon dioxide',
- 'Si': 'silicon atom',
- 'O': 'oxygen atom',
- 'Ir': 'iridium atom',
- 'Zr': 'zirconium atom',
- 'zeolite': 'zeolite',
- 'propylene': 'prop-1-ene',
+ 'carbon monoxide': 'carbon monoxide',
+ 'carbon': 'carbon atom',
+ 'monoxide': 'carbon monoxide',
  'Rh': 'rhodium atom',
- 'Co': 'cobalt atom',
+ 'propyl': 'propyl',
+ 'ethane': 'ethane',
+ 'Ir': 'iridium atom',
+ 'Mn2O3': 'oxo(oxomanganiooxy)manganese',
+ 'Mn': 'manganese atom',
+ 'O': 'oxygen atom',
+ 'aldehyde': 'aldehyde',
+ 'Zr': 'zirconium atom',
+ 'methane': 'methane',
+ 'methanol': 'methanol',
+ 'MoO3': 'molybdenum trioxide',
+ 'Mo': 'molybdenum atom',
+ 'Ethylene': 'ethene',
+ 'cobalt': 'cobalt atom',
+ 'alkene': 'alkene',
+ 'Sc2O3': 'oxo(oxoscandiooxy)scandium',
+ 'Sc': 'scandium atom',
+ 'rhodium oxide': 'oxorhodium',
+ 'rhodium': 'rhodium atom',
+ 'propylene': 'propene',
+ 'propanol': 'propan-1-ol',
+ 'V2O5': 'divanadium pentaoxide',
+ 'V': 'vanadium atom',
+ 'Sr': 'strontium atom',
+ 'P': 'phosphorus atom',
+ 'acetic acid': 'acetic acid',
+ 'acetic': 'acetic acid',
+ 'acid': 'acid',
+ 'Al': 'aluminium atom',
+ 'RhCo': 'cobalt;rhodium',
  'C': 'carbon atom',
+ 'zeolite': 'zeolite',
+ 'RhCo3': 'cobalt;rhodium',
+ 'propanal': 'propanal',
  'Ni': 'nickel atom',
  'Cobalt': 'cobalt atom',
- 'RhCo': 'cobalt(2+);rhodium(3+)',
- 'Sr': 'strontium atom',
+ 'silica': 'silicon dioxide',
+ 'La': 'lanthanum atom',
+ 'rhodium trichloride': 'trichlororhodium',
+ 'S': 'sulfur atom',
+ 'Al2O3': 'aluminium oxide',
+ 'TiO2': 'titanium dioxide',
+ 'Ti': 'titanium atom',
+ 'SiO2': 'silicon dioxide',
+ 'Si': 'silicon atom',
+ 'CO': 'carbon monoxide',
  'Cu': 'copper atom',
- 'acetic acid': 'acetic acid',
- 'acid': 'acid',
- 'Rh2O3': 'Rh2O3',
- 'Al': 'aluminium atom'}
+ 'ethylene': 'ethene',
+ 'Rh2O3': 'oxo(oxorhodiooxy)rhodium'}
 
-missing_all=[]
-match_dict_all={}
-chem_list=['rhodium oxide',
+missing=[]
+match_dict={}
+chem_list=['Co',
  '1,3-butadiene',
- 'propyl',
- 'hydride',
- 'Zn',
- 'propene',
- 'La',
- 'SiO2',
- 'Ir',
- 'Zr',
- 'zeolite',
- 'propylene',
- 'RhCo3(CO)12',
- 'Ni',
- 'alkene',
- 'Cobalt',
- 'RhCo',
- 'olefin',
- 'Sr',
- 'Cu',
- 'Co',
  'oxide',
- 'acetic acid',
+ 'lithium aluminum hydride',
+ 'olefin',
+ 'Zn',
+ 'carbon monoxide',
  'Rh',
- 'Rh2O3',
+ 'aluminum',
+ 'propyl',
+ 'ethane',
+ 'Ir',
+ 'Mn2O3',
  'MCM-41',
- 'rhodium',
+ 'aldehyde',
+ 'lithium',
+ 'Zr',
+ 'hydride',
+ 'HZSM-5',
+ 'methane',
+ 'methanol',
+ 'MoO3',
+ 'Ethylene',
+ 'cobalt',
+ 'alkene',
+ 'Sc2O3',
+ 'rhodium oxide',
+ 'propylene',
+ 'Rh2O3@S-1',
+ 'propanol',
+ 'V2O5',
+ 'Sr',
+ 'Rh2P',
+ 'acetic acid',
+ 'carbon',
+ 'silicalite-1 ',
  'Al',
- 'ZSM-5']
-onto_list ={
-            'CHEBI': 'http://purl.obolibrary.org/obo/chebi.owl',
-            #'BFO'  : 'http://purl.obolibrary.org/obo/bfo/2.0/bfo.owl',
-            'RXNO' : 'http://purl.obolibrary.org/obo/rxno.owl',
-            'CHMO' : 'http://purl.obolibrary.org/obo/chmo.owl',
-            'AFO'  : "./ontologies/afo.owl"
-            }
-onto_new='afo'
-onto_old='afo'
-categories={'ZSM-5 zeolite': 'Catalyst',
+ 'RhCo',
+ 'RhCo3(CO)12',
+ 'zeolite',
+ 'RhCo3',
+ 'ZSM-5 ',
+ 'propanal',
+ 'ZSM-5',
+ 'Ni',
+ 'Cobalt',
+ 'silica',
+ 'La',
+ 'rhodium trichloride',
+ 'S',
+ 'propene',
+ 'Al2O3',
+ 'rhodium',
+ 'TiO2',
+ 'SiO2',
+ 'CO',
+ 'Cu',
+ 'ethylene',
+ 'Rh2O3',
+ 'cobalt atom',
+ 'buta-1,3-diene',
+ 'oxide',
+ 'lithium tetrahydroaluminate',
+ 'lithium atom',
+ 'aluminium atom',
+ 'hydride',
+ 'olefin',
+ 'zinc atom',
+ 'carbon monoxide',
+ 'carbon atom',
+ 'carbon monoxide',
+ 'rhodium atom',
+ 'propyl',
+ 'ethane',
+ 'iridium atom',
+ 'oxo(oxomanganiooxy)manganese',
+ 'manganese atom',
+ 'oxygen atom',
+ 'aldehyde',
+ 'zirconium atom',
+ 'methane',
+ 'methanol',
+ 'molybdenum trioxide',
+ 'molybdenum atom',
+ 'ethene',
+ 'cobalt atom',
+ 'alkene',
+ 'oxo(oxoscandiooxy)scandium',
+ 'scandium atom',
+ 'oxorhodium',
+ 'rhodium atom',
+ 'propene',
+ 'propan-1-ol',
+ 'divanadium pentaoxide',
+ 'vanadium atom',
+ 'strontium atom',
+ 'phosphorus atom',
+ 'acetic acid',
+ 'acetic acid',
+ 'acid',
+ 'aluminium atom',
+ 'cobalt;rhodium',
+ 'carbon atom',
+ 'zeolite',
+ 'cobalt;rhodium',
+ 'propanal',
+ 'nickel atom',
+ 'cobalt atom',
+ 'silicon dioxide',
+ 'lanthanum atom',
+ 'trichlororhodium',
+ 'sulfur atom',
+ 'aluminium oxide',
+ 'titanium dioxide',
+ 'titanium atom',
+ 'silicon dioxide',
+ 'silicon atom',
+ 'carbon monoxide',
+ 'copper atom',
+ 'ethene',
+ 'oxo(oxorhodiooxy)rhodium']
+categories={'Rh2P nanoparticle on SiO2 support material': 'Catalyst',
+ 'hydroformylation': 'Reaction',
+ 'ethylene': 'Reactant',
+ 'propylene': 'Reactant',
+ 'transmission electron microscopy': 'Characterization',
+ 'infrared analysis of adsorbed CO': 'Characterization',
+ 'high throughput experimentation': 'Characterization',
+ 'reduction': 'Treatment',
+ 'heterogeneous hydroformylation': 'Reaction',
+ 'RhCo3 supported on MCM-41': 'Catalyst',
+ 'hydrogenation': 'Reaction',
+ 'DRIFTS': 'Characterization',
+ 'DRC': 'Characterization',
+ 'coimpregnation': 'Treatment',
+ 'decarbonylation': 'Reaction',
+ 'atmospheric ethylene': 'Reactant',
+ 'RhCo3 supported on SiO2': 'Catalyst',
+ 'binary catalyst': 'Catalyst',
+ 'monometallic catalyst': 'Catalyst',
+ 'rhodium': 'Catalyst',
+ 'cobalt': 'Catalyst',
+ '5%Rh supported on Al2O3': 'Catalyst',
+ '1%Co supported on Al2O3': 'Catalyst',
+ '0.5%Co-0.5%Rh supported on Al2O3': 'Catalyst',
+ 'ethane': 'Product',
+ 'propanal': 'Product',
+ 'propanol': 'Product',
+ 'Rh catalyst': 'Catalyst',
+ 'CO': 'Reactant',
+ 'Ethylene': 'Reactant',
+ 'carbon monoxide': 'Reactant',
+ 'methanol': 'Product',
+ 'Rh supported on SiO2 catalyst': 'Catalyst',
+ 'dissociation': 'Reaction',
+ 'MoO3': 'Catalyst',
+ 'Sc2O3': 'Catalyst',
+ 'TiO2': 'Catalyst',
+ 'V2O5': 'Catalyst',
+ 'Mn2O3': 'Catalyst',
+ 'organic oxygenate': 'Product',
+ 'TPR': 'Characterization',
+ 'XPS': 'Characterization',
+ 'FTIR': 'Characterization',
+ 'XRD': 'Characterization',
+ 'atmospheric hydroformylation': 'Reaction',
+ 'propene': 'Reactant',
+ 'linear aldehyde': 'Product',
+ 'Rh supported on Al ': 'Catalyst',
+ 'reducing': 'Treatment',
+ 'rhodium trichloride supported on silica with lithium aluminum hydride': 'Catalyst',
+ 'vapour phase propene': 'Reactant',
+ 'X-ray diffraction': 'Characterization',
+ 'X-ray photoemission spectroscopy': 'Characterization',
+ 'Fourier  transform-IR spectroscopy': 'Characterization',
+ 'ZSM-5 zeolite': 'Catalyst',
  'naphtha': 'Reactant',
  'catalytic cracking': 'Reaction',
  'Sr, Zr, La-supported on ZSM-5 zeolite': 'Catalyst',
@@ -694,7 +877,7 @@ categories={'ZSM-5 zeolite': 'Catalyst',
  'light olefin': 'Product',
  'Zr-supported on ZSM-5 zeolite': 'Catalyst',
  'HZSM-5': 'Catalyst',
- 'RhCo catalyst': 'Catalyst',
+ 'RhCo supported on SiO2 catalyst .': 'Catalyst',
  'heterogeneous rhodium oxide catalyst encapsulated within microporous silicalite-1  (S-1) ': 'Catalyst',
  'Rh2O3@S-1': 'Catalyst',
  'Supported catalyst based on the RhCo': 'Catalyst',
@@ -704,29 +887,73 @@ categories={'ZSM-5 zeolite': 'Catalyst',
  'Cobalt complex': 'Catalyst',
  'rhodium based catalyst': 'Catalyst',
  'heterogeneous ethylene': 'Reactant',
- 'hydroformylation': 'Reaction',
  'Rh,Co based catalyst': 'Catalyst',
  'Supported catalyst based on the RhCo couple': 'Catalyst',
- 'propene': 'Reactant',
  'RhCo based catalyst': 'Catalyst',
- 'reduction': 'Treatment',
- 'Rh based catalyst': 'Catalyst',
- 'DRC': 'Characterization',
- 'propylene': 'Reactant',
- 'hydrogenation': 'Reaction',
+ 'Rh supported on Al based catalyst': 'Catalyst',
  'propyl specie': 'Product',
  'Rh-based heterogeneous catalyst': 'Catalyst',
  'Rh': 'Catalyst',
  'Rh-based alloy catalyst': 'Catalyst',
- 'heterogeneous hydroformylation': 'Reaction',
  'monometallic Rh supported on MCM-41': 'Catalyst',
+ 'Rh supported on  MCM-41': 'Catalyst',
  'Rh-based bimetallic catalyst': 'Catalyst',
- 'RhM3,M =  M= ,Co Co, Ni,Cu Zn': 'Catalyst',
- 'ethylene': 'Reactant',
+ 'RhM3 supported on MCM-41,M =  M= ,Co Co, Ni,Cu Zn': 'Catalyst',
  'Bimetallic heterogeneous catalyst based on rhodium supported on various oxide': 'Catalyst',
  'Rh, Ir-based atomically dispersed catalyst': 'Catalyst',
  'dimerization': 'Reaction',
  '1,3-butadiene': 'Reactant',
  'methane': 'Reactant',
  'acetic acid': 'Product'}
-df_entity, rel_synonym=preprocess_classes(categories, sup_cat, rel_synonym, chem_list, missing_all, match_dict_all, onto_list, onto_new,onto_old)
+df_entity, rel_synonym, missing_all, match_dict_all=preprocess_classes(categories, sup_cat, rel_synonym, chem_list, missing, match_dict)
+"""
+A method for the synthesis of highly crystalline Rh2P nanoparticles on SiO2 support materials and their use as truly heterogeneous
+ single-site catalysts for the hydroformylation of ethylene and propylene is presented. The supported Rh2P nanoparticles were investigated 
+ by transmission electron microscopy and by infrared analysis of adsorbed CO. The inﬂuence of feed gas composition and reaction temperature 
+ on the activity and selectivity in the hydroformylation reaction was evaluated by using high throughput experimentation as an enabling 
+ element; core ﬁndings were that beneﬁcial eﬀects on the selectivity were observed at high CO partial pressures and after addition of water
+ to the feed gas. The analytical and performance data of the materials gave evidence that high temperature reduction leading to highly 
+ crystalline Rh2P nanoparticles is key to achieving active, selective, and long- term stable catalysts. KEYWORDS: hydroformylation, 
+ heterogeneous, rhodium, phosphide, nanoparticles, ethylene The reaction mechanisms of heterogeneous hydro- formylation of ethylene and 
+ propylene were compared at 413−453 K using RhCo3/MCM-41 as catalysts. The reaction rates of propylene for both hydroformylation and the 
+ undesired side reaction of hydrogenation were found to be about one order of magnitude lower than those for ethylene in ﬂow reactor studies.
+ The diﬀerence in the kinetic behavior between ethylene and propylene was investigated by measuring the reaction orders and apparent 
+ activation energies, and these macrokinetic observables were analyzed using the degree of rate control (DRC) method. In situ diﬀuse 
+ reﬂectance infrared Fourier transform spectroscopy (DRIFTS) experiments were performed to characterize the surface intermediates formed
+ during the reactions. When the reactant was changed from ethylene to propylene, the IR peak corresponding to adsorbed CO exhibited a 
+ signiﬁcant increase, while the IR peaks of the alkyl group decreased in magnitude. Combined with the DRIFTS results, DRC analysis indicates
+ that the ﬁrst step of oleﬁn hydroformylation, the formation of an alkyl group on the catalyst surface, plays a key role in the diﬀerence
+ between ethylene and propylene. This step is kinetically nonrelevant when ethylene is the reactant, but it is one of the rate-controlling 
+ steps for propylene. The low concentration of the adsorbed propyl group, which is a common intermediate shared by both hydroformylation and 
+ hydrogenation of propylene, decreases the rates of both reaction pathways as compared to ethylene. KEYWORDS: hydroformylation, ethylene, 
+ propylene, kinetics, degree of rate controlA bimetallic SiO2-supported RhCo3 cluster catalyst derived from Rh4(CO)12 and Co2(CO)8 by 
+ coimpregnation followed by decarbonylation under H2 at 623 K has been probed by atmospheric ethylene hydroformylation at 423 K. 
+ The catalytic behavior is consistent with that of RhCo3/SiO2 derived from RhCo3(CO)12. At the same time, the corresponding binary 
+ catalysts prepared from inorganic rhodium and cobalt salts exhibit much lower activities than RhCo3/SiO2 and significantly enhanced 
+ activities compared to monometallic catalysts. The results suggest that the increase in catalytic activity by combination of rhodium and 
+ cobalt is attributed to the bimetallic catalysis by RhCo3 clusters regardless of the synergistic catalysis by monometallic rhodium and 
+ cobalt sites.Intrinsic hydroformylation kinetics have been measured in a high-throughput kinetic test setup at temperatures varying from 
+ 448 to 498 K, with the total pressure ranging from 1 to 3 MPa. A gaseous feed containing CO, C 2H4 and H2 was used with space times varying
+ from 2.7 kgcat s/molC2H4,in to 149 kgcat s/molC2H4,in. Three catalysts have been investigated, i.e., 5%Rh on Al2O3, 1%Co on 
+ Al2O3 and 0.5%Co-0.5%Rh on Al2O3. The main products observed were ethane, propanal and propanol. The Rh catalyst showed the highest 
+ hydroformylation and hydrogenation site time conversions in the investigated range of operating conditions. Moreover it was found on 
+ all investigated catalysts that the hydrogenation activation energy was about 15-20 kJ mol-1 higher than that for hydroformylation. On the
+ Rh catalyst, higher ethylene feed concentrations have a more pronounced effect on CO conversion and production of propanal and propanol 
+ compared with an increase in the inlet concentration of the other reactants.© 2013 Elsevier B.V. All rights reserved.
+ Ethylene hydroformylation and carbon monoxide hydrogenation (leading to methanol and C2-oxygenates) over Rh/SiO2 catalysts share several 
+ important common mechanistic features, namely, CO insertion and metal-carbon (acyl or alkyl) bond hydrogenation. However, these processes 
+ are differentiated in that the CO hydrogenation also requires an initial CO dissociation before catalysis can proceed. In this study, the 
+ catalytic response to changes in particle size and to the addition of metal additives was studied to elucidate the differences in the two 
+ processes. In the hydroformylation process, both hydroformylation and hydrogenation of ethylene occurred concurrently. The desirable 
+ hydroformylation was enhanced over fine Rh particles with maximum activity observed at a particle diameter of 3.5 nm and hydrogenation was 
+ favored over large particles. CO hydrogenation was favored by larger particles. These results suggest that hydroformylation occurs at the 
+ edge and corner Rh sites, but that the key step in CO hydrogenation is different from that in hydroformylation and occurs on the surface.
+ The addition of group II-VIII metal oxides, such as MoO3, Sc2O3, TiO2, V2O5, and Mn2O3, which are expected to enhance CO dissociation,
+ leads to increased rates in CO hydrogenation, but only served to slow the hydroformylation process slightly without any effect on the 
+ selectivity. Similar comparisons using basic metals, such as the alkali and alkaline earths, which should enhance selectivity for insertion
+ of CO over hydrogenation, increased the selectivity for the hydroformylation over hydrogenation as expected, although catalytic activity
+ was reduced. Similarly, the selectivity toward organic oxygenates (a reflection of the degree of CO insertion) in CO hydrogenation was also
+ increased.The reduction of cobalt and rhodium salts coadsorbed on silica by aqueous NaBH4 at 273 K in Ar allows the synthesis of catalytic 
+ systems formed by very small rhodium crystallites (< 4 nm) and cobalt oxide/hydroxide. The presence of an unreduced cobalt species is well 
+ documented by TPR and XPS. The cobalt oxide is probably deposited on the rhodium surface, obscuring a large amount of the active metal 
+ centers. As can be judged by FT-IR and XRD data the morphology of the system is not modified by thermal treatments in CO and H2."""
