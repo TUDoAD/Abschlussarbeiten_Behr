@@ -335,56 +335,69 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                 entity_old = (j,entity,l)
                 continue
             else:
+                spans = sorted(Document(entity).cems, key = lambda span: span.start)
+                list_spans=[i for c in spans for i in c.text.split()]+[c.text for c in spans]
+                chem_list.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_list and cem not in list_spans])
+                for c in chem_list: # search if for i.e. ZSM-5 in entity if only ZSM found. replace ZSM with ZSM-5 in chem_list
+                    if re.findall(r'({}[—–-][\d]+)[\s]'.format(c), entity):
+                        chem_list[:] = [re.findall(r'({}[—–-][\d]+)[\s]'.format(c), entity)[0] if x == c else x for x in chem_list]
+                pattern = r'^[\d,]+[—–-] [a-z]+$' #1,3- butadiene -> 1,3-butadiene
+                if re.search(pattern,entity) or re.search(r'^ [A-Za-z\d—–-]+$|^[A-Za-z\d—–-]+ $',entity):
+                    entity=entity.replace(' ','') 
+                        
                 mol = re.findall(r'(([\w@—–-]+)(?:[\s]?/[\s]?|[\s]on[\s])+([\w@—–-]+))', entity) # 'RhCo on Al2O3' or 'RhCo/Al2O3' r'((?:([\w@—–-]+)[\s])?([\w@—–-]+)(?:[\s]?/[\s]?|[\s]on[\s])+([\w@—–-]+))', entity
                 if mol:
                     for i in range(len(mol)):
                         if ('supported' or 'Supported') in mol[i][0]:
                             continue
                         elif l == 'Catalyst':
-                            cem=None
+                            cem=[]
                             if '/' in mol[i][0]:
                                 entity = entity.replace('/',' supported on ')
-                                sup = True
-                            elif 'on' in mol[i][0]:
-                                sup = False
-                                for c in chem_list_all:
-                                    if c in entity[re.search(r'[\s]on[\s]',entity).end():]:
-                                        
-                                    if re.search(mol[i][1],c):
-                                        entity = entity.replace('on','supported on')
-                                        sup = True
-                                        
-                                    elif c in entity[:re.search(r'[\s]on[\s]',entity).start()] and 'based' not in entity[:re.search(r'[\s]on[\s]',entity).start()]:  
-                                        cem = c
-                                    
-                            if sup==True:    
                                 support = mol[i][2]
                                 chem_list.append(support)
                                 catalyst = mol[i][1]
                                 chem_list.append(catalyst)
+                                sup = True
+                            elif 'on' in mol[i][0]:
+                                
+                                sup = False
+                                if 'based' not in entity[:re.search(r'[\s]on[\s]',entity).start()]:
+                                    for c in chem_list:
+                                        if mol[i][1] in chem_list_all:
+                                            sup = True
+                                            cem.append(mol[i][1])
+                                            if mol[i][1] not in chem_list:
+                                                print('{} added to chem_list'.format(mol[i][1]))
+                                                chem_list.append(mol[i][1])
+                                        elif c in entity[:re.search(r'[\s]on[\s]',entity).start()]:
+                                            cem.append(c)
+                                    for c in chem_list:    
+                                        if c in entity[re.search(r'[\s]on[\s]',entity).end():]:
+                                            support = c     
+                                            sup =True
+                                            break
+                                        else:
+                                            sup=False
+                                    if sup==True:
+                                        entity = entity.replace('on','supported on')                                        
+                            if sup==True:    
                                 if support in sup_cat.keys():
-                                    if catalyst not in sup_cat[support]:
+                                    if cem:
+                                        sup_cat[support].extend([c for c in cem and c not in sup_cat[support]])
+                                    elif catalyst not in sup_cat[support]:
                                         sup_cat[support].append(catalyst)
                                 else:
+                                    if cem:
+                                        sup_cat[support] = cem
+                                    else:
                                         sup_cat[support] = [catalyst]
                         else:
-        
                             for k in range(1, len(mol[i])):
                                 chem_list.append(mol[i][k])
                                 entity = entity.replace('/',',')
                 
-                pattern = r'^[\d,]+[—–-] [a-z]+$' #1,3- butadiene -> 1,3-butadiene
-                if re.search(pattern,entity) or re.search(r'^ [A-Za-z\d—–-]+$|^[A-Za-z\d—–-]+ $',entity):
-                    entity=entity.replace(' ','') 
-                
-                spans = sorted(Document(entity).cems, key = lambda span: span.start)
-                chem_list.extend([c.text for c in spans])
-                chem_list.extend([c for c in chem_list_all if c in entity and c not in chem_list]) #add chemicals that wasn't recognized with chemdataextractor like()
-                
-                for c in chem_list: # search if for i.e. ZSM-5 in entity if only ZSM found. replace ZSM with ZSM-5 in chem_list
-                    if re.findall(r'({}[—–-][\d]+)[\s]'.format(c), entity):
-                        chem_list[:] = [re.findall(r'({}[—–-][\d]+)[\s]'.format(c), entity)[0] if x == c else x for x in chem_list]
-                        
+                      
                 if 'system' in entity or 'surface' in entity and l=='Catalyst':
                         entity = entity.replace('system','catalyst')
                         entity = entity.replace('surface','catalyst')
