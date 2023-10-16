@@ -15,7 +15,7 @@ import os
 from chemdataextractor import Document
 from pubchempy import get_compounds
 from preprocess_onto import *
-import json
+
 def load_classes_chebi():
     """
     Load Classes from ChEBI Ontology
