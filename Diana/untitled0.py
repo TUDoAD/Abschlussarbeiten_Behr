@@ -4,17 +4,7 @@ Created on Sat Sep 23 14:07:50 2023
 
 @author: smdicher
 """
-  on=re.search('on')
-  for c in chem_list_all:
-      if c == re.search(mol[i][1]) or c == re.findall(r'(([\w@—–-]+)(?:[\s]on[\s])+[\w@—–-]+(?:[\s])+([\w@—–-]+))', entity)[2]:
-          entity = entity.replace('on','supported on')
-          sup = True
-          break    
-      elif c == re.findall(r'(([\w@—–-]+)(?:[\s]on[\s])+[\w@—–-]+(?:[\s])+([\w@—–-]+))', entity)[2]:
-          
-          spans = sorted(Document(entity).cems, key = lambda span: span.start)
-          list_spans=[i for c in spans for i in c.text.split()]+[c.text for c in spans]
-          chem_list.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_list and cem not in list_spans])
+
 from utils2 import *
 from txt_extract import get_abstract, get_metadata
 path=r'.\import\*.pdf'

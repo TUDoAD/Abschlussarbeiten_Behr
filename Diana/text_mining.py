@@ -335,10 +335,14 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                 entity_old = (j,entity,l)
                 continue
             else:
+                
                 spans = sorted(Document(entity).cems, key = lambda span: span.start)
+                chem_entity=[c.text for c in spans]
                 list_spans=[i for c in spans for i in c.text.split()]+[c.text for c in spans]
-                chem_list.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_list and cem not in list_spans])
-                for c in chem_list: # search if for i.e. ZSM-5 in entity if only ZSM found. replace ZSM with ZSM-5 in chem_list
+                chem_entity.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_list and cem not in list_spans])
+                
+                for c in chem_list: # search spans
+                #if for i.e. ZSM-5 in entity if only ZSM found. replace ZSM with ZSM-5 in chem_list
                     if re.findall(r'({}[—–-][\d]+)[\s]'.format(c), entity):
                         chem_list[:] = [re.findall(r'({}[—–-][\d]+)[\s]'.format(c), entity)[0] if x == c else x for x in chem_list]
                 pattern = r'^[\d,]+[—–-] [a-z]+$' #1,3- butadiene -> 1,3-butadiene
@@ -363,7 +367,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                                 
                                 sup = False
                                 if 'based' not in entity[:re.search(r'[\s]on[\s]',entity).start()]:
-                                    for c in chem_list:
+                                    for c in chem_entity:
                                         if mol[i][1] in chem_list_all:
                                             sup = True
                                             cem.append(mol[i][1])
@@ -372,7 +376,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                                                 chem_list.append(mol[i][1])
                                         elif c in entity[:re.search(r'[\s]on[\s]',entity).start()]:
                                             cem.append(c)
-                                    for c in chem_list:    
+                                    for c in chem_entity:    
                                         if c in entity[re.search(r'[\s]on[\s]',entity).end():]:
                                             support = c     
                                             sup =True
@@ -384,7 +388,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                             if sup==True:    
                                 if support in sup_cat.keys():
                                     if cem:
-                                        sup_cat[support].extend([c for c in cem and c not in sup_cat[support]])
+                                        sup_cat[support].extend([c for c in cem if c not in sup_cat[support]])
                                     elif catalyst not in sup_cat[support]:
                                         sup_cat[support].append(catalyst)
                                 else:
@@ -396,8 +400,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                             for k in range(1, len(mol[i])):
                                 chem_list.append(mol[i][k])
                                 entity = entity.replace('/',',')
-                
-                      
+                                     
                 if 'system' in entity or 'surface' in entity and l=='Catalyst':
                         entity = entity.replace('system','catalyst')
                         entity = entity.replace('surface','catalyst')
@@ -423,7 +426,13 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                                                     sup_cat[c].append(spans[k].text)
                                                 k+=1
                                 """
-                    entity = entity.replace('loaded','supported on')                                           
+                    entity = entity.replace('loaded','supported on')
+                      
+                spans = sorted(Document(entity).cems, key = lambda span: span.start)
+                chem_list.extend([c.text for c in spans])
+                list_spans=[i for c in spans for i in c.text.split()]+[c.text for c in spans]
+                chem_list.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_list and cem not in list_spans])
+                                         
                 #else:
                 categories[entity] = l 
             entity_old = (j,entity,l)  
@@ -504,7 +513,7 @@ def chemical_prep(chem_list, onto_class_list):
     onto_new_dict = {}
     synonyms = {}
     onto_dict,inchikey = synonym_dicts(onto_class_list)
-    
+    chem_list=[c for c in chem_list if '/' not in c]
     for molecule in chem_list:  
         non_chem = False
         if re.search(r'^ [A-Za-z\d—–-]+|^[A-Za-z\d—–-]+ $',molecule): 
@@ -740,7 +749,56 @@ onto_list ={
             }   
 """
 #onto_new= onto_name+'_upd'
-test_txt=""" 
+test_txt="""A method for the synthesis of highly crystalline Rh2P nanoparticles on SiO2 support materials and their use as truly heterogeneous
+ single-site catalysts for the hydroformylation of ethylene and propylene is presented. The supported Rh2P nanoparticles were investigated 
+ by transmission electron microscopy and by infrared analysis of adsorbed CO. The inﬂuence of feed gas composition and reaction temperature 
+ on the activity and selectivity in the hydroformylation reaction was evaluated by using high throughput experimentation as an enabling 
+ element; core ﬁndings were that beneﬁcial eﬀects on the selectivity were observed at high CO partial pressures and after addition of water
+ to the feed gas. The analytical and performance data of the materials gave evidence that high temperature reduction leading to highly 
+ crystalline Rh2P nanoparticles is key to achieving active, selective, and long- term stable catalysts. KEYWORDS: hydroformylation, 
+ heterogeneous, rhodium, phosphide, nanoparticles, ethylene The reaction mechanisms of heterogeneous hydro- formylation of ethylene and 
+ propylene were compared at 413−453 K using RhCo3/MCM-41 as catalysts. The reaction rates of propylene for both hydroformylation and the 
+ undesired side reaction of hydrogenation were found to be about one order of magnitude lower than those for ethylene in ﬂow reactor studies.
+ The diﬀerence in the kinetic behavior between ethylene and propylene was investigated by measuring the reaction orders and apparent 
+ activation energies, and these macrokinetic observables were analyzed using the degree of rate control (DRC) method. In situ diﬀuse 
+ reﬂectance infrared Fourier transform spectroscopy (DRIFTS) experiments were performed to characterize the surface intermediates formed
+ during the reactions. When the reactant was changed from ethylene to propylene, the IR peak corresponding to adsorbed CO exhibited a 
+ signiﬁcant increase, while the IR peaks of the alkyl group decreased in magnitude. Combined with the DRIFTS results, DRC analysis indicates
+ that the ﬁrst step of oleﬁn hydroformylation, the formation of an alkyl group on the catalyst surface, plays a key role in the diﬀerence
+ between ethylene and propylene. This step is kinetically nonrelevant when ethylene is the reactant, but it is one of the rate-controlling 
+ steps for propylene. The low concentration of the adsorbed propyl group, which is a common intermediate shared by both hydroformylation and 
+ hydrogenation of propylene, decreases the rates of both reaction pathways as compared to ethylene. KEYWORDS: hydroformylation, ethylene, 
+ propylene, kinetics, degree of rate controlA bimetallic SiO2-supported RhCo3 cluster catalyst derived from Rh4(CO)12 and Co2(CO)8 by 
+ coimpregnation followed by decarbonylation under H2 at 623 K has been probed by atmospheric ethylene hydroformylation at 423 K. 
+ The catalytic behavior is consistent with that of RhCo3/SiO2 derived from RhCo3(CO)12. At the same time, the corresponding binary 
+ catalysts prepared from inorganic rhodium and cobalt salts exhibit much lower activities than RhCo3/SiO2 and significantly enhanced 
+ activities compared to monometallic catalysts. The results suggest that the increase in catalytic activity by combination of rhodium and 
+ cobalt is attributed to the bimetallic catalysis by RhCo3 clusters regardless of the synergistic catalysis by monometallic rhodium and 
+ cobalt sites.Intrinsic hydroformylation kinetics have been measured in a high-throughput kinetic test setup at temperatures varying from 
+ 448 to 498 K, with the total pressure ranging from 1 to 3 MPa. A gaseous feed containing CO, C 2H4 and H2 was used with space times varying
+ from 2.7 kgcat s/molC2H4,in to 149 kgcat s/molC2H4,in. Three catalysts have been investigated, i.e., 5%Rh on Al2O3, 1%Co on 
+ Al2O3 and 0.5%Co-0.5%Rh on Al2O3. The main products observed were ethane, propanal and propanol. The Rh catalyst showed the highest 
+ hydroformylation and hydrogenation site time conversions in the investigated range of operating conditions. Moreover it was found on 
+ all investigated catalysts that the hydrogenation activation energy was about 15-20 kJ mol-1 higher than that for hydroformylation. On the
+ Rh catalyst, higher ethylene feed concentrations have a more pronounced effect on CO conversion and production of propanal and propanol 
+ compared with an increase in the inlet concentration of the other reactants.© 2013 Elsevier B.V. All rights reserved.
+ Ethylene hydroformylation and carbon monoxide hydrogenation (leading to methanol and C2-oxygenates) over Rh/SiO2 catalysts share several 
+ important common mechanistic features, namely, CO insertion and metal-carbon (acyl or alkyl) bond hydrogenation. However, these processes 
+ are differentiated in that the CO hydrogenation also requires an initial CO dissociation before catalysis can proceed. In this study, the 
+ catalytic response to changes in particle size and to the addition of metal additives was studied to elucidate the differences in the two 
+ processes. In the hydroformylation process, both hydroformylation and hydrogenation of ethylene occurred concurrently. The desirable 
+ hydroformylation was enhanced over fine Rh particles with maximum activity observed at a particle diameter of 3.5 nm and hydrogenation was 
+ favored over large particles. CO hydrogenation was favored by larger particles. These results suggest that hydroformylation occurs at the 
+ edge and corner Rh sites, but that the key step in CO hydrogenation is different from that in hydroformylation and occurs on the surface.
+ The addition of group II-VIII metal oxides, such as MoO3, Sc2O3, TiO2, V2O5, and Mn2O3, which are expected to enhance CO dissociation,
+ leads to increased rates in CO hydrogenation, but only served to slow the hydroformylation process slightly without any effect on the 
+ selectivity. Similar comparisons using basic metals, such as the alkali and alkaline earths, which should enhance selectivity for insertion
+ of CO over hydrogenation, increased the selectivity for the hydroformylation over hydrogenation as expected, although catalytic activity
+ was reduced. Similarly, the selectivity toward organic oxygenates (a reflection of the degree of CO insertion) in CO hydrogenation was also
+ increased.The reduction of cobalt and rhodium salts coadsorbed on silica by aqueous NaBH4 at 273 K in Ar allows the synthesis of catalytic 
+ systems formed by very small rhodium crystallites (< 4 nm) and cobalt oxide/hydroxide. The presence of an unreduced cobalt species is well 
+ documented by TPR and XPS. The cobalt oxide is probably deposited on the rhodium surface, obscuring a large amount of the active metal 
+ centers. As can be judged by FT-IR and XRD data the morphology of the system is not modified by thermal treatments in CO and H2.
  The system resulted inactive for the atmospheric hydroformylation of propene, but actively catalyzed the reaction when a slight pressure (506 kPa) was 
  applied. The high values of chemoselectivity towards hydroformylation (R = 0.75) and regioselectivity to linear aldehydes (S(L) = 96) can 
  be due to the electronic and steric effects of the cobalt oxide layer.A Rh/Al system with rhodium nanocrystals was prepared by reducing 

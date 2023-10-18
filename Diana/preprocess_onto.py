@@ -171,8 +171,8 @@ def equality():
     new_world= owlready2.World()
     onto =new_world.get_ontology("./ontologies/{}.owl".format(onto_new.lower())).load()
     new_world1=owlready2.World()
-    onto_old=new_world1.get_ontology("./ontologies/{}.owl".format(onto_old.lower())).load()
-    for c_1 in onto_old.classes():
+    onto_old1=new_world1.get_ontology("./ontologies/{}.owl".format(onto_old.lower())).load()
+    for c_1 in onto_old1.classes():
         if c_1.label:
             labels_old.append(c_1.label[0])
     for o in list(onto_list.keys()):
@@ -186,7 +186,7 @@ def equality():
                 if c_2.label[0] in labels_old:
                     
                     iri_snip=c_2.iri
-                    iri_old=onto_old.search_one(label=c_2.label[0]).iri
+                    iri_old=onto_old1.search_one(label=c_2.label[0]).iri
                     if str(iri_snip) == str(iri_old):
                         continue
                     else:
