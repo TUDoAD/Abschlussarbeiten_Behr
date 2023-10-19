@@ -20,3 +20,6 @@
 ###
 	- Vergleiche eigenes ELN/DataProperties mit denen von EnzymeML 
 		- Eliminiere Doppelungen!
+
+
+Finale_Onto_mod.owl
