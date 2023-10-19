@@ -7,10 +7,9 @@ Created on Thu Oct  5 12:40:01 2023
 
 #Abfragen 
 from owlready2 import *
-onto_name='afo_upd'
 
 new_world = owlready2.World()
-onto = get_ontology("./ontologies/{}.owl".format(onto_name)).load()
+onto = get_ontology("./ontologies/{}.owl".format(onto_new)).load()
 sync_reasoner(onto) 
 
 def get_reaction(reac=None,doi=None):
@@ -56,17 +55,36 @@ def cat_list(cat=None,doi=None,restriction=None):
         WHERE{
         	{
         		?catalyst_e rdf:type owl:NamedIndividual.
-        		?catalyst_e rdfs:subClassOf* role:AFRL_0000217.
-                OPTIONAL{?catalyst_e afo:has_catalyst_component ?catalyst.}
-        	}
-        	UNION
-        	 {
+		?catalyst_e rdf:type ?type.
+        		?type rdfs:subClassOf* role:AFRL_0000217.
+		?catalyst_e rdfs:label ?catlabel.
+          		FILTER NOT EXISTS {
+        				FILTER regex(?catlabel, "catalyst role").
+        						}
+	}	
+	UNION
+    	{
         		?catalyst_e rdf:type owl:NamedIndividual.
         	 	?catalyst_e rdf:type ?type.
-        		?type rdfs:subClassOf* :(chemical substance).
-        		?catalyst_e afo:has_catalyst_component ?catalyst.
+        		?type rdfs:subClassOf* ?chem_substance.
+                		?chem_substance rdfs:label ?chemlabel.
+               		 FILTER regex(?chemlabel, 'chemical substance').
+                ?catalyst afo:catalytic_component_of ?catalyst_e.	
         
-        	 }
+        }
+    UNION
+             {
+                 ?catalyst_e rdf:type owl:NamedIndividual.
+         	 	?catalyst_e obo:RO_0000087 role:AFRL_0000217.
+                 FILTER NOT EXISTS {
+  						FILTER regex(?com, "created automatically").
+  						?catalyst_chem rdf:type ?type.
+                 		?type rdfs:subClassOf* ?chem_substance.
+                        ?chem_substance rdfs:label ?chemlabel.
+                        FILTER regex(?chemlabel, 'chemical substance').
+                        
+                          }
+                 }
         	OPTIONAL {
         			?catalyst rdfs:comment ?com.
         				FILTER NOT EXISTS {
@@ -131,7 +149,7 @@ def cat_list(cat=None,doi=None,restriction=None):
     PREFIX afo: <http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#>
     PREFIX role: <http://purl.allotrope.org/ontologies/role#>
     PREFIX new:  <http://www.semanticweb.org/chern/ontologies/2023/10/new_onto.owl#>
-    SELECT ?catalyst ?catOtherName ?doi"""+sparqlstr
+    SELECT ?catalyst_e ?catalyst ?catOtherName ?doi"""+sparqlstr
     catalyst_list=list(default_world.sparql(sparqlstr))
     return catalyst_list
 def get_entList(list_type,doi=None): #list_type one of ['reactant','support','product']

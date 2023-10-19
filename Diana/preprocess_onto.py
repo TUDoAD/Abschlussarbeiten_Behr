@@ -16,7 +16,6 @@ def set_config_key(key, value):
 with open("config.json") as json_config:
      for key, value in json.load(json_config).items():
          set_config_key(key, value)
-         
 def create_list_IRIs(class_list, IRI_json_filename = 'iriDictionary'):
     """
     Create List of IRIs for Ontology Entities
@@ -58,19 +57,21 @@ def create_list_IRIs(class_list, IRI_json_filename = 'iriDictionary'):
     onto_names = list(onto_list.keys()) 
     new_world=owlready2.World()
     onto= new_world.get_ontology('./ontologies/{}.owl'.format(onto_new)).load()
-    entities_all=[c.label for c in onto.classes()]
-    entities_all.extend([c.label for c in onto.individuals()])
+    entities_all=[c.label[0] for c in onto.classes() if c.label]
+    entities_all.extend([c.label[0] for c in onto.individuals() if c.label])
     try:
         onto_names.remove(onto_old.upper())
     except: 
         print('{} not in the list of the given ontologies "onto_list"')
+    i=0
     for entity in class_list:
         if entity not in entities_all:
             match_dict = search_value_in_nested_dict(entity, onto_names, onto_dict, match_dict)
-    missing = [e for e in class_list if e not in match_dict.values()] 
-    for m in missing:
-        if m in entities_all:
-            missing.remove(m)
+        else:
+            match_dict['dummy'+str(i)]=entity
+            i += 1
+    missing = [e for e in class_list if e not in match_dict.values() and e not in entities_all] 
+
     for key,value in match_dict.items():
         x = []
         for O in onto_names:
@@ -83,7 +84,7 @@ def create_list_IRIs(class_list, IRI_json_filename = 'iriDictionary'):
                 except:
                     print('List with common ontology classes for {}_{} is not provided'.format(onto_old.upper(),O))
             double_afo = df['{}_IRI'.format(O)].to_list()
-            if key in double_afo or key in x or O == onto_old.upper():
+            if key in double_afo or key in x or O == onto_old.upper() or 'dummy' in key:
                 continue
             elif key in list_IRIs:
                 write_in_txt(key,value,O)

@@ -395,7 +395,7 @@ def get_metadata(filename):
             result = cr.works(query = title)
             doi=result['message']['items'][0]['DOI']
             title=result['message']['items'][0]['title'][0]
-    return title, doi,publisher,ab
+    return title, doi, publisher,ab
 
 def get_abstract(path, doi, publisher,ab):    
                                           
@@ -424,6 +424,7 @@ def get_abstract(path, doi, publisher,ab):
         #abstract=abstract[re.search(:r'K[Ee][Yy][Ww][Oo][Rr][Dd][Ss][:]?', abstract).start()]
         #keywords = re.findall(r'[a-zA-Z]\w+',text)
     return abstract
+"""
 abstract_all=''
 path=r'.\import\*.pdf'
 for i in glob.iglob(path):
@@ -435,3 +436,4 @@ for i in glob.iglob(path):
     if abstract==None:
         abstract=''
     abstract_all= abstract+abstract_all
+    """

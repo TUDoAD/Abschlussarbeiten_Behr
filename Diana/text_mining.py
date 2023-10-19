@@ -12,10 +12,22 @@ from owlready2 import *
 from CatalysisIE.model import *
 from CatalysisIE.utils import *
 import os
+import json
 from chemdataextractor import Document
 from pubchempy import get_compounds
 from preprocess_onto import *
 
+def set_config_key(key, value):
+     globals()[key] = value
+def run_text_mining(abstract,model, onto_class_list):
+    with open("config.json") as json_config:
+         for key, value in json.load(json_config).items():
+             set_config_key(key, value)
+    sents = text_prep(abstract) 
+    categories,chem_list, reac_dict, sup_cat, abbreviation= CatalysisIE_search(model, sents)
+    missing, match_dict, rel_synonym, onto_new_dict=chemical_prep(chem_list, onto_class_list)
+    return chem_list, categories,onto_new_dict, sup_cat, abbreviation, missing, match_dict, rel_synonym, reac_dict
+        
 def load_classes_chebi():
     """
     Load Classes from ChEBI Ontology
@@ -571,6 +583,7 @@ def chemical_prep(chem_list, onto_class_list):
                         class_list.remove(key)
                         onto_new_dict.pop(key)
                         break
+    
     class_list = [*set(class_list)] #remove duplicates
     class_list.extend(['molecule'])
     missing, match_dict = create_list_IRIs(class_list,IRI_json_filename = 'iriDictionary')
@@ -733,21 +746,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
     rel_synonym[k] = key          
     class_list.append(key)
     return class_list, key, rel_synonym
-
-ckpt_name = 'CatalysisIE/checkpoint/CV_0.ckpt'
-bert_name = 'CatalysisIE/pretrained/scibert_domain_adaption'
-model = BERTSpan.load_from_checkpoint(ckpt_name, model_name=bert_name, train_dataset=[], val_dataset=[], test_dataset=[])
-#onto_old = 'afo'
-#onto_new = 'afo'
-"""
-onto_list ={
-            'CHEBI': 'http://purl.obolibrary.org/obo/chebi.owl',
-            #'BFO'  : 'http://purl.obolibrary.org/obo/bfo/2.0/bfo.owl',
-            'RXNO' : 'http://purl.obolibrary.org/obo/rxno.owl',
-            'CHMO' : 'http://purl.obolibrary.org/obo/chmo.owl',
-            'AFO'  : "./ontologies/afo.owl"
-            }   
-"""
+'''
 #onto_new= onto_name+'_upd'
 test_txt="""A method for the synthesis of highly crystalline Rh2P nanoparticles on SiO2 support materials and their use as truly heterogeneous
  single-site catalysts for the hydroformylation of ethylene and propylene is presented. The supported Rh2P nanoparticles were investigated 
@@ -812,3 +811,4 @@ sents = text_prep(test_txt)
 categories,chem_list, reac_dict, sup_cat, abbreviation= CatalysisIE_search(model, sents)
 missing, match_dict, rel_synonym, onto_new_dict=chemical_prep(chem_list, onto_class_list)
 
+'''
