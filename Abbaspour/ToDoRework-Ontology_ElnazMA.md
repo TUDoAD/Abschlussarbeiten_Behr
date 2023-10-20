@@ -12,14 +12,20 @@
 					
 	- Gedanken zu integration in DEXPI machen
 	- Erste Ideen für Paper mit Katrin aufschreiben!
-	
 	- measurement .addData ausprobieren bei pyenzyme Dokument
-
-###
-# important stuff
-###
 	- Vergleiche eigenes ELN/DataProperties mit denen von EnzymeML 
 		- Eliminiere Doppelungen!
 
 
-Finale_Onto_mod.owl
+## Coding
+
+### Ontologien
+- Testaufbau der finalen Ontologie in Finale_Onto_mod.owl
+- Entsprechendes Anpassen der BaseOnto
+- Code restrukturieren und auf BaseOnto anpassen
+- General Class Axioms in Python -> Links von Hendrik anschauen!
+
+
+
+
+
