@@ -20,7 +20,7 @@
 ## Coding
 
 ### Ontologien
-- Testaufbau der finalen Ontologie in Finale_Onto_mod.owl
+- Testaufbau der finalen Ontologie in **Finale_Onto_mod.owl**
 - Entsprechendes Anpassen der BaseOnto
 - Code restrukturieren und auf BaseOnto anpassen
 - General Class Axioms in Python -> Links von Hendrik anschauen!
