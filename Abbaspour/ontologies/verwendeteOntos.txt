@@ -2,3 +2,7 @@ Folgende Ontologien entanden im Rahmen der Masterarbeit
 - BaseOnto.owl
 - Zwischenstand_Onto_
 - Finale_Onto_
+
+
+
+https://purl.obolibrary.org/obo/go.owl

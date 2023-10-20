@@ -26,6 +26,10 @@
 - General Class Axioms in Python -> Links von Hendrik anschauen!
 
 
+### Reaction + Substances
+Catalyst: [Laccase] -> Laccase Substance: http://purl.obolibrary.org/obo/GO_1990204 Laccase activity: http://purl.obolibrary.org/obo/GO_0016682
 
-
-
+Oxidoreductase activity(is_a http://purl.obolibrary.org/obo/GO_0016491):
+		{Educts:[ABTS_red is_a https://www.wikidata.org/wiki/Q287582],
+	     Products:[],
+	     Catalyst:[Laccase is_a http://purl.obolibrary.org/obo/GO_1990204]},
