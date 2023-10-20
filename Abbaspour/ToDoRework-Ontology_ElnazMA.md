@@ -33,3 +33,20 @@ Oxidoreductase activity(is_a http://purl.obolibrary.org/obo/GO_0016491):
 		{Educts:[ABTS_red is_a https://www.wikidata.org/wiki/Q287582],
 	     Products:[],
 	     Catalyst:[Laccase is_a http://purl.obolibrary.org/obo/GO_1990204]},
+		 
+		 
+ 
+## Kompetenzfragen
+Zu welcher Art der Reaktionen gehörte die Reaktion im EnzymeML-Dokument? 
+BZW.: Welche Art der Reaktion wurde katalysiert?
+Mit welcher Art Kinetik wurde die Reaktion modelliert? 
+
+
+
+
+
+
+
+
+
+
