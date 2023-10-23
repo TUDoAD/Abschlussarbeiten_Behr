@@ -7,6 +7,7 @@ Created on Tue Oct 10 09:11:35 2023
 import sys
 import yaml
 import math
+import pandas as pd
 import pubchempy as pcp
 from collections import Counter
 #import owlready2
@@ -287,9 +288,25 @@ def simulation(name, data, combination):
     
     errors = interf.CalculateFlowsheet2(sim)
     
+    # save results in excel-file
+    coordinates = []
+    for p in r1.points:
+        coordinates.append(p[0])
+    #print(coordinates)
+    values = []
+    for i in range(1, r1.ComponentConversions.Count + 3):
+        list1=[]
+        for p in r1.points:
+            list1.append(p[i])
+        values.append(list1)
+    #print(values)    
+    names = []
+    for k in r1.ComponentConversions.Keys:
+        names.append(k)
+    #print(names)
     # save file as dwxmz
     fileName_dwsim = name + ".dwxmz"
-    fileNameToSave = Path.Combine("C:\\Users\\smmcvoel\\Desktop\\Temporäre Ablage\\dice_01", fileName_dwsim)
+    fileNameToSave = Path.Combine("C:\\Users\\smmcvoel\\Desktop\\Temporäre Ablage", fileName_dwsim)
     #fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName_dwsim)
     
     interf.SaveFlowsheet(sim, fileNameToSave, True)
@@ -316,7 +333,7 @@ def simulation(name, data, combination):
     stri = MemoryStream()
     d.SaveTo(stri)
     image = Image.FromStream(stri)
-    imgPath = Path.Combine("C:\\Users\\smmcvoel\\Desktop\\Temporäre Ablage\\dice_01", fileName_pic)
+    imgPath = Path.Combine("C:\\Users\\smmcvoel\\Desktop\\Temporäre Ablage", fileName_pic)
     #imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName_pic)
     image.Save(imgPath, ImageFormat.Png)
     stri.Dispose()
@@ -327,16 +344,18 @@ def simulation(name, data, combination):
     
     #im = Image.open(imgPath)
     #im.show()
+    return coordinates, values, names
     
 
-
-name = sys.argv[1]
-temperature = sys.argv[2]
-pressure = sys.argv[3]
-loading = sys.argv[4]
+"""
+name = "test_109"#sys.argv[1]
+temperature = 420#sys.argv[2]
+pressure = 100000#sys.argv[3]
+loading = 1000#sys.argv[4]
 combination = (float(temperature), float(pressure), float(loading))
 
 with open("C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/new_reaction_2023-10-12_DataSheet.yaml", "r") as file:
     data = yaml.safe_load(file)
     
 simulation(name, data, combination)
+"""
