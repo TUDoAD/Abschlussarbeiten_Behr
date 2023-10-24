@@ -174,8 +174,14 @@ r=(K_0 * R2 * math.pow(R1, 1/3))/(1 + K_1 * R2 + K_2 * R1 + K_3 * P2)""")
                     
 
 def simulation(name, data, combination):
-    temperature, pressure, loading = combination
     ## create flowsheet and run simulation
+    temperature, pressure, veloc = combination
+    
+    # set variable parameter for the new linkML-file
+    data[0]["Mixture"][0]["temperature"] = temperature
+    data[0]["Mixture"][0]["pressure"] = pressure
+    data[0]["Mixture"][0]["velocity"] = veloc 
+    
     # get compound from DWSIM and add them to the simulation
     print("Adding substances to Simulation...")
     substances = data[0]["Mixture"][0]["substances"]
@@ -257,14 +263,18 @@ def simulation(name, data, combination):
     #m1.SetTemperature(data[0]["Mixture"][0]["temperature"])
     m1.SetTemperature(temperature)
     m1.SetPressure(pressure)
-    V_flow = math.pi * (data[1]["Reactor"][0]["tube_diameter"]/2) ** 2 * data[0]["Mixture"][0]["velocity"]
+    #velocity = data[0]["Mixture"][0]["velocity"]
+    velocity = float(veloc)
+    radius = float(data[1]["Reactor"][0]["tube_diameter"])/2
+    V_flow = math.pi * radius ** 2 * velocity
     m1.SetVolumetricFlow(V_flow)
     
     # specify reactor parameter; doesnt make a difference if diameter or length is choosen
     r1.Volume = data[1]["Reactor"][0]["reactive_volume"]
-    r1.Length = data[1]["Reactor"][0]["tube_length"]
+    r1.Length = float(data[1]["Reactor"][0]["tube_length"])
     #r1.Diameter = data[1]["Reactor"][0]["tube_diameter"]
     r1.NumberOfTubes = data[1]["Reactor"][0]["num_tubes"]
+    r1.UseUserDefinedPressureDrop = True
     
     if data[1]["Reactor"][0]["calculation_mode"] == "isothermal":
         r1.ReactorOperationMode = Reactors.OperationMode.Isothermic
@@ -274,7 +284,7 @@ def simulation(name, data, combination):
         print("Error accured while setting the ReactorOperationMode!")
         
     # specify catalyst parameter
-    r1.CatalystLoading = loading
+    r1.CatalystLoading = data[1]['Reactor'][0]["catalyst_loading"]
     r1.CatalystVoidFraction = data[1]['Reactor'][0]["catalyst_void_fraction"]
     #cat_diameter = data[1]['Reactor'][0]["catalyst_particle_diameter"] #m
     r1.CatalystParticleDiameter = data[1]['Reactor'][0]["catalyst_particle_diameter"]
@@ -288,7 +298,10 @@ def simulation(name, data, combination):
     
     errors = interf.CalculateFlowsheet2(sim)
     
-    # save results in excel-file
+    # save results 
+    path = "C:\\Users\\smmcvoel\\Documents\\GitHub\\Abschlussarbeiten_Behr\\VoelkenrathMA\\linkml\\new_reaction_2023-10-23_small-dice\\"
+
+    #yaml-file
     coordinates = []
     for p in r1.points:
         coordinates.append(p[0])
@@ -303,10 +316,22 @@ def simulation(name, data, combination):
     names = []
     for k in r1.ComponentConversions.Keys:
         names.append(k)
+    names.append("Temperature")
+    names.append("Pressure")
     #print(names)
-    # save file as dwxmz
+    
+    data.append({"Coordinates": coordinates})
+    for names_, values in zip(names, values):
+        data.append({names_: values})    
+
+    yaml_name = path + name + ".yaml"
+    with open(yaml_name, 'w') as new_yaml_file:
+        yaml.dump(data, new_yaml_file, default_flow_style=False)
+    
+    
+    # dwxmz-file
     fileName_dwsim = name + ".dwxmz"
-    fileNameToSave = Path.Combine("C:\\Users\\smmcvoel\\Desktop\\Temporäre Ablage", fileName_dwsim)
+    fileNameToSave = Path.Combine(path, fileName_dwsim)
     #fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName_dwsim)
     
     interf.SaveFlowsheet(sim, fileNameToSave, True)
@@ -333,7 +358,7 @@ def simulation(name, data, combination):
     stri = MemoryStream()
     d.SaveTo(stri)
     image = Image.FromStream(stri)
-    imgPath = Path.Combine("C:\\Users\\smmcvoel\\Desktop\\Temporäre Ablage", fileName_pic)
+    imgPath = Path.Combine(path, fileName_pic)
     #imgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName_pic)
     image.Save(imgPath, ImageFormat.Png)
     stri.Dispose()
@@ -347,15 +372,13 @@ def simulation(name, data, combination):
     return coordinates, values, names
     
 
-"""
-name = "test_109"#sys.argv[1]
-temperature = 420#sys.argv[2]
-pressure = 100000#sys.argv[3]
-loading = 1000#sys.argv[4]
-combination = (float(temperature), float(pressure), float(loading))
+name = sys.argv[1]
+temperature = sys.argv[2]
+pressure = sys.argv[3]
+velocity = sys.argv[4]
+combination = (float(temperature), float(pressure), float(velocity))
 
-with open("C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/new_reaction_2023-10-12_DataSheet.yaml", "r") as file:
+with open("C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/new_reaction_2023-10-23_DataSheet.yaml", "r") as file:
     data = yaml.safe_load(file)
     
 simulation(name, data, combination)
-"""
