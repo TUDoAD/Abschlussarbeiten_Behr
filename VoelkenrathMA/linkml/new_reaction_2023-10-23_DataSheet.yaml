@@ -31,8 +31,8 @@
 - ChemicalReaction:
   - - id: 0
       reactions:
-      - br: 8.81E-12
-        K_1: 30.3E-6 # here: K_CO2
-        K_2: 3.7E-6 # here: K_H2
-        K_3: 200E-6 # here: K_H2O
+      - br: 8.81E-6
+        K_1: 30.3 # here: K_CO2
+        K_2: 3.7 # here: K_H2
+        K_3: 200 # here: K_H2O
         reaction_equation: CO2+4H2>CH4+2H2O

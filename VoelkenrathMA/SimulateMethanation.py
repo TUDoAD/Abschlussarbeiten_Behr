@@ -139,8 +139,8 @@ def createReaction(data, substances):
                     rorders.Add(key, 0)
         
         # create reaction, set numerator and denominator to 1, because it get overwritten with own kintic skript
-        reaction = sim.CreateHetCatReaction(reaction_name, "This reaction is created automatically!", comps, base_key, "Mixture",
-                                            "Fugacities", "Pa", "mol/[kg.s]", "1", "1" )
+        reaction = sim.CreateHetCatReaction(reaction_name, "This reaction is created automatically!", comps, base_key, "Vapor",
+                                            "Partial Pressures", "Pa", "kmol/[kg.s]", "1", "1" )
         
         sim.AddReaction(reaction)
         sim.AddReactionToSet(reaction.ID, "DefaultSet", True, 0)
@@ -299,7 +299,7 @@ def simulation(name, data, combination):
     errors = interf.CalculateFlowsheet2(sim)
     
     # save results 
-    path = "C:\\Users\\smmcvoel\\Documents\\GitHub\\Abschlussarbeiten_Behr\\VoelkenrathMA\\linkml\\new_reaction_2023-10-23_small-dice\\"
+    path = "C:\\Users\\smmcvoel\\Documents\\GitHub\\Abschlussarbeiten_Behr\\VoelkenrathMA\\linkml\\new_reaction_2023-10-23_wide-dice-new\\"
 
     #yaml-file
     coordinates = []

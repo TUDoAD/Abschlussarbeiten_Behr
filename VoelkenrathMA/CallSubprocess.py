@@ -8,9 +8,9 @@ import itertools
 import subprocess
 
 def call_subprocess():
-    temperature = [270, 272.5, 275, 277.5, 280] # K
-    pressure = [200000, 225000 ,250000, 275000,300000] # Pa
-    velocity = [0.0005, 0.00075, 0.001, 0.00125, 0.0015] # m/s
+    temperature = [300, 350, 400, 450, 500] # K
+    pressure = [100000, 150000, 200000, 250000, 300000] # Pa
+    velocity = [0.0001, 0.001, 0.01, 0.1, 1] # m/s
     
     combinations = list(itertools.product(temperature, pressure, velocity))
     
