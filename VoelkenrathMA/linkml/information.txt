@@ -1,0 +1,7 @@
+NewReaction01 - NewReaction04 are the same Datasheets, but they are used to simulate
+the System on different ways.
+
+NewReaction01 -> Just Reactor with a wide range in the parameter dice
+NewReaction02 -> Just Reactor with a small range in the parameter dice
+NewReaction03 -> Reactor and Downstream with a wide range in the parameter dice
+NewReaction04 -> Reactor and Downstream with a small range in the parameter dice
