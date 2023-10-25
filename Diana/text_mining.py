@@ -4,7 +4,7 @@ Created on Wed Oct 11 15:13:36 2023
 
 @author: smdicher
 """
-
+import time
 import stanza
 #stanza.download('en', package='craft', processors='tokenize')
 import spacy
@@ -16,7 +16,7 @@ import json
 from chemdataextractor import Document
 from pubchempy import get_compounds
 from preprocess_onto import *
-
+import pickle
 def set_config_key(key, value):
      globals()[key] = value
 def run_text_mining(abstract,model, onto_class_list):
@@ -43,6 +43,7 @@ def load_classes_chebi():
 
     """
     print('extracting ChEBI classes...')
+    start_time=time.time()
     new_world3 = owlready2.World()
     try:
         onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
@@ -53,6 +54,8 @@ def load_classes_chebi():
     for i in set_org_mol:
         if i in onto_class_list:
             onto_class_list.remove(i)
+    print("--- %.2f seconds ---" % (time.time() - start_time))
+
     return onto_class_list
 
 def delete_files_in_directory(directory_path):
@@ -288,7 +291,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
     a = 0
     categories = {}
     reac_dict = {}
-
+    c_idx=None
     entity_old = (0,None,None)
     output_sents = pred_model_dataset(model, test_sents)
     for sent in output_sents:
@@ -297,14 +300,14 @@ def CatalysisIE_search(model, test_sents): #change description at the and
         chem_list_all.extend([c.text for c in Document(assemble_token_text(sent)).cems])
         abb_list = Document(assemble_token_text(sent)).abbreviation_definitions
         for i in range(len(abb_list)):
-            abbreviation[abb_list[i][0][0]] = abb_list[i][1][0]
+            abbreviation[abb_list[i][1][0]] = abb_list[i][0][0]
         for i, j, l in get_bio_spans(sent_tag):
             print(assemble_token_text(sent[i:j + 1]), l)
             entity = assemble_token_text(sent[i:j + 1])
             
             #add abbreviation if directly after entity an entity in brackets
             if i == a+1 and '({})'.format(entity) in assemble_token_text(sent):
-                abbreviation[entity] = entity_old[1]
+                abbreviation[entity_old[1]] = entity
             
             #match hyphen in chemical entity and remove it  # Rh-Co --> RhCo
             match_hyph = re.findall(r'(([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?))', entity) 
@@ -316,7 +319,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
             doc_list = []
             doc = nlp(entity)
             for i in range(len(doc)):
-                if doc[i].tag_ == 'NNS':
+                if doc[i].tag_ == 'NNS' and doc[i].text not in (abbreviation.keys() and abbreviation.values()):
                     doc_list.append(str(doc[i].lemma_))
                 else:
                     doc_list.append(str(doc[i]))
@@ -336,6 +339,10 @@ def CatalysisIE_search(model, test_sents): #change description at the and
             
             #if reactant before reaction: append to reac_dict dictionary {'reaction-type':'reactant'}
             if l == 'Reaction':
+                if sent[j+2:j+4]=='of':
+                    for c in Document(assemble_token_text(sent)).cems:
+                        if c.start == j+5:
+                            c_idx=j+5
                 if entity_old[0]+1 == i and entity[2]=='Reactant':
                     if entity not in reac_dict.keys():
                         reac_dict[entity] = [entity_old[1]]
@@ -351,18 +358,21 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                 spans = sorted(Document(entity).cems, key = lambda span: span.start)
                 chem_entity=[c.text for c in spans]
                 list_spans=[i for c in spans for i in c.text.split()]+[c.text for c in spans]
-                chem_entity.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_list and cem not in list_spans])
+                chem_entity.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_entity and cem not in list_spans])
                 
-                for c in chem_list: # search spans
+                for c in chem_entity: # search spans
                 #if for i.e. ZSM-5 in entity if only ZSM found. replace ZSM with ZSM-5 in chem_list
-                    if re.findall(r'({}[—–-][\d]+)[\s]'.format(c), entity):
-                        chem_list[:] = [re.findall(r'({}[—–-][\d]+)[\s]'.format(c), entity)[0] if x == c else x for x in chem_list]
+                    pattern = r'\b({}[—–-]\d+[-]?\d*[A-Z]*)\b'.format(c)
+                    matches = re.findall(pattern, entity)
+                    if matches:
+                        list_spans.append(c)
+                        chem_list.append(matches[0])
                 pattern = r'^[\d,]+[—–-] [a-z]+$' #1,3- butadiene -> 1,3-butadiene
                 if re.search(pattern,entity) or re.search(r'^ [A-Za-z\d—–-]+$|^[A-Za-z\d—–-]+ $',entity):
                     entity=entity.replace(' ','') 
                         
-                mol = re.findall(r'(([\w@—–-]+)(?:[\s]?/[\s]?|[\s]on[\s])+([\w@—–-]+))', entity) # 'RhCo on Al2O3' or 'RhCo/Al2O3' r'((?:([\w@—–-]+)[\s])?([\w@—–-]+)(?:[\s]?/[\s]?|[\s]on[\s])+([\w@—–-]+))', entity
-                if mol:
+                mol = re.findall(r'(([\w—–-]+)(?:[\s]?/[\s]?|[\s]?@[\s]?|[\s]on[\s])+([\w—–-]+))', entity) # 'RhCo on Al2O3' or 'RhCo/Al2O3' or 'RhCo@Al2O3'r'((?:([\w@—–-]+)[\s])?([\w@—–-]+)(?:[\s]?/[\s]?|[\s]on[\s])+([\w@—–-]+))', entity
+                if mol and entity not in abbreviation.values():
                     for i in range(len(mol)):
                         if ('supported' or 'Supported') in mol[i][0]:
                             continue
@@ -375,6 +385,15 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                                 catalyst = mol[i][1]
                                 chem_list.append(catalyst)
                                 sup = True
+                            if '@' in mol[i][0]:
+                                    entity = entity.replace('@',' supported on ')
+                                    support = mol[i][2]
+                                    if re.findall(r'(([A-Za-z]+)[—–-]\d+[-]?\d*[A-Z]*)', support):
+                                        list_spans.append(re.findall(r'(([A-Za-z]+)[—–-]\d+[-]?\d*[A-Z]*)', support)[1])
+                                    chem_list.append(support)
+                                    catalyst = mol[i][1]
+                                    chem_list.append(catalyst)
+                                    sup = True
                             elif 'on' in mol[i][0]:
                                 
                                 sup = False
@@ -422,27 +441,14 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                             e_btwn = entity[spans[i-1].end:spans[i].start]
                             if 'loaded' in e_btwn:    
                                 loaded_end =  entity.index('loaded')+len('loaded')+1
-                                """
-                                for c in chem_list:
-                                    try:
-                                        idx = entity.index(c)
-                                    except:
-                                        continue
-                                    else:
-                                        if idx == loaded_end:
-                                            if c not in sup_cat.keys():
-                                                sup_cat[c] = []
-                                            k=0
-                                            while k<i:
-                                                if spans[k].text not in sup_cat[c]:
-                                                    sup_cat[c].append(spans[k].text)
-                                                k+=1
-                                """
                     entity = entity.replace('loaded','supported on')
-                      
+                if i==c_idx:
+                    if entity not in reac_dict.keys():
+                        reac_dict[entity] = [entity_old[1]]
+                    elif entity_old[1] not in reac_dict.values():
+                        reac_dict[entity].append(entity_old[1])
                 spans = sorted(Document(entity).cems, key = lambda span: span.start)
                 chem_list.extend([c.text for c in spans])
-                list_spans=[i for c in spans for i in c.text.split()]+[c.text for c in spans]
                 chem_list.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_list and cem not in list_spans])
                                          
                 #else:

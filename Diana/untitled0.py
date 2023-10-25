@@ -19,7 +19,9 @@ with open("config.json") as json_config:
          set_config_key(key, value)
          
 model = BERTSpan.load_from_checkpoint(ckpt_name, model_name=bert_name, train_dataset=[], val_dataset=[], test_dataset=[])
+
 onto_class_list = load_classes_chebi()
+onto_new='afo_upd'
 df_all = pd.DataFrame(columns=['entity','classes','cems', 'category'])
 created_cl=[]
 for i in glob.iglob(path):
@@ -28,7 +30,7 @@ for i in glob.iglob(path):
     delete_files_in_directory(path_class_list)
     title,doi,publisher,ab = get_metadata(i)
     if doi == None:
-        continue
+        continue 
     print(title+' : '+doi)
     abstract = get_abstract(i, doi, publisher, ab)
     if abstract != None:
@@ -37,7 +39,7 @@ for i in glob.iglob(path):
             print(p_id)
             continue
         chem_list, categories,onto_new_dict, sup_cat, abbreviation, missing, match_dict, rel_synonym, reac_dict = run_text_mining(abstract,model, onto_class_list)
-        df_entity, rel_synonym, missing_all, match_dict_all = preprocess_classes(categories, sup_cat, rel_synonym, chem_list, missing, match_dict)
+        df_entity, rel_synonym, missing_all, match_dict_all = preprocess_classes(categories, abbreviation, sup_cat, rel_synonym, chem_list, missing, match_dict)
         df_all = pd.concat([df_all, df_entity], axis=0)
         onto_extender()
         eq = equality() #für validierung alle eq1 classen aufnehmen

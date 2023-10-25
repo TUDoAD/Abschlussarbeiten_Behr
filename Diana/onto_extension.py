@@ -11,7 +11,7 @@ from preprocess_onto import *
 from chemdataextractor import Document
 
 
-def preprocess_classes(categories, sup_cat, rel_synonym, chem_list, missing_all, match_dict_all):
+def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list, missing_all, match_dict_all):
     """
     
 
@@ -78,7 +78,7 @@ def preprocess_classes(categories, sup_cat, rel_synonym, chem_list, missing_all,
         else:
             sup_cat.pop(i)
     for entity,l in categories.items():
-        if entity in classes.keys() or l in not_process:
+        if entity in classes.keys() or l in not_process or entity in abbreviation.values():
             continue
         else:
             spans = sorted(Document(entity).cems, key = lambda span: span.start)
@@ -321,7 +321,7 @@ def check_in_snip(e_snip, classes, entity, l, chem_list):
     classes[entity] = [*set(classes[entity])] 
     if len(classes[entity])>1 and l == 'Catalyst':
         classes[entity].remove('catalyst role')
-    return classes,head
+    return classes, head
 
 def check_in_children(token, token_new,list_token):
     if token.children:
@@ -334,6 +334,7 @@ def check_in_children(token, token_new,list_token):
 
 def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,reac_dict,p_id,rel_synonym,chem_list,onto_new_dict):
     global num
+    print(sup_cat)
     nlp = spacy.load('en_core_web_sm')
     num = 0 
     sup_sub_df = pd.DataFrame(columns=['super_class','subclass'])
@@ -391,7 +392,6 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                 elif classes[k] != 'catalyst role':
                         sup_sub_df = sup_sub_df.append({'super_class':'catalyst role','subclass':classes[k]},ignore_index=True)
                 k += 1  
-            #if not row.classes
             if row.entity not in list(sup_sub_df['subclass']):    
                 for i in classes_parent:
 
@@ -417,7 +417,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                     sup_sub_df = sup_sub_df.append({'super_class': k.split()[i], 'subclass':k},ignore_index=True)
                 else:
                     sup_sub_df = sup_sub_df.append({'super_class': 'chemical reaction (molecular)', 'subclass':k},ignore_index = True)
-                #sup_sub_df=sup_sub_df.append({'super_class':i, 'subclass':row.entity},ignore_index=True) #überdenken
+                
                        
     with onto:
         
@@ -427,7 +427,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
             support_mat.label.append('support material')
             num += 1
             created_classes.append('support material')
-        #print(has_role)
+
         try:
             support_role_i = [i for i in list(onto.search(label='support role')) if i in list(onto.individuals())][0]
         except:
@@ -467,10 +467,12 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                     if row.category == 'Catalyst' and row.entity in chem_sub.keys():
                         e_ind = [i for i in list(onto.search(label=row.entity)) if i in list(onto.individuals())][0]
                         for c in chem_sub[row.entity]: #assign catalyst roles
+                            print(row.entity+':'+c)
                             try:
                                 cat_cl = [i for i in list(onto.search(label=c)) if i in list(onto.individuals())][0]
                             except:
                                 onto,cat_cl =add_individum(onto,list(onto.search(label = c))[0], c ,p_id)
+                                
                             e_ind.RO_0000087.append(cat_cl) #'has role' = RO_0000087
                     for c in row.cems:
                         if c != row.entity and not row.classes:
@@ -497,30 +499,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                                         except:
                                             onto, cat=add_individum(onto,list(onto.search(label=k))[0], c_t,p_id)
                                         cat.supported_on.append(ind)
-                                        cat.catalytic_component_of.append(e_ind)
-                            
-                            """
-                            for k in c.split():
-                                if k not in sup_cat.keys():
-                                    k = next((short for short, full in rel_synonym.items() if full == k and short in sup_cat.keys()), None)
-                                    try:
-                                        sup_cat[k]
-                                    except:
-                                        continue
-                                print('k as support:{}'.format(k))
-                                ind.RO_0000087.append(support_role_i) #'has role' = RO_0000087
-                                ind.support_component_of.append(e_ind)
-                                for i in sup_cat[k]:
-                                    c_t = rel_synonym[i] if i in rel_synonym.keys() else i
-                                    try:
-                                        cat=[i for i in list(onto.search(label=c_t)) if i in list(onto.individuals())][0]
-                                    except:
-                                        onto, cat=add_individum(onto,list(onto.search(label=c_t))[0], c_t,p_id)
-                                        
-                                    cat.supported_on.append(ind)
-                                    cat.catalytic_component_of.append(e_ind)
-                                sup_cat.pop(k) 
-                              """      
+                                        cat.catalytic_component_of.append(e_ind)  
                         if row.category== 'Product':
                             ind.RO_0000087.append(prod_role_i)
                         elif row.category =='Reactant':
@@ -529,7 +508,6 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                             if c==row.entity:
                                 ind.RO_0000087.append(cat_role_i) #'has role' = RO_0000087
                             elif e_ind not in ind.support_component_of:                          
-                                #catalytic_comp[e_ind]
                                 ind.catalytic_component_of.append(e_ind)
                 
                 if row.category== 'Reaction':
@@ -539,7 +517,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                            cem_i=[i for i in list(onto.search(label=r)) if i in list(onto.individuals())][0]         
                            ind.RO_0000057.append(cem_i) #'has participant' = RO_0000057
                 if row.entity in abbreviation.keys(): # check for abbreviations
-                    ind.comment.append(abbreviation[row.entity][0])
+                    ind.comment.append(abbreviation[row.entity])
                          
 
         for sup,v in sup_cat.items():
@@ -573,7 +551,10 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
         pub_new = onto.search_one(iri='*publication{}'.format(p_id))
         for entity in entities_pub:
             print('entity:{}'.format(entity))
-            ind = [i for i in list(onto.search(label = entity)) if i in list(onto.individuals())][0]
+            try:
+                ind = [i for i in list(onto.search(label = entity)) if i in list(onto.individuals())][0]
+            except:
+                continue
             ind.mentioned_in.append(pub_new)
         for short,entity in rel_synonym.items():
             inds = [i for i in list(onto.search(label=entity))]
@@ -582,7 +563,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
     onto = create_comp_relation(onto,match_dict, rel_synonym,p_id,onto_new_dict)
                 
     onto.save('./ontologies/{}.owl'.format(onto_new))
-    return created_classes, sup_sub_df        
+    return created_classes, sup_sub_df       
           
 def create_comp_relation(onto,match_dict, rel_synonym,p_id,onto_new_dict):
     global num
@@ -721,7 +702,63 @@ def create_sub_super(missing, onto, idx, indecies, entities, sup_sub_df, created
             created_classes.append(super_class_l.lower())    
 
     return  indecies, onto,super_class, created_classes
- 
+"""
+sup_cat={'silicon dioxide': ['cobalt;rhodium']}
+missing_all=['cobalt;rhodium',
+ 'cluster catalyst role',
+ 'decarbonylation',
+ 'binary catalyst role',
+ 'monometallic catalyst role']
+match_dict_all={'dummy0': 'hydroformylation',
+ 'dummy1': 'catalyst role',
+ 'dummy2': 'silicon atom',
+ 'dummy3': 'silicon dioxide',
+ 'dummy4': 'cobalt atom',
+ 'dummy5': 'molecule'}
+rel_synonym={'cobalt': 'cobalt atom', 'SiO2': 'silicon dioxide', 'Si': 'silicon atom', 'O': 'oxygen atom', 'rhodium': 'rhodium atom', 'RhCo3': 'cobalt;rhodium', 'Rh': 'rhodium atom', 'Co': 'cobalt atom'}
+chem_list=['cobalt', 'SiO2', 'rhodium', 'RhCo3', 'cobalt atom', 'silicon dioxide', 'silicon atom', 'oxygen atom', 'rhodium atom', 'cobalt;rhodium', 'rhodium atom', 'cobalt atom']
+onto_new_dict={'cobalt atom': ['cobalt atom'], 'silicon dioxide': ['silicon atom', 'oxygen atom'], 'rhodium atom': ['rhodium atom'], 'cobalt;rhodium': ['rhodium atom', 'cobalt atom']}
+
+entity=['rhodium atom',
+ 'cobalt atom',
+ 'bimetallic SiO2-supported RhCo3 cluster catalyst',
+ 'decarbonylation',
+ 'hydroformylation',
+ 'RhCo3 supported on SiO2',
+ 'binary catalyst',
+ 'monometallic catalyst']
+classes=[[],
+ [],
+ ['cluster catalyst role'],
+ ['decarbonylation'],
+ ['hydroformylation'],
+ ['catalyst role'],
+ ['binary catalyst role'],
+ ['monometallic catalyst role']]
+cems=[['rhodium atom'],
+ ['cobalt atom'],
+ ['silicon dioxide', 'cobalt;rhodium'],
+ [],
+ [],
+ ['cobalt;rhodium', 'silicon dioxide'],
+ [],
+ []]
+category=['Catalyst',
+ 'Catalyst',
+ 'Catalyst',
+ 'Reaction',
+ 'Reaction',
+ 'Catalyst',
+ 'Catalyst',
+ 'Catalyst']
+d={'entity':entity,'classes':classes,'cems':cems, 'category':category}
+df_entity=pd.DataFrame(data=d)
+p_id=6
+abbreviation={}
+reac_dict={}
+created_classes, sup_sub_df  = create_classes_onto(abbreviation, sup_cat, missing_all, match_dict_all, df_entity,reac_dict,p_id,rel_synonym,chem_list,onto_new_dict)
+"""
+"""
 sup_cat={'SiO2': ['Rh2P', 'RhCo3', 'Rh'],
  'MCM-41': ['RhCo3'],
  'Al2O3': ['Rh', 'Rh', 'Rh', 'Co', 'Co'], #problem mit duplikaten gelöst!
@@ -912,6 +949,7 @@ onto_new_dict={'MCM-41': [],
 p_id=1
 df_entity, rel_synonym, missing_all, match_dict_all=preprocess_classes(categories, sup_cat, rel_synonym, chem_list, missing, match_dict)
 #created_classes, sup_sub_df=create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,reac_dict,p_id,rel_synonym,chem_list)
+"""
 """
 A method for the synthesis of highly crystalline Rh2P nanoparticles on SiO2 support materials and their use as truly heterogeneous
  single-site catalysts for the hydroformylation of ethylene and propylene is presented. The supported Rh2P nanoparticles were investigated 

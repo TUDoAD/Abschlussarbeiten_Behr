@@ -375,6 +375,7 @@ def pdf_title(filename):
     return os.path.basename(os.path.splitext(filename)[0])
 
 def get_metadata(filename):
+    
     title = pdf_title(filename)
     title = sanitize(' '.join(title.split()))
     ab=None
@@ -395,10 +396,10 @@ def get_metadata(filename):
             result = cr.works(query = title)
             doi=result['message']['items'][0]['DOI']
             title=result['message']['items'][0]['title'][0]
+            publisher=result['message']['items'][0]['publisher']
     return title, doi, publisher,ab
 
-def get_abstract(path, doi, publisher,ab):    
-                                          
+def get_abstract(path, doi, publisher,ab):                                    
     if 'Elsevier' in publisher:
         if ab == None:
             ab = AbstractRetrieval(doi)
@@ -436,4 +437,4 @@ for i in glob.iglob(path):
     if abstract==None:
         abstract=''
     abstract_all= abstract+abstract_all
-    """
+"""
