@@ -69,6 +69,7 @@ ax.set_zlabel('Concentration mol/m3')
 fig.colorbar(scatter)
 
 ax.set_title('Methanation')
+#ACHTUNG ABLAGEORT ANPASSEN
 plt.savefig("Methanation_small-dice.svg")
 plt.show()
          
