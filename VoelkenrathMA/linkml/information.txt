@@ -1,7 +1,10 @@
-NewReaction01 - NewReaction04 are the same Datasheets, but they are used to simulate
+NewReaction01 - NewReaction06 are nearly the same Datasheets, but they are used to simulate
 the System on different ways.
 
-NewReaction01 -> Just Reactor with a wide range in the parameter dice
-NewReaction02 -> Just Reactor with a small range in the parameter dice
-NewReaction03 -> Reactor and Downstream with a wide range in the parameter dice
-NewReaction04 -> Reactor and Downstream with a small range in the parameter dice
+NewReaction01 -> Just Reactor (x_CO2=0.04, x_H2=0.051, x_Ar=0.909)
+NewReaction02 -> Just Reactor (x_CO2=0.5, x_H2=0.5, x_Ar=0)
+NewReaction03 -> Just Reactor (x_CO2=0.2, x_H2=0.8, x_Ar=0)
+
+NewReaction04 -> Reactor and Downstream (x_CO2=0.04, x_H2=0.051, x_Ar=0.909)
+NewReaction05 -> Reactor and Downstream (x_CO2=0.5, x_H2=0.5, x_Ar=0)
+NewReaction06 -> Reactor and Downstream (x_CO2=0.2, x_H2=0.8, x_Ar=0)
