@@ -4,17 +4,13 @@
       - 0.5
     - - H2
       - 0.5
-    - - Ar
-      - 0.0
     pressure: 100000.0
     substances:
     - CO2
     - H2
     - CH4
     - H2O
-    - CO
     - Ni
-    - Ar
     temperature: 298.0
     #type: !!python/name:owlready2.entity.Mixture ''
     velocity: 0.848826363

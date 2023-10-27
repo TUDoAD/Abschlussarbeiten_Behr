@@ -292,6 +292,13 @@ def simulation(name_sim, path, data, combination):
     errors = interf.CalculateFlowsheet2(sim)
     
     ##SAVE RESULTS
+    # getting outlet composition
+    outlet = list(m2.GetOverallComposition())
+    outlet_composition = []
+    for i in range(len(substances)):
+        outlet_composition.append([substances[i][0], outlet[i]])
+    data.append({"Outlet Composition": outlet_composition})
+    
     # yaml-file
     coordinates = []
     for p in r1.points:
@@ -313,7 +320,7 @@ def simulation(name_sim, path, data, combination):
     data.append({"Coordinates": coordinates})
     for names_, values in zip(names, values):
         data.append({names_: values})    
-
+    
     yaml_name = path + name_sim + ".yaml"
     with open(yaml_name, 'w') as new_yaml_file:
         yaml.dump(data, new_yaml_file, default_flow_style=False)
@@ -355,7 +362,7 @@ def simulation(name_sim, path, data, combination):
     #im.show()
     
 
-def run():  
+def run():
     name_sim = sys.argv[1]
     temperature = sys.argv[2]
     pressure = sys.argv[3]
@@ -369,3 +376,14 @@ def run():
         
     simulation(name_sim, path, data, combination)
 run()
+
+"""
+Für Überarbeitungszwecke:
+    name_sim = "test_01"
+    temperature = 600
+    pressure = 300000
+    velocity = 0.001
+    path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_01/"
+    data_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_01_Datasheet.yaml"
+    combination = (float(temperature), float(pressure), float(velocity))
+"""

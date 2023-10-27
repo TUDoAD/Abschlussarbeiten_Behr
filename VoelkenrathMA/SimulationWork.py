@@ -32,4 +32,4 @@ CallSubprocess.call_subprocess(name, temperature, pressure, velocity, path)
 if "_DataSheet" in name:
     name_sim = name.split("_DataSheet")[0]
 directory = path + name_sim + "/"
-EvaluateMethanation.MinMax(name, directory)
+#EvaluateMethanation.MinMax(name, directory)

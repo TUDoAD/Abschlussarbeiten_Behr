@@ -309,7 +309,11 @@ def simulation(name_sim, path, data, combination):
     r1.CatalystParticleDiameter = data[1]['Reactor'][0]["catalyst_particle_diameter"]
     
     # specifiy other devices (valve, cooler, separator)
-    v1.CalculationMode = UnitOperations.CalculationMode.OutletPressure
+    v1.CalcMode = UnitOperations.Valve.CalculationMode.OutletPressure
+    v1.set_OutletPressure(100000) # Pa: 1 bar [NormPressure]
+    
+    h1.CalcMode  = UnitOperations.Heater.CalculationMode.OutletTemperature
+    h1.OutletTemperature = 293.15 # K: 25°C [NormTemperature]
     
     # create reaction
     print("Create reactions and kinetic scripts...")
@@ -321,6 +325,19 @@ def simulation(name_sim, path, data, combination):
     errors = interf.CalculateFlowsheet2(sim)
     
     ##SAVE RESULTS
+    # getting outlet composition of sep_gas
+    outlet_gas = list(m5.GetOverallComposition())
+    outlet_gas_composition = []
+    for i in range(len(substances)):
+        outlet_gas_composition.append([substances[i][0], outlet_gas[i]])
+    data.append({"Sep_Gas Composition": outlet_gas_composition})
+    
+    outlet_liq = list(m6.GetOverallComposition())
+    outlet_liq_composition = []
+    for i in range(len(substances)):
+        outlet_liq_composition.append([substances[i][0], outlet_liq[i]])
+    data.append({"Sep_Liquid Composition": outlet_liq_composition})
+    
     # yaml-file
     coordinates = []
     for p in r1.points:
