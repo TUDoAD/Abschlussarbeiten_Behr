@@ -222,23 +222,48 @@ def simulation(name_sim, path, data, combination):
     # material
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "feed")
     m2 = sim.AddObject(ObjectType.MaterialStream, 200, 50, "outlet")
+    m3 = sim.AddObject(ObjectType.MaterialStream, 325, 50, "expanded")
+    m4 = sim.AddObject(ObjectType.MaterialStream, 450, 50, "cooled")
+    m5 = sim.AddObject(ObjectType.MaterialStream, 600, 50, "sep_gas")
+    m6 = sim.AddObject(ObjectType.MaterialStream, 600, 100, "sep_liquid")
     
     # energy
-    e1 = sim.AddObject(ObjectType.EnergyStream, 50, 100, "power")
+    e1 = sim.AddObject(ObjectType.EnergyStream, 50, 125, "E1")
+    e2 = sim.AddObject(ObjectType.EnergyStream, 325, 125, "E2")
     
     # device
     r1 = sim.AddObject(ObjectType.RCT_PFR, 100, 75, "reactor")
+    v1 = sim.AddObject(ObjectType.Valve, 250, 75, "valve")
+    h1 = sim.AddObject(ObjectType.Heater, 375, 75, "cooler")
+    s1 = sim.AddObject(ObjectType.Vessel, 500, 75, "separator")
     
     # get flowsheet objects as object
     m1 = m1.GetAsObject()
     m2 = m2.GetAsObject()
+    m3 = m3.GetAsObject()
+    m4 = m4.GetAsObject()
+    m5 = m5.GetAsObject()
+    m6 = m6.GetAsObject()
     e1 = e1.GetAsObject()
+    e2 = e2.GetAsObject()
+    
     r1 = r1.GetAsObject()
+    v1 = v1.GetAsObject()
+    h1 = h1.GetAsObject()
+    s1 = s1.GetAsObject()
     
     # connect Objects
     r1.ConnectFeedMaterialStream(m1,0)
     r1.ConnectProductMaterialStream(m2,0)
     r1.ConnectFeedEnergyStream(e1,1)
+    sim.ConnectObjects(m2.GraphicObject, v1.GraphicObject, -1, -1) # outlet -> valve
+    sim.ConnectObjects(v1.GraphicObject, m3.GraphicObject, -1, -1) # valve -> expanded
+    sim.ConnectObjects(m3.GraphicObject, h1.GraphicObject, -1, -1) # expanded -> heater
+    sim.ConnectObjects(e2.GraphicObject, h1.GraphicObject, -1, -1) # E2 -> heater
+    sim.ConnectObjects(h1.GraphicObject, m4.GraphicObject, -1, -1) # heater -> cooled
+    sim.ConnectObjects(m4.GraphicObject, s1.GraphicObject, -1, -1) # cooled -> separator
+    sim.ConnectObjects(s1.GraphicObject, m5.GraphicObject, -1, -1) # separator -> sep_gas
+    sim.ConnectObjects(s1.GraphicObject, m6.GraphicObject, -1, -1) # separator -> sep_liquid
     
     # add property package
     sim.CreateAndAddPropertyPackage("NRTL")
@@ -283,6 +308,10 @@ def simulation(name_sim, path, data, combination):
     r1.CatalystVoidFraction = data[1]['Reactor'][0]["catalyst_void_fraction"]
     r1.CatalystParticleDiameter = data[1]['Reactor'][0]["catalyst_particle_diameter"]
     
+    # specifiy other devices (valve, cooler, separator)
+    v1.CalculationMode = UnitOperations.CalculationMode.OutletPressure
+    
+    # create reaction
     print("Create reactions and kinetic scripts...")
     createReaction(data, substances)
     print("Done!")

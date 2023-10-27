@@ -224,7 +224,7 @@ def simulation(name_sim, path, data, combination):
     m2 = sim.AddObject(ObjectType.MaterialStream, 200, 50, "outlet")
     
     # energy
-    e1 = sim.AddObject(ObjectType.EnergyStream, 50, 100, "power")
+    e1 = sim.AddObject(ObjectType.EnergyStream, 50, 125, "E1")
     
     # device
     r1 = sim.AddObject(ObjectType.RCT_PFR, 100, 75, "reactor")

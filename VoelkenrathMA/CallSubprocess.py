@@ -34,8 +34,8 @@ def call_subprocess(name, temperature, pressure, velocity, path):
         pressure = str(combinations[i][1])
         velocity = str(combinations[i][2])
         
-        command = ['python', 'SimulateMethanation.py', name_sim_, temperature, pressure, velocity, new_dir, data_path]
-        #command = ['python', 'SimulateMethanation_Downstream.py', name_sim_, temperature, pressure, velocity, new_dir, data_path]
+        #command = ['python', 'SimulateMethanation.py', name_sim_, temperature, pressure, velocity, new_dir, data_path]
+        command = ['python', 'SimulateMethanation_Downstream.py', name_sim_, temperature, pressure, velocity, new_dir, data_path]
         
         process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         
