@@ -55,7 +55,8 @@ def load_classes_chebi():
         if i in onto_class_list:
             onto_class_list.remove(i)
     print("--- %.2f seconds ---" % (time.time() - start_time))
-
+    #onto_dict,inchikey = synonym_dicts(onto_class_list)
+    
     return onto_class_list
 
 def delete_files_in_directory(directory_path):
@@ -319,7 +320,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
             doc_list = []
             doc = nlp(entity)
             for i in range(len(doc)):
-                if doc[i].tag_ == 'NNS' and doc[i].text not in (abbreviation.keys() and abbreviation.values()):
+                if doc[i].tag_ == 'NNS' and doc[i].text not in abbreviation.keys() and doc[i].text not in abbreviation.values():
                     doc_list.append(str(doc[i].lemma_))
                 else:
                     doc_list.append(str(doc[i]))
@@ -372,7 +373,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                     entity=entity.replace(' ','') 
                         
                 mol = re.findall(r'(([\w—–-]+)(?:[\s]?/[\s]?|[\s]?@[\s]?|[\s]on[\s])+([\w—–-]+))', entity) # 'RhCo on Al2O3' or 'RhCo/Al2O3' or 'RhCo@Al2O3'r'((?:([\w@—–-]+)[\s])?([\w@—–-]+)(?:[\s]?/[\s]?|[\s]on[\s])+([\w@—–-]+))', entity
-                if mol and entity not in abbreviation.values():
+                if mol:
                     for i in range(len(mol)):
                         if ('supported' or 'Supported') in mol[i][0]:
                             continue
@@ -386,10 +387,12 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                                 chem_list.append(catalyst)
                                 sup = True
                             if '@' in mol[i][0]:
-                                    entity = entity.replace('@',' supported on ')
+                                    if entity not in abbreviation.values():
+                                        entity = entity.replace('@',' supported on ')
                                     support = mol[i][2]
-                                    if re.findall(r'(([A-Za-z]+)[—–-]\d+[-]?\d*[A-Z]*)', support):
-                                        list_spans.append(re.findall(r'(([A-Za-z]+)[—–-]\d+[-]?\d*[A-Z]*)', support)[1])
+                                    if re.findall(r'([A-Za-z]+)[—–-]\d+[—–-]?\d*[A-Z]*', support):
+                                        print(re.findall(r'(([A-Za-z]+)[—–-]\d+[—–-]?\d*[A-Z]*)', support))
+                                        list_spans.append(re.findall(r'([A-Za-z]+)[—–-]\d+[—–-]?\d*[A-Z]*', support)[0])
                                     chem_list.append(support)
                                     catalyst = mol[i][1]
                                     chem_list.append(catalyst)
@@ -447,9 +450,10 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                         reac_dict[entity] = [entity_old[1]]
                     elif entity_old[1] not in reac_dict.values():
                         reac_dict[entity].append(entity_old[1])
-                spans = sorted(Document(entity).cems, key = lambda span: span.start)
-                chem_list.extend([c.text for c in spans])
-                chem_list.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_list and cem not in list_spans])
+                if l not in ['Characterization','Treatment']:
+                    spans = sorted(Document(entity).cems, key = lambda span: span.start)
+                    chem_list.extend([c.text for c in spans])
+                    chem_list.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_list and cem not in list_spans])
                                          
                 #else:
                 categories[entity] = l 
@@ -531,12 +535,10 @@ def chemical_prep(chem_list, onto_class_list):
     onto_new_dict = {}
     synonyms = {}
     onto_dict,inchikey = synonym_dicts(onto_class_list)
-    chem_list=[c for c in chem_list if '/' not in c]
+    #chem_list=[c for c in chem_list if '/' not in c]#check if still useful
     for molecule in chem_list:  
-        non_chem = False
-        if re.search(r'^ [A-Za-z\d—–-]+|^[A-Za-z\d—–-]+ $',molecule): 
+        if re.search(r'^ [A-Za-z\d—–-]+|^[A-Za-z\d—–-]+ $|[A-Za-z]+\(\d+ \)',molecule): 
             molecule = molecule.replace(' ','')
-        
         if molecule in abbreviation.keys():
             comp_dict[molecule] = []
             spans = Document(abbreviation[molecule]).cems
@@ -548,17 +550,16 @@ def chemical_prep(chem_list, onto_class_list):
                 else:
                     comp_dict[molecule].append(comp.text)
             continue
-        if non_chem == True or re.search(r'[A-Z]+[—–-][\d]+', molecule):
+        if re.search(r'[A-Z]+[—–-][\d]+', molecule):
             onto_new_dict[molecule] = []
             class_list.append(molecule)
             continue        
-        molecule_split = molecule.split()
+        molecule_split = molecule.split()        
         if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) or re.match(r'[\d,]+[—–-][a-z]+',molecule):
              comp_dict[molecule] = molecule_split  
         else:
              comp = re.findall(r'([A-Z](?:[a-z])?)',molecule)
              comp_dict[molecule] = comp
-
     for k,v in comp_dict.items():
         i = 0
         if k not in onto_new_dict.keys():           

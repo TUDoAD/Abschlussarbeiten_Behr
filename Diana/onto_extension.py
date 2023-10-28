@@ -144,9 +144,12 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
                 elif entity not in chem_list and not set(entity.split()).issubset(chem_list):
                     sup_i = False
                     entity_n = entity
-                    if re.search('supported on', entity):
+                    if re.search('supported on', entity) or re.search('encapsulated within', entity):
                         #Rh-Co based system supported on alumina, titania and silica                                    
-                        e_btwn=entity[re.search('supported on ', entity).end():]
+                        if 'supported on' in entity:
+                            e_btwn=entity[re.search('supported on ', entity).end():]
+                        else:
+                            e_btwn=entity[re.search('encapsulated within ', entity).end():]
                         sup_i=True                            
                     elif re.search('supported', entity) and re: #bimetallic SiO2-supported RhCo3 cluster catalyst 
                         if '-' in entity and entity.index('-')==re.search('supported',entity).start()-1:
@@ -279,17 +282,15 @@ def check_in_snip(e_snip, classes, entity, l, chem_list):
     classes[entity] = []
     doc_snip = nlp(e_snip)
     head = None
+    if chem_list:
+        chem_list.extend([c for c in [cem.split() for cem in chem_list]][0])
     if l == 'Catalyst':
         classes[entity] = ['catalyst role']
         if e_snip == entity:
             if 'catalyst' in entity:
                 token_new = 'catalyst role'
-                if [t.text for t in [token for token in doc_snip if token.text=='catalyst'][0].children if t.text != "catalyst"]: 
-                    token_new = 'catalyst role'
+                if [t.text for t in [token for token in doc_snip if token.text=='catalyst'][0].children if t.text != "catalyst" and t.text not in chem_list]: 
                     for i in reversed(range(len([t.text for t in [token for token in doc_snip if token.text == 'catalyst'][0].children if t.text != "catalyst"]))):
-                        if list([token for token in doc_snip if token.text == 'catalyst'][0].children)[i].text in chem_list:
-                            continue
-                        else:
                             token_new = [t.text.lower() for t in [token for token in doc_snip if token.text == 'catalyst'][0].children][i] +' ' + token_new
                             classes[entity].append(token_new) # Problem: from 'bimetallic SiO2-supported RhCo3 cluster catalyst' only 'cluster catalyst role'
             else:
@@ -308,6 +309,8 @@ def check_in_snip(e_snip, classes, entity, l, chem_list):
     
     elif l=='Reaction':
         if len(doc_snip) > 1:
+            if '-' in doc_snip.text:
+                doc_snip = nlp(e_snip.replace('-',' '))
             for token in doc_snip:
                 if token.head.text == token.text:
                     token_new = token.head.text
