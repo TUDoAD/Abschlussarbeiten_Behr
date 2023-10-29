@@ -327,7 +327,9 @@ def CatalysisIE_search(model, test_sents): #change description at the and
             entity = " ".join(doc_list)         
             e_split = entity.split()
             entity = doc_token(entity, e_split)
-            
+            if re.search(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity): #Rh(111 )
+                i = re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0].replace(' ','')
+                entity = entity.replace(re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0],i)
             pattern = r'([A-Za-z]+[\s]?[—–-] [a-z]+|[A-Za-z]+ [—–-][\s]?[a-z]+)' #e_split:['hydro- formylation'] and entity:heterogeneous hydro- formylation or X - ray diffraction
             e_split = re.findall(pattern,entity)
             if e_split:
@@ -537,7 +539,7 @@ def chemical_prep(chem_list, onto_class_list):
     onto_dict,inchikey = synonym_dicts(onto_class_list)
     #chem_list=[c for c in chem_list if '/' not in c]#check if still useful
     for molecule in chem_list:  
-        if re.search(r'^ [A-Za-z\d—–-]+|^[A-Za-z\d—–-]+ $|[A-Za-z]+\(\d+ \)',molecule): 
+        if re.search(r'^ [A-Za-z\d—–-]+|^[A-Za-z\d—–-]+ $',molecule): 
             molecule = molecule.replace(' ','')
         if molecule in abbreviation.keys():
             comp_dict[molecule] = []
