@@ -14,8 +14,9 @@
 	- Erste Ideen für Paper mit Katrin aufschreiben!
 	- measurement .addData ausprobieren bei pyenzyme Dokument
 	- Vergleiche eigenes ELN/DataProperties mit denen von EnzymeML 
-		- Eliminiere Doppelungen!
-
+		- Eliminiere Doppelungen!		
+	- Reaktorklassifikation über STRENDA ?
+	https://github.com/StephanM87/Strenda-biocatalysis/tree/main
 
 ## Coding
 
@@ -42,13 +43,5 @@ Laccase activity (is_a http://purl.obolibrary.org/obo/GO_0016682):
 Zu welcher Art der Reaktionen gehörte die Reaktion im EnzymeML-Dokument? 
 BZW.: Welche Art der Reaktion wurde katalysiert?
 Mit welcher Art Kinetik wurde die Reaktion modelliert? 
-
-
-
-
-
-
-
-
 
 
