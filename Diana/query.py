@@ -76,7 +76,6 @@ def get_reaction(reac=None,doi=None,include_all=False):
         reaction_list= list(default_world.sparql(sparqlstr))
     except:
         reaction_list= []
-
     return reaction_list   
 
 doi= r'10.1016/1381-1169(96)00243-9'
@@ -85,10 +84,10 @@ list_reac=get_reaction(reac=None,doi=doi) #get list of all reaction mentioned in
 #get the list of all publications in ontology where same reactions as in input publication were mentioned
 same_reac_doi= []
 for i in list_reac:
-    reac_doi=get_reaction(reac=i,doi=None)
+    reac_doi=get_reaction(reac=i[0],doi=None)
     for c in reac_doi:
-        if c not in same_reac_doi:
-            same_reac_doi.append(c) #output example: [['10.1016/0304-5102(93)87113-m'],['10.1016/1381-1169(96)00243-9']]
+        if c not in same_reac_doi and c[0]!=doi:
+            same_reac_doi.append(c)#output example: [['10.1016/0304-5102(93)87113-m'],['10.1016/1381-1169(96)00243-9']]
 
 #get the list of publications which have "hydroformulation" reaction
 reac_doi_list=get_reaction(reac="hydroformylation",doi=None)  #output example: [['10.1016/0304-5102(93)87113-m'],['10.1016/1381-1169(96)00243-9']]
@@ -168,6 +167,7 @@ def cat_list(cat=None,doi=None,restriction=None):
             }
         """ #search for all catalysts and components of catalyst
     else:
+
         sparqlstr="""
         WHERE{
         	{

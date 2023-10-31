@@ -1,4 +1,7 @@
 {
+  "path": ".\\import\\*.pdf",
+  "ckpt_name": "CatalysisIE/checkpoint/CV_0.ckpt",
+  "bert_name": "CatalysisIE/pretrained/scibert_domain_adaption",
   "apikey": "f2302a8c33c3c6dc589a1fe03915f376",
   "onto_list": {
     "CHEBI": "http://purl.obolibrary.org/obo/chebi.owl",
@@ -7,5 +10,7 @@
     "AFO": "./ontologies/afo.owl"
   },
   "onto_old": "afo",
-  "onto_new": "afo_upd1"
+  "onto_new": "afo_upd1",
+  "path_snippet": ".\\ontology_snippet\\",
+  "path_class_list": ".\\class_lists\\"
 }

@@ -63,13 +63,14 @@ def create_list_IRIs(class_list, IRI_json_filename = 'iriDictionary'):
         onto_names.remove(onto_old.upper())
     except: 
         print('{} not in the list of the given ontologies "onto_list"')
-    i=0
+    
     for entity in class_list:
         if entity not in entities_all:
             match_dict = search_value_in_nested_dict(entity, onto_names, onto_dict, match_dict)
         else:
-            match_dict['dummy'+str(i)]=entity
-            i += 1
+
+            match_dict['dummy_'+entity]=entity
+            
     missing = [e for e in class_list if e not in match_dict.values() and e not in entities_all] 
 
     for key,value in match_dict.items():

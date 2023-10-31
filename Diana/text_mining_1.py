@@ -692,7 +692,6 @@ def search_inchikey(inchikey, c):
 
 def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
     numinbrackets = None
-    comp=True
     if len(synonyms[k]) == 1:
             key = synonyms[k][0]
     else:   
@@ -705,12 +704,8 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                 if len(synonyms[k]) == 0:
                     if not mol:
                         print('no synonyms and entities for {}, key = k'.format(k))
-                        ans= input('Is {} an existing compound?\n'.format(k))
-                        if ans=='no':
-                            key=False                        
-                        else:    
-                            key = k
-                            class_list.append(k)
+                        key = k
+                        class_list.append(k)
                         return class_list, key, rel_synonym  
                     elif len(mol) == 1:
                         key=mol[0].iupac_name #some of the compounds that can be found in pubchem don't have IUPAC names (i.e. "propyl")

@@ -81,10 +81,8 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
         if entity in classes.keys() or l in not_process or entity in abbreviation.values():
             continue
         else:
-            spans = sorted(Document(entity).cems, key = lambda span: span.start)
-            chem_entity = [c.text for c in spans]
-            list_spans = [i for c in spans for i in c.text.split()]+[c.text for c in spans]
-            chem_entity.extend([cem for cem in chem_list if cem in entity and cem not in list_spans])
+
+            chem_entity=[cem for cem in chem_list if cem in entity]
             spans_dict[entity] = []
             spans_n = []
             if l == 'Catalyst':
@@ -154,12 +152,18 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
                     elif re.search('supported', entity) and re: #bimetallic SiO2-supported RhCo3 cluster catalyst 
                         if '-' in entity and entity.index('-')==re.search('supported',entity).start()-1:
                             entity_n= entity[:entity.index('-')]+ ' '+entity[entity.index('-')+1:]
-                            spans_dict
+                            
                         e_btwn=entity[:re.search('supported', entity).start()-1]
                         sup_i = True                 
                     
                     for c in chem_entity:
-                        pattern='\\b'+c+'\\b'
+                        if ('(' and')') in c: #Rh(111)
+                            d=c
+                            d=d.replace('(','\\(')
+                            d=d.replace(')', '\\)')
+                            pattern=d
+                        else:
+                            pattern='\\b'+c+'\\b'
                         if re.search(pattern,entity_n):
                             c_t = rel_synonym[c] if c in rel_synonym.keys() else c
                             if sup_i==True and c in e_btwn:
@@ -500,7 +504,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                                         try:
                                             cat=[i for i in list(onto.search(label=k)) if i in list(onto.individuals())][0]
                                         except:
-                                            onto, cat=add_individum(onto,list(onto.search(label=k))[0], c_t,p_id)
+                                            onto, cat=add_individum(onto,list(onto.search(label=k))[0], c,p_id)
                                         cat.supported_on.append(ind)
                                         cat.catalytic_component_of.append(e_ind)  
                         if row.category== 'Product':
@@ -662,7 +666,10 @@ def create_sub_super(missing, onto, idx, indecies, entities, sup_sub_df, created
                 try:
                     super_class = [c for c in onto.search(prefLabel=super_class_l) if c in onto.classes()][0]
                 except:
-                    super_class = onto.search_one(label=super_class_l+ ' (molecule)')
+                    try:
+                        super_class = [c for c in onto.search(label=super_class_l.lower()) if c in onto.classes()][0]
+                    except:    
+                        super_class = onto.search_one(label=super_class_l+ ' (molecule)')
             if not subclass:
                 onto, created_classes = create_subclass(onto, sup_sub_df.loc[idx, 'subclass'], entities, super_class,created_classes,chem_list,p_id=p_id)
         elif super_class_l in list(sup_sub_df['subclass']):
