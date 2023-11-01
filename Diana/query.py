@@ -95,11 +95,10 @@ reac_doi_list=get_reaction(reac="hydroformylation",doi=None)  #output example: [
 #get list of all publication which have "hydroformulation" and reactions which have "hydroformylation" in label
 reac_doi_list=get_reaction(reac="hydroformylation",doi=None, include_all=True)
 
-def cat_list(cat=None,doi=None,restriction=None):
-    if doi==None:
-        doi= ''
-    else: 
-        doi='FILTER regex(?doi, "'+doi+'").'
+def cat_list(cat=None,doi=None,restriction=None, include_all=False,add_support=False):
+    if doi!=None:
+        doi= '"{}".}}'.format(doi) 
+        
     if restriction!=None:
         restr=''
     
@@ -110,90 +109,54 @@ def cat_list(cat=None,doi=None,restriction=None):
         		?catalyst_e rdf:type owl:NamedIndividual.
 		        ?catalyst_e rdf:type ?type.
         		?type rdfs:subClassOf* role:AFRL_0000217.
-		?catalyst_e rdfs:label ?catlabel.
+                ?catalyst_e rdfs:label ?catlabel.
           		FILTER NOT EXISTS {
-        				FILTER regex(?catlabel, "catalyst role").
+        				FILTER regex(STR(?catlabel), "role").
         						}
 	}	
 	UNION
     	{
-        		?catalyst_e rdf:type owl:NamedIndividual.
-        	 	?catalyst_e rdf:type ?type.
+        		?catalyst_full rdf:type owl:NamedIndividual.
+        	 	?catalyst_full rdf:type ?type.
         		?type rdfs:subClassOf* ?chem_substance.
-                		?chem_substance rdfs:label ?chemlabel.
+                	?chem_substance rdfs:label ?chemlabel.
                		 FILTER regex(?chemlabel, 'chemical substance').
-                ?catalyst afo:catalytic_component_of ?catalyst_e.	
-        
+                ?catalyst_e afo:catalytic_component_of ?catalyst_full.	
+                ?catalyst_full rdfs:label ?catalyst.
+                
         }
-    UNION
+    """
+    
+    if include_all==True and cat ==None:
+        
+        sparqlstr=sparqlstr+"""
+        UNION
              {
                  ?catalyst_e rdf:type owl:NamedIndividual.
          	 	?catalyst_e obo:RO_0000087 role:AFRL_0000217.
                  FILTER NOT EXISTS {
-  						FILTER regex(?com, "created automatically").
+  						
   						?catalyst_chem rdf:type ?type.
                  		?type rdfs:subClassOf* ?chem_substance.
                         ?chem_substance rdfs:label ?chemlabel.
                         FILTER regex(?chemlabel, 'chemical substance').
-                        
                           }
                  }
-        	OPTIONAL {
-        			?catalyst rdfs:comment ?com.
-        				FILTER NOT EXISTS {
-        						FILTER regex(?com, "created automatically").
-        						}
-                    BIND(STR(?com) as ?catOtherName)
-        			
-        		}
-        	?catalyst afo:mentioned_in ?mention.
-            ?mention afo:has_doi ?doi.
-            """+doi+"""
-            ?catalyst afo:has_support_component ?support
-            
-            
-            ?support rdf:type owl:NamedIndividual.
-            ?support obo:RO_0000087 ?supRole.
-            ?catalyst afo:supported_on ?support.
-            {?support rdfs:comment ?supcom.
-				FILTER NOT EXISTS {
-						FILTER regex(?supcom, "created automatically").
-						}
-            BIND(STR(?supcom) as ?supNames).
-            }
-            UNION
-            {?support rdfs:label ?supNames.}
-            FILTER regex(?supNames,'"""+supName+"""').
-            }
-        """ #search for all catalysts and components of catalyst
+             """
+    if add_support!=True:       
+         sparqlstr=sparqlstr+"""
+             ?catalyst_full afo:has_support_component ?support.
+         """ 
+    if doi==None:
+        sparqlstr=sparqlstr+"""
+        	?catalyst_e afo:mentioned_in ?mention.
+            ?mention afo:has_doi ?doi.}
+            """
     else:
+        sparqlstr=sparqlstr+"""
+        	?catalyst_e afo:mentioned_in ?mention.
+            ?mention afo:has_doi """+doi
 
-        sparqlstr="""
-        WHERE{
-        	{
-        		?catalyst rdf:type owl:NamedIndividual.
-        		?catalyst rdfs:label ?catlabel.
-                FILTER regex(?catlabel, '"""+cat+"""')
-                
-        	}
-        	UNION
-        	 {
-        		?catalyst rdf:type owl:NamedIndividual.
-        	 	?catalyst rdfs:comment ?catCom.
-                 FILTER regex(?catCom, '"""+cat+"""')
-            OPTIONAL {
-             			?catalyst rdfs:comment ?com.
-             				FILTER NOT EXISTS {
-             						FILTER regex(?com, "created automatically")
-             						}
-                         BIND(STR(?com) as ?catOtherName)
-             			
-             		}
-        	?catalyst afo:mentioned_in ?mention.
-            ?mention afo:has_doi ?doi.
-            FILTER regex(?doi, "10.1021/acscatal.7b00499.s001").
-            }
-        """ #search for all catalyst components and alternative names of one catalyst
     sparqlstr="""
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -279,6 +242,73 @@ d=list(default_world.sparql("""
                                 
                                 }
                             """))
+                            WHERE{
+                            	{
+                            		?catalyst_e rdf:type owl:NamedIndividual.
+                    		        ?catalyst_e rdf:type ?type.
+                            		?type rdfs:subClassOf* role:AFRL_0000217.
+                                    ?catalyst_e rdfs:label ?catalyst.
+                              		FILTER NOT EXISTS {
+                            				FILTER regex(STR(?catalyst), "role").
+                            						}
+                    	}	
+                    	UNION
+                        	{
+                            		?catalyst_full rdf:type owl:NamedIndividual.
+                            	 	?catalyst_full rdf:type ?type.
+                            		?type rdfs:subClassOf* ?chem_substance.
+                                    	?chem_substance rdfs:label ?chemlabel.
+                                   		 FILTER regex(?chemlabel, 'chemical substance').
+                                    ?catalyst_e afo:catalytic_component_of ?catalyst_full.	
+                                	{ ?catalyst_e rdfs:comment ?catalyst.
+                                        FILTER NOT EXISTS {
+                                        FILTER regex(?catalyst, "created automatically").}
+                                        }
+                                    UNION
+                                   	{ ?catalyst_e rdfs:label ?catalyst.}
+                                    
+                            }
+                                        
+            ?support rdf:type owl:NamedIndividual.
+            ?support obo:RO_0000087 ?supRole.
+            ?catalyst afo:supported_on ?support.
+            {?support rdfs:comment ?supcom.
+				FILTER NOT EXISTS {
+						FILTER regex(?supcom, "created automatically").
+						}
+            BIND(STR(?supcom) as ?supNames).
+            }
+            UNION
+            {?support rdfs:label ?supNames.}
+            FILTER regex(?supNames,'"""+supName+"""').
+            else:
+
+                sparqlstr="""
+                WHERE{
+                	{
+                		?catalyst rdf:type owl:NamedIndividual.
+                		?catalyst rdfs:label ?catlabel.
+                        FILTER regex(?catlabel, '"""+cat+"""')
+                        
+                	}
+                	UNION
+                	 {
+                		?catalyst rdf:type owl:NamedIndividual.
+                	 	?catalyst rdfs:comment ?catCom.
+                         FILTER regex(?catCom, '"""+cat+"""')
+                    OPTIONAL {
+                     			?catalyst rdfs:comment ?com.
+                     				FILTER NOT EXISTS {
+                     						FILTER regex(?com, "created automatically")
+                     						}
+                                 BIND(STR(?com) as ?catOtherName)
+                     			
+                     		}
+                	?catalyst afo:mentioned_in ?mention.
+                    ?mention afo:has_doi doi.
+                    .
+                    }
+                """ #search for all catalyst components and alternative names of one catalyst
 '''                            
 #r= ScopusSearch('TITLE-ABS-KEY({}-{}-{}')                            
                             #PREFIX role: <http://purl.allotrope.org/ontologies/role#AFRL_0000360>'''
