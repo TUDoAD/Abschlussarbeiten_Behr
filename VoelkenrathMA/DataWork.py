@@ -206,7 +206,7 @@ def CreateDataSheet(name, data):
         print(" ")
         print(f"The implemented reaction is a {reaction_type}")
     else:
-        print("Reasoner not found a reaction-type for the implemented reaction. Check if reaction is in ontology and define it if not")
+        print("Reasoner not found a reaction-type for the implemented reaction. Check if reaction is in ontology and define it if not!")
         return False
 
     # load reactor scheme
@@ -342,6 +342,7 @@ def CreateDataSheet(name, data):
     reactor_class = onto.search(iri="http://purl.allotrope.org/ontologies/equipment#AFE_0000153")[0]
     
     data_points = [
+        {'Reaction_Type': reaction_type},
         {'Mixture':[{'type': mixture_class, 'temperature': inlet_temperature, 'pressure': inlet_pressure, 'velocity': inlet_velocity, 'mole_fraction': mole_frac, 'substances': components}]},
         {'Reactor':[{'type': reactor_class, 'calculation_mode': calculation_mode, 'reactive_volume': reactive_volume, 'tube_length': tube_length, 'tube_diameter': tube_diameter,
          'num_tubes': num_tubes, 'catalyst_loading': catalyst_loading, 'catalyst_particle_diameter': catalyst_diameter, 'catalyst_void_fraction':  catalyst_porosity}]}

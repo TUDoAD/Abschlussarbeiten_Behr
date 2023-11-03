@@ -5,6 +5,7 @@ Created on Tue Oct 24 08:59:20 2023
 @author: smmcvoel
 """
 import os
+import math
 import yaml
 import numpy as np
 import matplotlib.pyplot as plt
@@ -26,11 +27,16 @@ def MinMax(name, directory):
                 file_path = os.path.join(directory, file)
                 with open(file_path, 'r') as data_file:
                     data = yaml.safe_load(data_file)
-                    
-                temperature_ = data[0]["Mixture"][0]["temperature"] # K
-                pressure_ = data[0]["Mixture"][0]["pressure"] # Pa
-                velocity_ = data[0]["Mixture"][0]["velocity"] # m/s
-                concentration_ = data[6]["Methane"][-1] # mol/m3 [Methane]
+                
+                for i in range(len(data)):
+                    if "Mixture" in data[i]:
+                        temperature_ = data[i]["Mixture"][0]["temperature"] # K
+                        pressure_ = data[i]["Mixture"][0]["pressure"] # Pa
+                        velocity_ = data[i]["Mixture"][0]["velocity"] # m/s
+                
+                for i in range(len(data)):
+                    if "Methane" in data[i]:
+                        concentration_ = data[i]["Methane"][-1] # mol/m3 [Methane]
                 
                 temperature.append(temperature_)
                 pressure.append(pressure_)
@@ -80,4 +86,93 @@ def MinMax(name, directory):
     fig_name = directory + name + ".svg"
     plt.savefig(fig_name)
     plt.show()
-         
+    
+
+def Selectivity(directory):
+    for file in os.listdir(directory):
+
+        if file.endswith('.yaml'):
+            file_path = os.path.join(directory, file)
+            with open(file_path, 'r') as data_file:
+                data = yaml.safe_load(data_file)
+                
+            for i in range(len(data)):
+                if "ChemicalReaction" in data[i]:
+                    mechanism = data[i]["ChemicalReaction"][0]
+                if "Reactor" in data[i]:
+                    diameter = float(data[i]["Reactor"][0]["tube_diameter"])
+                    #print("d: " + str(diameter))
+                if "Mixture" in data[i]:
+                    velocity = float(data[i]["Mixture"][0]["velocity"])
+                    #print("u: " + str(velocity))
+                if "Hydrogen" in data[i]:
+                    h2_0 = data[i]["Hydrogen"][0]
+                    #print(h2_0)
+                    h2 = data[i]["Hydrogen"][-1]                
+                    #print(h2)
+                if "Carbon dioxide" in data[i]:
+                    co2_0 = data[i]["Carbon dioxide"][0]
+                    #print(h2_0)
+                    co2 = data[i]["Carbon dioxide"][-1]                
+                    #print(h2)
+                if "Methane" in data[i]:
+                    ch4_0 = data[i]["Methane"][0]
+                    #print(ch4_0)
+                    ch4 = data[i]["Methane"][-1]
+                    #print(ch4)
+            
+            equation = mechanism[0]["reactions"][0]["reaction_equation"]
+                    
+            educts_ = equation.split(">")[0].split("+")
+            educts = []
+            for educt in educts_:
+                if educt[0].isdigit():
+                    educts.append([educt[1:], -int(educt[0])])
+                else: 
+                    educts.append([educt, -1])
+                    
+            products_ = equation.split(">")[1].split("+")
+            products = []
+            for product in products_:
+                if product[0].isdigit():
+                    products.append([product[1:], int(product[0])])
+                else: 
+                    products.append([product, 1])
+            
+            # calculation
+            A = math.pi * (diameter/2) ** 2
+            V_flow = velocity * A
+                        
+            n_h2_0 = h2_0 * V_flow
+            n_h2 = h2 * V_flow
+            
+            n_co2_0 = co2_0 * V_flow
+            n_co2 = co2 * V_flow
+            
+            X_h2 = (n_h2_0 - n_h2)/n_h2_0
+            #print("X(H2): " + str(X_h2))
+            X_co2 = (n_co2_0 - n_co2)/n_co2_0
+            #print("X(CO2): " + str(X_co2))
+            
+            n_ch4_0 = ch4_0 * V_flow
+            n_ch4 =  ch4 * V_flow
+    
+            for educt in educts:
+                if educt[0] == "H2":
+                    v_h2 = educt[1]
+            for product in products:
+                if product[0] == "CH4":
+                    v_ch4 = product[1]
+            
+            Y_ch4 = ((n_ch4 - n_ch4_0)/n_h2_0) * (abs(v_h2)/v_ch4)
+            #print("Y(CH4): " + str(Y_ch4))
+            S = Y_ch4 / X_h2
+            #print("S(H2;CH4): " + str(S))
+            
+            # save results
+            data.append({"Turnover": [["X_CO2", X_co2], ["X_H2", X_h2]]})
+            data.append({"Yield": ["Y_CH4", Y_ch4]})
+            data.append({"Selectivity": S})
+            with open(file_path, 'w') as updated_data_file:
+                yaml.dump(data, updated_data_file, default_flow_style=False)
+            

@@ -81,7 +81,9 @@ sim = interf.CreateFlowsheet()
 
 
 def createReaction(data, substances):
-    mechanism = data[2]["ChemicalReaction"][0]
+    for i in range(len(data)):
+        if "ChemicalReaction" in data[i]:
+            mechanism = data[i]["ChemicalReaction"][0]
     
     i = 0
     while i <= (len(mechanism)-1):
@@ -178,13 +180,18 @@ def simulation(name_sim, path, data, combination):
     temperature, pressure, veloc = combination
     
     # set variable parameter for the new linkML-file
-    data[0]["Mixture"][0]["temperature"] = temperature
-    data[0]["Mixture"][0]["pressure"] = pressure
-    data[0]["Mixture"][0]["velocity"] = veloc 
+    for i in range(len(data)):
+        if "Mixture" in data[i]:
+            data[i]["Mixture"][0]["temperature"] = temperature
+            data[i]["Mixture"][0]["pressure"] = pressure
+            data[i]["Mixture"][0]["velocity"] = veloc 
+            
+            substances = data[i]["Mixture"][0]["substances"]
+            mole_fraction = data[i]["Mixture"][0]["mole_fraction"]
     
     # get compound from DWSIM and add them to the simulation
     print("Adding substances to Simulation...")
-    substances = data[0]["Mixture"][0]["substances"]
+    
     for sub in substances:
         try:
             if "-Ni" not in sub:
@@ -270,7 +277,7 @@ def simulation(name_sim, path, data, combination):
     
     # specify material parameter
     print("Set mole fractions...")
-    mole_fraction = data[0]["Mixture"][0]["mole_fraction"]
+
     composition = [0.0] * len(substances)
     for entry in mole_fraction:
         sub, value = entry
@@ -286,28 +293,29 @@ def simulation(name_sim, path, data, combination):
     m1.SetTemperature(temperature)
     m1.SetPressure(pressure)
     velocity = float(veloc)
-    radius = float(data[1]["Reactor"][0]["tube_diameter"])/2
-    V_flow = math.pi * radius ** 2 * velocity
-    m1.SetVolumetricFlow(V_flow)
-    
     # specify reactor parameter; doesnt make a difference if diameter or length is choosen
-    r1.Volume = data[1]["Reactor"][0]["reactive_volume"]
-    r1.Length = float(data[1]["Reactor"][0]["tube_length"])
-    r1.NumberOfTubes = data[1]["Reactor"][0]["num_tubes"]
+    for i in range(len(data)):
+        if "Reactor" in data[i]:
+            radius = float(data[i]["Reactor"][0]["tube_diameter"])/2
+            r1.Volume = data[i]["Reactor"][0]["reactive_volume"]
+            r1.Length = float(data[i]["Reactor"][0]["tube_length"])
+            r1.NumberOfTubes = data[i]["Reactor"][0]["num_tubes"]
+            if data[i]["Reactor"][0]["calculation_mode"] == "isothermal":
+                r1.ReactorOperationMode = Reactors.OperationMode.Isothermic
+            elif data[i]["Reactor"][0]["calculation_mode"] == "adiabatic":
+                r1.ReactorOperationMode = Reactors.OperationMode.Adiabatic
+            else:
+                print("Error accured while setting the ReactorOperationMode!")
+                
+            # specify catalyst parameter
+            r1.CatalystLoading = data[i]['Reactor'][0]["catalyst_loading"]
+            r1.CatalystVoidFraction = data[i]['Reactor'][0]["catalyst_void_fraction"]
+            r1.CatalystParticleDiameter = data[i]['Reactor'][0]["catalyst_particle_diameter"]
+            
+    V_flow = math.pi * radius ** 2 * velocity
+    m1.SetVolumetricFlow(V_flow)    
     r1.UseUserDefinedPressureDrop = True
-    
-    if data[1]["Reactor"][0]["calculation_mode"] == "isothermal":
-        r1.ReactorOperationMode = Reactors.OperationMode.Isothermic
-    elif data[1]["Reactor"][0]["calculation_mode"] == "adiabatic":
-        r1.ReactorOperationMode = Reactors.OperationMode.Adiabatic
-    else:
-        print("Error accured while setting the ReactorOperationMode!")
-        
-    # specify catalyst parameter
-    r1.CatalystLoading = data[1]['Reactor'][0]["catalyst_loading"]
-    r1.CatalystVoidFraction = data[1]['Reactor'][0]["catalyst_void_fraction"]
-    r1.CatalystParticleDiameter = data[1]['Reactor'][0]["catalyst_particle_diameter"]
-    
+
     # specifiy other devices (valve, cooler, separator)
     v1.CalcMode = UnitOperations.Valve.CalculationMode.OutletPressure
     v1.set_OutletPressure(100000) # Pa: 1 bar [NormPressure]
@@ -392,7 +400,7 @@ def simulation(name_sim, path, data, combination):
     d.SaveTo(stri)
     image = Image.FromStream(stri)
     imgPath = Path.Combine(path, fileName_pic)
-    image.Save(imgPath, ImageFormat.Png)
+    #image.Save(imgPath, ImageFormat.Png)
     stri.Dispose()
     canvas.Dispose()
     bmp.Dispose()

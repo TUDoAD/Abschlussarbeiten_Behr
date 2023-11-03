@@ -5,24 +5,36 @@ Created on Tue Jul 25 10:33:27 2023
 @author: mvoel
 """
 """
-This Code calls the Simulation as Subprocess, otherwise there would be problems with reloaded DWSSIM-modules.
+This Code calls the Simulation as Subprocess, otherwise there would be problems with reloaded DWSIM-modules.
 You can choose between the simulation with/without downstream by comment one of the command lines!
 """
 import os
+import yaml
 import itertools
 import subprocess
 
 def call_subprocess(name, temperature, pressure, velocity, path):    
     # calling the subprocess-simulation
-    combinations = list(itertools.product(temperature, pressure, velocity))
-    
-    data_path = path + name + ".yaml"
+    combinations = list(itertools.product(temperature, pressure, velocity))   
     
     if "_DataSheet" in name:
-        name_sim = name.split("_DataSheet")[0]
-        
+        nr_sim_sheet = name.split("_")[1]
+    else:
+        nr_sim_sheet = "01"
+    
+    data_path = path + name + ".yaml"
+    with open(data_path, "r") as file:
+        data = yaml.safe_load(file)
+    
+    for i in range(len(data)):
+        if "Reaction_Type" in data[i]:
+            name_sim = data[i]["Reaction_Type"] + "_" + nr_sim_sheet
+          
     # creating new folder
-    new_dir = path + name_sim + "/"
+    if "_DataSheet" in name:
+        name_dir = name.split("_DataSheet")[0]
+    
+    new_dir = path + name_dir + "/"
     if not os.path.exists(new_dir):
         os.makedirs(new_dir)
     print(new_dir)
@@ -34,8 +46,12 @@ def call_subprocess(name, temperature, pressure, velocity, path):
         pressure = str(combinations[i][1])
         velocity = str(combinations[i][2])
         
-        #command = ['python', 'SimulateMethanation.py', name_sim_, temperature, pressure, velocity, new_dir, data_path]
-        command = ['python', 'SimulateMethanation_Downstream.py', name_sim_, temperature, pressure, velocity, new_dir, data_path]
+        """
+        Option1: Simulation of Reactor
+        Option2: Simulation of Reactor and Downstream
+        """
+        command = ['python', 'SimulateMethanation.py', name_sim_, temperature, pressure, velocity, new_dir, data_path]
+        #command = ['python', 'SimulateMethanation_Downstream.py', name_sim_, temperature, pressure, velocity, new_dir, data_path]
         
         process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         

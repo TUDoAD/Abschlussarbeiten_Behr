@@ -1,3 +1,4 @@
+- Reaction_Type: Methanation
 - Mixture:
   - mole_fraction:
     - - CO2
