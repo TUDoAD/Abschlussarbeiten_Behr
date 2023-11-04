@@ -2,12 +2,13 @@ The tool consists following modules: preprocess_onto.py, txt_extract.py, text_mi
 Before starting the code, some preparations must be done:
 -	Folder structure must have the following structure:
 
+```bash
 main_folder
-  
-  |__import
-  |__ontologies
-  |__ontology_snipet
-  |__class_lists
+├── import
+├── ontologies
+├── ontology_snipet
+└── classlist
+```
  	
 -	The ontology to be extended must be stored in the “ontologies” folder;
 -	main_folder can also have a different name important is that all Python modules together with config.json are placed inside it;
