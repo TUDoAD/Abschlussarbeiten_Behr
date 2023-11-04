@@ -3,6 +3,7 @@ Before starting the code, some preparations must be done:
 -	Folder structure must have the following structure:
 
 main_folder
+  
   |__import
   |__ontologies
   |__ontology_snipet
