@@ -11,5 +11,5 @@ main_folder
 ```
  	
 -	The ontology to be extended must be stored in the “ontologies” folder;
--	main_folder can also have a different name important is that all Python modules together with config.json are placed inside it;
+-	main_folder can also have a different name. Important is that all Python modules together with config.json are placed inside it;
 -	Global variables listed in config.json must be adjusted for the process.
