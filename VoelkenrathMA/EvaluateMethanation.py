@@ -104,6 +104,7 @@ def Selectivity(directory):
                     #print("d: " + str(diameter))
                 if "Mixture" in data[i]:
                     velocity = float(data[i]["Mixture"][0]["velocity"])
+                    molefractions = data[i]["Mixture"][0]["mole_fraction"]
                     #print("u: " + str(velocity))
                 if "Hydrogen" in data[i]:
                     h2_0 = data[i]["Hydrogen"][0]
@@ -160,13 +161,34 @@ def Selectivity(directory):
             for educt in educts:
                 if educt[0] == "H2":
                     v_h2 = educt[1]
+                if educt[0] == "CO2":
+                    v_co2 = educt[1]
             for product in products:
                 if product[0] == "CH4":
                     v_ch4 = product[1]
             
-            Y_ch4 = ((n_ch4 - n_ch4_0)/n_h2_0) * (abs(v_h2)/v_ch4)
+            for i in range(len(molefractions)):
+                if molefractions[i][0] == "CO2":
+                    frac_co2 = molefractions[i][1]
+                if molefractions[i][0] == "H2":
+                    frac_h2 = molefractions[i][1]
+                    
+            if frac_h2 > (4 * frac_co2):
+                Y_ch4 = ((n_ch4 - n_ch4_0)/n_co2_0) * (abs(v_co2)/v_ch4)
+                S = Y_ch4 / X_co2
+                print("h2")
+            elif frac_h2 < (4 * frac_co2):
+                Y_ch4 = ((n_ch4 - n_ch4_0)/n_h2_0) * (abs(v_h2)/v_ch4)
+                S = Y_ch4 / X_h2
+                print("co2")
+            elif frac_h2 == (4 * frac_co2):
+                Y_ch4 = ((n_ch4 - n_ch4_0)/n_h2_0) * (abs(v_h2)/v_ch4)
+                S = Y_ch4 / X_h2
+                print("h2_equal")
+            else:
+                print("Some weird error accured while calculation the yield!")
+            
             #print("Y(CH4): " + str(Y_ch4))
-            S = Y_ch4 / X_h2
             #print("S(H2;CH4): " + str(S))
             
             # save results

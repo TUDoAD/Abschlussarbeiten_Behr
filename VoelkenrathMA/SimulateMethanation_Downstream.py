@@ -260,6 +260,7 @@ def simulation(name_sim, path, data, combination):
     s1 = s1.GetAsObject()
     
     # connect Objects
+    r1.dV = 1
     r1.ConnectFeedMaterialStream(m1,0)
     r1.ConnectProductMaterialStream(m2,0)
     r1.ConnectFeedEnergyStream(e1,1)
@@ -273,7 +274,8 @@ def simulation(name_sim, path, data, combination):
     sim.ConnectObjects(s1.GraphicObject, m6.GraphicObject, -1, -1) # separator -> sep_liquid
     
     # add property package
-    sim.CreateAndAddPropertyPackage("NRTL")
+    sim.CreateAndAddPropertyPackage("Peng-Robinson (PR)")
+    #sim.CreateAndAddPropertyPackage("Soave-Redlich-Kwong (SRK)")
     
     # specify material parameter
     print("Set mole fractions...")

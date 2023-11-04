@@ -83,22 +83,105 @@ sim = interf.CreateFlowsheet()
 def createReaction(data, substances):
     for i in range(len(data)):
         if "ChemicalReaction" in data[i]:
-            mechanism = data[i]["ChemicalReaction"][0]
+            mechanism = data[i]["ChemicalReaction"]
     
-    i = 0
-    while i <= (len(mechanism)-1):
+
+    comps = Dictionary[str, float]()
+    dorders = Dictionary[str, float]()
+    rorders = Dictionary[str, float]()
+    
+    reaction_name = "ID_" + str(0)
+    
+    br = mechanism[0][0]["reactions"][0]["br"]
+    K_1 = mechanism[0][0]["reactions"][0]["K_1"]
+    K_2 = mechanism[0][0]["reactions"][0]["K_2"]
+    K_3 = mechanism[0][0]["reactions"][0]["K_3"]
+    
+    equation = mechanism[0][0]["reactions"][0]["reaction_equation"]
+    
+    educts_ = equation.split(">")[0].split("+")
+    educts = []
+    for educt in educts_:
+        if educt[0].isdigit():
+            educts.append([educt[1:], -int(educt[0])])
+        else: 
+            educts.append([educt, -1])
+            
+    products_ = equation.split(">")[1].split("+")
+    products = []
+    for product in products_:
+        if product[0].isdigit():
+            products.append([product[1:], int(product[0])])
+        else: 
+            products.append([product, 1])
+    
+    # set base compound
+    base_formula = educts[0][0]
+    for j in range(len(substances)):
+        if base_formula == substances[j][0]:
+            base_key = substances[j][1]
+           
+    for compound in educts:
+        for j in range(len(substances)):
+            if compound[0]  == substances[j][0]:
+                key = substances[j][1]
+                coefficient = compound[1]
+                comps.Add(key, float(coefficient))
+                dorders.Add(key, 0)
+                rorders.Add(key, 0)
+
+    for compound in products:
+        for j in range(len(substances)):
+            if compound[0]  == substances[j][0]:
+                key = substances[j][1]
+                coefficient = compound[1]
+                comps.Add(key, float(coefficient))
+                dorders.Add(key, 0)
+                rorders.Add(key, 0)
+    
+    # create reaction, set numerator and denominator to 1, because it get overwritten with own kintic skript
+    reaction = sim.CreateHetCatReaction(reaction_name, "This reaction is created automatically!", comps, base_key, "Vapor",
+                                        "Partial Pressure", "MPa", "kmol/[kg.s]", "1", "1" )
+    
+    sim.AddReaction(reaction)
+    sim.AddReactionToSet(reaction.ID, "DefaultSet", True, 0)
+    
+    # add kinetic script
+    sim.Scripts.Add(reaction_name, FlowsheetSolver.Script())
+    myscripttitle = reaction_name
+    
+    myscript = sim.Scripts[myscripttitle]
+    myscript.Title = myscripttitle
+    myscript.ID = str(0)
+    myscript.ScriptText = str(f"""import math
+from System import Array
+from DWSIM.Thermodynamics import *
+
+import clr
+clr.AddReference('DWSIM.MathOps.DotNumerics')                                                                 
+from DotNumerics.ODE import *
+
+K_0 = {br}
+K_1 = {K_1}
+K_2 = {K_2}
+K_3 = {K_3}
+
+r=(K_0 * R2 * math.pow(R1, 1/3))/(1 + K_1 * R2 + K_2 * R1 + K_3 * P2)""")
+    myreaction = sim.GetReaction(reaction_name)
+    myreaction.ReactionKinetics = ReactionKinetics(1)
+    myreaction.ScriptTitle = myscripttitle
+        
+    if len(mechanism) == 2:
         comps = Dictionary[str, float]()
         dorders = Dictionary[str, float]()
         rorders = Dictionary[str, float]()
         
-        reaction_name = "ID_" + str(i)
+        reaction_name = "ID_" + str(1)
         
-        br = mechanism[i]["reactions"][0]["br"]
-        K_1 = mechanism[i]["reactions"][0]["K_1"]
-        K_2 = mechanism[i]["reactions"][0]["K_2"]
-        K_3 = mechanism[i]["reactions"][0]["K_3"]
+        k_1 = mechanism[1][0]["reactions"][0]["k_1"]
+        K_1 = mechanism[1][0]["reactions"][0]["K_1"]
         
-        equation = mechanism[i]["reactions"][0]["reaction_equation"]
+        equation = mechanism[1][0]["reactions"][0]["reaction_equation"]
         
         educts_ = equation.split(">")[0].split("+")
         educts = []
@@ -139,10 +222,10 @@ def createReaction(data, substances):
                     comps.Add(key, float(coefficient))
                     dorders.Add(key, 0)
                     rorders.Add(key, 0)
-        
+                    
         # create reaction, set numerator and denominator to 1, because it get overwritten with own kintic skript
         reaction = sim.CreateHetCatReaction(reaction_name, "This reaction is created automatically!", comps, base_key, "Vapor",
-                                            "Partial Pressure", "MPa", "kmol/[kg.s]", "1", "1" )
+                                                "Partial Pressure", "MPa", "kmol/[kg.s]", "1", "1" )
         
         sim.AddReaction(reaction)
         sim.AddReactionToSet(reaction.ID, "DefaultSet", True, 0)
@@ -153,7 +236,7 @@ def createReaction(data, substances):
         
         myscript = sim.Scripts[myscripttitle]
         myscript.Title = myscripttitle
-        myscript.ID = str(i)
+        myscript.ID = str(1)
         myscript.ScriptText = str(f"""import math
 from System import Array
 from DWSIM.Thermodynamics import *
@@ -162,17 +245,13 @@ import clr
 clr.AddReference('DWSIM.MathOps.DotNumerics')                                                                 
 from DotNumerics.ODE import *
 
-K_0 = {br}
+k_1 = {k_1}
 K_1 = {K_1}
-K_2 = {K_2}
-K_3 = {K_3}
 
-r=(K_0 * R2 * math.pow(R1, 1/3))/(1 + K_1 * R2 + K_2 * R1 + K_3 * P2)""")
+r=(k_1 * R2  * math.pow(R1, 0.5))/(1 + K_1 * R1)""")
         myreaction = sim.GetReaction(reaction_name)
         myreaction.ReactionKinetics = ReactionKinetics(1)
         myreaction.ScriptTitle = myscripttitle
-        
-        i+=1
                     
 
 def simulation(name_sim, path, data, combination):
@@ -186,11 +265,12 @@ def simulation(name_sim, path, data, combination):
             data[i]["Mixture"][0]["pressure"] = pressure
             data[i]["Mixture"][0]["velocity"] = veloc 
             
-            # get compound from DWSIM and add them to the simulation
-            print("Adding substances to Simulation...")
             substances = data[i]["Mixture"][0]["substances"]
             mole_fraction = data[i]["Mixture"][0]["mole_fraction"]
-            
+    
+    # get compound from DWSIM and add them to the simulation
+    print("Adding substances to Simulation...")
+    
     for sub in substances:
         try:
             if "-Ni" not in sub:
@@ -228,31 +308,57 @@ def simulation(name_sim, path, data, combination):
     # material
     m1 = sim.AddObject(ObjectType.MaterialStream, 50, 50, "feed")
     m2 = sim.AddObject(ObjectType.MaterialStream, 200, 50, "outlet")
+    m3 = sim.AddObject(ObjectType.MaterialStream, 325, 50, "expanded")
+    m4 = sim.AddObject(ObjectType.MaterialStream, 450, 50, "cooled")
+    m5 = sim.AddObject(ObjectType.MaterialStream, 600, 50, "sep_gas")
+    m6 = sim.AddObject(ObjectType.MaterialStream, 600, 100, "sep_liquid")
     
     # energy
     e1 = sim.AddObject(ObjectType.EnergyStream, 50, 125, "E1")
+    e2 = sim.AddObject(ObjectType.EnergyStream, 325, 125, "E2")
     
     # device
     r1 = sim.AddObject(ObjectType.RCT_PFR, 100, 75, "reactor")
+    v1 = sim.AddObject(ObjectType.Valve, 250, 75, "valve")
+    h1 = sim.AddObject(ObjectType.Heater, 375, 75, "cooler")
+    s1 = sim.AddObject(ObjectType.Vessel, 500, 75, "separator")
     
     # get flowsheet objects as object
     m1 = m1.GetAsObject()
     m2 = m2.GetAsObject()
+    m3 = m3.GetAsObject()
+    m4 = m4.GetAsObject()
+    m5 = m5.GetAsObject()
+    m6 = m6.GetAsObject()
     e1 = e1.GetAsObject()
+    e2 = e2.GetAsObject()
+    
     r1 = r1.GetAsObject()
+    v1 = v1.GetAsObject()
+    h1 = h1.GetAsObject()
+    s1 = s1.GetAsObject()
     
     # connect Objects
+    r1.dV = 1
     r1.ConnectFeedMaterialStream(m1,0)
     r1.ConnectProductMaterialStream(m2,0)
     r1.ConnectFeedEnergyStream(e1,1)
-    r1.dV = 1
+    sim.ConnectObjects(m2.GraphicObject, v1.GraphicObject, -1, -1) # outlet -> valve
+    sim.ConnectObjects(v1.GraphicObject, m3.GraphicObject, -1, -1) # valve -> expanded
+    sim.ConnectObjects(m3.GraphicObject, h1.GraphicObject, -1, -1) # expanded -> heater
+    sim.ConnectObjects(e2.GraphicObject, h1.GraphicObject, -1, -1) # E2 -> heater
+    sim.ConnectObjects(h1.GraphicObject, m4.GraphicObject, -1, -1) # heater -> cooled
+    sim.ConnectObjects(m4.GraphicObject, s1.GraphicObject, -1, -1) # cooled -> separator
+    sim.ConnectObjects(s1.GraphicObject, m5.GraphicObject, -1, -1) # separator -> sep_gas
+    sim.ConnectObjects(s1.GraphicObject, m6.GraphicObject, -1, -1) # separator -> sep_liquid
+    
     # add property package
     sim.CreateAndAddPropertyPackage("Peng-Robinson (PR)")
     #sim.CreateAndAddPropertyPackage("Soave-Redlich-Kwong (SRK)")
     
     # specify material parameter
     print("Set mole fractions...")
-    
+
     composition = [0.0] * len(substances)
     for entry in mole_fraction:
         sub, value = entry
@@ -265,17 +371,16 @@ def simulation(name_sim, path, data, combination):
     m1.SetOverallComposition(composition)
     print("Done!")
     
-    # specify reactor parameter; doesnt make a difference if diameter or length is choosen
     m1.SetTemperature(temperature)
     m1.SetPressure(pressure)
     velocity = float(veloc)
+    # specify reactor parameter; doesnt make a difference if diameter or length is choosen
     for i in range(len(data)):
         if "Reactor" in data[i]:
             radius = float(data[i]["Reactor"][0]["tube_diameter"])/2
             r1.Volume = data[i]["Reactor"][0]["reactive_volume"]
             r1.Length = float(data[i]["Reactor"][0]["tube_length"])
             r1.NumberOfTubes = data[i]["Reactor"][0]["num_tubes"]
-    
             if data[i]["Reactor"][0]["calculation_mode"] == "isothermal":
                 r1.ReactorOperationMode = Reactors.OperationMode.Isothermic
             elif data[i]["Reactor"][0]["calculation_mode"] == "adiabatic":
@@ -289,9 +394,17 @@ def simulation(name_sim, path, data, combination):
             r1.CatalystParticleDiameter = data[i]['Reactor'][0]["catalyst_particle_diameter"]
             
     V_flow = math.pi * radius ** 2 * velocity
-    m1.SetVolumetricFlow(V_flow)
+    m1.SetVolumetricFlow(V_flow)    
     r1.UseUserDefinedPressureDrop = True
 
+    # specifiy other devices (valve, cooler, separator)
+    v1.CalcMode = UnitOperations.Valve.CalculationMode.OutletPressure
+    v1.set_OutletPressure(100000) # Pa: 1 bar [NormPressure]
+    
+    h1.CalcMode  = UnitOperations.Heater.CalculationMode.OutletTemperature
+    h1.OutletTemperature = 293.15 # K: 25°C [NormTemperature]
+    
+    # create reaction
     print("Create reactions and kinetic scripts...")
     createReaction(data, substances)
     print("Done!")
@@ -299,14 +412,20 @@ def simulation(name_sim, path, data, combination):
     # set Solver Mode
     Settings.SolveMode = 0
     errors = interf.CalculateFlowsheet2(sim)
-
+    
     ##SAVE RESULTS
-    # getting outlet composition
-    outlet = list(m2.GetOverallComposition())
-    outlet_composition = []
+    # getting outlet composition of sep_gas
+    outlet_gas = list(m5.GetOverallComposition())
+    outlet_gas_composition = []
     for i in range(len(substances)):
-        outlet_composition.append([substances[i][0], outlet[i]])
-    data.append({"Outlet Composition": outlet_composition})
+        outlet_gas_composition.append([substances[i][0], outlet_gas[i]])
+    data.append({"Sep_Gas Composition": outlet_gas_composition})
+    
+    outlet_liq = list(m6.GetOverallComposition())
+    outlet_liq_composition = []
+    for i in range(len(substances)):
+        outlet_liq_composition.append([substances[i][0], outlet_liq[i]])
+    data.append({"Sep_Liquid Composition": outlet_liq_composition})
     
     # yaml-file
     coordinates = []
@@ -329,7 +448,7 @@ def simulation(name_sim, path, data, combination):
     data.append({"Coordinates": coordinates})
     for names_, values in zip(names, values):
         data.append({names_: values})    
-    
+
     yaml_name = path + name_sim + ".yaml"
     with open(yaml_name, 'w') as new_yaml_file:
         yaml.dump(data, new_yaml_file, default_flow_style=False)
@@ -371,7 +490,7 @@ def simulation(name_sim, path, data, combination):
     #im.show()
     
 
-def run():
+def run():  
     name_sim = sys.argv[1]
     temperature = sys.argv[2]
     pressure = sys.argv[3]
@@ -379,20 +498,9 @@ def run():
     path = sys.argv[5]
     data_path = sys.argv[6]
     combination = (float(temperature), float(pressure), float(velocity))
-   
+        
     with open(data_path, "r") as file:
         data = yaml.safe_load(file)
         
     simulation(name_sim, path, data, combination)
 run()
-
-"""
-Für Überarbeitungszwecke:
-    name_sim = "test_01"
-    temperature = 600
-    pressure = 300000
-    velocity = 0.001
-    path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_01/"
-    data_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_01_Datasheet.yaml"
-    combination = (float(temperature), float(pressure), float(velocity))
-"""

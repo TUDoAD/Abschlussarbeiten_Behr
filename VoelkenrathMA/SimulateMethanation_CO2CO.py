@@ -83,22 +83,105 @@ sim = interf.CreateFlowsheet()
 def createReaction(data, substances):
     for i in range(len(data)):
         if "ChemicalReaction" in data[i]:
-            mechanism = data[i]["ChemicalReaction"][0]
+            mechanism = data[i]["ChemicalReaction"]
     
-    i = 0
-    while i <= (len(mechanism)-1):
+
+    comps = Dictionary[str, float]()
+    dorders = Dictionary[str, float]()
+    rorders = Dictionary[str, float]()
+    
+    reaction_name = "ID_" + str(0)
+    
+    br = mechanism[0][0]["reactions"][0]["br"]
+    K_1 = mechanism[0][0]["reactions"][0]["K_1"]
+    K_2 = mechanism[0][0]["reactions"][0]["K_2"]
+    K_3 = mechanism[0][0]["reactions"][0]["K_3"]
+    
+    equation = mechanism[0][0]["reactions"][0]["reaction_equation"]
+    
+    educts_ = equation.split(">")[0].split("+")
+    educts = []
+    for educt in educts_:
+        if educt[0].isdigit():
+            educts.append([educt[1:], -int(educt[0])])
+        else: 
+            educts.append([educt, -1])
+            
+    products_ = equation.split(">")[1].split("+")
+    products = []
+    for product in products_:
+        if product[0].isdigit():
+            products.append([product[1:], int(product[0])])
+        else: 
+            products.append([product, 1])
+    
+    # set base compound
+    base_formula = educts[0][0]
+    for j in range(len(substances)):
+        if base_formula == substances[j][0]:
+            base_key = substances[j][1]
+           
+    for compound in educts:
+        for j in range(len(substances)):
+            if compound[0]  == substances[j][0]:
+                key = substances[j][1]
+                coefficient = compound[1]
+                comps.Add(key, float(coefficient))
+                dorders.Add(key, 0)
+                rorders.Add(key, 0)
+
+    for compound in products:
+        for j in range(len(substances)):
+            if compound[0]  == substances[j][0]:
+                key = substances[j][1]
+                coefficient = compound[1]
+                comps.Add(key, float(coefficient))
+                dorders.Add(key, 0)
+                rorders.Add(key, 0)
+    
+    # create reaction, set numerator and denominator to 1, because it get overwritten with own kintic skript
+    reaction = sim.CreateHetCatReaction(reaction_name, "This reaction is created automatically!", comps, base_key, "Vapor",
+                                        "Partial Pressure", "MPa", "kmol/[kg.s]", "1", "1" )
+    
+    sim.AddReaction(reaction)
+    sim.AddReactionToSet(reaction.ID, "DefaultSet", True, 0)
+    
+    # add kinetic script
+    sim.Scripts.Add(reaction_name, FlowsheetSolver.Script())
+    myscripttitle = reaction_name
+    
+    myscript = sim.Scripts[myscripttitle]
+    myscript.Title = myscripttitle
+    myscript.ID = str(0)
+    myscript.ScriptText = str(f"""import math
+from System import Array
+from DWSIM.Thermodynamics import *
+
+import clr
+clr.AddReference('DWSIM.MathOps.DotNumerics')                                                                 
+from DotNumerics.ODE import *
+
+K_0 = {br}
+K_1 = {K_1}
+K_2 = {K_2}
+K_3 = {K_3}
+
+r=(K_0 * R2 * math.pow(R1, 1/3))/(1 + K_1 * R2 + K_2 * R1 + K_3 * P2)""")
+    myreaction = sim.GetReaction(reaction_name)
+    myreaction.ReactionKinetics = ReactionKinetics(1)
+    myreaction.ScriptTitle = myscripttitle
+        
+    if len(mechanism) == 2:
         comps = Dictionary[str, float]()
         dorders = Dictionary[str, float]()
         rorders = Dictionary[str, float]()
         
-        reaction_name = "ID_" + str(i)
+        reaction_name = "ID_" + str(1)
         
-        br = mechanism[i]["reactions"][0]["br"]
-        K_1 = mechanism[i]["reactions"][0]["K_1"]
-        K_2 = mechanism[i]["reactions"][0]["K_2"]
-        K_3 = mechanism[i]["reactions"][0]["K_3"]
+        k_1 = mechanism[1][0]["reactions"][0]["k_1"]
+        K_1 = mechanism[1][0]["reactions"][0]["K_1"]
         
-        equation = mechanism[i]["reactions"][0]["reaction_equation"]
+        equation = mechanism[1][0]["reactions"][0]["reaction_equation"]
         
         educts_ = equation.split(">")[0].split("+")
         educts = []
@@ -139,10 +222,10 @@ def createReaction(data, substances):
                     comps.Add(key, float(coefficient))
                     dorders.Add(key, 0)
                     rorders.Add(key, 0)
-        
+                    
         # create reaction, set numerator and denominator to 1, because it get overwritten with own kintic skript
         reaction = sim.CreateHetCatReaction(reaction_name, "This reaction is created automatically!", comps, base_key, "Vapor",
-                                            "Partial Pressure", "MPa", "kmol/[kg.s]", "1", "1" )
+                                                "Partial Pressure", "MPa", "kmol/[kg.s]", "1", "1" )
         
         sim.AddReaction(reaction)
         sim.AddReactionToSet(reaction.ID, "DefaultSet", True, 0)
@@ -153,7 +236,7 @@ def createReaction(data, substances):
         
         myscript = sim.Scripts[myscripttitle]
         myscript.Title = myscripttitle
-        myscript.ID = str(i)
+        myscript.ID = str(1)
         myscript.ScriptText = str(f"""import math
 from System import Array
 from DWSIM.Thermodynamics import *
@@ -162,18 +245,14 @@ import clr
 clr.AddReference('DWSIM.MathOps.DotNumerics')                                                                 
 from DotNumerics.ODE import *
 
-K_0 = {br}
+k_1 = {k_1}
 K_1 = {K_1}
-K_2 = {K_2}
-K_3 = {K_3}
 
-r=(K_0 * R2 * math.pow(R1, 1/3))/(1 + K_1 * R2 + K_2 * R1 + K_3 * P2)""")
+r=(k_1 * R2  * math.pow(R1, 0.5))/(1 + K_1 * R1)""")
         myreaction = sim.GetReaction(reaction_name)
         myreaction.ReactionKinetics = ReactionKinetics(1)
-        myreaction.ScriptTitle = myscripttitle
+        myreaction.ScriptTitle = myscripttitle            
         
-        i+=1
-                    
 
 def simulation(name_sim, path, data, combination):
     ## create flowsheet and run simulation
