@@ -1,6 +1,6 @@
 The tool consists following modules: preprocess_onto.py, txt_extract.py, text_mining.py, onto_extension.py also there are jupyter notebook with SPARQL queries examples and functions for querying the ontology depending on the information of interest. 
 Before starting the code, some preparations must be done:
--	Folder structure must have the following structure:
+-	Folder structure must have the following:
 
 ```bash
 main_folder
