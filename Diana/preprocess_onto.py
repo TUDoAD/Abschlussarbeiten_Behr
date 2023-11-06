@@ -141,7 +141,7 @@ def onto_extender ():
         # --method: can be modified as needed  [http://robot.obolibrary.org/extract]
         # --term-file: is the text file, in which the IRI's are stored, which are to be searched for.
         os.system('java -jar c://Windows/robot.jar extract --input-iri {} --method BOT --term-file class_lists/IRIs_{}.txt --output ontology_snipet/{}_classes.owl'.format(iri,o,o))
-    for filepath in glob.iglob('ontology_sniplet/*.owl'):
+    for filepath in glob.iglob('ontology_snipet/*.owl'):
         os.system('robot merge --input {} --input ontologies/{}.owl --output ontologies/{}.owl'.format(filepath, onto_new, onto_new))
 
 def equality():
@@ -180,7 +180,7 @@ def equality():
     for o in list(onto_list.keys()):
         try:
             new_world2 = owlready2.World()
-            onto_snip = new_world2.get_ontology("./ontology_sniplet/{}_classes.owl".format(o)).load()
+            onto_snip = new_world2.get_ontology("./ontology_snipet/{}_classes.owl".format(o)).load()
         except:
             print('no entity from {} ontology found'.format(o))
         else:
