@@ -81,7 +81,7 @@ def get_reaction(reac=None,doi=None,include_all=False):
     return reaction_list   
 """
 doi= r'10.1016/1381-1169(96)00243-9'
-list_reac=get_reaction(reac=None,doi=doi) #get list of all reaction mentioned in given doi (doi needs to be part of ontology)
+list_reac=get_reaction(reac=None,doi=doi) #get list of all reactions mentioned in given doi (doi needs to be part of ontology)
 
 #get the list of all publications in ontology where same reactions as in input publication were mentioned
 same_reac_doi= []
