@@ -96,7 +96,7 @@ def sanitize(filename):
 def meta_title(filename):
     """Title from pdf metadata. 
     """
-    docinfo = PdfReader(open(filename, 'rb')).metadata
+    docinfo = PdfReader(open(filename, 'rb')).metadata()
     if docinfo is None:
         return ''
     return docinfo.title if docinfo.title else ''
@@ -373,8 +373,8 @@ def pdf_title(filename):
     if valid_title(title):
         return title
     return os.path.basename(os.path.splitext(filename)[0])
-"""
-def get_metadata_1(filename):
+
+def get_metadata(filename):
     
     title = pdf_title(filename)
     title = sanitize(' '.join(title.split()))
@@ -389,7 +389,7 @@ def get_metadata_1(filename):
     except:
             file= Reader()
             pdf= file.read_file(filename)
-            if not pdf or pdf=='':
+            if not pdf:
                 return None,None,None,None
             title=pdf.title()
             cr = Crossref()
@@ -398,11 +398,11 @@ def get_metadata_1(filename):
             title=result['message']['items'][0]['title'][0]
             publisher=result['message']['items'][0]['publisher']
     return title, doi, publisher,ab
-"""
-def get_abstract(path, doi, publisher):                                    
-    if 'Elsevier' in publisher:
 
-        ab = AbstractRetrieval(doi)
+def get_abstract(path, doi, publisher,ab):                                    
+    if 'Elsevier' in publisher:
+        if ab == None:
+            ab = AbstractRetrieval(doi)
         abstract=ab.abstract
         #keywords=ab.authkeywords
         if not abstract:
@@ -413,9 +413,11 @@ def get_abstract(path, doi, publisher):
         abstract=pdf.abstract()
     else:
         return None
-    
-    abstract=re.sub(r'A[Bb][Ss][Tt][Rr][Aa][Cc][Tt][:]?','',abstract)
-    if abstract[0]==':':
+
+    pattern=r'A[Bb][Ss][Tt][Rr][Aa][Cc][Tt][:]?'
+    if re.search(pattern,abstract):
+            abstract=abstract.replace(re.search(pattern,abstract).group(0),'')
+    elif abstract[0]==':':
             abstract=abstract[1:]
     
     #if re.search(r'K[Ee][Yy][Ww][Oo][Rr][Dd][Ss][:]?', abstract):
@@ -423,72 +425,6 @@ def get_abstract(path, doi, publisher):
         #abstract=abstract[re.search(:r'K[Ee][Yy][Ww][Oo][Rr][Dd][Ss][:]?', abstract).start()]
         #keywords = re.findall(r'[a-zA-Z]\w+',text)
     return abstract
-
-def is_majority_included(list1, list2, threshold=0.8):
-    # Count how many items from list1 are in list2
-    count = sum(1 for item in list1 if item in list2)
-
-    # Calculate the percentage
-    percentage = count / len(list1)
-
-    # Check if the percentage is above the threshold
-    return percentage >= threshold   
-
-def get_metadata(filename):
-    file= Reader()
-    pdf= file.read_file(filename)
-    manual_prep= False
-    try:
-        title=pdf.title()
-    except:
-        #print('empty title')
-        title = pdf_title(filename)
-        title = sanitize(' '.join(title.split()))
-    if not re.search(r'[\w]+',title):
-        #print('empty title')
-        title = pdf_title(filename)
-        title = sanitize(' '.join(title.split()))
-        manual_prep=True
-
-    cr = Crossref()
-    result = cr.works(query = title)
-    for i in range(len(result['message']['items'])):    
-        try:
-            result['message']['items'][i]['title'][0]
-        except:
-            continue
-        else:
-            if is_majority_included(title.split(), result['message']['items'][i]['title'][0].split(), threshold=0.8):
-                title=result['message']['items'][i]['title'][0]
-                doi=result['message']['items'][i]['DOI']
-                publisher=result['message']['items'][i]['publisher']
-                return title, doi, publisher
-
-            elif i== len(result['message']['items'])-1: 
-                if manual_prep==False:
-                    title = pdf_title(filename)
-                    title = sanitize(' '.join(title.split()))
-                    cr = Crossref()
-                    result = cr.works(query = title)
-                    for k in range(len(result['message']['items'])):
-                        try:
-                            result['message']['items'][k]['title'][0]
-                        except:
-                            continue
-                        else:
-                            if is_majority_included(title.split(), result['message']['items'][k]['title'][0].split(), threshold=0.8):
-                                title=result['message']['items'][k]['title'][0]
-                                doi=result['message']['items'][k]['DOI']
-                                publisher=result['message']['items'][k]['publisher']
-                                return title, doi, publisher
-                            elif k == len(result['message']['items'])-1:
-                                print('no title found for '+filename)
-                                return None,None,None
-                else:
-                    print('no title found for '+filename)
-                    return None,None,None
-
-
 """
 abstract_all=''
 path=r'.\import\*.pdf'
@@ -501,22 +437,4 @@ for i in glob.iglob(path):
     if abstract==None:
         abstract=''
     abstract_all= abstract+abstract_all
-import json
-def set_config_key(key, value):
-         globals()[key] = value
-         
-with open("config.json") as json_config:
-         for key, value in json.load(json_config).items():
-             set_config_key(key, value)
-for i in glob.iglob(path):
-
-                 title,doi,publisher= get_metadata(i)
-                 print(title)
-                 print(doi)
-                 
-             
-"""    
-
-
-
-
+"""
