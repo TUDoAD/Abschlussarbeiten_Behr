@@ -140,7 +140,7 @@ def onto_extender ():
         # --input: is the ontology in which to search for the desired IRI's.
         # --method: can be modified as needed  [http://robot.obolibrary.org/extract]
         # --term-file: is the text file, in which the IRI's are stored, which are to be searched for.
-        os.system('java -jar c://Windows/robot.jar extract --input-iri {} --method BOT --term-file class_lists/IRIs_{}.txt --output ontology_sniplet/{}_classes.owl'.format(iri,o,o))
+        os.system('java -jar c://Windows/robot.jar extract --input-iri {} --method BOT --term-file class_lists/IRIs_{}.txt --output ontology_snipet/{}_classes.owl'.format(iri,o,o))
     for filepath in glob.iglob('ontology_sniplet/*.owl'):
         os.system('robot merge --input {} --input ontologies/{}.owl --output ontologies/{}.owl'.format(filepath, onto_new, onto_new))
 

@@ -8,10 +8,12 @@ Created on Thu Oct  5 12:40:01 2023
 #Abfragen 
 import re
 from owlready2 import *
+from pybliometrics.scopus import ScopusSearch
 onto_new= "afo_upd"
 new_world = owlready2.World()
 onto = get_ontology("./ontologies/{}.owl".format(onto_new)).load()
 sync_reasoner(onto) 
+import pandas as pd
 
 def get_reaction(reac=None,doi=None,include_all=False):
     if doi!=None:
@@ -77,7 +79,7 @@ def get_reaction(reac=None,doi=None,include_all=False):
     except:
         reaction_list= []
     return reaction_list   
-
+"""
 doi= r'10.1016/1381-1169(96)00243-9'
 list_reac=get_reaction(reac=None,doi=doi) #get list of all reaction mentioned in given doi (doi needs to be part of ontology)
 
@@ -94,7 +96,7 @@ reac_doi_list=get_reaction(reac="hydroformylation",doi=None)  #output example: [
 
 #get list of all publication which have "hydroformulation" and reactions which have "hydroformylation" in label
 reac_doi_list=get_reaction(reac="hydroformylation",doi=None, include_all=True)
-
+"""
 def cat_list(cat=None,doi=None,restriction=None, include_all=False,add_support=False):
     if doi!=None:
         doi= '"{}".}}'.format(doi) 
@@ -206,8 +208,75 @@ def get_entList(list_type,doi=None): #list_type one of ['reactant','support','pr
     ent_list=list(default_world.sparql(sparqlstr))
     return ent_list
 #sup_list=get_entList('support', None)
+columns= ['eid',
+          'doi',
+          'pii',
+          'pubmed_id',
+          'title',
+          'subtype',
+          'subtypeDescription',
+          'creator',
+          'afid',
+          'affilname',
+          'affiliation_city',
+          'affiliation_country',
+          'author_count',
+          'author_names',
+          'author_ids',
+          'author_afids',
+          'coverDate',
+          'coverDisplayDate',
+          'publicationName',
+          'issn',
+          'source_id',
+          'eIssn',
+          'aggregationType',
+          'volume',
+          'issueIdentifier',
+          'article_number',
+          'pageRange',
+          'description',
+          'authkeywords',
+          'citedby_count',
+          'openaccess',
+          'freetoread',
+          'freetoreadLabel',
+          'fund_acr',
+          'fund_no',
+          'fund_sponsor',
+          'query']
+df_all = pd.DataFrame(columns=columns)
+results=[]
+reac_list=[['hydroformylation'], ['atmospheric hydroformylation']]
+cat_list=[['Co'],['Rh']]
+sup_list=[['SiO2']]
+for r in reac_list:
+    for cat in cat_list:
+        for sup in sup_list:
+            query = 'TITLE-ABS-KEY("{}"AND"{}"AND"{}")'.format(r[0],cat[0],sup[0])
+            result = ScopusSearch(query, view='STANDARD',verbose=True)
+            results.append(result)
+            df = pd.DataFrame(pd.DataFrame(result.results))
+            df['query'] = [query for _ in range(result.get_results_size())]
+            df_all = pd.concat([df_all, df], axis=0, ignore_index=True)
 
+distinct_df=df_all.drop_duplicates(['eid']).reset_index(drop=True)
 
+distinct_df['coverDate']=pd.to_datetime(distinct_df['coverDate'])
+#filter found publication according the date
+start = '2019-01-01'
+end = '2023-12-31'
+filtered_df = distinct_df[(distinct_df['coverDate'] >= start_date) & (distinct_df['coverDate'] <= end_date)]
+with pd.ExcelWriter('output.xlsx', engine='xlsxwriter') as writer:
+    # Write the first dataframe to a sheet named 'all'
+    df_all.to_excel(writer, sheet_name='all', index=False)
+
+    # Write the second dataframe to a sheet named 'distinct_eid'
+    distinct_df.to_excel(writer, sheet_name='distinct_eid', index=False)
+    
+    #Write the third dataframe to a sheet named 'filtered_distinct'
+    filtered_df.to_excel(writer, sheet_name='filtered_distinct', index=False)
+    
 def get_new_pub(n,doi=None,cat=None,reaction=None, sup=None, prod=None, reactant=None ):
     #n-number of publication to retrieve
 
