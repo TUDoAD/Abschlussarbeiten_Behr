@@ -542,7 +542,6 @@ def chemical_prep(chem_list, onto_class_list):
     onto_new_dict = {}
     synonyms = {}
     onto_dict,inchikey = synonym_dicts(onto_class_list)
-    #chem_list=[c for c in chem_list if '/' not in c]#check if still useful
     for molecule in chem_list:  
         if re.search(r'^ [A-Za-z\d—–-]+|^[A-Za-z\d—–-]+ $',molecule): 
             molecule = molecule.replace(' ','')
@@ -578,11 +577,6 @@ def chemical_prep(chem_list, onto_class_list):
                 
                 if i == 0:
                     class_list, key ,rel_synonym = compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym) #,comp = False
-
-                    if key==False:
-                        chem_list.remove(k)
-                        break
-
                     onto_new_dict[key] = []
                     i += 1
                 if c == k:
