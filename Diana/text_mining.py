@@ -542,11 +542,11 @@ def chemical_prep(chem_list, onto_class_list):
     onto_new_dict = {}
     synonyms = {}
     onto_dict,inchikey = synonym_dicts(onto_class_list)
-    #chem_list=[c for c in chem_list if '/' not in c]#check if still useful
+    
     for molecule in chem_list:  
         if re.search(r'^ [A-Za-z\d—–-]+|^[A-Za-z\d—–-]+ $',molecule): 
             molecule = molecule.replace(' ','')
-        if molecule in abbreviation.keys():
+        if molecule in abbreviation.keys(): #check if nessesary
             comp_dict[molecule] = []
             spans = Document(abbreviation[molecule]).cems
             class_list.append(molecule)
@@ -608,11 +608,11 @@ def chemical_prep(chem_list, onto_class_list):
 
 def synonym_dicts(class_list):
     """
-    extracts class names and descriptions based on class list (as owlready2 object)
+    extracts class names and descriptions based on class list (the owlready2 object)
     returns dictionary with general structure of 
     desc_dict = {ontology_class_label : Definition string}
     WARNING: Descriptions often have different identifiers (see try:... except loop)
-          Implemented IAO_0000115 and .comment for now. 
+           
 
 
     """
