@@ -50,8 +50,8 @@ def call_subprocess(name, temperature, pressure, velocity, path):
         Option1: Simulation of Reactor
         Option2: Simulation of Reactor and Downstream
         """
-        command = ['python', 'SimulateMethanation_CO2CO.py', name_sim_, temperature, pressure, velocity, new_dir, data_path]
-        #command = ['python', 'SimulateMethanation_Downstream_CO2CO.py', name_sim_, temperature, pressure, velocity, new_dir, data_path]
+        #command = ['python', 'SimulateMethanation_CO2CO.py', name_sim_, temperature, pressure, velocity, new_dir, data_path]
+        command = ['python', 'SimulateMethanation_Downstream_CO2CO.py', name_sim_, temperature, pressure, velocity, new_dir, data_path]
         
         process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         

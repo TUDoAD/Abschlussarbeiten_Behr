@@ -409,6 +409,8 @@ def simulation(name_sim, path, data, combination):
     for names_, values in zip(names, values):
         data.append({names_: values})    
     
+    data.append({"hasDownstream": "No"})
+    
     yaml_name = path + name_sim + ".yaml"
     with open(yaml_name, 'w') as new_yaml_file:
         yaml.dump(data, new_yaml_file, default_flow_style=False)
