@@ -302,12 +302,12 @@ def CatalysisIE_search(model, test_sents): #change description at the and
         abb_list = Document(assemble_token_text(sent)).abbreviation_definitions
         for i in range(len(abb_list)):
             abbreviation[abb_list[i][1][0]] = abb_list[i][0][0]
-        for i, j, l in get_bio_spans(sent_tag):
-            print(assemble_token_text(sent[i:j + 1]), l)
-            entity = assemble_token_text(sent[i:j + 1])
+        for k, j, l in get_bio_spans(sent_tag):
+            print(assemble_token_text(sent[k:j + 1]), l)
+            entity = assemble_token_text(sent[k:j + 1])
             entity_raw=entity
             #add abbreviation if directly after entity an entity in brackets
-            if i == a+1 and '({})'.format(entity) in assemble_token_text(sent):
+            if k == a+1 and '({})'.format(entity) in assemble_token_text(sent):
                 abbreviation[entity_old[1]] = entity
             
             #match hyphen in chemical entity and remove it  # Rh-Co --> RhCo
@@ -342,14 +342,14 @@ def CatalysisIE_search(model, test_sents): #change description at the and
             
             #if reactant before reaction: append to reac_dict dictionary {'reaction-type':'reactant'}
             if l == 'Reaction':
-                if sent[j+2:j+4]=='of':
+                if assemble_token_text(sent[j+1:j+2])=='of':
                     for c in Document(assemble_token_text(sent)).cems:
-                        if c.start == j+5:
-                            c_idx=j+5
-                if entity_old[0]+1 == i and entity[2]=='Reactant':
+                        if c.start == re.search(assemble_token_text(sent[k:j+1])+' of',assemble_token_text(sent)).end()+1:
+                            c_idx=j+2
+                if entity_old[0]+1 == k and entity_old[2]=='Reactant':
                     if entity not in reac_dict.keys():
                         reac_dict[entity] = [entity_old[1]]
-                    elif entity_old[1] not in reac_dict.values():
+                    elif entity_old[1] not in reac_dict[entity]:
                         reac_dict[entity].append(entity_old[1])
                 
             
@@ -434,8 +434,8 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                                     else:
                                         sup_cat[support] = [catalyst]
                         else:
-                            for k in range(1, len(mol[i])):
-                                chem_list.append(mol[i][k])
+                            for n in range(1, len(mol[i])):
+                                chem_list.append(mol[i][n])
                                 entity = entity.replace('/',',')
                                      
                 if 'system' in entity or 'surface' in entity and l=='Catalyst':
@@ -448,11 +448,11 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                             if 'loaded' in e_btwn:    
                                 loaded_end =  entity.index('loaded')+len('loaded')+1
                     entity = entity.replace('loaded','supported on')
-                if i==c_idx:
-                    if entity not in reac_dict.keys():
-                        reac_dict[entity] = [entity_old[1]]
-                    elif entity_old[1] not in reac_dict.values():
-                        reac_dict[entity].append(entity_old[1])
+                if k==c_idx:
+                    if entity_old[1] not in reac_dict.keys():
+                        reac_dict[entity_old[1]] = [entity]
+                    elif entity not in reac_dict[entity_old[1]]:
+                        reac_dict[entity_old[1]].append(entity)
                 if l not in ['Characterization','Treatment']:
                     spans_new = sorted(Document(entity).cems, key = lambda span: span.start)
                     for c in spans_new:
