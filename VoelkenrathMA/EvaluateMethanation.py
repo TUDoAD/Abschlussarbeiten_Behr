@@ -211,9 +211,6 @@ def Selectivity(directory):
 
 
 def createIndividuals(directory):
-    """Vor dem erzeugen der Individuen müssen die entsprechenden Dateien noch ins DataVerse geladen werden
-    ACHTUNG: prüfe (zumindest bei Entwicklung) ob alles Datensätze vollständig und richtig sind bevor sie hochgeladen werden"""
-
     # load ontology
     onto_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-Onto.owl"
     onto = owlready2.get_ontology(onto_path).load()
@@ -234,7 +231,7 @@ def createIndividuals(directory):
                     pressure = data[i]["Mixture"][0]["pressure"]
                     velocity = data[i]["Mixture"][0]["velocity"]
                     
-                    # set frac_co and frac_ar to 0, because they are not in every simulation
+                    # set frac_co and frac_ar to False, because they are not in every simulation
                     # this way, there is no problem with the dataproperties (MolarFraction...)
                     frac_co = False
                     frac_ar = False

@@ -27,8 +27,14 @@ def call_subprocess(name, temperature, pressure, velocity, path):
         data = yaml.safe_load(file)
     
     for i in range(len(data)):
+        if "Mixture" in data[i]:
+            for j in range(len(data[i]["Mixture"][0]["mole_fraction"])):
+                if "CO2" in data[i]["Mixture"][0]["mole_fraction"][j][0]:
+                    x_co2 = data[i]["Mixture"][0]["mole_fraction"][j][1]
+    
+    for i in range(len(data)):
         if "Reaction_Type" in data[i]:
-            name_sim = data[i]["Reaction_Type"] + "_" + nr_sim_sheet
+            name_sim = data[i]["Reaction_Type"] + "_" + str(x_co2)
           
     # creating new folder
     if "_DataSheet" in name:
