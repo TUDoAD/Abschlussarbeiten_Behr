@@ -71,20 +71,16 @@ def base_ontology_extension(name_base_ontology):
         # Komponenten: DWSIM stellt 6 Datenbanken zur verfügung (DWSIM, ChemSep, Biodiesel, CoolProp, ChEDL and Electrolytes)
         # Daraus ergeben sich 1500 verfügbare Komponenten für die Simulation
         # Datenbanken werden der metadata4Ing Klasse 'ChemicalSubstance' subsumiert
-           
-        #class modeledSubstance(onto.search_one(iri = '*ChemicalSubstance')): pass
-        #class DefaultDatabase(modeledSubstance): pass
-        #class DWSIMCompound(DefaultDatabase): pass
-        #class ChemSep(DefaultDatabase): pass
-        #class Biodiesel(DefaultDatabase): pass
-        #class CoolProp(DefaultDatabase): pass
-        #class ChEDL(DefaultDatabase): pass
-        #class Electrolytes(DefaultDatabase): pass
-    
+        
+        # Bool to state whether the substance is already contained in DWSIM Database
         class hasDWSIMdatabaseEntry(DataProperty):
             label = 'hasDWSIMdatabaseEntry'
             range = [bool]
             pass
+        
+        # Substance parameters can be imported as JSON or XML file 
+        # For later steps: 
+        #    if <indv> hasDWSIMdatabaseEntry True -> read in isImportedAs
         
         class isImportedAs(DataProperty):
             label = 'isImportedAs'
@@ -185,13 +181,14 @@ def set_relations(dataProp_dict, onto):
     for class_name in list(dataProp_dict.keys()):
         # Klasse in Ontologie raussuchen, die zum Dictionary-key passt
         #onto_class = BaseOnto.search_one(label=class_name)
-        onto_class = BaseOnto.search_one(iri='*ind_'+class_name)
- ##ALEX       
-        for entry in dataProp_dict[class_name]:
-            
+        onto_class = BaseOnto.search_one(iri='*ind_'+class_name)  
+        for entry in dataProp_dict[class_name]:           
             data_prop_type = type(dataProp_dict[class_name][entry])
+            
+            # Assert value directly, if entry is int or float
+            # give the entry as string else
             if (data_prop_type == int) or (data_prop_type == float):
-                codestring = "{}.{}.append({})".format(str(onto_class),str(entry), dataProp_dict[class_name][entry])                
+                codestring = "{}.{}.append({})".format(str(onto_class),str(entry), dataProp_dict[class_name][entry])
            
             else:
                 codestring = "{}.{}.append('{}')".format(str(onto_class),str(entry), str(dataProp_dict[class_name][entry]))                
@@ -225,11 +222,11 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
     # Sheet0 beinhaltet Reaktionsteilnehmer und -koeffizienten
     # Sheet1 beinhaltet die Stoffdaten, die für den Compound Creator relevant sind
     # Sheet2 beinhaltet zusätzliche Stoffdaten
-    sheet0 = pd.read_excel("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=0)
-    sheet1 = pd.read_excel("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=1)
-    sheet2 = pd.read_excel("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=2)
+    sheet0 = pd.read_excel(support_ELN_str, sheet_name=0)
+    sheet1 = pd.read_excel(support_ELN_str, sheet_name=1)
+    sheet2 = pd.read_excel(support_ELN_str, sheet_name=2)
     # Excel 'Ergänzendes Laborbuch' Sheet3 laden für fehlende Parameter
-    sheet3 = pd.read_excel("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=3)
+    sheet3 = pd.read_excel(support_ELN_str, sheet_name=3)
 
 
     # Dict, in dem alle Eigenschaften von Laccase hinterlegt sind
@@ -304,6 +301,6 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
 def run():
     enzymeML_readin("EnzymeML_Template_18-8-2021_KR")
     onto = base_ontology_extension("BaseOnto")
-    substance_knowledge_graph("Ergänzendes Laborbuch_Kinetik_1.xlsx", onto, "BaseOnto2")
+    substance_knowledge_graph("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", onto, "BaseOnto2")
     
 run()    
