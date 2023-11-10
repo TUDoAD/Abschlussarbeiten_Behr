@@ -185,17 +185,17 @@ def set_relations(dataProp_dict, onto):
     for class_name in list(dataProp_dict.keys()):
         # Klasse in Ontologie raussuchen, die zum Dictionary-key passt
         #onto_class = BaseOnto.search_one(label=class_name)
-        onto_class = BaseOnto.search_one(name='ind_'+class_name)
-        
+        onto_class = BaseOnto.search_one(iri='*ind_'+class_name)
+ ##ALEX       
         for entry in dataProp_dict[class_name]:
             
             data_prop_type = type(dataProp_dict[class_name][entry])
             if (data_prop_type == int) or (data_prop_type == float):
-                codestring = "{}.{} = {}".format(str(onto_class),str(entry), dataProp_dict[class_name][entry])                
+                codestring = "{}.{}.append({})".format(str(onto_class),str(entry), dataProp_dict[class_name][entry])                
                 print(dataProp_dict[class_name][entry])
            
             else:
-                codestring = "{}.{} = '{}'".format(str(onto_class),str(entry), str(dataProp_dict[class_name][entry]))                
+                codestring = "{}.{}.append('{}')".format(str(onto_class),str(entry), str(dataProp_dict[class_name][entry]))                
             
             # Code, der im codestring enthalten ist compilieren
             code = compile(codestring, "<string>","exec")
