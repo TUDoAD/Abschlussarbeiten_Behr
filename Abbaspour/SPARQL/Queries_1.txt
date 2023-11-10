@@ -4,18 +4,19 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX :<http://anonymous#>
 
-SELECT DISTINCT ?subject ?type ?v ?x ?w ?e
+SELECT DISTINCT ?subject ?type ?v ?x ?rateLaw ?e
 	WHERE {
-#?subject rdf:type ?w .
+
 ?subject rdf:type ?type .
 ?type rdfs:subClassOf ?v.
 ?v owl:onProperty :has_role.
 ?v owl:someValuesFrom ?x.
 ?subject :modeled_by ?q.
-?q rdf:type ?w.
-?w rdf:type owl:Class.
-#?w rdfs:SubClassOf ?e.
+	?q rdf:type ?rateLaw.
+	?rateLaw rdf:type owl:Class.
 
+#?subject rdf:type ?w .
+#?w rdfs:SubClassOf ?e.
 #?subject rdf:type owl:NamedIndividual.
 #?subject :has_nbps ?v .
 #?subject :hasCriticalPressure ?type.
