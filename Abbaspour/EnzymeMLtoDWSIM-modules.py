@@ -140,11 +140,14 @@ def class_creation(sheet: pd.DataFrame, onto):
                     # Neue Komponenten müssen als JSON-file über den AddCompoumd-Ordner hinzugefügt werden
                     # Sind die Komponenten einmal hinzugefügt worden, stehen sie für jede anschließende Simulation zur Verfügung
                 codestring = """with onto:
-                            class {}(onto.search_one(iri = '*ChemicalSubstance')):
-                                label = '{}'
-                                hasDWSIMdatabaseEntry = {}
-                                pass
-                            """.format(substance, substance, row[j])
+                                    class {}(onto.search_one(iri = '*ChemicalSubstance')):
+                                        label = '{}'
+                                        hasDWSIMdatabaseEntry = {}
+                                        pass
+                                    
+                                    substance_indv = {}('ind_{}')
+                            
+                            """.format(substance, substance, row[j], substance, substance)
                 # Code, der im codestring enthalten ist compilieren
                 code = compile(codestring, "<string>", "exec")
 
@@ -159,9 +162,9 @@ def dataProp_creation(dataProp_dict, onto):
     relation_set = set()
     for i in list(dataProp_dict.keys()):
         relation_set.update(set(dataProp_dict[i].keys()))
-    
     # Definieren jeder Relation in der Ontologie via codestring und exec:
     for rel in relation_set:
+    #for subst in dataProp_dict:
         codestring = """with onto:
             class {}(DataProperty):
                 label = '{}'
@@ -181,7 +184,8 @@ def set_relations(dataProp_dict, onto):
     BaseOnto = onto
     for class_name in list(dataProp_dict.keys()):
         # Klasse in Ontologie raussuchen, die zum Dictionary-key passt
-        onto_class = BaseOnto.search_one(label=class_name)
+        #onto_class = BaseOnto.search_one(label=class_name)
+        onto_class = BaseOnto.search_one(name='ind_'+class_name)
         
         for entry in dataProp_dict[class_name]:
             
