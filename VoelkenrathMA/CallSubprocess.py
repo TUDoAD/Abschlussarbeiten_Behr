@@ -3,8 +3,7 @@
 Created on Tue Jul 25 10:33:27 2023
 
 @author: mvoel
-"""
-"""
+
 This Code calls the Simulation as Subprocess, otherwise there would be problems with reloaded DWSIM-modules.
 You can choose between the simulation with/without downstream by comment one of the command lines!
 """

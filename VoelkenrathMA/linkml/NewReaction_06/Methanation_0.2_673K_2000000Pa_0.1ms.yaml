@@ -1,0 +1,91 @@
+- Reaction_Type: Methanation
+- Mixture:
+  - mole_fraction:
+    - - CO2
+      - 0.2
+    - - H2
+      - 0.8
+    pressure: 2000000.0
+    substances:
+    - - CO2
+      - Carbon dioxide
+    - - H2
+      - Hydrogen
+    - - CH4
+      - Methane
+    - - H2O
+      - Water
+    - - Ni
+      - Nickel
+    temperature: 673.0
+    velocity: 0.1
+- Reactor:
+  - calculation_mode: isothermal
+    catalyst_loading: 746.9671996
+    catalyst_particle_diameter: 0.00075
+    catalyst_void_fraction: 0.46
+    num_tubes: 1
+    reactive_volume: 2.356e-06
+    tube_diameter: 1E-02
+    tube_length: 3E-02
+- ChemicalReaction:
+  - - id: 0
+      reactions:
+      - K_1: 30.3
+        K_2: 3.7
+        K_3: 200
+        br: 8.81e-06
+        reaction_equation: CO2+4H2>CH4+2H2O
+- Sep_Gas Composition:
+  - - CO2
+    - 0.19989563116090414
+  - - H2
+    - 0.7995825246436166
+  - - CH4
+    - 0.00017395999108136046
+  - - H2O
+    - 0.00034788420439786546
+  - - Ni
+    - 0.0
+- Sep_Liquid Composition:
+  - - CO2
+    - 0.008846307035988094
+  - - H2
+    - 1.8673781978292116e-05
+  - - CH4
+    - 7.453220327914677e-11
+  - - H2O
+    - 0.9911350191075013
+  - - Ni
+    - 0.0
+- Coordinates:
+  - 0.0
+  - 0.03
+- Carbon dioxide:
+  - 71.19966007618228
+  - 71.13776487756503
+- Hydrogen:
+  - 284.79864030472913
+  - 284.55105951026013
+- Methane:
+  - 1.2732395447351627e-05
+  - 0.061907931012698765
+- Water:
+  - 1.2732395447351627e-05
+  - 0.1238031296299502
+- Temperature:
+  - 673.0
+  - 673.0
+- Pressure:
+  - 2000000.0
+  - 2000000.0
+- hasDownstream: 'Yes'
+- Turnover:
+  - - X_CO2
+    - 0.0008693187376319256
+  - - X_H2
+    - 0.0008693187376319256
+- Yield:
+  - Y_CH4
+  - 0.0008693187376319595
+- Selectivity: 1.000000000000039
