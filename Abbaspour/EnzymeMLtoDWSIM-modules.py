@@ -71,36 +71,48 @@ def base_ontology_extension(name_base_ontology):
         # Komponenten: DWSIM stellt 6 Datenbanken zur verfügung (DWSIM, ChemSep, Biodiesel, CoolProp, ChEDL and Electrolytes)
         # Daraus ergeben sich 1500 verfügbare Komponenten für die Simulation
         # Datenbanken werden der metadata4Ing Klasse 'ChemicalSubstance' subsumiert
-            class modeledSubstance(onto.search_one(iri = '*ChemicalSubstance')): pass
-            class DefaultDatabase(modeledSubstance): pass
-            class DWSIMCompound(DefaultDatabase): pass
-            #class ChemSep(DefaultDatabase): pass
-            #class Biodiesel(DefaultDatabase): pass
-            #class CoolProp(DefaultDatabase): pass
-            #class ChEDL(DefaultDatabase): pass
-            #class Electrolytes(DefaultDatabase): pass
+           
+        #class modeledSubstance(onto.search_one(iri = '*ChemicalSubstance')): pass
+        #class DefaultDatabase(modeledSubstance): pass
+        #class DWSIMCompound(DefaultDatabase): pass
+        #class ChemSep(DefaultDatabase): pass
+        #class Biodiesel(DefaultDatabase): pass
+        #class CoolProp(DefaultDatabase): pass
+        #class ChEDL(DefaultDatabase): pass
+        #class Electrolytes(DefaultDatabase): pass
+    
+        class hasDWSIMdatabaseEntry(DataProperty):
+            label = 'hasDWSIMdatabaseEntry'
+            range = [bool]
+            pass
         
-            # Object property -> Triplett liest sich: 'Stoffdatenbank liefert chemische Substanz'
-            class provides(modeledSubstance >> onto.search_one(iri = '*ChemicalSubstance')): pass
-
-        # DWSIM bietet die Möhlichkeit Komponenten zu importieren über: Online-Quellen, Json- oder XML_Dateien
-        # Zusätzlich kann der User über den 'Compound Creator' Stoffe erstellen
-        # So entsteht eine von DWSIM 'abweichende Datenbank'
-            class DeviatingDatabase(modeledSubstance): pass
-            class OnlineSource(DeviatingDatabase): pass
-            class UserDefinedCompound(DeviatingDatabase): pass
-
-            # Object property -> Triplett liest sich: 'User-definierte Komponente schafft abweichende Datenbank'
-            class creates(UserDefinedCompound >> DeviatingDatabase): pass 
+        class isImportedAs(DataProperty):
+            label = 'isImportedAs'
+            range = [str]
+            pass
         
-        # Um selbst erstellte Komponenten der Simulation verfügbar zu machen, müssen diese in dem spezifischen Ordner 'addcomps' hinterlegt sein
-        # Ordner findet sich unter: "C:\Users\49157\AppData\Local\DWSIM8\addcomps"
-            class AddCompoundFile(UserDefinedCompound): pass      
-            class XMLfile(AddCompoundFile): pass
-            class JSONfile(AddCompoundFile): pass
-            
-            # Object property -> Triplett liest sich: 'AddCompound-Ordner muss user-definierte Komponente enthalten'
-            class mustInclude(AddCompoundFile >> UserDefinedCompound): pass
+        # Object property -> Triplett liest sich: 'Stoffdatenbank liefert chemische Substanz'
+        #class provides(modeledSubstance >> onto.search_one(iri = '*ChemicalSubstance')): pass
+
+    # DWSIM bietet die Möhlichkeit Komponenten zu importieren über: Online-Quellen, Json- oder XML_Dateien
+    # Zusätzlich kann der User über den 'Compound Creator' Stoffe erstellen
+    # So entsteht eine von DWSIM 'abweichende Datenbank'
+        #class DeviatingDatabase(modeledSubstance): pass
+        #class OnlineSource(DeviatingDatabase): pass
+        #class UserDefinedCompound(DeviatingDatabase): pass
+
+        # Object property -> Triplett liest sich: 'User-definierte Komponente schafft abweichende Datenbank'
+       # class creates(UserDefinedCompound >> DeviatingDatabase): pass 
+    
+    # Um selbst erstellte Komponenten der Simulation verfügbar zu machen, müssen diese in dem spezifischen Ordner 'addcomps' hinterlegt sein
+    # Ordner findet sich unter: "C:\Users\49157\AppData\Local\DWSIM8\addcomps"
+       # class AddCompoundFile(UserDefinedCompound): pass      
+        #class XMLfile(AddCompoundFile): pass
+        #class JSONfile(AddCompoundFile): pass
+        
+        # Object property -> Triplett liest sich: 'AddCompound-Ordner muss user-definierte Komponente enthalten'
+        #class mustInclude(AddCompoundFile >> UserDefinedCompound): pass
+
 
     return onto
 
@@ -122,24 +134,17 @@ def class_creation(sheet: pd.DataFrame, onto):
             for j in range(1, len(row)):
                 # Namen des Reaktanten der aktuellen Spalte auslesen
                 substance = sheet.iloc[reactantRow, j]
-                if row[j] == "True":
-                    # Falls 'inDWSIMdatabase' = "True", Klasse mit 'DWSIMCompound' erzeugen:
+                #if row[j] == "True":
+                    # Falls 'inDWSIMdatabase' = "True", Klasse mit 'hasDWSIMdatabaseEntry = true' erzeugen:
                     # codestring aufsetzen, .format(substance,substance) am Ende ersetzt jeden {}-Teil des Strings mit Inhalt der Variablen substance
                     # Neue Komponenten müssen als JSON-file über den AddCompoumd-Ordner hinzugefügt werden
                     # Sind die Komponenten einmal hinzugefügt worden, stehen sie für jede anschließende Simulation zur Verfügung
-                    codestring = """with onto:
-                                class {}(onto.search_one(iri = '*DWSIMCompound')):
-                                    label = '{}'
-                                    pass
-                                """.format(substance, substance)
-                else:
-                    # Ansonsten Klasse mit 'JSONfile' erzeugen
-                    codestring = """with onto:
-                                class {}(onto.search_one(iri = '*JSONfile')): 
-                                    label = '{}'
-                                    pass
-                                """.format(substance, substance)
-
+                codestring = """with onto:
+                            class {}(onto.search_one(iri = '*ChemicalSubstance')):
+                                label = '{}'
+                                hasDWSIMdatabaseEntry = {}
+                                pass
+                            """.format(substance, substance, row[j])
                 # Code, der im codestring enthalten ist compilieren
                 code = compile(codestring, "<string>", "exec")
 
@@ -286,13 +291,16 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
     #####
     return onto
 
-
-
+##
+#
+# in 00_2023_MA_Abaspour_Pythoncode.py nach #ALEX Rev suchen !
+#
+##
 
 
 def run():
     enzymeML_readin("EnzymeML_Template_18-8-2021_KR")
     onto = base_ontology_extension("BaseOnto")
-    substance_knowledge_graph("Ergänzendes Laborbuch_Kinetik_1.xlsx", onto, "BaseOnto")
+    substance_knowledge_graph("Ergänzendes Laborbuch_Kinetik_1.xlsx", onto, "BaseOnto2")
     
-    
+run()    
