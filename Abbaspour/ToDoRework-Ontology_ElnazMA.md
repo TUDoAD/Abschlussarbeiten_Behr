@@ -22,10 +22,12 @@
 
 ### Ontologien
 - Testaufbau der finalen Ontologie in **Finale_Onto_mod.owl**
-- Entsprechendes Anpassen der BaseOnto
+	- WIP Ontologie hier: **Substances_and_BaseOnto2.owl**
+- Entsprechendes Anpassen der **BaseOnto.owl** -> Importiert jetzt SBO komplett!
 - Code restrukturieren und auf BaseOnto anpassen
 - General Class Axioms in Python -> Links von Hendrik anschauen!
-
+- Handschriftl. Notizen !
+- Reasoning prüfen
 
 ### Reaction + Substances
 Catalyst: [Laccase] -> Laccase Substance: http://purl.obolibrary.org/obo/GO_1990204 Laccase activity: http://purl.obolibrary.org/obo/GO_0016682
