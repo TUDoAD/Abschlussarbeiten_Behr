@@ -4,14 +4,23 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX :<http://anonymous#>
 
-SELECT DISTINCT ?subject ?type ?v
+SELECT DISTINCT ?subject ?type ?v ?x ?w ?e
 	WHERE {
+#?subject rdf:type ?w .
+?subject rdf:type ?type .
+?type rdfs:subClassOf ?v.
+?v owl:onProperty :has_role.
+?v owl:someValuesFrom ?x.
+?subject :modeled_by ?q.
+?q rdf:type ?w.
+?w rdf:type owl:Class.
+#?w rdfs:SubClassOf ?e.
+
 #?subject rdf:type owl:NamedIndividual.
-?subject rdf:type :Laccase .
-#?type :has_nbps ?v .
-
-#?subject rdf:type :Laccase .
-
+#?subject :has_nbps ?v .
+#?subject :hasCriticalPressure ?type.
+#?type rdfs:label ?v.
+#?type :has_role ?v.
 #?subject rdf:type ?type.
 #?subject rdf:type :Laccase.
 #?subject a :Laccase.
