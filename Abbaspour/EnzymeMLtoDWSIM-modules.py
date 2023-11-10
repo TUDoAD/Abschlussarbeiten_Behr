@@ -192,7 +192,6 @@ def set_relations(dataProp_dict, onto):
             data_prop_type = type(dataProp_dict[class_name][entry])
             if (data_prop_type == int) or (data_prop_type == float):
                 codestring = "{}.{}.append({})".format(str(onto_class),str(entry), dataProp_dict[class_name][entry])                
-                print(dataProp_dict[class_name][entry])
            
             else:
                 codestring = "{}.{}.append('{}')".format(str(onto_class),str(entry), str(dataProp_dict[class_name][entry]))                
