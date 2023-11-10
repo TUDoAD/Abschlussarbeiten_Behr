@@ -303,4 +303,3 @@ def run():
     onto = base_ontology_extension("BaseOnto")
     substance_knowledge_graph("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", onto, "BaseOnto2")
     
-run()    
