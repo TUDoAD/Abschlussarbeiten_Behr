@@ -18,6 +18,7 @@
 	- Reaktorklassifikation über STRENDA ?
 	https://github.com/StephanM87/Strenda-biocatalysis/tree/main
 
+
 ## Coding
 
 ### Ontologien
@@ -25,9 +26,13 @@
 	- WIP Ontologie hier: **Substances_and_BaseOnto2.owl**
 - Entsprechendes Anpassen der **BaseOnto.owl** -> Importiert jetzt SBO komplett!
 - Code restrukturieren und auf BaseOnto anpassen
-- General Class Axioms in Python -> Links von Hendrik anschauen!
+- Allgemein auf s0, s1, s2 usw. achten, dass richtig aufgeschrieben in den ELNs !
 - Handschriftl. Notizen !
 - Reasoning prüfen
+
+
+- General Class Axioms in Python -> Links von Hendrik anschauen!
+- Reac4Cat Prinzip einbauen
 
 ### Reaction + Substances
 Catalyst: [Laccase] -> Laccase Substance: http://purl.obolibrary.org/obo/GO_1990204 Laccase activity: http://purl.obolibrary.org/obo/GO_0016682
