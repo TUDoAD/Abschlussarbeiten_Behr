@@ -55,6 +55,22 @@ def enzymeML_readin(EnzymeML_XLSM_str):
         Protein_Organism = protein.organism # Trametes versicolor
         Protein_UniProtID = protein.uniprotid # None, should be 'D2CSE5'
 
+####
+
+
+def eln_data_to_dict(eln_sheet):
+    ext_eln_data = {}
+    for col, d in eln_sheet.iteritems():
+        if col != "Property":
+            sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0]
+            if pd.notna(sub_name): ext_eln_data[sub_name] = {}
+           # if sub_name in list(ext_eln_data.keys()):
+            for index, row in eln_sheet.iterrows():
+                if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
+                    ext_eln_data[sub_name][row["Property"]] = row[col]
+    
+    return ext_eln_data
+
 
 #####
 # Ontology-Extension der Base Ontology #
@@ -316,6 +332,9 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
 ##
 
 
+
+
+
 def run():
    # enzymeML_readin("EnzymeML_Template_18-8-2021_KR")
    enzmldoc = pe.EnzymeMLDocument.fromTemplate("./ELNs/EnzymeML_Template_18-8-2021_KR.xlsm")
@@ -339,16 +358,27 @@ for col, d in sheet1.iteritems():
             if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
                 ext_eln_data[sub_name][row["Property"]] = row[col]
 
-for sheet_name in ['Properties for JSON-file', 'Additional Info (Units)', 'Reactorspecification']:
-    eln_sheet = pd.read_excel(ELN_xlsx, sheet_name)
-    for col, d in eln_sheet.iteritems():
-        if col != "Property":
-            sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0]
-            #ext_eln_data[sub_name] = {}
-            if sub_name in list(ext_eln_data.keys()):
-                for index, row in eln_sheet.iterrows():
-                    if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
-                        ext_eln_data[sub_name][row["Property"]] = row[col]
+ext_eln_data = eln_data_to_dict(sheet1)
+
+for sheet_name in ['Properties for JSON-file', 'Additional Info (Units)']:
+    eln_sheet = pd.read_excel(ELN_xlsx,sheet_name)
+    add_dict = eln_data_to_dict(eln_sheet)
+    ext_eln_data = {key: {**ext_eln_data.get(key, {}), **add_dict.get(key, {})} for key in set(ext_eln_data) | set(add_dict)}
+   
+    
+"""
+eln_sheet = pd.read_excel(ELN_xlsx, sheet_name)
+for col, d in eln_sheet.iteritems():
+    if col != "Property":
+        sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0]
+        #ext_eln_data[sub_name] = {}
+        if sub_name in list(ext_eln_data.keys()):
+            for index, row in eln_sheet.iterrows():
+                if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
+                    ext_eln_data[sub_name][row["Property"]] = row[col]
+"""
+
+    
 
 """
 subst_row_sheet2 = sheet2[sheet2['Property'].str.contains('hasCompoundName')]
