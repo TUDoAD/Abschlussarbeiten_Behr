@@ -229,9 +229,14 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
     sheet3 = pd.read_excel(support_ELN_str, sheet_name=3)
 
 ##
-    #test = pd.ExcelFile("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx")
-    #sheet1 = pd.read_excel(test,'Substances and Parameters')
-    #index_EnzymeML_ID =sheet1[sheet1['Property'].str.contains('hasEnzymeML_ID')].index[0]
+    ELN_xlsx = pd.ExcelFile(support_ELN_str)
+    sheet1 = pd.read_excel(ELN_xlsx,'Substances and Reactions')
+    sheet2 = pd.read_excel(ELN_xlsx,'Properties for JSON-file')
+    sheet3 = pd.read_excel(ELN_xlsx,'Additional Info (Units)')
+    sheet4 = pd.read_excel(ELN_xlsx,'Reactorspecification')
+    
+    index_EnzymeML_ID =sheet1[sheet1['Property'].str.contains('hasEnzymeML_ID')].index[0]
+    
 ##
 
     # Dict, in dem alle Eigenschaften von Laccase hinterlegt sind
