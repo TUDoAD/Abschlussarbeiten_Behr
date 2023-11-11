@@ -326,9 +326,9 @@ def run():
 
 ELN_xlsx = pd.ExcelFile("./ELNs/New-ELN_Kinetik_1.xlsx")
 sheet1 = pd.read_excel(ELN_xlsx,'Substances and Reactions')
-sheet2 = pd.read_excel(ELN_xlsx,'Properties for JSON-file')
-sheet3 = pd.read_excel(ELN_xlsx,'Additional Info (Units)')
-sheet4 = pd.read_excel(ELN_xlsx,'Reactorspecification')
+#sheet2 = pd.read_excel(ELN_xlsx,'Properties for JSON-file')
+#sheet3 = pd.read_excel(ELN_xlsx,'Additional Info (Units)')
+#sheet4 = pd.read_excel(ELN_xlsx,'Reactorspecification')
 
 ext_eln_data = {}
 for col, d in sheet1.iteritems():
@@ -339,10 +339,24 @@ for col, d in sheet1.iteritems():
             if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
                 ext_eln_data[sub_name][row["Property"]] = row[col]
 
-for subst in ext_eln_data:
-    if ext_eln_data[subst]["inDWSIMdatabase"]:
-        sheet2
-    
+for sheet_name in ['Properties for JSON-file', 'Additional Info (Units)', 'Reactorspecification']:
+    eln_sheet = pd.read_excel(ELN_xlsx, sheet_name)
+    for col, d in eln_sheet.iteritems():
+        if col != "Property":
+            sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0]
+            #ext_eln_data[sub_name] = {}
+            if sub_name in list(ext_eln_data.keys()):
+                for index, row in eln_sheet.iterrows():
+                    if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
+                        ext_eln_data[sub_name][row["Property"]] = row[col]
+
+"""
+subst_row_sheet2 = sheet2[sheet2['Property'].str.contains('hasCompoundName')]
+for col in sheet2: 
+    for subst in ext_eln_data:    
+        if ext_eln_data[subst]["inDWSIMdatabase"] 
+        
+"""        
     
     #index_EnzymeML_ID = sheet1[sheet1['Property'].str.contains('hasCompoundName')]
     

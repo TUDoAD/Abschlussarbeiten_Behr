@@ -34,6 +34,10 @@
 - General Class Axioms in Python -> Links von Hendrik anschauen!
 - Reac4Cat Prinzip einbauen
 
+### ELN-REWORK
+Reactorspecification neu Strukturieren + py Code !
+
+
 ### Reaction + Substances
 Catalyst: [Laccase] -> Laccase Substance: http://purl.obolibrary.org/obo/GO_1990204 Laccase activity: http://purl.obolibrary.org/obo/GO_0016682
 
