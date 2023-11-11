@@ -229,13 +229,21 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
     sheet3 = pd.read_excel(support_ELN_str, sheet_name=3)
 
 ##
-    ELN_xlsx = pd.ExcelFile(support_ELN_str)
-    sheet1 = pd.read_excel(ELN_xlsx,'Substances and Reactions')
-    sheet2 = pd.read_excel(ELN_xlsx,'Properties for JSON-file')
-    sheet3 = pd.read_excel(ELN_xlsx,'Additional Info (Units)')
-    sheet4 = pd.read_excel(ELN_xlsx,'Reactorspecification')
+ #   ELN_xlsx = pd.ExcelFile(support_ELN_str)
+ #   sheet1 = pd.read_excel(ELN_xlsx,'Substances and Reactions')
+ #   sheet2 = pd.read_excel(ELN_xlsx,'Properties for JSON-file')
+ #   sheet3 = pd.read_excel(ELN_xlsx,'Additional Info (Units)')
+ #   sheet4 = pd.read_excel(ELN_xlsx,'Reactorspecification')
     
-    index_EnzymeML_ID =sheet1[sheet1['Property'].str.contains('hasEnzymeML_ID')].index[0]
+ #   data = {}
+    ##for col, d in sheet1.iteritems():        
+    
+    
+    
+    #index_EnzymeML_ID = sheet1[sheet1['Property'].str.contains('hasCompoundName')]
+    
+    #index_EnzymeML_ID =sheet1[sheet1['Property'].str.contains('hasEnzymeML_ID')].index[0]
+    
     
 ##
 
@@ -308,9 +316,36 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
 ##
 
 
-#def run():
+def run():
    # enzymeML_readin("EnzymeML_Template_18-8-2021_KR")
-enzmldoc = pe.EnzymeMLDocument.fromTemplate("./ELNs/EnzymeML_Template_18-8-2021_KR.xlsm")
-onto = base_ontology_extension("BaseOnto")
-onto, test_dict = substance_knowledge_graph("./ELNs/New-ELN_Kinetik_1.xlsx", onto, "BaseOnto2")
+   enzmldoc = pe.EnzymeMLDocument.fromTemplate("./ELNs/EnzymeML_Template_18-8-2021_KR.xlsm")
+   onto = base_ontology_extension("BaseOnto")
+   onto, test_dict = substance_knowledge_graph("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", onto, "BaseOnto2")
+   
+   return test_dict
 
+ELN_xlsx = pd.ExcelFile("./ELNs/New-ELN_Kinetik_1.xlsx")
+sheet1 = pd.read_excel(ELN_xlsx,'Substances and Reactions')
+sheet2 = pd.read_excel(ELN_xlsx,'Properties for JSON-file')
+sheet3 = pd.read_excel(ELN_xlsx,'Additional Info (Units)')
+sheet4 = pd.read_excel(ELN_xlsx,'Reactorspecification')
+
+ext_eln_data = {}
+for col, d in sheet1.iteritems():
+    if col != "Property":
+        sub_name = sheet1[sheet1['Property'].str.contains('hasCompoundName')][col].iloc[0]
+        ext_eln_data[sub_name] = {}
+        for index, row in sheet1.iterrows():
+            if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
+                ext_eln_data[sub_name][row["Property"]] = row[col]
+
+for subst in ext_eln_data:
+    if ext_eln_data[subst]["inDWSIMdatabase"]:
+        sheet2
+    
+    
+    #index_EnzymeML_ID = sheet1[sheet1['Property'].str.contains('hasCompoundName')]
+    
+    
+    
+    
