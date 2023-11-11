@@ -10,6 +10,8 @@ ATTENTION (Checklist before calling upload):
     - Adjust Description for your dataset
     - Adjust Directory in which the files are
     - Adjust Ontology u want to extend
+    
+    - Adjust (maybe) the names for the individuals (line 127)
 """
 import os
 import yaml
@@ -22,9 +24,9 @@ from pyDataverse.models import Dataset, Datafile
 
 def upload():
     ## Adjustments    
-    title = "DWSIM Methanation (x_co2=0,04, with Downstream)"
-    descr = "Automatic generated simulation-files for the Ni-catalyzed Methanation of Carbon Dioxide (x_co2=0,04) with Downstream."
-    folder_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_04/"
+    title = "DWSIM Methanation (x_co2=0,2, with Downstream)"
+    descr = "Automatic generated simulation-files for the Ni-catalyzed Methanation of Carbon Dioxide (x_co2=0,2) with Downstream."
+    folder_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_06/"
     onto_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-Onto.owl"
     
     ## Uploading the simulation-files
