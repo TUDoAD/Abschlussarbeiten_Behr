@@ -228,6 +228,11 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
     # Excel 'Ergänzendes Laborbuch' Sheet3 laden für fehlende Parameter
     sheet3 = pd.read_excel(support_ELN_str, sheet_name=3)
 
+##
+    #test = pd.ExcelFile("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx")
+    #sheet1 = pd.read_excel(test,'Substances and Parameters')
+    #index_EnzymeML_ID =sheet1[sheet1['Property'].str.contains('hasEnzymeML_ID')].index[0]
+##
 
     # Dict, in dem alle Eigenschaften von Laccase hinterlegt sind
     data0 = {}
@@ -289,7 +294,7 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
     #####
     # Ontology-Extension der Base Ontology #
     #####
-    return onto
+    return onto, test_dict
 
 ##
 #
@@ -298,8 +303,9 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
 ##
 
 
-def run():
-    enzymeML_readin("EnzymeML_Template_18-8-2021_KR")
-    onto = base_ontology_extension("BaseOnto")
-    substance_knowledge_graph("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", onto, "BaseOnto2")
-    
+#def run():
+   # enzymeML_readin("EnzymeML_Template_18-8-2021_KR")
+enzmldoc = pe.EnzymeMLDocument.fromTemplate("./ELNs/EnzymeML_Template_18-8-2021_KR.xlsm")
+onto = base_ontology_extension("BaseOnto")
+onto, test_dict = substance_knowledge_graph("./ELNs/New-ELN_Kinetik_1.xlsx", onto, "BaseOnto2")
+
