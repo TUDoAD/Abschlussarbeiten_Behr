@@ -43,6 +43,8 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
 
     """
     global nlp
+    global comment_treat
+    global comment_charac
     not_process=['Characterization','Treatment']
     nlp = spacy.load('en_core_web_sm')
     classes = {}
@@ -53,6 +55,8 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
     chem_e = []
     chem_list.extend([str(i) for i in rel_synonym.values()]) 
     pop=[]
+    comment_treat=[]
+    comment_charac=[]
     for k, v in sup_cat.items():
         new_values=[]
         for i in v :
@@ -78,11 +82,27 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
         else:
             sup_cat.pop(i)
     for entity,l in categories.items():
-        if entity in classes.keys() or l in not_process or entity in abbreviation.values():
+        if l in not_process:
+            if l == 'Treatment':
+                comment_treat.append(entity)
+            if l==' Characterization':
+                comment_charac.append(entity)
+        elif entity in classes.keys() or entity in abbreviation.values():
             continue
         else:
 
-            chem_entity=[cem for cem in chem_list if cem in entity]
+            chem_all=[cem for cem in chem_list if cem in entity]
+            seen_items = set()
+
+            # Create a new list to store the filtered items
+            chem_entity = []
+
+            # Iterate through the items and filter out substrings
+            for item in chem_all:
+                # Check if the item is not a substring of any seen item
+                if not any(item in seen_item for seen_item in seen_items):
+                    chem_entity.append(item)
+                    seen_items.add(item)
             spans_dict[entity] = []
             spans_n = []
             if l == 'Catalyst':
@@ -121,14 +141,14 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
                                     based_m = re.search('on',entity)
                                 e_snip = entity[based_m.end()+1:]
                                 
-                                if re.search('supported', e_snip) and s_on==False: 
+                            if re.search('supported', e_snip) and s_on==False: 
                                         #based on silica supported bimetallic catalysts
                                         e_btwn = e_snip[:re.search('supported', e_snip).start()-1]    
                                         sup_i = True
-                                else:
+                            else:
                                     sup_i = False
                                 
-                                for c in chem_enity:
+                            for c in chem_entity:
                                     pattern ='\\b'+c+'\\b'
                                     if re.search(pattern,e_snip):
                                         c_t = rel_synonym[c] if c in rel_synonym.keys() else c
@@ -137,7 +157,7 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
                                         if c_t not in spans_n:    
                                             spans_n.append(c_t)  
                                      
-                                if 'catalyst' in e_snip:
+                            if 'catalyst' in e_snip:
                                     classes,_ = check_in_snip(e_snip, classes, entity,l,chem_entity)
                 elif entity not in chem_list and not set(entity.split()).issubset(chem_list):
                     sup_i = False
@@ -265,7 +285,8 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
     missing,match_dict = create_list_IRIs(v_all, IRI_json_filename = 'iriDictionary') 
     missing_all.extend(missing)   
     match_dict_all.update(match_dict)      
-      
+    comment_treat=[*set(comment_treat)]
+    comment_charac=[*set(comment_charac)]
     return df_entity, rel_synonym, missing_all, match_dict_all
 
 def shortcut_add_class(ele_old,classes_n, not_del, value, i, key ):
@@ -361,6 +382,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
             for c in row.cems:
                 if c in match_dict.values():
                     if c.lower() not in [i.label[0].lower() for i in onto.individuals() if i.label]:
+                        print()
                         cem = onto.search_one(label = c)
                         if not cem:
                             cem = onto.search_one(label = c + ' (molecule)')
@@ -519,10 +541,22 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                 
                 if row.category== 'Reaction':
                     if row.entity in reac_dict.keys():
-                        ind= [i for i in list(onto.search(label=entity)) if i in list(onto.individuals())][0]                
+                        
+                        ind= [i for i in list(onto.search(label=row.entity)) if i in list(onto.individuals())][0]                
                         for r in reac_dict[row.entity]:
-                           cem_i=[i for i in list(onto.search(label=r)) if i in list(onto.individuals())][0]         
-                           ind.RO_0000057.append(cem_i) #'has participant' = RO_0000057
+                            c_t=rel_synonym[r] if r in rel_synonym.keys() else r
+                            try:
+                                cem_i=[i for i in list(onto.search(label=r)) if i in list(onto.individuals())][0]  
+                            except:
+                                try:
+                                    cem_i=[i for i in list(onto.search(label=c_t)) if i in list(onto.individuals())][0]   
+                                except:
+                                    try:
+                                        cem_i=[i for i in list(onto.search(label=c_t+' (molecule)')) if i in list(onto.individuals())][0]
+                                    except:
+                                        print(r+" was skipped in reac_dict")
+                                        continue
+                            ind.RO_0000057.append(cem_i) #'has participant' = RO_0000057
                 if row.entity in abbreviation.keys(): # check for abbreviations
                     ind.comment.append(abbreviation[row.entity])
                          
@@ -556,6 +590,8 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
         entities_pub.extend([i for c in df_entity.cems if c for i in c if i not in entities_pub])
         entities_pub = [*set(entities_pub)]
         pub_new = onto.search_one(iri='*publication{}'.format(p_id))
+        pub_new.comment.append('treatment: '+', '.join(comment_treat))
+        pub_new.comment.append('characterization: '+', '.join(comment_charac))
         for entity in entities_pub:
             print('entity:{}'.format(entity))
             try:

@@ -4,7 +4,7 @@ Created on Sat Sep 23 14:07:50 2023
 
 @author: smdicher
 """
-from text_mining_1 import load_classes_chebi, delete_files_in_directory, run_text_mining, add_publication
+from text_mining import load_classes_chebi, delete_files_in_directory, run_text_mining, add_publication
 from preprocess_onto import *
 from onto_extension import preprocess_classes,create_classes_onto
 from txt_extract import get_abstract, get_metadata
@@ -26,13 +26,13 @@ df_all = pd.DataFrame(columns=['entity','classes','cems', 'category'])
 created_cl=[]
 for i in glob.iglob(path):
     abstract=None
-    delete_files_in_directory(path_snippet)
+    delete_files_in_directory(path_snipet)
     delete_files_in_directory(path_class_list)
-    title,doi,publisher,ab = get_metadata(i)
+    title,doi,publisher = get_metadata(i)
     if doi == None:
         continue 
     print(title+' : '+doi)
-    abstract = get_abstract(i, doi, publisher, ab)
+    abstract = get_abstract(i, doi, publisher)
     if abstract != None:
         p_id = add_publication(doi,title,abstract)
         if p_id == None:
@@ -42,10 +42,9 @@ for i in glob.iglob(path):
         df_entity, rel_synonym, missing_all, match_dict_all = preprocess_classes(categories, abbreviation, sup_cat, rel_synonym, chem_list, missing, match_dict)
         df_all = pd.concat([df_all, df_entity], axis=0)
         onto_extender()
-        eq = equality() #für validierung alle eq1 classen aufnehmen
         created_classes,sup_sub_df = create_classes_onto(abbreviation, sup_cat, missing_all, match_dict_all, df_entity,reac_dict,p_id,rel_synonym,chem_list,onto_new_dict)
         created_cl.append(created_classes)
-
+eq = equality()#für validierung alle eq1 classen aufnehmen
 """        
 JAVA_EXE='C:\Program Files\Java\jdk-11.0.17\bin\java.exe'
 onto=get_ontology('./ontologies/{}.owl'.format(onto_new)).load()
