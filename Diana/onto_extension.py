@@ -380,10 +380,10 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                     sup_sub_df = sup_sub_df.append({'super_class':'molecule', 'subclass': c},ignore_index = True)
             if row.cems[0] != row.entity:
                 if nlp(row.entity)[-1].text in chem_list and 'supported' not in row.entity:
-                    print(row.entity +' is subclass of '+ row.cems[0]) #check if works
                     sup_sub_df = sup_sub_df.append({'super_class':row.cems[0], 'subclass': row.entity},ignore_index=True)
-                if row.category == 'Catalyst' and row.entity not in sup_sub_df['subclass']:
+                if row.category == 'Catalyst' and row.entity not in sup_sub_df['subclass'] and "based" not in row.entity:
                     sup_sub_df = sup_sub_df.append({'super_class':'chemical substance', 'subclass': row.entity},ignore_index=True)
+                
         if row.category =='Catalyst':
             k = 0
             while k < len(row.classes):
