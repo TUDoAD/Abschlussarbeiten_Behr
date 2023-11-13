@@ -163,7 +163,7 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
                     sup_i = False
                     entity_n = entity
                     if re.search('supported on', entity) or re.search('encapsulated within', entity):
-                        #Rh-Co based system supported on alumina, titania and silica                                    
+                        #Rh-Co supported on alumina, titania and silica                                    
                         if 'supported on' in entity:
                             e_btwn=entity[re.search('supported on ', entity).end():]
                         else:
@@ -225,12 +225,15 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
                 c_list = []
                 for c in entity.split():
                     c_t = rel_synonym[c] if c in rel_synonym.keys() else c
+                    if "atom" in c_t:
+                       c_list=[entity]
+                       break
                     c_list.append(c_t)
             
             list_all.append([' '.join(c_list),[],[' '.join(c_list)],categories[entity]])    #changed entity! prop-1-ene instead propylene
             if len(entity.split()) > 1 and set(entity.split()).issubset(chem_list):    
                 chem_e.append(' '.join(c_list))
-                
+                print('changed entity:'+' '.join(c_list))
         elif entity.split()[-1] in chem_list and entity not in classes.keys():
             #i.e. light olefin
             classes,_ = check_in_snip(entity, classes, entity, l,chem_list)
@@ -282,6 +285,7 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
         list_all.append([k,v,spans_dict[k],categories[k]])
         v_all.extend(v)
     df_entity = pd.DataFrame(list_all, columns=['entity','classes', 'cems', 'category'])
+    df_entity=df_entity.drop_duplicates(['entity']).reset_index()
     missing,match_dict = create_list_IRIs(v_all, IRI_json_filename = 'iriDictionary') 
     missing_all.extend(missing)   
     match_dict_all.update(match_dict)      
@@ -376,13 +380,10 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
         
         classes_parent = []
         classes = sorted(list(row.classes),reverse = False, key = len)
-        if row.cems: 
-            
-                    
+        if row.cems:                     
             for c in row.cems:
                 if c in match_dict.values():
                     if c.lower() not in [i.label[0].lower() for i in onto.individuals() if i.label]:
-                        print()
                         cem = onto.search_one(label = c)
                         if not cem:
                             cem = onto.search_one(label = c + ' (molecule)')
@@ -558,7 +559,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                                         continue
                             ind.RO_0000057.append(cem_i) #'has participant' = RO_0000057
                 if row.entity in abbreviation.keys(): # check for abbreviations
-                    ind.comment.append(abbreviation[row.entity])
+                    e_ind.comment.append(abbreviation[row.entity])
                          
 
         for sup,v in sup_cat.items():
@@ -581,8 +582,11 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                     try:
                         onto, cat = add_individum(onto,list(onto.search(label=cat))[0], cat,p_id)
                     except:
-                        new_cl = types.new_class(class_name, ('molecule',))
-                        onto, cat = add_individum(onto,new_cl, cat,p_id)
+                        try:
+                            new_cl = types.new_class(class_name, ('molecule',))
+                            onto, cat = add_individum(onto,new_cl, cat,p_id)
+                        except:
+                            continue
                 cat.RO_0000087.append(cat_role_i)    #has role catalyst role
                 cat.supported_on.append(sup)
         entities_pub = []
@@ -590,8 +594,10 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
         entities_pub.extend([i for c in df_entity.cems if c for i in c if i not in entities_pub])
         entities_pub = [*set(entities_pub)]
         pub_new = onto.search_one(iri='*publication{}'.format(p_id))
-        pub_new.comment.append('treatment: '+', '.join(comment_treat))
-        pub_new.comment.append('characterization: '+', '.join(comment_charac))
+        if comment_treat:
+            pub_new.comment.append('treatment: '+', '.join(comment_treat))
+        if comment_charac:
+            pub_new.comment.append('characterization: '+', '.join(comment_charac))
         for entity in entities_pub:
             print('entity:{}'.format(entity))
             try:
@@ -658,7 +664,7 @@ def create_subclass(onto,subclass,entities,super_class,created_classes,chem_list
             new_i = onto.search_one(label = subclass)
             new_i.is_a.append(super_class)  
     
-    elif subclass.lower() == super_class.label[0].lower():    #to implement for reaction
+    elif subclass.lower() == super_class.label[0].lower() or ("role" in super_class.label[0] and "role" not in subclass):    #to implement for reaction
          onto, new_i = add_individum(onto,super_class, subclass,p_id)
     elif subclass.lower() not in created_classes:
           class_name = 'DC_{:02d}{:02d}'.format(p_id, num)
