@@ -16,7 +16,7 @@ from owlready2 import *
 # Reasoner HermiT ist in Java geschrieben
 # Unter Windows muss der Speicherort des Java-Interpreters wie folgt konfiguriert werden
 
-owlready2.JAVA_EXE = "C://Users//49157//Downloads//Protege-5.5.0-win//Protege-5.5.0//jre//bin//java.exe"
+#owlready2.JAVA_EXE = "C://Users//49157//Downloads//Protege-5.5.0-win//Protege-5.5.0//jre//bin//java.exe"
 
 # Ontologie laden, in der Entitäten der Thesis verabreitet werden sollen
 # Diese Ontologie ist ein Zusammenschluss zweier bestehenden Ontologien: metadata4Ing + SBO
@@ -87,12 +87,12 @@ import pandas as pd
 # Sheet0 beinhaltet Reaktionsteilnehmer und -koeffizienten
 # Sheet1 beinhaltet die Stoffdaten, die für den Compound Creator relevant sind
 # Sheet2 beinhaltet zusätzliche Stoffdaten
-sheet0 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=0)
-sheet1 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=1)
-sheet2 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=2)
+sheet0 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1_afterSubmission.xlsx", sheet_name=0)
+sheet1 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1_afterSubmission.xlsx", sheet_name=1)
+sheet2 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1_afterSubmission.xlsx", sheet_name=2)
 # Excel 'Ergänzendes Laborbuch' Sheet3 laden für fehlende Parameter
-sheet3 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=3)
-sheet4 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1.xlsx", sheet_name=4) 
+sheet3 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1_afterSubmission.xlsx", sheet_name=3)
+sheet4 = pd.read_excel("./Ergänzendes Laborbuch_Kinetik_1_afterSubmission.xlsx", sheet_name=4) 
 sheet4['Unnamed: 2'] = pd.to_numeric(sheet4['Unnamed: 2'],downcast="integer", errors="coerce")
 
 # Ontologie Design
@@ -703,7 +703,7 @@ from System import String, Environment
 from System.Collections.Generic import Dictionary
  
 # Pfad, wo DWSIM-Ordner mit allen Paketen hinterlegt ist
-dwsimpath = "C:\\Users\\49157\\AppData\\Local\\DWSIM8\\"
+dwsimpath = "C:\\Users\\smaxbehr\\AppData\\Local\\DWSIM8\\"
 
 clr.AddReference(dwsimpath + "DWSIM")
 clr.AddReference(dwsimpath + "CapeOpen.dll")
@@ -738,7 +738,7 @@ from System import *
 
 from System.Linq import *
 from DWSIM import *
-from DWSIM import FormPCBulk
+#from DWSIM import FormPCBulk
 from DWSIM.Interfaces import *
 from DWSIM.Interfaces.Enums import*
 
