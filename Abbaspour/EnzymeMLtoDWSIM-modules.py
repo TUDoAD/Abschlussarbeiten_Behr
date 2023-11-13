@@ -77,22 +77,23 @@ def eln_subst_data_to_dict(eln_sheet):
 def new_ELN_to_dict(eln_path):
     
     ELN_xlsx = pd.ExcelFile(eln_path)
-    sheet1 = pd.read_excel(ELN_xlsx,'Substances and Reactions')
+    eln_sheet = pd.read_excel(ELN_xlsx,'Substances and Reactions')
     
     ext_eln_data = {}
     subst_eln_data = {}
     
     # load substances and properties into dictionary
-    for col, d in sheet1.iteritems():
+    for col, d in eln_sheet.iteritems():
         if col != "Property":
             sub_name = sheet1[sheet1['Property'].str.contains('hasCompoundName')][col].iloc[0]
             subst_eln_data[sub_name] = {}
-            for index, row in sheet1.iterrows():
+            for index, row in eln_sheet.iterrows():
                 if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
                     subst_eln_data[sub_name][row["Property"]] = row[col]
     
-    subst_eln_data = eln_subst_data_to_dict(sheet1)   
+    subst_eln_data = eln_subst_data_to_dict(sheet1)
     
+    ## adding dicts to already existing dict
     for sheet_name in ['Properties for JSON-file', 'Additional Info (Units)']:
         eln_sheet = pd.read_excel(ELN_xlsx,sheet_name)
         add_dict = eln_subst_data_to_dict(eln_sheet)
@@ -101,12 +102,25 @@ def new_ELN_to_dict(eln_path):
     ##
     
     # load PFD data
+    ## ALEX hier weiter
+    eln_sheet = pd.read_excel(ELN_xlsx,"PFD")
+    pfd_eln_data = {}
+    for index, row in eln_sheet.iterrows():
+        pfd_eln_data[row["object"]] = {'DWSIM-object type':row["DWSIM-object type"],
+                                       'DWSIM-object argument':int(row["DWSIM-object argument"]) if pd.notna(row["DWSIM-object argument"]) else None, 
+                                       'connection':row["output connected to"]
+                                       }
     
-    eln_sheet = pd.read_excel(ELN_xlsx,sheet_name)
-    add_dict = eln_subst_data_to_dict(eln_sheet)
+    eln_sheet = pd.read_excel(ELN_xlsx,"Material Streams")
+    matstream_dict = eln_subst_data_to_dict(eln_sheet)
+    ## ALEX HIER WEITER
+    
+    for subst in matstreams_
+    
     ##
     
     ext_eln_data["substances"] = subst_eln_data   
+    ext_eln_data["PFD"] = pfd_eln_data 
     
     return ext_eln_data
 
