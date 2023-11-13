@@ -58,7 +58,7 @@ def enzymeML_readin(EnzymeML_XLSM_str):
 ####
 
 
-def eln_data_to_dict(eln_sheet):
+def eln_subst_data_to_dict(eln_sheet):
     ext_eln_data = {}
     for col, d in eln_sheet.iteritems():
         if col != "Property":
@@ -70,6 +70,47 @@ def eln_data_to_dict(eln_sheet):
                     ext_eln_data[sub_name][row["Property"]] = row[col]
     
     return ext_eln_data
+
+
+####
+
+def new_ELN_to_dict(eln_path):
+    
+    ELN_xlsx = pd.ExcelFile(eln_path)
+    sheet1 = pd.read_excel(ELN_xlsx,'Substances and Reactions')
+    
+    ext_eln_data = {}
+    subst_eln_data = {}
+    
+    # load substances and properties into dictionary
+    for col, d in sheet1.iteritems():
+        if col != "Property":
+            sub_name = sheet1[sheet1['Property'].str.contains('hasCompoundName')][col].iloc[0]
+            subst_eln_data[sub_name] = {}
+            for index, row in sheet1.iterrows():
+                if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
+                    subst_eln_data[sub_name][row["Property"]] = row[col]
+    
+    subst_eln_data = eln_subst_data_to_dict(sheet1)   
+    
+    for sheet_name in ['Properties for JSON-file', 'Additional Info (Units)']:
+        eln_sheet = pd.read_excel(ELN_xlsx,sheet_name)
+        add_dict = eln_subst_data_to_dict(eln_sheet)
+        subst_eln_data = {key: {**subst_eln_data.get(key, {}), **add_dict.get(key, {})} for key in set(subst_eln_data) | set(add_dict)}    
+    
+    ##
+    
+    # load PFD data
+    
+    eln_sheet = pd.read_excel(ELN_xlsx,sheet_name)
+    add_dict = eln_subst_data_to_dict(eln_sheet)
+    ##
+    
+    ext_eln_data["substances"] = subst_eln_data   
+    
+    return ext_eln_data
+
+####
 
 
 #####
@@ -132,6 +173,9 @@ def base_ontology_extension(name_base_ontology):
 # Die Elemente einer Stoffliste werden entweder der Oberklasse JSON-Datei oder DWSIM-Komponente subsumiert
 
 def class_creation(sheet: pd.DataFrame, onto):
+    #TODO: Übergeben des ELN-Dicts als parameter
+    #      Lookup, ob es die Substanz schon als Ontologie-Klasse gibt
+    #      
     BaseOnto = onto
     reactantRow = -1
     # Die Zeile ermitteln, in der die Labels der Reaktanten stehen
@@ -343,28 +387,9 @@ def run():
    
    return test_dict
 
-ELN_xlsx = pd.ExcelFile("./ELNs/New-ELN_Kinetik_1.xlsx")
-sheet1 = pd.read_excel(ELN_xlsx,'Substances and Reactions')
-#sheet2 = pd.read_excel(ELN_xlsx,'Properties for JSON-file')
-#sheet3 = pd.read_excel(ELN_xlsx,'Additional Info (Units)')
-#sheet4 = pd.read_excel(ELN_xlsx,'Reactorspecification')
+eln_str = "./ELNs/New-ELN_Kinetik_1.xlsx"
+eln_dict = new_ELN_to_dict(eln_str)
 
-ext_eln_data = {}
-for col, d in sheet1.iteritems():
-    if col != "Property":
-        sub_name = sheet1[sheet1['Property'].str.contains('hasCompoundName')][col].iloc[0]
-        ext_eln_data[sub_name] = {}
-        for index, row in sheet1.iterrows():
-            if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
-                ext_eln_data[sub_name][row["Property"]] = row[col]
-
-ext_eln_data = eln_data_to_dict(sheet1)
-
-for sheet_name in ['Properties for JSON-file', 'Additional Info (Units)']:
-    eln_sheet = pd.read_excel(ELN_xlsx,sheet_name)
-    add_dict = eln_data_to_dict(eln_sheet)
-    ext_eln_data = {key: {**ext_eln_data.get(key, {}), **add_dict.get(key, {})} for key in set(ext_eln_data) | set(add_dict)}
-   
     
 """
 eln_sheet = pd.read_excel(ELN_xlsx, sheet_name)

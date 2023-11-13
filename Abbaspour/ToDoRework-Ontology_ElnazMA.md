@@ -30,6 +30,7 @@
 - Handschriftl. Notizen !
 - Reasoning prüfen
 
+- DOCSTRINGS
 
 - General Class Axioms in Python -> Links von Hendrik anschauen!
 - Reac4Cat Prinzip einbauen
