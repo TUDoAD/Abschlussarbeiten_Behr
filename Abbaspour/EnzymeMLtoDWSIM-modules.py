@@ -135,10 +135,7 @@ def new_ELN_to_dict(eln_path):
     # join substances related data and PFD-related data    
     ext_eln_data["substances"] = subst_eln_data   
     ext_eln_data["PFD"] = pfd_eln_data 
-     
-    
-    ## import EnzymeML via pyenzyme!
-    enzmldoc = pe.EnzymeMLDocument.fromTemplate("./ELNs/EnzymeML_Template_18-8-2021_KR.xlsm")
+    # 
     
     return ext_eln_data
 
@@ -314,11 +311,12 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
     # Sheet0 beinhaltet Reaktionsteilnehmer und -koeffizienten
     # Sheet1 beinhaltet die Stoffdaten, die für den Compound Creator relevant sind
     # Sheet2 beinhaltet zusätzliche Stoffdaten
+    """
     sheet0 = pd.read_excel(support_ELN_str, sheet_name=0)
     sheet1 = pd.read_excel(support_ELN_str, sheet_name=1)
     sheet2 = pd.read_excel(support_ELN_str, sheet_name=2)
     # Excel 'Ergänzendes Laborbuch' Sheet3 laden für fehlende Parameter
-    sheet3 = pd.read_excel(support_ELN_str, sheet_name=3)
+    #sheet3 = pd.read_excel(support_ELN_str, sheet_name=3)
 
 ##
  #   ELN_xlsx = pd.ExcelFile(support_ELN_str)
@@ -384,15 +382,21 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
         
     test_dict = {sheet0.iloc[2,1]: data0, sheet0.iloc[2,2]: data1, sheet0.iloc[2,3]: data2,
                  sheet0.iloc[2,4]: data3, sheet0.iloc[2,5]: data4}
-
+    """
 
     # Aufrufen von Funktion class_creation(),um die Reaktanten in Sheet0 durchzugehen
-    BaseOnto= class_creation(sheet0, onto)
+    BaseOnto = class_creation(sheet0, onto)
 
-    BaseOnto = dataProp_creation(test_dict, BaseOnto)
+    # BaseOnto = dataProp_creation(test_dict, BaseOnto)
 
-    BaseOnto= set_relations(test_dict, BaseOnto)
+    # BaseOnto= set_relations(test_dict, BaseOnto)
 
+    ##
+    eln_dict = new_ELN_to_dict(support_ELN_str)
+    
+    BaseOnto = dataProp_creation(eln_dict, BaseOnto)
+
+    BaseOnto= set_relations(eln_dict, BaseOnto)
     # Ontologie zwischenspeichern
     BaseOnto.save(file="./ontologies/Substances_and_"+ onto_str +".owl", format="rdfxml")
 
@@ -415,7 +419,8 @@ def run():
    # enzymeML_readin("EnzymeML_Template_18-8-2021_KR")
    enzmldoc = pe.EnzymeMLDocument.fromTemplate("./ELNs/EnzymeML_Template_18-8-2021_KR.xlsm")
    onto = base_ontology_extension("BaseOnto")
-   onto, test_dict = substance_knowledge_graph("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", onto, "BaseOnto2")
+  # onto, test_dict = substance_knowledge_graph("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", onto, "BaseOnto2")
+   onto, test_dict = substance_knowledge_graph("./ELNs/New-ELN_Kinetik_1.xlsx", onto, "BaseOnto2")
    
    return test_dict
 
