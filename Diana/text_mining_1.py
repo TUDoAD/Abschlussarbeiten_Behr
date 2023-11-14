@@ -24,9 +24,9 @@ def run_text_mining(abstract,model, onto_class_list):
          for key, value in json.load(json_config).items():
              set_config_key(key, value)
     sents = text_prep(abstract) 
-    categories,chem_list, reac_dict, sup_cat, abbreviation= CatalysisIE_search(model, sents)
+    categories,chem_list, reac_dict, sup_cat, abbreviation,entities_raw= CatalysisIE_search(model, sents)
     missing, match_dict,chem_list,rel_synonym, onto_new_dict=chemical_prep(chem_list, onto_class_list)
-    return chem_list, categories,onto_new_dict, sup_cat, abbreviation, missing, match_dict, rel_synonym, reac_dict
+    return chem_list, categories,onto_new_dict, sup_cat, abbreviation, missing, match_dict, rel_synonym, reac_dict,entities_raw
         
 def load_classes_chebi():
     """
@@ -295,6 +295,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
     c_idx=None
     entity_old = (0,None,None)
     output_sents = pred_model_dataset(model, test_sents)
+    raw_entities= {}
     for sent in output_sents:
         sent_tag = [t['pred'] for t in sent]
         print(assemble_token_text(sent))
@@ -310,23 +311,27 @@ def CatalysisIE_search(model, test_sents): #change description at the and
             if k == a+1 and '({})'.format(entity) in assemble_token_text(sent):
                 abbreviation[entity_old[1]] = entity
             
+            doc = nlp(entity)
+            for i in range(len(doc)):
+                if entity not in (abbreviation.keys() or abbreviation.values()):
+                    if doc[i].tag_ == 'NNS' and doc[i].text not in (abbreviation.keys() or abbreviation.values()):
+                        entity=re.sub(str(doc[i].text),str(doc[i].lemma_),entity )
+                        entity_raw=entity
             #match hyphen in chemical entity and remove it  # Rh-Co --> RhCo
             match_hyph = re.findall(r'(([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?))', entity) 
-            if match_hyph and entity not in abbreviations.values():
+            if match_hyph and entity not in abbreviation.values():
                 for i in range(len(match_hyph)):
                     entity = entity.replace(match_hyph[i][0],match_hyph[i][1]+match_hyph[i][2])
             
             #preprocess the entity with spacy: plural to singular
-            doc_list = []
-            doc = nlp(entity)
-            for i in range(len(doc)):
-                if doc[i].tag_ == 'NNS' and doc[i].text not in abbreviation.keys() and doc[i].text not in abbreviation.values():
-                    doc_list.append(str(doc[i].lemma_))
-                else:
-                    doc_list.append(str(doc[i]))
-            entity = " ".join(doc_list)         
-            e_split = entity.split()
-            entity = doc_token(entity, e_split)
+            #doc_list = []
+
+                        
+           #     else:  
+           #         doc_list.append(str(doc[i]))
+           # entity = " ".join(doc_list)         
+           # e_split = entity.split()
+           # entity = doc_token(entity, e_split)
             if re.search(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity): #Rh(111 )
                 i = re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0].replace(' ','')
                 entity = entity.replace(re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0],i)
@@ -467,8 +472,13 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                 categories[entity] = l 
             entity_old = (j,entity,l)  
             a = j+1
+            if entity in raw_entities.keys():
+                raw_entities[entity].append(entity_raw)
+                raw_entities[entity]=[*set(raw_entities[entity])]
+            else:
+                raw_entities[entity]=[entity_raw]
     chem_list = [*set(chem_list)]
-    return categories,chem_list, reac_dict, sup_cat, abbreviation
+    return categories,chem_list, reac_dict, sup_cat, abbreviation,raw_entities
 
 def doc_token(entity, e_split,  j = 0):
     """

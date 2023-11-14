@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Sep 23 14:07:50 2023
-
-@author: smdicher
-"""
+@author: smdicher"""
 from text_mining_1 import load_classes_chebi, delete_files_in_directory, run_text_mining, add_publication
 from preprocess_onto import *
-from onto_extension import preprocess_classes,create_classes_onto
+from onto_extension import preprocess_classes,create_classes_onto 
 from txt_extract import get_abstract, get_metadata
 from CatalysisIE.model import *
 from CatalysisIE.utils import *
@@ -38,8 +36,8 @@ for i in glob.iglob(path):
         if p_id == None:
             print(p_id)
             continue
-        chem_list, categories,onto_new_dict, sup_cat, abbreviation, missing, match_dict, rel_synonym, reac_dict = run_text_mining(abstract,model, onto_class_list)
-        df_entity, rel_synonym, missing_all, match_dict_all = preprocess_classes(categories, abbreviation, sup_cat, rel_synonym, chem_list, missing, match_dict)
+        chem_list, categories,onto_new_dict, sup_cat, abbreviation, missing, match_dict, rel_synonym, reac_dict,entities_raw = run_text_mining(abstract,model, onto_class_list)
+        df_entity, rel_synonym, missing_all, match_dict_all = preprocess_classes(categories, abbreviation, sup_cat, rel_synonym, chem_list, missing, match_dict,entities_raw)
         df_all = pd.concat([df_all, df_entity], axis=0)
         onto_extender()
         created_classes,sup_sub_df = create_classes_onto(abbreviation, sup_cat, missing_all, match_dict_all, df_entity,reac_dict,p_id,rel_synonym,chem_list,onto_new_dict)

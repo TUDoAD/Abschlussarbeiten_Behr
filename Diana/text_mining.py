@@ -312,7 +312,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
             
             #match hyphen in chemical entity and remove it  # Rh-Co --> RhCo
             match_hyph = re.findall(r'(([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?))', entity) 
-            if match_hyph:
+            if match_hyph and entity not in abbreviation.values():
                 for i in range(len(match_hyph)):
                     entity = entity.replace(match_hyph[i][0],match_hyph[i][1]+match_hyph[i][2])
             
