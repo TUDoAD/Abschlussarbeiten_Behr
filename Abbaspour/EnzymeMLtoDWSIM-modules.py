@@ -119,6 +119,12 @@ def new_ELN_to_dict(eln_path):
             pfd_eln_data[matstream_dict[subst]["EntersAtObject"]].update({subst:matstream_dict[subst]})
     
     # Sheet Reactor Specification
+    eln_sheet = pd.read_excel(ELN_xlsx,"Reactor Specification")
+    react_dict = eln_subst_data_to_dict(eln_sheet)    
+    try: 
+        pfd_eln_data[react_dict["isDWSIMObject"]]
+    except:
+        print('Reactor Specification misses proper DWSIM Object')
     
     ##
     
