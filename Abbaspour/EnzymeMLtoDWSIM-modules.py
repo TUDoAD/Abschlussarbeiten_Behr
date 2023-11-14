@@ -119,20 +119,22 @@ def new_ELN_to_dict(eln_path):
             pfd_eln_data[matstream_dict[subst]["EntersAtObject"]].update({subst:matstream_dict[subst]})
     
     # Sheet Reactor Specification
-    eln_sheet = pd.read_excel(ELN_xlsx,"Reactor Specification")
-    react_dict = eln_subst_data_to_dict(eln_sheet)    
+    eln_sheet = pd.read_excel(ELN_xlsx,"Reactor Specification")    
+    react_dict = {}
+    
+    for index, row in eln_sheet.iterrows():
+        reactdict[row["Property"]] = row["Value"]
+    
     try: 
-        pfd_eln_data[react_dict["isDWSIMObject"]]
+        pfd_eln_data[react_dict["isDWSIMObject"]].update(pfd_enl_data)   
     except:
-        print('Reactor Specification misses proper DWSIM Object')
+        print('Reactor Specification misses proper DWSIM Object!')
     
     ##
-    
+    # join substances related data and PFD-related data    
     ext_eln_data["substances"] = subst_eln_data   
     ext_eln_data["PFD"] = pfd_eln_data 
-    
-    
-    
+     
     
     ## import EnzymeML via pyenzyme!
     
