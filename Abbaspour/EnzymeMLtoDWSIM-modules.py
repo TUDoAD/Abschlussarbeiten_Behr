@@ -138,7 +138,7 @@ def new_ELN_to_dict(eln_path):
      
     
     ## import EnzymeML via pyenzyme!
-    
+    enzmldoc = pe.EnzymeMLDocument.fromTemplate("./ELNs/EnzymeML_Template_18-8-2021_KR.xlsm")
     
     return ext_eln_data
 
