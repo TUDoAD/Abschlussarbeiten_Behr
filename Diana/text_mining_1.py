@@ -312,7 +312,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
             
             #match hyphen in chemical entity and remove it  # Rh-Co --> RhCo
             match_hyph = re.findall(r'(([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?))', entity) 
-            if match_hyph:
+            if match_hyph and entity not in abbreviations.values():
                 for i in range(len(match_hyph)):
                     entity = entity.replace(match_hyph[i][0],match_hyph[i][1]+match_hyph[i][2])
             
@@ -368,8 +368,9 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                     pattern = r'\b({}[—–-]\d+[-]?\d*[A-Z]*)\b'.format(c)
                     matches = re.findall(pattern, entity)
                     if matches:
-                        list_spans.append(c)
-                        chem_list.append(matches[0])
+                        if not re.findall(r'{}[—–-]\d+\.'.format(c), entity):
+                            list_spans.append(c)
+                            chem_list.append(matches[0])
                 pattern = r'^[\d,]+[—–-] [a-z]+$' #1,3- butadiene -> 1,3-butadiene
                 if re.search(pattern,entity) or re.search(r'^ [A-Za-z\d—–-]+$|^[A-Za-z\d—–-]+ $',entity):
                     entity=entity.replace(' ','') 
@@ -542,10 +543,11 @@ def chemical_prep(chem_list, onto_class_list):
     onto_new_dict = {}
     synonyms = {}
     onto_dict,inchikey = synonym_dicts(onto_class_list)
+    
     for molecule in chem_list:  
         if re.search(r'^ [A-Za-z\d—–-]+|^[A-Za-z\d—–-]+ $',molecule): 
             molecule = molecule.replace(' ','')
-        if molecule in abbreviation.keys():
+        if molecule in abbreviation.keys(): #check if nessesary
             comp_dict[molecule] = []
             spans = Document(abbreviation[molecule]).cems
             class_list.append(molecule)
@@ -577,6 +579,11 @@ def chemical_prep(chem_list, onto_class_list):
                 
                 if i == 0:
                     class_list, key ,rel_synonym = compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym) #,comp = False
+
+                    if key==False:
+                        chem_list.remove(k)
+                        break
+
                     onto_new_dict[key] = []
                     i += 1
                 if c == k:

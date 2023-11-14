@@ -4,7 +4,7 @@ Created on Sat Sep 23 14:07:50 2023
 
 @author: smdicher
 """
-from text_mining import load_classes_chebi, delete_files_in_directory, run_text_mining, add_publication
+from text_mining_1 import load_classes_chebi, delete_files_in_directory, run_text_mining, add_publication
 from preprocess_onto import *
 from onto_extension import preprocess_classes,create_classes_onto
 from txt_extract import get_abstract, get_metadata
