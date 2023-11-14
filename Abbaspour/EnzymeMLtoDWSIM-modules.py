@@ -164,38 +164,12 @@ def base_ontology_extension(name_base_ontology):
             range = [bool]
             pass
         
-        # Substance parameters can be imported as JSON or XML file 
-        # For later steps: 
-        #    if <indv> hasDWSIMdatabaseEntry True -> read in isImportedAs
         
         class isImportedAs(DataProperty):
             label = 'isImportedAs'
             range = [str]
             pass
         
-        # Object property -> Triplett liest sich: 'Stoffdatenbank liefert chemische Substanz'
-        #class provides(modeledSubstance >> onto.search_one(iri = '*ChemicalSubstance')): pass
-
-    # DWSIM bietet die Möhlichkeit Komponenten zu importieren über: Online-Quellen, Json- oder XML_Dateien
-    # Zusätzlich kann der User über den 'Compound Creator' Stoffe erstellen
-    # So entsteht eine von DWSIM 'abweichende Datenbank'
-        #class DeviatingDatabase(modeledSubstance): pass
-        #class OnlineSource(DeviatingDatabase): pass
-        #class UserDefinedCompound(DeviatingDatabase): pass
-
-        # Object property -> Triplett liest sich: 'User-definierte Komponente schafft abweichende Datenbank'
-       # class creates(UserDefinedCompound >> DeviatingDatabase): pass 
-    
-    # Um selbst erstellte Komponenten der Simulation verfügbar zu machen, müssen diese in dem spezifischen Ordner 'addcomps' hinterlegt sein
-    # Ordner findet sich unter: "C:\Users\49157\AppData\Local\DWSIM8\addcomps"
-       # class AddCompoundFile(UserDefinedCompound): pass      
-        #class XMLfile(AddCompoundFile): pass
-        #class JSONfile(AddCompoundFile): pass
-        
-        # Object property -> Triplett liest sich: 'AddCompound-Ordner muss user-definierte Komponente enthalten'
-        #class mustInclude(AddCompoundFile >> UserDefinedCompound): pass
-
-
     return onto
 
 # Code für die dynamische Erstellung von Komponenten/Substanzen als Klassen
@@ -229,42 +203,7 @@ def subst_classes_from_dict(eln_dict, onto): #sheet: pd.DataFrame, onto):
         code = compile(codestring, "<string>", "exec")
         # Execute code
         exec(code)
-    """
-    reactantRow = -1
-    # Die Zeile ermitteln, in der die Labels der Reaktanten stehen
-    for i in range(len(sheet.index)):
-        if sheet.iloc[i, 0] == "hasCompoundName":
-            reactantRow = i
-            break
-    """
-    """
-    # Das sheet durchsuchen nach der Zeile mit 'inDWSIMdatabase', dann die Spalten in dieser Zeile auslesen
-    for index, row in sheet.iterrows():
-        if row[0] == "inDWSIMdatabase":
-            for j in range(1, len(row)):
-                # Namen des Reaktanten der aktuellen Spalte auslesen
-                substance = sheet.iloc[reactantRow, j]
-                #if row[j] == "True":
-                    # Falls 'inDWSIMdatabase' = "True", Klasse mit 'hasDWSIMdatabaseEntry = true' erzeugen:
-                    # codestring aufsetzen, .format(substance,substance) am Ende ersetzt jeden {}-Teil des Strings mit Inhalt der Variablen substance
-                    # Neue Komponenten müssen als JSON-file über den AddCompoumd-Ordner hinzugefügt werden
-                    # Sind die Komponenten einmal hinzugefügt worden, stehen sie für jede anschließende Simulation zur Verfügung
-                codestring = 
-                            #""with onto:
-                                    class {}(onto.search_one(iri = '*ChemicalSubstance')):
-                                        label = '{}'
-                                        hasDWSIMdatabaseEntry = {}
-                                        pass
-                                    
-                                    substance_indv = {}('ind_{}')
-                            
-                            #"".format(substance, substance, row[j], substance, substance)
-                # Code, der im codestring enthalten ist compilieren
-                code = compile(codestring, "<string>", "exec")
 
-                # Code ausführen
-                exec(code)
-    """
     
     return BaseOnto
 
@@ -334,90 +273,6 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
     # Im vorliegenden Fall weichen die abgeschätzten Werte zu weit von den Literaturwerten ab
     # Weshalb Stoffeigenschaften manuell in der JSON-datei korrigiert wurden
     # und fehlende Stoffdaten durch die des Lösemittels ersetzt
-
-    # Excel Datei 'Ergänzendes Laborbuch' laden
-    # Sheet0 beinhaltet Reaktionsteilnehmer und -koeffizienten
-    # Sheet1 beinhaltet die Stoffdaten, die für den Compound Creator relevant sind
-    # Sheet2 beinhaltet zusätzliche Stoffdaten
-    """
-    sheet0 = pd.read_excel(support_ELN_str, sheet_name=0)
-    sheet1 = pd.read_excel(support_ELN_str, sheet_name=1)
-    sheet2 = pd.read_excel(support_ELN_str, sheet_name=2)
-    # Excel 'Ergänzendes Laborbuch' Sheet3 laden für fehlende Parameter
-    #sheet3 = pd.read_excel(support_ELN_str, sheet_name=3)
-
-##
- #   ELN_xlsx = pd.ExcelFile(support_ELN_str)
- #   sheet1 = pd.read_excel(ELN_xlsx,'Substances and Reactions')
- #   sheet2 = pd.read_excel(ELN_xlsx,'Properties for JSON-file')
- #   sheet3 = pd.read_excel(ELN_xlsx,'Additional Info (Units)')
- #   sheet4 = pd.read_excel(ELN_xlsx,'Reactorspecification')
-    
- #   data = {}
-    ##for col, d in sheet1.iteritems():        
-    
-    
-    
-    #index_EnzymeML_ID = sheet1[sheet1['Property'].str.contains('hasCompoundName')]
-    
-    #index_EnzymeML_ID =sheet1[sheet1['Property'].str.contains('hasEnzymeML_ID')].index[0]
-    
-    
-##
-
-    # Dict, in dem alle Eigenschaften von Laccase hinterlegt sind
-    data0 = {}
-    for row in sheet0.iloc[3:7].iterrows():
-        data0[row[1][0]] = row[1][1]
-
-    for row in sheet1.iloc[3:31].iterrows():
-        data0[row[1][0]] = row[1][1]
-
-    for row in sheet2.iloc[3:14].iterrows():
-        data0[row[1][0]] = row[1][1]
-
-    # Dict, in dem alle Eigenschaften von ABTS_red hinterlegt sind
-    data1 = {}
-    for row in sheet0.iloc[3:7].iterrows():
-        data1[row[1][0]] = row[1][2]
-        
-    for row in sheet1.iloc[3:31].iterrows():
-        data1[row[1][0]] = row[1][2]
-
-    for row in sheet2.iloc[3:14].iterrows():
-        data1[row[1][0]] = row[1][2]
-
-    # Dict, in dem alle Eigenschaften von ABTS_ox hinterlegt sind     
-    data2 = {}
-    for row in sheet0.iloc[3:7].iterrows():
-        data2[row[1][0]] = row[1][3]
-        
-    for row in sheet1.iloc[3:31].iterrows():
-        data2[row[1][0]] = row[1][3]
-
-    for row in sheet2.iloc[3:14].iterrows():
-        data2[row[1][0]] = row[1][3]
-
-    # Dict, in dem alle Eigenschaften von Oxygen hinterlegt sind
-    data3 = {}
-    for row in sheet0.iloc[3:7].iterrows():
-        data3[row[1][0]] = row[1][4]
-
-    # Dict, in dem alle Eigenschaften von Wasser hinterlegt sind
-    data4 = {}
-    for row in sheet0.iloc[3:7].iterrows():
-        data4[row[1][0]] = row[1][5]
-        
-    test_dict = {sheet0.iloc[2,1]: data0, sheet0.iloc[2,2]: data1, sheet0.iloc[2,3]: data2,
-                 sheet0.iloc[2,4]: data3, sheet0.iloc[2,5]: data4}
-    """
-
-    # Aufrufen von Funktion class_creation(),um die Reaktanten in Sheet0 durchzugehen
-    #BaseOnto = class_creation(sheet0, onto)
-
-    # BaseOnto = dataProp_creation(test_dict, BaseOnto)
-
-    # BaseOnto= set_relations(test_dict, BaseOnto)
 
     ##
     eln_dict = new_ELN_to_dict(support_ELN_str)
