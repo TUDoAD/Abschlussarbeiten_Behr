@@ -62,7 +62,8 @@ def eln_subst_data_to_dict(eln_sheet):
     ext_eln_data = {}
     for col, d in eln_sheet.iteritems():
         if col != "Property":
-            sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0].strip()
+            sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0]
+            sub_name = sub_name.strip() if sub_name == str else sub_name 
             if pd.notna(sub_name): ext_eln_data[sub_name] = {}
            # if sub_name in list(ext_eln_data.keys()):
             for index, row in eln_sheet.iterrows():
@@ -108,7 +109,7 @@ def new_ELN_to_dict(eln_path):
     for index, row in eln_sheet.iterrows():
         pfd_eln_data[row["object"].strip()] = {'DWSIM-object type':row["DWSIM-object type"].strip(),
                                        'DWSIM-object argument':int(row["DWSIM-object argument"]) if pd.notna(row["DWSIM-object argument"]) else None, 
-                                       'connection':row["output connected to"].strip()
+                                       'connection':row["output connected to"].strip() if pd.notna(row["output connected to"]) else None,
                                        }
     
     # Sheet Material Streams
