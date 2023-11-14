@@ -123,7 +123,7 @@ def new_ELN_to_dict(eln_path):
     react_dict = {}
     
     for index, row in eln_sheet.iterrows():
-        reactdict[row["Property"]] = row["Value"]
+        react_dict[row["Property"]] = row["Value"]
     
     try: 
         pfd_eln_data[react_dict["isDWSIMObject"]].update(pfd_enl_data)   
