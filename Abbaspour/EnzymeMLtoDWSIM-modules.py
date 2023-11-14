@@ -62,7 +62,7 @@ def eln_subst_data_to_dict(eln_sheet):
     ext_eln_data = {}
     for col, d in eln_sheet.iteritems():
         if col != "Property":
-            sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0]
+            sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0].strip()
             if pd.notna(sub_name): ext_eln_data[sub_name] = {}
            # if sub_name in list(ext_eln_data.keys()):
             for index, row in eln_sheet.iterrows():
@@ -85,7 +85,7 @@ def new_ELN_to_dict(eln_path):
     # load substances and properties into dictionary
     for col, d in eln_sheet.iteritems():
         if col != "Property":
-            sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0]
+            sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0].strip()
             subst_eln_data[sub_name] = {}
             for index, row in eln_sheet.iterrows():
                 if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
@@ -97,7 +97,7 @@ def new_ELN_to_dict(eln_path):
     for sheet_name in ['Properties for JSON-file', 'Additional Info (Units)']:
         eln_sheet = pd.read_excel(ELN_xlsx,sheet_name)
         add_dict = eln_subst_data_to_dict(eln_sheet)
-        subst_eln_data = {key: {**subst_eln_data.get(key, {}), **add_dict.get(key, {})} for key in set(subst_eln_data) | set(add_dict)}    
+        subst_eln_data = {key.strip(): {**subst_eln_data.get(key, {}), **add_dict.get(key, {})} for key in set(subst_eln_data) | set(add_dict)}    
     
     ##
     
@@ -106,9 +106,9 @@ def new_ELN_to_dict(eln_path):
     eln_sheet = pd.read_excel(ELN_xlsx,"PFD")
     pfd_eln_data = {}
     for index, row in eln_sheet.iterrows():
-        pfd_eln_data[row["object"]] = {'DWSIM-object type':row["DWSIM-object type"],
+        pfd_eln_data[row["object"].strip()] = {'DWSIM-object type':row["DWSIM-object type"].strip(),
                                        'DWSIM-object argument':int(row["DWSIM-object argument"]) if pd.notna(row["DWSIM-object argument"]) else None, 
-                                       'connection':row["output connected to"]
+                                       'connection':row["output connected to"].strip()
                                        }
     
     # Sheet Material Streams
@@ -126,9 +126,9 @@ def new_ELN_to_dict(eln_path):
         react_dict[row["Property"]] = row["Value"]
     
     try: 
-        pfd_eln_data[react_dict["isDWSIMObject"]].update(pfd_enl_data)   
+        pfd_eln_data[react_dict["isDWSIMObject"]].update(react_dict)   
     except:
-        print('Reactor Specification misses proper DWSIM Object!')
+        print('Warning: Sheet Reactor Specification in ELN misses proper DWSIM Object!')
     
     ##
     # join substances related data and PFD-related data    
