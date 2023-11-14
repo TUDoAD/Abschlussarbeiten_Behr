@@ -201,18 +201,43 @@ def base_ontology_extension(name_base_ontology):
 # Code für die dynamische Erstellung von Komponenten/Substanzen als Klassen
 # Die Elemente einer Stoffliste werden entweder der Oberklasse JSON-Datei oder DWSIM-Komponente subsumiert
 
-def class_creation(sheet: pd.DataFrame, onto):
-    #TODO: Übergeben des ELN-Dicts als parameter
-    #      Lookup, ob es die Substanz schon als Ontologie-Klasse gibt
+def subst_classes_from_dict(eln_dict, onto): #sheet: pd.DataFrame, onto):
+    #TODO: Lookup, ob es die Substanz schon als Ontologie-Klasse gibt !
     #      
     BaseOnto = onto
+    
+    for subst in list(eln_dict["substances"].keys()):
+        if onto.search_one(label = subst) != None:
+            codestring = """with onto:
+                            substance_indv = {}('ind_{}')
+                """.format(subst, subst)
+        elif onto.search_one(iri = "*{}".format(subst)) != None:
+            codestring = """with onto:
+                            substance_indv = {}('ind_{}')
+                """.format(subst, subst)
+            
+        else:
+            codestring = """with onto:
+                        class {}(onto.search_one(iri = '*ChemicalSubstance')):
+                            label = '{}'
+                            pass                    
+                        substance_indv = {}('ind_{}')
+                
+                """.format(subst, subst, subst, subst)
+        #
+        # compile codestring
+        code = compile(codestring, "<string>", "exec")
+        # Execute code
+        exec(code)
+    """
     reactantRow = -1
     # Die Zeile ermitteln, in der die Labels der Reaktanten stehen
     for i in range(len(sheet.index)):
         if sheet.iloc[i, 0] == "hasCompoundName":
             reactantRow = i
             break
-
+    """
+    """
     # Das sheet durchsuchen nach der Zeile mit 'inDWSIMdatabase', dann die Spalten in dieser Zeile auslesen
     for index, row in sheet.iterrows():
         if row[0] == "inDWSIMdatabase":
@@ -224,7 +249,8 @@ def class_creation(sheet: pd.DataFrame, onto):
                     # codestring aufsetzen, .format(substance,substance) am Ende ersetzt jeden {}-Teil des Strings mit Inhalt der Variablen substance
                     # Neue Komponenten müssen als JSON-file über den AddCompoumd-Ordner hinzugefügt werden
                     # Sind die Komponenten einmal hinzugefügt worden, stehen sie für jede anschließende Simulation zur Verfügung
-                codestring = """with onto:
+                codestring = 
+                            #""with onto:
                                     class {}(onto.search_one(iri = '*ChemicalSubstance')):
                                         label = '{}'
                                         hasDWSIMdatabaseEntry = {}
@@ -232,12 +258,14 @@ def class_creation(sheet: pd.DataFrame, onto):
                                     
                                     substance_indv = {}('ind_{}')
                             
-                            """.format(substance, substance, row[j], substance, substance)
+                            #"".format(substance, substance, row[j], substance, substance)
                 # Code, der im codestring enthalten ist compilieren
                 code = compile(codestring, "<string>", "exec")
 
                 # Code ausführen
                 exec(code)
+    """
+    
     return BaseOnto
 
 def dataProp_creation(dataProp_dict, onto):
@@ -385,7 +413,7 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
     """
 
     # Aufrufen von Funktion class_creation(),um die Reaktanten in Sheet0 durchzugehen
-    BaseOnto = class_creation(sheet0, onto)
+    #BaseOnto = class_creation(sheet0, onto)
 
     # BaseOnto = dataProp_creation(test_dict, BaseOnto)
 
@@ -394,16 +422,18 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
     ##
     eln_dict = new_ELN_to_dict(support_ELN_str)
     
-    BaseOnto = dataProp_creation(eln_dict, BaseOnto)
+    BaseOnto = subst_classes_from_dict(eln_dict, onto)
+    
+    BaseOnto = dataProp_creation(eln_dict["substances"], BaseOnto)
 
-    BaseOnto= set_relations(eln_dict, BaseOnto)
+    BaseOnto= set_relations(eln_dict["substances"], BaseOnto)
     # Ontologie zwischenspeichern
     BaseOnto.save(file="./ontologies/Substances_and_"+ onto_str +".owl", format="rdfxml")
 
     #####
     # Ontology-Extension der Base Ontology #
     #####
-    return onto, test_dict
+    return onto, eln_dict
 
 ##
 #
