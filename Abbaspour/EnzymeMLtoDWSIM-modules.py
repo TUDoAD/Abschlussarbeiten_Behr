@@ -3,6 +3,7 @@
 Created on Mon Sep 25 13:58:00 2023
 
 @author: Alexander Behr
+@author: Elnaz Abbaspour
 """
 
 
@@ -175,7 +176,6 @@ def base_ontology_extension(name_base_ontology):
 # Die Elemente einer Stoffliste werden entweder der Oberklasse JSON-Datei oder DWSIM-Komponente subsumiert
 
 def subst_classes_from_dict(eln_dict, onto): #sheet: pd.DataFrame, onto):
-    #TODO: Lookup, ob es die Substanz schon als Ontologie-Klasse gibt !
     #      
     for subst in list(eln_dict["substances"].keys()):
         # include as individual, if label is already present
@@ -298,9 +298,6 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
 ##
 
 
-
-
-
 def run():
    # enzymeML_readin("EnzymeML_Template_18-8-2021_KR")
    enzmldoc = pe.EnzymeMLDocument.fromTemplate("./ELNs/EnzymeML_Template_18-8-2021_KR.xlsm")
@@ -313,31 +310,4 @@ def run():
 #eln_str = "./ELNs/New-ELN_Kinetik_1.xlsx"
 #eln_dict = new_ELN_to_dict(eln_str)
 
-    
-"""
-eln_sheet = pd.read_excel(ELN_xlsx, sheet_name)
-for col, d in eln_sheet.iteritems():
-    if col != "Property":
-        sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0]
-        #ext_eln_data[sub_name] = {}
-        if sub_name in list(ext_eln_data.keys()):
-            for index, row in eln_sheet.iterrows():
-                if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
-                    ext_eln_data[sub_name][row["Property"]] = row[col]
-"""
-
-    
-
-"""
-subst_row_sheet2 = sheet2[sheet2['Property'].str.contains('hasCompoundName')]
-for col in sheet2: 
-    for subst in ext_eln_data:    
-        if ext_eln_data[subst]["inDWSIMdatabase"] 
-        
-"""        
-    
-    #index_EnzymeML_ID = sheet1[sheet1['Property'].str.contains('hasCompoundName')]
-    
-    
-    
-    
+   
