@@ -164,7 +164,6 @@ def base_ontology_extension(name_base_ontology):
             range = [bool]
             pass
         
-        
         class isImportedAs(DataProperty):
             label = 'isImportedAs'
             range = [str]
@@ -178,18 +177,20 @@ def base_ontology_extension(name_base_ontology):
 def subst_classes_from_dict(eln_dict, onto): #sheet: pd.DataFrame, onto):
     #TODO: Lookup, ob es die Substanz schon als Ontologie-Klasse gibt !
     #      
-    BaseOnto = onto
-    
     for subst in list(eln_dict["substances"].keys()):
+        # include as individual, if label is already present
         if onto.search_one(label = subst) != None:
             codestring = """with onto:
-                            substance_indv = {}('ind_{}')
+                            substance_indv = onto.search_one(label = "{}")('ind_{}')
                 """.format(subst, subst)
+       
+        # include as individual, if part in IRI is already present
         elif onto.search_one(iri = "*{}".format(subst)) != None:
             codestring = """with onto:
-                            substance_indv = {}('ind_{}')
+                            substance_indv = onto.search_one(iri = "*{}")('ind_{}')
                 """.format(subst, subst)
-            
+        
+        # include as class and individual of class
         else:
             codestring = """with onto:
                         class {}(onto.search_one(iri = '*ChemicalSubstance')):
@@ -205,7 +206,7 @@ def subst_classes_from_dict(eln_dict, onto): #sheet: pd.DataFrame, onto):
         exec(code)
 
     
-    return BaseOnto
+    return onto
 
 def dataProp_creation(dataProp_dict, onto):
     # Benötigte Relationen bestimmen via set() -> auch bei Mehrfachnennung
@@ -307,10 +308,10 @@ def run():
   # onto, test_dict = substance_knowledge_graph("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", onto, "BaseOnto2")
    onto, test_dict = substance_knowledge_graph("./ELNs/New-ELN_Kinetik_1.xlsx", onto, "BaseOnto2")
    
-   return test_dict
+   #return test_dict
 
-eln_str = "./ELNs/New-ELN_Kinetik_1.xlsx"
-eln_dict = new_ELN_to_dict(eln_str)
+#eln_str = "./ELNs/New-ELN_Kinetik_1.xlsx"
+#eln_dict = new_ELN_to_dict(eln_str)
 
     
 """
