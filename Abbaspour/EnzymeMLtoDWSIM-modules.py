@@ -85,13 +85,13 @@ def new_ELN_to_dict(eln_path):
     # load substances and properties into dictionary
     for col, d in eln_sheet.iteritems():
         if col != "Property":
-            sub_name = sheet1[sheet1['Property'].str.contains('hasCompoundName')][col].iloc[0]
+            sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0]
             subst_eln_data[sub_name] = {}
             for index, row in eln_sheet.iterrows():
                 if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
                     subst_eln_data[sub_name][row["Property"]] = row[col]
     
-    subst_eln_data = eln_subst_data_to_dict(sheet1)
+    subst_eln_data = eln_subst_data_to_dict(eln_sheet)
     
     ## adding dicts to already existing dict
     for sheet_name in ['Properties for JSON-file', 'Additional Info (Units)']:
@@ -115,7 +115,9 @@ def new_ELN_to_dict(eln_path):
     matstream_dict = eln_subst_data_to_dict(eln_sheet)
     ## ALEX HIER WEITER
     
-    for subst in matstreams_
+    for subst in matstream_dict: 
+        if "EntersAtObject" in matstream_dict[subst]:
+            pfd_eln_data[matstream_dict[subst]["EntersAtObject"]].update({subst:matstream_dict[subst]})
     
     ##
     
