@@ -20,6 +20,10 @@
 
 
 ## Coding
+substances eingebaut, jetzt noch PFD-teil des additional dicts in ontologie
+dann SBO Terms/EnzymeML infos in Ontologie einbringen
+Dann rework der DWSIM-Funktionen 
+
 
 ### Ontologien
 - Testaufbau der finalen Ontologie in **Finale_Onto_mod.owl**
@@ -34,10 +38,6 @@
 
 - General Class Axioms in Python -> Links von Hendrik anschauen!
 - Reac4Cat Prinzip einbauen
-
-### ELN-REWORK
-Reactorspecification neu Strukturieren + py Code !
-
 
 ### Reaction + Substances
 Catalyst: [Laccase] -> Laccase Substance: http://purl.obolibrary.org/obo/GO_1990204 Laccase activity: http://purl.obolibrary.org/obo/GO_0016682
