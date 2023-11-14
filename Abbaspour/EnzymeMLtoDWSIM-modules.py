@@ -102,7 +102,7 @@ def new_ELN_to_dict(eln_path):
     ##
     
     # load PFD data
-    ## ALEX hier weiter
+    # Sheet PFD
     eln_sheet = pd.read_excel(ELN_xlsx,"PFD")
     pfd_eln_data = {}
     for index, row in eln_sheet.iterrows():
@@ -111,18 +111,25 @@ def new_ELN_to_dict(eln_path):
                                        'connection':row["output connected to"]
                                        }
     
+    # Sheet Material Streams
     eln_sheet = pd.read_excel(ELN_xlsx,"Material Streams")
-    matstream_dict = eln_subst_data_to_dict(eln_sheet)
-    ## ALEX HIER WEITER
-    
+    matstream_dict = eln_subst_data_to_dict(eln_sheet)    
     for subst in matstream_dict: 
         if "EntersAtObject" in matstream_dict[subst]:
             pfd_eln_data[matstream_dict[subst]["EntersAtObject"]].update({subst:matstream_dict[subst]})
+    
+    # Sheet Reactor Specification
     
     ##
     
     ext_eln_data["substances"] = subst_eln_data   
     ext_eln_data["PFD"] = pfd_eln_data 
+    
+    
+    
+    
+    ## import EnzymeML via pyenzyme!
+    
     
     return ext_eln_data
 
