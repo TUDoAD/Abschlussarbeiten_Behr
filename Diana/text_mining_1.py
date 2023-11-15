@@ -323,15 +323,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                 for i in range(len(match_hyph)):
                     entity = entity.replace(match_hyph[i][0],match_hyph[i][1]+match_hyph[i][2])
             
-            #preprocess the entity with spacy: plural to singular
-            #doc_list = []
 
-                        
-           #     else:  
-           #         doc_list.append(str(doc[i]))
-           # entity = " ".join(doc_list)         
-           # e_split = entity.split()
-           # entity = doc_token(entity, e_split)
             if re.search(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity): #Rh(111 )
                 i = re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0].replace(' ','')
                 entity = entity.replace(re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0],i)
