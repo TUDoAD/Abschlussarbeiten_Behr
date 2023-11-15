@@ -73,7 +73,7 @@ def upload():
     ## Add Information to Ontologie
     # load ontology
     onto = owlready2.get_ontology(onto_path).load()
-
+    print("Extend Ontology...")
     # load simulation files
     for file in os.listdir(folder_path):
 
@@ -97,8 +97,8 @@ def upload():
                     for j in range(len(data[i]["Mixture"][0]["mole_fraction"])):
                         if "CO2" in data[i]["Mixture"][0]["mole_fraction"][j][0]:
                             frac_co2 = data[i]["Mixture"][0]["mole_fraction"][j][1]
-                        if "CO" in data[i]["Mixture"][0]["mole_fraction"][j][0]:
-                            frac_co = data[i]["Mixture"][0]["mole_fraction"][j][1]
+                        #if "CO" in data[i]["Mixture"][0]["mole_fraction"][j][0]:
+                        #    frac_co = data[i]["Mixture"][0]["mole_fraction"][j][1]
                         if "H2" in data[i]["Mixture"][0]["mole_fraction"][j][0]:
                             frac_h2 = data[i]["Mixture"][0]["mole_fraction"][j][1]
                         if "Ar" in data[i]["Mixture"][0]["mole_fraction"][j][0]:
@@ -124,15 +124,15 @@ def upload():
                 class_string = "*" + reaction_type
                 class_reaction_type = onto.search(iri=class_string)[0]
 
-                individual_name = "Sim_" + reaction_type + "_" + str(frac_co2) + "_" + str(temperature) + "K_" + str(pressure) + "Pa_" + str(velocity) + "ms"
+                individual_name = "Sim_" + reaction_type + "_" + str(frac_co2) + "_" + str(temperature) + "K_" + str(pressure) + "Pa_" + str(velocity) + "ms_wd"
                 individual = class_reaction_type(individual_name)
                 
                 individual.hasMolarFractionCarbonDioxide.append(frac_co2)
                 individual.hasMolarFractionHydrogen.append(frac_h2)
-                if frac_co:
-                    individual.hasMolarFractionCarbonMonoxide.append(frac_co)
+                #if frac_co:
+                #    individual.hasMolarFractionCarbonMonoxide.append(frac_co)
                 if frac_ar:
-                    individual.hasMolarFractionCarbonMonoxide.append(frac_ar)
+                    individual.hasMolarFractionArgon.append(frac_ar)
                     
                 url = "https://nfdirepo.fokus.fraunhofer.de/dataset.xhtml?persistentId=" + ds_pid + "&version=DRAFT"
                 ind_comment = f"Dataset: {url}"
