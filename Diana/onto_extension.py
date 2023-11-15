@@ -11,7 +11,7 @@ from preprocess_onto import *
 from chemdataextractor import Document
 
 
-def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list, missing_all, match_dict_all):
+def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list, missing_all, match_dict_all,entities_raw):
     """
     
 
@@ -45,6 +45,8 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
     global nlp
     global comment_treat
     global comment_charac
+    global entities_raw1
+    entities_raw1=entities_raw
     not_process=['Characterization','Treatment']
     nlp = spacy.load('en_core_web_sm')
     classes = {}
@@ -85,12 +87,12 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
         if l in not_process:
             if l == 'Treatment':
                 comment_treat.append(entity)
-            if l==' Characterization':
+            else:
                 comment_charac.append(entity)
         elif entity in classes.keys() or entity in abbreviation.values():
             continue
         else:
-
+            entity_raw=entity
             chem_all=[cem for cem in chem_list if cem in entity]
             seen_items = set()
 
@@ -215,7 +217,12 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
                         if c_t not in spans_n:    
                             spans_n.append(c_t) 
             spans_dict[entity].extend(spans_n)                
-        
+            if entity!=entity_raw:
+                if entity in entities_raw1.keys():
+                    entities_raw1[entity].extend(entities_raw1[entity_raw])
+                    entities_raw1[entity]=[*set(entities_raw1[entity])]
+                else:
+                    entities_raw1[entity]=entities_raw1[entity_raw]
         if entity in chem_list or set(entity.split()).issubset(chem_list):            
             if entity in rel_synonym.keys():
                 c_list = [rel_synonym[entity]]
@@ -291,6 +298,8 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
     match_dict_all.update(match_dict)      
     comment_treat=[*set(comment_treat)]
     comment_charac=[*set(comment_charac)]
+    print('comment_treat:{}'.format(comment_treat))
+    print('comment_charac:{}'.format(comment_charac))
     return df_entity, rel_synonym, missing_all, match_dict_all
 
 def shortcut_add_class(ele_old,classes_n, not_del, value, i, key ):
@@ -366,7 +375,7 @@ def check_in_children(token, token_new,list_token):
 
 def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,reac_dict,p_id,rel_synonym,chem_list,onto_new_dict):
     global num
-    print(sup_cat)
+    print(entities_raw1)
     nlp = spacy.load('en_core_web_sm')
     num = 0 
     sup_sub_df = pd.DataFrame(columns=['super_class','subclass'])
@@ -387,6 +396,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                         cem = onto.search_one(label = c)
                         if not cem:
                             cem = onto.search_one(label = c + ' (molecule)')
+                        print('cem:{}'.format(c))
                         onto,_ = add_individum(onto,cem, c,p_id = p_id) 
                     
                 elif len(c.split()) > 1:
@@ -493,7 +503,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
         for row in df_entity.itertuples():
             
                 if row.cems:
-                    
+                    e_ind=[]
                     if row.category == 'Catalyst' and row.entity in chem_sub.keys():
                         e_ind = [i for i in list(onto.search(label=row.entity)) if i in list(onto.individuals())][0]
                         for c in chem_sub[row.entity]: #assign catalyst roles
@@ -537,7 +547,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                         elif row.category=='Catalyst':
                             if c==row.entity:
                                 ind.RO_0000087.append(cat_role_i) #'has role' = RO_0000087
-                            elif e_ind not in ind.support_component_of:                          
+                            elif e_ind and e_ind not in ind.support_component_of:                          
                                 ind.catalytic_component_of.append(e_ind)
                 
                 if row.category== 'Reaction':
@@ -558,9 +568,8 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                                         print(r+" was skipped in reac_dict")
                                         continue
                             ind.RO_0000057.append(cem_i) #'has participant' = RO_0000057
-                if row.entity in abbreviation.keys(): # check for abbreviations
+                if row.entity in abbreviation.keys() and e_ind: # check for abbreviations
                     e_ind.comment.append(abbreviation[row.entity])
-                         
 
         for sup,v in sup_cat.items():
             sup = rel_synonym[sup] if sup in rel_synonym.keys() else sup
@@ -605,6 +614,9 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
             except:
                 continue
             ind.mentioned_in.append(pub_new)
+            if entity in entities_raw1.keys() and entity != entities_raw1[entity][0]:
+                for i in entities_raw1[entity]:
+                    ind.comment.append(i)
         for short,entity in rel_synonym.items():
             inds = [i for i in list(onto.search(label=entity))]
             for i in inds:
