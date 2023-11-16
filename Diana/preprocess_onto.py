@@ -69,9 +69,10 @@ def create_list_IRIs(class_list, IRI_json_filename = 'iriDictionary'):
             match_dict = search_value_in_nested_dict(entity, onto_names, onto_dict, match_dict)
         else:
 
-            match_dict['dummy_'+entity]=entity
+            match_dict['dummy_'+entity]=[entity,entity]
+    values=[i[0] for i in match_dict.values()]
             
-    missing = [e for e in class_list if e not in match_dict.values() and e not in entities_all] 
+    missing = [e for e in class_list if e not in values and e not in entities_all] 
 
     for key,value in match_dict.items():
         x = []
@@ -88,10 +89,10 @@ def create_list_IRIs(class_list, IRI_json_filename = 'iriDictionary'):
             if key in double_afo or key in x or O == onto_old.upper() or 'dummy' in key:
                 continue
             elif key in list_IRIs:
-                write_in_txt(key,value,O)
+                write_in_txt(key,value[0],O)
                 x.append(key)
             else:
-                write_in_txt(key, value, 'diverse')
+                write_in_txt(key, value[0], 'diverse')
     return missing, match_dict
         
 def write_in_txt(IRI,label,onto_name):
@@ -131,7 +132,7 @@ def search_value_in_nested_dict(value, onto_names, onto_dict, match_dict):
         for IRI in onto_dict[k].keys() :
             for key, val in onto_dict[k][IRI].items():
                 if val and (value.lower() == val.lower() or value.lower()+' (molecule)'==val.lower()):
-                    match_dict[IRI] = value            
+                    match_dict[IRI] = [value,val]            
     return match_dict
 
 def onto_extender ():
