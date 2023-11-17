@@ -5,6 +5,7 @@ Created on Wed Oct 25 09:32:55 2023
 @author: smmcvoel
 """
 
+import json
 import CallSubprocess
 import EvaluateMethanation
 
@@ -20,13 +21,16 @@ ATTENTION:
 
 # set path for the data-sheet
 "!!USER-INPUT!!"
-name = "NewReaction_06_DataSheet"
+name = "NewReaction_01_DataSheet"
 path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/"
 
 # specify the simulated temperature, pressure and velocity
-temperature = [273, 373, 473, 573, 673, 773, 873] # K
-pressure = [100000, 500000, 1000000, 2000000, 3000000] # Pa
-velocity = [0.0001, 0.001, 0.01, 0.1, 1] # m/s
+with open("parameter.json") as json_file:
+    para = json.load(json_file)
+    
+temperature = para["temperature"] # K
+pressure = para["pressure"] # Pa
+velocity = para["velocity"] # m/s
 
 # execute the script which calls the simulation as subprocess
 CallSubprocess.call_subprocess(name, temperature, pressure, velocity, path)

@@ -12,9 +12,12 @@ competency questions:
     - Give me all individuals with a turnover (CO2) bigger than 0.X
     - Give me all individuals which are nearest to the experimental file (dataverse2)
 """
-
+import json
 import owlready2
 import pandas as pd
+
+from pyDataverse.api import NativeApi, DataAccessApi
+from pyDataverse.models import Dataset, Datafile
 
 #print("Loading Ontology...")
 onto_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-Onto_merged-and-inferred.owl"
@@ -153,10 +156,13 @@ def query_3(molefrac_co2=None, temperature=None, pressure=None, velocity=None):
     PREFIX exp: <http://example.org#>
     """
     # simulated parameter combinations
+    with open("parameter.json") as json_file:
+        para = json.load(json_file)
+    
     list_mole = [0.04, 0.2, 0.5] # [-]
-    list_temp = [273, 373, 473, 573, 673, 773, 873] # K
-    list_pres = [100000, 500000, 1000000, 2000000, 3000000] # Pa
-    list_velo = [0.0001, 0.001, 0.01, 0.1, 1] # m/s
+    list_temp = para["temperature"] # K
+    list_pres = para["pressure"] # Pa
+    list_velo = para["velocity"] # m/s
     
     sparql_query = f"""
     SELECT ?individual
@@ -290,7 +296,7 @@ def query_3(molefrac_co2=None, temperature=None, pressure=None, velocity=None):
     
     
 def query_4(x_co2):
-    # Query for some unspecific parameter
+    # Query for some unspecific turnover
     # e.g.: Query.query_4(x_co2 = 0.2)
     sparqlstr = """
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -407,4 +413,192 @@ def query_5(temperature=None, pressure=None, velocity=None, downstream=None):
     df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file"])
     path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
     df.to_excel(path + "query_5_results.xlsx")
+
+
+def query_6():
+    # Query for a set of parameter which comes from experimental data (from API)
+    # set file name from which u want to use the parameters
+    par_file = "Exp15_v0.2.8_eop.xlsx"
+    
+    # Get parameter from dataverse
+    base_url = "https://repo4cat.hlrs.de/"
+    api_token = "1e98ec1a-ddf0-4fbd-8348-d5ab86524e70"
+    dataverse_alias = "tu-do-ad"
+    
+    api = NativeApi(base_url, api_token)
+    data_api = DataAccessApi(base_url, api_token)
+
+    # DOI of dataset
+    DOI = "hdl:21.T11978/repo4cat-proto-1030&version=DRAFT"
+    dataset = api.get_dataset(DOI)
+    
+    file_list = dataset.json()["data"]["latestVersion"]["files"]
+    
+    for file in file_list:
+        filename = file["label"]
+        
+        if filename == par_file:
+            #print(f"{par_file} found in dataset!")
+            file_id = file["dataFile"]["id"]
+            
+            response = data_api.get_datafile(file_id)
+            excel = pd.read_excel(filename, sheet_name=[1,2,4])
+            user_quest = excel[1]
+            experi = excel[2]
+            calc = excel[4] 
+    
+    for i in range(len(user_quest)):
+        if user_quest.at[i, "Unnamed: 2"] == "reactor inlet temperature":
+            temperature = user_quest.at[i, "Unnamed: 4"] # K
+        if user_quest.at[i, "Unnamed: 2"] == "pressure":
+            pressure = user_quest.at[i, "Unnamed: 4"] * 100000 # bar -> Pa
+    
+    for i in range(len(calc)):
+        if calc.at[i, "Unnamed: 0"] == "linear velocity":
+            velocity = calc.at[i, "Unnamed: 1"]
+    
+    # sparql query
+    sparqlstr = """
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX afo: <http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#>
+    PREFIX exp: <http://example.org#>
+    """
+    
+    sparql_query = f"""
+    SELECT ?individual
+    
+    WHERE{{ 
+    """
+    
+    with open("parameter.json") as json_file:
+        para = json.load(json_file)
+        
+    list_temp = para["temperature"] # K
+    list_pres = para["pressure"] # Pa
+    list_velo = para["velocity"] # m/s
+    
+    temperature = float(temperature)
+    if temperature not in list_temp:
+        min_temp = max(filter(lambda x: x < temperature, list_temp), default=None)
+        max_temp = min(filter(lambda x: x > temperature, list_temp), default=None)
+        
+        if min_temp and not max_temp:
+            sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionTemperature ?temp.
+            FILTER (?temp={temperature} || ?temp={min_temp})
+            """
+        elif not min_temp and max_temp:
+            sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionTemperature ?temp.
+            FILTER (?temp={temperature} || ?temp={max_temp})
+            """
+        elif min_temp and max_temp:
+            sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionTemperature ?temp.
+            FILTER (?temp={temperature} || ?temp={min_temp} || ?temp={max_temp})
+            """
+        else:
+            print("Some error occured in query_3 while setting the temperature")
+    else:
+        temperature = float(temperature)
+        sparql_query = sparql_query + f"?individual afo:hasSimulatedReactionTemperature {temperature}\n"
+        
+    pressure = float(pressure)
+    if pressure not in list_pres:
+        min_pres = max(filter(lambda x: x < pressure, list_pres), default=None)
+        max_pres = min(filter(lambda x: x > pressure, list_pres), default=None)
+        
+        if min_pres and not max_pres:
+            sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionPressure ?pres.
+            FILTER (?pres={pressure} || ?pres={min_pres})
+            """
+        elif not min_pres and max_pres:
+            sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionPressure ?pres.
+            FILTER (?pres={pressure} || ?pres={max_pres})
+            """
+        elif min_pres and max_pres:
+            sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionPressure ?pres.
+            FILTER (?pres={pressure} || ?pres={min_pres} || ?pres={max_pres})
+            """
+        else:
+            print("Some error occured in query_3 while setting the pressure")
+    else:
+        temperature = float(temperature)
+        sparql_query = sparql_query + f"?individual afo:hasSimulatedReactionPressure {pressure}\n"
+
+    velocity = float(velocity)
+    if velocity not in list_velo:
+        min_velo = max(filter(lambda x: x < velocity, list_velo), default=None)
+        max_velo = min(filter(lambda x: x > velocity, list_velo), default=None)
+        
+        if min_velo and not max_velo:
+            sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionVelocity ?velo.
+            FILTER (?velo={velocity} || ?velo={min_velo})
+            """
+        elif not min_velo and max_velo:
+            sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionVelocity ?pres.
+            FILTER (?velo={velocity} || ?velo={max_velo})
+            """
+        elif min_velo and max_velo:
+            sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionVelocity ?pres.
+            FILTER (?velo={velocity} || ?velo={min_velo} || ?velo={max_velo})
+            """
+        else:
+            print("Some error occured in query_3 while setting the velocity")
+    else:
+        temperature = float(temperature)
+        sparql_query = sparql_query + f"?individual afo:hasSimulatedReactionVelocity {velocity}\n"
+
+    sparql_query = sparql_query + "}"
+    #print(sparql_query)
+    
+    sparqlstr = sparqlstr + sparql_query
+    
+    try:
+        individual_list = list(owlready2.default_world.sparql(sparqlstr))
+    except:
+        individual_list = []
+        print("Some error occured while executing query_3!")
+        
+    # get urls and format query results
+    results = []
+    for i in range(len(individual_list)):
+        individual = individual_list[i][0]
+        comments = individual.comment
+        
+        for j in range(len(comments)):
+            if "DWSIM-file" in comments[j]:
+                dwsim_url = comments[j].split("DWSIM-file: ")[1]
+            if "LinkML-file" in comments[j]:
+                linkml_url = comments[j].split("LinkML-file: ")[1]
+        results.append([individual, dwsim_url, linkml_url])
+    
+    df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file"])
+    path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
+    df.to_excel(path + "query_6_results.xlsx")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     

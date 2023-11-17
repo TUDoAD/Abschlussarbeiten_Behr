@@ -36,7 +36,7 @@ def upload():
     dataverse_alias = "tudo-ProcessSimulations"
     
     # create a NativeAPI instance
-    api = NativeApi (base_url, api_key)
+    api = NativeApi(base_url, api_key)
     response = api.get_info_version()
     #print("API-status: " + str(response.json()))
     
