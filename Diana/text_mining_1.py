@@ -461,6 +461,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                     chem_list.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_list and cem not in list_spans])
                                          
                 #else:
+                
                 categories[entity] = l 
             entity_old = (j,entity,l)  
             a = j+1
@@ -787,7 +788,9 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
     return class_list, key, rel_synonym
 '''
 #onto_new= onto_name+'_upd'
-text="""1. Introduction
+text="""Unprecedented bimetallic cobalt–rhodium layered hydrotalcite-type materials (CoRh-HT) were successfully prepared and used as potential catalysts for highly selective hydroformylation of alkenes to aldehydes. This is the first report on hydroformylation studied using a Co–Rh-based heterogeneous catalyst that contains cobalt present in the Co2+ and Co3+ oxidation states and rhodium present as an Rh3+ ion in the framework. Presence of Rh3+ along with Co2+ and Co3+ in the layered framework was confirmed based on various physicochemical studies such as HRTEM, powder X-ray diffraction, and X-ray photoelectron spectroscopy.
+
+1. Introduction
 Hydroformylation is one of the most powerful and widely applied industrial processes employed for the synthesis of aldehydes from olefins by using syngas (a mixture of H2 and CO) through an atom-efficient method [1,2]. Active species in homogeneous catalysts are tunable; therefore, homogeneous catalysts afford more efficient systems than heterogeneous catalysts. Nevertheless, heterogeneous catalysts are of considerable interest for use in industrial applications because they can be conveniently recovered and recycled [3].Transition-metal-based catalysts containing metals such as Fe, Co, Ru, Rh, Pd, Pt, and Os have been extensively studied [[4], [5], [6]]. Among these catalysts, Rh-, Co-, and Pt-based catalysts are considered to be powerful tools for achieving selectivity in hydroformylation reactions [[4], [5], [6], [7]].To date, Rh- and Co-based catalysts are most widely used for hydroformylation due to their selectivity toward linear aldehydes and their abundance and affordability [[8], [9], [10], [11], [12]]. Rhodium complexes with phosphorus-based ligands are crucial for homogeneous hydroformylation reactions. Attempts have also been made to stabilize Rh in polymer matrices, porous polymers, ionic liquids, supercritical fluids, etc. [[8], [9], [10], [11], [12]]. However, difficulties associated with the recovery and recycling of these materials restrict their extensive application [13,14]. Therefore, the development of novel catalytic systems that combine the advantages of homogenous and heterogeneous catalysis is still a major aim in modern chemistry. Further, to date, no efficient catalyst has been proposed for hydroformylation that functions under ambient reaction conditions, such as low temperatures, pressures, and durations. Because rhodium- and cobalt-based catalysts are the most efficient catalysts for the hydroformylation of alkenes, the development of heterogeneous catalysts based on Rh and Co systems is essentials. In this regard, it is worth mentioning that hydrotalcite (HT)-like materials are a class of clays containing brucite-like layers, which possess a molar composition of [M2+1-xM3+x(OH)2](An)x/n.mH2O. These clays have a positively charged framework layer and exchangeable interlayer anions and have attracted increasing interest in the field of catalysis [[15], [16], [17]]. Notably, HT-based materials have been used as catalysts or catalytic supports in many organic transformations such as alkylation, isomerization, hydroxylation, trans-esterification, redox reactions, condensation, hydroformylation, and environmentally-friendly reactions [[18], [19], [20]]. In particular, monometallic α-Co(OH)2+x species, which are analogous to layered double hydroxides, have attracted considerable interest as electrochemical, optical, and catalytic materials [21,22].Therefore, the introduction of trivalent metal ions such as Rh3+ into the framework of α-Co(OH)2+x could provide unique materials that are potential hydroformylation catalysts. To the best of our knowledge, there have been no reports on the introduction of trivalent ions, particularly Rh3+, into the framework of cobalt hydrotalcite and on the exploration of the catalytic behavior of such composites. The introduction of rhodium into the less expensive framework of α-Co(OH)2+x may afford a catalyst with the potential for hydroformylation under mild conditions. In this study, for the first time, we prepare rhodium-containing cobalt hydrotalcite (CoRh-HT)-type materials through an in situ sol-gel method. The resultant layered CoRh-HT-type materials were utilized for the hydroformylation of 1-octene and demonstrated to be promising catalysts. The rhodium-containing α-Co(OH)2+x species, which are analogous to layered hydrotalcite, were prepared in the presence of hexamethylenetetramine. The resultant materials were thoroughly characterized by various spectroscopic analytical methods.
 
 2. Experimental
@@ -815,5 +818,7 @@ onto_class_list=load_classes_chebi()
 sents = text_prep(test_txt) 
 categories,chem_list, reac_dict, sup_cat, abbreviation= CatalysisIE_search(model, sents)
 missing, match_dict, rel_synonym, onto_new_dict=chemical_prep(chem_list, onto_class_list)
-
+38.52 seconds 
+323.99 seconds 
+324.65
 '''
