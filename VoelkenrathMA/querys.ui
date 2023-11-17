@@ -462,7 +462,8 @@
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 5px</string>
+border-radius: 5px;
+border: 1px solid #83b818;</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_4" native="true">
@@ -476,7 +477,8 @@ border-radius: 5px</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 5px</string>
+border-radius: 5px;
+border: 1px solid #83b818;</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_6" native="true">
@@ -490,7 +492,8 @@ border-radius: 5px</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 5px</string>
+border-radius: 5px;
+border: 1px solid #83b818;</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_7" native="true">
@@ -504,7 +507,8 @@ border-radius: 5px</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 5px</string>
+border-radius: 5px;
+border: 1px solid #83b818;</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_8" native="true">
@@ -518,7 +522,8 @@ border-radius: 5px</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 5px</string>
+border-radius: 5px;
+border: 1px solid #83b818;</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_9" native="true">
@@ -532,7 +537,8 @@ border-radius: 5px</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 5px</string>
+border-radius: 5px;
+border: 1px solid #83b818;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_4">
@@ -686,7 +692,8 @@ border-radius: 5px</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 5px</string>
+border-radius: 5px;
+border: 1px solid #83b818;</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_11" native="true">
@@ -700,7 +707,8 @@ border-radius: 5px</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 5px</string>
+border-radius: 5px;
+border: 1px solid #83b818;</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_3">
@@ -799,7 +807,8 @@ border-radius: 5px</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 5px</string>
+border-radius: 5px;
+border: 1px solid #83b818;</string>
       </property>
      </widget>
      <widget class="QComboBox" name="comboBox_3">
@@ -833,7 +842,8 @@ border-radius: 5px</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 5px</string>
+border-radius: 5px;
+border: 1px solid #83b818;</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_13" native="true">
@@ -847,7 +857,8 @@ border-radius: 5px</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 5px</string>
+border-radius: 5px;
+border: 1px solid #83b818;</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_2" native="true">
@@ -861,7 +872,8 @@ border-radius: 5px</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 5px</string>
+border-radius: 5px;
+border: 1px solid #83b818;</string>
       </property>
      </widget>
      <widget class="QComboBox" name="comboBox_4">
