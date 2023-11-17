@@ -64,27 +64,6 @@
      <attribute name="title">
       <string>Query 1</string>
      </attribute>
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>320</width>
-        <height>80</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>Beschreibung der ersten Query einfügen</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
@@ -158,7 +137,7 @@
        <string>Downstream:</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="comboBox">
+     <widget class="QComboBox" name="Q1comboBox">
       <property name="geometry">
        <rect>
         <x>150</x>
@@ -183,20 +162,20 @@
        </property>
       </item>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="Q1Button">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>10</x>
         <y>340</y>
-        <width>75</width>
-        <height>23</height>
+        <width>370</width>
+        <height>40</height>
        </rect>
       </property>
       <property name="text">
        <string>Run Query 1</string>
       </property>
      </widget>
-     <widget class="QListWidget" name="listWidget">
+     <widget class="QListWidget" name="Q1List">
       <property name="geometry">
        <rect>
         <x>390</x>
@@ -206,10 +185,12 @@
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255)</string>
+       <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px;
+border: 2px solid rgb(156, 194, 59);</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="Q1Temp">
       <property name="geometry">
        <rect>
         <x>150</x>
@@ -224,11 +205,14 @@
       <property name="inputMethodHints">
        <set>Qt::ImhDigitsOnly</set>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
       <property name="placeholderText">
        <string>273</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_2">
+     <widget class="QLineEdit" name="Q1Pres">
       <property name="geometry">
        <rect>
         <x>150</x>
@@ -243,11 +227,14 @@
       <property name="inputMethodHints">
        <set>Qt::ImhDigitsOnly</set>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
       <property name="placeholderText">
        <string>100000</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_3">
+     <widget class="QLineEdit" name="Q1Velo">
       <property name="geometry">
        <rect>
         <x>150</x>
@@ -262,8 +249,54 @@
       <property name="inputMethodHints">
        <set>Qt::ImhDigitsOnly</set>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
       <property name="placeholderText">
        <string>0,001</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>320</y>
+        <width>370</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="Q1Text">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>370</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Query searches for simulation files in which the given parameters are included. If none are found, the files with the next higher and lower parameters are displayed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>75</y>
+        <width>370</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
      </widget>
     </widget>
@@ -287,19 +320,6 @@
       </property>
       <property name="text">
        <string>Temperature [K]:</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>340</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Run Query 2</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_9">
@@ -356,12 +376,12 @@
        <string>Downstream:</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="comboBox_2">
+     <widget class="QComboBox" name="Q2comboBox">
       <property name="geometry">
        <rect>
         <x>150</x>
         <y>284</y>
-        <width>141</width>
+        <width>140</width>
         <height>22</height>
        </rect>
       </property>
@@ -375,27 +395,6 @@
         <string>Without Downstream</string>
        </property>
       </item>
-     </widget>
-     <widget class="QLabel" name="label_12">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>320</width>
-        <height>80</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>Beschreibung der zweiten Query einfügen</string>
-      </property>
      </widget>
      <widget class="QLabel" name="label_14">
       <property name="geometry">
@@ -451,7 +450,7 @@
        <string>-</string>
       </property>
      </widget>
-     <widget class="QWidget" name="widget" native="true">
+     <widget class="QWidget" name="Q2widget1" native="true">
       <property name="geometry">
        <rect>
         <x>340</x>
@@ -463,10 +462,10 @@
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 1px solid #83b818;</string>
+border: 2px solid rgb(156, 194, 59);</string>
       </property>
      </widget>
-     <widget class="QWidget" name="widget_4" native="true">
+     <widget class="QWidget" name="Q2widget3" native="true">
       <property name="geometry">
        <rect>
         <x>340</x>
@@ -478,10 +477,10 @@ border: 1px solid #83b818;</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 1px solid #83b818;</string>
+border: 2px solid rgb(156, 194, 59);</string>
       </property>
      </widget>
-     <widget class="QWidget" name="widget_6" native="true">
+     <widget class="QWidget" name="Q2widget5" native="true">
       <property name="geometry">
        <rect>
         <x>340</x>
@@ -493,10 +492,10 @@ border: 1px solid #83b818;</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 1px solid #83b818;</string>
+border: 2px solid rgb(156, 194, 59);</string>
       </property>
      </widget>
-     <widget class="QWidget" name="widget_7" native="true">
+     <widget class="QWidget" name="Q2widget6" native="true">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -508,10 +507,10 @@ border: 1px solid #83b818;</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 1px solid #83b818;</string>
+border: 2px solid rgb(156, 194, 59);</string>
       </property>
      </widget>
-     <widget class="QWidget" name="widget_8" native="true">
+     <widget class="QWidget" name="Q2widget2" native="true">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -523,10 +522,10 @@ border: 1px solid #83b818;</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 1px solid #83b818;</string>
+border: 2px solid rgb(156, 194, 59);</string>
       </property>
      </widget>
-     <widget class="QWidget" name="widget_9" native="true">
+     <widget class="QWidget" name="Q2widget4" native="true">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -538,10 +537,10 @@ border: 1px solid #83b818;</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 1px solid #83b818;</string>
+border: 2px solid rgb(156, 194, 59);</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_4">
+     <widget class="QLineEdit" name="Q2Velo1">
       <property name="geometry">
        <rect>
         <x>150</x>
@@ -555,12 +554,15 @@ border: 1px solid #83b818;</string>
       </property>
       <property name="inputMethodHints">
        <set>Qt::ImhDigitsOnly</set>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
       <property name="placeholderText">
        <string>0,001</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_5">
+     <widget class="QLineEdit" name="Q2Temp1">
       <property name="geometry">
        <rect>
         <x>150</x>
@@ -574,12 +576,15 @@ border: 1px solid #83b818;</string>
       </property>
       <property name="inputMethodHints">
        <set>Qt::ImhDigitsOnly</set>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
       <property name="placeholderText">
        <string>273</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_6">
+     <widget class="QLineEdit" name="Q2Pres1">
       <property name="geometry">
        <rect>
         <x>150</x>
@@ -594,11 +599,14 @@ border: 1px solid #83b818;</string>
       <property name="inputMethodHints">
        <set>Qt::ImhDigitsOnly</set>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
       <property name="placeholderText">
        <string>100000</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_7">
+     <widget class="QLineEdit" name="Q2Pres2">
       <property name="geometry">
        <rect>
         <x>235</x>
@@ -613,11 +621,14 @@ border: 1px solid #83b818;</string>
       <property name="inputMethodHints">
        <set>Qt::ImhDigitsOnly</set>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
       <property name="placeholderText">
        <string>500000</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_8">
+     <widget class="QLineEdit" name="Q2Temp2">
       <property name="geometry">
        <rect>
         <x>235</x>
@@ -632,11 +643,14 @@ border: 1px solid #83b818;</string>
       <property name="inputMethodHints">
        <set>Qt::ImhDigitsOnly</set>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
       <property name="placeholderText">
        <string>473</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_9">
+     <widget class="QLineEdit" name="Q2Velo2">
       <property name="geometry">
        <rect>
         <x>235</x>
@@ -651,8 +665,67 @@ border: 1px solid #83b818;</string>
       <property name="inputMethodHints">
        <set>Qt::ImhDigitsOnly</set>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
       <property name="placeholderText">
        <string>0,1</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>320</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Query searches for all simulation files in the specified parameter range and plots them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>320</y>
+        <width>320</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>75</y>
+        <width>320</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Q2Button">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>340</y>
+        <width>320</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Run Query 2</string>
       </property>
      </widget>
     </widget>
@@ -660,28 +733,7 @@ border: 1px solid #83b818;</string>
      <attribute name="title">
       <string>Query 3</string>
      </attribute>
-     <widget class="QLabel" name="label_13">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>320</width>
-        <height>80</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>Beschreibung der dritten Query einfügen</string>
-      </property>
-     </widget>
-     <widget class="QWidget" name="widget_10" native="true">
+     <widget class="QWidget" name="Q3widget5" native="true">
       <property name="geometry">
        <rect>
         <x>340</x>
@@ -693,10 +745,10 @@ border: 1px solid #83b818;</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 1px solid #83b818;</string>
+border: 2px solid rgb(156, 194, 59);</string>
       </property>
      </widget>
-     <widget class="QWidget" name="widget_11" native="true">
+     <widget class="QWidget" name="Q3widget6" native="true">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -708,20 +760,7 @@ border: 1px solid #83b818;</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 1px solid #83b818;</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_3">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>340</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Run Query 3</string>
+border: 2px solid rgb(156, 194, 59);</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_18">
@@ -796,7 +835,7 @@ border: 1px solid #83b818;</string>
        <string>Downstream:</string>
       </property>
      </widget>
-     <widget class="QWidget" name="widget_12" native="true">
+     <widget class="QWidget" name="Q3widget2" native="true">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -808,15 +847,15 @@ border: 1px solid #83b818;</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 1px solid #83b818;</string>
+border: 2px solid rgb(156, 194, 59);</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="comboBox_3">
+     <widget class="QComboBox" name="Q3comboBox2">
       <property name="geometry">
        <rect>
         <x>150</x>
         <y>294</y>
-        <width>141</width>
+        <width>140</width>
         <height>22</height>
        </rect>
       </property>
@@ -831,7 +870,7 @@ border: 1px solid #83b818;</string>
        </property>
       </item>
      </widget>
-     <widget class="QWidget" name="widget_5" native="true">
+     <widget class="QWidget" name="Q3widget3" native="true">
       <property name="geometry">
        <rect>
         <x>340</x>
@@ -843,10 +882,10 @@ border: 1px solid #83b818;</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 1px solid #83b818;</string>
+border: 2px solid rgb(156, 194, 59);</string>
       </property>
      </widget>
-     <widget class="QWidget" name="widget_13" native="true">
+     <widget class="QWidget" name="Q3widget4" native="true">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -858,10 +897,10 @@ border: 1px solid #83b818;</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 1px solid #83b818;</string>
+border: 2px solid rgb(156, 194, 59);</string>
       </property>
      </widget>
-     <widget class="QWidget" name="widget_2" native="true">
+     <widget class="QWidget" name="Q3widget1" native="true">
       <property name="geometry">
        <rect>
         <x>340</x>
@@ -873,15 +912,15 @@ border: 1px solid #83b818;</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 1px solid #83b818;</string>
+border: 2px solid rgb(156, 194, 59);</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="comboBox_4">
+     <widget class="QComboBox" name="Q3comboBox1">
       <property name="geometry">
        <rect>
         <x>150</x>
         <y>90</y>
-        <width>141</width>
+        <width>140</width>
         <height>22</height>
        </rect>
       </property>
@@ -904,43 +943,108 @@ border: 1px solid #83b818;</string>
        <string>Experimental Data:</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="Q3Temp">
       <property name="geometry">
        <rect>
         <x>150</x>
         <y>140</y>
-        <width>111</width>
+        <width>140</width>
         <height>20</height>
        </rect>
       </property>
       <property name="text">
        <string>-</string>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
      </widget>
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="Q3Pres">
       <property name="geometry">
        <rect>
         <x>150</x>
         <y>190</y>
-        <width>111</width>
+        <width>140</width>
         <height>20</height>
        </rect>
       </property>
       <property name="text">
        <string>-</string>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
      </widget>
-     <widget class="QLabel" name="label_17">
+     <widget class="QLabel" name="Q3Velo">
       <property name="geometry">
        <rect>
         <x>150</x>
         <y>240</y>
-        <width>111</width>
+        <width>140</width>
         <height>20</height>
        </rect>
       </property>
       <property name="text">
        <string>-</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>320</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Query searches for the simulation files that are closest to the parameters contained in the selected file and plots a comparison.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>75</y>
+        <width>320</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line_6">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>320</y>
+        <width>320</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Q3Button">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>340</y>
+        <width>320</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Run Query 3</string>
       </property>
      </widget>
     </widget>
