@@ -37,9 +37,7 @@ import os
 import re
 import string
 import subprocess
-import sys
 import unidecode
-#import pybliometrics
 from pybliometrics.scopus import AbstractRetrieval
 from pypdf import PdfReader
 from pdfminer.pdfdocument import PDFDocument
@@ -49,6 +47,7 @@ from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import PDFPageAggregator
 from pdfminer.layout import LAParams, LTChar, LTFigure, LTTextBox, LTTextLine
 from habanero import Crossref
+from bs4 import BeautifulSoup
 __all__ = ['pdf_title']
 
 def make_parsing_state(*sequential, **named):
@@ -460,6 +459,8 @@ def get_metadata(filename):
         else:
             if is_majority_included(title.split(), result['message']['items'][i]['title'][0].split(), threshold=0.8):
                 title=result['message']['items'][i]['title'][0]
+                soup = BeautifulSoup(title, 'html.parser')
+                title = soup.get_text()
                 doi=result['message']['items'][i]['DOI']
                 publisher=result['message']['items'][i]['publisher']
                 return title, doi, publisher
@@ -478,6 +479,8 @@ def get_metadata(filename):
                         else:
                             if is_majority_included(title.split(), result['message']['items'][k]['title'][0].split(), threshold=0.8):
                                 title=result['message']['items'][k]['title'][0]
+                                soup = BeautifulSoup(title, 'html.parser')
+                                title = soup.get_text()
                                 doi=result['message']['items'][k]['DOI']
                                 publisher=result['message']['items'][k]['publisher']
                                 return title, doi, publisher
@@ -491,31 +494,31 @@ def get_metadata(filename):
 
 """
 abstract_all=''
-path=r'.\import\*.pdf'
+path=r'.\import_1\*.pdf'
 for i in glob.iglob(path):
     title,doi,publisher,ab = get_metadata(i)
     if doi==None:
         continue
     print(title+' : '+doi)
     abstract = get_abstract(i, doi, publisher,ab)
-    if abstract==None:
-        abstract=''
-    abstract_all= abstract+abstract_all
-import json
-def set_config_key(key, value):
-         globals()[key] = value
-         
-with open("config.json") as json_config:
-         for key, value in json.load(json_config).items():
-             set_config_key(key, value)
-for i in glob.iglob(path):
+    print(abstract)
+    import json
+    def set_config_key(key, value):
+             globals()[key] = value
+             
+    with open("config.json") as json_config:
+             for key, value in json.load(json_config).items():
+                 set_config_key(key, value)
+    for i in glob.iglob(path):
 
-                 title,doi,publisher= get_metadata(i)
-                 print(title)
-                 print(doi)
+                     title,doi,publisher= get_metadata(i)
+                     print(title)
+                     print(doi)
+    """
+
                  
              
-"""    
+  
 
 
 
