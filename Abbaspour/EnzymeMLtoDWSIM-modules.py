@@ -175,10 +175,12 @@ def base_ontology_extension(name_base_ontology):
 # Code für die dynamische Erstellung von Komponenten/Substanzen als Klassen
 # Die Elemente einer Stoffliste werden entweder der Oberklasse JSON-Datei oder DWSIM-Komponente subsumiert
 
-def subst_classes_from_dict(eln_dict, onto): #sheet: pd.DataFrame, onto):
+def subst_classes_from_dict(enzmldoc, eln_dict, onto):
     #      
+    # a = enzmldoc.getAny("s0").ontology.value
     for subst in list(eln_dict["substances"].keys()):
-        # include as individual, if label is already present
+        print(subst)
+        # include as individual, if label is already present as class
         if onto.search_one(label = subst) != None:
             codestring = """with onto:
                             substance_indv = onto.search_one(label = "{}")('ind_{}')
@@ -192,13 +194,19 @@ def subst_classes_from_dict(eln_dict, onto): #sheet: pd.DataFrame, onto):
         
         # include as class and individual of class
         else:
+            
+            if "hasEnzymeML_ID" in eln_dict["substances"][subst]:
+                subst_superclass = enzmldoc.getAny(eln_dict["substances"][subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')
+            else: 
+                subst_superclass = 'ChemicalSubstance'
+                
             codestring = """with onto:
-                        class {}(onto.search_one(iri = '*ChemicalSubstance')):
+                        class {}(onto.search_one(iri = '*{}')):
                             label = '{}'
                             pass                    
                         substance_indv = {}('ind_{}')
                 
-                """.format(subst, subst, subst, subst)
+                """.format(subst, subst_superclass, subst, subst, subst)
         #
         # compile codestring
         code = compile(codestring, "<string>", "exec")
@@ -260,10 +268,9 @@ def set_relations(dataProp_dict, onto):
                 
     return BaseOnto
 
-def substance_knowledge_graph(support_ELN_str, onto, onto_str):
+def substance_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
     # Stoffliste aus dem ergänzenden Laborbuch
     # Laccase, ABTS_red, ABTS_ox, Oxygen, Water
-    # test_substances = [sheet0.iloc[2,1], sheet0.iloc[2,2], sheet0.iloc[2,3], sheet0.iloc[2,4], sheet0.iloc[2,5]]
 
     # Wörterbuch mit Stoffeigenschaften erstellen
     # Eigenschaften beachten, die relevant sind für die Simulation in DWSIM
@@ -276,20 +283,20 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
     # und fehlende Stoffdaten durch die des Lösemittels ersetzt
 
     ##
-    eln_dict = new_ELN_to_dict(support_ELN_str)
+    #SBO Term: enzmldoc.getAny("s0").ontology.value
     
-    BaseOnto = subst_classes_from_dict(eln_dict, onto)
+    BaseOnto = subst_classes_from_dict(enzmldoc, supp_eln_dict, onto)
     
-    BaseOnto = dataProp_creation(eln_dict["substances"], BaseOnto)
+    BaseOnto = dataProp_creation(supp_eln_dict["substances"], BaseOnto)
 
-    BaseOnto= set_relations(eln_dict["substances"], BaseOnto)
+    BaseOnto= set_relations(supp_eln_dict["substances"], BaseOnto)
     # Ontologie zwischenspeichern
     BaseOnto.save(file="./ontologies/Substances_and_"+ onto_str +".owl", format="rdfxml")
 
     #####
     # Ontology-Extension der Base Ontology #
     #####
-    return onto, eln_dict
+    return BaseOnto, supp_eln_dict
 
 ##
 #
@@ -300,10 +307,13 @@ def substance_knowledge_graph(support_ELN_str, onto, onto_str):
 
 def run():
    # enzymeML_readin("EnzymeML_Template_18-8-2021_KR")
+   # onto, test_dict = substance_knowledge_graph("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", onto, "BaseOnto2")
+   
    enzmldoc = pe.EnzymeMLDocument.fromTemplate("./ELNs/EnzymeML_Template_18-8-2021_KR.xlsm")
    onto = base_ontology_extension("BaseOnto")
-  # onto, test_dict = substance_knowledge_graph("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", onto, "BaseOnto2")
-   onto, test_dict = substance_knowledge_graph("./ELNs/New-ELN_Kinetik_1.xlsx", onto, "BaseOnto2")
+   
+   new_eln_dict = new_ELN_to_dict("./ELNs/New-ELN_Kinetik_1.xlsx")
+   onto, test_dict = substance_knowledge_graph(enzmldoc, new_eln_dict, onto, "BaseOnto2")
    
    #return test_dict
 
