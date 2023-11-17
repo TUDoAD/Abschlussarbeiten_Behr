@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>816</width>
-    <height>466</height>
+    <width>810</width>
+    <height>460</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>810</width>
+    <height>460</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>810</width>
+    <height>460</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -84,6 +96,7 @@
       </property>
       <property name="font">
        <font>
+        <family>MS Shell Dlg 2</family>
         <pointsize>10</pointsize>
        </font>
       </property>
@@ -448,7 +461,8 @@
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255)</string>
+       <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_4" native="true">
@@ -461,7 +475,8 @@
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255)</string>
+       <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_6" native="true">
@@ -474,7 +489,8 @@
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255)</string>
+       <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_7" native="true">
@@ -487,7 +503,8 @@
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255)</string>
+       <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_8" native="true">
@@ -500,7 +517,8 @@
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255)</string>
+       <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_9" native="true">
@@ -513,7 +531,8 @@
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255)</string>
+       <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_4">
@@ -666,7 +685,8 @@
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255)</string>
+       <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_11" native="true">
@@ -679,7 +699,8 @@
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255)</string>
+       <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_3">
@@ -777,7 +798,8 @@
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255)</string>
+       <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px</string>
       </property>
      </widget>
      <widget class="QComboBox" name="comboBox_3">
@@ -810,7 +832,8 @@
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255)</string>
+       <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_13" native="true">
@@ -823,7 +846,8 @@
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255)</string>
+       <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_2" native="true">
@@ -836,7 +860,8 @@
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255)</string>
+       <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px</string>
       </property>
      </widget>
      <widget class="QComboBox" name="comboBox_4">
@@ -914,7 +939,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>816</width>
+     <width>810</width>
      <height>21</height>
     </rect>
    </property>
