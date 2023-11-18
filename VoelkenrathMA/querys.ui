@@ -253,7 +253,7 @@ border: 2px solid rgb(156, 194, 59);</string>
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
       <property name="placeholderText">
-       <string>0,001</string>
+       <string>0.001</string>
       </property>
      </widget>
      <widget class="Line" name="line">

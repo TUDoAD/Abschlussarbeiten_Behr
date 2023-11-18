@@ -144,7 +144,7 @@ def query_2(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
     df.to_excel(path + "query_2_results.xlsx")
     
 
-def query_3(molefrac_co2=None, temperature=None, pressure=None, velocity=None):
+def query_3(molefrac_co2=None, temperature=None, pressure=None, velocity=None, downstream=None):
     # Query for some unspecific parameter
     # e.g.: Query.query_3(molefrac_co2=0.3, temperature=300.0)
     sparqlstr = """
@@ -265,6 +265,11 @@ def query_3(molefrac_co2=None, temperature=None, pressure=None, velocity=None):
         else:
             temperature = float(temperature)
             sparql_query = sparql_query + f"?individual afo:hasSimulatedReactionVelocity {velocity}\n"
+            
+    if downstream:
+        downstream = str(downstream)
+        sparql_query = sparql_query + f"""?individual afo:hasSimulatedDownstream {downstream}."""
+            
     
     sparql_query = sparql_query + "}"
     #print(sparql_query)
@@ -292,7 +297,9 @@ def query_3(molefrac_co2=None, temperature=None, pressure=None, velocity=None):
     
     df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file"])
     path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
-    df.to_excel(path + "query_3_results.xlsx")
+    df.to_excel(path + "GUI_Q1_results.xlsx")
+    
+    return results
     
     
 def query_4(x_co2):
