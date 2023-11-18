@@ -284,6 +284,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
     """
     global abbreviation
     global nlp
+    global sup_cat
     nlp = spacy.load('en_core_web_sm')
     chem_list_all = []
     chem_list = []
@@ -292,24 +293,24 @@ def CatalysisIE_search(model, test_sents): #change description at the and
     a = 0
     categories = {}
     reac_dict = {}
-    c_idx=None
     entity_old = (0,None,None)
     output_sents = pred_model_dataset(model, test_sents)
     raw_entities= {}
     for sent in output_sents:
+        c_idx=None
         sent_tag = [t['pred'] for t in sent]
         print(assemble_token_text(sent))
         chem_list_all.extend([c.text for c in Document(assemble_token_text(sent)).cems])
         abb_list = Document(assemble_token_text(sent)).abbreviation_definitions
         for i in range(len(abb_list)):
-            abbreviation[abb_list[i][1][0]] = abb_list[i][0][0]
+            abbreviation[abb_list[i][0][0]] = abb_list[i][1][0]
         for k, j, l in get_bio_spans(sent_tag):
             print(assemble_token_text(sent[k:j + 1]), l)
             entity = assemble_token_text(sent[k:j + 1])
             entity_raw=entity
             #add abbreviation if directly after entity an entity in brackets
             if k == a+1 and '({})'.format(entity) in assemble_token_text(sent):
-                abbreviation[entity_old[1]] = entity
+                abbreviation[entity] = entity_old[1]
             
             doc = nlp(entity)
             for i in range(len(doc)):
@@ -318,8 +319,12 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                         entity=re.sub(str(doc[i].text),str(doc[i].lemma_),entity )
                         entity_raw=entity
             #match hyphen in chemical entity and remove it  # Rh-Co --> RhCo
+            abbr=False
             match_hyph = re.findall(r'(([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?))', entity) 
-            if match_hyph and entity not in abbreviation.values():
+            for v in abbreviation.keys():
+                if v in entity:
+                    abbr=True
+            if match_hyph and abbr==False:
                 for i in range(len(match_hyph)):
                     entity = entity.replace(match_hyph[i][0],match_hyph[i][1]+match_hyph[i][2])
             
@@ -350,6 +355,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                         reac_dict[entity].append(entity_old[1])
                 
             
+                    
             if entity in categories.keys():
                 entity_old = (j,entity,l)
                 continue
@@ -366,6 +372,11 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                     matches = re.findall(pattern, entity)
                     if matches:
                         if not re.findall(r'{}[—–-]\d+\.'.format(c), entity):
+                            list_spans.append(c)
+                            chem_list.append(matches[0])
+                    pattern = r'\b({}[—–-][A-Z]+(?:-\d+)?)\b'.format(c)
+                    matches = re.findall(pattern, entity)
+                    if matches:
                             list_spans.append(c)
                             chem_list.append(matches[0])
                 pattern = r'^[\d,]+[—–-] [a-z]+$' #1,3- butadiene -> 1,3-butadiene
@@ -387,7 +398,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                                 chem_list.append(catalyst)
                                 sup = True
                             if '@' in mol[i][0]:
-                                    if entity not in abbreviation.values():
+                                    if entity not in abbreviation.keys():
                                         entity = entity.replace('@',' supported on ')
                                     support = mol[i][2]
                                     if re.findall(r'([A-Za-z]+)[—–-]\d+[—–-]?\d*[A-Z]*', support):
@@ -446,11 +457,18 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                             if 'loaded' in e_btwn:    
                                 loaded_end =  entity.index('loaded')+len('loaded')+1
                     entity = entity.replace('loaded','supported on')
-                if k==c_idx:
+                if k==c_idx and entity_old[2]=='Reaction':
                     if entity_old[1] not in reac_dict.keys():
                         reac_dict[entity_old[1]] = [entity]
                     elif entity not in reac_dict[entity_old[1]]:
                         reac_dict[entity_old[1]].append(entity)
+                    c_idx=None
+                if (l=="Reactant" or l=="Product") and entity_old[2]=="Reaction":
+                    if assemble_token_text(sent[k-1:k])=='of':
+                        if entity_old[1] not in reac_dict.keys():
+                            reac_dict[entity_old[1]] = [entity]
+                        elif entity not in reac_dict[entity_old[1]]:
+                            reac_dict[entity_old[1]].append(entity)
                 if l not in ['Characterization','Treatment']:
                     spans_new = sorted(Document(entity).cems, key = lambda span: span.start)
                     for c in spans_new:
@@ -460,6 +478,8 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                             chem_list.append(c.text)
                     chem_list.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_list and cem not in list_spans])
                                          
+                #else:
+                
                 categories[entity] = l 
             entity_old = (j,entity,l)  
             a = j+1
@@ -471,70 +491,6 @@ def CatalysisIE_search(model, test_sents): #change description at the and
     chem_list = [*set(chem_list)]
     return categories,chem_list, reac_dict, sup_cat, abbreviation,raw_entities
 
-def doc_token(entity, e_split,  j = 0):
-    """
-    Entity Tokenization Function
-    
-    This function is used for tokenizing and processing a given entity to remove spaces after .join()-function in CatalystIE_search 
-    It is designed to handle specific cases where certain tokens should be combined or modified based on their positions and parts of speech.
-    
-    Parameters
-    ----------
-    entity : str
-        The input entity within the text.
-    
-    e_split : list
-        A list of splits from the entity.
-    
-    nlp : object
-        A natural language processing (NLP) object used for text processing.
-    
-    j : int, optional
-        The starting index for token processing. Default is 0.
-    
-    Returns
-    -------
-    entity : str
-        The processed entity after tokenization.
-
-    """
-    brackets = False
-    doc = nlp(entity) 
-    for i,token  in enumerate(doc[j:]):   
-        if token == doc[-1]:
-            break
-        elif token.pos_ in ['CCONJ','PUNCT','SYM','PRON'] and entity[token.idx-1] == ' ' and token.text != "=":
-            j=j+i
-            if token.pos_ =='CCONJ':
-                e_new = ''.join([e_split[j-1],',',e_split[j+1]])
-            elif token.pos_=='PRON':
-                e_new= ' '.join([e_split[j-1],e_split[j+1]])
-                del e_split[j]
-            elif token.text =='(' and doc[j+2].text == ')':
-                e_new = "".join(e_split[j:j+3])
-                brackets = True
-                j=j+1
-            elif token.text == '(' and brackets == False:
-                e_new = "".join([e_split[j],e_split[j+1]])
-            elif token.text == ')' and brackets == False:
-                e_new = "".join([e_split[j-1],e_split[j]])
-            else:
-                e_new = "".join(e_split[j-1:j+2])
-            if brackets == False:
-                e_after = entity[doc[j+1].idx+len(doc[j+1].text)+1:]
-            else:
-                e_after = entity[doc[j+2].idx+len(doc[j+2].text)+1:]
-            if j == 1:
-                entity = " ".join([e_new,e_after])
-            else:
-                e_before = entity[:doc[j-1].idx]
-                entity = " ".join([e_before,e_new,e_after])
-                   
-            entity = doc_token(entity, e_split, j=j+1)
-            break
-        else:
-            continue
-    return entity
 
 def chemical_prep(chem_list, onto_class_list):
     global onto_new_dict
@@ -563,6 +519,9 @@ def chemical_prep(chem_list, onto_class_list):
             onto_new_dict[molecule] = []
             class_list.append(molecule)
             continue        
+        match_material=re.findall(r'((?:[A-Z](?:[a-z]?[\d]*))+)[—–-]((?:[A-Z](?:[a-z]?[\d]*))+)',molecule)#TiO2-SiO2 from Ni-W/TiO2-SiO2
+        if match_material and molecule in sup_cat.keys():
+            comp_dict[molecule] = [match_material[0][0],match_material[0][1]]
         molecule_split = molecule.split()        
         if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) or re.match(r'[\d,]+[—–-][a-z]+',molecule):
             comp_dict[molecule] = molecule_split  
@@ -593,6 +552,7 @@ def chemical_prep(chem_list, onto_class_list):
                 else:
                     class_list, comp, rel_synonym = compare_synonyms(synonyms, inchikey, class_list, c, rel_synonym) #,comp = True                
                 onto_new_dict[key].append(comp)
+            """
             if key:
                 for i in onto_new_dict[key]:
                     if len(i) == 1: #remove components if one of the components (atoms) doesn't exist (ex.ZMS- Z,M don't exist, S-exists)                                   
@@ -601,7 +561,7 @@ def chemical_prep(chem_list, onto_class_list):
                         class_list.remove(key)
                         onto_new_dict.pop(key)
                         break
-                
+              """  
     class_list = [*set(class_list)] #remove duplicates
     class_list.extend(['molecule'])
     missing, match_dict = create_list_IRIs(class_list,IRI_json_filename = 'iriDictionary')
@@ -694,7 +654,6 @@ def search_inchikey(inchikey, c):
 
 def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
     numinbrackets = None
-    comp=True
     if len(synonyms[k]) == 1:
             key = synonyms[k][0]
     else:   
@@ -720,10 +679,12 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                     else:
                         while True:
                             mol_new = [i for i in mol if i.iupac_name]
-                            print('choose iupac name for {}:{}'.format(k,[i.iupac_name for i in mol_new]))
+                            print('choose iupac name for {}'.format(k))
                             print('components have following SMILES:')
+                            n=1
                             for i in mol_new:
-                                print('{}:{}'.format(i.iupac_name, i.isomeric_smiles))
+                                print('{}. {}:{}'.format(n,i.iupac_name, i.isomeric_smiles))
+                                n+=1
                             idx = input('write number of fitting iupac name or "none"\n')
                             if idx =='none':
                                 key = k
@@ -740,7 +701,11 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                                     
                 else:
                     while True:
-                            print('choose synonyms for {}:{}'.format(k,synonyms[k]))
+                            print('choose synonyms for {}'.format(k))
+                            n=1
+                            for i in synonyms[k]:
+                                print('{}. {}'.format(n,i))
+                                n+=1
                             idx = input('write number of fitting synonym or "none"\n')                            
                             if idx =='none':
                                 key = k
@@ -756,12 +721,24 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
             elif len(comp_check) == 1:
                 key = comp_check[0]                  
             else:
-                key = None
+                print('no synonyms but some matches in inchikey for {}:'.format(k))                 
+                n=1
                 for i in comp_check:
-                    if i in synonyms[k]:
-                        key = i
-                if key == None:
-                    print('no synonyms but some matches in inchikey for {}:{}'.format(k, comp_check))                 
+                    print('{}. {}'.format(n,i))
+                    n+=1
+                while True:
+                    idx = input('write number of fitting synonym or "none"\n')                            
+                    if idx =='none':
+                        key = k
+                        class_list.append(k)
+                        return class_list, key, rel_synonym 
+                    else:
+                        try:
+                            idx = int(idx)
+                            key = comp_check[idx-1]
+                            break
+                        except:
+                            print('error: write a number between 1 and {} or "none"'.format(len(comp_check)))                  
                     
     if key == None or not key:
         key = k 
