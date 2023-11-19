@@ -21,6 +21,7 @@ from pyDataverse.models import Dataset, Datafile
 
 #print("Loading Ontology...")
 onto_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-Onto_merged-and-inferred.owl"
+#onto_path = "E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-Onto_merged-and-inferred.owl"
 new_world = owlready2.World()
 onto = owlready2.get_ontology(onto_path).load()
 

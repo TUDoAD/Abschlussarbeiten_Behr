@@ -75,6 +75,20 @@ class Ui(QtWidgets.QMainWindow):
 
     def run_Q2(self):
         print("Query 2 started...")
+        # get parameter from GUI and call query
+        self.Q2_T_input_1 = self.findChild(QtWidgets.OLineEdit, "Q2Temp1")
+        self.Q2_T_input_2 = self.findChild(QtWidgets.OLineEdit, "Q2Temp2")
+        self.Q2_P_input_1 = self.findChild(QtWidgets.OLineEdit, "Q2Pres1")
+        self.Q2_P_input_2 = self.findChild(QtWidgets.OLineEdit, "Q2Pres2")
+        self.Q2_V_input_1 = self.findChild(QtWidgets.OLineEdit, "Q2Velo1")
+        self.Q2_V_input_2 = self.findChild(QtWidgets.OLineEdit, "Q2Velo2")
+        
+        temp_1 = self.Q2_T_input_1.text()
+        temp_2 = self.Q2_T_input_2.text()
+        pres_1 = self.Q2_P_input_1.text()
+        pres_2 = self.Q2_P_input_2.text()
+        velo_1 = self.Q2_V_input_1.text()
+        velo_2 = self.Q2_V_input_2.text()
         
         
     def run_Q3(self):
