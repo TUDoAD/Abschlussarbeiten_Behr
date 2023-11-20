@@ -52,7 +52,7 @@
      <string notr="true">background-color: rgb(240, 240, 240)</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Query_1">
      <property name="sizePolicy">
@@ -68,7 +68,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>83</y>
+        <y>130</y>
         <width>111</width>
         <height>41</height>
        </rect>
@@ -87,7 +87,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>146</y>
+        <y>180</y>
         <width>111</width>
         <height>41</height>
        </rect>
@@ -105,7 +105,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>209</y>
+        <y>230</y>
         <width>111</width>
         <height>41</height>
        </rect>
@@ -123,7 +123,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>272</y>
+        <y>280</y>
         <width>111</width>
         <height>41</height>
        </rect>
@@ -137,14 +137,17 @@
        <string>Downstream:</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="Q1comboBox">
+     <widget class="QComboBox" name="Q1comboBox2">
       <property name="geometry">
        <rect>
         <x>150</x>
-        <y>284</y>
-        <width>141</width>
+        <y>292</y>
+        <width>145</width>
         <height>22</height>
        </rect>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
       </property>
       <item>
        <property name="text">
@@ -187,14 +190,14 @@
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 2px solid rgb(156, 194, 59);</string>
+border: 2px solid #84BC34;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="Q1Temp">
       <property name="geometry">
        <rect>
         <x>150</x>
-        <y>94</y>
+        <y>140</y>
         <width>145</width>
         <height>20</height>
        </rect>
@@ -216,7 +219,7 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="geometry">
        <rect>
         <x>150</x>
-        <y>157</y>
+        <y>190</y>
         <width>145</width>
         <height>20</height>
        </rect>
@@ -238,7 +241,7 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="geometry">
        <rect>
         <x>150</x>
-        <y>220</y>
+        <y>240</y>
         <width>145</width>
         <height>20</height>
        </rect>
@@ -299,6 +302,54 @@ p, li { white-space: pre-wrap; }
        <enum>Qt::Horizontal</enum>
       </property>
      </widget>
+     <widget class="QComboBox" name="Q1comboBox1">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>90</y>
+        <width>145</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>0.04</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>0.20</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>0.50</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>All files</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_24">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>90</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Mole Fraction CO2</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="Query_2">
      <attribute name="title">
@@ -308,7 +359,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>83</y>
+        <y>130</y>
         <width>111</width>
         <height>41</height>
        </rect>
@@ -326,7 +377,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>146</y>
+        <y>180</y>
         <width>111</width>
         <height>41</height>
        </rect>
@@ -344,7 +395,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>209</y>
+        <y>230</y>
         <width>111</width>
         <height>41</height>
        </rect>
@@ -362,7 +413,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>272</y>
+        <y>280</y>
         <width>111</width>
         <height>41</height>
        </rect>
@@ -376,11 +427,11 @@ p, li { white-space: pre-wrap; }
        <string>Downstream:</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="Q2comboBox">
+     <widget class="QComboBox" name="Q2comboBox2">
       <property name="geometry">
        <rect>
         <x>150</x>
-        <y>284</y>
+        <y>290</y>
         <width>140</width>
         <height>22</height>
        </rect>
@@ -400,7 +451,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>220</x>
-        <y>83</y>
+        <y>130</y>
         <width>10</width>
         <height>41</height>
        </rect>
@@ -418,7 +469,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>220</x>
-        <y>146</y>
+        <y>180</y>
         <width>10</width>
         <height>41</height>
        </rect>
@@ -436,7 +487,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>220</x>
-        <y>209</y>
+        <y>230</y>
         <width>10</width>
         <height>41</height>
        </rect>
@@ -462,7 +513,7 @@ p, li { white-space: pre-wrap; }
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 2px solid rgb(156, 194, 59);</string>
+border: 2px solid #84BC34;</string>
       </property>
      </widget>
      <widget class="QWidget" name="Q2widget3" native="true">
@@ -477,7 +528,7 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 2px solid rgb(156, 194, 59);</string>
+border: 2px solid #84BC34;</string>
       </property>
      </widget>
      <widget class="QWidget" name="Q2widget5" native="true">
@@ -492,7 +543,7 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 2px solid rgb(156, 194, 59);</string>
+border: 2px solid #84BC34;</string>
       </property>
      </widget>
      <widget class="QWidget" name="Q2widget6" native="true">
@@ -507,7 +558,7 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 2px solid rgb(156, 194, 59);</string>
+border: 2px solid #84BC34;</string>
       </property>
      </widget>
      <widget class="QWidget" name="Q2widget2" native="true">
@@ -522,7 +573,7 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 2px solid rgb(156, 194, 59);</string>
+border: 2px solid #84BC34;</string>
       </property>
      </widget>
      <widget class="QWidget" name="Q2widget4" native="true">
@@ -537,14 +588,14 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 2px solid rgb(156, 194, 59);</string>
+border: 2px solid #84BC34;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="Q2Velo1">
       <property name="geometry">
        <rect>
         <x>150</x>
-        <y>220</y>
+        <y>240</y>
         <width>60</width>
         <height>20</height>
        </rect>
@@ -559,14 +610,14 @@ border: 2px solid rgb(156, 194, 59);</string>
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
       <property name="placeholderText">
-       <string>0,001</string>
+       <string>0.0001</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="Q2Temp1">
       <property name="geometry">
        <rect>
         <x>150</x>
-        <y>94</y>
+        <y>140</y>
         <width>60</width>
         <height>20</height>
        </rect>
@@ -588,7 +639,7 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="geometry">
        <rect>
         <x>150</x>
-        <y>157</y>
+        <y>190</y>
         <width>60</width>
         <height>20</height>
        </rect>
@@ -610,7 +661,7 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="geometry">
        <rect>
         <x>235</x>
-        <y>157</y>
+        <y>190</y>
         <width>60</width>
         <height>20</height>
        </rect>
@@ -625,14 +676,14 @@ border: 2px solid rgb(156, 194, 59);</string>
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
       <property name="placeholderText">
-       <string>500000</string>
+       <string>3000000</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="Q2Temp2">
       <property name="geometry">
        <rect>
         <x>235</x>
-        <y>94</y>
+        <y>140</y>
         <width>60</width>
         <height>20</height>
        </rect>
@@ -647,14 +698,14 @@ border: 2px solid rgb(156, 194, 59);</string>
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
       <property name="placeholderText">
-       <string>473</string>
+       <string>873</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="Q2Velo2">
       <property name="geometry">
        <rect>
         <x>235</x>
-        <y>220</y>
+        <y>240</y>
         <width>60</width>
         <height>20</height>
        </rect>
@@ -669,7 +720,7 @@ border: 2px solid rgb(156, 194, 59);</string>
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
       <property name="placeholderText">
-       <string>0,1</string>
+       <string>1</string>
       </property>
      </widget>
      <widget class="QTextBrowser" name="textBrowser_2">
@@ -728,6 +779,49 @@ p, li { white-space: pre-wrap; }
        <string>Run Query 2</string>
       </property>
      </widget>
+     <widget class="QComboBox" name="Q2comboBox1">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>90</y>
+        <width>145</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>0.04</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>0.20</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>0.50</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_25">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>90</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Mole Fraction CO2</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="Query_3">
      <attribute name="title">
@@ -745,7 +839,7 @@ p, li { white-space: pre-wrap; }
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 2px solid rgb(156, 194, 59);</string>
+border: 2px solid #84BC34;</string>
       </property>
      </widget>
      <widget class="QWidget" name="Q3widget6" native="true">
@@ -760,7 +854,7 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 2px solid rgb(156, 194, 59);</string>
+border: 2px solid #84BC34;</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_18">
@@ -821,7 +915,7 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>282</y>
+        <y>280</y>
         <width>111</width>
         <height>41</height>
        </rect>
@@ -847,14 +941,14 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 2px solid rgb(156, 194, 59);</string>
+border: 2px solid #84BC34;</string>
       </property>
      </widget>
      <widget class="QComboBox" name="Q3comboBox2">
       <property name="geometry">
        <rect>
         <x>150</x>
-        <y>294</y>
+        <y>292</y>
         <width>140</width>
         <height>22</height>
        </rect>
@@ -882,7 +976,7 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 2px solid rgb(156, 194, 59);</string>
+border: 2px solid #84BC34;</string>
       </property>
      </widget>
      <widget class="QWidget" name="Q3widget4" native="true">
@@ -897,7 +991,7 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 2px solid rgb(156, 194, 59);</string>
+border: 2px solid #84BC34;</string>
       </property>
      </widget>
      <widget class="QWidget" name="Q3widget1" native="true">
@@ -912,7 +1006,7 @@ border: 2px solid rgb(156, 194, 59);</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 5px;
-border: 2px solid rgb(156, 194, 59);</string>
+border: 2px solid #84BC34;</string>
       </property>
      </widget>
      <widget class="QComboBox" name="Q3comboBox1">
@@ -1062,6 +1156,31 @@ p, li { white-space: pre-wrap; }
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>Q1comboBox1</tabstop>
+  <tabstop>Q1Temp</tabstop>
+  <tabstop>Q1Pres</tabstop>
+  <tabstop>Q1Velo</tabstop>
+  <tabstop>Q1comboBox2</tabstop>
+  <tabstop>Q1Button</tabstop>
+  <tabstop>Q2comboBox1</tabstop>
+  <tabstop>Q2Temp1</tabstop>
+  <tabstop>Q2Temp2</tabstop>
+  <tabstop>Q2Pres1</tabstop>
+  <tabstop>Q2Pres2</tabstop>
+  <tabstop>Q2Velo1</tabstop>
+  <tabstop>Q2Velo2</tabstop>
+  <tabstop>Q2comboBox2</tabstop>
+  <tabstop>Q2Button</tabstop>
+  <tabstop>Q3comboBox1</tabstop>
+  <tabstop>Q3comboBox2</tabstop>
+  <tabstop>Q3Button</tabstop>
+  <tabstop>Q1List</tabstop>
+  <tabstop>textBrowser_2</tabstop>
+  <tabstop>textBrowser_3</tabstop>
+  <tabstop>Q1Text</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

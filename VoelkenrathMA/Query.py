@@ -147,7 +147,7 @@ def query_2(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
 
 def query_3(molefrac_co2=None, temperature=None, pressure=None, velocity=None, downstream=None):
     # Query for some unspecific parameter
-    # e.g.: Query.query_3(molefrac_co2=0.3, temperature=300.0)
+    # e.g.: Query.query_3(molefrac_co2=0.2, temperature=300.0)
     sparqlstr = """
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -349,9 +349,9 @@ def query_4(x_co2):
     df.to_excel(path + "query_4_results.xlsx")
     
   
-def query_5(temperature=None, pressure=None, velocity=None, downstream=None):
+def query_5(molefrac_co2=None, temperature=None, pressure=None, velocity=None, downstream=None):
     # Query for a parameter range
-    # e.g. Query.query_5(temperature=[200,300])
+    # e.g. Query.query_5(molefrac_co2=0.04, temperature=[200,300], pressure=[100000,2000000], velocity=[0.001,1], downstream="'Yes'")
     sparqlstr = """
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -362,11 +362,13 @@ def query_5(temperature=None, pressure=None, velocity=None, downstream=None):
     """
     
     sparql_query = f"""
-    SELECT ?individual
+    SELECT DISTINCT ?individual
     
     WHERE{{ 
     """
-    
+    if molefrac_co2:
+        sparql_query = sparql_query + f"?individual afo:hasMolarFractionCarbonDioxide {molefrac_co2}\n"
+        
     if temperature:
         temperature[0] = float(temperature[0])
         temperature[1] = float(temperature[1])
@@ -393,7 +395,10 @@ def query_5(temperature=None, pressure=None, velocity=None, downstream=None):
         ?individual afo:hasSimulatedReactionVelocity ?velo.
         FILTER(?velo >= {velocity[0]} && ?velo <= {velocity[1]})
         """
-    
+        
+    if downstream:
+        downstream = str(downstream)
+        sparql_query = sparql_query + f"""?individual afo:hasSimulatedDownstream {downstream}."""
     
     sparql_query = sparql_query + "}"
     
@@ -410,17 +415,23 @@ def query_5(temperature=None, pressure=None, velocity=None, downstream=None):
     for i in range(len(individual_list)):
         individual = individual_list[i][0]
         comments = individual.comment
+        turnover = individual.hasTurnoverCarbonDioxide
+        temperature = individual.hasSimulatedReactionTemperature
+        pressure = individual.hasSimulatedReactionPressure
+        velocity = individual.hasSimulatedReactionVelocity
         
         for j in range(len(comments)):
             if "DWSIM-file" in comments[j]:
                 dwsim_url = comments[j].split("DWSIM-file: ")[1]
             if "LinkML-file" in comments[j]:
                 linkml_url = comments[j].split("LinkML-file: ")[1]
-        results.append([individual, dwsim_url, linkml_url])
+        
+        results.append([individual, dwsim_url, linkml_url, temperature[0], pressure[0], velocity[0], turnover])
     
-    df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file"])
+    df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file", "Temperature [K]", "Pressure [Pa]", "Velocity [m/s]", "Turnover CO2"])
     path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
     df.to_excel(path + "query_5_results.xlsx")
+    return results
 
 
 def query_6():
