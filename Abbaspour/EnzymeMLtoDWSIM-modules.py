@@ -162,7 +162,8 @@ def base_ontology_extension(name_base_ontology):
     # loading the ontology with owlready2 results in the XML-classes of the formulas
     # being interpreted as ontology classes and annotation properties
     # Thus, deletion of these classes takes place here
-        
+    
+    """
     SBO_annotation_classes = ["apply","bvar","ci","cn","degree","divide","factorial","floor","lambda","lowlimit","minus","plus","power","product","root","selector","semantics","sum","tanh", "times","uplimit", "ln", "log","MathMLmath"]
     for dep_class in SBO_annotation_classes:
         codestr ="class_list = onto.search(iri = '*{}')\nfor indv in class_list: destroy_entity(indv)".format(dep_class)
@@ -171,7 +172,7 @@ def base_ontology_extension(name_base_ontology):
             exec(code)
         except:
             print(codestr)
-           
+    """        
     with onto:
         # Komponenten: DWSIM stellt 6 Datenbanken zur verfügung (DWSIM, ChemSep, Biodiesel, CoolProp, ChEDL and Electrolytes)
         # Daraus ergeben sich 1500 verfügbare Komponenten für die Simulation
