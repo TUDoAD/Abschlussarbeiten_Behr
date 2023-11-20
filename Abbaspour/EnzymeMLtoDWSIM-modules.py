@@ -61,7 +61,7 @@ def enzymeML_readin(EnzymeML_XLSM_str):
 
 def eln_subst_data_to_dict(eln_sheet):
     ext_eln_data = {}
-    for col, d in eln_sheet.iteritems():
+    for col, d in eln_sheet.items():
         if col != "Property":
             sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0]
             sub_name = sub_name.strip() if sub_name == str else sub_name 
@@ -85,7 +85,7 @@ def new_ELN_to_dict(eln_path):
     subst_eln_data = {}
     
     # load substances and properties into dictionary
-    for col, d in eln_sheet.iteritems():
+    for col, d in eln_sheet.items():
         if col != "Property":
             sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0].strip()
             subst_eln_data[sub_name] = {}
@@ -150,10 +150,28 @@ def base_ontology_extension(name_base_ontology):
     # Only supports owl-ontologies
     # load base ontology
     onto_world = owlready2.World()
+   # sbo_onto = onto_world.get_ontology("https://raw.githubusercontent.com/EBI-BioModels/SBO/master/SBO_OWL.owl").load()
     onto = onto_world.get_ontology("./ontologies/"+name_base_ontology+".owl").load()
+   # onto.imported_ontologies.append(sbo_onto)
+    
+    
     # Ohne diese Definition wird die Ontologie für set_relations(test_dict, onto) nicht gefunden
     BaseOnto = onto
 
+    #SBO has some classes that contain XMLs describing mathematical formulas
+    # loading the ontology with owlready2 results in the XML-classes of the formulas
+    # being interpreted as ontology classes and annotation properties
+    # Thus, deletion of these classes takes place here
+        
+    SBO_annotation_classes = ["apply","bvar","ci","cn","degree","divide","factorial","floor","lambda","lowlimit","minus","plus","power","product","root","selector","semantics","sum","tanh", "times","uplimit", "ln", "log","MathMLmath"]
+    for dep_class in SBO_annotation_classes:
+        codestr ="class_list = onto.search(iri = '*{}')\nfor indv in class_list: destroy_entity(indv)".format(dep_class)
+        code = compile(codestr, "<string>","exec")
+        try: 
+            exec(code)
+        except:
+            print(codestr)
+           
     with onto:
         # Komponenten: DWSIM stellt 6 Datenbanken zur verfügung (DWSIM, ChemSep, Biodiesel, CoolProp, ChEDL and Electrolytes)
         # Daraus ergeben sich 1500 verfügbare Komponenten für die Simulation
@@ -179,7 +197,6 @@ def subst_classes_from_dict(enzmldoc, eln_dict, onto):
     #      
     # a = enzmldoc.getAny("s0").ontology.value
     for subst in list(eln_dict["substances"].keys()):
-        print(subst)
         # include as individual, if label is already present as class
         if onto.search_one(label = subst) != None:
             codestring = """with onto:
@@ -213,7 +230,6 @@ def subst_classes_from_dict(enzmldoc, eln_dict, onto):
         # Execute code
         exec(code)
 
-    
     return onto
 
 def dataProp_creation(dataProp_dict, onto):
@@ -226,7 +242,7 @@ def dataProp_creation(dataProp_dict, onto):
     # Definieren jeder Relation in der Ontologie via codestring und exec:
     for rel in relation_set:
     #for subst in dataProp_dict:
-        codestring = """with onto:
+        codestring = """with BaseOnto:
             class {}(DataProperty):
                 label = '{}'
                 pass
@@ -254,17 +270,18 @@ def set_relations(dataProp_dict, onto):
             # give the entry as string else
             if (data_prop_type == int) or (data_prop_type == float):
                 codestring = "{}.{}.append({})".format(str(onto_class),str(entry), dataProp_dict[class_name][entry])
-           
             else:
                 codestring = "{}.{}.append('{}')".format(str(onto_class),str(entry), str(dataProp_dict[class_name][entry]))                
             
             # Code, der im codestring enthalten ist compilieren
             code = compile(codestring, "<string>","exec")
             # Code ausführen
-            try: 
-                exec(code)
-            except:
-                print(codestring)
+            #try: 
+            #    exec(code)
+            #except:
+            #    print(codestring)
+            #print(codestring)
+            exec(code)
                 
     return BaseOnto
 
@@ -290,6 +307,8 @@ def substance_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
     BaseOnto = dataProp_creation(supp_eln_dict["substances"], BaseOnto)
 
     BaseOnto= set_relations(supp_eln_dict["substances"], BaseOnto)
+        
+
     # Ontologie zwischenspeichern
     BaseOnto.save(file="./ontologies/Substances_and_"+ onto_str +".owl", format="rdfxml")
 
@@ -317,7 +336,7 @@ def run():
    
    #return test_dict
 
-#eln_str = "./ELNs/New-ELN_Kinetik_1.xlsx"
-#eln_dict = new_ELN_to_dict(eln_str)
+eln_str = "./ELNs/New-ELN_Kinetik_1.xlsx"
+eln_dict = new_ELN_to_dict(eln_str)
 
    
