@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Sep 23 14:07:50 2023
-@author: smdicher"""
-from text_mining_1 import load_classes_chebi, delete_files_in_directory, run_text_mining, add_publication
+hor: smdicher"""
+from text_mining import load_classes_chebi, delete_files_in_directory, run_text_mining, add_publication
 from preprocess_onto import *
 from onto_extension import preprocess_classes,create_classes_onto 
 from txt_extract import get_abstract, get_metadata
@@ -41,9 +41,10 @@ for i in glob.iglob(path):
         df_entity, rel_synonym, missing_all, match_dict_all = preprocess_classes(categories, abbreviation, onto_new_dict, sup_cat, rel_synonym, chem_list, missing, match_dict,entities_raw)
         df_all = pd.concat([df_all, df_entity], axis=0)
         onto_extender()
+
         eq = equality()#für validierung alle eq1 classen aufnehmen
         created_classes,sup_sub_df = create_classes_onto(abbreviation, sup_cat, missing_all, match_dict_all, df_entity,reac_dict,p_id,rel_synonym,chem_list,onto_new_dict)
-        created_cl.append(created_classes)
-        eq1.append(eq)
+        created_cl.extend(created_classes)
+        eq1.extend(eq)
         match_d_all.update(match_dict_all)
 

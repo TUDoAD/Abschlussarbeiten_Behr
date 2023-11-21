@@ -117,6 +117,7 @@ def add_publication(doi,title,abstract):
         onto = new_world.get_ontology('./ontologies/{}.owl'.format(onto_new)).load()
     except:
         onto = new_world.get_ontology('./ontologies/{}.owl'.format(onto_old)).load()
+        onto.set_base_iri('http://www.semanticweb.org/ontologies/2023/11/new_onto.owl#',rename_entities=False)
     pub_c = onto.search_one(label='publication')
     with onto:
         if not pub_c:

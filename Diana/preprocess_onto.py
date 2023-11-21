@@ -123,7 +123,8 @@ def write_in_txt(IRI,label,onto_name):
     iri_class = IRI + '  # ' + label +'\n'
     txt.write(iri_class) 
     txt.close() 
-   
+
+    
 def search_value_in_nested_dict(value, onto_names, onto_dict, match_dict):
     
     for k in onto_names:
@@ -143,7 +144,8 @@ def onto_extender ():
         # --term-file: is the text file, in which the IRI's are stored, which are to be searched for.
         os.system('java -jar c://Windows/robot.jar extract --input-iri {} --method BOT --term-file class_lists/IRIs_{}.txt --output ontology_snipet/{}_classes.owl'.format(iri,o,o))
     for filepath in glob.iglob('ontology_snipet/*.owl'):
-        os.system('robot merge --input {} --input ontologies/{}.owl --output ontologies/{}.owl'.format(filepath, onto_new, onto_new))
+        os.system('robot merge --input ontologies/{}.owl --input {} --output ontologies/{}.owl'.format(onto_new, filepath,  onto_new))
+        os.system('robot merge --input empty.owl --input {} --output empty.owl'.format(filepath))
 
 def equality():
     """
@@ -171,8 +173,8 @@ def equality():
     """
     eq=[]
     labels_old=[]
-    new_world= owlready2.World()
-    onto =new_world.get_ontology("./ontologies/{}.owl".format(onto_new.lower())).load()
+    new_world4= owlready2.World()
+    onto =new_world4.get_ontology("./ontologies/{}.owl".format(onto_new.lower())).load()
     new_world1=owlready2.World()
     onto_old1=new_world1.get_ontology("./ontologies/{}.owl".format(onto_old.lower())).load()
     for c_1 in onto_old1.classes():
@@ -199,6 +201,6 @@ def equality():
                             'Equivalence with {} added automatically'.format(c_2.iri)])
                         onto.search_one(iri=iri_snip).comment = ([
                             'Equivalence with {} added automatically'.format(onto.search_one(iri=iri_old).iri)]) 
-    onto.set_base_iri('http://www.semanticweb.org/chern/ontologies/2023/10/new_onto.owl#',rename_entities=False)
+
     onto.save('./ontologies/{}.owl'.format(onto_new.lower())) 
     return eq   

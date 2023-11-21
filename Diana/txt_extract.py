@@ -412,10 +412,10 @@ def get_abstract(path, doi, publisher):
         abstract=pdf.abstract()
     else:
         return None
-    
-    abstract=re.sub(r'A[Bb][Ss][Tt][Rr][Aa][Cc][Tt][:]?','',abstract)
-    if abstract[0]==':':
-            abstract=abstract[1:]
+    if abstract:
+        abstract=re.sub(r'A[Bb][Ss][Tt][Rr][Aa][Cc][Tt][:]?','',abstract)
+        if abstract[0]==':':
+                abstract=abstract[1:]
     
     #if re.search(r'K[Ee][Yy][Ww][Oo][Rr][Dd][Ss][:]?', abstract):
         #keywords=abstract[re.search(r'K[Ee][Yy][Ww][Oo][Rr][Dd][Ss][:]?', abstract).end():]
@@ -494,14 +494,19 @@ def get_metadata(filename):
 
 """
 abstract_all=''
-path=r'.\import_1\*.pdf'
+path=r'.\Methanisierung\*.pdf'
 for i in glob.iglob(path):
-    title,doi,publisher,ab = get_metadata(i)
+    title,doi,publisher = get_metadata(i)
     if doi==None:
         continue
     print(title+' : '+doi)
-    abstract = get_abstract(i, doi, publisher,ab)
-    print(abstract)
+    abstract = get_abstract(i, doi, publisher)
+    if abstract!=None and abstract:
+        print("Abstract:"+abstract)
+    else:
+        print('no abstract found')
+        """
+"""
     import json
     def set_config_key(key, value):
              globals()[key] = value
@@ -514,11 +519,8 @@ for i in glob.iglob(path):
                      title,doi,publisher= get_metadata(i)
                      print(title)
                      print(doi)
-    """
 
-                 
-             
-  
+"""
 
 
 

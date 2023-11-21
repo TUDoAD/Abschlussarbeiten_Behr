@@ -117,6 +117,7 @@ def add_publication(doi,title,abstract):
         onto = new_world.get_ontology('./ontologies/{}.owl'.format(onto_new)).load()
     except:
         onto = new_world.get_ontology('./ontologies/{}.owl'.format(onto_old)).load()
+        onto.set_base_iri('http://www.semanticweb.org/ontologies/2023/11/new_onto.owl#',rename_entities=False)
     pub_c = onto.search_one(label='publication')
     with onto:
         if not pub_c:
@@ -292,7 +293,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
     abbreviation = {}
     a = 0
     categories = {}
-    reac_dict = {}
+    reac_dict = {}   
     entity_old = (0,None,None)
     output_sents = pred_model_dataset(model, test_sents)
     raw_entities= {}
@@ -328,7 +329,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                 for i in range(len(match_hyph)):
                     entity = entity.replace(match_hyph[i][0],match_hyph[i][1]+match_hyph[i][2])
             
-
+    
             if re.search(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity): #Rh(111 )
                 i = re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0].replace(' ','')
                 entity = entity.replace(re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0],i)
@@ -523,7 +524,7 @@ def chemical_prep(chem_list, onto_class_list):
         if match_material and molecule in sup_cat.keys():
             comp_dict[molecule] = [match_material[0][0],match_material[0][1]]
         molecule_split = molecule.split()        
-        if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) or re.match(r'[\d,]+[—–-][a-z]+',molecule):
+        if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+',molecule):
             comp_dict[molecule] = molecule_split  
         else:
              comp = re.findall(r'([A-Z](?:[a-z])?)',molecule)
@@ -582,7 +583,10 @@ def synonym_dicts(class_list):
     desc_dict = {} 
     inchikey = {}
     temp_class_label = []
-    
+    """
+    new_world4 = owlready2.World()
+    onto = new_world4.get_ontology('ontologies/{}.owl'.format(onto_new)).load()
+    """
     def_id = ["hasRelatedSynonym", "hasExactSynonym","inchikey"]
     
     for i in range(len(class_list)):
