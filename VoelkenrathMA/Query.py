@@ -147,7 +147,7 @@ def query_2(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
     df.to_excel(path + "query_2_results.xlsx")
     
 
-def query_3(molefrac_co2=None, temperature=None, pressure=None, velocity=None, downstream=None):
+def query_3(molefrac_co2=None, temperature=None, pressure=None, velocity=None, downstream=None, result_name=None):
     # Query for some unspecific parameter
     # e.g.: Query.query_3(molefrac_co2=0.2, temperature=300.0)
     sparqlstr = """
@@ -301,7 +301,9 @@ def query_3(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
     df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file"])
     path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
     #path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
-    df.to_excel(path + "GUI_Q1_results.xlsx")
+    if result_name == None:
+        result_name = "query_3"
+    df.to_excel(path + result_name + ".xlsx")
     
     return results
     
@@ -352,7 +354,7 @@ def query_4(x_co2):
     df.to_excel(path + "query_4_results.xlsx")
     
   
-def query_5(molefrac_co2=None, temperature=None, pressure=None, velocity=None, downstream=None):
+def query_5(molefrac_co2=None, temperature=None, pressure=None, velocity=None, downstream=None, result_name=None):
     # Query for a parameter range
     # e.g. Query.query_5(molefrac_co2=0.04, temperature=[200,300], pressure=[100000,2000000], velocity=[0.001,1], downstream="'Yes'")
     sparqlstr = """
@@ -434,7 +436,9 @@ def query_5(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
     df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file", "Temperature [K]", "Pressure [Pa]", "Velocity [m/s]", "Turnover CO2"])
     path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
     #path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
-    df.to_excel(path + "query_5_results.xlsx")
+    if result_name == None:
+        result_name = "query_5"
+    df.to_excel(path + result_name + ".xlsx")
     return results
 
 

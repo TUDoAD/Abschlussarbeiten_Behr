@@ -10,12 +10,15 @@ import json
 import Query
 import qdarktheme
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtGui import QDesktopServices
+from pyDataverse.models import Dataset, Datafile
+from pyDataverse.api import NativeApi, DataAccessApi
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 
 class Ui(QtWidgets.QMainWindow):
@@ -30,12 +33,32 @@ class Ui(QtWidgets.QMainWindow):
         self.list_pres = self.para["pressure"] # Pa
         self.list_velo = self.para["velocity"] # m/s
         
+        # call query 1
         self.Q1button = self.findChild(QtWidgets.QPushButton, "Q1Button")
         self.Q1button.clicked.connect(self.run_Q1)
         
+        # call query 2
         self.Q2button = self.findChild(QtWidgets.QPushButton, "Q2Button")
         self.Q2button.clicked.connect(self.run_Q2)
         
+        # call dataverse API an set parameter
+        self.Q3xml_file = self.findChild(QtWidgets.QComboBox, "Q3comboBox1")
+        
+        base_url = "https://repo4cat.hlrs.de/"
+        api_token = "1e98ec1a-ddf0-4fbd-8348-d5ab86524e70"
+        dataverse_alias = "tu-do-ad"
+        api = NativeApi(base_url, api_token)
+        data_api = DataAccessApi(base_url, api_token)
+        DOI = "hdl:21.T11978/repo4cat-proto-1030&version=DRAFT"
+        dataset = api.get_dataset(DOI)
+        file_list = dataset.json()["data"]["latestVersion"]["files"]
+        for file in file_list:
+            file_name = file["label"]
+            if ".xlsx" in file_name:
+                self.Q3xml_file.addItem(file_name)
+
+        self.Q3xml_file.currentIndexChanged.connect(self.update_labels)
+        # call query 3
         self.Q3button = self.findChild(QtWidgets.QPushButton, "Q3Button")
         self.Q3button.clicked.connect(self.run_Q3)
         
@@ -71,7 +94,8 @@ class Ui(QtWidgets.QMainWindow):
         else:
             down_1 = None
             
-        results = Query.query_3(molefrac_co2=mole_1, temperature=self.Q1_temp_1, pressure=self.Q1_pres_1, velocity=self.Q1_velo_1, downstream=down_1)
+        self.Q1_results = Query.query_3(molefrac_co2=mole_1, temperature=self.Q1_temp_1, pressure=self.Q1_pres_1,
+                                        velocity=self.Q1_velo_1, downstream=down_1)
         print("Results are stored in GUI_Q1_results.xlsx")
         
         # display results in GUI
@@ -83,10 +107,10 @@ class Ui(QtWidgets.QMainWindow):
             self.Q1_list.itemClicked.disconnect(self.openUrl)
         except: TypeError
         
-        for i in range(len(results)):
-            individual_1 = QtWidgets.QListWidgetItem(str(results[i][0]).split("inferred.")[1], self.Q1_list)
-            simulation_1 = QtWidgets.QListWidgetItem((" - Simulation-File: " + str(results[i][1])), self.Q1_list)
-            data_1 =QtWidgets.QListWidgetItem((" - Data-File: "+ str(results[i][2])), self.Q1_list)
+        for i in range(len(self.Q1_results)):
+            individual_1 = QtWidgets.QListWidgetItem(str(self.Q1_results[i][0]).split("inferred.")[1], self.Q1_list)
+            simulation_1 = QtWidgets.QListWidgetItem((" - Simulation-File: " + str(self.Q1_results[i][1])), self.Q1_list)
+            data_1 =QtWidgets.QListWidgetItem((" - Data-File: "+ str(self.Q1_results[i][2])), self.Q1_list)
             
             self.Q1_list.addItem(individual_1)
             self.Q1_list.addItem(simulation_1)
@@ -130,8 +154,9 @@ class Ui(QtWidgets.QMainWindow):
         else:
             print("Some error occured while setting the downstream option...")
             
-        self.results = Query.query_5(molefrac_co2=mole_1, temperature=[self.Q2_temp_1, self.Q2_temp_2],
-                                pressure=[self.Q2_pres_1, self.Q2_pres_2], velocity=[self.Q2_velo_1, self.Q2_velo_2], downstream=down_1)
+        self.Q2_results = Query.query_5(molefrac_co2=mole_1, temperature=[self.Q2_temp_1, self.Q2_temp_2],
+                                pressure=[self.Q2_pres_1, self.Q2_pres_2], velocity=[self.Q2_velo_1, self.Q2_velo_2],
+                                downstream=down_1, result_name="GUI_Q2_results")
         
         self.createQ2Plots()
         
@@ -139,7 +164,76 @@ class Ui(QtWidgets.QMainWindow):
         
     def run_Q3(self):
         print("Query 3 started...")
+        # getting parameter for query
+        # parameter set in def_update_labels
+        # T: self.Q3_xml_temperature
+        # P: self.Q3_xml_pressure
+        # V: self.Q3_xml_velocity
+        # X: self.Q3_xml_molefrac # Molefraction of CO2
+        self.Q3_Downstream = self.findChild(QtWidgets.QComboBox, "Q3comboBox2")
+        
+        if self.Q3_Downstream.currentText() == "With Downstream":
+            down_1 = "'Yes'"
+        elif self.Q3_Downstream.currentText() == "Without Downstream":
+            down_1 = "'No'"
+        else:
+            print("Some error occured while setting the downstream option...")
+            
+        self.Q3_results = Query.query_3(molefrac_co2=float(self.Q3_xml_molefrac), temperature=float(self.Q3_xml_temperature),
+                                        pressure=float(self.Q3_xml_pressure), velocity=float(self.Q3_xml_velocity), downstream=self.Q3_Downstream,
+                                        result_name="GUI_Q3_results")
+        print("Query positiv")
+        
+        
 
+    
+    def update_labels(self):
+        self.Q3xml_file_text = self.Q3xml_file.currentText()
+        
+        base_url = "https://repo4cat.hlrs.de/"
+        api_token = "1e98ec1a-ddf0-4fbd-8348-d5ab86524e70"
+        dataverse_alias = "tu-do-ad"
+        api = NativeApi(base_url, api_token)
+        data_api = DataAccessApi(base_url, api_token)
+        DOI = "hdl:21.T11978/repo4cat-proto-1030&version=DRAFT"
+        dataset = api.get_dataset(DOI)
+        
+        file_list = dataset.json()["data"]["latestVersion"]["files"]
+
+        for file in file_list:
+            file_name = file["label"]
+            if file_name  == self.Q3xml_file_text:
+                print("xml-file found...")
+                file_id = file["dataFile"]["id"]
+                
+                response = data_api.get_datafile(file_id)
+                with open(self.Q3xml_file_text, "wb") as f:
+                    f.write(response.content)                    
+                excel = pd.read_excel(file_name, sheet_name=[1,2,4])
+                self.user_quest = excel[1]
+                self.experi = excel[2]
+                self.calc = excel[4]
+                
+        for i in range(len(self.user_quest)):
+            if self.user_quest.at[i, "Unnamed: 2"] == "reactor inlet temperature":
+                self.Q3_xml_temperature = self.user_quest.at[i, "Unnamed: 4"] # K
+            if self.user_quest.at[i, "Unnamed: 2"] == "pressure":
+                self.Q3_xml_pressure = self.user_quest.at[i, "Unnamed: 4"] * 100000 # bar -> Pa
+            if self.user_quest.at[i, "Unnamed: 2"] ==  "CO2":
+                self.Q3_xml_molefrac = self.user_quest.at[i, "Unnamed: 4"]
+        
+        for i in range(len(self.calc)):
+            if self.calc.at[i, "Unnamed: 0"] == "linear velocity":
+                self.Q3_xml_velocity = self.calc.at[i, "Unnamed: 1"]
+                
+        self.Q3_temp_1 = self.findChild(QtWidgets.QLabel, "Q3Temp")
+        self.Q3_pres_1 = self.findChild(QtWidgets.QLabel, "Q3Pres")
+        self.Q3_velo_1 = self.findChild(QtWidgets.QLabel, "Q3Velo")
+
+        self.Q3_temp_1.setText(str(self.Q3_xml_temperature))
+        self.Q3_pres_1.setText(str(self.Q3_xml_pressure))
+        self.Q3_velo_1.setText(str(self.Q3_xml_velocity))
+        
 
     def openUrl(self, item):
         # get url from ListObject
@@ -157,8 +251,6 @@ class Ui(QtWidgets.QMainWindow):
     
     
     def createQ2Plots(self):
-        
-        ## Plot_1 x,T (v=constants)
         # get minimal values
         temp_1 = []
         for result in self.results:

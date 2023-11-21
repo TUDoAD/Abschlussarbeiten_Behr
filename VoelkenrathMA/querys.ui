@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../../Downloads/AD2.ico</normaloff>../../../../Downloads/AD2.ico</iconset>
+    <normaloff>AD2.ico</normaloff>AD2.ico</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
@@ -52,7 +52,7 @@
      <string notr="true">background-color: rgb(240, 240, 240)</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="Query_1">
      <property name="sizePolicy">
