@@ -20,8 +20,8 @@ from pyDataverse.api import NativeApi, DataAccessApi
 from pyDataverse.models import Dataset, Datafile
 
 #print("Loading Ontology...")
-#onto_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-Onto_merged-and-inferred.owl"
-onto_path = "E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-Onto_merged-and-inferred.owl"
+onto_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-Onto_merged-and-inferred.owl"
+#onto_path = "E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-Onto_merged-and-inferred.owl"
 new_world = owlready2.World()
 onto = owlready2.get_ontology(onto_path).load()
 
@@ -77,8 +77,8 @@ def query_1(molefrac_co2, temperature, pressure, velocity, downstream):
         results.append([individual, dwsim_url, linkml_url])
     
     df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file"])
-    #path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
-    path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
+    path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
+    #path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
     df.to_excel(path + "query_1_results.xlsx")
     
         
@@ -142,8 +142,8 @@ def query_2(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
         results.append([individual, dwsim_url, linkml_url])
     
     df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file"])
-    #path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
-    path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
+    path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
+    #path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
     df.to_excel(path + "query_2_results.xlsx")
     
 
@@ -299,8 +299,8 @@ def query_3(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
         results.append([individual, dwsim_url, linkml_url])
     
     df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file"])
-    #path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
-    path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
+    path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
+    #path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
     df.to_excel(path + "GUI_Q1_results.xlsx")
     
     return results
@@ -432,8 +432,8 @@ def query_5(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
         results.append([individual, dwsim_url, linkml_url, temperature[0], pressure[0], velocity[0], turnover])
     
     df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file", "Temperature [K]", "Pressure [Pa]", "Velocity [m/s]", "Turnover CO2"])
-    #path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
-    path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
+    path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
+    #path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
     df.to_excel(path + "query_5_results.xlsx")
     return results
 
@@ -597,8 +597,8 @@ def query_6():
         results.append([individual, dwsim_url, linkml_url])
     
     df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file"])
-    #path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
-    path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
+    path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
+    #path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
     df.to_excel(path + "query_6_results.xlsx")
 
 
