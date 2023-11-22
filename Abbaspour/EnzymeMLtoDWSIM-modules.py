@@ -196,13 +196,16 @@ def base_ontology_extension(name_base_ontology):
 def subst_classes_from_dict(enzmldoc, subst_dict, onto):
     #      
     # iterate through each substance from subst_dict and include it in ontology
-
+    
+    enzymeML_subst_parameters = ["smiles","inchi"]
+    
     for subst in list(subst_dict.keys()):
         # include as individual, if label is already present as class
         if onto.search_one(label = subst) != None:
             codestring = """with onto:
                             substance_indv = onto.search_one(label = "{}")('ind_{}')
-                """.format(subst, subst)
+                            onto.search_one(label = "{}")
+                """.format(subst, subst, subst)
        
         # include as individual, if part in IRI is already present
         elif onto.search_one(iri = "*{}".format(subst)) != None:
@@ -213,8 +216,7 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
         # include as class and individual of class and search in enzymeML doc for
         # the substance
         
-        else:
-            
+        else: 
             if "hasEnzymeML_ID" in subst_dict[subst]:
                 subst_superclass = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')
                 enzml_name = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).name
@@ -230,7 +232,6 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
                         substance_indv = {}('ind_{}')
                         substance_indv.label = '{}'
                         substance_indv.altLabel = '{}'
-                
                 """.format(subst, subst_superclass, subst, enzml_name, subst, subst,subst, enzml_name)
         #
         
@@ -253,9 +254,14 @@ def subst_dataProp_creation(dataProp_dict, onto):
     for i in list(dataProp_dict.keys()):
         relation_set.update(set(dataProp_dict[i].keys()))
     
-    # only selecting some of the parameters of the EnzymeML substance description
-    enzymeML_subst_parameters = ["smiles","inchi"]
+    
+    # Important for adding protein and reactant parameters to ontology that are only contained 
+    # in the EnzymeML Excel Sheet
+    enzymeML_subst_parameters = ["organism","sequence","ecnumber"]
     relation_set.update(set(enzymeML_subst_parameters))
+        
+    # only selecting some of the parameters of the EnzymeML substance description
+    #relation_set.update(set(enzymeML_subst_parameters))
         
     # Definieren jeder Relation in der Ontologie via codestring und exec:
     for rel in relation_set:
@@ -274,28 +280,44 @@ def subst_dataProp_creation(dataProp_dict, onto):
     
     return BaseOnto
     
-def subst_set_relations(enzmldoc, dataProp_dict, onto):
-    # Wieder aufsetzen des Codestrings, diesmal anhand eines Dictionaries
+def subst_set_relations(enzmldoc, subst_dict, onto):
     BaseOnto = onto
-    for class_name in list(dataProp_dict.keys()):
-        # Klasse/substanz in Ontologie raussuchen, die zum Dictionary-key passt
-        #onto_class = BaseOnto.search_one(label=class_name)
+    
+    # Important for adding protein parameters to ontology that are only contained 
+    # in the EnzymeML Excel Sheet
+    enzymeML_subst_parameters = ["organism","sequence","ecnumber"]
+    prot_dict = enzmldoc.protein_dict
+    
+    for class_name in list(subst_dict.keys()):
+        #iterate through each key of the substance dictionary (each substance)
+        # and extend the respective individual with the data properties            
         onto_class = BaseOnto.search_one(iri='*ind_'+class_name)  
-        for entry in dataProp_dict[class_name]: 
-            data_prop_type = type(dataProp_dict[class_name][entry])
+        
+        if subst_dict[class_name][hasEnzymeML_ID] in prot_dict.keys():
+            for prot_param in enzymeML_subst_parameters:
+                prot_dat = 
+                codestring = "{}.{}.append({})".format(str(onto_class),prot_param,str(value))
+    
+                code = compile(codestring, "<string>","exec"))
+                exec(code)
+            
+        for entry in subst_dict[class_name]: 
+            data_prop_type = type(subst_dict[class_name][entry])
             
             # Assert value directly, if entry is int or float
             # give the entry as string else
             if (data_prop_type == int) or (data_prop_type == float):
-                codestring = "{}.{}.append({})".format(str(onto_class),str(entry), dataProp_dict[class_name][entry])
+                codestring = "{}.{}.append({})".format(str(onto_class),str(entry), subst_dict[class_name][entry])
             else:
-                codestring = "{}.{}.append('{}')".format(str(onto_class),str(entry), str(dataProp_dict[class_name][entry]))                
+                codestring = "{}.{}.append('{}')".format(str(onto_class),str(entry), str(subst_dict[class_name][entry]))                
             
             # Code, der im codestring enthalten ist compilieren
             code = compile(codestring, "<string>","exec")
 
             exec(code)
                 
+        
+        
     return BaseOnto
 
 def substance_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
