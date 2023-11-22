@@ -293,14 +293,16 @@ def subst_set_relations(enzmldoc, subst_dict, onto):
         # and extend the respective individual with the data properties            
         onto_class = BaseOnto.search_one(iri='*ind_'+class_name)  
         
-        if subst_dict[class_name][hasEnzymeML_ID] in prot_dict.keys():
-            for prot_param in enzymeML_subst_parameters:
-                prot_dat = 
-                codestring = "{}.{}.append({})".format(str(onto_class),prot_param,str(value))
+        if "hasEnzymeML_ID" in subst_dict[class_name].keys():
+            if subst_dict[class_name]["hasEnzymeML_ID"] in prot_dict.keys():
+                # get the data as dictionary from the respective protein:
+                prot_dat = prot_dict[subst_dict[class_name]["hasEnzymeML_ID"]].dict()
     
-                code = compile(codestring, "<string>","exec"))
-                exec(code)
-            
+                for prot_param in enzymeML_subst_parameters:
+                    codestring = "{}.{}.append('{}')".format(str(onto_class),prot_param,str(prot_dat[prot_param]))
+                    code = compile(codestring, "<string>","exec")
+                    exec(code)
+                
         for entry in subst_dict[class_name]: 
             data_prop_type = type(subst_dict[class_name][entry])
             
