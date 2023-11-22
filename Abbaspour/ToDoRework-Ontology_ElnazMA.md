@@ -28,7 +28,7 @@ Dann rework der DWSIM-Funktionen
 ### Ontologien
 - Testaufbau der finalen Ontologie in **Finale_Onto_mod.owl**
 	- WIP Ontologie hier: **Substances_and_BaseOnto2.owl**
-- Entsprechendes Anpassen der **BaseOnto.owl** -> Importiert jetzt SBO komplett!
+- Entsprechendes Anpassen der **BaseOnto.owl** -> Importiert jetzt SBO und metadata4ing komplett!
 - Code restrukturieren und auf BaseOnto anpassen
 - Allgemein auf s0, s1, s2 usw. achten, dass richtig aufgeschrieben in den ELNs !
 - Handschriftl. Notizen !
