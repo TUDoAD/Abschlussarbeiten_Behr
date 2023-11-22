@@ -220,19 +220,34 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
             if "hasEnzymeML_ID" in subst_dict[subst]:
                 subst_superclass = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')
                 enzml_name = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).name
+                
+                try:
+                    smiles = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).smiles
+                except:
+                    smiles = None
+                
+                try:
+                    inchi = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).inchi
+                except:
+                    inchi = None
+                
             else: 
                 subst_superclass = 'ChemicalSubstance'
-                enzml_name = ''
+                enzml_name = None
+                smiles = None
+                inchi = None
                 
             codestring = """with onto:
                         class {}(onto.search_one(iri = '*{}')):
                             label = '{}'
                             altLabel = '{}'
+                            smiles = '{}'
+                            inchi = '{}'
                             pass                    
                         substance_indv = {}('ind_{}')
                         substance_indv.label = '{}'
                         substance_indv.altLabel = '{}'
-                """.format(subst, subst_superclass, subst, enzml_name, subst, subst,subst, enzml_name)
+                """.format(subst, subst_superclass, subst, enzml_name, smiles, inchi, subst, subst,subst, enzml_name)
         #
         
         #print(codestring)
