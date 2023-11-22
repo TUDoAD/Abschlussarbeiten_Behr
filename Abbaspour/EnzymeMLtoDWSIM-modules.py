@@ -75,7 +75,8 @@ def eln_subst_data_to_dict(eln_sheet):
 
 
 ####
-
+# parsing information from new/additional ELN into dictionary
+#
 def new_ELN_to_dict(eln_path):
     
     ELN_xlsx = pd.ExcelFile(eln_path)
@@ -191,14 +192,12 @@ def base_ontology_extension(name_base_ontology):
         
     return onto
 
-# Code für die dynamische Erstellung von Komponenten/Substanzen als Klassen
-# Die Elemente einer Stoffliste werden entweder der Oberklasse JSON-Datei oder DWSIM-Komponente subsumiert
-
-def subst_classes_from_dict(enzmldoc, eln_dict, onto):
+# dynamic creation of substances based on the enzymeML document and the additional eln
+def subst_classes_from_dict(enzmldoc, subst_dict, onto):
     #      
-    # iterate through each substance from eln_dict and include it in ontology
+    # iterate through each substance from subst_dict and include it in ontology
 
-    for subst in list(eln_dict["substances"].keys()):
+    for subst in list(subst_dict.keys()):
         # include as individual, if label is already present as class
         if onto.search_one(label = subst) != None:
             codestring = """with onto:
@@ -211,12 +210,14 @@ def subst_classes_from_dict(enzmldoc, eln_dict, onto):
                             substance_indv = onto.search_one(iri = "*{}")('ind_{}')
                 """.format(subst, subst)
         
-        # include as class and individual of class
+        # include as class and individual of class and search in enzymeML doc for
+        # the substance
+        
         else:
             
-            if "hasEnzymeML_ID" in eln_dict["substances"][subst]:
-                subst_superclass = enzmldoc.getAny(eln_dict["substances"][subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')
-                enzml_name = enzmldoc.getAny(eln_dict["substances"][subst]["hasEnzymeML_ID"]).name
+            if "hasEnzymeML_ID" in subst_dict[subst]:
+                subst_superclass = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')
+                enzml_name = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).name
             else: 
                 subst_superclass = 'ChemicalSubstance'
                 enzml_name = ''
@@ -242,13 +243,20 @@ def subst_classes_from_dict(enzmldoc, eln_dict, onto):
 
     return onto
 
-def dataProp_creation(dataProp_dict, onto):
+def subst_dataProp_creation(dataProp_dict, onto):
     # Benötigte Relationen bestimmen via set() -> auch bei Mehrfachnennung
     # ist jede Relation aus Dictionary nur max. 1x enthalten in relation_list
     BaseOnto = onto
     relation_set = set()
+    #iterate through dataProp_dict keys (all substances in additional eln) and 
+    # add all keys as dataProperty
     for i in list(dataProp_dict.keys()):
         relation_set.update(set(dataProp_dict[i].keys()))
+    
+    # only selecting some of the parameters of the EnzymeML substance description
+    enzymeML_subst_parameters = ["smiles","inchi"]
+    relation_set.update(set(enzymeML_subst_parameters))
+        
     # Definieren jeder Relation in der Ontologie via codestring und exec:
     for rel in relation_set:
     #for subst in dataProp_dict:
@@ -266,14 +274,14 @@ def dataProp_creation(dataProp_dict, onto):
     
     return BaseOnto
     
-def set_relations(dataProp_dict, onto):
+def subst_set_relations(enzmldoc, dataProp_dict, onto):
     # Wieder aufsetzen des Codestrings, diesmal anhand eines Dictionaries
     BaseOnto = onto
     for class_name in list(dataProp_dict.keys()):
-        # Klasse in Ontologie raussuchen, die zum Dictionary-key passt
+        # Klasse/substanz in Ontologie raussuchen, die zum Dictionary-key passt
         #onto_class = BaseOnto.search_one(label=class_name)
         onto_class = BaseOnto.search_one(iri='*ind_'+class_name)  
-        for entry in dataProp_dict[class_name]:           
+        for entry in dataProp_dict[class_name]: 
             data_prop_type = type(dataProp_dict[class_name][entry])
             
             # Assert value directly, if entry is int or float
@@ -285,38 +293,21 @@ def set_relations(dataProp_dict, onto):
             
             # Code, der im codestring enthalten ist compilieren
             code = compile(codestring, "<string>","exec")
-            # Code ausführen
-            #try: 
-            #    exec(code)
-            #except:
-            #    print(codestring)
-            #print(codestring)
+
             exec(code)
                 
     return BaseOnto
 
 def substance_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
-    # Stoffliste aus dem ergänzenden Laborbuch
-    # Laccase, ABTS_red, ABTS_ox, Oxygen, Water
-
-    # Wörterbuch mit Stoffeigenschaften erstellen
-    # Eigenschaften beachten, die relevant sind für die Simulation in DWSIM
-    # Die relative Dichte und der Normalsiedepunkt, werden gebraucht für 'bulk c7+ pseudocompound creator setting'
-    # Auf diese Weise können Stoffe direkt über einen Code erstellt werden
-    # und DWSIM schätzt durch entsprechende Modelle fehlende Stoffeigenschaften ab
-    # z.B. wird das Molekulargewicht oder die chemische Strukturformel abgeschätzt
-    # Im vorliegenden Fall weichen die abgeschätzten Werte zu weit von den Literaturwerten ab
-    # Weshalb Stoffeigenschaften manuell in der JSON-datei korrigiert wurden
-    # und fehlende Stoffdaten durch die des Lösemittels ersetzt
 
     ##
     #SBO Term: enzmldoc.getAny("s0").ontology.value
     
-    BaseOnto = subst_classes_from_dict(enzmldoc, supp_eln_dict, onto)
+    BaseOnto = subst_classes_from_dict(enzmldoc, supp_eln_dict["substances"], onto)
     
-    BaseOnto = dataProp_creation(supp_eln_dict["substances"], BaseOnto)
+    BaseOnto = subst_dataProp_creation(supp_eln_dict["substances"], BaseOnto)
 
-    BaseOnto= set_relations(supp_eln_dict["substances"], BaseOnto)
+    BaseOnto = subst_set_relations(enzmldoc, supp_eln_dict["substances"], BaseOnto)
         
 
     # Ontologie zwischenspeichern
