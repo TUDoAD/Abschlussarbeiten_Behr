@@ -198,14 +198,13 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
     # iterate through each substance from subst_dict and include it in ontology
     
     enzymeML_subst_parameters = ["smiles","inchi"]
-    
+    ## HERE!
     for subst in list(subst_dict.keys()):
         # include as individual, if label is already present as class
         if onto.search_one(label = subst) != None:
             codestring = """with onto:
                             substance_indv = onto.search_one(label = "{}")('ind_{}')
-                            onto.search_one(label = "{}")
-                """.format(subst, subst, subst)
+                """.format(subst, subst)
        
         # include as individual, if part in IRI is already present
         elif onto.search_one(iri = "*{}".format(subst)) != None:
@@ -216,8 +215,43 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
         # include as class and individual of class and search in enzymeML doc for
         # the substance
         
-        else: 
-            if "hasEnzymeML_ID" in subst_dict[subst]:
+        else:   
+            subst_superclass = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')              
+            enzml_name = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).name
+            codestring = """with onto:
+                        class {}(onto.search_one(iri = '*{}')):
+                            label = '{}'
+                            altLabel = '{}'
+                            pass                    
+                        substance_indv = {}('ind_{}')
+                        substance_indv.label = '{}'
+                        substance_indv.altLabel = '{}'
+                """.format(subst, subst_superclass, subst, enzml_name, subst, subst,subst, enzml_name)
+        #
+        
+        #print(codestring)
+        
+        # compile codestring
+        code = compile(codestring, "<string>", "exec")
+        # Execute code
+        exec(code)
+        
+        #iterate through enzymeML_subst_parameters and include their properties where suited
+        if "hasEnzymeML_ID" in list(subst_dict[subst].keys()):
+            for param in enzymeML_subst_parameters:
+                try:
+                    value = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).dict()[param]
+                except:
+                    value = None
+                codestring = """with onto:
+                        onto.search_one(label = '{}').{} = '{}'            
+                    """.format(subst, param, value)
+                        # compile codestring
+                print(codestring)
+                code = compile(codestring, "<string>", "exec")
+                # Execute code
+                exec(code)
+                """
                 subst_superclass = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')
                 enzml_name = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).name
                 
@@ -237,25 +271,26 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
                 smiles = None
                 inchi = None
                 
-            codestring = """with onto:
-                        class {}(onto.search_one(iri = '*{}')):
-                            label = '{}'
-                            altLabel = '{}'
-                            smiles = '{}'
-                            inchi = '{}'
-                            pass                    
-                        substance_indv = {}('ind_{}')
-                        substance_indv.label = '{}'
-                        substance_indv.altLabel = '{}'
-                """.format(subst, subst_superclass, subst, enzml_name, smiles, inchi, subst, subst,subst, enzml_name)
-        #
-        
-        #print(codestring)
-        
-        # compile codestring
-        code = compile(codestring, "<string>", "exec")
-        # Execute code
-        exec(code)
+            if "hasEnzymeML_ID" in subst_dict[subst]:
+                subst_superclass = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')
+                enzml_name = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).name
+                
+                try:
+                    smiles = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).smiles
+                except:
+                    smiles = None
+                
+                try:
+                    inchi = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).inchi
+                except:
+                    inchi = None
+                
+            else: 
+                subst_superclass = 'ChemicalSubstance'
+                enzml_name = None
+                smiles = None
+                inchi = None
+        """
 
     return onto
 
