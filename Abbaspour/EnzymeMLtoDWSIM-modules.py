@@ -156,7 +156,7 @@ def base_ontology_extension(name_base_ontology):
     
     
     # Ohne diese Definition wird die Ontologie für set_relations(test_dict, onto) nicht gefunden
-    BaseOnto = onto
+    #BaseOnto = onto
 
     #SBO has some classes that contain XMLs describing mathematical formulas
     # loading the ontology with owlready2 results in the XML-classes of the formulas
@@ -196,7 +196,8 @@ def base_ontology_extension(name_base_ontology):
 
 def subst_classes_from_dict(enzmldoc, eln_dict, onto):
     #      
-    # a = enzmldoc.getAny("s0").ontology.value
+    # iterate through each substance from eln_dict and include it in ontology
+
     for subst in list(eln_dict["substances"].keys()):
         # include as individual, if label is already present as class
         if onto.search_one(label = subst) != None:
@@ -215,17 +216,25 @@ def subst_classes_from_dict(enzmldoc, eln_dict, onto):
             
             if "hasEnzymeML_ID" in eln_dict["substances"][subst]:
                 subst_superclass = enzmldoc.getAny(eln_dict["substances"][subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')
+                enzml_name = enzmldoc.getAny(eln_dict["substances"][subst]["hasEnzymeML_ID"]).name
             else: 
                 subst_superclass = 'ChemicalSubstance'
+                enzml_name = ''
                 
             codestring = """with onto:
                         class {}(onto.search_one(iri = '*{}')):
                             label = '{}'
+                            altLabel = '{}'
                             pass                    
                         substance_indv = {}('ind_{}')
+                        substance_indv.label = '{}'
+                        substance_indv.altLabel = '{}'
                 
-                """.format(subst, subst_superclass, subst, subst, subst)
+                """.format(subst, subst_superclass, subst, enzml_name, subst, subst,subst, enzml_name)
         #
+        
+        #print(codestring)
+        
         # compile codestring
         code = compile(codestring, "<string>", "exec")
         # Execute code
@@ -330,6 +339,7 @@ def run():
    # onto, test_dict = substance_knowledge_graph("./ELNs/Ergänzendes Laborbuch_Kinetik_1.xlsx", onto, "BaseOnto2")
    
    enzmldoc = pe.EnzymeMLDocument.fromTemplate("./ELNs/EnzymeML_Template_18-8-2021_KR.xlsm")
+   
    onto = base_ontology_extension("BaseOnto")
    
    new_eln_dict = new_ELN_to_dict("./ELNs/New-ELN_Kinetik_1.xlsx")
@@ -340,4 +350,13 @@ def run():
 eln_str = "./ELNs/New-ELN_Kinetik_1.xlsx"
 eln_dict = new_ELN_to_dict(eln_str)
 
-   
+def test():
+    enzmldoc = pe.EnzymeMLDocument.fromTemplate("./ELNs/EnzymeML_Template_18-8-2021_KR.xlsm")
+    enzdict = enzmldoc.dict()
+    eln_str = "./ELNs/New-ELN_Kinetik_1.xlsx"
+    eln_dict = new_ELN_to_dict(eln_str)
+    
+    return enzdict, eln_dict
+#enzdict, eln_dict = test()
+    
+    
