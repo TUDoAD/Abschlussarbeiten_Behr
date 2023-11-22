@@ -28,15 +28,14 @@ Dann rework der DWSIM-Funktionen
 ### Ontologien
 - Testaufbau der finalen Ontologie in **Finale_Onto_mod.owl**
 	- WIP Ontologie hier: **Substances_and_BaseOnto2.owl**
-- Entsprechendes Anpassen der **BaseOnto.owl** -> Importiert jetzt SBO und metadata4ing komplett!
+- Entsprechendes Anpassen der **BaseOnto.owl** -> Importiert jetzt SBO und metadata4ing komplett sowie 3 Annotationen aus ChEBI!
 - Code restrukturieren und auf BaseOnto anpassen
-- Allgemein auf s0, s1, s2 usw. achten, dass richtig aufgeschrieben in den ELNs !
 - Handschriftl. Notizen !
 - Reasoning prüfen
 
 - DOCSTRINGS
 
-- General Class Axioms in Python -> Links von Hendrik anschauen!
+- General Class Axioms in Python -> Links von Hendrik anschauen (per Mail)!
 - Reac4Cat Prinzip einbauen
 
 ### Reaction + Substances
@@ -57,3 +56,13 @@ BZW.: Welche Art der Reaktion wurde katalysiert?
 Mit welcher Art Kinetik wurde die Reaktion modelliert? 
 
 
+## Paper
+Was wurde übertragen von EnzymeML -> Ontologie?
+### Substanzen
+-smiles
+-inchi
+-organism
+-sequence
+-ecnumber
+
+-> Reaktionstemperatur usw. bei Reaktorsetup!
