@@ -357,6 +357,8 @@ def query_4(x_co2):
 def query_5(molefrac_co2=None, temperature=None, pressure=None, velocity=None, downstream=None, result_name=None):
     # Query for a parameter range
     # e.g. Query.query_5(molefrac_co2=0.04, temperature=[200,300], pressure=[100000,2000000], velocity=[0.001,1], downstream="'Yes'")
+    list_mole = [0.04, 0.2, 0.5]
+    
     sparqlstr = """
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -372,7 +374,28 @@ def query_5(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
     WHERE{{ 
     """
     if molefrac_co2:
-        sparql_query = sparql_query + f"?individual afo:hasMolarFractionCarbonDioxide {molefrac_co2}\n"
+        molefrac_co2 = float(molefrac_co2)
+        if molefrac_co2 not in list_mole:
+            min_frac = max(filter(lambda x: x < molefrac_co2, list_mole), default=None)
+            max_frac = min(filter(lambda x: x > molefrac_co2, list_mole), default=None)
+            
+            if min_frac and not max_frac:
+                sparql_query = sparql_query + f"""?individual afo:hasMolarFractionCarbonDioxide ?mole_co2.
+                FILTER (?mole_co2={molefrac_co2} || ?mole_co2={min_frac})
+                """
+            elif not min_frac and max_frac:
+                sparql_query = sparql_query + f"""?individual afo:hasMolarFractionCarbonDioxide ?mole_co2.
+                FILTER (?mole_co2={molefrac_co2} || ?mole_co2={max_frac})
+                """
+            elif min_frac and max_frac:
+                sparql_query = sparql_query + f"""?individual afo:hasMolarFractionCarbonDioxide ?mole_co2.
+                FILTER (?mole_co2={molefrac_co2} || ?mole_co2={min_frac} || ?mole_co2={max_frac})
+                """
+            else:
+                print("Some error occured in query_3 while setting the mole_fraction")
+        else:
+            molefrac_co2 = float(molefrac_co2)
+            sparql_query = sparql_query + f"?individual afo:hasMolarFractionCarbonDioxide {molefrac_co2}\n"
         
     if temperature:
         temperature[0] = float(temperature[0])
@@ -604,29 +627,4 @@ def query_6():
     path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
     #path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
     df.to_excel(path + "query_6_results.xlsx")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+ 
