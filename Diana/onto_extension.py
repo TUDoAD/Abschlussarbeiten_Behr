@@ -348,11 +348,12 @@ def check_in_snip(e_snip, classes, entity, l, chem_list):
     head = None
     if chem_list:
         chem_list.extend([c for c in [cem.split() for cem in chem_list]][0])
+        c_i=[]
         for c in chem_list:
             if '-' in c:
                 c_i=c.split('-')
                 c_i.append('-')
-                chem_list.extend(c_i)
+        chem_list.extend(c_i)
         chem_list=[*set(chem_list)]
     if l == 'Catalyst':
         classes[entity] = ['catalyst role']
@@ -649,9 +650,9 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                                         continue
                             ind.RO_0000057.append(cem_i) #'has participant' = RO_0000057
                 if row.entity in abbreviation.keys():
-                    if e_ind: # check for abbreviations
+                    try: # check for abbreviations
                         e_ind.comment.append(abbreviation[row.entity])
-                    else:
+                    except:
                         e_ind = [i for i in list(onto.search(label=row.entity)) if i in list(onto.individuals())][0]
                         e_ind.comment.append(abbreviation[row.entity])
 
