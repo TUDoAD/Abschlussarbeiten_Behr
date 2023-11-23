@@ -4,14 +4,15 @@ Created on Fri Oct 13 15:43:18 2023
 
 @author: smdicher
 """
+import os
 import spacy
 import re
 import pandas as pd
 from preprocess_onto import *
 from chemdataextractor import Document
 import time
-
-def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list, missing_all, match_dict_all,entities_raw):
+from text_mining import add_publication
+def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_synonym, chem_list, missing_all, match_dict_all,entities_raw):
     """
     
 
@@ -59,6 +60,7 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
     pop=[]
     comment_treat=[]
     comment_charac=[]
+    values_comp = [i for v in onto_new_dict.values() for i in v if i]
     for k, v in sup_cat.items():
         new_values=[]
         for i in v :
@@ -90,13 +92,13 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
                 comment_treat.append(entity)
             else:
                 comment_charac.append(entity)
-        elif entity in classes.keys() or entity in abbreviation.values():
+        elif entity in classes.keys():
             continue
         else:
             entity_raw=entity
             chem_all=[cem for cem in chem_list if cem in entity]
             seen_items = set()
-
+            
             # Create a new list to store the filtered items
             chem_entity = []
 
@@ -106,6 +108,22 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
                 if not any(item in seen_item for seen_item in seen_items):
                     chem_entity.append(item)
                     seen_items.add(item)
+            if entity not in chem_list and entity in values_comp:
+                chem_entity.append(entity)
+                chem_list.append(entity)
+            # Create a set to keep track of entities to remove
+            entities_to_remove = set()
+
+            # Iterate through the entities and check if they are substrings of others
+            for i, cem1 in enumerate(chem_entity):
+                for j, cem2 in enumerate(chem_entity):
+                    if i != j and cem1 in cem2:
+                        entities_to_remove.add(cem1)
+
+            # Filter out entities that are substrings of others
+            chem_entity = [c for c in chem_entity if c not in entities_to_remove]
+            print(entity+':')
+            print(chem_entity)
             spans_dict[entity] = []
             spans_n = []
             if l == 'Catalyst':
@@ -246,7 +264,12 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
             #i.e. light olefin
             classes,_ = check_in_snip(entity, classes, entity, l,chem_list)
             c_t = rel_synonym[entity.split()[-1]] if entity.split()[-1] in rel_synonym.keys() else entity.split()[-1]
-            spans_dict[entity].append(c_t)        
+            spans_dict[entity].append(c_t) #
+        elif entity not in classes.keys() and l in ['Product','Reactant']: 
+            for c in chem_entity:
+                c_t = rel_synonym[c] if c in rel_synonym.keys() else c
+                spans_dict[entity].append(c_t) #muss für entities wie "phenolic species", alkyl group erweitert werden  
+            list_all.append([entity,['chemical substance'],[],l])
     for k,v in spans_dict.items(): #replacement of parts of chemical entities with full name. i.e. ['zeolite', 'ZSM-5']-> ['ZSM-5 zeolite'] if 'ZSM-5 zeolite' is in entity
         for c in chem_e:
             for i in range(len(c.split())):
@@ -292,6 +315,8 @@ def preprocess_classes(categories,abbreviation, sup_cat, rel_synonym, chem_list,
     for k,v in classes_n.items():
         list_all.append([k,v,spans_dict[k],categories[k]])
         v_all.extend(v)
+        v_all.append(k)
+        v_all=[*set(v_all)]
     df_entity = pd.DataFrame(list_all, columns=['entity','classes', 'cems', 'category'])
     df_entity=df_entity.drop_duplicates(['entity']).reset_index()
     missing,match_dict = create_list_IRIs(v_all, IRI_json_filename = 'iriDictionary') 
@@ -323,36 +348,62 @@ def check_in_snip(e_snip, classes, entity, l, chem_list):
     head = None
     if chem_list:
         chem_list.extend([c for c in [cem.split() for cem in chem_list]][0])
+        for c in chem_list:
+            if '-' in c:
+                c_i=c.split('-')
+                c_i.append('-')
+                chem_list.extend(c_i)
         chem_list=[*set(chem_list)]
     if l == 'Catalyst':
         classes[entity] = ['catalyst role']
         if e_snip == entity:
             if 'catalyst' in entity:
-                token_new = 'catalyst role'
-                if [t.text for t in [token for token in doc_snip if token.text=='catalyst'][0].children if t.text != "catalyst" and t.text not in chem_list]: 
-                    for i in reversed(range(len([t.text for t in [token for token in doc_snip if token.text == 'catalyst'][0].children if t.text != "catalyst"]))):
-                            token_new = [t.text.lower() for t in [token for token in doc_snip if token.text == 'catalyst'][0].children][i] +' ' + token_new
-                            classes[entity].append(token_new) # Problem: from 'bimetallic SiO2-supported RhCo3 cluster catalyst' only 'cluster catalyst role'
+                #token_new = 'catalyst role'
+                try:
+                    if [t.text for t in [token for token in doc_snip if token.text=='catalyst'][0].children if t.text != "catalyst" and t.text not in chem_list]: 
+                        for t in [token for token in doc_snip if token.text=='catalyst'][0].children:
+                            if t.text != "catalyst" and t.text!='containing' and t.text not in chem_list:
+                                print(t.text)
+                                if not re.search(r'[Ss]upported',t.text):
+                                    token_new=t.text.lower()+' catalyst role'
+                                    classes[entity].append(token_new)
+                                if t.children:
+                                    children=list(t.children)
+                                    for i in reversed(range(len([k.text for k in children if k.text != "catalyst" and k.text not in chem_list and 'supported' not in k.text]))):
+                                        token_new=[t.text.lower() for t in children if t.text != "catalyst" and t.text not in chem_list and 'supported' not in t.text][i] +' ' + token_new
+                                        classes[entity].append(token_new) 
+                except:
+                    print('\nDependency parsing could not be performed.\nAssigned class for "{}" is "catalyst role"\n'.format(entity))
+                            
+                    """
+                            for i in reversed(range(len([t.text for t in [token for token in doc_snip if token.text!='catalyst'][0].children if t.text != "catalyst" and t.text not in chem_list]))):
+                                    token_new =  [t.text.lower() for t in [token for token in doc_snip if token.text == 'catalyst'][0].children][i]+' ' + token_new
+                                    classes[entity].append(token_new) # Problem: from 'bimetallic SiO2-supported RhCo3 cluster catalyst' only 'cluster catalyst role' 
+                            """
             else:
                 print('no catalyst in entity:{}'.format(entity))
         else:            
             for token in doc_snip:
                 if token.head.text == 'catalyst' or token.pos_=='VERB':
+                    token_new=' catalyst role'
                     if token.text != 'catalyst':
-                        if not  re.search(r'[Ss]upported',token.text):
-                            token_new=token.text.lower()+' catalyst role'
+                        if not  re.search(r'[Ss]upported',token.text) and token.text not in chem_list:
+                            token_new=token.text.lower()+token_new
                             classes[entity].append(token_new)
                         if token.children:
-                            for i in reversed(range(len([t.text for t in token.children if t.text != "catalyst"]))):
-                                token_new=[t.text.lower() for t in token.children][i] +' ' + token_new
+                            for i in reversed(range(len([t.text for t in token.children if t.text != "catalyst" and t.text not in chem_list and 'supported' not in t.text]))):
+                                token_new=[t.text.lower() for t in token.children if t.text != "catalyst" and t.text not in chem_list and 'supported' not in t.text][i] +' ' + token_new
                                 classes[entity].append(token_new) 
     
     elif l=='Reaction':
         if len(doc_snip) > 1:
             if '-' in doc_snip.text:
                 doc_snip = nlp(e_snip.replace('-',' '))
-            for token in doc_snip:
-                if token.head.text == token.text:
+            for token in reversed(list(doc_snip)):
+                if token.text=='reaction':
+                    token_new = token.text
+                    head=token_new
+                elif token.head.text == token.text and head==None:
                     token_new = token.head.text
                     head=token_new
                 else:
@@ -360,7 +411,7 @@ def check_in_snip(e_snip, classes, entity, l, chem_list):
                 list_token=[]
                 classes[entity].extend(check_in_children(token, token_new,list_token))
         else:
-            classes[entity].append(e_snip)         
+            classes[entity].append(e_snip)            
     classes[entity] = [*set(classes[entity])] 
     if len(classes[entity])>1 and l == 'Catalyst':
         classes[entity].remove('catalyst role')
@@ -368,7 +419,7 @@ def check_in_snip(e_snip, classes, entity, l, chem_list):
 
 def check_in_children(token, token_new,list_token):
     if token.children:
-       for t in token.children:
+        for t in reversed(list(token.children)):
                 token = t
                 token_new = t.text.lower() +' ' + token_new
                 list_token = check_in_children(token, token_new,list_token)
@@ -377,37 +428,43 @@ def check_in_children(token, token_new,list_token):
 
 def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,reac_dict,p_id,rel_synonym,chem_list,onto_new_dict):
     global num
+    global classes_all
     print(entities_raw1)
     nlp = spacy.load('en_core_web_sm')
     num = 0 
     sup_sub_df = pd.DataFrame(columns=['super_class','subclass'])
     new_world = owlready2.World()
     super_classes=['molecule','support material','chemical substance' ]
-    created_classes = []
+    
     onto = new_world.get_ontology('./ontologies/{}.owl'.format(onto_new)).load()
+    created_classes =[]
+    classes_all=[i.label[0].lower() for i in onto.classes() if i.label]
+    #onto.set_base_iri('http://www.semanticweb.org/ontologies/2023/11/new_onto.owl#',rename_entities=False)
     chem_sub = {}
     chem_list.extend([str(i) for i in rel_synonym.values()])
+    onto_names={}
+    idx_abb=[]
+    for v in match_dict.values():
+        onto_names[v[0]]=v[1]
     for row in df_entity.itertuples():
-        
+        if row.entity in abbreviation.values():
+            idx_abb.append(row.Index)
+            continue
         classes_parent = []
         classes = sorted(list(row.classes),reverse = False, key = len)
+
         if row.cems:                     
             for c in row.cems:
-                value=False
-                for v in match_dict.values():
-                    if c in v:
+                if c in onto_names.keys():
                         if c.lower() not in [i.label[0].lower() for i in onto.individuals() if i.label]:
-                            cem = onto.search_one(label = v[1])
+                            cem = onto.search_one(label = onto_names[c])
                             print('cem:{}'.format(c))
                             onto,_ = add_individum(onto,cem, c,p_id = p_id)
-                            value= True
-                    else:
-                        continue
-                if value==False:
+                else:
                     if len(c.split()) > 1:
                         for i in range(len(c.split())):
-                            if c.split()[i] in match_dict.values(): 
-                                sup_sub_df = sup_sub_df.append({'super_class':c.split()[i], 'subclass': c},ignore_index = True)                         
+                            if c.split()[i] in onto_names.keys():
+                                sup_sub_df = sup_sub_df.append({'super_class':onto_names[c.split()[i]], 'subclass': c},ignore_index = True)                         
                         if c in sup_cat.keys():
                             sup_sub_df = sup_sub_df.append({'super_class':'support material', 'subclass': c},ignore_index = True)
                         elif c not in list(sup_sub_df['subclass']):
@@ -419,9 +476,14 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
             if row.cems[0] != row.entity:
                 if nlp(row.entity)[-1].text in chem_list and 'supported' not in row.entity:
                     sup_sub_df = sup_sub_df.append({'super_class':row.cems[0], 'subclass': row.entity},ignore_index=True)
-                if row.category == 'Catalyst' and row.entity not in sup_sub_df['subclass'] and "based" not in row.entity:
+                """
+                if row.entity in abbreviation.values():
+                     sup_sub_df = sup_sub_df.append({'super_class':[k for k,v in abbreviation.items() if v==row.entity][0], 'subclass': row.entity},ignore_index=True)  
+                     """
+                if row.category == 'Catalyst' and row.entity not in sup_sub_df['subclass'] : # and "based" not in row.entity
                     sup_sub_df = sup_sub_df.append({'super_class':'chemical substance', 'subclass': row.entity},ignore_index=True)
-                
+        if row.classes==['chemical substance']:
+            sup_sub_df = sup_sub_df.append({'super_class':'chemical substance', 'subclass': row.entity},ignore_index=True)      
         if row.category =='Catalyst':
             k = 0
             while k < len(row.classes):
@@ -437,11 +499,20 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                 elif classes[k] != 'catalyst role':
                         sup_sub_df = sup_sub_df.append({'super_class':'catalyst role','subclass':classes[k]},ignore_index=True)
                 k += 1  
-            if row.entity not in list(sup_sub_df['subclass']):    
+            
+            if row.entity not in list(sup_sub_df['subclass']) and not row.cems:   
+                sup_sub_df = sup_sub_df.append({'super_class':'chemical substance', 'subclass': row.entity},ignore_index=True)
+                """
+                if row.entity not in abbreviation.values():
+                    sup_sub_df = sup_sub_df.append({'super_class':'chemical substance', 'subclass': row.entity},ignore_index=True)
+                else:
+                    idx_abb.append(row.Index) #in case catalyst is a chemical substance and have an abbreviation it will not be created as entity but will be added in the annotations of its abbreviation
+                    """
+                """
                 for i in classes_parent:
-
-                        sup_sub_df = sup_sub_df.append({'super_class':i, 'subclass':row.entity},ignore_index = True)
-            elif classes_parent:
+                    sup_sub_df = sup_sub_df.append({'super_class':i, 'subclass':row.entity},ignore_index = True)
+                 """   
+            if classes_parent:
                 chem_sub[row.entity] = classes_parent
         elif row.category == 'Reaction':
             k=0
@@ -455,15 +526,17 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
             for k in classes_parent:    
                 i = len(k.split())-1
                     
-                if k in match_dict.values() and k.lower() not in [c.label[0].lower() for c in onto.individuals() if c.label]:
-                     onto, _ = add_individum(onto,onto.search_one(label = k), k,p_id = p_id)     
-
-                elif k.split()[i] in match_dict.values():
-                    sup_sub_df = sup_sub_df.append({'super_class': k.split()[i], 'subclass':k},ignore_index=True)
+                if k in onto_names.keys() and k not in [c.label[0] for c in onto.individuals() if c.label]:
+                    onto, _ = add_individum(onto,onto.search_one(label = onto_names[k]), k,p_id = p_id)     
+                elif k in onto_names.values() and k not in [c.label[0] for c in onto.individuals() if c.label]:
+                    onto, _ = add_individum(onto,onto.search_one(label = k), k,p_id = p_id)
+                elif k.split()[i] in onto_names.keys():
+                    
+                    sup_sub_df = sup_sub_df.append({'super_class': onto_names[k.split()[i]], 'subclass':k},ignore_index=True)
                 else:
                     sup_sub_df = sup_sub_df.append({'super_class': 'chemical reaction (molecular)', 'subclass':k},ignore_index = True)
-                
-                       
+    df_entity_all=df_entity            
+    df_entity= df_entity.drop(index=idx_abb)                   
     with onto:
         
         support_mat = onto.search_one(label='support material')
@@ -500,13 +573,13 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
             if s.index in indecies:
                 continue                                 
             elif s.super_class in super_classes or s.super_class in chem_list :
-                indecies, onto,_,created_classes = create_sub_super(missing, onto,s.Index, indecies,entities, sup_sub_df,created_classes,chem_list,p_id,s.subclass)            
+                indecies, onto,_,created_classes = create_sub_super(missing, onto,s.Index, indecies,entities, sup_sub_df,created_classes,chem_list,abbreviation,p_id,s.subclass)            
             else:
-                indecies, onto,_,created_classes = create_sub_super(missing, onto,s.Index, indecies,entities, sup_sub_df,created_classes,chem_list,p_id = p_id)
+                indecies, onto,_,created_classes = create_sub_super(missing, onto,s.Index, indecies,entities, sup_sub_df,created_classes,chem_list,abbreviation,p_id = p_id)
         
         
         for row in df_entity.itertuples():
-            
+                
                 if row.cems:
                     e_ind=[]
                     if row.category == 'Catalyst' and row.entity in chem_sub.keys():
@@ -521,7 +594,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                             e_ind.RO_0000087.append(cat_cl) #'has role' = RO_0000087
                     for c in row.cems:
                         if c != row.entity and not row.classes:
-                            print(row.classes, c)
+                            
                             if [i for i in list(onto.search(label=c)) if i in list(onto.classes())]:
                                 onto, ind = add_individum(onto,[i for i in list(onto.search(label=c)) if i in list(onto.classes())][0], row.entity,p_id)
                             else:
@@ -557,8 +630,10 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                 
                 if row.category== 'Reaction':
                     if row.entity in reac_dict.keys():
-                        
-                        ind= [i for i in list(onto.search(label=row.entity)) if i in list(onto.individuals())][0]                
+                        try:
+                            ind= [i for i in list(onto.search(label=row.entity)) if i in list(onto.individuals())][0] 
+                        except:
+                            onto,ind=add_individum(onto,[i for i in list(onto.search(label=row.classes[0])) if i in list(onto.classes())][0], row.entity,p_id)
                         for r in reac_dict[row.entity]:
                             c_t=rel_synonym[r] if r in rel_synonym.keys() else r
                             try:
@@ -573,8 +648,12 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                                         print(r+" was skipped in reac_dict")
                                         continue
                             ind.RO_0000057.append(cem_i) #'has participant' = RO_0000057
-                if row.entity in abbreviation.keys() and e_ind: # check for abbreviations
-                    e_ind.comment.append(abbreviation[row.entity])
+                if row.entity in abbreviation.keys():
+                    if e_ind: # check for abbreviations
+                        e_ind.comment.append(abbreviation[row.entity])
+                    else:
+                        e_ind = [i for i in list(onto.search(label=row.entity)) if i in list(onto.individuals())][0]
+                        e_ind.comment.append(abbreviation[row.entity])
 
         for sup,v in sup_cat.items():
             sup = rel_synonym[sup] if sup in rel_synonym.keys() else sup
@@ -584,7 +663,8 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                 try:
                     onto, sup=add_individum(onto,list(onto.search(label=sup))[0], sup,p_id)
                 except:
-                    new_cl = types.new_class(sup, ('support material',))
+                    sup_mat=[i for i in list(onto.search(label='support material')) if i in onto.classes()][0]
+                    new_cl = types.new_class(sup, (sup_mat,))
                     onto, sup = add_individum(onto,new_cl, sup,p_id)
             sup.RO_0000087.append(support_role_i)
             
@@ -596,16 +676,14 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                     try:
                         onto, cat = add_individum(onto,list(onto.search(label=cat))[0], cat,p_id)
                     except:
-                        try:
-                            new_cl = types.new_class(class_name, ('molecule',))
-                            onto, cat = add_individum(onto,new_cl, cat,p_id)
-                        except:
-                            continue
+                        mol=[i for i in list(onto.search(label='molecule')) if i in onto.classes()][0]
+                        new_cl = types.new_class(cat, (mol,))
+                        onto, cat = add_individum(onto,new_cl, cat,p_id)
                 cat.RO_0000087.append(cat_role_i)    #has role catalyst role
                 cat.supported_on.append(sup)
         entities_pub = []
         entities_pub.extend([c for c in df_entity.entity])
-        entities_pub.extend([i for c in df_entity.cems if c for i in c if i not in entities_pub])
+        entities_pub.extend([i for c in df_entity_all.cems if c for i in c if i not in entities_pub])
         entities_pub = [*set(entities_pub)]
         pub_new = onto.search_one(iri='*publication{}'.format(p_id))
         if comment_treat:
@@ -626,20 +704,21 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
             inds = [i for i in list(onto.search(label=entity))]
             for i in inds:
                 i.comment.append(short)
-    onto = create_comp_relation(onto,match_dict, rel_synonym,p_id,onto_new_dict)
+    onto = create_comp_relation(onto,list(onto_names.keys()), rel_synonym,p_id,onto_new_dict)
                 
     onto.save('./ontologies/{}.owl'.format(onto_new))
     return created_classes, sup_sub_df       
           
-def create_comp_relation(onto,match_dict, rel_synonym,p_id,onto_new_dict):
+def create_comp_relation(onto,values, rel_synonym,p_id,onto_new_dict):
     global num
     #global onto_new_dict
     short = []
     pub_new = onto.search_one(iri='*publication{}'.format(p_id))
     with onto:
         for k,v in onto_new_dict.items():
-            if k in match_dict.values() or len(v) == 1:
+            if k in values or len(v) == 1:
                 continue
+
             else:
                 try:
                     mol = [m for m in onto.search(label = k) if m in onto.individuals()][0]
@@ -668,22 +747,24 @@ def create_comp_relation(onto,match_dict, rel_synonym,p_id,onto_new_dict):
     return onto
 
     
-def create_subclass(onto,subclass,entities,super_class,created_classes,chem_list,p_id ):
+def create_subclass(onto,subclass,entities,super_class,created_classes,chem_list,abbreviation,p_id ):
     global num
     new_sub = None  
     created_ind = [i.label[0].lower() for i in onto.individuals() if i.label]
     
-    if [c for c in chem_list if re.search(r'\b[\d.,%]*{}\b'.format(c),subclass) if c != subclass]:
+    if [c for c in chem_list if re.search(r'\b[\d.,%]*{}\b'.format(re.escape(c)),subclass) if c != subclass]:
         print('subclass:{}'.format(subclass))
         if subclass.lower() not in created_ind:
             onto, new_i = add_individum(onto,super_class,subclass,p_id)            
         else:
             new_i = onto.search_one(label = subclass)
             new_i.is_a.append(super_class)  
-    
+    elif subclass in abbreviation.values():
+        if subclass.lower() not in created_ind:
+            onto, new_i = add_individum(onto,super_class,subclass,p_id)
     elif subclass.lower() == super_class.label[0].lower() or ("role" in super_class.label[0] and "role" not in subclass):    #to implement for reaction
          onto, new_i = add_individum(onto,super_class, subclass,p_id)
-    elif subclass.lower() not in created_classes:
+    elif subclass.lower() not in created_classes and subclass.lower() not in classes_all:
           class_name = 'DC_{:02d}{:02d}'.format(p_id, num)
           num += 1
           new_sub = types.new_class(class_name,(super_class,))      
@@ -695,6 +776,13 @@ def create_subclass(onto,subclass,entities,super_class,created_classes,chem_list
               elif subclass.lower() in created_ind:
                   new_i = onto.search_one(label=subclass)
                   new_i.is_a.append(super_class)
+    elif subclass.lower() not in classes_all and subclass in entities:
+        super_class=[i for i in onto.search(label=subclass.lower()) if i in onto.classes()][0]
+        if subclass.lower() not in created_ind:
+            onto, new_i = add_individum(onto,super_class, subclass,p_id)
+        elif subclass in created_ind:
+            new_i = [i for i in onto.search(label=subclass) if i in onto.individuals()][0] 
+            new_i.is_a.append(super_class)
     if new_sub:
         new_sub.comment.append('created automatically')    
 
@@ -714,11 +802,11 @@ def add_individum(onto,super_class, ind,p_id):
             new_i.comment.append('created automatically')                
     return onto, new_i        
 
-def create_sub_super(missing, onto, idx, indecies, entities, sup_sub_df, created_classes, chem_list, p_id, subclass = None ):
+def create_sub_super(missing, onto, idx, indecies, entities, sup_sub_df, created_classes, chem_list, abbreviation,p_id, subclass = None ):
     global num
     super_class_l = sup_sub_df.loc[idx, 'super_class']
     with onto:
-        if super_class_l not in missing or super_class_l in created_classes:
+        if super_class_l not in missing or super_class_l in created_classes or super_class_l in classes_all:
             try:
                 super_class = [c for c in onto.search(label=super_class_l) if c in onto.classes()][0]
             except:
@@ -730,19 +818,19 @@ def create_sub_super(missing, onto, idx, indecies, entities, sup_sub_df, created
                     except:    
                         super_class = onto.search_one(label=super_class_l+ ' (molecule)')
             if not subclass:
-                onto, created_classes = create_subclass(onto, sup_sub_df.loc[idx, 'subclass'], entities, super_class,created_classes,chem_list,p_id=p_id)
+                onto, created_classes = create_subclass(onto, sup_sub_df.loc[idx, 'subclass'], entities, super_class,created_classes,chem_list,abbreviation,p_id=p_id)
         elif super_class_l in list(sup_sub_df['subclass']):
             query = sup_sub_df.query('subclass == "{}"'.format(super_class_l))
             idx = query.index[0]
             subclass=super_class_l
             indecies.extend(list(query.index))
-            indecies, onto, super_class,created_classes = create_sub_super(missing, onto, idx, indecies,entities,sup_sub_df,created_classes,chem_list,p_id,subclass=subclass)
+            indecies, onto, super_class,created_classes = create_sub_super(missing, onto, idx, indecies,entities,sup_sub_df,created_classes,chem_list,abbreviation,p_id,subclass=subclass)
             query = sup_sub_df.query('super_class == "{}"'.format(super_class_l))
             if query.empty == False:
                 indecies.extend(list(query.index))
                 for q in range(len(query)):
                     subclass = query['subclass'].iloc[q]
-                    onto, created_classes=create_subclass(onto,subclass,entities,super_class,created_classes,chem_list,p_id=p_id)
+                    onto, created_classes=create_subclass(onto,subclass,entities,super_class,created_classes,chem_list,abbreviation,p_id=p_id)
                     subclass = None 
         
         else: 
@@ -753,8 +841,8 @@ def create_sub_super(missing, onto, idx, indecies, entities, sup_sub_df, created
             super_class.label.append(super_class_l)
             created_classes.append(super_class_l.lower())
         if subclass:
-            if subclass.lower() not in created_classes:
-                if super_class_l== 'chemical substance' or super_class_l in chem_list:
+            if subclass.lower() not in created_classes and subclass.lower() not in classes_all:
+                if super_class_l== 'chemical substance' or super_class_l in chem_list: #or super_class_l in abbreviation.keys()
                     onto, _ = add_individum(onto,super_class, subclass,p_id)
                     new_sub = super_class
                 else:
@@ -771,477 +859,812 @@ def create_sub_super(missing, onto, idx, indecies, entities, sup_sub_df, created
             created_classes.append(super_class_l.lower())    
 
     return  indecies, onto,super_class, created_classes
-entities_raw1={'Hydroformylation': ['Hydroformylation'],
- 'aldehyde': ['aldehyde'],
- 'olefin': ['olefin'],
- 'heterogeneous catalyst': ['heterogeneous catalyst'],
- 'Fe': ['Fe'],
- 'Co': ['Co'],
- 'Ru': ['Ru'],
- 'Rh': ['Rh'],
- 'Pd': ['Pd'],
- 'Rh-, Co-, and Pt-based catalyst': ['Rh-, Co-, and Pt-based catalyst'],
- 'hydroformylation': ['hydroformylation'],
- 'Rh-and Co-based catalyst': ['Rh- and Co-based catalyst'],
- 'linear aldehyde': ['linear aldehyde'],
- 'rhodium-and cobalt-based catalyst': ['rhodium- and cobalt-based catalyst'],
- 'alkene': ['alkene'],
- 'heterogeneous catalyst based on Rh and Co': ['heterogeneous catalyst based on Rh and Co'],
- 'hydrotalcite (HT)-like material': ['hydrotalcite (HT)-like material'],
- 'HT-based material': ['HT-based material'],
- 'alkylation': ['alkylation'],
- 'isomerization': ['isomerization'],
- 'hydroxylation': ['hydroxylation'],
- 'redox reaction': ['redox reaction'],
- 'condensation': ['condensation'],
- 'layered double hydroxide': ['layered double hydroxide'],
- 'cobalt hydrotalcite': ['cobalt hydrotalcite'],
- 'rhodium-containing cobalt hydrotalcite': ['rhodium-containing cobalt hydrotalcite'],
- 'in situ sol-gel method': ['in situ sol-gel method'],
- 'layered CoRhHT-type material': ['layered CoRh-HT-type material'],
- '1-Octene': ['1-Octene'],
- 'C8H16': ['C8H16'],
- '1-Decene': ['1-Decene'],
- 'C10H20,96.0': ['C10H20,96.0'],
- '1-Heptene': ['1-Heptene'],
- 'C7H14': ['C7H14'],
- '1-Hexene': ['1-Hexene'],
- 'layered CoRh-HT type material': ['layered Co-Rh-HT type material'],
- 'stirred': ['stirred'],
- 'stir': ['stir'],
- 'filtered': ['filtered'],
- 'washed': ['washed'],
- 'dried': ['dried'],
- 'CoRhHT-2': ['CoRhHT-2'],
- 'CoRhHT-3': ['CoRhHT-3'],
- 'Cobalt Rhodium HT': ['Cobalt Rhodium HT'],
- 'Powder X-ray diffraction': ['Powder X-ray diffraction'],
- 'XRD': ['XRD'],
- 'Fourier-transform infrared': ['Fourier-transform infrared'],
- 'FT-IR': ['FT-IR'],
- 'ICPAES': ['ICP-AES'],
- 'X-ray photoelectron spectra': ['X-ray photoelectron spectra'],
- 'XPS': ['XPS'],
- '1-hexene': ['1-hexene'],
- '1-decene': ['1-decene'],
- 'CoRhHT catalyst': ['CoRh-HT catalyst'],
- '1-octene': ['1-octene'],
- 'gas chromatography': ['gas chromatography'],
- 'layered CoRhHT': ['layered CoRh-HT'],
- 'rhodium': ['rhodium'],
- 'rhodium-containing sample': ['rhodium-containing sample'],
- 'α-Co(OH)2': ['α-Co(OH)2'],
- 'CoRhHT': ['CoRh-HT'],
- 'high-resolution transmission electron microscopy': ['high-resolution transmission electron microscopy'],
- 'HR-TEM': ['HR-TEM'],
- 'CoRhHT-1': ['CoRh-HT-1'],
- 'CoRhHT-type material': ['CoRh-HT-type material'],
- 'X-ray photoelectron spectral': ['X-ray photoelectron spectral'],
- 'cobalt-rhodium hydrotalcite material': ['cobalt-rhodium hydrotalcite material'],
- 'Co 2p XPS': ['Co 2p XPS'],
- 'layered CoRhHT-1 material': ['layered CoRh-HT-1 material'],
- 'hydro-formylated product': ['hydro-formylated product'],
- 'alcohol': ['alcohol'],
- 'hydrogenation': ['hydrogenation'],
- 'olefin-isomerized product': ['olefin-isomerized product'],
- 'hydroformylated product': ['hydroformylated product'],
- 'lower alkene': ['lower alkene'],
- 'hexane': ['hexane'],
- 'heptene': ['heptene'],
- 'hydroformylation product': ['hydroformylation product'],
- 'separated': ['separated'],
- 'isomerized olefin': ['isomerized olefin'],
- 'cobalt': ['cobalt'],
- 'aldehyde product': ['aldehyde product'],
- 'lighter olefin': ['lighter olefin'],
- 'C10': ['C10'],
- 'C8': ['C8'],
- 'C7': ['C7'],
- 'isomerized product': ['isomerized product'],
- 'branched aldehyde': ['branched aldehyde'],
- 'linear alkene': ['linear alkene'],
- 'branched alkene': ['branched alkene'],
- 'pure cobalt hydrotalcite': ['pure cobalt hydrotalcite'],
- 'HT': ['HT'],
- 'layered hydrotalcite-type material': ['layered hydrotalcite-type material'],
- 'Rh3+-containing layered CoRhHT-type material': ['Rh3+-containing layered CoRh-HT-type material']}
-p_id=1
-entities_raw={'Hydroformylation': ['Hydroformylation'],
- 'aldehyde': ['aldehyde'],
- 'olefin': ['olefin'],
- 'heterogeneous catalyst': ['heterogeneous catalyst'],
- 'Fe': ['Fe'],
- 'Co': ['Co'],
- 'Ru': ['Ru'],
- 'Rh': ['Rh'],
- 'Pd': ['Pd'],
- 'Rh-, Co-, and Pt-based catalyst': ['Rh-, Co-, and Pt-based catalyst'],
- 'hydroformylation': ['hydroformylation'],
- 'Rh-and Co-based catalyst': ['Rh- and Co-based catalyst'],
- 'linear aldehyde': ['linear aldehyde'],
- 'rhodium-and cobalt-based catalyst': ['rhodium- and cobalt-based catalyst'],
- 'alkene': ['alkene'],
- 'heterogeneous catalyst based on Rh and Co': ['heterogeneous catalyst based on Rh and Co'],
- 'hydrotalcite (HT)-like material': ['hydrotalcite (HT)-like material'],
- 'HT-based material': ['HT-based material'],
- 'alkylation': ['alkylation'],
- 'isomerization': ['isomerization'],
- 'hydroxylation': ['hydroxylation'],
- 'redox reaction': ['redox reaction'],
- 'condensation': ['condensation'],
- 'layered double hydroxide': ['layered double hydroxide'],
- 'cobalt hydrotalcite': ['cobalt hydrotalcite'],
- 'rhodium-containing cobalt hydrotalcite': ['rhodium-containing cobalt hydrotalcite'],
- 'in situ sol-gel method': ['in situ sol-gel method'],
- 'layered CoRhHT-type material': ['layered CoRh-HT-type material'],
- '1-Octene': ['1-Octene'],
- 'C8H16': ['C8H16'],
- '1-Decene': ['1-Decene'],
- 'C10H20,96.0': ['C10H20,96.0'],
- '1-Heptene': ['1-Heptene'],
- 'C7H14': ['C7H14'],
- '1-Hexene': ['1-Hexene'],
- 'layered CoRh-HT type material': ['layered Co-Rh-HT type material'],
- 'stirred': ['stirred'],
- 'stir': ['stir'],
- 'filtered': ['filtered'],
- 'washed': ['washed'],
- 'dried': ['dried'],
- 'CoRhHT-2': ['CoRhHT-2'],
- 'CoRhHT-3': ['CoRhHT-3'],
- 'Cobalt Rhodium HT': ['Cobalt Rhodium HT'],
- 'Powder X-ray diffraction': ['Powder X-ray diffraction'],
- 'XRD': ['XRD'],
- 'Fourier-transform infrared': ['Fourier-transform infrared'],
- 'FT-IR': ['FT-IR'],
- 'ICPAES': ['ICP-AES'],
- 'X-ray photoelectron spectra': ['X-ray photoelectron spectra'],
- 'XPS': ['XPS'],
- '1-hexene': ['1-hexene'],
- '1-decene': ['1-decene'],
- 'CoRhHT catalyst': ['CoRh-HT catalyst'],
- '1-octene': ['1-octene'],
- 'gas chromatography': ['gas chromatography'],
- 'layered CoRhHT': ['layered CoRh-HT'],
- 'rhodium': ['rhodium'],
- 'rhodium-containing sample': ['rhodium-containing sample'],
- 'α-Co(OH)2': ['α-Co(OH)2'],
- 'CoRhHT': ['CoRh-HT'],
- 'high-resolution transmission electron microscopy': ['high-resolution transmission electron microscopy'],
- 'HR-TEM': ['HR-TEM'],
- 'CoRhHT-1': ['CoRh-HT-1'],
- 'CoRhHT-type material': ['CoRh-HT-type material'],
- 'X-ray photoelectron spectral': ['X-ray photoelectron spectral'],
- 'cobalt-rhodium hydrotalcite material': ['cobalt-rhodium hydrotalcite material'],
- 'Co 2p XPS': ['Co 2p XPS'],
- 'layered CoRhHT-1 material': ['layered CoRh-HT-1 material'],
- 'hydro-formylated product': ['hydro-formylated product'],
- 'alcohol': ['alcohol'],
- 'hydrogenation': ['hydrogenation'],
- 'olefin-isomerized product': ['olefin-isomerized product'],
- 'hydroformylated product': ['hydroformylated product'],
- 'lower alkene': ['lower alkene'],
- 'hexane': ['hexane'],
- 'heptene': ['heptene'],
- 'hydroformylation product': ['hydroformylation product'],
- 'separated': ['separated'],
- 'isomerized olefin': ['isomerized olefin'],
- 'cobalt': ['cobalt'],
- 'aldehyde product': ['aldehyde product'],
- 'lighter olefin': ['lighter olefin'],
- 'C10': ['C10'],
- 'C8': ['C8'],
- 'C7': ['C7'],
- 'isomerized product': ['isomerized product'],
- 'branched aldehyde': ['branched aldehyde'],
- 'linear alkene': ['linear alkene'],
- 'branched alkene': ['branched alkene'],
- 'pure cobalt hydrotalcite': ['pure cobalt hydrotalcite'],
- 'HT': ['HT'],
- 'layered hydrotalcite-type material': ['layered hydrotalcite-type material'],
- 'Rh3+-containing layered CoRhHT-type material': ['Rh3+-containing layered CoRh-HT-type material']}
-match_dict_all={'http://purl.obolibrary.org/obo/CHEBI_17478': 'aldehyde',
- 'http://purl.obolibrary.org/obo/CHEBI_29021': 'hexane',
- 'http://purl.obolibrary.org/obo/CHEBI_30682': 'ruthenium atom',
- 'http://purl.obolibrary.org/obo/CHEBI_33363': 'palladium',
- 'http://purl.obolibrary.org/obo/CHEBI_49637': 'hydrogen atom',
- 'http://purl.obolibrary.org/obo/CHEBI_33641': 'olefin',
- 'http://purl.obolibrary.org/obo/CHEBI_32878': 'alkene',
- 'http://purl.obolibrary.org/obo/CHEBI_87148': '(z)-13-methyltetradec-2-enoic acid',
- 'http://purl.obolibrary.org/obo/CHEBI_25805': 'oxygen atom',
- 'http://purl.obolibrary.org/obo/CHEBI_186747': '1-heptene',
- 'http://purl.obolibrary.org/obo/CHEBI_27594': 'carbon atom',
- 'http://purl.obolibrary.org/obo/CHEBI_87315': '1-decene',
- 'http://purl.obolibrary.org/obo/CHEBI_18248': 'iron atom',
- 'http://purl.obolibrary.org/obo/CHEBI_24579': '1-hexene',
- 'http://purl.obolibrary.org/obo/CHEBI_33359': 'rhodium atom',
- 'http://purl.obolibrary.org/obo/CHEBI_27638': 'cobalt atom',
- 'http://purl.obolibrary.org/obo/CHEBI_33364': 'platinum',
- 'http://purl.obolibrary.org/obo/CHEBI_18276': 'dihydrogen',
- 'http://purl.obolibrary.org/obo/CHEBI_16234': 'hydroxide',
- 'http://purl.obolibrary.org/obo/CHEBI_46708': '1-octene',
- 'dummy_molecule': 'molecule',
- 'http://purl.obolibrary.org/obo/RXNO_0000272': 'hydroformylation',
- 'dummy_catalyst role': 'catalyst role',
- 'http://purl.obolibrary.org/obo/MOP_0000369': 'alkylation',
- 'http://purl.obolibrary.org/obo/MOP_0000589': 'hydrogenation'}
 
-reac_dict={'hydroformylation': ['olefin', 'hydro-formylated product'],
- '1-decene': ['CoRhHT catalyst'],
- 'olefin': ['hydroformylation product'],
- 'aldehyde': ['separated'],
- 'aldehyde product': ['lighter olefin']}
-missing_all=['α-Co(OH)2',
- 'cobalt(2+);rhodium(3+)',
- 'CoRhHT-2',
- 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
- 'CoRhHT-3',
- 'heptene',
- 'cobalt hydrotalcite',
- 'C10H20,96.0',
- 'T',
- 'Rh3+',
- 'CoRhHT-1',
- 'rhodium',
- 'Cobalt Rhodium',
- 'HT',
+
+
+"""
+
+sup_cat={'SiO2': ['Rh2P', 'RhCo3', 'Rh'],
+ 'MCM-41': ['RhCo3'],
+ 'Al2O3': ['Rh', 'Rh', 'Rh', 'Co', 'Co'], #problem mit duplikaten gelöst!
+ 'Al': ['Rh']}
+rel_synonym= {'OH': 'hydroxide',
+ 'O': 'oxygen atom',
+ 'H': 'hydrogen atom',
+ 'Cobalt': 'cobalt atom',
+ 'Rhodium': 'rhodium atom',
+ 'hydrotalcite': 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
+ 'Rh': 'rhodium atom',
+ 'hexane': 'hexane',
+ 'cobalt': 'cobalt atom',
+ 'Rh3+': 'rhodium',
+ 'C10': '(z)-13-methyltetradec-2-enoic acid',
+ 'C': 'carbon atom',
+ '1-octene': '1-octene',
+ 'olefin': 'olefin',
+ 'Pd': 'palladium',
+ 'rhodium': 'rhodium atom',
+ 'aldehyde': 'aldehyde',
+ 'Fe': 'iron atom',
+ 'C7H14': '1-heptene',
+ 'alkene': 'alkene',
+ '1-Hexene': '1-hexene',
+ '1-decene': '1-decene',
+ 'Ru': 'ruthenium atom',
+ '1-Octene': '1-octene',
+ 'CoRh': 'cobalt;rhodium',
+ 'Co': 'cobalt atom',
+ '1-Heptene': '1-heptene',
+ 'Rh3': 'rhodium',
+ 'C8H16': '1-octene',
+ 'H2': 'dihydrogen',
+ 'Pt': 'platinum',
+ '1-Decene': '1-decene'}
+missing=['dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
  'Cobalt Rhodium HT',
- 'Hydroformylation',
- 'heterogeneous catalyst role',
+ 'CoRhHT-2',
+ 'cobalt hydrotalcite',
+ 'T',
+ 'CoRh-HT',
+ 'CoRhHT-3',
+ 'HT',
+ 'CoRh-HT-3',
+ 'heptene',
+ 'C10H20,96.0',
+ 'Cobalt Rhodium',
+ 'α-Co(OH)2',
+ 'CoRhHT',
+ 'cobalt;rhodium',
+ 'CoRh-HT-2',
+ 'CoRh-HT-1',
+ 'rhodium',
+ 'hydroformylation',
+ 'isomerization',
+ 'hydroxylation',
+ 'redox reaction',
+ 'condensation',
+ 'washed',
+ 'ht catalyst role',
  'heterogeneous catalyst role',
  'isomerization',
  'hydroxylation',
  'redox reaction',
  'condensation',
  'washed',
- 'corhht catalyst role']
-chem_list=['α-Co(OH)2',
- 'aldehyde',
- 'hexane',
- 'Fe',
- 'CoRhHT-2',
- 'C7H14',
- 'OH',
- 'Rh',
- 'Ru',
- 'Pd',
- 'C8H16',
- 'Co',
- 'CoRhHT-3',
- 'heptene',
- 'cobalt hydrotalcite',
- 'olefin',
- 'CoRh',
- 'C10H20,96.0',
- 'alkene',
- '1-Octene',
- 'Rh3+',
- '1-Heptene',
- 'Pt',
- '1-decene',
- '1-Hexene',
- '1-Decene',
- '1-hexene',
- 'CoRhHT-1',
- 'C10',
- 'Rh3',
- 'H2',
- 'hydrotalcite',
- 'rhodium',
- 'Cobalt Rhodium',
- 'hydroxide',
+ 'ht catalyst role']
+match_dict={'http://purl.obolibrary.org/obo/CHEBI_25805': ['oxygen atom', 'oxygen atom'],
+ 'http://purl.obolibrary.org/obo/CHEBI_87148': ['(z)-13-methyltetradec-2-enoic acid',
+  '(Z)-13-methyltetradec-2-enoic acid'],
+ 'http://purl.obolibrary.org/obo/CHEBI_29021': ['hexane', 'hexane'],
+ 'http://purl.obolibrary.org/obo/CHEBI_46708': ['1-octene', '1-octene'],
+ 'http://purl.obolibrary.org/obo/CHEBI_18248': ['iron atom', 'iron atom'],
+ 'http://purl.obolibrary.org/obo/CHEBI_33641': ['olefin', 'olefin'],
+ 'http://purl.obolibrary.org/obo/CHEBI_49637': ['hydrogen atom',
+  'hydrogen atom'],
+ 'http://purl.obolibrary.org/obo/CHEBI_17478': ['aldehyde', 'aldehyde'],
+ 'http://purl.obolibrary.org/obo/CHEBI_16234': ['hydroxide', 'hydroxide'],
+ 'http://purl.obolibrary.org/obo/CHEBI_33359': ['rhodium atom',
+  'rhodium atom'],
+ 'http://purl.obolibrary.org/obo/CHEBI_27594': ['carbon atom', 'carbon atom'],
+ 'http://purl.obolibrary.org/obo/CHEBI_32878': ['alkene', 'alkene'],
+ 'http://purl.obolibrary.org/obo/CHEBI_87315': ['1-decene', '1-decene'],
+ 'http://purl.obolibrary.org/obo/CHEBI_30682': ['ruthenium atom',
+  'ruthenium atom'],
+ 'http://purl.obolibrary.org/obo/CHEBI_27638': ['cobalt atom', 'cobalt atom'],
+ 'http://purl.obolibrary.org/obo/CHEBI_33363': ['palladium', 'palladium'],
+ 'http://purl.obolibrary.org/obo/CHEBI_186747': ['1-heptene', '1-Heptene'],
+ 'http://purl.obolibrary.org/obo/CHEBI_33364': ['platinum', 'platinum'],
+ 'http://purl.obolibrary.org/obo/CHEBI_24579': ['1-hexene', '1-hexene'],
+ 'http://purl.obolibrary.org/obo/CHEBI_18276': ['dihydrogen',
+  'dihydrogen (molecule)'],
+ 'dummy_molecule': ['molecule', 'molecule'],
+ 'dummy_catalyst role': ['catalyst role', 'catalyst role'],
+ 'http://purl.obolibrary.org/obo/RXNO_0000272': ['Hydroformylation',
+  'hydroformylation'],
+ 'http://purl.obolibrary.org/obo/MOP_0000369': ['alkylation', 'alkylation'],
+ 'http://purl.obolibrary.org/obo/MOP_0000589': ['hydrogenation',
+  'hydrogenation'],
+ 'dummy_hydroformylation': ['hydroformylation', 'hydroformylation'],
+ 'dummy_alkylation': ['alkylation', 'alkylation'],
+ 'dummy_hydrogenation': ['hydrogenation', 'hydrogenation']}
+chem_list=['OH',
  'Cobalt Rhodium HT',
+ 'hydrotalcite',
+ 'Rh',
+ 'hexane',
+ 'CoRhHT-2',
+ 'cobalt hydrotalcite',
+ 'Rh3+',
+ 'C10',
+ '1-octene',
+ 'olefin',
+ 'Pd',
+ 'CoRh-HT',
+ 'CoRhHT-3',
+ 'aldehyde',
+ 'Fe',
+ 'hydroxide',
+ 'rhodium',
+ 'C7H14',
+ 'CoRh-HT-3',
+ 'heptene',
+ 'alkene',
+ '1-Hexene',
+ '1-decene',
+ 'C10H20,96.0',
+ 'Ru',
+ '1-Octene',
+ 'Cobalt Rhodium',
+ 'CoRh',
+ 'α-Co(OH)2',
+ '1-Heptene',
+ 'CoRhHT',
+ 'Rh3',
+ 'Co',
  'cobalt',
- '1-octene',
+ 'C8H16',
+ '1-hexene',
+ 'CoRh-HT-2',
+ 'H2',
+ 'CoRh-HT-1',
+ 'Pt',
+ '1-Decene',
+ 'hydroxide',
+ 'oxygen atom',
+ 'hydrogen atom',
  'cobalt atom',
  'rhodium atom',
- 'hydrogen atom',
- 'oxygen atom',
- 'aldehyde',
+ 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
+ 'rhodium atom',
  'hexane',
+ 'cobalt atom',
+ 'rhodium',
+ '(z)-13-methyltetradec-2-enoic acid',
+ 'carbon atom',
+ '1-octene',
+ 'olefin',
+ 'palladium',
+ 'rhodium atom',
+ 'aldehyde',
  'iron atom',
  '1-heptene',
- 'carbon atom',
- 'hydroxide',
- 'ruthenium atom',
- 'palladium',
- '1-octene',
- 'cobalt atom',
- 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
- 'olefin',
- 'cobalt(2+);rhodium(3+)',
  'alkene',
- '1-octene',
- '1-heptene',
- 'platinum',
- '1-decene',
  '1-hexene',
  '1-decene',
- '(z)-13-methyltetradec-2-enoic acid',
+ 'ruthenium atom',
+ '1-octene',
+ 'cobalt;rhodium',
+ 'cobalt atom',
+ '1-heptene',
  'rhodium',
+ '1-octene',
  'dihydrogen',
- 'cobalt atom',
- 'rhodium atom',
- 'α-Co(OH)2',
- 'α-Co(OH)2',
- 'α-Co(OH)2',
- 'α-Co(OH)2',
- 'α-Co(OH)2',
- 'α-Co(OH)2',
- 'α-Co(OH)2',
- 'cobalt atom',
- 'rhodium atom',
- 'hydrogen atom',
+ 'platinum',
+ '1-decene',
+ 'HT',
+ 'hydroxide',
  'oxygen atom',
- 'aldehyde',
+ 'hydrogen atom',
+ 'cobalt atom',
+ 'rhodium atom',
+ 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
+ 'rhodium atom',
  'hexane',
+ 'cobalt atom',
+ 'rhodium',
+ '(z)-13-methyltetradec-2-enoic acid',
+ 'carbon atom',
+ '1-octene',
+ 'olefin',
+ 'palladium',
+ 'rhodium atom',
+ 'aldehyde',
  'iron atom',
  '1-heptene',
- 'carbon atom',
- 'hydroxide',
- 'ruthenium atom',
- 'palladium',
- '1-octene',
- 'cobalt atom',
- 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
- 'olefin',
- 'cobalt(2+);rhodium(3+)',
  'alkene',
- '1-octene',
- '1-heptene',
- 'platinum',
- '1-decene',
  '1-hexene',
  '1-decene',
- '(z)-13-methyltetradec-2-enoic acid',
+ 'ruthenium atom',
+ '1-octene',
+ 'cobalt;rhodium',
+ 'cobalt atom',
+ '1-heptene',
  'rhodium',
+ '1-octene',
  'dihydrogen',
- 'cobalt atom',
- 'rhodium atom',
- 'cobalt atom',
- 'rhodium atom',
- 'hydrogen atom',
+ 'platinum',
+ '1-decene',
+ 'hydroxide',
  'oxygen atom',
- 'aldehyde',
+ 'hydrogen atom',
+ 'cobalt atom',
+ 'rhodium atom',
+ 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
+ 'rhodium atom',
  'hexane',
+ 'cobalt atom',
+ 'rhodium',
+ '(z)-13-methyltetradec-2-enoic acid',
+ 'carbon atom',
+ '1-octene',
+ 'olefin',
+ 'palladium',
+ 'rhodium atom',
+ 'aldehyde',
  'iron atom',
  '1-heptene',
- 'carbon atom',
- 'hydroxide',
- 'ruthenium atom',
- 'palladium',
- '1-octene',
- 'cobalt atom',
- 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
- 'olefin',
- 'cobalt(2+);rhodium(3+)',
  'alkene',
- '1-octene',
- '1-heptene',
- 'platinum',
- '1-decene',
  '1-hexene',
  '1-decene',
- '(z)-13-methyltetradec-2-enoic acid',
- 'rhodium',
- 'dihydrogen',
+ 'ruthenium atom',
+ '1-octene',
+ 'cobalt;rhodium',
  'cobalt atom',
- 'rhodium atom']
-categ={'heterogeneous catalyst based on Rh and Co':'Catalyst'}
+ '1-heptene',
+ 'rhodium',
+ '1-octene',
+ 'dihydrogen',
+ 'platinum',
+ '1-decene',
+ 'hydroxide',
+ 'oxygen atom',
+ 'hydrogen atom',
+ 'cobalt atom',
+ 'rhodium atom',
+ 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
+ 'rhodium atom',
+ 'hexane',
+ 'cobalt atom',
+ 'rhodium',
+ '(z)-13-methyltetradec-2-enoic acid',
+ 'carbon atom',
+ '1-octene',
+ 'olefin',
+ 'palladium',
+ 'rhodium atom',
+ 'aldehyde',
+ 'iron atom',
+ '1-heptene',
+ 'alkene',
+ '1-hexene',
+ '1-decene',
+ 'ruthenium atom',
+ '1-octene',
+ 'cobalt;rhodium',
+ 'cobalt atom',
+ '1-heptene',
+ 'rhodium',
+ '1-octene',
+ 'dihydrogen',
+ 'platinum',
+ '1-decene']
+categories={'bimetallic cobalt-rhodium layered hydrotalcite-type material': 'Catalyst',
+ 'CoRh-HT': 'Catalyst',
+ 'hydroformylation': 'Reaction',
+ 'alkene': 'Reactant',
+ 'aldehyde': 'Product',
+ 'CoRh-based heterogeneous catalyst': 'Catalyst',
+ 'HRTEM': 'Characterization',
+ 'powder X-ray diffraction': 'Characterization',
+ 'X-ray photoelectron spectroscopy': 'Characterization',
+ 'Hydroformylation': 'Reaction',
+ 'olefin': 'Reactant',
+ 'heterogeneous catalyst': 'Catalyst',
+ 'Fe': 'Catalyst',
+ 'Co': 'Catalyst',
+ 'Ru': 'Catalyst',
+ 'Rh': 'Catalyst',
+ 'Pd': 'Catalyst',
+ 'Rh-, Co-, and Pt-based catalyst': 'Catalyst',
+ 'Rh-and Co-based catalyst': 'Catalyst',
+ 'linear aldehyde': 'Product',
+ 'rhodium-and cobalt-based catalyst': 'Catalyst',
+ 'heterogeneous catalyst based on Rh and Co': 'Catalyst',
+ 'hydrotalcite (HT)-like material': 'Catalyst',
+ 'HT-based material': 'Catalyst',
+ 'alkylation': 'Reaction',
+ 'isomerization': 'Reaction',
+ 'hydroxylation': 'Reaction',
+ 'redox reaction': 'Reaction',
+ 'condensation': 'Reaction',
+ 'layered double hydroxide': 'Catalyst',
+ 'cobalt hydrotalcite': 'Catalyst',
+ 'rhodium-containing cobalt hydrotalcite': 'Catalyst',
+ 'in situ sol-gel method': 'Treatment',
+ 'layered CoRh-HT-type material': 'Catalyst',
+ '1-Octene': 'Reactant',
+ 'C8H16': 'Reactant',
+ '1-Decene': 'Reactant',
+ 'C10H20,96.0': 'Reactant',
+ '1-Heptene': 'Reactant',
+ 'C7H14': 'Reactant',
+ '1-Hexene': 'Reactant',
+ 'layered CoRh-HT type material': 'Catalyst',
+ 'stirred': 'Treatment',
+ 'stir': 'Treatment',
+ 'filtered': 'Treatment',
+ 'washed': 'Reaction',
+ 'dried': 'Treatment',
+ 'CoRhHT-2': 'Catalyst',
+ 'CoRhHT-3': 'Catalyst',
+ 'Cobalt Rhodium HT': 'Catalyst',
+ 'Powder X-ray diffraction': 'Characterization',
+ 'XRD': 'Characterization',
+ 'Fourier-transform infrared': 'Characterization',
+ 'FT-IR': 'Characterization',
+ 'ICPAES': 'Characterization',
+ 'X-ray photoelectron spectra': 'Characterization',
+ 'XPS': 'Characterization',
+ '1-hexene': 'Reactant',
+ '1-decene': 'Reactant',
+ 'CoRh-HT catalyst': 'Catalyst',
+ '1-octene': 'Reactant',
+ 'gas chromatography': 'Characterization',
+ 'layered CoRh-HT': 'Catalyst',
+ 'rhodium': 'Catalyst',
+ 'rhodium-containing sample': 'Catalyst',
+ 'α-Co(OH)2': 'Catalyst',
+ 'CoRh-HT-3': 'Catalyst',
+ 'high-resolution transmission electron microscopy': 'Characterization',
+ 'HR-TEM': 'Characterization',
+ 'CoRh-HT-1': 'Catalyst',
+ 'CoRh-HT-2': 'Catalyst',
+ 'CoRh-HT-type material': 'Catalyst',
+ 'X-ray photoelectron spectral': 'Characterization',
+ 'cobalt-rhodium hydrotalcite material': 'Catalyst',
+ 'Co 2p XPS': 'Characterization',
+ 'layered CoRh-HT-1 material': 'Catalyst',
+ 'hydro-formylated product': 'Product',
+ 'alcohol': 'Product',
+ 'hydrogenation': 'Reaction',
+ 'olefin-isomerized product': 'Product',
+ 'hydroformylated product': 'Product',
+ 'lower alkene': 'Reactant',
+ 'hexane': 'Reactant',
+ 'heptene': 'Reactant',
+ 'hydroformylation product': 'Product',
+ 'separated': 'Treatment',
+ 'isomerized olefin': 'Product',
+ 'cobalt': 'Catalyst',
+ 'aldehyde product': 'Product',
+ 'lighter olefin': 'Reactant',
+ 'C10': 'Product',
+ 'C8': 'Product',
+ 'C7': 'Reactant',
+ 'isomerized product': 'Product',
+ 'branched aldehyde': 'Product',
+ 'linear alkene': 'Reactant',
+ 'branched alkene': 'Product',
+ 'pure cobalt hydrotalcite': 'Catalyst',
+ 'HT': 'Catalyst',
+ 'layered hydrotalcite-type material': 'Catalyst',
+ 'Rh3+-containing layered CoRh-HT-type material': 'Catalyst'}
+reac_dict={'hydroformylation': ['alkene', 'olefin', 'hydro-formylated product'],
+ '1-decene': ['CoRh-HT catalyst'],
+ 'hydrogenation': ['olefin-isomerized product'],
+ 'aldehyde': ['lower alkene'],
+ 'isomerization': ['linear alkene']} #checken warum so
+abbreviation={'CoRh-HT': 'bimetallic cobalt-rhodium layered hydrotalcite-type material',
+ 'FT-IR': 'Fourier-transform infrared',
+ 'XPS': 'X-ray photoelectron spectral',
+ 'HR-TEM': 'high-resolution transmission electron microscopy'}
+onto_new_dict={'CoRhHT-2': [],
+ 'CoRhHT-3': [],
+ 'CoRh-HT-3': [],
+ 'CoRh-HT-2': [],
+ 'CoRh-HT-1': [],
+ 'hydroxide': ['oxygen atom', 'hydrogen atom'],
+ 'Cobalt Rhodium HT': ['cobalt atom', 'rhodium atom', 'HT'],
+ 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate': ['dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate'],
+ 'rhodium atom': ['rhodium atom'],
+ 'hexane': ['hexane'],
+ 'cobalt hydrotalcite': ['cobalt atom',
+  'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate'],
+ 'rhodium': ['rhodium atom'],
+ '(z)-13-methyltetradec-2-enoic acid': ['carbon atom'],
+ '1-octene': ['carbon atom', 'hydrogen atom'],
+ 'olefin': ['olefin'],
+ 'palladium': ['palladium'],
+ 'CoRh-HT': ['cobalt atom', 'rhodium atom'],
+ 'aldehyde': ['aldehyde'],
+ 'iron atom': ['iron atom'],
+ '1-heptene': ['1-heptene'],
+ 'heptene': ['heptene'],
+ 'alkene': ['alkene'],
+ '1-hexene': ['1-hexene'],
+ '1-decene': ['1-decene'],
+ 'C10H20,96.0': ['carbon atom', 'hydrogen atom'],
+ 'ruthenium atom': ['ruthenium atom'],
+ 'Cobalt Rhodium': ['cobalt atom', 'rhodium atom'],
+ 'cobalt;rhodium': ['cobalt atom', 'rhodium atom'],
+ 'α-Co(OH)2': ['cobalt atom', 'oxygen atom', 'hydrogen atom'],
+ 'CoRhHT': ['cobalt atom', 'rhodium atom', 'hydrogen atom', 'T'],
+ 'cobalt atom': ['cobalt atom'],
+ 'dihydrogen': ['hydrogen atom'],
+ 'platinum': ['platinum']}
 
-abbreviation={'Fourier-transform infrared': 'FT-IR',
+entities_raw={'bimetallic cobalt-rhodium layered hydrotalcite-type material': ['bimetallic cobalt-rhodium layered hydrotalcite-type material'],
+ 'CoRh-HT': ['CoRh-HT'],
+ 'hydroformylation': ['hydroformylation'],
+ 'alkene': ['alkene'],
+ 'aldehyde': ['aldehyde'],
+ 'CoRh-based heterogeneous catalyst': ['Co-Rh-based heterogeneous catalyst'],
+ 'HRTEM': ['HRTEM'],
+ 'powder X-ray diffraction': ['powder X-ray diffraction'],
+ 'X-ray photoelectron spectroscopy': ['X-ray photoelectron spectroscopy'],
+ 'Hydroformylation': ['Hydroformylation'],
+ 'olefin': ['olefin'],
+ 'heterogeneous catalyst': ['heterogeneous catalyst'],
+ 'Fe': ['Fe'],
+ 'Co': ['Co'],
+ 'Ru': ['Ru'],
+ 'Rh': ['Rh'],
+ 'Pd': ['Pd'],
+ 'Rh-, Co-, and Pt-based catalyst': ['Rh-, Co-, and Pt-based catalyst'],
+ 'Rh-and Co-based catalyst': ['Rh- and Co-based catalyst'],
+ 'linear aldehyde': ['linear aldehyde'],
+ 'rhodium-and cobalt-based catalyst': ['rhodium- and cobalt-based catalyst'],
+ 'heterogeneous catalyst based on Rh and Co': ['heterogeneous catalyst based on Rh and Co'],
+ 'hydrotalcite (HT)-like material': ['hydrotalcite (HT)-like material'],
+ 'HT-based material': ['HT-based material'],
+ 'alkylation': ['alkylation'],
+ 'isomerization': ['isomerization'],
+ 'hydroxylation': ['hydroxylation'],
+ 'redox reaction': ['redox reaction'],
+ 'condensation': ['condensation'],
+ 'layered double hydroxide': ['layered double hydroxide'],
+ 'cobalt hydrotalcite': ['cobalt hydrotalcite'],
+ 'rhodium-containing cobalt hydrotalcite': ['rhodium-containing cobalt hydrotalcite'],
+ 'in situ sol-gel method': ['in situ sol-gel method'],
+ 'layered CoRh-HT-type material': ['layered CoRh-HT-type material'],
+ '1-Octene': ['1-Octene'],
+ 'C8H16': ['C8H16'],
+ '1-Decene': ['1-Decene'],
+ 'C10H20,96.0': ['C10H20,96.0'],
+ '1-Heptene': ['1-Heptene'],
+ 'C7H14': ['C7H14'],
+ '1-Hexene': ['1-Hexene'],
+ 'layered CoRh-HT type material': ['layered Co-Rh-HT type material'],
+ 'stirred': ['stirred'],
+ 'stir': ['stir'],
+ 'filtered': ['filtered'],
+ 'washed': ['washed'],
+ 'dried': ['dried'],
+ 'CoRhHT-2': ['CoRhHT-2'],
+ 'CoRhHT-3': ['CoRhHT-3'],
+ 'Cobalt Rhodium HT': ['Cobalt Rhodium HT'],
+ 'Powder X-ray diffraction': ['Powder X-ray diffraction'],
+ 'XRD': ['XRD'],
+ 'Fourier-transform infrared': ['Fourier-transform infrared'],
+ 'FT-IR': ['FT-IR'],
+ 'ICPAES': ['ICP-AES'],
+ 'X-ray photoelectron spectra': ['X-ray photoelectron spectra'],
+ 'XPS': ['XPS'],
+ '1-hexene': ['1-hexene'],
+ '1-decene': ['1-decene'],
+ 'CoRh-HT catalyst': ['CoRh-HT catalyst'],
+ '1-octene': ['1-octene'],
+ 'gas chromatography': ['gas chromatography'],
+ 'layered CoRh-HT': ['layered CoRh-HT'],
+ 'rhodium': ['rhodium'],
+ 'rhodium-containing sample': ['rhodium-containing sample'],
+ 'α-Co(OH)2': ['α-Co(OH)2'],
+ 'CoRh-HT-3': ['CoRh-HT-3'],
+ 'high-resolution transmission electron microscopy': ['high-resolution transmission electron microscopy'],
+ 'HR-TEM': ['HR-TEM'],
+ 'CoRh-HT-1': ['CoRh-HT-1'],
+ 'CoRh-HT-2': ['CoRh-HT-2'],
+ 'CoRh-HT-type material': ['CoRh-HT-type material'],
+ 'X-ray photoelectron spectral': ['X-ray photoelectron spectral'],
+ 'cobalt-rhodium hydrotalcite material': ['cobalt-rhodium hydrotalcite material'],
+ 'Co 2p XPS': ['Co 2p XPS'],
+ 'layered CoRh-HT-1 material': ['layered CoRh-HT-1 material'],
+ 'hydro-formylated product': ['hydro-formylated product'],
+ 'alcohol': ['alcohol'],
+ 'hydrogenation': ['hydrogenation'],
+ 'olefin-isomerized product': ['olefin-isomerized product'],
+ 'hydroformylated product': ['hydroformylated product'],
+ 'lower alkene': ['lower alkene'],
+ 'hexane': ['hexane'],
+ 'heptene': ['heptene'],
+ 'hydroformylation product': ['hydroformylation product'],
+ 'separated': ['separated'],
+ 'isomerized olefin': ['isomerized olefin'],
+ 'cobalt': ['cobalt'],
+ 'aldehyde product': ['aldehyde product'],
+ 'lighter olefin': ['lighter olefin'],
+ 'C10': ['C10'],
+ 'C8': ['C8'],
+ 'C7': ['C7'],
+ 'isomerized product': ['isomerized product'],
+ 'branched aldehyde': ['branched aldehyde'],
+ 'linear alkene': ['linear alkene'],
+ 'branched alkene': ['branched alkene'],
+ 'pure cobalt hydrotalcite': ['pure cobalt hydrotalcite'],
+ 'HT': ['HT'],
+ 'layered hydrotalcite-type material': ['layered hydrotalcite-type material'],
+ 'Rh3+-containing layered CoRh-HT-type material': ['Rh3+-containing layered CoRh-HT-type material']}
+p_id = 1
+df_entity, rel_synonym, missing_all, match_dict_all = preprocess_classes(categories, abbreviation, onto_new_dict, sup_cat, rel_synonym, chem_list, missing, match_dict,entities_raw)
+created_classes,sup_sub_df = create_classes_onto(abbreviation, sup_cat, missing_all, match_dict_all, df_entity,reac_dict,p_id,rel_synonym,chem_list,onto_new_dict)
+
+match_dict_all={'http://purl.obolibrary.org/obo/CHEBI_18276': ['dihydrogen',
+  'dihydrogen (molecule)'],
+ 'http://purl.obolibrary.org/obo/CHEBI_87315': ['1-decene', '1-decene'],
+ 'dummy_oxygen atom': ['oxygen atom', 'oxygen atom'],
+ 'http://purl.obolibrary.org/obo/CHEBI_18248': ['iron atom', 'iron atom'],
+ 'dummy_rhodium atom': ['rhodium atom', 'rhodium atom'],
+ 'http://purl.obolibrary.org/obo/CHEBI_33364': ['platinum', 'platinum'],
+ 'dummy_olefin': ['olefin', 'olefin'],
+ 'http://purl.obolibrary.org/obo/CHEBI_33363': ['palladium', 'palladium'],
+ 'dummy_cobalt atom': ['cobalt atom', 'cobalt atom'],
+ 'http://purl.obolibrary.org/obo/CHEBI_46708': ['1-octene', '1-octene'],
+ 'dummy_carbon atom': ['carbon atom', 'carbon atom'],
+ 'dummy_hydrogen atom': ['hydrogen atom', 'hydrogen atom'],
+ 'http://purl.obolibrary.org/obo/CHEBI_186747': ['1-heptene', '1-Heptene'],
+ 'dummy_aldehyde': ['aldehyde', 'aldehyde'],
+ 'http://purl.obolibrary.org/obo/CHEBI_87148': ['(z)-13-methyltetradec-2-enoic acid',
+  '(Z)-13-methyltetradec-2-enoic acid'],
+ 'http://purl.obolibrary.org/obo/CHEBI_24579': ['1-hexene', '1-hexene'],
+ 'http://purl.obolibrary.org/obo/CHEBI_30682': ['ruthenium atom',
+  'ruthenium atom'],
+ 'http://purl.obolibrary.org/obo/CHEBI_16234': ['hydroxide', 'hydroxide'],
+ 'http://purl.obolibrary.org/obo/CHEBI_29021': ['hexane', 'hexane'],
+ 'dummy_alkene': ['alkene', 'alkene'],
+ 'dummy_molecule': ['molecule', 'molecule'],
+ 'dummy_catalyst role': ['catalyst role', 'catalyst role'],
+ 'http://purl.obolibrary.org/obo/RXNO_0000272': ['Hydroformylation',
+  'hydroformylation'],
+ 'http://purl.obolibrary.org/obo/MOP_0000369': ['alkylation', 'alkylation'],
+ 'http://purl.obolibrary.org/obo/MOP_0000589': ['hydrogenation',
+  'hydrogenation']}
+
+
+missing_all=['rhodium',
+ 'CoRh-HT-1',
+ 'Cobalt Rhodium HT',
+ 'CoRhHT-3',
+ 'cobalt hydrotalcite',
+ 'CoRh-HT-2',
+ 'heptene',
+ 'Cobalt Rhodium',
+ 'T',
+ 'HT',
+ 'CoRhHT-2',
+ 'α-Co(OH)2',
+ 'cobalt;rhodium',
+ 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
+ 'C10H20,96.0',
+ 'CoRhHT',
+ 'hydroformylation',
+ 'heterogeneous catalyst role',
+ 'heterogeneous catalyst role',
+ 'heterogeneous catalyst role',
+ 'isomerization',
+ 'hydroxylation',
+ 'redox reaction',
+ 'condensation',
+ 'washed']
+chem_list=['Pt',
+ 'rhodium',
+ 'Ru',
+ 'cobalt',
+ '1-decene',
+ 'CoRh-HT-1',
+ '1-Decene',
+ 'Rh3+',
+ 'Rh3',
+ 'hydrotalcite',
+ 'Fe',
+ 'Cobalt Rhodium HT',
+ 'CoRhHT-3',
+ 'OH',
+ 'cobalt hydrotalcite',
+ 'CoRh',
+ '1-Hexene',
+ '1-Octene',
+ 'C7H14',
+ 'olefin',
+ 'CoRh-HT-2',
+ 'heptene',
+ '1-octene',
+ 'H2',
+ 'Cobalt Rhodium',
+ 'C10',
+ 'Co',
+ 'CoRhHT-2',
+ 'α-Co(OH)2',
+ 'aldehyde',
+ '1-Heptene',
+ 'Rh',
+ 'C10H20,96.0',
+ 'CoRh-HT',
+ 'CoRhHT'
+ '1-hexene',
+ 'C8H16',
+ 'Pd',
+ 'hydroxide',
+ 'hexane',
+ 'alkene',
+ 'platinum',
+ 'rhodium atom',
+ 'ruthenium atom',
+ 'cobalt atom',
+ '1-decene',
+ '1-decene',
+ 'rhodium',
+ 'rhodium atom',
+ 'rhodium',
+ 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
+ 'iron atom',
+ 'cobalt atom',
+ 'rhodium atom',
+ 'hydroxide',
+ 'oxygen atom',
+ 'hydrogen atom',
+ 'cobalt;rhodium',
+ 'cobalt atom',
+ '1-hexene',
+ '1-octene',
+ '1-heptene',
+ 'carbon atom',
+ 'olefin',
+ 'dihydrogen',
+ '(z)-13-methyltetradec-2-enoic acid',
+ 'aldehyde',
+ '1-heptene',
+ '1-octene',
+ 'palladium',
+ 'hexane',
+ 'alkene',
+ 'HT',
+ 'platinum',
+ 'rhodium atom',
+ 'ruthenium atom',
+ 'cobalt atom',
+ '1-decene',
+ '1-decene',
+ 'rhodium',
+ 'rhodium atom',
+ 'rhodium',
+ 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
+ 'iron atom',
+ 'cobalt atom',
+ 'rhodium atom',
+ 'hydroxide',
+ 'oxygen atom',
+ 'hydrogen atom',
+ 'cobalt;rhodium',
+ 'cobalt atom',
+ '1-hexene',
+ '1-octene',
+ '1-heptene',
+ 'carbon atom',
+ 'olefin',
+ 'dihydrogen',
+ '(z)-13-methyltetradec-2-enoic acid',
+ 'aldehyde',
+ '1-heptene',
+ '1-octene',
+ 'palladium',
+ 'hexane',
+ 'alkene',
+ 'Pt',
+ 'platinum',
+ 'rhodium atom',
+ 'ruthenium atom',
+ 'cobalt atom',
+ '1-decene',
+ '1-decene',
+ 'rhodium',
+ 'rhodium atom',
+ 'rhodium',
+ 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
+ 'iron atom',
+ 'cobalt atom',
+ 'rhodium atom',
+ 'hydroxide',
+ 'oxygen atom',
+ 'hydrogen atom',
+ 'cobalt;rhodium',
+ 'cobalt atom',
+ '1-hexene',
+ '1-octene',
+ '1-heptene',
+ 'carbon atom',
+ 'olefin',
+ 'dihydrogen',
+ '(z)-13-methyltetradec-2-enoic acid',
+ 'aldehyde',
+ '1-heptene',
+ '1-octene',
+ 'palladium',
+ 'hexane',
+ 'alkene']
+#categ={'heterogeneous catalyst based on Rh and Co':'Catalyst'}
+
+abbreviation={'bimetallic cobalt-rhodium layered hydrotalcite-type material': 'CoRh-HT',
+ 'Fourier-transform infrared': 'FT-IR',
  'X': 'XPS',
  'X-ray photoelectron spectra': 'XPS',
  'high-resolution transmission electron microscopy': 'HR-TEM',
  'X-ray photoelectron spectral': 'XPS'}
-onto_new_dict={'CoRhHT-2': [],
+onto_new_dict={'CoRh-HT-1': [],
  'CoRhHT-3': [],
- 'CoRhHT-1': [],
- 'α-Co(OH)2': ['cobalt atom', 'oxygen atom', 'hydrogen atom'],
- 'aldehyde': ['aldehyde'],
- 'hexane': ['hexane'],
- 'iron atom': ['iron atom'],
- '1-heptene': ['1-heptene'],
- 'hydroxide': ['oxygen atom', 'hydrogen atom'],
+ 'CoRh-HT-2': [],
+ 'CoRhHT-2': [],
+ 'platinum': ['platinum'],
  'rhodium atom': ['rhodium atom'],
  'ruthenium atom': ['ruthenium atom'],
- 'palladium': ['palladium'],
- '1-octene': ['1-octene'],
  'cobalt atom': ['cobalt atom'],
- 'heptene': ['heptene'],
+ '1-decene': ['1-decene'],
+ 'rhodium': ['rhodium atom'],
+ 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate': ['dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate'],
+ 'iron atom': ['iron atom'],
+ 'Cobalt Rhodium HT': ['cobalt atom', 'rhodium atom', 'HT'],
+ 'hydroxide': ['oxygen atom', 'hydrogen atom'],
  'cobalt hydrotalcite': ['cobalt atom',
   'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate'],
- 'olefin': ['olefin'],
- 'cobalt(2+);rhodium(3+)': ['cobalt atom', 'rhodium atom'],
- 'C10H20,96.0': ['carbon atom', 'hydrogen atom'],
- 'alkene': ['alkene'],
- 'Rh3+': ['rhodium atom'],
- 'platinum': ['platinum'],
- '1-decene': ['1-decene'],
+ 'cobalt;rhodium': ['cobalt atom', 'rhodium atom'],
  '1-hexene': ['1-hexene'],
- '(z)-13-methyltetradec-2-enoic acid': ['carbon atom'],
- 'rhodium': ['rhodium atom'],
+ '1-octene': ['carbon atom', 'hydrogen atom'],
+ '1-heptene': ['1-heptene'],
+ 'olefin': ['olefin'],
+ 'heptene': ['heptene'],
  'dihydrogen': ['hydrogen atom'],
- 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate': ['dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate'],
  'Cobalt Rhodium': ['cobalt atom', 'rhodium atom'],
- 'Cobalt Rhodium HT': ['cobalt atom', 'rhodium atom', 'HT']}
+ '(z)-13-methyltetradec-2-enoic acid': ['carbon atom'],
+ 'α-Co(OH)2': ['cobalt atom', 'oxygen atom', 'hydrogen atom'],
+ 'aldehyde': ['aldehyde'],
+ 'C10H20,96.0': ['carbon atom', 'hydrogen atom'],
+ 'CoRhHT': ['cobalt atom', 'rhodium atom', 'hydrogen atom', 'T'],
+ 'palladium': ['palladium'],
+ 'hexane': ['hexane'],
+ 'alkene': ['alkene']}
 
 sup_cat={}
-rel_synonym={'Co': 'cobalt atom',
+rel_synonym={'Pt': 'platinum',
+ 'rhodium': 'rhodium atom',
+ 'Ru': 'ruthenium atom',
+ 'cobalt': 'cobalt atom',
+ '1-decene': '1-decene',
+ '1-Decene': '1-decene',
+ 'Rh3+': 'rhodium',
  'Rh': 'rhodium atom',
- 'H': 'hydrogen atom',
- 'O': 'oxygen atom',
- 'aldehyde': 'aldehyde',
- 'hexane': 'hexane',
+ 'Rh3': 'rhodium',
+ 'hydrotalcite': 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
  'Fe': 'iron atom',
+ 'Cobalt': 'cobalt atom',
+ 'Rhodium': 'rhodium atom',
+ 'OH': 'hydroxide',
+ 'O': 'oxygen atom',
+ 'H': 'hydrogen atom',
+ 'CoRh': 'cobalt;rhodium',
+ 'Co': 'cobalt atom',
+ '1-Hexene': '1-hexene',
+ '1-Octene': '1-octene',
  'C7H14': '1-heptene',
  'C': 'carbon atom',
- 'OH': 'hydroxide',
- 'Ru': 'ruthenium atom',
- 'Pd': 'palladium',
- 'C8H16': '1-octene',
- 'cobalt': 'cobalt atom',
- 'hydrotalcite': 'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
  'olefin': 'olefin',
- 'CoRh': 'cobalt(2+);rhodium(3+)',
- 'alkene': 'alkene',
- '1-Octene': '1-octene',
- '1-Heptene': '1-heptene',
- 'Pt': 'platinum',
- '1-decene': '1-decene',
- '1-Hexene': '1-hexene',
- '1-Decene': '1-decene',
- 'C10': '(z)-13-methyltetradec-2-enoic acid',
- 'Rh3': 'rhodium',
  'H2': 'dihydrogen',
- 'Cobalt': 'cobalt atom',
- 'Rhodium': 'rhodium atom'}
+ 'C10': '(z)-13-methyltetradec-2-enoic acid',
+ 'aldehyde': 'aldehyde',
+ '1-Heptene': '1-heptene',
+ 'C8H16': '1-octene',
+ 'Pd': 'palladium',
+ 'hexane': 'hexane',
+ 'alkene': 'alkene'}
 
-"""
-sup_cat={'silicon dioxide': ['cobalt;rhodium']}
-missing_all=['cobalt;rhodium',
- 'cluster catalyst role',
- 'decarbonylation',
- 'binary catalyst role',
- 'monometallic catalyst role']
-match_dict_all={'dummy0': 'hydroformylation',
- 'dummy1': 'catalyst role',
- 'dummy2': 'silicon atom',
- 'dummy3': 'silicon dioxide',
- 'dummy4': 'cobalt atom',
- 'dummy5': 'molecule'}
-rel_synonym={'cobalt': 'cobalt atom', 'SiO2': 'silicon dioxide', 'Si': 'silicon atom', 'O': 'oxygen atom', 'rhodium': 'rhodium atom', 'RhCo3': 'cobalt;rhodium', 'Rh': 'rhodium atom', 'Co': 'cobalt atom'}
-chem_list=['cobalt', 'SiO2', 'rhodium', 'RhCo3', 'cobalt atom', 'silicon dioxide', 'silicon atom', 'oxygen atom', 'rhodium atom', 'cobalt;rhodium', 'rhodium atom', 'cobalt atom']
-onto_new_dict={'cobalt atom': ['cobalt atom'], 'silicon dioxide': ['silicon atom', 'oxygen atom'], 'rhodium atom': ['rhodium atom'], 'cobalt;rhodium': ['rhodium atom', 'cobalt atom']}
-"""
-entity=['aldehyde',
+
+
+entity=['alkene',
+ 'aldehyde',
  'olefin',
  'iron atom',
  'cobalt atom',
  'ruthenium atom',
  'rhodium atom',
  'palladium',
- 'alkene',
  'cobalt hydrotalcite',
  '1-octene',
  '1-decene',
@@ -1251,15 +1674,19 @@ entity=['aldehyde',
  'CoRhHT-2',
  'CoRhHT-3',
  'Cobalt Rhodium HT',
- 'rhodium',
  'α-Co(OH)2',
- 'CoRhHT-1',
+ 'CoRh-HT-1',
+ 'CoRh-HT-2',
  'hexane',
  'heptene',
  '(z)-13-methyltetradec-2-enoic acid',
+ 'HT',
+ 'bimetallic cobalt-rhodium layered hydrotalcite-type material',
+ 'CoRh-HT',
+ 'hydroformylation',
+ 'CoRh-based heterogeneous catalyst',
  'Hydroformylation',
  'heterogeneous catalyst',
- 'hydroformylation',
  'linear aldehyde',
  'heterogeneous catalyst based on Rh and Co',
  'hydrotalcite (HT)-like material',
@@ -1270,16 +1697,16 @@ entity=['aldehyde',
  'condensation',
  'layered double hydroxide',
  'rhodium-containing cobalt hydrotalcite',
- 'layered CoRhHT-type material',
+ 'layered CoRh-HT-type material',
  'layered CoRh-HT type material',
  'washed',
- 'CoRhHT catalyst',
- 'layered CoRhHT',
+ 'CoRh-HT catalyst',
+ 'layered CoRh-HT',
  'rhodium-containing sample',
- 'CoRhHT',
- 'CoRhHT-type material',
+ 'CoRh-HT-3',
+ 'CoRh-HT-type material',
  'cobalt-rhodium hydrotalcite material',
- 'layered CoRhHT-1 material',
+ 'layered CoRh-HT-1 material',
  'hydrogenation',
  'lower alkene',
  'isomerized olefin',
@@ -1288,9 +1715,8 @@ entity=['aldehyde',
  'linear alkene',
  'branched alkene',
  'pure cobalt hydrotalcite',
- 'HT',
  'layered hydrotalcite-type material',
- 'Rh3+-containing layered CoRhHT-type material']
+ 'Rh3+-containing layered CoRh-HT-type material']
 classes=[[],
  [],
  [],
@@ -1314,9 +1740,13 @@ classes=[[],
  [],
  [],
  [],
+ [],
+ ['catalyst role'],
+ ['catalyst role'],
+ ['hydroformylation'],
+ ['heterogeneous catalyst role'],
  ['Hydroformylation'],
  ['heterogeneous catalyst role'],
- ['hydroformylation'],
  [],
  ['heterogeneous catalyst role'],
  ['catalyst role'],
@@ -1330,7 +1760,7 @@ classes=[[],
  ['catalyst role'],
  ['catalyst role'],
  ['washed'],
- ['corhht catalyst role'],
+ ['catalyst role'],
  ['catalyst role'],
  ['catalyst role'],
  ['catalyst role'],
@@ -1346,16 +1776,15 @@ classes=[[],
  [],
  ['catalyst role'],
  ['catalyst role'],
- ['catalyst role'],
  ['catalyst role']]
-cems=[['aldehyde'],
+cems=[['alkene'],
+ ['aldehyde'],
  ['olefin'],
  ['iron atom'],
  ['cobalt atom'],
  ['ruthenium atom'],
  ['rhodium atom'],
  ['palladium'],
- ['alkene'],
  ['cobalt hydrotalcite'],
  ['1-octene'],
  ['1-decene'],
@@ -1371,11 +1800,15 @@ cems=[['aldehyde'],
  ['hexane'],
  ['heptene'],
  ['(z)-13-methyltetradec-2-enoic acid'],
+ ['cobalt atom',
+  'rhodium',
+  'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate'],
  [],
+ ['cobalt;rhodium'],
  [],
  [],
  ['aldehyde'],
- ['rhodium atom', 'cobalt atom'],
+ ['cobalt atom', 'rhodium atom'],
  ['dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate'],
  [],
  [],
@@ -1383,18 +1816,17 @@ cems=[['aldehyde'],
  [],
  [],
  ['hydroxide'],
- ['cobalt hydrotalcite', 'rhodium'],
+ ['cobalt atom', 'cobalt hydrotalcite', 'rhodium'],
  [],
- ['cobalt(2+);rhodium(3+)'],
+ ['cobalt;rhodium'],
  [],
  [],
  [],
  ['rhodium'],
  [],
- [],
- ['dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate',
+ ['cobalt atom',
   'rhodium',
-  'cobalt atom'],
+  'dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate'],
  ['CoRhHT-1'],
  [],
  ['alkene'],
@@ -1403,18 +1835,18 @@ cems=[['aldehyde'],
  ['aldehyde'],
  ['alkene'],
  ['alkene'],
- ['cobalt hydrotalcite'],
+ ['cobalt atom', 'cobalt hydrotalcite'],
  [],
  ['dialuminum;hexamagnesium;oxygen(2-);carbonate;dodecahydrate'],
- ['Rh3+']]
-category=['Product',
+ ['rhodium']]
+category=['Reactant',
+ 'Product',
  'Reactant',
  'Catalyst',
  'Catalyst',
  'Catalyst',
  'Catalyst',
  'Catalyst',
- 'Reactant',
  'Catalyst',
  'Reactant',
  'Reactant',
@@ -1430,9 +1862,11 @@ category=['Product',
  'Reactant',
  'Reactant',
  'Product',
+ 'Catalyst',
  'Reaction',
  'Catalyst',
  'Reaction',
+ 'Catalyst',
  'Product',
  'Catalyst',
  'Catalyst',
@@ -1446,7 +1880,6 @@ category=['Product',
  'Catalyst',
  'Catalyst',
  'Reaction',
- 'Catalyst',
  'Catalyst',
  'Catalyst',
  'Catalyst',
@@ -1466,202 +1899,10 @@ category=['Product',
  'Catalyst']
 d={'entity':entity,'classes':classes,'cems':cems, 'category':category}
 df_entity=pd.DataFrame(data=d)
-start_time=time.time() 
-create_classes_onto(abbreviation, sup_cat, missing_all, match_dict_all, df_entity,reac_dict,p_id,rel_synonym,chem_list,onto_new_dict)
-print("--- %.2f seconds ---" % (time.time() - start_time))
-"""
-sup_cat={'SiO2': ['Rh2P', 'RhCo3', 'Rh'],
- 'MCM-41': ['RhCo3'],
- 'Al2O3': ['Rh', 'Rh', 'Rh', 'Co', 'Co'], #problem mit duplikaten gelöst!
- 'Al': ['Rh']}
-rel_synonym= {'ethylene': 'ethene',
- 'Ethylene': 'ethene',
- 'SiO2': 'silicon dioxide',
- 'Si': 'silicon atom',
- 'O': 'oxygen atom',
- 'propylene': 'propene',
- 'Rh': 'rhodium atom',
- 'silica': 'silicon dioxide',
- 'rhodium': 'rhodium atom',
- 'CO': 'carbon monoxide',
- 'C': 'carbon atom',
- 'lithium aluminum hydride': 'lithium tetrahydroaluminate',
- 'lithium': 'lithium atom',
- 'aluminum': 'aluminium atom',
- 'hydride': 'hydride',
- 'propanal': 'propanal',
- 'Mn2O3': 'oxo(oxomanganiooxy)manganese',
- 'Mn': 'manganese atom',
- 'aldehyde': 'aldehyde',
- 'MoO3': 'molybdenum trioxide',
- 'Mo': 'molybdenum atom',
- 'P': 'phosphorus atom',
- 'Al2O3': 'aluminium oxide',
- 'Al': 'aluminium atom',
- 'V2O5': 'divanadium pentaoxide',
- 'V': 'vanadium atom',
- 'Sc2O3': 'oxo(oxoscandiooxy)scandium',
- 'Sc': 'scandium atom',
- 'cobalt': 'cobalt atom',
- 'ethane': 'ethane',
- 'methanol': 'methanol',
- 'RhCo3': 'cobalt;rhodium',
- 'Co': 'cobalt atom',
- 'rhodium trichloride': 'trichlororhodium',
- 'propanol': 'propan-1-ol',
- 'TiO2': 'titanium dioxide',
- 'Ti': 'titanium atom'}
-missing=['trichloride',
- 'cobalt;rhodium',
- 'MCM-41',
- 'Rh2P',
- 'oxo(oxoscandiooxy)scandium',
- 'trichlororhodium',
- 'oxo(oxomanganiooxy)manganese']
-match_dict={'http://purl.obolibrary.org/obo/CHEBI_28685': 'molybdenum atom',
- 'http://purl.obolibrary.org/obo/CHEBI_28831': 'propan-1-ol',
- 'http://purl.obolibrary.org/obo/CHEBI_30045': 'divanadium pentaoxide',
- 'http://purl.obolibrary.org/obo/CHEBI_42266': 'ethane',
- 'http://purl.obolibrary.org/obo/CHEBI_27638': 'cobalt atom',
- 'http://purl.obolibrary.org/obo/CHEBI_28659': 'phosphorus atom',
- 'http://purl.obolibrary.org/obo/CHEBI_33359': 'rhodium atom',
- 'http://purl.obolibrary.org/obo/CHEBI_30563': 'silicon dioxide',
- 'http://purl.obolibrary.org/obo/CHEBI_27698': 'vanadium atom',
- 'http://purl.obolibrary.org/obo/CHEBI_25805': 'oxygen atom',
- 'http://purl.obolibrary.org/obo/CHEBI_30142': 'lithium tetrahydroaluminate',
- 'http://purl.obolibrary.org/obo/CHEBI_17245': 'carbon monoxide',
- 'http://purl.obolibrary.org/obo/CHEBI_27573': 'silicon atom',
- 'http://purl.obolibrary.org/obo/CHEBI_33330': 'scandium atom',
- 'http://purl.obolibrary.org/obo/CHEBI_27594': 'carbon atom',
- 'http://purl.obolibrary.org/obo/CHEBI_17153': 'propanal',
- 'http://purl.obolibrary.org/obo/CHEBI_18153': 'ethene',
- 'http://purl.obolibrary.org/obo/CHEBI_30187': 'aluminium oxide',
- 'http://purl.obolibrary.org/obo/CHEBI_17478': 'aldehyde',
- 'http://purl.obolibrary.org/obo/CHEBI_30145': 'lithium atom',
- 'http://purl.obolibrary.org/obo/CHEBI_18291': 'manganese atom',
- 'http://purl.obolibrary.org/obo/CHEBI_17790': 'methanol',
- 'http://purl.obolibrary.org/obo/CHEBI_29239': 'hydride',
- 'http://purl.obolibrary.org/obo/CHEBI_33341': 'titanium atom',
- 'http://purl.obolibrary.org/obo/CHEBI_28984': 'aluminium atom',
- 'http://purl.obolibrary.org/obo/CHEBI_32234': 'titanium dioxide',
- 'http://purl.obolibrary.org/obo/CHEBI_30627': 'molybdenum trioxide',
- 'http://purl.obolibrary.org/obo/CHEBI_16052': 'propene',
- 'http://purl.obolibrary.org/obo/CHEBI_25367': 'molecule'}
-chem_list=['ethylene',
- 'Ethylene',
- 'SiO2',
- 'propylene',
- 'Rh',
- 'silica',
- 'MCM-41',
- 'rhodium',
- 'CO',
- 'carbon monoxide',
- 'propene',
- 'lithium aluminum hydride',
- 'propanal',
- 'Mn2O3',
- 'aldehyde',
- 'MoO3',
- 'Rh2P',
- 'Al2O3',
- 'V2O5',
- 'Sc2O3',
- 'cobalt',
- 'ethane',
- 'methanol',
- 'RhCo3',
- 'rhodium trichloride',
- 'propanol',
- 'Co',
- 'Al',
- 'TiO2']
-categories={'Rh2P nanoparticle supported on SiO2 support material': 'Catalyst',
- 'hydroformylation': 'Reaction',
- 'ethylene': 'Reactant',
- 'propylene': 'Reactant',
- 'transmission electron microscopy': 'Characterization',
- 'infrared analysis of adsorbed CO': 'Characterization',
- 'high throughput experimentation': 'Characterization',
- 'reduction': 'Treatment',
- 'heterogeneous hydroformylation': 'Reaction',
- 'RhCo3 supported on MCM-41': 'Catalyst',
- 'hydrogenation': 'Reaction',
- 'DRIFTS': 'Characterization',
- 'DRC': 'Characterization',
- 'coimpregnation': 'Treatment',
- 'decarbonylation': 'Reaction',
- 'atmospheric ethylene': 'Reactant',
- 'RhCo3 supported on SiO2': 'Catalyst',
- 'binary catalyst': 'Catalyst',
- 'monometallic catalyst': 'Catalyst',
- 'rhodium': 'Catalyst',
- 'cobalt': 'Catalyst',
- '5%Rh supported on Al2O3': 'Catalyst',
- '1%Co supported on Al2O3': 'Catalyst',
- '0.5%Co-0.5%Rh supported on Al2O3': 'Catalyst',
- 'ethane': 'Product',
- 'propanal': 'Product',
- 'propanol': 'Product',
- 'Rh catalyst': 'Catalyst',
- 'CO': 'Reactant',
- 'Ethylene': 'Reactant',
- 'carbon monoxide': 'Reactant',
- 'methanol': 'Product',
- 'Rh supported on SiO2 catalyst': 'Catalyst',
- 'dissociation': 'Reaction',
- 'MoO3': 'Catalyst',
- 'Sc2O3': 'Catalyst',
- 'TiO2': 'Catalyst',
- 'V2O5': 'Catalyst',
- 'Mn2O3': 'Catalyst',
- 'organic oxygenate': 'Product',
- 'TPR': 'Characterization',
- 'XPS': 'Characterization',
- 'FTIR': 'Characterization',
- 'XRD': 'Characterization',
- 'atmospheric hydroformylation': 'Reaction',
- 'propene': 'Reactant',
- 'linear aldehyde': 'Product',
- 'Rh supported on Al ': 'Catalyst',
- 'reducing': 'Treatment',
- 'rhodium trichloride supported on silica with lithium aluminum hydride': 'Catalyst',
- 'vapour phase propene': 'Reactant',
- 'X-ray diffraction': 'Characterization',
- 'X-ray photoemission spectroscopy': 'Characterization',
- 'Fourier  transform-IR spectroscopy': 'Characterization'}
-reac_dict={}
-abbreviation={'DRC': 'degree',
- 'DRIFTS': 'diﬀuse',
- 'XPS': 'X-ray photoemission spectroscopy'}
-onto_new_dict={'MCM-41': [],
- 'ethene': ['ethene'],
- 'silicon dioxide': ['silicon dioxide'],
- 'propene': ['propene'],
- 'rhodium atom': ['rhodium atom'],
- 'carbon monoxide': ['carbon atom', 'oxygen atom'],
- 'lithium tetrahydroaluminate': ['lithium atom', 'aluminium atom', 'hydride'],
- 'propanal': ['propanal'],
- 'oxo(oxomanganiooxy)manganese': ['manganese atom', 'oxygen atom'],
- 'aldehyde': ['aldehyde'],
- 'molybdenum trioxide': ['molybdenum atom', 'oxygen atom'],
- 'Rh2P': ['rhodium atom', 'phosphorus atom'],
- 'aluminium oxide': ['aluminium atom', 'oxygen atom'],
- 'divanadium pentaoxide': ['vanadium atom', 'oxygen atom'],
- 'oxo(oxoscandiooxy)scandium': ['scandium atom', 'oxygen atom'],
- 'cobalt atom': ['cobalt atom'],
- 'ethane': ['ethane'],
- 'methanol': ['methanol'],
- 'cobalt;rhodium': ['rhodium atom', 'cobalt atom'],
- 'trichlororhodium': ['rhodium atom', 'trichloride'],
- 'propan-1-ol': ['propan-1-ol'],
- 'aluminium atom': ['aluminium atom'],
- 'titanium dioxide': ['titanium atom', 'oxygen atom']}
-p_id=1
-df_entity, rel_synonym, missing_all, match_dict_all=preprocess_classes(categories, sup_cat, rel_synonym, chem_list, missing, match_dict)
-#created_classes, sup_sub_df=create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,reac_dict,p_id,rel_synonym,chem_list)
-"""
-"""
+
+
+created_classes,sup_sub_df = create_classes_onto(abbreviation, sup_cat, missing_all, match_dict_all, df_entity,reac_dict,p_id,rel_synonym,chem_list,onto_new_dict)
+
 A method for the synthesis of highly crystalline Rh2P nanoparticles on SiO2 support materials and their use as truly heterogeneous
  single-site catalysts for the hydroformylation of ethylene and propylene is presented. The supported Rh2P nanoparticles were investigated 
  by transmission electron microscopy and by infrared analysis of adsorbed CO. The inﬂuence of feed gas composition and reaction temperature 
@@ -1712,3 +1953,4 @@ A method for the synthesis of highly crystalline Rh2P nanoparticles on SiO2 supp
  systems formed by very small rhodium crystallites (< 4 nm) and cobalt oxide/hydroxide. The presence of an unreduced cobalt species is well 
  documented by TPR and XPS. The cobalt oxide is probably deposited on the rhodium surface, obscuring a large amount of the active metal 
  centers. As can be judged by FT-IR and XRD data the morphology of the system is not modified by thermal treatments in CO and H2."""
+ 

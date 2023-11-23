@@ -116,7 +116,14 @@ def add_publication(doi,title,abstract):
     try:
         onto = new_world.get_ontology('./ontologies/{}.owl'.format(onto_new)).load()
     except:
-        onto = new_world.get_ontology('./ontologies/{}.owl'.format(onto_old)).load()
+        onto = new_world.get_ontology('./ontologies/{}.owl'.format(onto_old)).load()       
+        with onto:    
+            class has_doi(DataProperty):
+                    range = [str]
+                    label = 'has doi'
+            class has_title(DataProperty):
+                    range = [str]
+                    label ='has title'
         onto.set_base_iri('http://www.semanticweb.org/ontologies/2023/11/new_onto.owl#',rename_entities=False)
     pub_c = onto.search_one(label='publication')
     with onto:
@@ -135,16 +142,8 @@ def add_publication(doi,title,abstract):
             new_pub.comment.append('DOI: {}'.format(doi))
             new_pub.comment.append('Abstract:{}'.format(abstract))
             has_doi = onto.search_one(label='has doi')
-            if not has_doi:
-                class has_doi(DataProperty):
-                    range = [str]
-                    label = 'has doi'
             new_pub.has_doi = [doi]
             has_title = onto.search_one(label='has title')
-            if not has_title:
-                class has_title(DataProperty):
-                    range = [str]
-                    label ='has title'
             new_pub.has_title = [title]
     onto.save('./ontologies/{}.owl'.format(onto_new))
     return p_id
@@ -520,14 +519,14 @@ def chemical_prep(chem_list, onto_class_list):
             onto_new_dict[molecule] = []
             class_list.append(molecule)
             continue        
-        match_material=re.findall(r'((?:[A-Z](?:[a-z]?[\d]*))+)[—–-]((?:[A-Z](?:[a-z]?[\d]*))+)',molecule) #TiO2-SiO2 from Ni-W/TiO2-SiO2
+        match_material=re.findall(r'((?:[A-Z](?:[a-wyz]?[\d]*))+)[—–-]((?:[A-Z](?:[a-wyz]?[\d]*))+)',molecule) #TiO2-SiO2 from Ni-W/TiO2-SiO2
         if match_material and molecule in sup_cat.keys():
             comp_dict[molecule] = [match_material[0][0],match_material[0][1]]
         molecule_split = molecule.split()        
-        if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+',molecule):
+        if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]+){3,}', molecule) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+',molecule):
             comp_dict[molecule] = molecule_split  
         else:
-             comp = re.findall(r'([A-Z](?:[a-z])?)',molecule)
+             comp = re.findall(r'([A-Z](?:[a-wyz]+)?)',molecule)
              comp_dict[molecule] = comp
     for k,v in comp_dict.items():
         i = 0
@@ -692,7 +691,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                             for i in mol_new:
                                 print('{}. {}:{}'.format(n,i.iupac_name, i.isomeric_smiles))
                                 n+=1
-                            idx = input('\nwrite number of fitting IUPAC name or "none"')
+                            idx = input('\nwrite number of fitting IUPAC name or "none"\n')
                             if idx =='none':
                                 key = k
                                 class_list.append(k)
@@ -704,7 +703,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                                     key = mol_new[idx-1].iupac_name
                                     break
                                 except:
-                                    print('\nerror: write a number between 1 and {} or "none"'.format(len(mol_new)))
+                                    print('\nerror: write a number between 1 and {} or "none"\n'.format(len(mol_new)))
                                     
                 else:
                     while True:
@@ -713,7 +712,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                             for i in synonyms[k]:
                                 print('{}. {}'.format(n,i))
                                 n+=1
-                            idx = input('\nwrite number of fitting synonym or "none"')                            
+                            idx = input('\nwrite number of fitting synonym or "none"\n')                            
                             if idx =='none':
                                 key = k
                                 class_list.append(k)
@@ -724,17 +723,17 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                                     key = synonyms[k][idx-1]
                                     break
                                 except:
-                                    print('\nerror: write a number between 1 and {} or "none"'.format(len(synonyms[k])))                               
+                                    print('\nerror: write a number between 1 and {} or "none"\n'.format(len(synonyms[k])))                               
             elif len(comp_check) == 1:
                 key = comp_check[0]                  
             else:
-                print('no synonyms but some matches in inchikey for {}:'.format(k))                 
+                print('no synonyms but some matches in InChiKeys for {}:'.format(k))                 
                 n=1
                 for i in comp_check:
                     print('{}. {}'.format(n,i))
                     n+=1
                 while True:
-                    idx = input('\nwrite number of fitting synonym or "none"')                            
+                    idx = input('\nwrite number of fitting synonym or "none"\n')                            
                     if idx =='none':
                         key = k
                         class_list.append(k)
@@ -745,7 +744,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                             key = comp_check[idx-1]
                             break
                         except:
-                            print('error: write a number between 1 and {} or "none"'.format(len(comp_check)))                  
+                            print('\nerror: write a number between 1 and {} or "none"\n'.format(len(comp_check)))                  
                     
     if key == None or not key:
         key = k 
