@@ -520,7 +520,7 @@ def chemical_prep(chem_list, onto_class_list):
             onto_new_dict[molecule] = []
             class_list.append(molecule)
             continue        
-        match_material=re.findall(r'((?:[A-Z](?:[a-z]?[\d]*))+)[—–-]((?:[A-Z](?:[a-z]?[\d]*))+)',molecule)#TiO2-SiO2 from Ni-W/TiO2-SiO2
+        match_material=re.findall(r'((?:[A-Z](?:[a-z]?[\d]*))+)[—–-]((?:[A-Z](?:[a-z]?[\d]*))+)',molecule) #TiO2-SiO2 from Ni-W/TiO2-SiO2
         if match_material and molecule in sup_cat.keys():
             comp_dict[molecule] = [match_material[0][0],match_material[0][1]]
         molecule_split = molecule.split()        
@@ -660,6 +660,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
     numinbrackets = None
     if len(synonyms[k]) == 1:
             key = synonyms[k][0]
+            print('found {} in ChEBI as {}'.format(k,key))
     else:   
             print(k)
             if re.search(r'^[A-Za-z]+\(\d+\)$',k):
@@ -672,24 +673,26 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                         print('no synonyms and entities for {}, key = k'.format(k))
                         ans= input('Is {} an existing compound?\n'.format(k))
                         if ans=='no':
-                            key=False                        
+                            key=False   
+                            print('\n{} is skipped'.format(k))
                         else:    
                             key = k
+                            print('new chemical compound added\n')
                             class_list.append(k)
                         return class_list, key, rel_synonym  
                     elif len(mol) == 1:
                         key=mol[0].iupac_name #some of the compounds that can be found in pubchem don't have IUPAC names (i.e. "propyl")
-                        
+                        print('found {} in PubChem as {}'.format(k,key))
                     else:
                         while True:
                             mol_new = [i for i in mol if i.iupac_name]
-                            print('choose iupac name for {}'.format(k))
+                            print('choose IUPAC name for {}\n'.format(k))
                             print('components have following SMILES:')
                             n=1
                             for i in mol_new:
                                 print('{}. {}:{}'.format(n,i.iupac_name, i.isomeric_smiles))
                                 n+=1
-                            idx = input('write number of fitting iupac name or "none"\n')
+                            idx = input('\nwrite number of fitting IUPAC name or "none"')
                             if idx =='none':
                                 key = k
                                 class_list.append(k)
@@ -701,7 +704,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                                     key = mol_new[idx-1].iupac_name
                                     break
                                 except:
-                                    print('error: write a number between 1 and {} or "none"'.format(len(mol_new)))
+                                    print('\nerror: write a number between 1 and {} or "none"'.format(len(mol_new)))
                                     
                 else:
                     while True:
@@ -710,7 +713,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                             for i in synonyms[k]:
                                 print('{}. {}'.format(n,i))
                                 n+=1
-                            idx = input('write number of fitting synonym or "none"\n')                            
+                            idx = input('\nwrite number of fitting synonym or "none"')                            
                             if idx =='none':
                                 key = k
                                 class_list.append(k)
@@ -721,7 +724,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                                     key = synonyms[k][idx-1]
                                     break
                                 except:
-                                    print('error: write a number between 1 and {} or "none"'.format(len(synonyms[k])))                               
+                                    print('\nerror: write a number between 1 and {} or "none"'.format(len(synonyms[k])))                               
             elif len(comp_check) == 1:
                 key = comp_check[0]                  
             else:
@@ -731,7 +734,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                     print('{}. {}'.format(n,i))
                     n+=1
                 while True:
-                    idx = input('write number of fitting synonym or "none"\n')                            
+                    idx = input('\nwrite number of fitting synonym or "none"')                            
                     if idx =='none':
                         key = k
                         class_list.append(k)
