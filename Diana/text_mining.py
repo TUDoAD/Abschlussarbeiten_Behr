@@ -139,6 +139,7 @@ def add_publication(doi,title,abstract):
         else:
             p_id = len(list(pub_c.instances()))+1
             new_pub = pub_c('publication{}'.format(p_id))
+            new_pub.label.append('publication{}'.format(p_id))
             new_pub.comment.append('DOI: {}'.format(doi))
             new_pub.comment.append('Abstract:{}'.format(abstract))
             has_doi = onto.search_one(label='has doi')
