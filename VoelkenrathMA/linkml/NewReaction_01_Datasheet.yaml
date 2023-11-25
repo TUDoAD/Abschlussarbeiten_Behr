@@ -15,6 +15,7 @@
     - H2O
     - Ni
     - Ar
+    - CO
     temperature: 298.0
     #type: !!python/name:owlready2.entity.Mixture ''
     velocity: 0.848826363
