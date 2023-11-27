@@ -242,8 +242,8 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                     entities_raw1[entity]=[*set(entities_raw1[entity])]
                 else:
                     entities_raw1[entity]=entities_raw1[entity_raw]
-            if chem_entity:
-                if entity in chem_list or set(entity.split()).issubset(chem_list) or entity == chem_entity[0]:            
+            
+            if entity in chem_list or set(entity.split()).issubset(chem_list):            
                     if entity in rel_synonym.keys():
                         c_list = [rel_synonym[entity]]
                     elif entity in rel_synonym.values():
@@ -261,13 +261,13 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                     if len(entity.split()) > 1 and set(entity.split()).issubset(chem_list):    
                         chem_e.append(' '.join(c_list))
                         print('changed entity:'+' '.join(c_list))
-                elif entity.split()[-1] in chem_list and entity not in classes.keys():
+            elif entity.split()[-1] in chem_list and entity not in classes.keys():
                     #i.e. light olefin
                     print('entity.split()[-1] in chem_list: {}'.format(entity))
                     classes,_ = check_in_snip(entity, classes, entity, l,chem_list)
                     c_t = rel_synonym[entity.split()[-1]] if entity.split()[-1] in rel_synonym.keys() else entity.split()[-1]
                     spans_dict[entity].append(c_t) #
-                elif entity not in classes.keys() and l in ['Product','Reactant']: 
+            elif entity not in classes.keys() and l in ['Product','Reactant']: 
                     for c in chem_entity:
                         c_t = rel_synonym[c] if c in rel_synonym.keys() else c
                         spans_dict[entity].append(c_t) #muss für entities wie "phenolic species", alkyl group erweitert werden  
