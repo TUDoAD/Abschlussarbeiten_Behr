@@ -242,35 +242,36 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                     entities_raw1[entity]=[*set(entities_raw1[entity])]
                 else:
                     entities_raw1[entity]=entities_raw1[entity_raw]
-        if entity in chem_list or set(entity.split()).issubset(chem_list) or entity == chem_entity[0]:            
-            if entity in rel_synonym.keys():
-                c_list = [rel_synonym[entity]]
-            elif entity in rel_synonym.values():
-                c_list = [entity]
-            else: 
-                c_list = []
-                for c in entity.split():
-                    c_t = rel_synonym[c] if c in rel_synonym.keys() else c
-                    if "atom" in c_t:
-                       c_list=[entity]
-                       break
-                    c_list.append(c_t)
-            
-            list_all.append([' '.join(c_list),[],[' '.join(c_list)],categories[entity]])    #changed entity! prop-1-ene instead propylene
-            if len(entity.split()) > 1 and set(entity.split()).issubset(chem_list):    
-                chem_e.append(' '.join(c_list))
-                print('changed entity:'+' '.join(c_list))
-        elif entity.split()[-1] in chem_list and entity not in classes.keys():
-            #i.e. light olefin
-            print('entity.split()[-1] in chem_list: {}'.format(entity))
-            classes,_ = check_in_snip(entity, classes, entity, l,chem_list)
-            c_t = rel_synonym[entity.split()[-1]] if entity.split()[-1] in rel_synonym.keys() else entity.split()[-1]
-            spans_dict[entity].append(c_t) #
-        elif entity not in classes.keys() and l in ['Product','Reactant']: 
-            for c in chem_entity:
-                c_t = rel_synonym[c] if c in rel_synonym.keys() else c
-                spans_dict[entity].append(c_t) #muss für entities wie "phenolic species", alkyl group erweitert werden  
-            list_all.append([entity,['chemical substance'],[],l])
+            if chem_entity:
+                if entity in chem_list or set(entity.split()).issubset(chem_list) or entity == chem_entity[0]:            
+                    if entity in rel_synonym.keys():
+                        c_list = [rel_synonym[entity]]
+                    elif entity in rel_synonym.values():
+                        c_list = [entity]
+                    else: 
+                        c_list = []
+                        for c in entity.split():
+                            c_t = rel_synonym[c] if c in rel_synonym.keys() else c
+                            if "atom" in c_t:
+                               c_list=[entity]
+                               break
+                            c_list.append(c_t)
+                    
+                    list_all.append([' '.join(c_list),[],[' '.join(c_list)],categories[entity]])    #changed entity! prop-1-ene instead propylene
+                    if len(entity.split()) > 1 and set(entity.split()).issubset(chem_list):    
+                        chem_e.append(' '.join(c_list))
+                        print('changed entity:'+' '.join(c_list))
+                elif entity.split()[-1] in chem_list and entity not in classes.keys():
+                    #i.e. light olefin
+                    print('entity.split()[-1] in chem_list: {}'.format(entity))
+                    classes,_ = check_in_snip(entity, classes, entity, l,chem_list)
+                    c_t = rel_synonym[entity.split()[-1]] if entity.split()[-1] in rel_synonym.keys() else entity.split()[-1]
+                    spans_dict[entity].append(c_t) #
+                elif entity not in classes.keys() and l in ['Product','Reactant']: 
+                    for c in chem_entity:
+                        c_t = rel_synonym[c] if c in rel_synonym.keys() else c
+                        spans_dict[entity].append(c_t) #muss für entities wie "phenolic species", alkyl group erweitert werden  
+                    list_all.append([entity,['chemical substance'],[],l])
     for k,v in spans_dict.items(): #replacement of parts of chemical entities with full name. i.e. ['zeolite', 'ZSM-5']-> ['ZSM-5 zeolite'] if 'ZSM-5 zeolite' is in entity
         for c in chem_e:
             for i in range(len(c.split())):
@@ -605,9 +606,12 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                             try:
                                 ind = [i for i in list(onto.search(label = c)) if i in list(onto.individuals())][0]
                             except:
-                                print('c in row.cems individuum added:{}'.format(c))
-                                onto, ind = add_individum(onto,list(onto.search(label = c))[0], c,p_id)
-                            
+                                try:
+                                    print('c in row.cems individuum added:{}'.format(c))
+                                    onto, ind = add_individum(onto,list(onto.search(label = c))[0], c,p_id)
+                                except:
+                                    mol=[i for i in list(onto.search(label='chemical substance')) if i in onto.classes()][0]
+                                    onto, ind = add_individum(onto,mol, c,p_id)
                             if c in sup_cat.keys():
                                 ind.RO_0000087.append(support_role_i) #'has role' = RO_0000087
                                 ind.support_component_of.append(e_ind)
@@ -649,12 +653,15 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                                         print(r+" was skipped in reac_dict")
                                         continue
                             ind.RO_0000057.append(cem_i) #'has participant' = RO_0000057
-                if row.entity in abbreviation.keys() or entities_raw1[row.entity][0] in abbreviation.keys():
-                    try: # check for abbreviations
-                        e_ind.comment.append(abbreviation[row.entity])
-                    except:
-                        e_ind = [i for i in list(onto.search(label=row.entity)) if i in list(onto.individuals())][0]
-                        e_ind.comment.append(abbreviation[row.entity])
+                try:
+                    if row.entity in abbreviation.keys() or entities_raw1[row.entity][0] in abbreviation.keys():
+                        try: # check for abbreviations
+                            e_ind.comment.append(abbreviation[row.entity])
+                        except:
+                            e_ind = [i for i in list(onto.search(label=row.entity)) if i in list(onto.individuals())][0]
+                            e_ind.comment.append(abbreviation[row.entity])
+                except:
+                    continue
 
         for sup,v in sup_cat.items():
             sup = rel_synonym[sup] if sup in rel_synonym.keys() else sup
