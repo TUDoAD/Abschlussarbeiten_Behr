@@ -399,8 +399,8 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                                 chem_list.append(catalyst)
                                 sup = True
                             if '@' in mol[i][0]:
-                                    if entity not in abbreviation.keys():
-                                        entity = entity.replace('@',' supported on ')
+                                    #if entity not in abbreviation.keys():
+                                    entity = entity.replace('@',' supported on ')
                                     support = mol[i][2]
                                     if re.findall(r'([A-Za-z]+)[—–-]\d+[—–-]?\d*[A-Z]*', support):
                                         print(re.findall(r'(([A-Za-z]+)[—–-]\d+[—–-]?\d*[A-Z]*)', support))

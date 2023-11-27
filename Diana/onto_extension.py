@@ -242,7 +242,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                     entities_raw1[entity]=[*set(entities_raw1[entity])]
                 else:
                     entities_raw1[entity]=entities_raw1[entity_raw]
-        if entity in chem_list or set(entity.split()).issubset(chem_list):            
+        if entity in chem_list or set(entity.split()).issubset(chem_list) or entity == chem_entity[0]:            
             if entity in rel_synonym.keys():
                 c_list = [rel_synonym[entity]]
             elif entity in rel_synonym.values():
@@ -262,6 +262,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                 print('changed entity:'+' '.join(c_list))
         elif entity.split()[-1] in chem_list and entity not in classes.keys():
             #i.e. light olefin
+            print('entity.split()[-1] in chem_list: {}'.format(entity))
             classes,_ = check_in_snip(entity, classes, entity, l,chem_list)
             c_t = rel_synonym[entity.split()[-1]] if entity.split()[-1] in rel_synonym.keys() else entity.split()[-1]
             spans_dict[entity].append(c_t) #
@@ -440,7 +441,6 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
     onto = new_world.get_ontology('./ontologies/{}.owl'.format(onto_new)).load()
     created_classes =[]
     classes_all=[i.label[0].lower() for i in onto.classes() if i.label]
-    #onto.set_base_iri('http://www.semanticweb.org/ontologies/2023/11/new_onto.owl#',rename_entities=False)
     chem_sub = {}
     chem_list.extend([str(i) for i in rel_synonym.values()])
     onto_names={}
@@ -472,7 +472,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                             sup_sub_df = sup_sub_df.append({'super_class':'molecule', 'subclass': c},ignore_index = True)
                     elif c in sup_cat.keys():
                         sup_sub_df = sup_sub_df.append({'super_class':'support material', 'subclass': c},ignore_index = True)                       
-                    else:
+                    elif c not in abbreviation.keys():
                         sup_sub_df = sup_sub_df.append({'super_class':'molecule', 'subclass': c},ignore_index = True)
             if row.cems[0] != row.entity:
                 if nlp(row.entity)[-1].text in chem_list and 'supported' not in row.entity:
@@ -649,7 +649,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                                         print(r+" was skipped in reac_dict")
                                         continue
                             ind.RO_0000057.append(cem_i) #'has participant' = RO_0000057
-                if row.entity in abbreviation.keys():
+                if row.entity in abbreviation.keys() or entities_raw1[row.entity][0] in abbreviation.keys():
                     try: # check for abbreviations
                         e_ind.comment.append(abbreviation[row.entity])
                     except:
