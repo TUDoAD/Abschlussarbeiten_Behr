@@ -29,6 +29,9 @@ Dann rework der DWSIM-Funktionen
 - Testaufbau der finalen Ontologie in **Finale_Onto_mod.owl**
 	- WIP Ontologie hier: **Substances_and_BaseOnto2.owl**
 - Entsprechendes Anpassen der **BaseOnto.owl** -> Importiert jetzt SBO und metadata4ing komplett sowie 3 Annotationen aus ChEBI!
+  -> GO -Ontologie importieren, damit Oxidoreductase activity, substances etc. rein können (siehe Reaction + Substances)
+
+
 - Code restrukturieren und auf BaseOnto anpassen
 - Handschriftl. Notizen !
 - Reasoning prüfen
