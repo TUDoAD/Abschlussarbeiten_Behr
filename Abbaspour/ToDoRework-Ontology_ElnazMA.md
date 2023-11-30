@@ -69,3 +69,5 @@ Was wurde übertragen von EnzymeML -> Ontologie?
 -ecnumber
 
 -> Reaktionstemperatur usw. bei Reaktorsetup!
+
+
