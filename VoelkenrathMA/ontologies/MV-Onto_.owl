@@ -1547,126 +1547,6 @@
     
 
 
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFraction -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFraction">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFractionArgon -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFractionArgon">
-        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFraction"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFractionCarbonDioxide -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFractionCarbonDioxide">
-        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFraction"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFractionCarbonMonoxide -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFractionCarbonMonoxide">
-        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFraction"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFractionHydrogen -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFractionHydrogen">
-        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFraction"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSelectivity -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSelectivity">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSimulatedDownstream -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSimulatedDownstream">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSimulatedReactionPressure -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSimulatedReactionPressure">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSimulatedReactionTemperature -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSimulatedReactionTemperature">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSimulatedReactionVelocity -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSimulatedReactionVelocity">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasTurnover -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasTurnover">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasTurnoverCarbonDioxide -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasTurnoverCarbonDioxide">
-        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasTurnover"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasTurnoverHydrogen -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasTurnoverHydrogen">
-        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasTurnover"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasYield -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasYield">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasYieldMethane -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasYieldMethane">
-        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasYield"/>
-    </owl:DatatypeProperty>
-    
-
-
     <!-- http://www.w3.org/2004/02/skos/core#notation -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2004/02/skos/core#notation">
@@ -1980,7 +1860,6 @@ The composition of a Mixture is not fixed.</core:definition>
     <owl:Class rdf:about="http://example.org#Pressure">
         <owl:equivalentClass rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001918"/>
         <rdfs:subClassOf rdf:resource="http://example.org#ThermodynamicStateProperty"/>
-        <rdfs:subClassOf rdf:resource="http://purl.allotrope.org/ontologies/result#AFR_0001583"/>
         <core:definition>Class originally comes from OntoCAPE.</core:definition>
         <core:definition>The (total absolute) pressure of a PhaseSystem</core:definition>
     </owl:Class>
@@ -5750,24 +5629,6 @@ dispersion. [NIST]</core:definition>
         <core:altLabel>reaction mixture</core:altLabel>
         <core:definition>A reaction mixture role is a role of a chemical mixture undergoing some chemical reaction. [Allotrope]</core:definition>
         <core:prefLabel>reaction mixture role</core:prefLabel>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Carbon_Monoxide -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Carbon_Monoxide">
-        <rdfs:subClassOf rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#molecule"/>
-        <rdfs:comment>Substance-Class is created automatically</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Molecular_Oxygen -->
-
-    <owl:Class rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Molecular_Oxygen">
-        <rdfs:subClassOf rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#molecule"/>
-        <rdfs:comment>Substance-Class is created automatically</rdfs:comment>
     </owl:Class>
     
 
@@ -12502,31 +12363,9 @@ Copyright © 2015-2022 Allotrope Foundation
     
 
 
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MV_Mix_Feed_Methanation_PFR -->
-
-    <owl:NamedIndividual rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MV_Mix_Feed_Methanation_PFR">
-        <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mixture"/>
-        <reac:hasComponent rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Sub_CO"/>
-        <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CO2"/>
-        <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2"/>
-        <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_Ni"/>
-    </owl:NamedIndividual>
-    
-
-
     <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MV_Mix_Product_Methanation_01 -->
 
     <owl:NamedIndividual rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MV_Mix_Product_Methanation_01">
-        <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mixture"/>
-        <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CH4"/>
-        <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2O"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MV_Mix_Product_Methanation_PFR -->
-
-    <owl:NamedIndividual rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MV_Mix_Product_Methanation_PFR">
         <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Mixture"/>
         <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_CH4"/>
         <reac:hasComponent rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Sub_H2O"/>
@@ -12541,33 +12380,6 @@ Copyright © 2015-2022 Allotrope Foundation
         <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Methanation"/>
         <reac:hasInitialMixture rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MV_Mix_Feed_Methanation_01"/>
         <reac:hasProduct rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MV_Mix_Product_Methanation_01"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MV_Reac_Methanation_PFR -->
-
-    <owl:NamedIndividual rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MV_Reac_Methanation_PFR">
-        <rdf:type rdf:resource="http://example.org#ChemicalReaction"/>
-        <rdf:type rdf:resource="https://nfdi4cat.org/ontologies/reac4cat#Methanation"/>
-        <reac:hasInitialMixture rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MV_Mix_Feed_Methanation_PFR"/>
-        <reac:hasProduct rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#MV_Mix_Product_Methanation_PFR"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Sub_CO -->
-
-    <owl:NamedIndividual rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Sub_CO">
-        <rdf:type rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Carbon_Monoxide"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Sub_O2 -->
-
-    <owl:NamedIndividual rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Sub_O2">
-        <rdf:type rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#Molecular_Oxygen"/>
     </owl:NamedIndividual>
     
 
