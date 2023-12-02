@@ -271,7 +271,7 @@ r = (k_1 * K_H2 * K_CO2 * R2 * R1 * (1 - (P1 * math.pow(P2, 2)) / (math.pow(R2, 
     
     myscript = sim.Scripts[myscripttitle]
     myscript.Title = myscripttitle
-    myscript.ID = str(0)
+    myscript.ID = str(1)
     myscript.ScriptText = str(f"""import math
 from System import Array
 from DWSIM.Thermodynamics import *
@@ -385,7 +385,7 @@ r = (k_2 * K_CO2 * R1 * (1 - (P2 * P1)/(R2 * R1 * K_RWGS))) / (1 + K_CO2 * R1 + 
     
     myscript = sim.Scripts[myscripttitle]
     myscript.Title = myscripttitle
-    myscript.ID = str(0)
+    myscript.ID = str(2)
     myscript.ScriptText = str(f"""import math
 from System import Array
 from DWSIM.Thermodynamics import *
@@ -431,14 +431,16 @@ r = (k_3 * K_H2 * K_CO * R2 * (1 - (P1 * P2) / (math.pow(R1, 3) * R2 * K_eq))) /
 
 def simulation(name_sim, path, data, combination):
     ## create flowsheet and run simulation
-    temperature, pressure, veloc = combination
+    temperature_outlet, pressure, res_t = combination
     
     # set variable parameter for the new linkML-file
     for i in range(len(data)):
         if "Mixture" in data[i]:
-            data[i]["Mixture"][0]["temperature"] = temperature
+            temperature_inlet = data[i]["Mixture"][0]["temperature"][0]["feed"]
+            data[i]["Mixture"][0]["temperature"][0]["outlet"] = temperature_outlet
             data[i]["Mixture"][0]["pressure"] = pressure
-            data[i]["Mixture"][0]["velocity"] = veloc 
+            #data[i]["Mixture"][0]["velocity"] = veloc 
+            data[i]["Mixture"][0]["residence time"] = res_t
             
             # get compound from DWSIM and add them to the simulation
             print("Adding substances to Simulation...")
@@ -499,7 +501,7 @@ def simulation(name_sim, path, data, combination):
     r1.ConnectFeedMaterialStream(m1,0)
     r1.ConnectProductMaterialStream(m2,0)
     r1.ConnectFeedEnergyStream(e1,1)
-    r1.dV = 1
+    r1.dV = 0.1
     # add property package
     sim.CreateAndAddPropertyPackage("Peng-Robinson (PR)")
     #sim.CreateAndAddPropertyPackage("Soave-Redlich-Kwong (SRK)")
@@ -520,29 +522,34 @@ def simulation(name_sim, path, data, combination):
     print("Done!")
     
     # specify reactor parameter; doesnt make a difference if diameter or length is choosen
-    m1.SetTemperature(temperature)
+    m1.SetTemperature(temperature_inlet)
     m1.SetPressure(pressure)
-    velocity = float(veloc)
+    #velocity = float(veloc)
     for i in range(len(data)):
         if "Reactor" in data[i]:
             radius = float(data[i]["Reactor"][0]["tube_diameter"])/2
             r1.Volume = data[i]["Reactor"][0]["reactive_volume"]
+            V_reac = data[i]["Reactor"][0]["reactive_volume"]
             r1.Length = float(data[i]["Reactor"][0]["tube_length"])
             r1.NumberOfTubes = data[i]["Reactor"][0]["num_tubes"]
-    
+            
+            """
             if data[i]["Reactor"][0]["calculation_mode"] == "isothermal":
                 r1.ReactorOperationMode = Reactors.OperationMode.Isothermic
             elif data[i]["Reactor"][0]["calculation_mode"] == "adiabatic":
                 r1.ReactorOperationMode = Reactors.OperationMode.Adiabatic
             else:
                 print("Error accured while setting the ReactorOperationMode!")
-                
+            """
+            r1.ReactorOperationMode = Reactors.OperationMode.OutletTemperature
+            r1.OutletTemperature = temperature_outlet
+            
             # specify catalyst parameter
             r1.CatalystLoading = data[i]['Reactor'][0]["catalyst_loading"]
             r1.CatalystVoidFraction = data[i]['Reactor'][0]["catalyst_void_fraction"]
             r1.CatalystParticleDiameter = data[i]['Reactor'][0]["catalyst_particle_diameter"]
             
-    V_flow = math.pi * radius ** 2 * velocity
+    V_flow = V_reac / res_t
     m1.SetVolumetricFlow(V_flow)
     r1.UseUserDefinedPressureDrop = True
 
@@ -555,6 +562,24 @@ def simulation(name_sim, path, data, combination):
     errors = interf.CalculateFlowsheet2(sim)
 
     ##SAVE RESULTS
+    # get moleflows for evaluation
+    mol_flow_in = m1.GetMolarFlow()
+    mol_flow_in_comp = []
+    
+    for i in range(len(substances)):
+        temp_1 = m1.GetCompoundMolarFlow(substances[i][1])
+        mol_flow_in_comp.append([substances[i][0], temp_1])
+  
+    mol_flow_out = m2.GetMolarFlow()
+    mol_flow_out_comp = []
+    
+    for i in range(len(substances)):
+        temp_2 = m2.GetCompoundMolarFlow(substances[i][1])
+        mol_flow_out_comp.append([substances[i][0], temp_2])
+        
+    data.append({"Inlet": [{"MolarFlow_In": mol_flow_in, "Comp_MolarFlow_In": mol_flow_in_comp}]})       
+    data.append({"Outlet": [{"MolarFlow_Out": mol_flow_out, "Comp_MolarFlow_Out": mol_flow_out_comp}]})
+    
     # getting outlet composition
     outlet = list(m2.GetOverallComposition())
     outlet_composition = []
@@ -628,22 +653,14 @@ def simulation(name_sim, path, data, combination):
     
 
 def run():
-    """
     name_sim = sys.argv[1]
     temperature = sys.argv[2]
     pressure = sys.argv[3]
-    velocity = sys.argv[4]
+    res_t = sys.argv[4]
     path = sys.argv[5]
     data_path = sys.argv[6]
-    combination = (float(temperature), float(pressure), float(velocity))
-    """
-    name_sim = "test_01"
-    temperature = 600
-    pressure = 300000
-    velocity = 0.001
-    path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/"
-    data_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_01_Datasheet.yaml"
-    combination = (float(temperature), float(pressure), float(velocity))
+    combination = (float(temperature), float(pressure), float(res_t))
+
     with open(data_path, "r") as file:
         data = yaml.safe_load(file)
         
@@ -655,8 +672,8 @@ Für Überarbeitungszwecke:
     name_sim = "test_01"
     temperature = 600
     pressure = 300000
-    velocity = 0.001
+    res_t = 0.001
     path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_01/"
     data_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_01_Datasheet.yaml"
-    combination = (float(temperature), float(pressure), float(velocity))
+    combination = (float(temperature), float(pressure), float(res_t))
 """

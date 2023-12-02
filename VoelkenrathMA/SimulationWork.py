@@ -21,7 +21,7 @@ ATTENTION:
 
 # set path for the data-sheet
 "!!USER-INPUT!!"
-name = "NewReaction_01_DataSheet"
+name = "NewReaction_06_DataSheet"
 path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/"
 
 # specify the simulated temperature, pressure and velocity
@@ -30,15 +30,15 @@ with open("parameter.json") as json_file:
     
 temperature = para["temperature"] # K
 pressure = para["pressure"] # Pa
-velocity = para["velocity"] # m/s
+res_t = para["res_t"] # m/s
 
 # execute the script which calls the simulation as subprocess
-CallSubprocess.call_subprocess(name, temperature, pressure, velocity, path)
+CallSubprocess.call_subprocess(name, temperature, pressure, res_t, path)
 
 # evaluate the simulation results and (not programmed now!) add every simulated system as individual to ontology
 if "_DataSheet" in name:
     name_sim = name.split("_DataSheet")[0]  
 
 directory = path + name_sim + "/"
-EvaluateMethanation.MinMax(name, directory)
-EvaluateMethanation.Selectivity(directory)
+#EvaluateMethanation.MinMax(name, directory)
+#EvaluateMethanation.Selectivity(directory)

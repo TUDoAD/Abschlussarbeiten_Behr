@@ -343,7 +343,7 @@ def CreateDataSheet(name, data):
     
     data_points = [
         {'Reaction_Type': reaction_type},
-        {'Mixture':[{'temperature': inlet_temperature, 'pressure': inlet_pressure, 'velocity': inlet_velocity, 'mole_fraction': mole_frac, 'substances': components}]},
+        {'Mixture':[{'temperature': [{"feed":inlet_temperature, "outlet":0}], 'pressure': inlet_pressure, 'residence time': 0, 'mole_fraction': mole_frac, 'substances': components}]},
         {'Reactor':[{'calculation_mode': calculation_mode, 'reactive_volume': reactive_volume, 'tube_length': tube_length, 'tube_diameter': tube_diameter,
          'num_tubes': num_tubes, 'catalyst_loading': catalyst_loading, 'catalyst_particle_diameter': catalyst_diameter, 'catalyst_void_fraction':  catalyst_porosity}]}
         ]

@@ -12,9 +12,9 @@ import yaml
 import itertools
 import subprocess
 
-def call_subprocess(name, temperature, pressure, velocity, path):    
+def call_subprocess(name, temperature, pressure, res_t, path):    
     # calling the subprocess-simulation
-    combinations = list(itertools.product(temperature, pressure, velocity))   
+    combinations = list(itertools.product(temperature, pressure, res_t))   
     
     if "_DataSheet" in name:
         nr_sim_sheet = name.split("_")[1]
@@ -49,14 +49,14 @@ def call_subprocess(name, temperature, pressure, velocity, path):
         name_sim_ = name_sim + f"_{combinations[i][0]}K_{combinations[i][1]}Pa_{combinations[i][2]}ms"
         temperature = str(combinations[i][0])
         pressure = str(combinations[i][1])
-        velocity = str(combinations[i][2])
+        res_t = str(combinations[i][2])
         
         """
         Option1: Simulation of Reactor
         Option2: Simulation of Reactor and Downstream
         """
-        #command = ['python', 'SimulateMethanation_CO2CO.py', name_sim_, temperature, pressure, velocity, new_dir, data_path]
-        command = ['python', 'SimulateMethanation_Downstream_CO2CO.py', name_sim_, temperature, pressure, velocity, new_dir, data_path]
+        #command = ['python', 'SimulateMethanation_simkin.py', name_sim_, temperature, pressure, res_t, new_dir, data_path]
+        command = ['python', 'SimulateMethanation_Downstream_simkin.py', name_sim_, temperature, pressure, res_t, new_dir, data_path]
         
         process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         

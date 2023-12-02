@@ -16,6 +16,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 def MinMax(name, directory):
+    # function checks, which of the simulation in the given parameter span have the highest and lowest outlet concentration
     results = []
     temperature = []
     pressure = []
@@ -34,7 +35,7 @@ def MinMax(name, directory):
                         # K
                         temperature_ = data[i]["Mixture"][0]["temperature"]
                         pressure_ = data[i]["Mixture"][0]["pressure"]  # Pa
-                        velocity_ = data[i]["Mixture"][0]["velocity"]  # m/s
+                        velocity_ = data[i]["Mixture"][0]["residence time"]  # m/s
 
                 for i in range(len(data)):
                     if "Methane" in data[i]:
@@ -69,13 +70,13 @@ def MinMax(name, directory):
     print(
         f'Minimal methane concentration is: {concentration[minima_index]} mol/m3')
     print(
-        f'The conditions for the minimum are: T={temperature[minima_index]}, p={pressure[minima_index]}, v={velocity[minima_index]}')
+        f'The conditions for the minimum are: T={temperature[minima_index]}, p={pressure[minima_index]}, tau={velocity[minima_index]}')
 
     maxima_index = concentration.index(max(concentration))
     print(
         f'Maximal methane concentration is: {concentration[maxima_index]} mol/m3.')
     print(
-        f'The conditions for the maximum are: T={temperature[maxima_index]}, p={pressure[maxima_index]}, v={velocity[maxima_index]}')
+        f'The conditions for the maximum are: T={temperature[maxima_index]}, p={pressure[maxima_index]}, tau={velocity[maxima_index]}')
 
     ax.scatter(pressure[minima_index], velocity[minima_index], min(
         concentration), c='red', marker='o', s=75, label='Minimum')
@@ -83,7 +84,7 @@ def MinMax(name, directory):
         concentration), c='green', marker='o', s=75, label='Maximum')
 
     ax.set_xlabel('Pressure Pa')
-    ax.set_ylabel('Velocity m/s')
+    ax.set_ylabel('Residence time s')
     ax.set_zlabel('Concentration mol/m3')
 
     fig.colorbar(scatter, label="Temperature", location='left')
@@ -114,7 +115,7 @@ def Selectivity(directory):
                     diameter = float(data[i]["Reactor"][0]["tube_diameter"])
                     #print("d: " + str(diameter))
                 if "Mixture" in data[i]:
-                    velocity = float(data[i]["Mixture"][0]["velocity"])
+                    #velocity = float(data[i]["Mixture"][0]["velocity"])
                     molefractions = data[i]["Mixture"][0]["mole_fraction"]
                     #print("u: " + str(velocity))
                 if "Hydrogen" in data[i]:
@@ -150,25 +151,34 @@ def Selectivity(directory):
                     products.append([product[1:], int(product[0])])
                 else:
                     products.append([product, 1])
-
-            # calculation
-            A = math.pi * (diameter/2) ** 2
-            V_flow = velocity * A
-
-            n_h2_0 = h2_0 * V_flow
-            n_h2 = h2 * V_flow
-
-            n_co2_0 = co2_0 * V_flow
-            n_co2 = co2 * V_flow
-
-            X_h2 = (n_h2_0 - n_h2)/n_h2_0
-            #print("X(H2): " + str(X_h2))
-            X_co2 = (n_co2_0 - n_co2)/n_co2_0
-            #print("X(CO2): " + str(X_co2))
-
-            n_ch4_0 = ch4_0 * V_flow
-            n_ch4 = ch4 * V_flow
-
+            
+            for i in range(len(data)):
+                if "Inlet" in data[i]:
+                    for j in range(len(data[i]["Inlet"][0]["Comp_MolarFlow_In"])):
+                        if data[i]["Inlet"][0]["Comp_MolarFlow_In"][j][0] == "CO2":
+                            n_co2_0 = data[i]["Inlet"][0]["Comp_MolarFlow_In"][j][1]
+                        if data[i]["Inlet"][0]["Comp_MolarFlow_In"][j][0] == "H2":
+                            n_h2_0 = data[i]["Inlet"][0]["Comp_MolarFlow_In"][j][1]
+                        if data[i]["Inlet"][0]["Comp_MolarFlow_In"][j][0] == "CH4":
+                            n_ch4_0 = data[i]["Inlet"][0]["Comp_MolarFlow_In"][j][1]
+                        if data[i]["Inlet"][0]["Comp_MolarFlow_In"][j][0] == "H2O":
+                            n_h2o_0 = data[i]["Inlet"][0]["Comp_MolarFlow_In"][j][1]
+                        if data[i]["Inlet"][0]["Comp_MolarFlow_In"][j][0] == "CO":
+                            n_co_0 = data[i]["Inlet"][0]["Comp_MolarFlow_In"][j][1]
+            
+                if "Outlet" in data[i]:
+                    for j in range(len(data[i]["Outlet"][0]["Comp_MolarFlow_Out"])):
+                        if data[i]["Outlet"][0]["Comp_MolarFlow_Out"][j][0] == "CO2":
+                            n_co2 = data[i]["Outlet"][0]["Comp_MolarFlow_Out"][j][1]
+                        if data[i]["Outlet"][0]["Comp_MolarFlow_Out"][j][0] == "H2":
+                            n_h2 = data[i]["Outlet"][0]["Comp_MolarFlow_Out"][j][1]
+                        if data[i]["Outlet"][0]["Comp_MolarFlow_Out"][j][0] == "CH4":
+                            n_ch4 = data[i]["Outlet"][0]["Comp_MolarFlow_Out"][j][1]
+                        if data[i]["Outlet"][0]["Comp_MolarFlow_Out"][j][0] == "H2O":
+                            n_h2o = data[i]["Outlet"][0]["Comp_MolarFlow_Out"][j][1]
+                        if data[i]["Outlet"][0]["Comp_MolarFlow_Out"][j][0] == "CO":
+                            n_co = data[i]["Outlet"][0]["Comp_MolarFlow_Out"][j][1] 
+            
             for educt in educts:
                 if educt[0] == "H2":
                     v_h2 = educt[1]
@@ -184,27 +194,38 @@ def Selectivity(directory):
                 if molefractions[i][0] == "H2":
                     frac_h2 = molefractions[i][1]
 
+            X_h2 = (n_h2_0 - n_h2)/n_h2_0
+            X_co2 = (n_co2_0 - n_co2)/n_co2_0
+    
             if frac_h2 > (4 * frac_co2):
                 Y_ch4 = ((n_ch4 - n_ch4_0)/n_co2_0) * (abs(v_co2)/v_ch4)
-                S = Y_ch4 / X_co2
+                S_ch4 = Y_ch4 / X_co2
+                S_co = ((n_co - n_co_0)/(n_co2_0 - n_co2)) * (abs(v_co2)/v_ch4)
+                
                 # print("h2")
             elif frac_h2 < (4 * frac_co2):
                 Y_ch4 = ((n_ch4 - n_ch4_0)/n_h2_0) * (abs(v_h2)/v_ch4)
-                S = Y_ch4 / X_h2
+                S_ch4 = Y_ch4 / X_h2
+                S_co = ((n_co - n_co_0)/(n_h2_0 - n_h2)) * (abs(v_h2)/v_ch4)
                 # print("co2")
             elif frac_h2 == (4 * frac_co2):
-                Y_ch4 = ((n_ch4 - n_ch4_0)/n_h2_0) * (abs(v_h2)/v_ch4)
-                S = Y_ch4 / X_h2
+                Y_ch4 = ((n_ch4 - n_ch4_0)/n_co2_0) * (abs(v_co2)/v_ch4)
+                S_ch4 = Y_ch4 / X_co2
+                S_co = ((n_co - n_co_0)/(n_co2_0 - n_co2)) * (abs(v_co2)/v_ch4)
                 # print("h2_equal")
             else:
                 print("Some weird error accured while calculation the yield!")
-
-            #print("Y(CH4): " + str(Y_ch4))
-            #print("S(H2;CH4): " + str(S))
-
+            
+            sum_S = S_ch4 + S_co
+            S_ch4 = S_ch4 / sum_S
+            S_co = S_co / sum_S
+            
             # save results
             data.append({"Turnover": [["X_CO2", X_co2], ["X_H2", X_h2]]})
             data.append({"Yield": ["Y_CH4", Y_ch4]})
-            data.append({"Selectivity": S})
+            data.append({"Selectivity": [{"CH4": S_ch4, "CO":S_co}]})
             with open(file_path, 'w') as updated_data_file:
                 yaml.dump(data, updated_data_file, default_flow_style=False)
+
+        
+
