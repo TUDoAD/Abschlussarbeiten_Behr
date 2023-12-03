@@ -15,6 +15,7 @@ ATTENTION (Checklist before calling upload):
 """
 import os
 import yaml
+import time
 import owlready2
 
 from pathlib import Path
@@ -23,6 +24,7 @@ from pyDataverse.models import Dataset, Datafile
 
 
 def upload():
+    start = time.time()
     ## Adjustments    
     title = "DWSIM Methanation (x_co2=0,04, without Downstream)"
     descr = "Automatic generated simulation-files for the Ni-catalyzed Methanation of Carbon Dioxide (x_co2=0,04) without Downstream."
@@ -86,10 +88,10 @@ def upload():
                 if "Reaction_Type" in data[i]:
                     reaction_type = data[i]["Reaction_Type"]
                 if "Mixture" in data[i]:
-                    temperature = data[i]["Mixture"][0]["temperature"]
+                    temperature = data[i]["Mixture"][0]["temperature"][0]["outlet"]
                     pressure = data[i]["Mixture"][0]["pressure"]
                     res_t = data[i]["Mixture"][0]["residence time"]
-                    velocity=1
+                    
                     # set frac_co and frac_ar to False, because they are not in every simulation
                     # this way, there is no problem with the dataproperties (MolarFraction...)
                     frac_co = False
@@ -103,7 +105,21 @@ def upload():
                             frac_h2 = data[i]["Mixture"][0]["mole_fraction"][j][1]
                         if "Ar" in data[i]["Mixture"][0]["mole_fraction"][j][0]:
                             frac_ar = data[i]["Mixture"][0]["mole_fraction"][j][1]
-
+                if "Outlet Composition" in data[i]:
+                    for k in range(len(data[i]["Outlet Composition"])):
+                        if "CO2" == data[i]["Outlet Composition"][k][0]:
+                            frac_out_co2 = data[i]["Outlet Composition"][k][1]
+                        if "H2" == data[i]["Outlet Composition"][k][0]:
+                            frac_out_h2 = data[i]["Outlet Composition"][k][1]
+                        if "CH4" == data[i]["Outlet Composition"][k][0]:
+                            frac_out_ch4 = data[i]["Outlet Composition"][k][1]
+                        if "H2O" == data[i]["Outlet Composition"][k][0]:
+                            frac_out_h2o = data[i]["Outlet Composition"][k][1]
+                        if "Ar" == data[i]["Outlet Composition"][k][0]:
+                            frac_out_ar = data[i]["Outlet Composition"][k][1]
+                        if "CO" == data[i]["Outlet Composition"][k][0]:
+                            frac_out_co = data[i]["Outlet Composition"][k][1]
+                
                 if "hasDownstream" in data[i]:
                     downstream = data[i]["hasDownstream"]
                 if "Turnover" in data[i]:
@@ -112,12 +128,13 @@ def upload():
                             turn_co2 = data[i]["Turnover"][j][1]
                         if "X_H2" in data[i]["Turnover"][j][0]:
                             turn_h2 = data[i]["Turnover"][j][1]
-                        if "X_CO" in data[i]["Turnover"][j][0]:
-                            turn_co = data[i]["Turnover"][j][1]
+                        #if "X_CO" in data[i]["Turnover"][j][0]:
+                        #    turn_co = data[i]["Turnover"][j][1]
                 if "Yield" in data[i]:
                     yield_ch4 = data[i]["Yield"][1]
-                if "Selectivity" in data[i]:
-                    selectivity = data[i]["Selectivity"]
+                if "Selectivity_normed" in data[i]:
+                    selectivity_ch4 = data[i]["Selectivity_normed"][0]["CH4"]
+                    selectivity_co = data[i]["Selectivity_normed"][0]["CO"]
 
             # create the individuals
             with onto:
@@ -153,13 +170,25 @@ def upload():
                 individual.hasSimulatedReactionPressure.append(pressure)
                 individual.hasSimulatedReactionTemperature.append(temperature)
                 #individual.hasSimulatedReactionVelocity.append(velocity)
-                individual.hasSimulatedReactionResidenceTime(res_t)
+                individual.hasSimulatedReactionResidenceTime.append(res_t)
+                
+                individual.hasOutletMolarFractionCarbonDioxide.append(frac_out_co2)
+                individual.hasOutletMolarFractionWater.append(frac_out_h2o)
+                individual.hasOutletMolarFractionHydrogen.append(frac_out_h2)
+                individual.hasOutletMolarFractionMethane.append(frac_out_ch4)
+                individual.hasOutletMolarFractionCarbonMonoxide.append(frac_out_co)
+                if frac_out_ar:
+                    individual.hasOutletMolarFractionArgon.append(frac_out_ar)
                 
                 individual.hasTurnoverHydrogen.append(turn_h2)
                 individual.hasTurnoverCarbonDioxide.append(turn_co2)
                 
                 individual.hasYieldMethane.append(yield_ch4)
                 
-                individual.hasSelectivity.append(selectivity)
+                individual.hasSelectivity_CO2_CH4.append(selectivity_ch4)
+                individual.hasSelectivity_CO2_CO.append(selectivity_co)
                 
                 onto.save(onto_path)
+    end = time.time()
+    time_needed = end-start
+    print(time_needed)

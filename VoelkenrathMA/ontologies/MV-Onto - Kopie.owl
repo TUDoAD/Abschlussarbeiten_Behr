@@ -1587,10 +1587,82 @@
     
 
 
+    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasOutletMolarFractionArgon -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasOutletMolarFractionArgon">
+        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFraction"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasOutletMolarFractionCarbonDioxide -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasOutletMolarFractionCarbonDioxide">
+        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFraction"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasOutletMolarFractionCarbonMonoxide -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasOutletMolarFractionCarbonMonoxide">
+        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFraction"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasOutletMolarFractionHydrogen -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasOutletMolarFractionHydrogen">
+        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFraction"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasOutletMolarFractionMethane -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasOutletMolarFractionMethane">
+        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFraction"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasOutletMolarFractionNickel -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasOutletMolarFractionNickel">
+        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFraction"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasOutletMolarFractionWater -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasOutletMolarFractionWater">
+        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasMolarFraction"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSelectivity -->
 
     <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSelectivity">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSelectivity_CO2_CH4 -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSelectivity_CO2_CH4">
+        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSelectivity"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSelectivity_CO2_CO -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSelectivity_CO2_CO">
+        <rdfs:subPropertyOf rdf:resource="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSelectivity"/>
     </owl:DatatypeProperty>
     
 
@@ -1606,6 +1678,14 @@
     <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSimulatedReactionPressure -->
 
     <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSimulatedReactionPressure">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSimulatedReactionResidenceTime -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#hasSimulatedReactionResidenceTime">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
     </owl:DatatypeProperty>
     
