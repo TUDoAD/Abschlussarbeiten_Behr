@@ -24,9 +24,9 @@ from pyDataverse.models import Dataset, Datafile
 
 def upload():
     ## Adjustments    
-    title = "DWSIM Methanation (x_co2=0,2, with Downstream)"
-    descr = "Automatic generated simulation-files for the Ni-catalyzed Methanation of Carbon Dioxide (x_co2=0,2) with Downstream."
-    folder_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_06/"
+    title = "DWSIM Methanation (x_co2=0,04, without Downstream)"
+    descr = "Automatic generated simulation-files for the Ni-catalyzed Methanation of Carbon Dioxide (x_co2=0,04) without Downstream."
+    folder_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_01/"
     onto_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-Onto.owl"
     
     ## Uploading the simulation-files
@@ -88,8 +88,8 @@ def upload():
                 if "Mixture" in data[i]:
                     temperature = data[i]["Mixture"][0]["temperature"]
                     pressure = data[i]["Mixture"][0]["pressure"]
-                    velocity = data[i]["Mixture"][0]["velocity"]
-                    
+                    res_t = data[i]["Mixture"][0]["residence time"]
+                    velocity=1
                     # set frac_co and frac_ar to False, because they are not in every simulation
                     # this way, there is no problem with the dataproperties (MolarFraction...)
                     frac_co = False
@@ -124,7 +124,7 @@ def upload():
                 class_string = "*" + reaction_type
                 class_reaction_type = onto.search(iri=class_string)[0]
 
-                individual_name = "Sim_" + reaction_type + "_" + str(frac_co2) + "_" + str(temperature) + "K_" + str(pressure) + "Pa_" + str(velocity) + "ms_wd"
+                individual_name = "Sim_" + reaction_type + "_" + str(frac_co2) + "_" + str(temperature) + "K_" + str(pressure) + "Pa_" + str(res_t) + "s_wod"
                 individual = class_reaction_type(individual_name)
                 
                 individual.hasMolarFractionCarbonDioxide.append(frac_co2)
@@ -152,7 +152,8 @@ def upload():
                 individual.hasSimulatedDownstream.append(downstream)
                 individual.hasSimulatedReactionPressure.append(pressure)
                 individual.hasSimulatedReactionTemperature.append(temperature)
-                individual.hasSimulatedReactionVelocity.append(velocity)
+                #individual.hasSimulatedReactionVelocity.append(velocity)
+                individual.hasSimulatedReactionResidenceTime(res_t)
                 
                 individual.hasTurnoverHydrogen.append(turn_h2)
                 individual.hasTurnoverCarbonDioxide.append(turn_co2)

@@ -1,0 +1,113 @@
+- Reaction_Type: Methanation
+- Mixture:
+  - mole_fraction:
+    - - CO2
+      - 0.04
+    - - H2
+      - 0.051
+    - - Ar
+      - 0.909
+    pressure: 3250000.0
+    residence time: 10.0
+    substances:
+    - - CO2
+      - Carbon dioxide
+    - - H2
+      - Hydrogen
+    - - CH4
+      - Methane
+    - - H2O
+      - Water
+    - - Ni
+      - Nickel
+    - - Ar
+      - Argon
+    - - CO
+      - Carbon monoxide
+    temperature:
+    - feed: 298.0
+      outlet: 986.007
+- Reactor:
+  - calculation_mode: isothermal
+    catalyst_loading: 149.3934399
+    catalyst_particle_diameter: 0.00075
+    catalyst_void_fraction: 0.46
+    num_tubes: 1
+    reactive_volume: 2.356e-06
+    tube_diameter: 1E-02
+    tube_length: 3E-02
+- ChemicalReaction:
+  - - id: 0
+      reactions:
+      - K_1: 30.3
+        K_2: 3.7
+        K_3: 200
+        br: 8.81e-06
+        reaction_equation: CO2+4H2>CH4+2H2O
+- Inlet:
+  - Comp_MolarFlow_In:
+    - - CO2
+      - 3.711367213077887e-06
+    - - H2
+      - 4.731993196674305e-06
+    - - CH4
+      - 0.0
+    - - H2O
+      - 0.0
+    - - Ni
+      - 0.0
+    - - Ar
+      - 8.434081991719498e-05
+    - - CO
+      - 0.0
+    MolarFlow_In: 9.278418032694717e-05
+- Outlet:
+  - Comp_MolarFlow_Out:
+    - - CO2
+      - 0.0
+    - - H2
+      - 0.0
+    - - CH4
+      - 0.0
+    - - H2O
+      - 0.0
+    - - Ni
+      - 0.0
+    - - Ar
+      - 0.0
+    - - CO
+      - 0.0
+    MolarFlow_Out: 0.0
+- Outlet Composition:
+  - - CO2
+    - 0.14285714285714285
+  - - H2
+    - 0.14285714285714285
+  - - CH4
+    - 0.14285714285714285
+  - - H2O
+    - 0.14285714285714285
+  - - Ni
+    - 0.14285714285714285
+  - - Ar
+    - 0.14285714285714285
+  - - CO
+    - 0.14285714285714285
+- Coordinates:
+  - 0.0
+- Temperature:
+  - 15.7528319740148
+- Pressure:
+  - 20.084860766868868
+- hasDownstream: 'No'
+- Turnover:
+  - - X_CO2
+    - 1.0
+  - - X_H2
+    - 1.0
+- Yield:
+  - Y_CH4
+  - 0.0
+- Selectivity:
+  - CH4: 0.0
+    CO: 0.0

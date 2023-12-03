@@ -197,11 +197,11 @@ def Selectivity(directory):
             X_h2 = (n_h2_0 - n_h2)/n_h2_0
             X_co2 = (n_co2_0 - n_co2)/n_co2_0
     
-            if frac_h2 > (4 * frac_co2):
-                Y_ch4 = ((n_ch4 - n_ch4_0)/n_co2_0) * (abs(v_co2)/v_ch4)
-                S_ch4 = Y_ch4 / X_co2
-                S_co = ((n_co - n_co_0)/(n_co2_0 - n_co2)) * (abs(v_co2)/v_ch4)
-                
+            #if frac_h2 > (4 * frac_co2):
+            Y_ch4 = ((n_ch4 - n_ch4_0)/n_co2_0) * (abs(v_co2)/v_ch4)
+            S_ch4 = Y_ch4 / X_co2
+            S_co = ((n_co - n_co_0)/(n_co2_0 - n_co2)) * (abs(v_co2)/v_ch4)
+            """    
                 # print("h2")
             elif frac_h2 < (4 * frac_co2):
                 Y_ch4 = ((n_ch4 - n_ch4_0)/n_h2_0) * (abs(v_h2)/v_ch4)
@@ -215,15 +215,20 @@ def Selectivity(directory):
                 # print("h2_equal")
             else:
                 print("Some weird error accured while calculation the yield!")
-            
-            sum_S = S_ch4 + S_co
-            S_ch4 = S_ch4 / sum_S
-            S_co = S_co / sum_S
-            
+            """
             # save results
             data.append({"Turnover": [["X_CO2", X_co2], ["X_H2", X_h2]]})
             data.append({"Yield": ["Y_CH4", Y_ch4]})
             data.append({"Selectivity": [{"CH4": S_ch4, "CO":S_co}]})
+            
+            try:
+                sum_S = S_ch4 + S_co
+                S_ch4_n = S_ch4 / sum_S
+                S_co_n = S_co / sum_S
+                data.append({"Selectivity_normed": [{"CH4": S_ch4_n, "CO":S_co_n}]})  
+            except: ZeroDivisionError
+            
+            
             with open(file_path, 'w') as updated_data_file:
                 yaml.dump(data, updated_data_file, default_flow_style=False)
 

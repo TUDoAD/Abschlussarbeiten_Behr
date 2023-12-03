@@ -1,0 +1,147 @@
+- Reaction_Type: Methanation
+- Mixture:
+  - mole_fraction:
+    - - CO2
+      - 0.04
+    - - H2
+      - 0.051
+    - - Ar
+      - 0.909
+    pressure: 100000.0
+    residence time: 5.0
+    substances:
+    - - CO2
+      - Carbon dioxide
+    - - H2
+      - Hydrogen
+    - - CH4
+      - Methane
+    - - H2O
+      - Water
+    - - Ni
+      - Nickel
+    - - Ar
+      - Argon
+    - - CO
+      - Carbon monoxide
+    temperature:
+    - feed: 298.0
+      outlet: 1048.944
+- Reactor:
+  - calculation_mode: isothermal
+    catalyst_loading: 149.3934399
+    catalyst_particle_diameter: 0.00075
+    catalyst_void_fraction: 0.46
+    num_tubes: 1
+    reactive_volume: 2.356e-06
+    tube_diameter: 1E-02
+    tube_length: 3E-02
+- ChemicalReaction:
+  - - id: 0
+      reactions:
+      - K_1: 30.3
+        K_2: 3.7
+        K_3: 200
+        br: 8.81e-06
+        reaction_equation: CO2+4H2>CH4+2H2O
+- Inlet:
+  - Comp_MolarFlow_In:
+    - - CO2
+      - 2.160808884827588e-07
+    - - H2
+      - 2.755031328155175e-07
+    - - CH4
+      - 0.0
+    - - H2O
+      - 0.0
+    - - Ni
+      - 0.0
+    - - Ar
+      - 4.910438190770694e-06
+    - - CO
+      - 0.0
+    MolarFlow_In: 5.40202221206897e-06
+- Outlet:
+  - Comp_MolarFlow_Out:
+    - - CO2
+      - 0.0
+    - - H2
+      - 0.0
+    - - CH4
+      - 0.0
+    - - H2O
+      - 0.0
+    - - Ni
+      - 0.0
+    - - Ar
+      - 0.0
+    - - CO
+      - 0.0
+    MolarFlow_Out: 0.0
+- Outlet Composition:
+  - - CO2
+    - 0.14285714285714285
+  - - H2
+    - 0.14285714285714285
+  - - CH4
+    - 0.14285714285714285
+  - - H2O
+    - 0.14285714285714285
+  - - Ni
+    - 0.14285714285714285
+  - - Ar
+    - 0.14285714285714285
+  - - CO
+    - 0.14285714285714285
+- Coordinates:
+  - 0.0
+  - 0.0003
+  - 0.0006
+  - 0.0009
+- Carbon dioxide:
+  - 0.4585757395644287
+  - 0.45082347002933715
+  - 0.4361088656143235
+  - 0.3940024676328213
+- Hydrogen:
+  - 0.5846840679446467
+  - 0.5847019964431739
+  - 0.5872418952545032
+  - 0.5888788811296879
+- Methane:
+  - 0.00021222410865874366
+  - 0.0
+  - 0.0
+  - 0.0
+- Water:
+  - 0.00021222410865874366
+  - 0.005374427634600006
+  - 0.013979829767169216
+  - 0.040748885128536846
+- Carbon monoxide:
+  - 0.00021222410865874366
+  - 0.0105545596529731
+  - 0.030723010438306903
+  - 0.08678126577081598
+- Temperature:
+  - 1048.944
+  - 1048.944
+  - 1048.944
+  - 1048.944
+- Pressure:
+  - 100000.0
+  - 100000.0
+  - 100000.0
+  - 100000.0
+- hasDownstream: 'No'
+- Turnover:
+  - - X_CO2
+    - 1.0
+  - - X_H2
+    - 1.0
+- Yield:
+  - Y_CH4
+  - 0.0
+- Selectivity:
+  - CH4: 0.0
+    CO: 0.0

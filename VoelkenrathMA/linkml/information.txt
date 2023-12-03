@@ -9,12 +9,3 @@ NewReaction03 -> Just Reactor (x_CO2=0.2, x_H2=0.8, x_Ar=0)
 NewReaction04 -> Reactor and Downstream (x_CO2=0.04, x_H2=0.051, x_Ar=0.909)
 NewReaction05 -> Reactor and Downstream (x_CO2=0.5, x_H2=0.5, x_Ar=0)
 NewReaction06 -> Reactor and Downstream (x_CO2=0.2, x_H2=0.8, x_Ar=0)
-
-CO2 & CO
-NewReaction07 -> Just Reactor (x_CO2=0.02, x_CO=0.02 x_H2=0.051, x_Ar=0.909)
-NewReaction08 -> Just Reactor (x_CO2=0.25, x_CO=0.25, x_H2=0.5, x_Ar=0)
-NewReaction09 -> Just Reactor (x_CO2=0.1, x_CO=0.1, x_H2=0.8, x_Ar=0)
-
-NewReaction10 -> Reactor and Downstream (x_CO2=0.02, x_CO=0.02 x_H2=0.051, x_Ar=0.909)
-NewReaction11 -> Reactor and Downstream (x_CO2=0.25, x_CO=0.25, x_H2=0.5, x_Ar=0)
-NewReaction12 -> Reactor and Downstream (x_CO2=0.1, x_CO=0.1, x_H2=0.8, x_Ar=0)
