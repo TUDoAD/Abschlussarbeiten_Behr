@@ -26,9 +26,9 @@ from pyDataverse.models import Dataset, Datafile
 def upload():
     start = time.time()
     ## Adjustments    
-    title = "DWSIM Methanation (x_co2=0,04, without Downstream)"
-    descr = "Automatic generated simulation-files for the Ni-catalyzed Methanation of Carbon Dioxide (x_co2=0,04) without Downstream."
-    folder_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_01/"
+    title = "DWSIM Methanation (x_co2=0,5, without Downstream)"
+    descr = "Automatic generated simulation-files for the Ni-catalyzed Methanation of Carbon Dioxide (x_co2=0,5) without Downstream."
+    folder_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_02/"
     onto_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-Onto.owl"
     
     ## Uploading the simulation-files
