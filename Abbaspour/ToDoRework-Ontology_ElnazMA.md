@@ -71,3 +71,6 @@ Was wurde übertragen von EnzymeML -> Ontologie?
 -> Reaktionstemperatur usw. bei Reaktorsetup!
 
 
+## STARTBEDINGUNGEN IN PROZESS-RBs ÜBERFÜHREN
+enzmldoc.measurement_dict['m2']
+enzmldoc.getMeasurement('m2')
