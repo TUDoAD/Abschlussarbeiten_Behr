@@ -216,17 +216,32 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
         # the substance
         
         else:   
-            subst_superclass = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')              
-            enzml_name = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).name
-            codestring = """with onto:
-                        class {}(onto.search_one(iri = '*{}')):
-                            label = '{}'
-                            altLabel = '{}'
-                            pass                    
-                        substance_indv = {}('ind_{}')
-                        substance_indv.label = '{}'
-                        substance_indv.altLabel = '{}'
-                """.format(subst, subst_superclass, subst, enzml_name, subst, subst,subst, enzml_name)
+            try:
+                subst_superclass = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')              
+                enzml_name = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).name
+            except: 
+                subst_superclass = "SBO_0000247" # Simple Chemical
+                enzml_name = ''
+            
+            if enzml_name:
+                codestring = """with onto:
+                            class {}(onto.search_one(iri = '*{}')):
+                                label = '{}'
+                                altLabel = '{}' 
+                                pass                    
+                            substance_indv = {}('ind_{}')
+                            substance_indv.label = '{}'
+                            substance_indv.altLabel = '{}'
+                    """.format(subst, subst_superclass, subst, enzml_name, subst, subst,subst, enzml_name)
+            else:
+                codestring = """with onto:
+                            class {}(onto.search_one(iri = '*{}')):
+                                label = '{}'
+                                pass                    
+                            substance_indv = {}('ind_{}')
+                            substance_indv.label = '{}'
+                    """.format(subst, subst_superclass, subst, subst, subst,subst)
+        
         #
         
         #print(codestring)
@@ -243,14 +258,16 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
                     value = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).dict()[param]
                 except:
                     value = None
-                codestring = """with onto:
-                        onto.search_one(label = '{}').{} = '{}'            
-                    """.format(subst, param, value)
+                
+                if value: 
+                    codestring = """with onto:
+                            onto.search_one(label = '{}').{} = '{}'            
+                            """.format(subst, param, value)
                         # compile codestring
-                print(codestring)
-                code = compile(codestring, "<string>", "exec")
-                # Execute code
-                exec(code)
+                    # print(codestring)
+                    code = compile(codestring, "<string>", "exec")
+                    # Execute code
+                    exec(code)
                 """
                 subst_superclass = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')
                 enzml_name = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).name
