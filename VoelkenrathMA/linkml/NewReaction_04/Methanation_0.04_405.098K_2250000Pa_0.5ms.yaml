@@ -8,7 +8,7 @@
     - - Ar
       - 0.909
     pressure: 2250000.0
-    residence time: 0
+    residence time: 0.5
     substances:
     - - CO2
       - Carbon dioxide

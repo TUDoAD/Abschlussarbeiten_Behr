@@ -26,9 +26,9 @@ from pyDataverse.models import Dataset, Datafile
 def upload():
     start = time.time()
     ## Adjustments    
-    title = "DWSIM Methanation (x_co2=0,5, without Downstream)"
-    descr = "Automatic generated simulation-files for the Ni-catalyzed Methanation of Carbon Dioxide (x_co2=0,5) without Downstream."
-    folder_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_02/"
+    title = "DWSIM Methanation (x_co2=0,04, with Downstream)"
+    descr = "Automatic generated simulation-files for the Ni-catalyzed Methanation of Carbon Dioxide (x_co2=0,04) with Downstream."
+    folder_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_04/"
     onto_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-Onto.owl"
     
     ## Uploading the simulation-files
@@ -105,6 +105,7 @@ def upload():
                             frac_h2 = data[i]["Mixture"][0]["mole_fraction"][j][1]
                         if "Ar" in data[i]["Mixture"][0]["mole_fraction"][j][0]:
                             frac_ar = data[i]["Mixture"][0]["mole_fraction"][j][1]
+                # without Downstream
                 if "Outlet Composition" in data[i]:
                     for k in range(len(data[i]["Outlet Composition"])):
                         if "CO2" == data[i]["Outlet Composition"][k][0]:
@@ -119,6 +120,21 @@ def upload():
                             frac_out_ar = data[i]["Outlet Composition"][k][1]
                         if "CO" == data[i]["Outlet Composition"][k][0]:
                             frac_out_co = data[i]["Outlet Composition"][k][1]
+                # with Downstream            
+                elif "Sep_Gas Composition" in data[i]:
+                    for k in range(len(data[i]["Sep_Gas Composition"])):
+                        if "CO2" == data[i]["Sep_Gas Composition"][k][0]:
+                            frac_out_co2 = data[i]["Sep_Gas Composition"][k][1]
+                        if "H2" == data[i]["Sep_Gas Composition"][k][0]:
+                            frac_out_h2 = data[i]["Sep_Gas Composition"][k][1]
+                        if "CH4" == data[i]["Sep_Gas Composition"][k][0]:
+                            frac_out_ch4 = data[i]["Sep_Gas Composition"][k][1]
+                        if "H2O" == data[i]["Sep_Gas Composition"][k][0]:
+                            frac_out_h2o = data[i]["Sep_Gas Composition"][k][1]
+                        if "Ar" == data[i]["Sep_Gas Composition"][k][0]:
+                            frac_out_ar = data[i]["Sep_Gas Composition"][k][1]
+                        if "CO" == data[i]["Sep_Gas Composition"][k][0]:
+                            frac_out_co = data[i]["Sep_Gas Composition"][k][1]
                 
                 if "hasDownstream" in data[i]:
                     downstream = data[i]["hasDownstream"]
@@ -138,10 +154,14 @@ def upload():
 
             # create the individuals
             with onto:
-                class_string = "*" + reaction_type
-                class_reaction_type = onto.search(iri=class_string)[0]
+                class_string = "*Methanation" #+ reaction_type
+                class_reaction_type_list = onto.search(iri=class_string)
+                for j in range(len(class_reaction_type_list)):
+                    if str(class_reaction_type_list[j]) == "reac4cat.Methanation":
+                        class_reaction_type = class_reaction_type_list[j]
 
-                individual_name = "Sim_" + reaction_type + "_" + str(frac_co2) + "_" + str(temperature) + "K_" + str(pressure) + "Pa_" + str(res_t) + "s_wod"
+                individual_name = "Sim_" + reaction_type + "_" + str(frac_co2) + "_" + str(temperature) + "K_" + str(pressure) + "Pa_" + str(res_t) + "s_wd"
+                
                 individual = class_reaction_type(individual_name)
                 
                 individual.hasMolarFractionCarbonDioxide.append(frac_co2)
@@ -177,8 +197,9 @@ def upload():
                 individual.hasOutletMolarFractionHydrogen.append(frac_out_h2)
                 individual.hasOutletMolarFractionMethane.append(frac_out_ch4)
                 individual.hasOutletMolarFractionCarbonMonoxide.append(frac_out_co)
-                if frac_out_ar:
+                try:
                     individual.hasOutletMolarFractionArgon.append(frac_out_ar)
+                except: UnboundLocalError
                 
                 individual.hasTurnoverHydrogen.append(turn_h2)
                 individual.hasTurnoverCarbonDioxide.append(turn_co2)
@@ -189,6 +210,8 @@ def upload():
                 individual.hasSelectivity_CO2_CO.append(selectivity_co)
                 
                 onto.save(onto_path)
+               
     end = time.time()
     time_needed = end-start
     print(time_needed)
+    

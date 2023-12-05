@@ -6,7 +6,7 @@
     - - H2
       - 0.8
     pressure: 3500000.0
-    residence time: 0
+    residence time: 1.0
     substances:
     - - CO2
       - Carbon dioxide

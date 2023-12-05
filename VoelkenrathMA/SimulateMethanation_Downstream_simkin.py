@@ -300,6 +300,7 @@ def simulation(name_sim, path, data, combination):
             data[i]["Mixture"][0]["temperature"][0]["outlet"] = temperature_outlet
             data[i]["Mixture"][0]["pressure"] = pressure
             #data[i]["Mixture"][0]["velocity"] = veloc 
+            data[i]["Mixture"][0]["residence time"] = res_t
             
             substances = data[i]["Mixture"][0]["substances"]
             mole_fraction = data[i]["Mixture"][0]["mole_fraction"]
