@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Oct 11 15:13:36 2023
-
+Processing without existence check
 @author: smdicher
 """
 import time
@@ -117,6 +117,13 @@ def add_publication(doi,title,abstract):
         onto = new_world.get_ontology('./ontologies/{}.owl'.format(onto_new)).load()
     except:
         onto = new_world.get_ontology('./ontologies/{}.owl'.format(onto_old)).load()
+        with onto:    
+            class has_doi(DataProperty):
+                    range = [str]
+                    label = 'has doi'
+            class has_title(DataProperty):
+                    range = [str]
+                    label ='has title'
         onto.set_base_iri('http://www.semanticweb.org/ontologies/2023/11/new_onto.owl#',rename_entities=False)
     pub_c = onto.search_one(label='publication')
     with onto:
@@ -135,16 +142,8 @@ def add_publication(doi,title,abstract):
             new_pub.comment.append('DOI: {}'.format(doi))
             new_pub.comment.append('Abstract:{}'.format(abstract))
             has_doi = onto.search_one(label='has doi')
-            if not has_doi:
-                class has_doi(DataProperty):
-                    range = [str]
-                    label = 'has doi'
             new_pub.has_doi = [doi]
             has_title = onto.search_one(label='has title')
-            if not has_title:
-                class has_title(DataProperty):
-                    range = [str]
-                    label ='has title'
             new_pub.has_title = [title]
     onto.save('./ontologies/{}.owl'.format(onto_new))
     return p_id
@@ -329,7 +328,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                 for i in range(len(match_hyph)):
                     entity = entity.replace(match_hyph[i][0],match_hyph[i][1]+match_hyph[i][2])
             
-
+    
             if re.search(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity): #Rh(111 )
                 i = re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0].replace(' ','')
                 entity = entity.replace(re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0],i)
@@ -399,8 +398,8 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                                 chem_list.append(catalyst)
                                 sup = True
                             if '@' in mol[i][0]:
-                                    if entity not in abbreviation.keys():
-                                        entity = entity.replace('@',' supported on ')
+                                    #if entity not in abbreviation.keys():
+                                    entity = entity.replace('@',' supported on ')
                                     support = mol[i][2]
                                     if re.findall(r'([A-Za-z]+)[—–-]\d+[—–-]?\d*[A-Z]*', support):
                                         print(re.findall(r'(([A-Za-z]+)[—–-]\d+[—–-]?\d*[A-Z]*)', support))
@@ -478,9 +477,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                         else:
                             chem_list.append(c.text)
                     chem_list.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_list and cem not in list_spans])
-                                         
-                #else:
-                
+
                 categories[entity] = l 
             entity_old = (j,entity,l)  
             a = j+1
@@ -520,14 +517,14 @@ def chemical_prep(chem_list, onto_class_list):
             onto_new_dict[molecule] = []
             class_list.append(molecule)
             continue        
-        match_material=re.findall(r'((?:[A-Z](?:[a-z]?[\d]*))+)[—–-]((?:[A-Z](?:[a-z]?[\d]*))+)',molecule)#TiO2-SiO2 from Ni-W/TiO2-SiO2
+        match_material=re.findall(r'((?:[A-Z](?:[a-wyz]?[\d]*))+)[—–-]((?:[A-Z](?:[a-wyz]?[\d]*))+)',molecule) #TiO2-SiO2 from Ni-W/TiO2-SiO2
         if match_material and molecule in sup_cat.keys():
             comp_dict[molecule] = [match_material[0][0],match_material[0][1]]
         molecule_split = molecule.split()        
-        if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]){3,}', molecule) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+',molecule):
+        if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]+){3,}', molecule) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+',molecule):
             comp_dict[molecule] = molecule_split  
         else:
-             comp = re.findall(r'([A-Z](?:[a-z])?)',molecule)
+             comp = re.findall(r'([A-Z](?:[a-wyz]+)?)',molecule)
              comp_dict[molecule] = comp
     for k,v in comp_dict.items():
         i = 0
@@ -553,16 +550,7 @@ def chemical_prep(chem_list, onto_class_list):
                 else:
                     class_list, comp, rel_synonym = compare_synonyms(synonyms, inchikey, class_list, c, rel_synonym) #,comp = True                
                 onto_new_dict[key].append(comp)
-                """
-            if key:
-                for i in onto_new_dict[key]:
-                    if len(i) == 1: #remove components if one of the components (atoms) doesn't exist (ex.ZMS- Z,M don't exist, S-exists)                                   
-                        print('deleted key:{}'.format(key))
-                        chem_list.remove(key)
-                        class_list.remove(key)
-                        onto_new_dict.pop(key)
-                        break
-                """
+
     class_list = [*set(class_list)] #remove duplicates
     class_list.extend(['molecule'])
     missing, match_dict = create_list_IRIs(class_list,IRI_json_filename = 'iriDictionary')
@@ -660,6 +648,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
     numinbrackets = None
     if len(synonyms[k]) == 1:
             key = synonyms[k][0]
+            print('found {} in ChEBI as {}'.format(k,key))
     else:   
             print(k)
             if re.search(r'^[A-Za-z]+\(\d+\)$',k):
@@ -675,29 +664,29 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                         return class_list, key, rel_synonym  
                     elif len(mol) == 1:
                         key=mol[0].iupac_name #some of the compounds that can be found in pubchem don't have IUPAC names (i.e. "propyl")
-                        
+                        print('found {} in PubChem as {}'.format(k,key))
                     else:
                         while True:
                             mol_new = [i for i in mol if i.iupac_name]
-                            print('choose iupac name for {}'.format(k))
+                            print('choose IUPAC name for {}\n'.format(k))
                             print('components have following SMILES:')
                             n=1
                             for i in mol_new:
                                 print('{}. {}:{}'.format(n,i.iupac_name, i.isomeric_smiles))
                                 n+=1
-                            idx = input('write number of fitting iupac name or "none"\n')
+                            idx = input('\nwrite number of fitting IUPAC name or "none"\n')
                             if idx =='none':
                                 key = k
                                 class_list.append(k)
 
-                                return class_list, key, rel_synonym                   
+                                return class_list, key, rel_synonym                      
                             else:
                                 try:
                                     idx = int(idx)
                                     key = mol_new[idx-1].iupac_name
                                     break
                                 except:
-                                    print('error: write a number between 1 and {} or "none"'.format(len(mol_new)))
+                                    print('\nerror: write a number between 1 and {} or "none"\n'.format(len(mol_new)))
                                     
                 else:
                     while True:
@@ -717,33 +706,28 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                                     key = synonyms[k][idx-1]
                                     break
                                 except:
-                                    print('error: write a number between 1 and {} or "none"'.format(len(synonyms[k])))                               
+                                    print('\nerror: write a number between 1 and {} or "none"\n'.format(len(synonyms[k])))                                
             elif len(comp_check) == 1:
                 key = comp_check[0]                  
             else:
-                key = None
+                print('no synonyms but some matches in InChiKeys for {}:'.format(k))                 
+                n=1
                 for i in comp_check:
-                    if i in synonyms[k]:
-                        key = i
-                if key == None:
-                    print('no synonyms but some matches in inchikey for {}:'.format(k))                 
-                    n=1
-                    for i in comp_check:
-                        print('{}. {}'.format(n,i))
-                        n+=1
-                    while True:
-                        idx = input('write number of fitting synonym or "none"\n')                            
-                        if idx =='none':
-                            key = k
-                            class_list.append(k)
-                            return class_list, key, rel_synonym 
-                        else:
-                            try:
-                                idx = int(idx)
-                                key = comp_check[idx-1]
-                                break
-                            except:
-                                print('error: write a number between 1 and {} or "none"'.format(len(comp_check)))   
+                    print('{}. {}'.format(n,i))
+                    n+=1
+                while True:
+                    idx = input('\nwrite number of fitting synonym or "none"\n')                            
+                    if idx =='none':
+                        key = k
+                        class_list.append(k)
+                        return class_list, key, rel_synonym 
+                    else:
+                        try:
+                            idx = int(idx)
+                            key = comp_check[idx-1]
+                            break
+                        except:
+                            print('\nerror: write a number between 1 and {} or "none"\n'.format(len(comp_check))) 
     if key == None or not key:
         key = k 
     if numinbrackets != None:

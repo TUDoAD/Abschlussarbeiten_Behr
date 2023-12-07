@@ -670,7 +670,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
             if k in comp_check:
                 if len(synonyms[k]) == 0:
                     if not mol:
-                        print('no synonyms and entities for {}, key = k'.format(k))
+                        print('no synonyms and entities for {}'.format(k))
                         ans= input('Is {} an existing compound?\n'.format(k))
                         if ans=='no':
                             key=False   
