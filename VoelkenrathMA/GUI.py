@@ -31,7 +31,7 @@ class Ui(QtWidgets.QMainWindow):
             
         self.list_temp = self.para["temperature"] # K
         self.list_pres = self.para["pressure"] # Pa
-        self.list_velo = self.para["velocity"] # m/s
+        self.list_velo = self.para["res_t"] # s
         
         # call query 1
         self.Q1button = self.findChild(QtWidgets.QPushButton, "Q1Button")
