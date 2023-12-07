@@ -106,7 +106,7 @@
        <rect>
         <x>30</x>
         <y>230</y>
-        <width>111</width>
+        <width>121</width>
         <height>41</height>
        </rect>
       </property>
@@ -116,7 +116,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Velocity [m/s]:</string>
+       <string>Residence Time [s]:</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_7">
@@ -396,7 +396,7 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>30</x>
         <y>230</y>
-        <width>111</width>
+        <width>121</width>
         <height>41</height>
        </rect>
       </property>
@@ -406,7 +406,7 @@ p, li { white-space: pre-wrap; }
        </font>
       </property>
       <property name="text">
-       <string>Velocity [m/s]:</string>
+       <string>Residence Time [s]:</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_11">
@@ -862,7 +862,7 @@ border: 2px solid #84BC34;</string>
        <rect>
         <x>30</x>
         <y>230</y>
-        <width>111</width>
+        <width>121</width>
         <height>41</height>
        </rect>
       </property>
@@ -872,7 +872,7 @@ border: 2px solid #84BC34;</string>
        </font>
       </property>
       <property name="text">
-       <string>Velocity [m/s]:</string>
+       <string>Residence Time [s]:</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_19">

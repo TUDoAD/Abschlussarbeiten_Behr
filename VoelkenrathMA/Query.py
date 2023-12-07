@@ -147,7 +147,7 @@ def query_2(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
     df.to_excel(path + "query_2_results.xlsx")
     
 
-def query_3(molefrac_co2=None, temperature=None, pressure=None, velocity=None, downstream=None, result_name=None):
+def query_3(molefrac_co2=None, temperature=None, pressure=None, res_t=None, downstream=None, result_name=None):
     # Query for some unspecific parameter
     # e.g.: Query.query_3(molefrac_co2=0.2, temperature=300.0)
     sparqlstr = """
@@ -165,7 +165,7 @@ def query_3(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
     list_mole = [0.04, 0.2, 0.5] # [-]
     list_temp = para["temperature"] # K
     list_pres = para["pressure"] # Pa
-    list_velo = para["velocity"] # m/s
+    list_res_t = para["res_t"] # m/s
     
     sparql_query = f"""
     SELECT ?individual
@@ -245,29 +245,29 @@ def query_3(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
             temperature = float(temperature)
             sparql_query = sparql_query + f"?individual afo:hasSimulatedReactionPressure {pressure}\n"
     
-    if velocity:
-        velocity = float(velocity)
-        if velocity not in list_velo:
-            min_velo = max(filter(lambda x: x < velocity, list_velo), default=None)
-            max_velo = min(filter(lambda x: x > velocity, list_velo), default=None)
+    if res_t:
+        res_t = float(res_t)
+        if res_t not in list_res_t:
+            min_res_t = max(filter(lambda x: x < res_t, list_res_t), default=None)
+            max_res_t = min(filter(lambda x: x > res_t, list_res_t), default=None)
             
-            if min_velo and not max_velo:
-                sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionVelocity ?velo.
-                FILTER (?velo={velocity} || ?velo={min_velo})
+            if min_res_t and not max_res_t:
+                sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionResidenceTime ?rest.
+                FILTER (?rest={res_t} || ?rest={min_res_t})
                 """
-            elif not min_velo and max_velo:
-                sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionVelocity ?pres.
-                FILTER (?velo={velocity} || ?velo={max_velo})
+            elif not min_res_t and max_res_t:
+                sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionResidenceTime ?rest.
+                FILTER (?rest={res_t} || ?rest={max_res_t})
                 """
-            elif min_velo and max_velo:
-                sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionVelocity ?pres.
-                FILTER (?velo={velocity} || ?velo={min_velo} || ?velo={max_velo})
+            elif min_res_t and max_res_t:
+                sparql_query = sparql_query + f"""?individual afo:hasSimulatedReactionResidenceTime ?rest.
+                FILTER (?rest={res_t} || ?rest={min_res_t} || ?rest={max_res_t})
                 """
             else:
                 print("Some error occured in query_3 while setting the velocity")
         else:
             temperature = float(temperature)
-            sparql_query = sparql_query + f"?individual afo:hasSimulatedReactionVelocity {velocity}\n"
+            sparql_query = sparql_query + f"?individual afo:hasSimulatedReactionResidenceTime {res_t}\n"
             
     if downstream:
         downstream = str(downstream)
@@ -354,9 +354,9 @@ def query_4(x_co2):
     df.to_excel(path + "query_4_results.xlsx")
     
   
-def query_5(molefrac_co2=None, temperature=None, pressure=None, velocity=None, downstream=None, result_name=None):
+def query_5(molefrac_co2=None, temperature=None, pressure=None, res_t=None, downstream=None, result_name=None):
     # Query for a parameter range
-    # e.g. Query.query_5(molefrac_co2=0.04, temperature=[200,300], pressure=[100000,2000000], velocity=[0.001,1], downstream="'Yes'")
+    # e.g. Query.query_5(molefrac_co2=0.04, temperature=[200,300], pressure=[100000,2000000], res_t=[0.001,1], downstream="'Yes'")
     list_mole = [0.04, 0.2, 0.5]
     
     sparqlstr = """
@@ -415,13 +415,13 @@ def query_5(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
         FILTER(?pres >= {pressure[0]} && ?pres <= {pressure[1]})
         """
     
-    if velocity:
-        velocity[0] = float(velocity[0])
-        velocity[1] = float(velocity[1])
+    if res_t:
+        res_t[0] = float(res_t[0])
+        res_t[1] = float(res_t[1])
         
         sparql_query = sparql_query + f"""
-        ?individual afo:hasSimulatedReactionVelocity ?velo.
-        FILTER(?velo >= {velocity[0]} && ?velo <= {velocity[1]})
+        ?individual afo:hasSimulatedReactionResidenceTime ?rest.
+        FILTER(?rest >= {res_t[0]} && ?rest <= {res_t[1]})
         """
         
     if downstream:
@@ -446,7 +446,7 @@ def query_5(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
         turnover = individual.hasTurnoverCarbonDioxide
         temperature = individual.hasSimulatedReactionTemperature
         pressure = individual.hasSimulatedReactionPressure
-        velocity = individual.hasSimulatedReactionVelocity
+        res_t = individual.hasSimulatedReactionResidenceTime
         
         for j in range(len(comments)):
             if "DWSIM-file" in comments[j]:
@@ -454,9 +454,9 @@ def query_5(molefrac_co2=None, temperature=None, pressure=None, velocity=None, d
             if "LinkML-file" in comments[j]:
                 linkml_url = comments[j].split("LinkML-file: ")[1]
         
-        results.append([individual, dwsim_url, linkml_url, temperature[0], pressure[0], velocity[0], turnover])
+        results.append([individual, dwsim_url, linkml_url, temperature[0], pressure[0], res_t[0], turnover])
     
-    df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file", "Temperature [K]", "Pressure [Pa]", "Velocity [m/s]", "Turnover CO2"])
+    df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file", "Temperature [K]", "Pressure [Pa]", "Residence Time [s]", "Turnover CO2"])
     path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
     #path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
     if result_name == None:
@@ -628,3 +628,123 @@ def query_6():
     #path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
     df.to_excel(path + "query_6_results.xlsx")
  
+
+def query_7(molefrac_co2=None, temperature=None, pressure=None, res_t=None, downstream=None, result_name=None):
+    # Query for a parameter range
+    # e.g. Query.query_5(molefrac_co2=0.04, temperature=[200,300], pressure=[100000,2000000], res_t=[0.001,1], downstream="'Yes'")
+    list_mole = [0.04, 0.2, 0.5]
+    
+    sparqlstr = """
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX afo: <http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#>
+    PREFIX exp: <http://example.org#>
+    """
+    
+    sparql_query = f"""
+    SELECT DISTINCT ?individual
+    
+    WHERE{{ 
+    """
+    if molefrac_co2:
+        molefrac_co2 = float(molefrac_co2)
+        if molefrac_co2 not in list_mole:
+            min_frac = max(filter(lambda x: x < molefrac_co2, list_mole), default=None)
+            max_frac = min(filter(lambda x: x > molefrac_co2, list_mole), default=None)
+            
+            if min_frac and not max_frac:
+                sparql_query = sparql_query + f"""?individual afo:hasMolarFractionCarbonDioxide ?mole_co2.
+                FILTER (?mole_co2={molefrac_co2} || ?mole_co2={min_frac})
+                """
+            elif not min_frac and max_frac:
+                sparql_query = sparql_query + f"""?individual afo:hasMolarFractionCarbonDioxide ?mole_co2.
+                FILTER (?mole_co2={molefrac_co2} || ?mole_co2={max_frac})
+                """
+            elif min_frac and max_frac:
+                sparql_query = sparql_query + f"""?individual afo:hasMolarFractionCarbonDioxide ?mole_co2.
+                FILTER (?mole_co2={molefrac_co2} || ?mole_co2={min_frac} || ?mole_co2={max_frac})
+                """
+            else:
+                print("Some error occured in query_3 while setting the mole_fraction")
+        else:
+            molefrac_co2 = float(molefrac_co2)
+            sparql_query = sparql_query + f"?individual afo:hasMolarFractionCarbonDioxide {molefrac_co2}\n"
+        
+    if temperature:
+        temperature[0] = float(temperature[0])
+        temperature[1] = float(temperature[1])
+        
+        sparql_query = sparql_query + f"""
+        ?individual afo:hasSimulatedReactionTemperature ?temp.
+        FILTER(?temp >= {temperature[0]} && ?temp <= {temperature[1]})
+        """
+    
+    if pressure:
+        pressure[0] = float(pressure[0])
+        pressure[1] = float(pressure[1])
+        
+        sparql_query = sparql_query + f"""
+        ?individual afo:hasSimulatedReactionPressure ?pres.
+        FILTER(?pres >= {pressure[0]} && ?pres <= {pressure[1]})
+        """
+    
+    if res_t:
+        res_t[0] = float(res_t[0])
+        res_t[1] = float(res_t[1])
+        
+        sparql_query = sparql_query + f"""
+        ?individual afo:hasSimulatedReactionResidenceTime ?rest.
+        FILTER(?rest >= {res_t[0]} && ?rest <= {res_t[1]})
+        """
+        
+    if downstream:
+        downstream = str(downstream)
+        sparql_query = sparql_query + f"""?individual afo:hasSimulatedDownstream {downstream}."""
+    
+    sparql_query = sparql_query + "}"
+    
+    sparqlstr = sparqlstr + sparql_query
+    
+    try:
+        individual_list = list(owlready2.default_world.sparql(sparqlstr))
+    except:
+        individual_list = []
+        print("Some error occured while executing query_5!")
+        
+    # get urls and format query results
+    results = []
+    for i in range(len(individual_list)):
+        individual = individual_list[i][0]
+        comments = individual.comment
+        turnover = individual.hasTurnoverCarbonDioxide
+        temperature = individual.hasSimulatedReactionTemperature
+        pressure = individual.hasSimulatedReactionPressure
+        res_t = individual.hasSimulatedReactionResidenceTime
+        
+        x_out_co2 = individual.hasOutletMolarFractionCarbonDioxide
+        x_out_h2 = individual.hasOutletMolarFractionHydrogen
+        x_out_ch4 = individual.hasOutletMolarFractionMethane
+        x_out_h2o = individual.hasOutletMolarFractionWater
+        x_out_co = individual.hasOutletMolarFractionCarbonMonoxide
+        
+        s_co2_ch4 = individual.hasSelectivity_CO2_CH4
+        s_co2_co = individual.hasSelectivity_CO2_CO
+        
+        for j in range(len(comments)):
+            if "DWSIM-file" in comments[j]:
+                dwsim_url = comments[j].split("DWSIM-file: ")[1]
+            if "LinkML-file" in comments[j]:
+                linkml_url = comments[j].split("LinkML-file: ")[1]
+        
+        results.append([individual, dwsim_url, linkml_url, temperature[0], pressure[0], res_t[0], turnover, x_out_co2, x_out_h2, x_out_ch4, x_out_h2o, x_out_co, s_co2_ch4, s_co2_co])
+    
+    df = pd.DataFrame(results, columns=["Individual", "DWSIM-file", "LinkML-file", "Temperature [K]", "Pressure [Pa]", "Residence Time [s]", "Turnover CO2", 
+                                        "x_out_CO2", "x_out_H2", "x_out_CH4", "x_out_H2O", "x_out_CO", "S_CO2_CH4", "S_CO2_CO"])
+    path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/"
+    #path = 'E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/query_results/'
+    if result_name == None:
+        result_name = "query_5"
+    df.to_excel(path + result_name + ".xlsx")
+    return results

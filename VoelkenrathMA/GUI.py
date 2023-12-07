@@ -31,7 +31,7 @@ class Ui(QtWidgets.QMainWindow):
             
         self.list_temp = self.para["temperature"] # K
         self.list_pres = self.para["pressure"] # Pa
-        self.list_velo = self.para["res_t"] # s
+        self.list_res_t = self.para["res_t"] # s
         
         # call query 1
         self.Q1button = self.findChild(QtWidgets.QPushButton, "Q1Button")
@@ -56,7 +56,7 @@ class Ui(QtWidgets.QMainWindow):
             file_name = file["label"]
             if ".xlsx" in file_name:
                 self.Q3xml_file.addItem(file_name)
-
+        
         self.Q3xml_file.currentIndexChanged.connect(self.update_labels)
         # call query 3
         self.Q3button = self.findChild(QtWidgets.QPushButton, "Q3Button")
@@ -76,7 +76,7 @@ class Ui(QtWidgets.QMainWindow):
         
         self.Q1_temp_1 = self.Q1_T_input.text()
         self.Q1_pres_1 = self.Q1_P_input.text()
-        self.Q1_velo_1 = self.Q1_V_input.text()
+        self.Q1_res_t_1 = self.Q1_V_input.text()
         
         if self.Q1_MoleFrac.currentText() == "0.04":
             mole_1 = 0.04
@@ -95,7 +95,7 @@ class Ui(QtWidgets.QMainWindow):
             down_1 = None
             
         self.Q1_results = Query.query_3(molefrac_co2=mole_1, temperature=self.Q1_temp_1, pressure=self.Q1_pres_1,
-                                        velocity=self.Q1_velo_1, downstream=down_1)
+                                        res_t=self.Q1_res_t_1, downstream=down_1, result_name="GUI_Q1_results")
         print("Results are stored in GUI_Q1_results.xlsx")
         
         # display results in GUI
@@ -155,7 +155,7 @@ class Ui(QtWidgets.QMainWindow):
             print("Some error occured while setting the downstream option...")
             
         self.Q2_results = Query.query_5(molefrac_co2=mole_1, temperature=[self.Q2_temp_1, self.Q2_temp_2],
-                                pressure=[self.Q2_pres_1, self.Q2_pres_2], velocity=[self.Q2_velo_1, self.Q2_velo_2],
+                                pressure=[self.Q2_pres_1, self.Q2_pres_2], res_t=[self.Q2_velo_1, self.Q2_velo_2],
                                 downstream=down_1, result_name="GUI_Q2_results")
         
         self.createQ2Plots()
@@ -167,7 +167,7 @@ class Ui(QtWidgets.QMainWindow):
         # parameter set in def_update_labels
         # T: self.Q3_xml_temperature
         # P: self.Q3_xml_pressure
-        # V: self.Q3_xml_velocity
+        # V: self.Q3_xml_res_t
         # X: self.Q3_xml_molefrac # Molefraction of CO2
         self.Q3_Downstream = self.findChild(QtWidgets.QComboBox, "Q3comboBox2")
         
@@ -178,8 +178,8 @@ class Ui(QtWidgets.QMainWindow):
         else:
             print("Some error occured while setting the downstream option...")
         
-        self.Q3_results = Query.query_5(molefrac_co2=float(self.Q3_xml_molefrac), temperature=[self.list_temp[0], self.list_temp[-1]],
-                                        pressure=[self.list_pres[0], self.list_pres[-1]], velocity=[self.list_velo[0], self.list_velo[-1]],
+        self.Q3_results = Query.query_7(molefrac_co2=float(self.Q3_xml_molefrac), temperature=[self.list_temp[0], self.list_temp[-1]],
+                                        pressure=[self.list_pres[0], self.list_pres[-1]], res_t=[self.list_res_t[0], self.list_res_t[-1]],
                                         downstream=down_3, result_name="GUI_Q3_results")
         
         self.createQ3Plots()
@@ -255,7 +255,7 @@ class Ui(QtWidgets.QMainWindow):
         temp_1 = []
         for result in self.Q2_results:
             temp_1.append(result[5])
-        self.min_velo_1 = min(temp_1)
+        self.min_res_t_1 = min(temp_1)
         
         temp_2 = []
         for result in self.Q2_results:
@@ -267,15 +267,18 @@ class Ui(QtWidgets.QMainWindow):
             temp_3.append(result[3])
         self.min_temp_1 = min(temp_3)
         
-        # data for plot 1 (x,T; v_const)
-        filtered_results_1 = [result for result in self.Q2_results if str(result[5]) == str(float(self.min_velo_1))]
+        # data for plot 1 (x,T; tau_const)
+        filtered_results_1 = [result for result in self.Q2_results if str(result[5]) == str(float(self.min_res_t_1))]
         pressure_groups_1 = {}
         for result in filtered_results_1:
             pressure = result[4]
             if pressure not in pressure_groups_1:
                 pressure_groups_1[pressure] = {"temperature": [], "turnover": []}
             pressure_groups_1[pressure]["temperature"].append(result[3])
-            pressure_groups_1[pressure]["turnover"].append(result[6])
+            pressure_groups_1[pressure]["temperature"] = sorted(pressure_groups_1[pressure]["temperature"])
+            
+            index = pressure_groups_1[pressure]["temperature"].index(result[3])
+            pressure_groups_1[pressure]["turnover"].insert(index, result[6])
                
         self.Q2W1 = self.findChild(QtWidgets.QWidget, "Q2widget1")
 
@@ -287,12 +290,15 @@ class Ui(QtWidgets.QMainWindow):
             if velo not in velo_groups_2:
                 velo_groups_2[velo] = {"temperature": [], "turnover": []}
             velo_groups_2[velo]["temperature"].append(result[3])
-            velo_groups_2[velo]["turnover"].append(result[6])
+            velo_groups_2[velo]["temperature"] = sorted(velo_groups_2[velo]["temperature"])
+            
+            index = velo_groups_2[velo]["temperature"].index(result[3])
+            velo_groups_2[velo]["turnover"].insert(index, result[6])
         
         self.Q2W2 = self.findChild(QtWidgets.QWidget, "Q2widget2")
         
-        # data for plot 3 (x,p; v_const)
-        filtered_results_3 = [result for result in self.Q2_results if str(result[5]) == str(float(self.min_velo_1))]
+        # data for plot 3 (x,p; tau_const)
+        filtered_results_3 = [result for result in self.Q2_results if str(result[5]) == str(float(self.min_res_t_1))]
         temperature_groups_3 = {}
         for result in filtered_results_3:
             temperature = result[3]
@@ -315,6 +321,7 @@ class Ui(QtWidgets.QMainWindow):
                 velo_groups_4[velo] = {"pressure": [], "turnover": []}
             velo_groups_4[velo]["pressure"].append(result[4])
             velo_groups_4[velo]["pressure"] = sorted(velo_groups_4[velo]["pressure"])
+            
             index = velo_groups_4[velo]["pressure"].index(result[4])
             velo_groups_4[velo]["turnover"].insert(index, result[6])
 
@@ -326,9 +333,12 @@ class Ui(QtWidgets.QMainWindow):
         for result in filtered_results_5:
             temperature = result[3]
             if temperature not in temperature_groups_5:
-                temperature_groups_5[temperature] = {"velocity": [], "turnover": []}
-            temperature_groups_5[temperature]["velocity"].append(result[5])
-            temperature_groups_5[temperature]["turnover"].append(result[6])
+                temperature_groups_5[temperature] = {"res. time": [], "turnover": []}
+            temperature_groups_5[temperature]["res. time"].append(result[5])
+            temperature_groups_5[temperature]["res. time"] = sorted(temperature_groups_5[temperature]["res. time"])
+            
+            index = temperature_groups_5[temperature]["res. time"].index(result[5])
+            temperature_groups_5[temperature]["turnover"].insert(index, result[6])
                
         self.Q2W5 = self.findChild(QtWidgets.QWidget, "Q2widget5")
         
@@ -338,10 +348,11 @@ class Ui(QtWidgets.QMainWindow):
         for result in filtered_results_6:
             pressure = result[4]
             if pressure not in pressure_groups_6:
-                pressure_groups_6[pressure] = {"velocity": [], "turnover": []}
-            pressure_groups_6[pressure]["velocity"].append(result[5])
-            pressure_groups_6[pressure]["velocity"] = sorted(pressure_groups_6[pressure]["velocity"])
-            index = pressure_groups_6[pressure]["velocity"].index(result[5])
+                pressure_groups_6[pressure] = {"res. time": [], "turnover": []}
+            pressure_groups_6[pressure]["res. time"].append(result[5])
+            pressure_groups_6[pressure]["res. time"] = sorted(pressure_groups_6[pressure]["res. time"])
+            
+            index = pressure_groups_6[pressure]["res. time"].index(result[5])
             pressure_groups_6[pressure]["turnover"].insert(index, result[6])
                
         self.Q2W6 = self.findChild(QtWidgets.QWidget, "Q2widget6")
@@ -353,8 +364,8 @@ class Ui(QtWidgets.QMainWindow):
             {"result_filter": lambda result: str(result[4]) == str(self.Q2_pres_1), "groups": velo_groups_2, "widget": self.Q2W2, "identifier": "temperature"},
             {"result_filter": lambda result: str(result[5]) == str(self.Q2_velo_1), "groups": temperature_groups_3, "widget": self.Q2W3, "identifier": "pressure"},
             {"result_filter": lambda result: str(result[3]) == str(self.Q2_temp_1), "groups": velo_groups_4, "widget": self.Q2W4, "identifier": "pressure"},
-            {"result_filter": lambda result: str(result[4]) == str(self.Q2_pres_1), "groups": temperature_groups_5, "widget": self.Q2W5, "identifier": "velocity"},
-            {"result_filter": lambda result: str(result[3]) == str(self.Q2_temp_1), "groups": pressure_groups_6, "widget": self.Q2W6, "identifier": "velocity"},
+            {"result_filter": lambda result: str(result[4]) == str(self.Q2_pres_1), "groups": temperature_groups_5, "widget": self.Q2W5, "identifier": "res. time"},
+            {"result_filter": lambda result: str(result[3]) == str(self.Q2_temp_1), "groups": pressure_groups_6, "widget": self.Q2W6, "identifier": "res. time"},
         ]
         
         for plot_info in plot_widgets:
@@ -389,7 +400,7 @@ class Ui(QtWidgets.QMainWindow):
                 ax.set_xlabel("T")
             elif identifier == "pressure":
                 ax.set_xlabel("p")
-            elif identifier == "velocity":
+            elif identifier == "res. time":
                 ax.set_xlabel("u")
             ax.set_ylabel("X")
             ax.grid(True)
@@ -398,14 +409,24 @@ class Ui(QtWidgets.QMainWindow):
             
             
     def createQ3Plots(self):
+        # [individual, dwsim_url, linkml_url, temperature[0], pressure[0], res_t[0], turnover, x_out_co2, x_out_h2, x_out_ch4, x_out_h2o, x_out_co, s_co2_ch4, s_co2_co]
         # get experimental data from df
         for column in self.experi.columns:
             if self.experi[column][1] == "T":
                 self.exp_temp = list(self.experi[column][2:])
+            
             if self.experi[column][1] == "CO2":
-                self.exp_turnover = list(self.experi[column][2:])
-        
-        self.experi_list = [self.exp_temp, self.exp_turnover]
+                self.exp_frac_co2 = list(self.experi[column][2:])
+            if self.experi[column][1] == "H2":
+                self.exp_frac_h2 = list(self.experi[column][2:])
+            if self.experi[column][1] == "CH4":
+                self.exp_frac_ch4 = list(self.experi[column][2:])
+            if self.experi[column][1] == "H2O":
+                self.exp_frac_h2o = list(self.experi[column][2:])
+            if self.experi[column][1] == "CO":
+                self.exp_frac_co = list(self.experi[column][2:])
+            
+        self.experi_list = [self.exp_temp, self.exp_frac_co2, self.exp_frac_h2, self.exp_frac_ch4, self.exp_frac_h2o, self.exp_frac_co]
         
         # get minimal values
         temp_1 = []
@@ -423,123 +444,125 @@ class Ui(QtWidgets.QMainWindow):
             temp_3.append(result[3])
         self.min_temp_1 = min(temp_3)
         
-        # data for plot 1 (x,T; v_const)
+        # data for plot 1 (x_CO2)
         filtered_results_1 = [result for result in self.Q3_results if str(result[5]) == str(float(self.min_velo_1))]
         pressure_groups_1 = {}
         for result in filtered_results_1:
             pressure = result[4]
             if pressure not in pressure_groups_1:
-                pressure_groups_1[pressure] = {"temperature": [], "turnover": []}
+                pressure_groups_1[pressure] = {"temperature": [], "mole_frac": []}
             pressure_groups_1[pressure]["temperature"].append(result[3])
-            pressure_groups_1[pressure]["turnover"].append(result[6])
+            pressure_groups_1[pressure]["temperature"] = sorted(pressure_groups_1[pressure]["temperature"])
+            index = pressure_groups_1[pressure]["temperature"].index(result[3])            
+            pressure_groups_1[pressure]["mole_frac"].insert(index, result[7])
         
         # adding experimental data to plot 1     
-        pressure_groups_1[f"Exp. {self.Q3_xml_pressure}"] = {"temperature": [], "turnover": []}
+        pressure_groups_1[f"Exp. {self.Q3_xml_pressure}"] = {"temperature": [], "mole_frac": []}
         pressure_groups_1[f"Exp. {self.Q3_xml_pressure}"]["temperature"] = self.exp_temp
-        pressure_groups_1[f"Exp. {self.Q3_xml_pressure}"]["turnover"] = self.exp_turnover
+        pressure_groups_1[f"Exp. {self.Q3_xml_pressure}"]["mole_frac"] = self.exp_frac_co2
      
         self.Q3W1 = self.findChild(QtWidgets.QWidget, "Q3widget1")
         
-        # data for plot 2 (x,T; p_const)
-        filtered_results_2 = [result for result in self.Q3_results if str(result[4]) == str(float(self.min_pres_1))]
-        velo_groups_2 = {}
+        # data for plot 2 (x_H2)
+        filtered_results_2 = [result for result in self.Q3_results if str(result[5]) == str(float(self.min_velo_1))]
+        pressure_groups_2 = {}
         for result in filtered_results_2:
-            velo = result[5]
-            if velo not in velo_groups_2:
-                velo_groups_2[velo] = {"temperature": [], "turnover": []}
-            velo_groups_2[velo]["temperature"].append(result[3])
-            velo_groups_2[velo]["turnover"].append(result[6])
+            pressure = result[4]
+            if pressure not in pressure_groups_2:
+                pressure_groups_2[pressure] = {"temperature": [], "mole_frac": []}
+            pressure_groups_2[pressure]["temperature"].append(result[3])
+            pressure_groups_2[pressure]["temperature"] = sorted(pressure_groups_2[pressure]["temperature"])
+            index = pressure_groups_2[pressure]["temperature"].index(result[3])  
+            pressure_groups_2[pressure]["mole_frac"].insert(index, result[8])
         
-        # adding experimental data to plot 2
-        velo_groups_2[f"Exp. {self.Q3_xml_velocity}"] = {"temperature": [], "turnover": []}
-        velo_groups_2[f"Exp. {self.Q3_xml_velocity}"]["temperature"] = self.exp_temp
-        velo_groups_2[f"Exp. {self.Q3_xml_velocity}"]["turnover"] = self.exp_turnover
+        # adding experimental data to plot 1     
+        pressure_groups_2[f"Exp. {self.Q3_xml_pressure}"] = {"temperature": [], "mole_frac": []}
+        pressure_groups_2[f"Exp. {self.Q3_xml_pressure}"]["temperature"] = self.exp_temp
+        pressure_groups_2[f"Exp. {self.Q3_xml_pressure}"]["mole_frac"] = self.exp_frac_h2
         
         self.Q3W2 = self.findChild(QtWidgets.QWidget, "Q3widget2")
         
-        # data for plot 3 (x,p; v_const)
+        # data for plot 3 (x_CH4)
         filtered_results_3 = [result for result in self.Q3_results if str(result[5]) == str(float(self.min_velo_1))]
-        temperature_groups_3 = {}
+        pressure_groups_3 = {}
         for result in filtered_results_3:
-            temperature = result[3]
-            if temperature not in temperature_groups_3:
-                temperature_groups_3[temperature] = {"pressure": [], "turnover": []}
-            temperature_groups_3[temperature]["pressure"].append(result[4])
-            temperature_groups_3[temperature]["pressure"] = sorted(temperature_groups_3[temperature]["pressure"])
-            
-            index = temperature_groups_3[temperature]["pressure"].index(result[4])
-            temperature_groups_3[temperature]["turnover"].insert(index, result[6])
-       
-        # adding experimental data to plot 3
-        temperature_groups_3[f"Exp. {self.Q3_xml_temperature}"] = {"pressure": [], "turnover": []}
-        temperature_groups_3[f"Exp. {self.Q3_xml_temperature}"]["pressure"] = [self.Q3_xml_pressure, self.Q3_xml_pressure*1.2]
-        temperature_groups_3[f"Exp. {self.Q3_xml_temperature}"]["turnover"] = [sum(self.exp_turnover)/len(self.exp_turnover),sum(self.exp_turnover)/len(self.exp_turnover)] #average turnover
+            pressure = result[4]
+            if pressure not in pressure_groups_3:
+                pressure_groups_3[pressure] = {"temperature": [], "mole_frac": []}
+            pressure_groups_3[pressure]["temperature"].append(result[3])
+            pressure_groups_3[pressure]["temperature"] = sorted(pressure_groups_3[pressure]["temperature"])
+            index = pressure_groups_3[pressure]["temperature"].index(result[3])  
+            pressure_groups_3[pressure]["mole_frac"].insert(index, result[9])
+        
+        # adding experimental data to plot 1     
+        pressure_groups_3[f"Exp. {self.Q3_xml_pressure}"] = {"temperature": [], "mole_frac": []}
+        pressure_groups_3[f"Exp. {self.Q3_xml_pressure}"]["temperature"] = self.exp_temp
+        pressure_groups_3[f"Exp. {self.Q3_xml_pressure}"]["mole_frac"] = self.exp_frac_ch4
 
         self.Q3W3 = self.findChild(QtWidgets.QWidget, "Q3widget3")
         
-        # data for plot 4 (x,p; T_const)
-        filtered_results_4 = [result for result in self.Q3_results if str(result[3]) == str(float(self.min_temp_1))]
-        velo_groups_4 = {}
+        # data for plot 4 (x_H2O)
+        filtered_results_4 = [result for result in self.Q3_results if str(result[5]) == str(float(self.min_velo_1))]
+        pressure_groups_4 = {}
         for result in filtered_results_4:
-            velo = result[5]
-            if velo not in velo_groups_4:
-                velo_groups_4[velo] = {"pressure": [], "turnover": []}
-            velo_groups_4[velo]["pressure"].append(result[4])
-            velo_groups_4[velo]["pressure"] = sorted(velo_groups_4[velo]["pressure"])
-            index = velo_groups_4[velo]["pressure"].index(result[4])
-            velo_groups_4[velo]["turnover"].insert(index, result[6])
-
-        # adding experimental data to plot 4
-        velo_groups_4[f"Exp. {self.Q3_xml_velocity}"] = {"pressure": [], "turnover": []}
-        velo_groups_4[f"Exp. {self.Q3_xml_velocity}"]["pressure"] = [self.Q3_xml_pressure, self.Q3_xml_pressure*1.2]
-        velo_groups_4[f"Exp. {self.Q3_xml_velocity}"]["turnover"] = [sum(self.exp_turnover)/len(self.exp_turnover),sum(self.exp_turnover)/len(self.exp_turnover)] #average turnover
+            pressure = result[4]
+            if pressure not in pressure_groups_4:
+                pressure_groups_4[pressure] = {"temperature": [], "mole_frac": []}
+            pressure_groups_4[pressure]["temperature"].append(result[3])
+            pressure_groups_4[pressure]["temperature"] = sorted(pressure_groups_4[pressure]["temperature"])
+            index = pressure_groups_4[pressure]["temperature"].index(result[3])  
+            pressure_groups_4[pressure]["mole_frac"].insert(index, result[10])
+        
+        # adding experimental data to plot 1     
+        pressure_groups_4[f"Exp. {self.Q3_xml_pressure}"] = {"temperature": [], "mole_frac": []}
+        pressure_groups_4[f"Exp. {self.Q3_xml_pressure}"]["temperature"] = self.exp_temp
+        pressure_groups_4[f"Exp. {self.Q3_xml_pressure}"]["mole_frac"] = self.exp_frac_h2o
         
         self.Q3W4 = self.findChild(QtWidgets.QWidget, "Q3widget4")
         
-        # data for plot 5 (x,v; p_const)
-        filtered_results_5 = [result for result in self.Q3_results if str(result[4]) == str(float(self.min_pres_1))]
-        temperature_groups_5 = {}
+        # data for plot 5 (x_CO)
+        filtered_results_5 = [result for result in self.Q3_results if str(result[5]) == str(float(self.min_velo_1))]
+        pressure_groups_5 = {}
         for result in filtered_results_5:
-            temperature = result[3]
-            if temperature not in temperature_groups_5:
-                temperature_groups_5[temperature] = {"velocity": [], "turnover": []}
-            temperature_groups_5[temperature]["velocity"].append(result[5])
-            temperature_groups_5[temperature]["turnover"].append(result[6])
+            pressure = result[4]
+            if pressure not in pressure_groups_5:
+                pressure_groups_5[pressure] = {"temperature": [], "mole_frac": []}
+            pressure_groups_5[pressure]["temperature"].append(result[3])
+            pressure_groups_5[pressure]["temperature"] = sorted(pressure_groups_5[pressure]["temperature"])
+            index = pressure_groups_5[pressure]["temperature"].index(result[3])  
+            pressure_groups_5[pressure]["mole_frac"].insert(index, result[11])
         
-        # adding experimental data to plot 5
-        temperature_groups_5[f"Exp. {self.Q3_xml_temperature}"] = {"velocity": [], "turnover": []}
-        temperature_groups_5[f"Exp. {self.Q3_xml_temperature}"]["velocity"] = [self.Q3_xml_velocity, self.Q3_xml_velocity*1.01]
-        temperature_groups_5[f"Exp. {self.Q3_xml_temperature}"]["turnover"] = [sum(self.exp_turnover)/len(self.exp_turnover),sum(self.exp_turnover)/len(self.exp_turnover)] #average turnover
+        # adding experimental data to plot 1     
+        pressure_groups_5[f"Exp. {self.Q3_xml_pressure}"] = {"temperature": [], "mole_frac": []}
+        pressure_groups_5[f"Exp. {self.Q3_xml_pressure}"]["temperature"] = self.exp_temp
+        pressure_groups_5[f"Exp. {self.Q3_xml_pressure}"]["mole_frac"] = self.exp_frac_co
         
         self.Q3W5 = self.findChild(QtWidgets.QWidget, "Q3widget5")
         
-        # data for plot 6 (x,v; T_const)
-        filtered_results_6 = [result for result in self.Q3_results if str(result[3]) == str(float(self.min_temp_1))]
+        # data for plot 6 (S_CH4; S_CO)
+        filtered_results_6 = [result for result in self.Q3_results if str(result[5]) == str(float(self.min_velo_1))]
         pressure_groups_6 = {}
         for result in filtered_results_6:
             pressure = result[4]
             if pressure not in pressure_groups_6:
-                pressure_groups_6[pressure] = {"velocity": [], "turnover": []}
-            pressure_groups_6[pressure]["velocity"].append(result[5])
-            pressure_groups_6[pressure]["velocity"] = sorted(pressure_groups_6[pressure]["velocity"])
-            index = pressure_groups_6[pressure]["velocity"].index(result[5])
-            pressure_groups_6[pressure]["turnover"].insert(index, result[6])
-        
-        # adding experimental data to plot 6
-        pressure_groups_6[f"Exp. {self.Q3_xml_pressure}"] = {"velocity": [], "turnover": []}
-        pressure_groups_6[f"Exp. {self.Q3_xml_pressure}"]["velocity"] = [self.Q3_xml_velocity, self.Q3_xml_velocity*1.01]
-        pressure_groups_6[f"Exp. {self.Q3_xml_pressure}"]["turnover"] = [sum(self.exp_turnover)/len(self.exp_turnover),sum(self.exp_turnover)/len(self.exp_turnover)] #average turnover
+                pressure_groups_6[pressure] = {"temperature": [], "mole_frac": []}
+            pressure_groups_6[pressure]["temperature"].append(result[3])
+            pressure_groups_6[pressure]["temperature"] = sorted(pressure_groups_6[pressure]["temperature"])
+            index = pressure_groups_6[pressure]["temperature"].index(result[3])  
+            pressure_groups_6[pressure]["mole_frac"].insert(index, result[12])
+            #pressure_groups_6[pressure]["mole_frac"].insert(index, result[13])
                
         self.Q3W6 = self.findChild(QtWidgets.QWidget, "Q3widget6")
         
         # Liste von Plot-Widgets
         plot_widgets = [
             {"result_filter": lambda result: str(result[5]) == str(self.Q3_velo_1), "groups": pressure_groups_1, "widget": self.Q3W1, "identifier": "temperature"},
-            {"result_filter": lambda result: str(result[4]) == str(self.Q3_pres_1), "groups": velo_groups_2, "widget": self.Q3W2, "identifier": "temperature"},
-            {"result_filter": lambda result: str(result[5]) == str(self.Q3_velo_1), "groups": temperature_groups_3, "widget": self.Q3W3, "identifier": "pressure"},
-            {"result_filter": lambda result: str(result[3]) == str(self.Q3_temp_1), "groups": velo_groups_4, "widget": self.Q3W4, "identifier": "pressure"},
-            {"result_filter": lambda result: str(result[4]) == str(self.Q3_pres_1), "groups": temperature_groups_5, "widget": self.Q3W5, "identifier": "velocity"},
-            {"result_filter": lambda result: str(result[3]) == str(self.Q3_temp_1), "groups": pressure_groups_6, "widget": self.Q3W6, "identifier": "velocity"},
+            {"result_filter": lambda result: str(result[4]) == str(self.Q3_pres_1), "groups": pressure_groups_2, "widget": self.Q3W2, "identifier": "temperature"},
+            {"result_filter": lambda result: str(result[5]) == str(self.Q3_velo_1), "groups": pressure_groups_3, "widget": self.Q3W3, "identifier": "temperature"},
+            {"result_filter": lambda result: str(result[3]) == str(self.Q3_temp_1), "groups": pressure_groups_4, "widget": self.Q3W4, "identifier": "temperature"},
+            {"result_filter": lambda result: str(result[4]) == str(self.Q3_pres_1), "groups": pressure_groups_5, "widget": self.Q3W5, "identifier": "temperature"},
+            {"result_filter": lambda result: str(result[3]) == str(self.Q3_temp_1), "groups": pressure_groups_6, "widget": self.Q3W6, "identifier": "temperature"},
+            
         ]
         
         for plot_info in plot_widgets:
@@ -568,7 +591,7 @@ class Ui(QtWidgets.QMainWindow):
                 getattr(self, f'{widget.objectName()}_canvas').draw_idle()
         
             for key, data in groups.items():
-                ax.plot(data[identifier], data['turnover'], label=f'{key}')
+                ax.plot(data[identifier], data['mole_frac'], label=f'{key}')
             
             if identifier == "temperature":
                 ax.set_xlabel("T")
@@ -579,9 +602,7 @@ class Ui(QtWidgets.QMainWindow):
             ax.set_ylabel("X")
             ax.grid(True)
             getattr(self, f'{widget.objectName()}_figure').tight_layout()
-            getattr(self, f'{widget.objectName()}_canvas').draw()
-            
-    
+            getattr(self, f'{widget.objectName()}_canvas').draw()           
                 
             
     def canvas_press_event(self, event):
@@ -710,7 +731,10 @@ class NewWindow_Q2_1(QtWidgets.QMainWindow):
             if pressure not in pressure_groups_1:
                 pressure_groups_1[pressure] = {"temperature": [], "turnover": []}
             pressure_groups_1[pressure]["temperature"].append(result[3])
-            pressure_groups_1[pressure]["turnover"].append(result[6])
+            pressure_groups_1[pressure]["temperature"] = sorted(pressure_groups_1[pressure]["temperature"])
+            
+            index = pressure_groups_1[pressure]["temperature"].index(result[3])
+            pressure_groups_1[pressure]["turnover"].insert(index, result[6])
         import matplotlib.pyplot as plt    
         self.Q2_Figure_1, self.Q2_P1_ax = plt.subplots()
         self.canvas_Q2_P1 = FigureCanvas(self.Q2_Figure_1)
@@ -721,7 +745,7 @@ class NewWindow_Q2_1(QtWidgets.QMainWindow):
         
         self.Q2_P1_ax.set_xlabel('T [K]')
         self.Q2_P1_ax.set_ylabel('X_CO2 [-]')
-        self.Q2_P1_ax.set_title("X_CO2 over T with constant velocity")
+        self.Q2_P1_ax.set_title("X_CO2 over T with constant residence time")
         self.Q2_Figure_1.tight_layout()
         self.Q2_P1_ax.grid(True)
         self.Q2_P1_ax.legend()
@@ -746,20 +770,23 @@ class NewWindow_Q2_2(QtWidgets.QMainWindow):
         self.min_pres_1 = min(temp_2)
         
         filtered_results_2 = [result for result in self.results if str(result[4]) == str(float(self.min_pres_1))]
-        velo_groups_1 = {}
+        velo_groups_2 = {}
         for result in filtered_results_2:
             velo = result[5]
-            if velo not in velo_groups_1:
-                velo_groups_1[velo] = {"temperature": [], "turnover": []}
-            velo_groups_1[velo]["temperature"].append(result[3])
-            velo_groups_1[velo]["turnover"].append(result[6])
+            if velo not in velo_groups_2:
+                velo_groups_2[velo] = {"temperature": [], "turnover": []}
+            velo_groups_2[velo]["temperature"].append(result[3])
+            velo_groups_2[velo]["temperature"] = sorted(velo_groups_2[velo]["temperature"])
+            
+            index = velo_groups_2[velo]["temperature"].index(result[3])
+            velo_groups_2[velo]["turnover"].insert(index, result[6])
         import matplotlib.pyplot as plt    
         self.Q2_Figure_2, self.Q2_P2_ax = plt.subplots()
         self.canvas_Q2_P2 = FigureCanvas(self.Q2_Figure_2)
         self.setCentralWidget(self.canvas_Q2_P2)
         
-        for velo, data in velo_groups_1.items():
-            plt.plot(data['temperature'], data['turnover'], label=f'Velocity: {velo} m/s')
+        for velo, data in velo_groups_2.items():
+            plt.plot(data['temperature'], data['turnover'], label=f'res. time: {velo} s')
         
         self.Q2_P2_ax.set_xlabel('T [K]')
         self.Q2_P2_ax.set_ylabel('X_CO2 [-]')
@@ -808,7 +835,7 @@ class NewWindow_Q2_3(QtWidgets.QMainWindow):
         
         self.Q2_P3_ax.set_xlabel('p [Pa]')
         self.Q2_P3_ax.set_ylabel('X_CO2 [-]')
-        self.Q2_P3_ax.set_title("X_CO2 over p with constant Temperature")
+        self.Q2_P3_ax.set_title("X_CO2 over p with constant residence time")
         self.Q2_Figure_3.tight_layout()
         self.Q2_P3_ax.grid(True)
         self.Q2_P3_ax.legend()
@@ -840,6 +867,7 @@ class NewWindow_Q2_4(QtWidgets.QMainWindow):
                 velo_groups_4[velo] = {"pressure": [], "turnover": []}
             velo_groups_4[velo]["pressure"].append(result[4])
             velo_groups_4[velo]["pressure"] = sorted(velo_groups_4[velo]["pressure"])
+            
             index = velo_groups_4[velo]["pressure"].index(result[4])
             velo_groups_4[velo]["turnover"].insert(index, result[6])
         import matplotlib.pyplot as plt    
@@ -848,7 +876,7 @@ class NewWindow_Q2_4(QtWidgets.QMainWindow):
         self.setCentralWidget(self.canvas_Q2_P4)
         
         for velo, data in velo_groups_4.items():
-            plt.plot(data['pressure'], data['turnover'], label=f'Velocity: {velo} ms')
+            plt.plot(data['pressure'], data['turnover'], label=f'res. time: {velo} s')
         
         self.Q2_P4_ax.set_xlabel('p [Pa]')
         self.Q2_P4_ax.set_ylabel('X_CO2 [-]')
@@ -881,20 +909,23 @@ class NewWindow_Q2_5(QtWidgets.QMainWindow):
         for result in filtered_results_5:
             temperature = result[3]
             if temperature not in temperature_groups_5:
-                temperature_groups_5[temperature] = {"velocity": [], "turnover": []}
-            temperature_groups_5[temperature]["velocity"].append(result[5])
-            temperature_groups_5[temperature]["turnover"].append(result[6])
+                temperature_groups_5[temperature] = {"res. time": [], "turnover": []}
+            temperature_groups_5[temperature]["res. time"].append(result[5])
+            temperature_groups_5[temperature]["res. time"] = sorted(temperature_groups_5[temperature]["res. time"])
+            
+            index = temperature_groups_5[temperature]["res. time"].index(result[5])
+            temperature_groups_5[temperature]["turnover"].insert(index, result[6])
         import matplotlib.pyplot as plt    
         self.Q2_Figure_5, self.Q2_P5_ax = plt.subplots()
         self.canvas_Q2_P5 = FigureCanvas(self.Q2_Figure_5)
         self.setCentralWidget(self.canvas_Q2_P5)
         
         for temp, data in temperature_groups_5.items():
-            plt.plot(data['velocity'], data['turnover'], label=f'Temperature: {temp} K')
+            plt.plot(data['res. time'], data['turnover'], label=f'Temperature: {temp} K')
         
-        self.Q2_P5_ax.set_xlabel('v [ms]')
+        self.Q2_P5_ax.set_xlabel('tau [s]')
         self.Q2_P5_ax.set_ylabel('X_CO2 [-]')
-        self.Q2_P5_ax.set_title("X_CO2 over v with constant pressure")
+        self.Q2_P5_ax.set_title("X_CO2 over tau with constant pressure")
         self.Q2_Figure_5.tight_layout()
         self.Q2_P5_ax.grid(True)
         self.Q2_P5_ax.legend()
@@ -923,10 +954,11 @@ class NewWindow_Q2_6(QtWidgets.QMainWindow):
         for result in filtered_results_6:
             pressure = result[4]
             if pressure not in pressure_groups_6:
-                pressure_groups_6[pressure] = {"velocity": [], "turnover": []}
-            pressure_groups_6[pressure]["velocity"].append(result[5])
-            pressure_groups_6[pressure]["velocity"] = sorted(pressure_groups_6[pressure]["velocity"])
-            index = pressure_groups_6[pressure]["velocity"].index(result[5])
+                pressure_groups_6[pressure] = {"res. time": [], "turnover": []}
+            pressure_groups_6[pressure]["res. time"].append(result[5])
+            pressure_groups_6[pressure]["res. time"] = sorted(pressure_groups_6[pressure]["res. time"])
+            
+            index = pressure_groups_6[pressure]["res. time"].index(result[5])
             pressure_groups_6[pressure]["turnover"].insert(index, result[6])
         import matplotlib.pyplot as plt    
         self.Q2_Figure_6, self.Q2_P6_ax = plt.subplots()
@@ -934,11 +966,11 @@ class NewWindow_Q2_6(QtWidgets.QMainWindow):
         self.setCentralWidget(self.canvas_Q2_P6)
         
         for pres, data in pressure_groups_6.items():
-            plt.plot(data['velocity'], data['turnover'], label=f'Pressure: {pres} Pa')
+            plt.plot(data['res. time'], data['turnover'], label=f'Pressure: {pres} Pa')
         
-        self.Q2_P6_ax.set_xlabel('v [ms]')
+        self.Q2_P6_ax.set_xlabel('tau [s]')
         self.Q2_P6_ax.set_ylabel('X_CO2 [-]')
-        self.Q2_P6_ax.set_title("X_CO2 over v with constant temperature")
+        self.Q2_P6_ax.set_title("X_CO2 over tau with constant temperature")
         self.Q2_Figure_6.tight_layout()
         self.Q2_P6_ax.grid(True)
         self.Q2_P6_ax.legend()
@@ -953,7 +985,7 @@ class NewWindow_Q3_1(QtWidgets.QMainWindow):
         self.Q3_velo_1 = Q3_velo_1
         
         self.Q3_xml_temperature, self.Q3_xml_pressure, self.Q3_xml_molefrac, self.Q3_xml_velocity = window_list
-        self.exp_temp, self.exp_turnover = experi_list
+        self.exp_temp, self.exp_frac_co2, self.exp_frac_h2, self.exp_frac_ch4, self.exp_frac_h2o, self.exp_frac_co = experi_list
         
         self.setWindowTitle("Q3_P1")
         self.create_plot()
@@ -970,25 +1002,27 @@ class NewWindow_Q3_1(QtWidgets.QMainWindow):
         for result in filtered_results_1:
             pressure = result[4]
             if pressure not in pressure_groups_1:
-                pressure_groups_1[pressure] = {"temperature": [], "turnover": []}
+                pressure_groups_1[pressure] = {"temperature": [], "mole_frac": []}
             pressure_groups_1[pressure]["temperature"].append(result[3])
-            pressure_groups_1[pressure]["turnover"].append(result[6])
+            pressure_groups_1[pressure]["temperature"] = sorted(pressure_groups_1[pressure]["temperature"])
+            index = pressure_groups_1[pressure]["temperature"].index(result[3])            
+            pressure_groups_1[pressure]["mole_frac"].insert(index, result[7])
         
         # adding experimental data to plot 1     
-        pressure_groups_1[f"Exp. {self.Q3_xml_pressure}"] = {"temperature": [], "turnover": []}
+        pressure_groups_1[f"Exp. {self.Q3_xml_pressure}"] = {"temperature": [], "mole_frac": []}
         pressure_groups_1[f"Exp. {self.Q3_xml_pressure}"]["temperature"] = self.exp_temp
-        pressure_groups_1[f"Exp. {self.Q3_xml_pressure}"]["turnover"] = self.exp_turnover
+        pressure_groups_1[f"Exp. {self.Q3_xml_pressure}"]["mole_frac"] = self.exp_frac_co2
         import matplotlib.pyplot as plt    
         self.Q3_Figure_1, self.Q3_P1_ax = plt.subplots()
         self.canvas_Q3_P1 = FigureCanvas(self.Q3_Figure_1)
         self.setCentralWidget(self.canvas_Q3_P1)
         
         for pressure, data in pressure_groups_1.items():
-            plt.plot(data['temperature'], data['turnover'], label=f'Pressure: {pressure} Pa')
+            plt.plot(data['temperature'], data['mole_frac'], label=f'Pressure: {pressure} Pa')
         
         self.Q3_P1_ax.set_xlabel('T [K]')
-        self.Q3_P1_ax.set_ylabel('X_CO2 [-]')
-        self.Q3_P1_ax.set_title("X_CO2 over T with constant velocity")
+        self.Q3_P1_ax.set_ylabel('x_CO2 [-]')
+        self.Q3_P1_ax.set_title("x_CO2")
         self.Q3_Figure_1.tight_layout()
         self.Q3_P1_ax.grid(True)
         self.Q3_P1_ax.legend()
@@ -1003,7 +1037,7 @@ class NewWindow_Q3_2(QtWidgets.QMainWindow):
         self.Q3_pres_1 = Q3_pres_1
         
         self.Q3_xml_temperature, self.Q3_xml_pressure, self.Q3_xml_molefrac, self.Q3_xml_velocity = window_list
-        self.exp_temp, self.exp_turnover = experi_list
+        self.exp_temp, self.exp_frac_co2, self.exp_frac_h2, self.exp_frac_ch4, self.exp_frac_h2o, self.exp_frac_co = experi_list
         
         self.setWindowTitle("Q3_P2")
         self.create_plot()
@@ -1012,33 +1046,35 @@ class NewWindow_Q3_2(QtWidgets.QMainWindow):
     def create_plot(self):
         temp_2 = []
         for result in self.results:
-            temp_2.append(result[4])
-        self.min_pres_1 = min(temp_2)
+            temp_2.append(result[5])
+        self.min_velo_1 = min(temp_2)
         
-        filtered_results_2 = [result for result in self.results if str(result[4]) == str(float(self.min_pres_1))]
-        velo_groups_2 = {}
+        filtered_results_2 = [result for result in self.results if str(result[5]) == str(float(self.min_velo_1))]
+        pressure_groups_2 = {}
         for result in filtered_results_2:
-            velo = result[5]
-            if velo not in velo_groups_2:
-                velo_groups_2[velo] = {"temperature": [], "turnover": []}
-            velo_groups_2[velo]["temperature"].append(result[3])
-            velo_groups_2[velo]["turnover"].append(result[6])
+            pressure = result[4]
+            if pressure not in pressure_groups_2:
+                pressure_groups_2[pressure] = {"temperature": [], "mole_frac": []}
+            pressure_groups_2[pressure]["temperature"].append(result[3])
+            pressure_groups_2[pressure]["temperature"] = sorted(pressure_groups_2[pressure]["temperature"])
+            index = pressure_groups_2[pressure]["temperature"].index(result[3])  
+            pressure_groups_2[pressure]["mole_frac"].insert(index, result[8])
         
-        # adding experimental data to plot 2
-        velo_groups_2[f"Exp. {self.Q3_xml_velocity}"] = {"temperature": [], "turnover": []}
-        velo_groups_2[f"Exp. {self.Q3_xml_velocity}"]["temperature"] = self.exp_temp
-        velo_groups_2[f"Exp. {self.Q3_xml_velocity}"]["turnover"] = self.exp_turnover
+        # adding experimental data to plot 1     
+        pressure_groups_2[f"Exp. {self.Q3_xml_pressure}"] = {"temperature": [], "mole_frac": []}
+        pressure_groups_2[f"Exp. {self.Q3_xml_pressure}"]["temperature"] = self.exp_temp
+        pressure_groups_2[f"Exp. {self.Q3_xml_pressure}"]["mole_frac"] = self.exp_frac_h2
         import matplotlib.pyplot as plt    
         self.Q3_Figure_2, self.Q3_P2_ax = plt.subplots()
         self.canvas_Q3_P2 = FigureCanvas(self.Q3_Figure_2)
         self.setCentralWidget(self.canvas_Q3_P2)
         
-        for velo, data in velo_groups_2.items():
-            plt.plot(data['temperature'], data['turnover'], label=f'Velocity: {velo} m/s')
+        for pressure, data in pressure_groups_2.items():
+            plt.plot(data['temperature'], data['mole_frac'], label=f'Pressure: {pressure} Pa')
         
         self.Q3_P2_ax.set_xlabel('T [K]')
-        self.Q3_P2_ax.set_ylabel('X_CO2 [-]')
-        self.Q3_P2_ax.set_title("X_CO2 over T with constant pressure")
+        self.Q3_P2_ax.set_ylabel('X_H2 [-]')
+        self.Q3_P2_ax.set_title("X_H2")
         self.Q3_Figure_2.tight_layout()
         self.Q3_P2_ax.grid(True)
         self.Q3_P2_ax.legend()
@@ -1053,7 +1089,7 @@ class NewWindow_Q3_3(QtWidgets.QMainWindow):
         self.Q3_velo_1 = Q3_velo_1
         
         self.Q3_xml_temperature, self.Q3_xml_pressure, self.Q3_xml_molefrac, self.Q3_xml_velocity = window_list
-        self.exp_temp, self.exp_turnover = experi_list
+        self.exp_temp, self.exp_frac_co2, self.exp_frac_h2, self.exp_frac_ch4, self.exp_frac_h2o, self.exp_frac_co = experi_list
         
         self.setWindowTitle("Q3_P3")
         self.create_plot()
@@ -1067,32 +1103,31 @@ class NewWindow_Q3_3(QtWidgets.QMainWindow):
         
         # data for plot 3 (x,p; v_const)
         filtered_results_3 = [result for result in self.results if str(result[5]) == str(float(self.min_velo_1))]
-        temperature_groups_3 = {}
+        pressure_groups_3 = {}
         for result in filtered_results_3:
-            temperature = result[3]
-            if temperature not in temperature_groups_3:
-                temperature_groups_3[temperature] = {"pressure": [], "turnover": []}
-            temperature_groups_3[temperature]["pressure"].append(result[4])
-            temperature_groups_3[temperature]["pressure"] = sorted(temperature_groups_3[temperature]["pressure"])
-            
-            index = temperature_groups_3[temperature]["pressure"].index(result[4])
-            temperature_groups_3[temperature]["turnover"].insert(index, result[6])
+            pressure = result[4]
+            if pressure not in pressure_groups_3:
+                pressure_groups_3[pressure] = {"temperature": [], "mole_frac": []}
+            pressure_groups_3[pressure]["temperature"].append(result[3])
+            pressure_groups_3[pressure]["temperature"] = sorted(pressure_groups_3[pressure]["temperature"])
+            index = pressure_groups_3[pressure]["temperature"].index(result[3])  
+            pressure_groups_3[pressure]["mole_frac"].insert(index, result[9])
         
-        # adding experimental data to plot 3
-        temperature_groups_3[f"Exp. {self.Q3_xml_temperature}"] = {"pressure": [], "turnover": []}
-        temperature_groups_3[f"Exp. {self.Q3_xml_temperature}"]["pressure"] = [self.Q3_xml_pressure, self.Q3_xml_pressure * 1.2]
-        temperature_groups_3[f"Exp. {self.Q3_xml_temperature}"]["turnover"] = [sum(self.exp_turnover)/len(self.exp_turnover),sum(self.exp_turnover)/len(self.exp_turnover)] #average turnover
+        # adding experimental data to plot 1     
+        pressure_groups_3[f"Exp. {self.Q3_xml_pressure}"] = {"temperature": [], "mole_frac": []}
+        pressure_groups_3[f"Exp. {self.Q3_xml_pressure}"]["temperature"] = self.exp_temp
+        pressure_groups_3[f"Exp. {self.Q3_xml_pressure}"]["mole_frac"] = self.exp_frac_ch4
         import matplotlib.pyplot as plt    
         self.Q3_Figure_3, self.Q3_P3_ax = plt.subplots()
         self.canvas_Q3_P3 = FigureCanvas(self.Q3_Figure_3)
         self.setCentralWidget(self.canvas_Q3_P3)
         
-        for temp, data in temperature_groups_3.items():
-            plt.plot(data['pressure'], data['turnover'], label=f'Temperature: {temp} K')
+        for pressure, data in pressure_groups_3.items():
+            plt.plot(data['temperature'], data['mole_frac'], label=f'Pressure: {pressure} Pa')
         
         self.Q3_P3_ax.set_xlabel('p [Pa]')
-        self.Q3_P3_ax.set_ylabel('X_CO2 [-]')
-        self.Q3_P3_ax.set_title("X_CO2 over p with constant Temperature")
+        self.Q3_P3_ax.set_ylabel('X_CH4 [-]')
+        self.Q3_P3_ax.set_title("X_CH4")
         self.Q3_Figure_3.tight_layout()
         self.Q3_P3_ax.grid(True)
         self.Q3_P3_ax.legend()
@@ -1107,7 +1142,7 @@ class NewWindow_Q3_4(QtWidgets.QMainWindow):
         self.Q3_temp_1 = Q3_temp_1
         
         self.Q3_xml_temperature, self.Q3_xml_pressure, self.Q3_xml_molefrac, self.Q3_xml_velocity = window_list
-        self.exp_temp, self.exp_turnover = experi_list
+        self.exp_temp, self.exp_frac_co2, self.exp_frac_h2, self.exp_frac_ch4, self.exp_frac_h2o, self.exp_frac_co = experi_list
         
         self.setWindowTitle("Q3_P4")
         self.create_plot()
@@ -1116,36 +1151,36 @@ class NewWindow_Q3_4(QtWidgets.QMainWindow):
     def create_plot(self):
         temp_4 = []
         for result in self.results:
-            temp_4.append(result[3])
-        self.min_temp_1 = min(temp_4)
+            temp_4.append(result[5])
+        self.min_velo_1 = min(temp_4)
         
         # data for plot 4 (x,p; T_const)
-        filtered_results_4 = [result for result in self.results if str(result[3]) == str(float(self.min_temp_1))]
-        velo_groups_4 = {}
+        filtered_results_4 = [result for result in self.results if str(result[5]) == str(float(self.min_velo_1))]
+        pressure_groups_4 = {}
         for result in filtered_results_4:
-            velo = result[5]
-            if velo not in velo_groups_4:
-                velo_groups_4[velo] = {"pressure": [], "turnover": []}
-            velo_groups_4[velo]["pressure"].append(result[4])
-            velo_groups_4[velo]["pressure"] = sorted(velo_groups_4[velo]["pressure"])
-            index = velo_groups_4[velo]["pressure"].index(result[4])
-            velo_groups_4[velo]["turnover"].insert(index, result[6])
-
-        # adding experimental data to plot 4
-        velo_groups_4[f"Exp. {self.Q3_xml_velocity}"] = {"pressure": [], "turnover": []}
-        velo_groups_4[f"Exp. {self.Q3_xml_velocity}"]["pressure"] = [self.Q3_xml_pressure, self.Q3_xml_pressure * 1.2]
-        velo_groups_4[f"Exp. {self.Q3_xml_velocity}"]["turnover"] = [sum(self.exp_turnover)/len(self.exp_turnover),sum(self.exp_turnover)/len(self.exp_turnover)] #average turnover
+            pressure = result[4]
+            if pressure not in pressure_groups_4:
+                pressure_groups_4[pressure] = {"temperature": [], "mole_frac": []}
+            pressure_groups_4[pressure]["temperature"].append(result[3])
+            pressure_groups_4[pressure]["temperature"] = sorted(pressure_groups_4[pressure]["temperature"])
+            index = pressure_groups_4[pressure]["temperature"].index(result[3])  
+            pressure_groups_4[pressure]["mole_frac"].insert(index, result[10])
+        
+        # adding experimental data to plot 1     
+        pressure_groups_4[f"Exp. {self.Q3_xml_pressure}"] = {"temperature": [], "mole_frac": []}
+        pressure_groups_4[f"Exp. {self.Q3_xml_pressure}"]["temperature"] = self.exp_temp
+        pressure_groups_4[f"Exp. {self.Q3_xml_pressure}"]["mole_frac"] = self.exp_frac_h2o
         import matplotlib.pyplot as plt    
         self.Q3_Figure_4, self.Q3_P4_ax = plt.subplots()
         self.canvas_Q3_P4 = FigureCanvas(self.Q3_Figure_4)
         self.setCentralWidget(self.canvas_Q3_P4)
         
-        for velo, data in velo_groups_4.items():
-            plt.plot(data['pressure'], data['turnover'], label=f'Velocity: {velo} ms')
+        for pressure, data in pressure_groups_4.items():
+            plt.plot(data['temperature'], data['mole_frac'], label=f'Pressure: {pressure} Pa')
         
         self.Q3_P4_ax.set_xlabel('p [Pa]')
-        self.Q3_P4_ax.set_ylabel('X_CO2 [-]')
-        self.Q3_P4_ax.set_title("X_CO2 over p with constant temperature")
+        self.Q3_P4_ax.set_ylabel('X_H2O [-]')
+        self.Q3_P4_ax.set_title("X_H2O")
         self.Q3_Figure_4.tight_layout()
         self.Q3_P4_ax.grid(True)
         self.Q3_P4_ax.legend()
@@ -1160,7 +1195,7 @@ class NewWindow_Q3_5(QtWidgets.QMainWindow):
         self.Q3_pres_1 = Q3_pres_1
         
         self.Q3_xml_temperature, self.Q3_xml_pressure, self.Q3_xml_molefrac, self.Q3_xml_velocity = window_list
-        self.exp_temp, self.exp_turnover = experi_list
+        self.exp_temp, self.exp_frac_co2, self.exp_frac_h2, self.exp_frac_ch4, self.exp_frac_h2o, self.exp_frac_co = experi_list
         
         self.setWindowTitle("Q3_P5")
         self.create_plot()
@@ -1169,34 +1204,36 @@ class NewWindow_Q3_5(QtWidgets.QMainWindow):
     def create_plot(self):
         temp_5 = []
         for result in self.results:
-            temp_5.append(result[4])
-        self.min_pres_1 = min(temp_5)
+            temp_5.append(result[5])
+        self.min_velo_1 = min(temp_5)
         
         # data for plot 5 (x,v; p_const)
-        filtered_results_5 = [result for result in self.results if str(result[4]) == str(float(self.min_pres_1))]
-        temperature_groups_5 = {}
+        filtered_results_5 = [result for result in self.results if str(result[5]) == str(float(self.min_velo_1))]
+        pressure_groups_5 = {}
         for result in filtered_results_5:
-            temperature = result[3]
-            if temperature not in temperature_groups_5:
-                temperature_groups_5[temperature] = {"velocity": [], "turnover": []}
-            temperature_groups_5[temperature]["velocity"].append(result[5])
-            temperature_groups_5[temperature]["turnover"].append(result[6])
+            pressure = result[4]
+            if pressure not in pressure_groups_5:
+                pressure_groups_5[pressure] = {"temperature": [], "mole_frac": []}
+            pressure_groups_5[pressure]["temperature"].append(result[3])
+            pressure_groups_5[pressure]["temperature"] = sorted(pressure_groups_5[pressure]["temperature"])
+            index = pressure_groups_5[pressure]["temperature"].index(result[3])  
+            pressure_groups_5[pressure]["mole_frac"].insert(index, result[11])
         
-        # adding experimental data to plot 5
-        temperature_groups_5[f"Exp. {self.Q3_xml_temperature}"] = {"velocity": [], "turnover": []}
-        temperature_groups_5[f"Exp. {self.Q3_xml_temperature}"]["velocity"] = [self.Q3_xml_velocity, self.Q3_xml_velocity * 1.01]
-        temperature_groups_5[f"Exp. {self.Q3_xml_temperature}"]["turnover"] = [sum(self.exp_turnover)/len(self.exp_turnover),sum(self.exp_turnover)/len(self.exp_turnover)] #average turnover
+        # adding experimental data to plot 1     
+        pressure_groups_5[f"Exp. {self.Q3_xml_pressure}"] = {"temperature": [], "mole_frac": []}
+        pressure_groups_5[f"Exp. {self.Q3_xml_pressure}"]["temperature"] = self.exp_temp
+        pressure_groups_5[f"Exp. {self.Q3_xml_pressure}"]["mole_frac"] = self.exp_frac_co
         import matplotlib.pyplot as plt    
         self.Q3_Figure_5, self.Q3_P5_ax = plt.subplots()
         self.canvas_Q3_P5 = FigureCanvas(self.Q3_Figure_5)
         self.setCentralWidget(self.canvas_Q3_P5)
         
-        for temp, data in temperature_groups_5.items():
-            plt.plot(data['velocity'], data['turnover'], label=f'Temperature: {temp} K')
+        for pressure, data in pressure_groups_5.items():
+            plt.plot(data['temperature'], data['mole_frac'], label=f'Pressure: {pressure} Pa')
         
         self.Q3_P5_ax.set_xlabel('v [ms]')
-        self.Q3_P5_ax.set_ylabel('X_CO2 [-]')
-        self.Q3_P5_ax.set_title("X_CO2 over v with constant pressure")
+        self.Q3_P5_ax.set_ylabel('x_CO [-]')
+        self.Q3_P5_ax.set_title("x_CO")
         self.Q3_Figure_5.tight_layout()
         self.Q3_P5_ax.grid(True)
         self.Q3_P5_ax.legend()
@@ -1211,7 +1248,7 @@ class NewWindow_Q3_6(QtWidgets.QMainWindow):
         self.Q3_temp_1 = Q3_temp_1
         
         self.Q3_xml_temperature, self.Q3_xml_pressure, self.Q3_xml_molefrac, self.Q3_xml_velocity = window_list
-        self.exp_temp, self.exp_turnover = experi_list
+        self.exp_temp, self.exp_frac_co2, self.exp_frac_h2, self.exp_frac_ch4, self.exp_frac_h2o, self.exp_frac_co = experi_list
         
         self.setWindowTitle("Q3_P6")
         self.create_plot()
@@ -1220,36 +1257,31 @@ class NewWindow_Q3_6(QtWidgets.QMainWindow):
     def create_plot(self):
         temp_6 = []
         for result in self.results:
-            temp_6.append(result[3])
-        self.min_temp_1 = min(temp_6)
+            temp_6.append(result[5])
+        self.min_velo_1 = min(temp_6)
         
         # data for plot 6 (x,v; T_const)
-        filtered_results_6 = [result for result in self.results if str(result[3]) == str(float(self.min_temp_1))]
+        filtered_results_6 = [result for result in self.results if str(result[5]) == str(float(self.min_velo_1))]
         pressure_groups_6 = {}
         for result in filtered_results_6:
             pressure = result[4]
             if pressure not in pressure_groups_6:
-                pressure_groups_6[pressure] = {"velocity": [], "turnover": []}
-            pressure_groups_6[pressure]["velocity"].append(result[5])
-            pressure_groups_6[pressure]["velocity"] = sorted(pressure_groups_6[pressure]["velocity"])
-            index = pressure_groups_6[pressure]["velocity"].index(result[5])
-            pressure_groups_6[pressure]["turnover"].insert(index, result[6])
-        
-        # adding experimental data to plot 6
-        pressure_groups_6[f"Exp. {self.Q3_xml_pressure}"] = {"velocity": [], "turnover": []}
-        pressure_groups_6[f"Exp. {self.Q3_xml_pressure}"]["velocity"] = [self.Q3_xml_velocity, self.Q3_xml_velocity * 1.01]
-        pressure_groups_6[f"Exp. {self.Q3_xml_pressure}"]["turnover"] = [sum(self.exp_turnover)/len(self.exp_turnover),sum(self.exp_turnover)/len(self.exp_turnover)] #average turnover
+                pressure_groups_6[pressure] = {"temperature": [], "mole_frac": []}
+            pressure_groups_6[pressure]["temperature"].append(result[3])
+            pressure_groups_6[pressure]["temperature"] = sorted(pressure_groups_6[pressure]["temperature"])
+            index = pressure_groups_6[pressure]["temperature"].index(result[3])  
+            pressure_groups_6[pressure]["mole_frac"].insert(index, result[12])
         import matplotlib.pyplot as plt    
         self.Q3_Figure_6, self.Q3_P6_ax = plt.subplots()
         self.canvas_Q3_P6 = FigureCanvas(self.Q3_Figure_6)
         self.setCentralWidget(self.canvas_Q3_P6)
         
-        for pres, data in pressure_groups_6.items():
-            plt.plot(data['velocity'], data['turnover'], label=f'Pressure: {pres} Pa')
+        for pressure, data in pressure_groups_6.items():
+            plt.plot(data['temperature'], data['mole_frac'], label=f'Pressure: {pressure} Pa')
         
         self.Q3_P6_ax.set_xlabel('v [ms]')
-        self.Q3_P6_ax.set_ylabel('X_CO2 [-]')
-        self.Q3_P6_ax.set_title("X_CO2 over v with constant temperature")
+        self.Q3_P6_ax.set_ylabel('Plathalter [-]')
+        self.Q3_P6_ax.set_title("Platzhalter")
         self.Q3_Figure_6.tight_layout()
         self.Q3_P6_ax.grid(True)
         self.Q3_P6_ax.legend()
