@@ -33,7 +33,7 @@ pressure = para["pressure"] # Pa
 res_t = para["res_t"] # m/s
 
 # execute the script which calls the simulation as subprocess
-#CallSubprocess.call_subprocess(name, temperature, pressure, res_t, path)
+CallSubprocess.call_subprocess(name, temperature, pressure, res_t, path)
 
 # evaluate the simulation results and (not programmed now!) add every simulated system as individual to ontology
 if "_DataSheet" in name:

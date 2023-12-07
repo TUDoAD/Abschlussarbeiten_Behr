@@ -376,7 +376,7 @@ def simulation(name_sim, path, data, combination):
     s1 = s1.GetAsObject()
     
     # connect Objects
-    r1.dV = 0.01
+    r1.dV = 0.1
     r1.ConnectFeedMaterialStream(m1,0)
     r1.ConnectProductMaterialStream(m2,0)
     r1.ConnectFeedEnergyStream(e1,1)

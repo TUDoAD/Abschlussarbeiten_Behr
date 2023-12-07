@@ -361,7 +361,7 @@ def simulation(name_sim, path, data, combination):
     r1.ConnectFeedMaterialStream(m1,0)
     r1.ConnectProductMaterialStream(m2,0)
     r1.ConnectFeedEnergyStream(e1,1)
-    r1.dV = 0.01
+    r1.dV = 0.1
     # add property package
     sim.CreateAndAddPropertyPackage("Peng-Robinson (PR)")
     #sim.CreateAndAddPropertyPackage("Soave-Redlich-Kwong (SRK)")
