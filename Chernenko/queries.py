@@ -37,16 +37,16 @@ def get_reaction(reac=None,doi=None,include_all=False):
                 ?mention afo:has_doi ?doi.}"""
 
     elif include_all == True:
-        sparqlstr = """
+        sparqlstr = '''
             SELECT ?label ?doi
             WHERE{
                 ?reaction rdf:type owl:NamedIndividual.
                 ?reaction rdf:type ?type.
                 ?type rdfs:subClassOf* obo:BFO_0000015.
                 ?reaction rdfs:label ?label.
-                FILTER regex(STR(?label),"hydroformylation","i").
+                FILTER regex(STR(?label),"'''+reac+'''","i").
                 ?reaction afo:mentioned_in ?mention.
-                ?mention afo:has_doi ?doi}"""
+                ?mention afo:has_doi ?doi}'''
     else: 
         regex_reac = '"{}"'.format(reac)
         sparqlstr = """
