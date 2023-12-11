@@ -1,8 +1,0 @@
-INFO       in modeling.py         --> Better speed can be achieved with apex installed from https://www.github.com/nvidia/apex .
-INFO       in modeling_bert.py    --> Better speed can be achieved with apex installed from https://www.github.com/nvidia/apex .
-INFO       in modeling_xlnet.py   --> Better speed can be achieved with apex installed from https://www.github.com/nvidia/apex .
-INFO       in registrable.py      --> instantiating registered subclass relu of <class 'allennlp.nn.activations.Activation'>
-INFO       in registrable.py      --> instantiating registered subclass relu of <class 'allennlp.nn.activations.Activation'>
-INFO       in registrable.py      --> instantiating registered subclass relu of <class 'allennlp.nn.activations.Activation'>
-INFO       in registrable.py      --> instantiating registered subclass relu of <class 'allennlp.nn.activations.Activation'>
-INFO       in tokenization.py     --> loading vocabulary file C:\Users\smdicher\AppData\Local\ChemDataExtractor\ChemDataExtractor\models/scibert_cased_vocab-1.0.txt
