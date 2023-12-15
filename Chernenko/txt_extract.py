@@ -492,7 +492,7 @@ def get_metadata(filename):
                     return None,None,None
 
 
-
+"""
 abstract_all=''
 path=r'.\Methanisierung\*.pdf'
 for i in glob.iglob(path):
@@ -505,7 +505,7 @@ for i in glob.iglob(path):
     #    print("Abstract:"+abstract)
     #else:
     #    print('no abstract found')
-        
+ """       
 """
     import json
     def set_config_key(key, value):

@@ -145,7 +145,7 @@ def onto_extender ():
         os.system('java -jar c://Windows/robot.jar extract --input-iri {} --method BOT --term-file class_lists/IRIs_{}.txt --output ontology_snipet/{}_classes.owl'.format(iri,o,o))
     for filepath in glob.iglob('ontology_snipet/*.owl'):
         os.system('robot merge --input ontologies/{}.owl --input {} --output ontologies/{}.owl'.format(onto_new, filepath,  onto_new))
-        os.system('robot merge --input empty.owl --input {} --output empty.owl'.format(filepath))
+        #os.system('robot merge --input empty.owl --input {} --output empty.owl'.format(filepath))
 
 def equality():
     """

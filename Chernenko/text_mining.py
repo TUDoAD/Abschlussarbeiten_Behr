@@ -108,8 +108,9 @@ def add_publication(doi,title,abstract):
     p_id : int or None
         If the publication is added successfully, it returns the unique publication ID (an integer). 
         If the publication already exists in the ontology, it returns None.
-
+ 
     """
+    #TODO Zahl von publication von hinten mit regex ablesen, in integer umwandeln, dann +1 -> p_id
     print('processing input publication...')
     global p_id
     new_world = owlready2.World()
@@ -505,7 +506,7 @@ def chemical_prep(chem_list, onto_class_list):
     for molecule in chem_list:  
         if re.search(r'^ [A-Za-z\d—–-]+|^[A-Za-z\d—–-]+ $',molecule): 
             molecule = molecule.replace(' ','')
-        if molecule in abbreviation.keys(): #check if nessesary
+        if molecule in abbreviation.keys():
             comp_dict[molecule] = []
             spans = Document(abbreviation[molecule]).cems
             class_list.append(molecule)
