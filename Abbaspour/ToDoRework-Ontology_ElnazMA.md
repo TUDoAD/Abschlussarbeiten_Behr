@@ -36,6 +36,9 @@ Dann rework der DWSIM-Funktionen
 - Handschriftl. Notizen !
 - Reasoning prüfen
 
+Prozessbeschreibung:
+- IAO, OBI 
+
 - DOCSTRINGS
 
 - General Class Axioms in Python -> Links von Hendrik anschauen (per Mail)!
