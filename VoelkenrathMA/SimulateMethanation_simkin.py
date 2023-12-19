@@ -25,7 +25,8 @@ from System import String, Environment, Array
 from System.IO import Directory, Path, File
 from System.Collections.Generic import Dictionary
 
-dwsimpath = "C:\\Users\\smmcvoel\\AppData\\Local\\DWSIM7\\"
+#dwsimpath = "C:\\Users\\smmcvoel\\AppData\\Local\\DWSIM7\\"
+dwsimpath = "C:\\Users\\smaxbehr\\AppData\\Local\\DWSIM8\\"
 
 clr.AddReference(dwsimpath + "DWSIM")
 clr.AddReference(dwsimpath + "CapeOpen.dll")
@@ -143,11 +144,12 @@ def createReaction(data, substances):
     dorders.Add(key, 0)
     rorders.Add(key, 0)
     
+    print(str(dict(comps)) + '\n Base Key:' + base_key)
+    
     num = "1.14*10^8*exp(-110000/(8.314*(T))) * 6.12*10^(-9)*exp(82900/(8.314*(T))) * 5*10^(-5)*exp(70000/(8.314*(T))) * R2 * R1 * (1- (P1 * P2^2)/(R2^4 * R1) * 1/exp(34.218 - 31266/(T)))"
     den = "(1+5*10^(-5)*exp(70000/(8.314*(T))) * R1 + 6.12*10^(-9)*exp(82900/(8.314*(T)))*R2 + 1.77*10^(5)*exp(-88600/(8.314*(T)))*P2 + 8.23*10^(-5) *exp(70650/(8.314*(T))) * N1)^2"
     # create reaction, set numerator and denominator to 1, because it get overwritten with own kintic skript
-    reaction = sim.CreateHetCatReaction(reaction_name, "This reaction is created automatically!", comps, base_key, "Vapor",
-                                        "Partial Pressure", "Pa", "mol/[kg.s]", num, den)
+    reaction = sim.CreateHetCatReaction(reaction_name, "This reaction is created automatically!", comps, base_key, "Vapor", "Partial Pressure", "Pa", "mol/[kg.s]", num, den)
     
     sim.AddReaction(reaction)
     sim.AddReactionToSet(reaction.ID, "DefaultSet", True, 0)
@@ -324,6 +326,17 @@ def simulation(name_sim, path, data, combination):
                     sim.SelectedCompounds.Add(compound.Name, compound)
                     index = substances.index(sub)
                     substances[index] = [sub, key]
+              
+              #  elif sub == "Ni":
+              #      key = "Nickel"
+              #      #try:
+              #      compound = sim.AvailableCompounds[key]
+              #      sim.SelectedCompounds.Add(compound.Name, compound)
+              #      #except:
+              #      #    pass
+              #      index = substances.index(sub)
+              #      substances[index] = [sub, key]
+              
                 else:
                     key = pcp.get_compounds(sub,"formula")[0].iupac_name
                     if "molecular" in key:
@@ -338,6 +351,7 @@ def simulation(name_sim, path, data, combination):
                         sim.SelectedCompounds.Add(compound.Name, compound)
                         index = substances.index(sub)
                         substances[index] = [sub, key]
+                        
         except: ArgumentException
     print("Done!")
         
@@ -414,6 +428,7 @@ def simulation(name_sim, path, data, combination):
     r1.UseUserDefinedPressureDrop = True
 
     print("Create reactions and kinetic scripts...")
+    #print(substances)
     createReaction(data, substances)
     print("Done!")
 
@@ -525,7 +540,7 @@ def run():
         data = yaml.safe_load(file)
        
     simulation(name_sim, path, data, combination)
-run()
+#run()
 
 """
 Für Überarbeitungszwecke:
