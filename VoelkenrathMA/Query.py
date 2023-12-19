@@ -15,12 +15,15 @@ competency questions:
 import json
 import owlready2
 import pandas as pd
+import os
 
 from pyDataverse.api import NativeApi, DataAccessApi
 from pyDataverse.models import Dataset, Datafile
 
 #print("Loading Ontology...")
-onto_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-OntoXMLRDF_reasoned.owl"
+#onto_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-OntoXMLRDF_reasoned.owl"
+#onto_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-OntoXMLRDF_reasoned.owl"
+onto_path = './ontologies/MV-OntoXMLRDF_reasoned.owl'
 #onto_path = "E:/Bibliothek/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-Onto_merged-and-inferred.owl"
 new_world = owlready2.World()
 onto = owlready2.get_ontology(onto_path).load()
