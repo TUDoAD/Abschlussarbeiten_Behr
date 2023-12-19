@@ -13,6 +13,7 @@ import xmltodict
 import subprocess
 import regex as re    
 import pubchempy as pcp
+import os
 
 from collections import Counter, OrderedDict
 from linkml_runtime.loaders import yaml_loader
@@ -23,11 +24,12 @@ from linkml_runtime.linkml_model import SchemaDefinition
 def ExecDetchemDriver():
     ## Calling DETCHEM driver and formatting data 
     # define file path
-    path = "C://Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/cli/dist/"
+    #path = "C://Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/cli/dist/"
+    path = os.getcwd() + '\\cli\\dist\\'
     cli = path + "cli.js"
-    dci = path + "input/Methanation_Ni_DETCHEM.txt"
-    ckt = path + "input/Methanation_thermdata.txt"
-    mol = path + "input/moldata.txt"
+    dci = path + "input\\Methanation_Ni_DETCHEM.txt"
+    ckt = path + "input\\Methanation_thermdata.txt"
+    mol = path + "input\\moldata.txt"
     sur = "Ni=2.55e-5" # ACHTUNG: maybe variable with future "DETCHEM Driver"
     
     command = ["node", cli, "--dci", dci, "--ckt", ckt, "--moldata", mol, "--surface", sur]
