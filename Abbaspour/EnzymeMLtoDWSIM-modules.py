@@ -396,21 +396,36 @@ def kin_ind_from_dict(kin_dict, onto):
         code = compile(codestring, "<string>","exec")
         exec(code)
         
-        ## adding Km indv if it is contained
-        if "Km" in kin_dict[kin]:
-            
-            ind_name = "Km_" + kin_dict[kin]["hasEnzymeML_ID"]
-            val = kin_dict[kin]["Km"]
-            unit = kin_dict[kin]["Km_Unit"]
-            
-            codestring = """with onto:
-                            Km_indv = onto.search_one(iri = "*SBO_0000373")('{}')
-                            Km_indv.has_value = {}
-                            Km_indv.has_unit_string = {}
-                """.format(ind_name, val, unit)
         
-        
-        
+        if kin_type == "Henri-Michaelis-Menten rate law":
+            ## adding Km indv if it is contained
+            if "Km" in kin_dict[kin]:
+                
+                ind_name = "Km_" + kin_dict[kin]["hasEnzymeML_ID"]
+                val = kin_dict[kin]["Km"]
+                unit = kin_dict[kin]["Km_Unit"]
+                
+                codestring = """with onto:
+                                Km_indv = onto.search_one(iri = "*SBO_0000373")('{}')
+                                Km_indv.has_value = '{}'
+                                Km_indv.has_unit_string = '{}'
+                    """.format(ind_name, val, unit)
+                code = compile(codestring, "<string>","exec")
+                exec(code)
+            ## adding kcat indv if it is contained
+            if "kcat" in kin_dict[kin]:
+                
+                ind_name = "kcat_" + kin_dict[kin]["hasEnzymeML_ID"]
+                val = kin_dict[kin]["kcat"]
+                unit = kin_dict[kin]["kcat_Unit"]
+                
+                codestring = """with onto:
+                                kcat_indv = onto.search_one(iri = "*SBO_0000025")('{}')
+                                kcat_indv.has_value = '{}'
+                                kcat_indv.has_unit_string = '{}'
+                    """.format(ind_name, val, unit)
+                code = compile(codestring, "<string>","exec")
+                exec(code)
 
     return onto
 
