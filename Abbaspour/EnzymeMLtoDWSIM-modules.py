@@ -88,8 +88,10 @@ def new_ELN_to_dict(eln_path):
     
     ext_eln_data = {}
     subst_eln_data = {}
+    kin_eln_data = {}
     
     # load substances and properties into dictionary
+    """
     for col, d in eln_sheet_properties.items():
         if col != "Property":
             sub_name = eln_sheet_properties[eln_sheet_properties['Property'].str.contains('Name')][col].iloc[0].strip()
@@ -97,7 +99,7 @@ def new_ELN_to_dict(eln_path):
             for index, row in eln_sheet_properties.iterrows():
                 if pd.notna(row[col]) and row["Property"] != "Name":
                     subst_eln_data[sub_name][row["Property"]] = row[col]
-    
+     """
     subst_eln_data = eln_subst_data_to_dict(eln_sheet_properties)
     
     ## adding dicts to already existing dict
@@ -111,22 +113,13 @@ def new_ELN_to_dict(eln_path):
     # extract kinetic parameters into dictionary
     for col, d in eln_sheet_kin_params.items():
         if col != "Property":
-            sub_name = eln_sheet_kin_params[eln_sheet_kin_params['Property'].str.contains('kineticName')][col].iloc[0].strip()
-            subst_eln_data[sub_name] = {}
+            kin_name = eln_sheet_kin_params[eln_sheet_kin_params['Property'].str.contains('Name')][col].iloc[0].strip()
+            kin_eln_data[kin_name] = {}
             for index, row in eln_sheet_kin_params.iterrows():
                 if pd.notna(row[col]) and row["Property"] != "kineticName":
-                    subst_eln_data[sub_name][row["Property"]] = row[col]
+                    kin_eln_data[kin_name][row["Property"]] = row[col]
     
-    subst_eln_data = eln_subst_data_to_dict(eln_sheet_kin_params)
-    
-    ## adding dicts to already existing dict
-    for sheet_name in ['Properties for JSON-file', 'Additional Info (Units)']:
-        eln_sheet_kin_params = pd.read_excel(ELN_xlsx,sheet_name)
-        add_dict = eln_subst_data_to_dict(eln_sheet_kin_params)
-        kinetic_eln_data = {key.strip(): {**subst_eln_data.get(key, {}), **add_dict.get(key, {})} for key in set(subst_eln_data) | set(add_dict)}    
-    
-    ##
-    
+    kinetic_eln_data = eln_subst_data_to_dict(eln_sheet_kin_params)
     
     # load PFD data
     # Sheet PFD
@@ -223,16 +216,16 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
     # iterate through each substance from subst_dict and include it in ontology
     
     enzymeML_subst_parameters = ["smiles","inchi"]
-    ## HERE!
+    
     for subst in list(subst_dict.keys()):
         # include as individual, if label is already present as class
-        if onto.search_one(label = subst) != None:
+        if onto.search_one(label = subst):
             codestring = """with onto:
                             substance_indv = onto.search_one(label = "{}")('ind_{}')
                 """.format(subst, subst)
        
         # include as individual, if part in IRI is already present
-        elif onto.search_one(iri = "*{}".format(subst)) != None:
+        elif onto.search_one(iri = "*{}".format(subst)):
             codestring = """with onto:
                             substance_indv = onto.search_one(iri = "*{}")('ind_{}')
                 """.format(subst, subst)
@@ -266,11 +259,7 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
                             substance_indv = {}('ind_{}')
                             substance_indv.label = 'Sub_{}'
                     """.format(subst, subst_superclass, subst, subst, subst,subst)
-        
-        #
-        
-        #print(codestring)
-        
+       
         # compile codestring
         code = compile(codestring, "<string>", "exec")
         # Execute code
@@ -293,46 +282,6 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
                     code = compile(codestring, "<string>", "exec")
                     # Execute code
                     exec(code)
-                """
-                subst_superclass = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')
-                enzml_name = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).name
-                
-                try:
-                    smiles = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).smiles
-                except:
-                    smiles = None
-                
-                try:
-                    inchi = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).inchi
-                except:
-                    inchi = None
-                
-            else: 
-                subst_superclass = 'ChemicalSubstance'
-                enzml_name = None
-                smiles = None
-                inchi = None
-                
-            if "hasEnzymeML_ID" in subst_dict[subst]:
-                subst_superclass = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')
-                enzml_name = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).name
-                
-                try:
-                    smiles = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).smiles
-                except:
-                    smiles = None
-                
-                try:
-                    inchi = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).inchi
-                except:
-                    inchi = None
-                
-            else: 
-                subst_superclass = 'ChemicalSubstance'
-                enzml_name = None
-                smiles = None
-                inchi = None
-        """
 
     return onto
 
@@ -408,11 +357,81 @@ def subst_set_relations(enzmldoc, subst_dict, onto):
             # Code, der im codestring enthalten ist compilieren
             code = compile(codestring, "<string>","exec")
 
-            exec(code)
-                
-        
+            exec(code)       
         
     return BaseOnto
+
+def kin_classes_from_dict(kin_dict, onto):
+    
+    for kin in list(kin_dict.keys()):
+        # kin = label of indv
+        
+        kin_type = kin_dict[kin]["rateLaw"] # ontology class
+        
+        kin_onto_class = onto.search_one(label = kin_type)
+        
+        if onto.search_one(label = kin_type):
+            codestring = """with onto:
+                            kin_indv = onto.search_one(label = "{}")('{}')
+                """.format(kin_type, kin)
+       
+        # include as individual, if part in IRI is already present
+        elif onto.search_one(iri = "*{}".format(kin_type)):
+            codestring = """with onto:
+                            kin_indv = onto.search_one(iri = "*{}")('{}')
+                """.format(kin_type, kin)
+        else:            
+            # if not contained in ontology, the kinetics are introduced as subclass of
+            # SBO_0000001 (rate law)
+            codestring = """with onto:
+                        class {}(onto.search_one(iri = '*SBO_0000001')):
+                            label = '{}'
+                            pass                    
+                        kin_indv = {}('{}')
+                        kin_indv.label = '{}'
+                """.format(kin_type,kin_type,kin_type,kin,kin)
+            
+        code = compile(codestring, "<string>","exec")
+        exec(code)
+        
+    
+    for subst in list(subst_dict.keys()):
+        # include as individual, if label is already present as class
+        if onto.search_one(label = subst) != None:
+            codestring = """with onto:
+                            substance_indv = onto.search_one(label = "{}")('ind_{}')
+                """.format(subst, subst)
+       
+        # include as individual, if part in IRI is already present
+        elif onto.search_one(iri = "*{}".format(subst)) != None:
+            codestring = """with onto:
+                            substance_indv = onto.search_one(iri = "*{}")('ind_{}')
+                """.format(subst, subst)
+        
+        # include as class and individual of class and search in enzymeML doc for
+        # the substance
+        
+        else:   
+            try:
+                subst_superclass = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')              
+                enzml_name = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).name
+            except: 
+                subst_superclass = "SBO_0000247" # Simple Chemical
+                enzml_name = ''
+            
+            if enzml_name:
+                codestring = """with onto:
+                            class {}(onto.search_one(iri = '*{}')):
+                                label = '{}'
+                                altLabel = '{}' 
+                                pass                    
+                            substance_indv = {}('ind_{}')
+                            substance_indv.label = 'Sub_{}'
+                            substance_indv.altLabel = '{}'
+                    """.format(subst, subst_superclass, subst, enzml_name, subst, subst,subst, enzml_name)
+
+    return onto
+
 
 def substance_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
 
@@ -428,6 +447,7 @@ def substance_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
     # insert data properties to substance individuals from dictionary
     BaseOnto = subst_set_relations(enzmldoc, supp_eln_dict["substances"], BaseOnto)
         
+    BaseOnto = kin_classes_from_dict(supp_eln_dict["kinetics"],BaseOnto)
 
     # Ontologie zwischenspeichern
     BaseOnto.save(file="./ontologies/Substances_and_"+ onto_str +".owl", format="rdfxml")
