@@ -111,10 +111,10 @@ def new_ELN_to_dict(eln_path):
     # extract kinetic parameters into dictionary
     for col, d in eln_sheet_kin_params.items():
         if col != "Property":
-            sub_name = eln_sheet_kin_params[eln_sheet_kin_params['Property'].str.contains('hasCompoundName')][col].iloc[0].strip()
+            sub_name = eln_sheet_kin_params[eln_sheet_kin_params['Property'].str.contains('kineticName')][col].iloc[0].strip()
             subst_eln_data[sub_name] = {}
             for index, row in eln_sheet_kin_params.iterrows():
-                if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
+                if pd.notna(row[col]) and row["Property"] != "kineticName":
                     subst_eln_data[sub_name][row["Property"]] = row[col]
     
     subst_eln_data = eln_subst_data_to_dict(eln_sheet_kin_params)
