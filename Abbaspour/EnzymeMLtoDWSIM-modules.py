@@ -405,11 +405,13 @@ def kin_ind_from_dict(kin_dict, onto):
                 val = kin_dict[kin]["Km"]
                 unit = kin_dict[kin]["Km_Unit"]
                 
+                hasVal = onto.search_one(iri = '*hasValue')
+                
                 codestring = """with onto:
                                 Km_indv = onto.search_one(iri = "*SBO_0000373")('{}')
-                                Km_indv.has_value = '{}'
-                                Km_indv.has_unit_string = '{}'
-                    """.format(ind_name, val, unit)
+                                Km_indv.{}.append('{}')
+                                Km_indv.has_unit_string.append('{}')
+                    """.format(ind_name, hasVal.name, val, unit)
                 code = compile(codestring, "<string>","exec")
                 exec(code)
             ## adding kcat indv if it is contained
@@ -421,9 +423,9 @@ def kin_ind_from_dict(kin_dict, onto):
                 
                 codestring = """with onto:
                                 kcat_indv = onto.search_one(iri = "*SBO_0000025")('{}')
-                                kcat_indv.has_value = '{}'
-                                kcat_indv.has_unit_string = '{}'
-                    """.format(ind_name, val, unit)
+                                kcat_indv.{}.append('{}')
+                                kcat_indv.has_unit_string.append('{}')
+                    """.format(ind_name, hasVal.name, val, unit)
                 code = compile(codestring, "<string>","exec")
                 exec(code)
 
