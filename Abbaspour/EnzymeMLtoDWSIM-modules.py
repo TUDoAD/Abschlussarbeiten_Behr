@@ -362,14 +362,15 @@ def subst_set_relations(enzmldoc, subst_dict, onto):
         
     return BaseOnto
 
-def kin_classes_from_dict(kin_dict, onto):
+def kin_ind_from_dict(kin_dict, onto):
     
     for kin in list(kin_dict.keys()):
         # kin = label of indv
         
+        ## adding rateLaw individual
         kin_type = kin_dict[kin]["rateLaw"] # ontology class
         
-        kin_onto_class = onto.search_one(label = kin_type)
+        #kin_onto_class = onto.search_one(label = kin_type)
         
         if onto.search_one(label = kin_type):
             codestring = """with onto:
@@ -391,9 +392,25 @@ def kin_classes_from_dict(kin_dict, onto):
                         kin_indv = {}('{}')
                         kin_indv.label = '{}'
                 """.format(kin_type,kin_type,kin_type,kin,kin)
-            
+        
         code = compile(codestring, "<string>","exec")
         exec(code)
+        
+        ## adding Km indv if it is contained
+        if "Km" in kin_dict[kin]:
+            
+            ind_name = "Km_" + kin_dict[kin]["hasEnzymeML_ID"]
+            val = kin_dict[kin]["Km"]
+            unit = kin_dict[kin]["Km_Unit"]
+            
+            codestring = """with onto:
+                            Km_indv = onto.search_one(iri = "*SBO_0000373")('{}')
+                            Km_indv.has_value = {}
+                            Km_indv.has_unit_string = {}
+                """.format(ind_name, val, unit)
+        
+        
+        
 
     return onto
 
@@ -412,7 +429,7 @@ def substance_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
     # insert data properties to substance individuals from dictionary
     BaseOnto = subst_set_relations(enzmldoc, supp_eln_dict["substances"], BaseOnto)
         
-    BaseOnto = kin_classes_from_dict(supp_eln_dict["kinetics"],BaseOnto)
+    BaseOnto = kin_ind_from_dict(supp_eln_dict["kinetics"],BaseOnto)
 
     # Ontologie zwischenspeichern
     BaseOnto.save(file="./ontologies/Substances_and_"+ onto_str +".owl", format="rdfxml")

@@ -335,6 +335,14 @@
     
 
 
+    <!-- http://anonymous#has_unit_string -->
+
+    <owl:DatatypeProperty rdf:about="http://anonymous#has_unit_string">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.nfdi.org/nfdi4cat/ontochem#amount -->
 
     <owl:DatatypeProperty rdf:about="http://www.nfdi.org/nfdi4cat/ontochem#amount">
