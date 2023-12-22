@@ -406,12 +406,19 @@ def kin_ind_from_dict(kin_dict, onto):
                 unit = kin_dict[kin]["Km_Unit"]
                 
                 hasVal = onto.search_one(iri = '*hasValue')
+                hasModel= onto.search_one(iri = '*RO_0002615')
+                kin_indv = onto.search_one(label = kin)
                 
                 codestring = """with onto:
                                 Km_indv = onto.search_one(iri = "*SBO_0000373")('{}')
                                 Km_indv.{}.append('{}')
                                 Km_indv.has_unit_string.append('{}')
-                    """.format(ind_name, hasVal.name, val, unit)
+                                Km_indv.RO_0002615 = {}
+                                
+                    """.format(ind_name, hasVal.name, val, unit, onto.search_one(label = kin))
+                    
+                    
+                print(codestring)
                 code = compile(codestring, "<string>","exec")
                 exec(code)
             ## adding kcat indv if it is contained
@@ -428,7 +435,11 @@ def kin_ind_from_dict(kin_dict, onto):
                     """.format(ind_name, hasVal.name, val, unit)
                 code = compile(codestring, "<string>","exec")
                 exec(code)
-
+            
+             
+            
+                
+                
     return onto
 
 
