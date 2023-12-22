@@ -82,27 +82,51 @@ def new_ELN_to_dict(eln_path):
     ELN_xlsx = pd.ExcelFile(eln_path)
     eln_sheet = pd.read_excel(ELN_xlsx,'Substances and Reactions')
     
+    kin_index = eln_sheet[eln_sheet['Property'].str.contains('Kinetic Parameters', na=False)].index.min()
+    eln_sheet_properties = eln_sheet.loc[:kin_index -1].dropna(how='all')
+    eln_sheet_kin_params = eln_sheet.loc[kin_index + 1:].dropna(how='all').dropna(axis=1, how='all')
+    
     ext_eln_data = {}
     subst_eln_data = {}
     
     # load substances and properties into dictionary
-    for col, d in eln_sheet.items():
+    for col, d in eln_sheet_properties.items():
         if col != "Property":
-            sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0].strip()
+            sub_name = eln_sheet_properties[eln_sheet_properties['Property'].str.contains('hasCompoundName')][col].iloc[0].strip()
             subst_eln_data[sub_name] = {}
-            for index, row in eln_sheet.iterrows():
+            for index, row in eln_sheet_properties.iterrows():
                 if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
                     subst_eln_data[sub_name][row["Property"]] = row[col]
     
-    subst_eln_data = eln_subst_data_to_dict(eln_sheet)
+    subst_eln_data = eln_subst_data_to_dict(eln_sheet_properties)
     
     ## adding dicts to already existing dict
     for sheet_name in ['Properties for JSON-file', 'Additional Info (Units)']:
-        eln_sheet = pd.read_excel(ELN_xlsx,sheet_name)
-        add_dict = eln_subst_data_to_dict(eln_sheet)
+        eln_sheet_properties = pd.read_excel(ELN_xlsx,sheet_name)
+        add_dict = eln_subst_data_to_dict(eln_sheet_properties)
         subst_eln_data = {key.strip(): {**subst_eln_data.get(key, {}), **add_dict.get(key, {})} for key in set(subst_eln_data) | set(add_dict)}    
     
     ##
+    
+    # extract kinetic parameters into dictionary
+    for col, d in eln_sheet_kin_params.items():
+        if col != "Property":
+            sub_name = eln_sheet_kin_params[eln_sheet_kin_params['Property'].str.contains('hasCompoundName')][col].iloc[0].strip()
+            subst_eln_data[sub_name] = {}
+            for index, row in eln_sheet_kin_params.iterrows():
+                if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
+                    subst_eln_data[sub_name][row["Property"]] = row[col]
+    
+    subst_eln_data = eln_subst_data_to_dict(eln_sheet_kin_params)
+    
+    ## adding dicts to already existing dict
+    for sheet_name in ['Properties for JSON-file', 'Additional Info (Units)']:
+        eln_sheet_kin_params = pd.read_excel(ELN_xlsx,sheet_name)
+        add_dict = eln_subst_data_to_dict(eln_sheet_kin_params)
+        kinetic_eln_data = {key.strip(): {**subst_eln_data.get(key, {}), **add_dict.get(key, {})} for key in set(subst_eln_data) | set(add_dict)}    
+    
+    ##
+    
     
     # load PFD data
     # Sheet PFD
@@ -137,6 +161,7 @@ def new_ELN_to_dict(eln_path):
     # join substances related data and PFD-related data    
     ext_eln_data["substances"] = subst_eln_data   
     ext_eln_data["PFD"] = pfd_eln_data 
+    ext_eln_data["kinetics"] = kinetic_eln_data
     # 
     
     return ext_eln_data
