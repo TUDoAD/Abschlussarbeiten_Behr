@@ -13,6 +13,7 @@ Created on Mon Sep 25 13:58:00 2023
 
 from owlready2 import *
 import pyenzyme as pe
+import json
 #from pyenzyme import EnzymeMLDocument, EnzymeReaction, Complex, Reactant, Protein, Creator
 #from pyenzyme.enzymeml.models import KineticModel, KineticParameter
 import pandas as pd
@@ -393,42 +394,6 @@ def kin_classes_from_dict(kin_dict, onto):
             
         code = compile(codestring, "<string>","exec")
         exec(code)
-        
-    
-    for subst in list(subst_dict.keys()):
-        # include as individual, if label is already present as class
-        if onto.search_one(label = subst) != None:
-            codestring = """with onto:
-                            substance_indv = onto.search_one(label = "{}")('ind_{}')
-                """.format(subst, subst)
-       
-        # include as individual, if part in IRI is already present
-        elif onto.search_one(iri = "*{}".format(subst)) != None:
-            codestring = """with onto:
-                            substance_indv = onto.search_one(iri = "*{}")('ind_{}')
-                """.format(subst, subst)
-        
-        # include as class and individual of class and search in enzymeML doc for
-        # the substance
-        
-        else:   
-            try:
-                subst_superclass = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).ontology.value.replace(':','_')              
-                enzml_name = enzmldoc.getAny(subst_dict[subst]["hasEnzymeML_ID"]).name
-            except: 
-                subst_superclass = "SBO_0000247" # Simple Chemical
-                enzml_name = ''
-            
-            if enzml_name:
-                codestring = """with onto:
-                            class {}(onto.search_one(iri = '*{}')):
-                                label = '{}'
-                                altLabel = '{}' 
-                                pass                    
-                            substance_indv = {}('ind_{}')
-                            substance_indv.label = 'Sub_{}'
-                            substance_indv.altLabel = '{}'
-                    """.format(subst, subst_superclass, subst, enzml_name, subst, subst,subst, enzml_name)
 
     return onto
 
@@ -474,6 +439,9 @@ def run():
    
    new_eln_dict = new_ELN_to_dict("./ELNs/New-ELN_Kinetik_1.xlsx")
    onto, test_dict = substance_knowledge_graph(enzmldoc, new_eln_dict, onto, "BaseOnto2")
+   
+   with open('dict_dump.json', 'w') as file:
+        json.dump(eln_dict, file)
    
    #return test_dict
 
