@@ -63,12 +63,12 @@ def eln_subst_data_to_dict(eln_sheet):
     ext_eln_data = {}
     for col, d in eln_sheet.items():
         if col != "Property":
-            sub_name = eln_sheet[eln_sheet['Property'].str.contains('hasCompoundName')][col].iloc[0]
+            sub_name = eln_sheet[eln_sheet['Property'].str.contains('Name')][col].iloc[0]
             sub_name = sub_name.strip() if sub_name == str else sub_name 
             if pd.notna(sub_name): ext_eln_data[sub_name] = {}
            # if sub_name in list(ext_eln_data.keys()):
             for index, row in eln_sheet.iterrows():
-                if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
+                if pd.notna(row[col]) and row["Property"] != "Name":
                     ext_eln_data[sub_name][row["Property"]] = row[col]
     
     return ext_eln_data
@@ -92,10 +92,10 @@ def new_ELN_to_dict(eln_path):
     # load substances and properties into dictionary
     for col, d in eln_sheet_properties.items():
         if col != "Property":
-            sub_name = eln_sheet_properties[eln_sheet_properties['Property'].str.contains('hasCompoundName')][col].iloc[0].strip()
+            sub_name = eln_sheet_properties[eln_sheet_properties['Property'].str.contains('Name')][col].iloc[0].strip()
             subst_eln_data[sub_name] = {}
             for index, row in eln_sheet_properties.iterrows():
-                if pd.notna(row[col]) and row["Property"] != "hasCompoundName":
+                if pd.notna(row[col]) and row["Property"] != "Name":
                     subst_eln_data[sub_name][row["Property"]] = row[col]
     
     subst_eln_data = eln_subst_data_to_dict(eln_sheet_properties)
