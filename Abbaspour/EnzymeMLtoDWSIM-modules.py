@@ -13,8 +13,8 @@ Created on Mon Sep 25 13:58:00 2023
 
 from owlready2 import *
 import pyenzyme as pe
-from pyenzyme import EnzymeMLDocument, EnzymeReaction, Complex, Reactant, Protein, Creator
-from pyenzyme.enzymeml.models import KineticModel, KineticParameter
+#from pyenzyme import EnzymeMLDocument, EnzymeReaction, Complex, Reactant, Protein, Creator
+#from pyenzyme.enzymeml.models import KineticModel, KineticParameter
 import pandas as pd
 
 
@@ -230,7 +230,7 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
                                 altLabel = '{}' 
                                 pass                    
                             substance_indv = {}('ind_{}')
-                            substance_indv.label = '{}'
+                            substance_indv.label = 'Sub_{}'
                             substance_indv.altLabel = '{}'
                     """.format(subst, subst_superclass, subst, enzml_name, subst, subst,subst, enzml_name)
             else:
@@ -239,7 +239,7 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
                                 label = '{}'
                                 pass                    
                             substance_indv = {}('ind_{}')
-                            substance_indv.label = '{}'
+                            substance_indv.label = 'Sub_{}'
                     """.format(subst, subst_superclass, subst, subst, subst,subst)
         
         #
@@ -394,10 +394,13 @@ def substance_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
     ##
     #SBO Term: enzmldoc.getAny("s0").ontology.value
     
+    # insert substances from dictionary in ontology
     BaseOnto = subst_classes_from_dict(enzmldoc, supp_eln_dict["substances"], onto)
     
+    # insert data properties to substance individuals from dictionary
     BaseOnto = subst_dataProp_creation(supp_eln_dict["substances"], BaseOnto)
 
+    # insert data properties to substance individuals from dictionary
     BaseOnto = subst_set_relations(enzmldoc, supp_eln_dict["substances"], BaseOnto)
         
 

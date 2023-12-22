@@ -47,12 +47,12 @@ Prozessbeschreibung:
 ### Reaction + Substances
 Catalyst: [Laccase] -> Laccase Substance: http://purl.obolibrary.org/obo/GO_1990204 Laccase activity: http://purl.obolibrary.org/obo/GO_0016682
 
-Oxidoreductase activity(is_a http://purl.obolibrary.org/obo/GO_0016491):
+Reaktion der Laccase = Oxidoreductase activity(is_a http://purl.obolibrary.org/obo/GO_0016491): X
 
-Laccase activity (is_a http://purl.obolibrary.org/obo/GO_0016682):
-		{Educts:[ABTS_red is_a https://www.wikidata.org/wiki/Q287582], O2],
-	     Products:[H2O, ABTS_ox],
-	     Catalyst:[Laccase is_a http://purl.obolibrary.org/obo/GO_1990204]},
+<Raus lassen, da schon über SBO definiert> Laccase activity (is_a http://purl.obolibrary.org/obo/GO_0016682):       X
+		{Reactant (http://biomodels.net/SBO/SBO_0000010):[ABTS_red is_a https://www.wikidata.org/wiki/Q287582], O2], X
+	     Product (http://biomodels.net/SBO/SBO_0000011):[H2O, ABTS_ox],   X
+	     Catalyst:[Laccase is_a oxidoreductase complex http://purl.obolibrary.org/obo/GO_1990204]},  X
 		 
 		 
  
