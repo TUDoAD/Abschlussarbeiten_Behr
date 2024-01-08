@@ -15,7 +15,7 @@ def set_config_key(key, value):
 with open("config.json") as json_config:
      for key, value in json.load(json_config).items():
          set_config_key(key, value)
-get_compounds("formula", "SiO2")         
+get_compounds("SiO2","formula")         
 model = BERTSpan.load_from_checkpoint(ckpt_name, model_name=bert_name, train_dataset=[], val_dataset=[], test_dataset=[])
 
 onto_class_list = load_classes_chebi()
