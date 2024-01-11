@@ -414,7 +414,7 @@ def kin_ind_from_dict(eln_dict, onto):
                         kin_indv.label = 'indv_{}'
                 """.format(kin_type,kin_type,kin_type,kin,kin)
         
-        print(codestring)
+        #print(codestring)
         code = compile(codestring, "<string>","exec")
         exec(code)
         
