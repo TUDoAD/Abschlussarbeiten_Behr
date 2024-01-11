@@ -393,7 +393,7 @@ def kin_ind_from_dict(eln_dict, onto):
                             kin_indv = onto.search_one(label = "{}")('indv_{}')
                             kin_indv.label = "indv_{}"
                             
-                            enzyme_indv = onto.search_one(label = {})
+                            enzyme_indv = onto.search_one(label = "{}")
                             kin_indv.RO_0000052 = enzyme_indv
                 """.format(kin_type, kin, kin, Enz_indv_label)
        
@@ -414,6 +414,7 @@ def kin_ind_from_dict(eln_dict, onto):
                         kin_indv.label = 'indv_{}'
                 """.format(kin_type,kin_type,kin_type,kin,kin)
         
+        print(codestring)
         code = compile(codestring, "<string>","exec")
         exec(code)
         
@@ -444,7 +445,7 @@ def kin_ind_from_dict(eln_dict, onto):
                     """.format(ind_name, hasVal.name, val, unit)
                     
                     
-                print(codestring)
+                #print(codestring)
                 code = compile(codestring, "<string>","exec")
                 exec(code)
             ## adding kcat indv if it is contained
