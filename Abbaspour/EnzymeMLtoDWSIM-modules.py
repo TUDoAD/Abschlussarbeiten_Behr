@@ -219,11 +219,14 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
     enzymeML_subst_parameters = ["smiles","inchi"]
     
     for subst in list(subst_dict.keys()):
+        
+        enzml_ID = subst_dict[subst]["hasEnzymeML_ID"]
         # include as individual, if label is already present as class
         if onto.search_one(label = subst):
             codestring = """with onto:
                             substance_indv = onto.search_one(label = "{}")('ind_{}')
-                """.format(subst, subst)
+                            substance_indv.label = 'Sub_{}_{}'
+                """.format(subst, subst, subst, enzml_ID)
        
         # include as individual, if part in IRI is already present
         elif onto.search_one(iri = "*{}".format(subst)):
@@ -241,6 +244,7 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
             except: 
                 subst_superclass = "SBO_0000247" # Simple Chemical
                 enzml_name = ''
+
             
             if enzml_name:
                 codestring = """with onto:
@@ -249,17 +253,17 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
                                 altLabel = '{}' 
                                 pass                    
                             substance_indv = {}('ind_{}')
-                            substance_indv.label = 'Sub_{}'
+                            substance_indv.label = 'Sub_{}_{}'
                             substance_indv.altLabel = '{}'
-                    """.format(subst, subst_superclass, subst, enzml_name, subst, subst,subst, enzml_name)
+                    """.format(subst, subst_superclass, subst, enzml_name, subst, subst,subst, enzml_ID, enzml_name)
             else:
                 codestring = """with onto:
                             class {}(onto.search_one(iri = '*{}')):
                                 label = '{}'
                                 pass                    
                             substance_indv = {}('ind_{}')
-                            substance_indv.label = 'Sub_{}'
-                    """.format(subst, subst_superclass, subst, subst, subst,subst)
+                            substance_indv.label = 'Sub_{}_{}'
+                    """.format(subst, subst_superclass, subst, subst, subst,subst,enzml_ID)
        
         # compile codestring
         code = compile(codestring, "<string>", "exec")
@@ -362,8 +366,9 @@ def subst_set_relations(enzmldoc, subst_dict, onto):
         
     return BaseOnto
 
-def kin_ind_from_dict(kin_dict, onto):
+def kin_ind_from_dict(eln_dict, onto):
     
+    kin_dict = eln_dict["kinetics"]
     for kin in list(kin_dict.keys()):
         # kin = label of indv
         
@@ -372,17 +377,26 @@ def kin_ind_from_dict(kin_dict, onto):
         
         #kin_onto_class = onto.search_one(label = kin_type)
         
+        # rateLaw -- characteristic of -> Enzyme
+        # indv_rateLaw -- http://purl.obolibrary.org/obo/RO_0000052 -> subst_Enzyme
+        Enzyme_name = kin_dict[kin]["kineticOfCompound"]             
+        subst_id = eln_dict["substances"][Enzyme_name]["hasEnzymeML_ID"]
+        
+        #include kinetic type as individual for further relations
         if onto.search_one(label = kin_type):
             codestring = """with onto:
                             kin_indv = onto.search_one(label = "{}")('{}')
                             kin_indv.label = "indv_{}"
+                            enzyme_indv = onto.search_one(label = Enzyme_name)
+                            kin_indv.RO_0000052.append()
                 """.format(kin_type, kin, kin)
        
         # include as individual, if part in IRI is already present
         elif onto.search_one(iri = "*{}".format(kin_type)):
             codestring = """with onto:
                             kin_indv = onto.search_one(iri = "*{}")('{}')
-                """.format(kin_type, kin)
+                            kin_indv.label = "indv_{}"
+                """.format(kin_type, kin, kin)
         else:            
             # if not contained in ontology, the kinetics are introduced as subclass of
             # SBO_0000001 (rate law)
@@ -396,6 +410,9 @@ def kin_ind_from_dict(kin_dict, onto):
         
         code = compile(codestring, "<string>","exec")
         exec(code)
+        
+        
+        
         
         
         if kin_type == "Henri-Michaelis-Menten rate law":
@@ -444,6 +461,7 @@ def kin_ind_from_dict(kin_dict, onto):
                 code = compile(codestring, "<string>","exec")
                 exec(code)             
             
+            
                 
                 
     return onto
@@ -463,7 +481,7 @@ def substance_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
     # insert data properties to substance individuals from dictionary
     BaseOnto = subst_set_relations(enzmldoc, supp_eln_dict["substances"], BaseOnto)
         
-    BaseOnto = kin_ind_from_dict(supp_eln_dict["kinetics"],BaseOnto)
+    BaseOnto = kin_ind_from_dict(supp_eln_dict,BaseOnto)
 
     # Ontologie zwischenspeichern
     BaseOnto.save(file="./ontologies/Substances_and_"+ onto_str +".owl", format="rdfxml")
