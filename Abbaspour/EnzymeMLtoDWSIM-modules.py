@@ -412,7 +412,7 @@ def kin_ind_from_dict(kin_dict, onto):
                 kin_indv_label =  "indv_"+kin
                 
                 codestring = """with onto:
-                                Km_indv = onto.search_one(iri = "*SBO_0000373")('{}')
+                                Km_indv = onto.search_one(iri = "*SBO_0000027")('{}')
                                 Km_indv.{}.append('{}')
                                 Km_indv.has_unit_string.append('{}')
                                 
@@ -431,15 +431,18 @@ def kin_ind_from_dict(kin_dict, onto):
                 val = kin_dict[kin]["kcat"]
                 unit = kin_dict[kin]["kcat_Unit"]
                 
+                kin_indv_label =  "indv_"+kin
+                
                 codestring = """with onto:
                                 kcat_indv = onto.search_one(iri = "*SBO_0000025")('{}')
                                 kcat_indv.{}.append('{}')
                                 kcat_indv.has_unit_string.append('{}')
+                                
+                                kin_indv = onto.search_one(label = kin_indv_label)
+                                kcat_indv.RO_0002615.append(kin_indv)
                     """.format(ind_name, hasVal.name, val, unit)
                 code = compile(codestring, "<string>","exec")
-                exec(code)
-            
-             
+                exec(code)             
             
                 
                 
