@@ -390,10 +390,11 @@ def kin_ind_from_dict(eln_dict, onto):
         #include kinetic type as individual for further relations
         if onto.search_one(label = kin_type):
             codestring = """with onto:
-                            kin_indv = onto.search_one(label = "{}")('{}')
+                            kin_indv = onto.search_one(label = "{}")('indv_{}')
                             kin_indv.label = "indv_{}"
+                            
                             enzyme_indv = onto.search_one(label = {})
-                            kin_indv.RO_0000052.append(enzyme_indv)
+                            kin_indv.RO_0000052 = enzyme_indv
                 """.format(kin_type, kin, kin, Enz_indv_label)
        
         # include as individual, if part in IRI is already present
