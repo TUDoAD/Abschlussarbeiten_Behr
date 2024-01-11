@@ -375,7 +375,8 @@ def kin_ind_from_dict(kin_dict, onto):
         if onto.search_one(label = kin_type):
             codestring = """with onto:
                             kin_indv = onto.search_one(label = "{}")('{}')
-                """.format(kin_type, kin)
+                            kin_indv.label = "indv_{}"
+                """.format(kin_type, kin, kin)
        
         # include as individual, if part in IRI is already present
         elif onto.search_one(iri = "*{}".format(kin_type)):
@@ -390,7 +391,7 @@ def kin_ind_from_dict(kin_dict, onto):
                             label = '{}'
                             pass                    
                         kin_indv = {}('{}')
-                        kin_indv.label = '{}'
+                        kin_indv.label = 'indv_{}'
                 """.format(kin_type,kin_type,kin_type,kin,kin)
         
         code = compile(codestring, "<string>","exec")
@@ -406,16 +407,18 @@ def kin_ind_from_dict(kin_dict, onto):
                 unit = kin_dict[kin]["Km_Unit"]
                 
                 hasVal = onto.search_one(iri = '*hasValue')
-                hasModel= onto.search_one(iri = '*RO_0002615')
-                kin_indv = onto.search_one(label = kin)
+                #hasModel= onto.search_one(iri = '*RO_0002615')
+                #kin_indv = onto.search_one(label = kin)
+                kin_indv_label =  "indv_"+kin
                 
                 codestring = """with onto:
                                 Km_indv = onto.search_one(iri = "*SBO_0000373")('{}')
                                 Km_indv.{}.append('{}')
                                 Km_indv.has_unit_string.append('{}')
-                                Km_indv.RO_0002615 = {}
                                 
-                    """.format(ind_name, hasVal.name, val, unit, onto.search_one(label = kin))
+                                kin_indv = onto.search_one(label = kin_indv_label)
+                                Km_indv.RO_0002615.append(kin_indv)
+                    """.format(ind_name, hasVal.name, val, unit)
                     
                     
                 print(codestring)
