@@ -220,7 +220,11 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
     
     for subst in list(subst_dict.keys()):
         
-        enzml_ID = subst_dict[subst]["hasEnzymeML_ID"]
+        try: 
+            enzml_ID = subst_dict[subst]["hasEnzymeML_ID"]
+        except:
+            enzml_ID = ''
+            
         # include as individual, if label is already present as class
         if onto.search_one(label = subst):
             codestring = """with onto:
@@ -380,16 +384,17 @@ def kin_ind_from_dict(eln_dict, onto):
         # rateLaw -- characteristic of -> Enzyme
         # indv_rateLaw -- http://purl.obolibrary.org/obo/RO_0000052 -> subst_Enzyme
         Enzyme_name = kin_dict[kin]["kineticOfCompound"]             
-        subst_id = eln_dict["substances"][Enzyme_name]["hasEnzymeML_ID"]
+        subst_id = eln_dict["substances"][Enzyme_name]["hasEnzymeML_ID"]       
+        Enz_indv_label = "Sub_" + Enzyme_name + "_" + subst_id
         
         #include kinetic type as individual for further relations
         if onto.search_one(label = kin_type):
             codestring = """with onto:
                             kin_indv = onto.search_one(label = "{}")('{}')
                             kin_indv.label = "indv_{}"
-                            enzyme_indv = onto.search_one(label = Enzyme_name)
-                            kin_indv.RO_0000052.append()
-                """.format(kin_type, kin, kin)
+                            enzyme_indv = onto.search_one(label = {})
+                            kin_indv.RO_0000052.append(enzyme_indv)
+                """.format(kin_type, kin, kin, Enz_indv_label)
        
         # include as individual, if part in IRI is already present
         elif onto.search_one(iri = "*{}".format(kin_type)):
