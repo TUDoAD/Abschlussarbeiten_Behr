@@ -8,7 +8,8 @@ Created on Sun Jan 14 06:39:56 2024
 
 import requests
 import pandas as pd
-path='./output/NAME_OF_EXCEL.xlsx'
+#path='./output/NAME_OF_EXCEL.xlsx'
+path = './output/new_output_full.xlsx'
 papers=pd.read_excel(path, sheet_name='distinct_eid')
 
 #  ScienceDirect API key
