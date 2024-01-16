@@ -501,6 +501,7 @@ def chemical_prep(chem_list, onto_class_list):
     class_list = []        
     onto_new_dict = {}
     synonyms = {}
+    seen_comp=[]
     onto_dict,inchikey = synonym_dicts(onto_class_list)
     
     for molecule in chem_list:  
@@ -531,29 +532,33 @@ def chemical_prep(chem_list, onto_class_list):
              comp = re.findall(r'([A-Z](?:[a-wyz]+)?)',molecule)
              comp_dict[molecule] = comp
     for k,v in comp_dict.items():
+        
         i = 0
         key=False
         if k not in onto_new_dict.keys():           
             for c in v:
-                for k_o, v_o in onto_dict.items():
-                    synonyms = fill_synonyms(synonyms,k,v_o,k_o)
-                    synonyms = fill_synonyms(synonyms,c,v_o,k_o)
-                
-                if i == 0:
-                    class_list, key ,rel_synonym = compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym) #,comp = False
-
-                    if key==False:
-                        chem_list.remove(k)
-                        break
-
-                    onto_new_dict[key] = []
-                    i += 1
-                if c == k:
-                    comp = key
+                if c in seen_comp
+                    for k_o, v_o in onto_dict.items():
+                        synonyms = fill_synonyms(synonyms,k,v_o,k_o)
+                        synonyms = fill_synonyms(synonyms,c,v_o,k_o)
                     
-                else:
-                    class_list, comp, rel_synonym = compare_synonyms(synonyms, inchikey, class_list, c, rel_synonym) #,comp = True                
-                onto_new_dict[key].append(comp)
+                    if i == 0:
+                        class_list, key ,rel_synonym = compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym) #,comp = False
+    
+                        if key==False:
+                            chem_list.remove(k)
+                            break
+                        elif k!=key:
+                            chem_list.append(rel_synonym[k])
+                        onto_new_dict[key] = []
+                        i += 1
+                    if c == k:
+                        comp = key
+                    else:
+                        class_list, comp, rel_synonym = compare_synonyms(synonyms, inchikey, class_list, c, rel_synonym) #,comp = True                
+                        if c != comp:
+                            chem_list.append(rel_synonym[c])
+                    onto_new_dict[key].append(comp)
             """
             if key:
                 for i in onto_new_dict[key]:
@@ -680,6 +685,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                             key = k
                             print('new chemical compound added\n')
                             class_list.append(k)
+                            rel_synonym[k]=key
                         return class_list, key, rel_synonym  
                     elif len(mol) == 1:
                         key=mol[0].iupac_name #some of the compounds that can be found in pubchem don't have IUPAC names (i.e. "propyl")
@@ -697,7 +703,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                             if idx =='none':
                                 key = k
                                 class_list.append(k)
-
+                                rel_synonym[k]=key
                                 return class_list, key, rel_synonym                   
                             else:
                                 try:
@@ -718,6 +724,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                             if idx =='none':
                                 key = k
                                 class_list.append(k)
+                                rel_synonym[k]=key
                                 return class_list, key, rel_synonym 
                             else:
                                 try:
@@ -739,6 +746,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                     if idx =='none':
                         key = k
                         class_list.append(k)
+                        rel_synonym[k]=key
                         return class_list, key, rel_synonym 
                     else:
                         try:
@@ -752,7 +760,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
         key = k 
     if numinbrackets != None:
         rel_synonym[numinbrackets] = key  
-    else:
+    elif k not in rel_synonym.keys():
         rel_synonym[k] = key          
     class_list.append(key)
     return class_list, key, rel_synonym
