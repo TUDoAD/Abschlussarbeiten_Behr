@@ -36,7 +36,7 @@ if response.status_code == 200:
     # Save the XML content to a file
     with open('{}.xml'.format(name), 'w', encoding='utf-8') as file:
         file.write(response.text)
-    print('XML content saved to paper.xml')
+    print('XML content saved to {}.xml'.format(name))
 else:
     # Print an error message if the request was unsuccessful
     print(f"Error: {response.status_code}\n{response.text}")
