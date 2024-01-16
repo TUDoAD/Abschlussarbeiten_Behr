@@ -399,17 +399,19 @@ def get_metadata_1(filename):
     return title, doi, publisher,ab
 """
 def get_abstract(path, doi, publisher):                                    
-    if 'Elsevier' in publisher:
+    
 
+     
+    if ('ACS' or 'American Chemical Society') in publisher:
+        file= Reader()
+        pdf= file.read_file(path)
+        abstract=pdf.abstract()
+    elif publisher:
         ab = AbstractRetrieval(doi)
         abstract=ab.abstract
         #keywords=ab.authkeywords
         if not abstract:
-            abstract=ab.description     
-    elif ('ACS' or 'American Chemical Society') in publisher:
-        file= Reader()
-        pdf= file.read_file(path)
-        abstract=pdf.abstract()
+            abstract=ab.description
     else:
         return None
     if abstract:
@@ -448,8 +450,17 @@ def get_metadata(filename):
         title = pdf_title(filename)
         title = sanitize(' '.join(title.split()))
         manual_prep=True
-
     cr = Crossref()
+    if re.search("[Jj]ournal|[Nn]ews",title):
+        doi=search_doi_text(filename)
+        if doi != None:
+            result = cr.works(ids = doi)
+            title=result['message']['title'][0]
+            publisher = result['message']['publisher']
+            return title, doi, publisher
+        else:
+            print('no title found for '+filename)
+            return None,None,None
     result = cr.works(query = title)
     for i in range(len(result['message']['items'])):    
         try:
@@ -458,11 +469,8 @@ def get_metadata(filename):
             continue
         else:
             if is_majority_included(title.split(), result['message']['items'][i]['title'][0].split(), threshold=0.8):
-                title=result['message']['items'][i]['title'][0]
-                soup = BeautifulSoup(title, 'html.parser')
-                title = soup.get_text()
                 doi=result['message']['items'][i]['DOI']
-                publisher=result['message']['items'][i]['publisher']
+                title, publisher = crossref_search(result,i)
                 return title, doi, publisher
 
             elif i== len(result['message']['items'])-1: 
@@ -478,34 +486,60 @@ def get_metadata(filename):
                             continue
                         else:
                             if is_majority_included(title.split(), result['message']['items'][k]['title'][0].split(), threshold=0.8):
-                                title=result['message']['items'][k]['title'][0]
-                                soup = BeautifulSoup(title, 'html.parser')
-                                title = soup.get_text()
                                 doi=result['message']['items'][k]['DOI']
-                                publisher=result['message']['items'][k]['publisher']
+                                title, publisher = crossref_search(result,k)
                                 return title, doi, publisher
                             elif k == len(result['message']['items'])-1:
-                                print('no title found for '+filename)
-                                return None,None,None
+                                doi = search_doi_text(filename)
+                                if doi != None:
+                                    try:
+                                        result = cr.works(ids = doi)
+                                        title=result['message']['title'][0]
+                                        publisher = result['message']['publisher']
+                                    except:
+                                        print('no title found for '+filename)
+                                        return None,None,None
+                                    return title, doi, publisher
+                                else:
+                                    print('no title found for '+filename)
+                                    return None,None,None
                 else:
                     print('no title found for '+filename)
                     return None,None,None
 
-
-"""
-abstract_all=''
+def search_doi_text(filename):
+    reader = PdfReader(filename)
+    page = reader.pages[0]
+    text= page.extract_text()
+    pattern= r"\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?![\"&\'<>])\S)+)\b"
+    m=re.search(pattern, text)
+    if m:
+        doi=m[0]
+    else:
+        doi=None
+    return doi
+def crossref_search(result,k):
+    title=result['message']['items'][k]['title'][0]
+    soup = BeautifulSoup(title, 'html.parser')
+    title = soup.get_text()
+    publisher=result['message']['items'][k]['publisher']
+    return title,publisher
+ 
+#abstract_all=''
 path=r'.\Methanisierung\*.pdf'
 for i in glob.iglob(path):
     title,doi,publisher = get_metadata(i)
     if doi==None:
         continue
     print(title+' : '+doi)
-    #abstract = get_abstract(i, doi, publisher)
+    abstract = get_abstract(i, doi, publisher)
+    if abstract==None or not abstract:
+        print('no abstract found')
     #if abstract!=None and abstract:
     #    print("Abstract:"+abstract)
     #else:
     #    print('no abstract found')
- """       
+        
 """
     import json
     def set_config_key(key, value):
