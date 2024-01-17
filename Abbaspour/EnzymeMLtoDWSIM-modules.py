@@ -26,7 +26,7 @@ import pandas as pd
 ##
 
 def enzymeML_readin(EnzymeML_XLSM_str):
-
+## DEPRECATED FUNCTION
     ## USER INPUT
     # Load EnzymeML Excel-file
     # Make sure, Macros are turned OFF, else the pH-value might not be parsed correctly
@@ -381,13 +381,36 @@ def kin_ind_from_dict(eln_dict, onto):
         
         #kin_onto_class = onto.search_one(label = kin_type)
         
+        ## Enzyme
         # rateLaw -- characteristic of -> Enzyme
         # indv_rateLaw -- http://purl.obolibrary.org/obo/RO_0000052 -> subst_Enzyme
         Enzyme_name = kin_dict[kin]["kineticOfCompound"]             
         subst_id = eln_dict["substances"][Enzyme_name]["hasEnzymeML_ID"]       
         Enz_indv_label = "Sub_" + Enzyme_name + "_" + subst_id
+    
+        ## Substrate 
+        # Might also be more than one substrate, if later there are other kinetics, 
+        # this could then be reused
+        Substrates = kin_dict[kin]["baseCompound"]
+        substrate_indv_label = []
+        for i in Substrates.split(","):
+            try:
+                substrate_indv_label.append("Sub_" + i.strip() + "_" + eln_dict["substances"][i.strip()]["hasEnzymeML_ID"])
+            except:
+                try:
+                    found = eln_dict["substances"][i.strip()]
+                    if found:
+                        substrate_indv_label.append("Sub_" + i.strip() + "_")
+                except:
+                    print("baseCompound {} in kinetic of {} not found in elndict. EnzymeML_ID missing or comma in baseCompound-Name?".format(i,kin))
+                    pass
+        
+        #TODO: Product ? 
+        #print(substrate_indv_label)
         
         #include kinetic type as individual for further relations
+        # RO_0000052 = characteristic of -> used to assign kinetic rate law to enzyme
+        # RO_0002233 = has input -> Used for input in kinetics ; Substrates are input of reaction      
         if onto.search_one(label = kin_type):
             codestring = """with onto:
                             kin_indv = onto.search_one(label = "{}")('indv_{}')
@@ -395,14 +418,26 @@ def kin_ind_from_dict(eln_dict, onto):
                             
                             enzyme_indv = onto.search_one(label = "{}")
                             kin_indv.RO_0000052 = enzyme_indv
+                            
                 """.format(kin_type, kin, kin, Enz_indv_label)
-       
+            
+            # adding substrates
+            for substrate in substrate_indv_label:
+                substr = """    substrate_indv = onto.search_one(label = "{}")
+                            kin_indv.RO_0002233 = substrate_indv
+                     """.format(substrate)
+                codestring = codestring + substr 
+                
+            
         # include as individual, if part in IRI is already present
         elif onto.search_one(iri = "*{}".format(kin_type)):
             codestring = """with onto:
                             kin_indv = onto.search_one(iri = "*{}")('{}')
                             kin_indv.label = "indv_{}"
-                """.format(kin_type, kin, kin)
+                            
+                            enzyme_indv = onto.search_one(label = "{}")
+                            kin_indv.RO_0000052 = enzyme_indv
+                """.format(kin_type, kin, kin, Enz_indv_label)
         else:            
             # if not contained in ontology, the kinetics are introduced as subclass of
             # SBO_0000001 (rate law)
@@ -412,9 +447,12 @@ def kin_ind_from_dict(eln_dict, onto):
                             pass                    
                         kin_indv = {}('{}')
                         kin_indv.label = 'indv_{}'
-                """.format(kin_type,kin_type,kin_type,kin,kin)
+                        
+                        enzyme_indv = onto.search_one(label = "{}")
+                        kin_indv.RO_0000052 = enzyme_indv
+                """.format(kin_type,kin_type,kin_type,kin,kin, Enz_indv_label)
         
-        #print(codestring)
+        print(codestring)
         code = compile(codestring, "<string>","exec")
         exec(code)
         
@@ -472,6 +510,9 @@ def kin_ind_from_dict(eln_dict, onto):
                 
                 
     return onto
+
+def process_ind_from_dict():
+    pass
 
 
 def substance_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
