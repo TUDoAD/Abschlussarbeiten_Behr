@@ -705,7 +705,7 @@ def eln_to_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
 ##
 #
 # in 00_2023_MA_Abaspour_Pythoncode.py nach #ALEX Rev suchen !
-#
+# -> include rest of DWSIM-Simus 
 ##
 
 
@@ -736,5 +736,8 @@ def test():
     
     return enzdict, eln_dict
 #enzdict, eln_dict = test()
+
+#TODO: Simulationsergebnisse zurück in KG 
+
     
     
