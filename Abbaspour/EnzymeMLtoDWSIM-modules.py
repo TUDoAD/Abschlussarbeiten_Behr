@@ -534,7 +534,7 @@ def kin_ind_from_dict(eln_dict, onto):
                 
     return onto
 
-def process_to_KG_from_dict(PFD_dict, onto):
+def process_to_KG_from_dict(eln_dict, onto):
     # includes all elements of process flow diagram asserted in additional ELN
     # into the ontology as subclass of ontochem:PhysChemProcessingModule 
     # subclass determined by "DWSIM-object type" entry in additional ELN.
@@ -552,8 +552,8 @@ def process_to_KG_from_dict(PFD_dict, onto):
     -> "EntersAtObject" determines individual of the PFD, 
 	    where the substance enters
     --> introduce <process_module_indv + "_" +  Substance_name> as 
-	    individual -- part of -> process_module_indv
-    --> With hasEnzymeML_ID and key of dict -> ind -- consists_of -> subst_ind
+	    individual -- part of -> process_module_indv (part of = http://purl.obolibrary.org/obo/BFO_0000050)
+    --> With hasEnzymeML_ID and key of dict -> ind -- composed primarily of -> subst_ind (composed primarily of = http://purl.obolibrary.org/obo/RO_0002473)
     -> include all other information as dataProperty  (see 5.)
     5. include other information as dataProperty to the individuals
 	   Iterate eln_dict["PFD"] and add all missing dataProperties 
@@ -622,10 +622,36 @@ def process_to_KG_from_dict(PFD_dict, onto):
                 if prop_key in subst_list:
                     # This triggers connection of the respective process module with the respective substance
                     # Mostly important for material streams
-                   # codestring = """with onto:
-                         
-                   #     """.format()
-                   print(prop_key)
+                    # prop_key is a substance, thus needs to be linked to its individual
+                    enz_id = eln_dict["substances"][prop_key]["hasEnzymeML_ID"]
+                    combined_ind_name = proc_mod + '_' + prop_key
+                    
+                    # Add dataProperties of subdictionaries, mostly containing material streams of the substances
+                    for key in list(PFD_dict[proc_mod][prop_key].keys()):
+                        onto = datProp_from_str(key, onto)
+                    
+                    # Add individual for each proc+substance and connect it to individuals                    
+                    codestring = """with onto:
+                        proc_indv = onto.search_one(label = "indv_{}") 
+                        subst_indv = onto.search_one(label = "Sub_{}_{}") 
+                        
+                        proc_subst_indv = onto.search_one(label = proc_indv.is_a[0].label)('{}')
+                        proc_subst_indv.label = "{}"
+                        
+                        proc_subst_indv.BFO_0000050.append(proc_indv)
+                        proc_subst_indv.RO_0002473.append(subst_indv)                           
+                        
+                        """.format(proc_mod,prop_key,enz_id,combined_ind_name,combined_ind_name)
+                    
+                    # add data properties for newly created individual
+                    for key in list(PFD_dict[proc_mod][prop_key].keys()):
+                        val = PFD_dict[proc_mod][prop_key][key]
+                        dataPropstring = """
+                            proc_subst_indv.{}.append('{}')
+                            """.format(key,val)
+                    
+                    codestring = codestring + dataPropstring
+                    
                 else:
                     # No Substance name -> Direct dataProperty assertion
                     onto = datProp_from_str(prop_key,onto)
