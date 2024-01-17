@@ -533,16 +533,14 @@ def process_to_KG_from_dict(PFD_dict, onto):
     # subclass determined by "DWSIM-object type" entry in additional ELN.
     # ontochem is the ontology based on the nfdi4cat-extension of metadata4ing
     # connection of components via "has_input" and "has_output" object properties
-    
-    
     #TODO: see below
     """
-    1. Add process modules as classes based on their dict-entry 
+    1. Adds process modules as classes based on their dict-entry 
 	   "DWSIM-object type" as subclass of http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingModule
-    2. Add process modules as individual of their respective 
+    2. Adds process modules as individual of their respective 
 	   classes based on their dict-key
     3. Add relation process_module_indv -- has_output -> process_module_indv 
-	   for each dict-entry "connection"
+	   for each dict-entry "connection" (has output: http://purl.obolibrary.org/obo/RO_0002234)
     4. Search for Substance names in subdicts of process modules
     -> "EntersAtObject" determines individual of the PFD, 
 	    where the substance enters
@@ -557,7 +555,8 @@ def process_to_KG_from_dict(PFD_dict, onto):
 	-> exclude all individuals/first level keys
     --> BaseOnto = datProp_from_dict(<DICT>, BaseOnto)
     """
-    #Add process modules as classes based on their dict-entry "DWSIM-object type" 
+    ##
+    # Add process modules as classes based on their dict-entry "DWSIM-object type" and add respective individual
     for proc_mod in list(PFD_dict.keys()):
         onto_class_name = PFD_dict[proc_mod]["DWSIM-object type"].strip()
         
@@ -583,7 +582,13 @@ def process_to_KG_from_dict(PFD_dict, onto):
         #print(codestring) 
         code = compile(codestring, "<string>","exec")
         exec(code)
-        
+    ##
+    
+    ##        
+    # Connect the process module individuals based on their dict-entry "connection"
+    # with the relation "has output" RO_0002234
+    for proc_mod in list(PFD_dict.keys()):
+        connected_indv = 
         
     return onto
 
