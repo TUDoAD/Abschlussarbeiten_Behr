@@ -546,21 +546,20 @@ def process_to_KG_from_dict(eln_dict, onto):
 	   "DWSIM-object type" as subclass of http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingModule
     2. Adds process modules as individual of their respective 
 	   classes based on their dict-key
-    3. Add relation process_module_indv -- has_output -> process_module_indv 
+    3. Adds relation process_module_indv -- has_output -> process_module_indv 
 	   for each dict-entry "connection" (has output: http://purl.obolibrary.org/obo/RO_0002234)
-    4. Search for Substance names in subdicts of process modules
+    4. Searches for Substance names in subdicts of process modules
     -> "EntersAtObject" determines individual of the PFD, 
 	    where the substance enters
-    --> introduce <process_module_indv + "_" +  Substance_name> as 
+    --> introduces <process_module_indv + "_" +  Substance_name> as 
 	    individual -- part of -> process_module_indv (part of = http://purl.obolibrary.org/obo/BFO_0000050)
     --> With hasEnzymeML_ID and key of dict -> ind -- composed primarily of -> subst_ind (composed primarily of = http://purl.obolibrary.org/obo/RO_0002473)
-    -> include all other information as dataProperty  (see 5.)
-    5. include other information as dataProperty to the individuals
-	   Iterate eln_dict["PFD"] and add all missing dataProperties 
+    -> includes all other information as dataProperty  (see 5.)
+    5. includes other information as dataProperty to the individuals
+	   Iterates eln_dict["PFD"] and add all missing dataProperties 
 	   of the dict to the ontology
-	-> exclude "DWSIM-object type", "connection", "EntersAtObject"
-	-> exclude all individuals/first level keys
-    --> BaseOnto = datProp_from_dict(<DICT>, BaseOnto)
+	-> excludes "DWSIM-object type", "connection", "EntersAtObject"
+	-> excludes all individuals/first level keys
     """
     
     PFD_dict = eln_dict["PFD"]
@@ -642,18 +641,20 @@ def process_to_KG_from_dict(eln_dict, onto):
                         proc_subst_indv = onto.search_one(label = proc_indv.is_a[0].label)('{}')
                         proc_subst_indv.label = "{}"
                         
-                        proc_subst_indv.BFO_0000050.append(proc_indv)
+                        proc_indv.BFO_0000051.append(proc_subst_indv)
                         proc_subst_indv.RO_0002473.append(subst_indv)                           
+                        proc_subst_indv.BFO_0000050.append(proc_indv)
                         
                         """.format(proc_mod,prop_key,enz_id,combined_ind_name,combined_ind_name)
                     
                     # add data properties for newly created individual
                     for key in list(PFD_dict[proc_mod][prop_key].keys()):
                         val = PFD_dict[proc_mod][prop_key][key]
-                        dataPropstring = """proc_subst_indv.{}.append('{}')""".format(key,val)
+                        dataPropstring = """
                         
-                    codestring = codestring + dataPropstring
-                    
+                        proc_subst_indv.{}.append('{}')""".format(key,val)    
+                        codestring = codestring + dataPropstring
+                    #print(codestring)
                 else:
                     # No Substance name -> Direct dataProperty assertion
                     onto = datProp_from_str(prop_key,onto)
