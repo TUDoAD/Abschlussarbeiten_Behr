@@ -536,11 +536,17 @@ def process_ind_from_dict(eln_dict, onto):
     
     #TODO: see below
     """
-    Add process modules as classes based on their dict-entry "DWSIM-object type" 
-    Add process modules as individual of their respective classes based on their dict-key
-    Add relation process_module_indv -- has_output -> process_module_indv for each dict-entry "connection"
-    Search for Substance names in subdicts of process modules -> 
-    "EntersAtObject" determines individual, where
+    1. Add process modules as classes based on their dict-entry "DWSIM-object type" 
+    1a. Iterate eln_dict["PFD"] and add all missing dataProperties of the dict to the ontology
+    2. Add process modules as individual of their respective classes based on their dict-key
+    3. Add relation process_module_indv -- has_output -> process_module_indv for each dict-entry "connection"
+    4. Search for Substance names in subdicts of process modules
+    -> "EntersAtObject" determines individual of the PFD, where the substance enters
+    --> introduce <process_module_indv + "_" +  Substance_name> as individual -- part of -> process_module_indv
+    --> With hasEnzymeML_ID and key of dict -> ind -- consists_of -> subst_ind
+    -> include all other information as dataProperty  
+    5. include other information as dataProperty to the individual
+    -> exclude "DWSIM-object type", "connection", "EntersAtObject"
     
     """
     
