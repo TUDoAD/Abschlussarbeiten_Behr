@@ -300,7 +300,7 @@ def datProp_from_str(data_prop_name, onto):
     # creates new dataproperty based on input string
     # if the label does not already exist as data property
     codestring = """with onto:
-        if not onto.search_one(label = '{}'):
+        if not onto.search_one(label = "{}"):
             class {}(DataProperty):
                 label = '{}'
                 pass
@@ -331,7 +331,10 @@ def datProp_from_dict(dataProp_dict, onto):
         
     # Definieren jeder Relation in der Ontologie via codestring und exec:
     for rel in relation_set:
-        onto = datProp_from_str("has_" + rel,onto)
+        if rel in enzymeML_subst_parameters:
+            onto = datProp_from_str("has_" + rel,onto)
+        else:
+            onto = datProp_from_str(rel,onto)
         
     return onto
     
@@ -354,7 +357,7 @@ def subst_set_relations(enzmldoc, subst_dict, onto):
                 prot_dat = prot_dict[subst_dict[class_name]["hasEnzymeML_ID"]].dict()
     
                 for prot_param in enzymeML_subst_parameters:
-                    codestring = "{}.{}.append('{}')".format(str(onto_class),prot_param,str(prot_dat[prot_param]))
+                    codestring = "{}.{}.append('{}')".format(str(onto_class),"has_" + prot_param,str(prot_dat[prot_param]))
                     code = compile(codestring, "<string>","exec")
                     exec(code)
                 
@@ -562,7 +565,7 @@ def process_to_KG_from_dict(PFD_dict, onto):
     
     PFD_dict = eln_dict["PFD"]
     subst_list = list(eln_dict["substances"].keys())
-    omit_list = ["DWSIM-object type", "connection", "EntersAtObject", "isDWSIMObject"]
+    omit_list = ["DWSIM-object type", "DWSIM-object argument", "connection", "EntersAtObject", "isDWSIMObject"]
     ##
     # Add process modules as classes based on their dict-entry "DWSIM-object type" and add respective individual
     for proc_mod in list(PFD_dict.keys()):
@@ -619,15 +622,18 @@ def process_to_KG_from_dict(PFD_dict, onto):
                 if prop_key in subst_list:
                     # This triggers connection of the respective process module with the respective substance
                     # Mostly important for material streams
-                    codestring = """with onto:
-                        some 
-                        """.format()
+                   # codestring = """with onto:
+                         
+                   #     """.format()
+                   print(prop_key)
                 else:
                     # No Substance name -> Direct dataProperty assertion
-                    onto = dataProp_from_str(prop_key,onto)
+                    onto = datProp_from_str(prop_key,onto)
+                    val = PFD_dict[proc_mod][prop_key]
                     codestring = """with onto:
-                        proc
-                        """.format()
+                        proc_indv = onto.search_one(label = "indv_{}") 
+                        proc_indv.{}.append('{}')
+                        """.format(proc_mod, prop_key, val)
                 
                 code = compile(codestring, "<string>", "exec")
                 exec(code)
