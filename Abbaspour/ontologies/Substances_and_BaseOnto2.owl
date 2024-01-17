@@ -456,6 +456,26 @@
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hasCriticalVolume</rdfs:label>
 </owl:DatatypeProperty>
 
+<owl:DatatypeProperty rdf:about="#hasCompoundMolarFlow">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hasCompoundMolarFlow</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#hasCompoundMolarFlowUnit">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hasCompoundMolarFlowUnit</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#hasVolumetricFlow">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hasVolumetricFlow</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#hasVolumetricFlowUnit">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hasVolumetricFlowUnit</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#EntersAtObject">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EntersAtObject</rdfs:label>
+</owl:DatatypeProperty>
+
 <owl:DatatypeProperty rdf:about="#hasPressureValue">
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hasPressureValue</rdfs:label>
 </owl:DatatypeProperty>
@@ -1728,6 +1748,38 @@ process depending on the context in which it occurs. For example, the observed e
   <obo:RO_0002234 rdf:resource="#indv_Reactor"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">indv_Heat</rdfs:label>
 </EnergyStream>
+
+<MaterialStream rdf:about="#Reactant_1_Laccase">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <obo:BFO_0000050 rdf:resource="#indv_Reactant_1"/>
+  <obo:RO_0002473 rdf:resource="#ind_Laccase"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reactant_1_Laccase</rdfs:label>
+  <EntersAtObject rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reactant_1</EntersAtObject>
+</MaterialStream>
+
+<MaterialStream rdf:about="#Reactant_1_ABTS_red">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <obo:BFO_0000050 rdf:resource="#indv_Reactant_1"/>
+  <obo:RO_0002473 rdf:resource="#ind_ABTS_red"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reactant_1_ABTS_red</rdfs:label>
+  <EntersAtObject rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reactant_1</EntersAtObject>
+</MaterialStream>
+
+<MaterialStream rdf:about="#Reactant_1_Water">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <obo:BFO_0000050 rdf:resource="#indv_Reactant_1"/>
+  <obo:RO_0002473 rdf:resource="#ind_Water"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reactant_1_Water</rdfs:label>
+  <EntersAtObject rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reactant_1</EntersAtObject>
+</MaterialStream>
+
+<MaterialStream rdf:about="#Reactant_2_Oxygen">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <obo:BFO_0000050 rdf:resource="#indv_Reactant_2"/>
+  <obo:RO_0002473 rdf:resource="#ind_Oxygen"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reactant_2_Oxygen</rdfs:label>
+  <EntersAtObject rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reactant_2</EntersAtObject>
+</MaterialStream>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">

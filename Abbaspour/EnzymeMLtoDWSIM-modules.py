@@ -623,7 +623,11 @@ def process_to_KG_from_dict(eln_dict, onto):
                     # This triggers connection of the respective process module with the respective substance
                     # Mostly important for material streams
                     # prop_key is a substance, thus needs to be linked to its individual
-                    enz_id = eln_dict["substances"][prop_key]["hasEnzymeML_ID"]
+                    try: 
+                        enz_id = eln_dict["substances"][prop_key]["hasEnzymeML_ID"]
+                    except:
+                        enz_id = ''
+                        
                     combined_ind_name = proc_mod + '_' + prop_key
                     
                     # Add dataProperties of subdictionaries, mostly containing material streams of the substances
@@ -646,10 +650,8 @@ def process_to_KG_from_dict(eln_dict, onto):
                     # add data properties for newly created individual
                     for key in list(PFD_dict[proc_mod][prop_key].keys()):
                         val = PFD_dict[proc_mod][prop_key][key]
-                        dataPropstring = """
-                            proc_subst_indv.{}.append('{}')
-                            """.format(key,val)
-                    
+                        dataPropstring = """proc_subst_indv.{}.append('{}')""".format(key,val)
+                        
                     codestring = codestring + dataPropstring
                     
                 else:
