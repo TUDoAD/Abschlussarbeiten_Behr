@@ -423,8 +423,9 @@ def kin_ind_from_dict(eln_dict, onto):
             
             # adding substrates
             for substrate in substrate_indv_label:
-                substr = """    substrate_indv = onto.search_one(label = "{}")
-                            kin_indv.RO_0002233 = substrate_indv
+                substr = """\n
+                            substrate_indv = onto.search_one(label = "{}")
+                            kin_indv.RO_0002233.append(substrate_indv)
                      """.format(substrate)
                 codestring = codestring + substr 
                 
@@ -452,7 +453,7 @@ def kin_ind_from_dict(eln_dict, onto):
                         kin_indv.RO_0000052 = enzyme_indv
                 """.format(kin_type,kin_type,kin_type,kin,kin, Enz_indv_label)
         
-        print(codestring)
+        #print(codestring)
         code = compile(codestring, "<string>","exec")
         exec(code)
         
