@@ -298,11 +298,13 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
 #
 def datProp_from_str(data_prop_name, onto):
     # creates new dataproperty based on input string
+    # if the label does not already exist as data property
     codestring = """with onto:
-        class {}(DataProperty):
-            label = '{}'
-            pass
-        """.format(data_prop_name,data_prop_name)
+        if not onto.search_one(label = '{}'):
+            class {}(DataProperty):
+                label = '{}'
+                pass
+        """.format(data_prop_name, data_prop_name,data_prop_name)
     code = compile(codestring, "<string>","exec")
     exec(code)
     return onto
@@ -559,6 +561,8 @@ def process_to_KG_from_dict(PFD_dict, onto):
     """
     
     PFD_dict = eln_dict["PFD"]
+    subst_list = list(eln_dict["substances"].keys())
+    omit_list = ["DWSIM-object type", "connection", "EntersAtObject", "isDWSIMObject"]
     ##
     # Add process modules as classes based on their dict-entry "DWSIM-object type" and add respective individual
     for proc_mod in list(PFD_dict.keys()):
@@ -609,14 +613,27 @@ def process_to_KG_from_dict(PFD_dict, onto):
     
     ##
     # Create DataProperty if not already contained in ontology
-    #for 
-    
-    
-    
-        
-    
-    
-    
+    for proc_mod in PFD_dict:
+        for prop_key in list(PFD_dict[proc_mod].keys()):
+            if prop_key not in omit_list:            
+                if prop_key in subst_list:
+                    # This triggers connection of the respective process module with the respective substance
+                    # Mostly important for material streams
+                    codestring = """with onto:
+                        some 
+                        """.format()
+                else:
+                    # No Substance name -> Direct dataProperty assertion
+                    onto = dataProp_from_str(prop_key,onto)
+                    codestring = """with onto:
+                        proc
+                        """.format()
+                
+                code = compile(codestring, "<string>", "exec")
+                exec(code)
+    ##        
+            
+            
     return onto
 
 def eln_to_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
