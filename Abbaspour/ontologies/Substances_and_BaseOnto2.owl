@@ -1582,8 +1582,6 @@ process depending on the context in which it occurs. For example, the observed e
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <obo:RO_0000052 rdf:resource="#ind_Laccase"/>
   <obo:RO_0002233 rdf:resource="#ind_ABTS_red"/>
-  <obo:RO_0002233 rdf:resource="#ind_Oxygen"/>
-  <obo:RO_0002233 rdf:resource="#ind_Water"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">indv_Michaelis-Menten-Kinetics</rdfs:label>
 </SBO:SBO_0000029>
 
