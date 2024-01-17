@@ -567,25 +567,20 @@ def process_to_KG_from_dict(PFD_dict, onto):
         # introduce DWSIM-object type as new class, if not already contained in ontology
         if onto.search_one(label = onto_class_name):
             codestring = """with onto:
-                                class {}(onto.search_one(iri = '*PhysChemProcessingModule')):
-                                        label = '{}'
-                                        comment = "Physical/Chemical processing module represented in a flowsheet of the process simulator DWSIM"
-                                        pass                        
-                                proc_indv = {}('ind_{}')
-                                proc_indv.label = 'Sub_{}_{}'
-                                proc.altLabel = '{}'
-             """.format(onto_class_name,onto_class_name,e,f,g,h,i) 
+                                proc_indv = onto.search_one(label = "{}")('{}')
+                                proc_indv.label = '{}'
+             """.format(onto_class_name,proc_mod,proc_mod) 
         else:
             codestring = """with onto:
                                     class {}(onto.search_one(iri = '*PhysChemProcessingModule')):
                                         label = '{}'
                                         comment = "Physical/Chemical processing module represented in a flowsheet of the process simulator DWSIM"
                                         pass                    
-                                    proc_indv = {}('ind_{}')
-                                    proc_indv.label = 'Sub_{}_{}'
-                                    proc.altLabel = '{}'
-             """.format(onto_class_name,onto_class_name,e,f,g,h,i) 
-         
+                                    proc_indv = {}('indv_{}')
+                                    proc_indv.label = 'indv_{}'
+             """.format(onto_class_name,onto_class_name,onto_class_name,proc_mod,proc_mod) 
+        
+        #print(codestring) 
         code = compile(codestring, "<string>","exec")
         exec(code)
         
