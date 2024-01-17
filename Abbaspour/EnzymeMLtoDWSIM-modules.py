@@ -588,8 +588,19 @@ def process_to_KG_from_dict(PFD_dict, onto):
     # Connect the process module individuals based on their dict-entry "connection"
     # with the relation "has output" RO_0002234
     for proc_mod in list(PFD_dict.keys()):
-        connected_indv = 
-        
+        # check, if there are any process modules connected to the current selected one
+        if type(PFD_dict[proc_mod]["connection"]) == str and str(PFD_dict[proc_mod]["connection"]).strip():
+            proc_indv_name = "indv_" + proc_mod.strip()
+            connected_indv_name = "indv_" + PFD_dict[proc_mod]["connection"].strip()
+            codestring = """with onto:
+                proc_indv = onto.search_one(label = "{}")
+                con_proc_indv = onto.search_one(label = "{}")
+                proc_indv.RO_0002234 = con_proc_indv
+            """.format(proc_indv_name, connected_indv_name)
+            
+            code = compile(codestring, "<string>", "exec")
+            exec(code)
+            
     return onto
 
 def eln_to_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
