@@ -526,11 +526,37 @@ def kin_ind_from_dict(eln_dict, onto):
                 
     return onto
 
-def process_ind_from_dict():
-    pass
+def process_ind_from_dict(eln_dict, onto):
+    # includes all elements of process flow diagram asserted in additional ELN
+    # into the ontology as subclass of ontochem:PhysChemProcessingModule 
+    # subclass determined by "DWSIM-object type" entry in additional ELN.
+    # ontochem is the ontology based on the nfdi4cat-extension of metadata4ing
+    # connection of components via "has_input" and "has_output" object properties
+    
+    
+    #TODO: see below
+    """
+    Add process modules as classes based on their dict-entry "DWSIM-object type" 
+    Add process modules as individual of their respective classes based on their dict-key
+    Add relation process_module_indv -- has_output -> process_module_indv for each dict-entry "connection"
+    Search for Substance names in subdicts of process modules -> 
+    "EntersAtObject" determines individual, where
+    
+    """
+    
+    for proc_mod in list(eln_dict["PFD"]).keys():
+       # onto_class = eln_dict["PFD"][proc_mod]["DWSIM-object type"]
+       # indv = proc_mod
+       codestring = """with onto:
+               
+        """
+        code = compile(codestring, "<string>","exec")
+        exec(code)
+        
+        
+    return onto
 
-
-def substance_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
+def eln_to_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
 
     ##
     #SBO Term: enzmldoc.getAny("s0").ontology.value
@@ -543,11 +569,17 @@ def substance_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
 
     # insert data properties to substance individuals from dictionary
     BaseOnto = subst_set_relations(enzmldoc, supp_eln_dict["substances"], BaseOnto)
-        
+    
+    # include kinetics in ontology        
     BaseOnto = kin_ind_from_dict(supp_eln_dict,BaseOnto)
 
+    # include Process Flow Diagram in ontology
+    BaseOnto = process_ind_from_dict(supp_eln_dict,BaseOnto)
+    
     # Ontologie zwischenspeichern
     BaseOnto.save(file="./ontologies/Substances_and_"+ onto_str +".owl", format="rdfxml")
+
+    
 
     #####
     # Ontology-Extension der Base Ontology #
@@ -570,7 +602,7 @@ def run():
    onto = base_ontology_extension("BaseOnto")
    
    new_eln_dict = new_ELN_to_dict("./ELNs/New-ELN_Kinetik_1.xlsx")
-   onto, test_dict = substance_knowledge_graph(enzmldoc, new_eln_dict, onto, "BaseOnto2")
+   onto, test_dict = eln_to_knowledge_graph(enzmldoc, new_eln_dict, onto, "BaseOnto2")
    
    with open('dict_dump.json', 'w') as file:
         json.dump(eln_dict, file)
