@@ -295,10 +295,23 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
 
     return onto
 
+#
+def datProp_from_str(data_prop_name, onto):
+    # creates new dataproperty based on input string
+    codestring = """with onto:
+        class {}(DataProperty):
+            label = '{}'
+            pass
+        """.format(data_prop_name,data_prop_name)
+    code = compile(codestring, "<string>","exec")
+    exec(code)
+    return onto
+#
+
 def datProp_from_dict(dataProp_dict, onto):
     # Benötigte Relationen bestimmen via set() -> auch bei Mehrfachnennung
     # ist jede Relation aus Dictionary nur max. 1x enthalten in relation_list
-    BaseOnto = onto
+    #BaseOnto = onto
     relation_set = set()
     #iterate through dataProp_dict keys (all substances in additional eln) and 
     # add all keys as dataProperty
@@ -316,20 +329,9 @@ def datProp_from_dict(dataProp_dict, onto):
         
     # Definieren jeder Relation in der Ontologie via codestring und exec:
     for rel in relation_set:
-    #for subst in dataProp_dict:
-        codestring = """with BaseOnto:
-            class {}(DataProperty):
-                label = '{}'
-                pass
-            """.format(rel,rel)
+        onto = datProp_from_str(rel,onto)
         
-        # Code, der im codestring enthalten ist compilieren
-        code = compile(codestring, "<string>","exec")
-        
-        # Code ausführen
-        exec(code)
-    
-    return BaseOnto
+    return onto
     
 def subst_set_relations(enzmldoc, subst_dict, onto):
     BaseOnto = onto
@@ -555,6 +557,8 @@ def process_to_KG_from_dict(PFD_dict, onto):
 	-> exclude all individuals/first level keys
     --> BaseOnto = datProp_from_dict(<DICT>, BaseOnto)
     """
+    
+    PFD_dict = eln_dict["PFD"]
     ##
     # Add process modules as classes based on their dict-entry "DWSIM-object type" and add respective individual
     for proc_mod in list(PFD_dict.keys()):
@@ -566,8 +570,8 @@ def process_to_KG_from_dict(PFD_dict, onto):
         # introduce DWSIM-object type as new class, if not already contained in ontology
         if onto.search_one(label = onto_class_name):
             codestring = """with onto:
-                                proc_indv = onto.search_one(label = "{}")('{}')
-                                proc_indv.label = '{}'
+                                proc_indv = onto.search_one(label = "{}")('indv_{}')
+                                proc_indv.label = 'indv_{}'
              """.format(onto_class_name,proc_mod,proc_mod) 
         else:
             codestring = """with onto:
@@ -595,12 +599,24 @@ def process_to_KG_from_dict(PFD_dict, onto):
             codestring = """with onto:
                 proc_indv = onto.search_one(label = "{}")
                 con_proc_indv = onto.search_one(label = "{}")
-                proc_indv.RO_0002234 = con_proc_indv
+                proc_indv.RO_0002234.append(con_proc_indv)
             """.format(proc_indv_name, connected_indv_name)
             
+            #print(codestring)
             code = compile(codestring, "<string>", "exec")
             exec(code)
-            
+    ##
+    
+    ##
+    # Create DataProperty if not already contained in ontology
+    #for 
+    
+    
+    
+        
+    
+    
+    
     return onto
 
 def eln_to_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
@@ -622,7 +638,7 @@ def eln_to_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
     BaseOnto = kin_ind_from_dict(supp_eln_dict,BaseOnto)
     
     ## include Process Flow Diagram in ontology    
-    BaseOnto = process_to_KG_from_dict(supp_eln_dict["PFD"],BaseOnto)
+    BaseOnto = process_to_KG_from_dict(supp_eln_dict,BaseOnto)
     
     # Ontologie zwischenspeichern
     BaseOnto.save(file="./ontologies/Substances_and_"+ onto_str +".owl", format="rdfxml")
