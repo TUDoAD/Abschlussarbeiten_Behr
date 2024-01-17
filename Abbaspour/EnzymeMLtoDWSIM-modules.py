@@ -439,6 +439,15 @@ def kin_ind_from_dict(eln_dict, onto):
                             enzyme_indv = onto.search_one(label = "{}")
                             kin_indv.RO_0000052 = enzyme_indv
                 """.format(kin_type, kin, kin, Enz_indv_label)
+            
+            # adding substrates
+            for substrate in substrate_indv_label:
+                substr = """\n
+                            substrate_indv = onto.search_one(label = "{}")
+                            kin_indv.RO_0002233.append(substrate_indv)
+                     """.format(substrate)
+                codestring = codestring + substr 
+
         else:            
             # if not contained in ontology, the kinetics are introduced as subclass of
             # SBO_0000001 (rate law)
@@ -452,7 +461,15 @@ def kin_ind_from_dict(eln_dict, onto):
                         enzyme_indv = onto.search_one(label = "{}")
                         kin_indv.RO_0000052 = enzyme_indv
                 """.format(kin_type,kin_type,kin_type,kin,kin, Enz_indv_label)
-        
+            
+            # adding substrates
+            for substrate in substrate_indv_label:
+                substr = """\n
+                            substrate_indv = onto.search_one(label = "{}")
+                            kin_indv.RO_0002233.append(substrate_indv)
+                     """.format(substrate)
+                codestring = codestring + substr 
+                
         #print(codestring)
         code = compile(codestring, "<string>","exec")
         exec(code)
@@ -505,10 +522,7 @@ def kin_ind_from_dict(eln_dict, onto):
                                 kcat_indv.RO_0002615.append(kin_indv)
                     """.format(ind_name, hasVal.name, val, unit)
                 code = compile(codestring, "<string>","exec")
-                exec(code)             
-            
-            
-                
+                exec(code)           
                 
     return onto
 
