@@ -167,6 +167,7 @@ def new_ELN_to_dict(eln_path):
 # Ontology-Extension der Base Ontology #
 #####
 def base_ontology_extension(name_base_ontology):
+    #TODO: Maybe deprecate this function and include these classes into the initial base-ontology manually
     # Only supports owl-ontologies
     # load base ontology
     onto_world = owlready2.World()
@@ -294,7 +295,7 @@ def subst_classes_from_dict(enzmldoc, subst_dict, onto):
 
     return onto
 
-def subst_dataProp_creation(dataProp_dict, onto):
+def datProp_from_dict(dataProp_dict, onto):
     # Benötigte Relationen bestimmen via set() -> auch bei Mehrfachnennung
     # ist jede Relation aus Dictionary nur max. 1x enthalten in relation_list
     BaseOnto = onto
@@ -526,7 +527,7 @@ def kin_ind_from_dict(eln_dict, onto):
                 
     return onto
 
-def process_ind_from_dict(eln_dict, onto):
+def process_to_KG_from_dict(PFD_dict, onto):
     # includes all elements of process flow diagram asserted in additional ELN
     # into the ontology as subclass of ontochem:PhysChemProcessingModule 
     # subclass determined by "DWSIM-object type" entry in additional ELN.
@@ -536,26 +537,55 @@ def process_ind_from_dict(eln_dict, onto):
     
     #TODO: see below
     """
-    1. Add process modules as classes based on their dict-entry "DWSIM-object type" 
-    1a. Iterate eln_dict["PFD"] and add all missing dataProperties of the dict to the ontology
-    2. Add process modules as individual of their respective classes based on their dict-key
-    3. Add relation process_module_indv -- has_output -> process_module_indv for each dict-entry "connection"
+    1. Add process modules as classes based on their dict-entry 
+	   "DWSIM-object type" as subclass of http://www.nfdi.org/nfdi4cat/ontochem#PhysChemProcessingModule
+    2. Add process modules as individual of their respective 
+	   classes based on their dict-key
+    3. Add relation process_module_indv -- has_output -> process_module_indv 
+	   for each dict-entry "connection"
     4. Search for Substance names in subdicts of process modules
-    -> "EntersAtObject" determines individual of the PFD, where the substance enters
-    --> introduce <process_module_indv + "_" +  Substance_name> as individual -- part of -> process_module_indv
+    -> "EntersAtObject" determines individual of the PFD, 
+	    where the substance enters
+    --> introduce <process_module_indv + "_" +  Substance_name> as 
+	    individual -- part of -> process_module_indv
     --> With hasEnzymeML_ID and key of dict -> ind -- consists_of -> subst_ind
-    -> include all other information as dataProperty  
-    5. include other information as dataProperty to the individual
-    -> exclude "DWSIM-object type", "connection", "EntersAtObject"
-    
+    -> include all other information as dataProperty  (see 5.)
+    5. include other information as dataProperty to the individuals
+	   Iterate eln_dict["PFD"] and add all missing dataProperties 
+	   of the dict to the ontology
+	-> exclude "DWSIM-object type", "connection", "EntersAtObject"
+	-> exclude all individuals/first level keys
+    --> BaseOnto = datProp_from_dict(<DICT>, BaseOnto)
     """
-    
-    for proc_mod in list(eln_dict["PFD"]).keys():
-       # onto_class = eln_dict["PFD"][proc_mod]["DWSIM-object type"]
-       # indv = proc_mod
-       codestring = """with onto:
-               
-        """
+    #Add process modules as classes based on their dict-entry "DWSIM-object type" 
+    for proc_mod in list(PFD_dict.keys()):
+        onto_class_name = PFD_dict[proc_mod]["DWSIM-object type"].strip()
+        
+        # onto_class = eln_dict["PFD"][proc_mod]["DWSIM-object type"]
+        # indv = proc_mod
+
+        # introduce DWSIM-object type as new class, if not already contained in ontology
+        if onto.search_one(label = onto_class_name):
+            codestring = """with onto:
+                                class {}(onto.search_one(iri = '*PhysChemProcessingModule')):
+                                        label = '{}'
+                                        comment = "Physical/Chemical processing module represented in a flowsheet of the process simulator DWSIM"
+                                        pass                        
+                                proc_indv = {}('ind_{}')
+                                proc_indv.label = 'Sub_{}_{}'
+                                proc.altLabel = '{}'
+             """.format(onto_class_name,onto_class_name,e,f,g,h,i) 
+        else:
+            codestring = """with onto:
+                                    class {}(onto.search_one(iri = '*PhysChemProcessingModule')):
+                                        label = '{}'
+                                        comment = "Physical/Chemical processing module represented in a flowsheet of the process simulator DWSIM"
+                                        pass                    
+                                    proc_indv = {}('ind_{}')
+                                    proc_indv.label = 'Sub_{}_{}'
+                                    proc.altLabel = '{}'
+             """.format(onto_class_name,onto_class_name,e,f,g,h,i) 
+         
         code = compile(codestring, "<string>","exec")
         exec(code)
         
@@ -567,20 +597,21 @@ def eln_to_knowledge_graph(enzmldoc, supp_eln_dict, onto, onto_str):
     ##
     #SBO Term: enzmldoc.getAny("s0").ontology.value
     
+    ## include substances in ontology
     # insert substances from dictionary in ontology
     BaseOnto = subst_classes_from_dict(enzmldoc, supp_eln_dict["substances"], onto)
     
     # insert data properties to substance individuals from dictionary
-    BaseOnto = subst_dataProp_creation(supp_eln_dict["substances"], BaseOnto)
+    BaseOnto = datProp_from_dict(supp_eln_dict["substances"], BaseOnto)
 
     # insert data properties to substance individuals from dictionary
     BaseOnto = subst_set_relations(enzmldoc, supp_eln_dict["substances"], BaseOnto)
     
-    # include kinetics in ontology        
+    ## include kinetics in ontology        
     BaseOnto = kin_ind_from_dict(supp_eln_dict,BaseOnto)
-
-    # include Process Flow Diagram in ontology
-    BaseOnto = process_ind_from_dict(supp_eln_dict,BaseOnto)
+    
+    ## include Process Flow Diagram in ontology    
+    BaseOnto = process_to_KG_from_dict(supp_eln_dict["PFD"],BaseOnto)
     
     # Ontologie zwischenspeichern
     BaseOnto.save(file="./ontologies/Substances_and_"+ onto_str +".owl", format="rdfxml")
