@@ -331,7 +331,7 @@ def datProp_from_dict(dataProp_dict, onto):
         
     # Definieren jeder Relation in der Ontologie via codestring und exec:
     for rel in relation_set:
-        onto = datProp_from_str(rel,onto)
+        onto = datProp_from_str("has_" + rel,onto)
         
     return onto
     
