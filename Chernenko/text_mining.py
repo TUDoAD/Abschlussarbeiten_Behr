@@ -330,10 +330,11 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                 for i in range(len(match_hyph)):
                     entity = entity.replace(match_hyph[i][0],match_hyph[i][1]+match_hyph[i][2])
             
-    
+            '''
             if re.search(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity): #Rh(111 )
                 i = re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0].replace(' ','')
                 entity = entity.replace(re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0],i)
+            '''
             pattern = r'([A-Za-z]+[\s]?[—–-] [a-z]+|[A-Za-z]+ [—–-][\s]?[a-z]+)' #e_split:['hydro- formylation'] and entity:heterogeneous hydro- formylation or X - ray diffraction
             e_split = re.findall(pattern,entity)
             if e_split:
@@ -535,30 +536,37 @@ def chemical_prep(chem_list, onto_class_list):
         
         i = 0
         key=False
-        if k not in onto_new_dict.keys():           
+        if k not in onto_new_dict.keys() and k in chem_list:           
+   
+            if k in rel_synonym.keys():
+                key= rel_synonym[k]
+            else:
+                for k_o, v_o in onto_dict.items():
+                    synonyms = fill_synonyms(synonyms,k,v_o,k_o)  
+                class_list, key ,rel_synonym = compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym) #,comp = False
+                if key==False:
+                    chem_list.remove(k)
+                    break
+                elif k!=key:
+                    chem_list.append(rel_synonym[k])
+            onto_new_dict[key] = []
+                         
             for c in v:
-                if c in seen_comp
-                    for k_o, v_o in onto_dict.items():
-                        synonyms = fill_synonyms(synonyms,k,v_o,k_o)
+                if c not in rel_synonym.keys():
+                    for k_o, v_o in onto_dict.items():    
                         synonyms = fill_synonyms(synonyms,c,v_o,k_o)
-                    
-                    if i == 0:
-                        class_list, key ,rel_synonym = compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym) #,comp = False
-    
-                        if key==False:
-                            chem_list.remove(k)
-                            break
-                        elif k!=key:
-                            chem_list.append(rel_synonym[k])
-                        onto_new_dict[key] = []
-                        i += 1
                     if c == k:
                         comp = key
                     else:
                         class_list, comp, rel_synonym = compare_synonyms(synonyms, inchikey, class_list, c, rel_synonym) #,comp = True                
                         if c != comp:
                             chem_list.append(rel_synonym[c])
-                    onto_new_dict[key].append(comp)
+                    onto_new_dict[key].append(comp) 
+                else:
+                    comp= rel_synonym[c]
+                    onto_new_dict[key].append(comp) 
+                    continue
+                
             """
             if key:
                 for i in onto_new_dict[key]:
@@ -589,11 +597,12 @@ def synonym_dicts(class_list):
     desc_dict = {} 
     inchikey = {}
     temp_class_label = []
-    """
+    
     new_world4 = owlready2.World()
     onto = new_world4.get_ontology('ontologies/{}.owl'.format(onto_new)).load()
-    """
-    def_id = ["hasRelatedSynonym", "hasExactSynonym","inchikey"]
+    mols_newonto= onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_25367').descendants()
+
+    def_id = ["hasRelatedSynonym", "hasExactSynonym","inchikey", 'comment']
     
     for i in range(len(class_list)):
         temp_class = class_list[i]
@@ -615,7 +624,7 @@ def synonym_dicts(class_list):
                 return()
 
         if temp_class_label and temp_class_label not in desc_dict.keys():
-            
+            #if temp_class in 
             # if class got a label which is not empty, search for Related and Exact synonyms                    
             desc_dict[temp_class_label] = getattr(temp_class,def_id[0])
             desc_dict[temp_class_label].extend(getattr(temp_class,def_id[1]))
@@ -624,6 +633,9 @@ def synonym_dicts(class_list):
                 desc_dict[temp_class_label].append(temp_class_label)
             elif not desc_dict[temp_class_label]:    
                 desc_dict[temp_class_label] = [temp_class_label]
+            if temp_class in mols_newonto:
+                temp_class_new=onto.search_one(iri=temp_class.iri)
+                ...
             # get inchikeys of chemical components
             inchikey[temp_class_label] = getattr(temp_class,def_id[2])
     print("Done.")

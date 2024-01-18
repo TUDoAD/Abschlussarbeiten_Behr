@@ -56,7 +56,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
     list_all = []
     heads = []
     chem_e = []
-    chem_list.extend([str(i) for i in rel_synonym.values()]) 
+    #chem_list.extend([str(i) for i in rel_synonym.values()]) 
     pop=[]
     comment_treat=[]
     comment_charac=[]
@@ -64,19 +64,16 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
     for k, v in sup_cat.items():
         new_values=[]
         for i in v :
-            if i in rel_synonym.keys():
-                new_values.append(rel_synonym[i])
-            else:
-                new_values.append(i)
+            new_values.append(rel_synonym[i])
+
         sup_cat[k]=new_values
     for k in sup_cat.keys():   
         sup_cat[k]=[*set(sup_cat[k])]
-        if k in rel_synonym.keys():
-            if rel_synonym[k] in sup_cat.keys():
+        if rel_synonym[k] in sup_cat.keys():
                 sup_cat[rel_synonym[k]].extend(sup_cat[k])                  
-            else:
+        else:
                 pop.append({rel_synonym[k]:sup_cat[k]})
-            pop.append(k)
+        pop.append(k)
     for i in pop:
         if type(i) == dict:
             if list(i.keys())[0] in sup_cat.keys():
@@ -138,7 +135,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                             pattern ='\\b'+c+'\\b'
                             if re.search(pattern,e_snip): 
                                 e_snip= e_snip[e_snip.index(c)+len(c)+1:]
-                                c_t = rel_synonym[c] if c in rel_synonym.keys() else c
+                                c_t = rel_synonym[c] 
                                 if c_t not in spans_n:    
                                     spans_n.append(c_t)
                                 if re.search('[Ss]upported', e_snip):
@@ -172,7 +169,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                             for c in chem_entity:
                                     pattern ='\\b'+c+'\\b'
                                     if re.search(pattern,e_snip):
-                                        c_t = rel_synonym[c] if c in rel_synonym.keys() else c
+                                        c_t = rel_synonym[c] 
                                         if sup_i == True and c in e_btwn:
                                                 support.append(c_t)                    
                                         if c_t not in spans_n:    
@@ -206,7 +203,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                         else:
                             pattern='\\b'+c+'\\b'
                         if re.search(pattern,entity_n):
-                            c_t = rel_synonym[c] if c in rel_synonym.keys() else c
+                            c_t = rel_synonym[c] 
                             if sup_i==True and c in e_btwn:
                                 eq_idx=e_btwn.find('=') #RhM3/MCM-41, M = Fe, Co, Ni, Cu, or Zn
                                 if eq_idx != -1: 
@@ -232,7 +229,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                 for c in chem_entity: #hydride hydroformulation
                     pattern = '\\b'+c+'\\b'
                     if re.search(pattern,entity):
-                        c_t = rel_synonym[c] if c in rel_synonym.keys() else c
+                        c_t = rel_synonym[c] 
                         if c_t not in spans_n:    
                             spans_n.append(c_t) 
             spans_dict[entity].extend(spans_n)                
@@ -251,7 +248,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                     else: 
                         c_list = []
                         for c in entity.split():
-                            c_t = rel_synonym[c] if c in rel_synonym.keys() else c
+                            c_t = rel_synonym[c] #if c in rel_synonym.keys() else c
                             if "atom" in c_t:
                                c_list=[entity]
                                break
@@ -269,14 +266,14 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                     spans_dict[entity].append(c_t) #
             elif entity not in classes.keys() and l in ['Product','Reactant']: 
                     for c in chem_entity:
-                        c_t = rel_synonym[c] if c in rel_synonym.keys() else c
+                        c_t = rel_synonym[c] #if c in rel_synonym.keys() else c
                         spans_dict[entity].append(c_t) #muss für entities wie "phenolic species", alkyl group erweitert werden  
                     list_all.append([entity,['chemical substance'],[],l])
     for k,v in spans_dict.items(): #replacement of parts of chemical entities with full name. i.e. ['zeolite', 'ZSM-5']-> ['ZSM-5 zeolite'] if 'ZSM-5 zeolite' is in entity
         for c in chem_e:
             for i in range(len(c.split())):
                 if c.split()[i] in sup_cat.keys(): #'ZSM-5' instead of 'ZSM-5 zeolite' (change to second)
-                    if c.split()[i] not in rel_synonym.keys():
+                    if c.split()[i] not in rel_synonym.keys(): #check!
                         rel_synonym[c.split()[i]] = c
                     sup_cat[c] = sup_cat[c.split()[i]] 
                     print('{} was replaced with {} in support-catalyst dictionary'.format(c.split()[i],c))
@@ -443,7 +440,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
     created_classes =[]
     classes_all=[i.label[0].lower() for i in onto.classes() if i.label]
     chem_sub = {}
-    chem_list.extend([str(i) for i in rel_synonym.values()])
+    #chem_list.extend([str(i) for i in rel_synonym.values()]) check!
     onto_names={}
     idx_abb=[]
     for v in match_dict.values():
@@ -664,7 +661,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                     continue
 
         for sup,v in sup_cat.items():
-            sup = rel_synonym[sup] if sup in rel_synonym.keys() else sup
+            sup = rel_synonym[sup] #if sup in rel_synonym.keys() else sup
             try:
                 sup = [i for i in list(onto.search(label=sup)) if i in list(onto.individuals())][0]
             except:
@@ -677,7 +674,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
             sup.RO_0000087.append(support_role_i)
             
             for cat in v:
-                cat = rel_synonym[cat] if cat in rel_synonym.keys() else cat
+                cat = rel_synonym[cat] #if cat in rel_synonym.keys() else cat
                 try:
                     cat = [i for i in list(onto.search(label=cat)) if i in list(onto.individuals())][0]
                 except:
@@ -711,7 +708,8 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
         for short,entity in rel_synonym.items():
             inds = [i for i in list(onto.search(label=entity))]
             for i in inds:
-                i.comment.append(short)
+                if i.label[0]!=short: #check!
+                    i.comment.append(short)
     onto = create_comp_relation(onto,list(onto_names.keys()), rel_synonym,p_id,onto_new_dict)
                 
     onto.save('./ontologies/{}.owl'.format(onto_new))
@@ -744,10 +742,10 @@ def create_comp_relation(onto,values, rel_synonym,p_id,onto_new_dict):
                         onto,c_i = add_individum(onto,comp[0],c,p_id)
                     else:
                         c_i = [i for i in comp if i in onto.individuals()][0]
-                    short = [i for i in rel_synonym.keys() if rel_synonym[i] == c]
+                    short = [i for i in rel_synonym.keys() if rel_synonym[i] == c]#check
                     if short:
                         for i in short:
-                            if i not in list(c_i.comment):
+                            if i not in list(c_i.comment) and i != c_i:
                                 c_i.comment.append(i)
                                 
                     mol.BFO_0000051.append(c_i) #"has part" relation between classes or individuals? chosen individuals because of reasoning time

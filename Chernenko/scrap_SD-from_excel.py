@@ -4,12 +4,10 @@ Created on Sun Jan 14 06:39:56 2024
 
 @author: chern
 """
-
-
 import requests
 import pandas as pd
-path='./output/NAME_OF_EXCEL.xlsx'
-papers=pd.read_excel(path, sheet_name='distinct_eid')
+path='./output/NAME_OF_EXCEL.xlsx' #change this to correct path
+papers=pd.read_excel(path, sheet_name='distinct_eid') #change the ame of sheet if needed
 #  ScienceDirect API key
 api_key = '173ea79a3547e18083fed35e7356bb62' # c4c1c384a5eb47dc15ddde06584e07ba
 
@@ -35,7 +33,7 @@ for r in papers.itertupels():
         # Save the XML content to a file
         with open('{}.xml'.format(name), 'w', encoding='utf-8') as file:
             file.write(response.text)
-        print('XML content saved to paper.xml')
+        print('XML content saved to {}.xml'.format(name))
     else:
         # Print an error message if the request was unsuccessful
         print(f"Error: {response.status_code}\n{response.text}")
