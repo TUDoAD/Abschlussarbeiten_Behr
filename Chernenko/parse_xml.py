@@ -19,11 +19,34 @@ from LimeSoup import (
     WileySoup,
 )
 
-path=".\text_xml\*.xml"
+path="C:/Users/chern/Documents/GitHub/Abschlussarbeiten_Behr/Chernenko/text_xml/*.xml"
 for xml in glob.iglob(path):
-    with open('{}.xml'.format(xml), 'r', encoding='utf-8') as file:
+    with open('{}'.format(xml), 'r', encoding='utf-8') as file:
         xml_str = file.read()
-        data = ECSSoup.parse(xml_str) 
-        with open('file_test.json', 'w', encoding = 'utf-8') as f:
-            json.dump(data, f, sort_keys=True, indent=4, ensure_ascii=False)
-
+        name=xml.strip('.xml')
+        try:
+            data = ElsevierSoup.parse(xml_str) 
+            with open('{name}.json', 'w', encoding = 'utf-8') as f:
+                json.dump(data, f, sort_keys=True, indent=4, ensure_ascii=False)
+        except:
+            try:
+                data = ACSSoup.parse(xml_str) 
+                with open('{name}.json', 'w', encoding = 'utf-8') as f:
+                    json.dump(data, f, sort_keys=True, indent=4, ensure_ascii=False)
+            except:
+                try:
+                    data = RSCSoup.parse(xml_str) 
+                    with open('{name}.json', 'w', encoding = 'utf-8') as f:
+                        json.dump(data, f, sort_keys=True, indent=4, ensure_ascii=False)
+                except:    
+                    try:
+                        data = SpringerSoup.parse(xml_str) 
+                        with open('{name}.json', 'w', encoding = 'utf-8') as f:
+                            json.dump(data, f, sort_keys=True, indent=4, ensure_ascii=False)
+                    except:    
+                        try:
+                            data = WileySoup.parse(xml_str) 
+                            with open('{name}.json', 'w', encoding = 'utf-8') as f:
+                                json.dump(data, f, sort_keys=True, indent=4, ensure_ascii=False)
+                        except:
+                            print('file: {} could not be parsed. check the publisher'.format(xml))

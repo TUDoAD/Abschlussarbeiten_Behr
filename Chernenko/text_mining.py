@@ -25,8 +25,8 @@ def run_text_mining(abstract,model, onto_class_list):
              set_config_key(key, value)
     sents = text_prep(abstract) 
     categories,chem_list, reac_dict, sup_cat, abbreviation,raw_entities= CatalysisIE_search(model, sents)
-    missing, match_dict,chem_list,rel_synonym, onto_new_dict=chemical_prep(chem_list, onto_class_list)
-    return chem_list, categories,onto_new_dict, sup_cat, abbreviation, missing, match_dict, rel_synonym, reac_dict,raw_entities
+    missing, match_dict,chem_list,rel_synonym, chem_dict=chemical_prep(chem_list, onto_class_list)
+    return chem_list, categories,chem_dict, sup_cat, abbreviation, missing, match_dict, rel_synonym, reac_dict,raw_entities
         
 def load_classes_chebi():
     """
@@ -330,6 +330,8 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                 for i in range(len(match_hyph)):
                     entity = entity.replace(match_hyph[i][0],match_hyph[i][1]+match_hyph[i][2])
             
+            entity = re.sub(r' product$','',entity)
+            entity = re.sub(r' reactant$','',entity)
             '''
             if re.search(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity): #Rh(111 )
                 i = re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0].replace(' ','')
@@ -496,14 +498,14 @@ def CatalysisIE_search(model, test_sents): #change description at the and
 
 
 def chemical_prep(chem_list, onto_class_list):
-    global onto_new_dict
+    global chem_dict
     rel_synonym = {}
     comp_dict = {}
     class_list = []        
-    onto_new_dict = {}
     synonyms = {}
-    seen_comp=[]
-    onto_dict,inchikey = synonym_dicts(onto_class_list)
+    chem_dict = {}
+    synonyms_new={}
+    onto_dict, inchikey, onto_dict_new = synonym_dicts(onto_class_list)
     
     for molecule in chem_list:  
         if re.search(r'^ [A-Za-z\d—–-]+|^[A-Za-z\d—–-]+ $',molecule): 
@@ -520,68 +522,79 @@ def chemical_prep(chem_list, onto_class_list):
                     comp_dict[molecule].append(comp.text)
             continue
         if re.search(r'[A-Z]+[—–-][\d]+', molecule):
-            onto_new_dict[molecule] = []
+            chem_dict[molecule] = []
             class_list.append(molecule)
             continue        
-        match_material=re.findall(r'((?:[A-Z](?:[a-wyz]?[\d]*))+)[—–-]((?:[A-Z](?:[a-wyz]?[\d]*))+)',molecule) #TiO2-SiO2 from Ni-W/TiO2-SiO2
+        match_material = re.findall(r'((?:[A-Z](?:[a-wyz]?[\d]*))+)[—–-]((?:[A-Z](?:[a-wyz]?[\d]*))+)', molecule) #TiO2-SiO2 from Ni-W/TiO2-SiO2
         if match_material and molecule in sup_cat.keys():
-            comp_dict[molecule] = [match_material[0][0],match_material[0][1]]
+            comp_dict[molecule] = [match_material[0][0], match_material[0][1]]
         molecule_split = molecule.split()        
-        if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]+){3,}', molecule) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+',molecule):
+        if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]+){3,}', molecule) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+', molecule):
             comp_dict[molecule] = molecule_split  
         else:
-             comp = re.findall(r'([A-Z](?:[a-wyz]+)?)',molecule)
+             comp = re.findall(r'([A-Z](?:[a-wyz]+)?)', molecule)
              comp_dict[molecule] = comp
     for k,v in comp_dict.items():
         
         i = 0
-        key=False
-        if k not in onto_new_dict.keys() and k in chem_list:           
+        key = False
+        if k not in chem_dict.keys() and k in chem_list:           
    
             if k in rel_synonym.keys():
-                key= rel_synonym[k]
+                key = rel_synonym[k]
             else:
+                if k in onto_dict_new.keys():
+                    synonyms_new[k] = [k]
+                else: 
+                    synonyms_new[k] = []
+                    for k_0,v in onto_dict_new.items():
+                        if k in v:
+                            synonyms_new[k].append(k_0)    
                 for k_o, v_o in onto_dict.items():
                     synonyms = fill_synonyms(synonyms,k,v_o,k_o)  
-                class_list, key ,rel_synonym = compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym) #,comp = False
-                if key==False:
+                class_list, key, rel_synonym = compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym,synonyms_new) #,comp = False
+                if key == False:
                     chem_list.remove(k)
                     break
-                elif k!=key:
+                elif k != key:
                     chem_list.append(rel_synonym[k])
-            onto_new_dict[key] = []
+            chem_dict[key] = []
                          
             for c in v:
                 if c not in rel_synonym.keys():
+                    synonyms_new[k] = []
+                    for k_o,v in onto_dict_new.items():
+                        if c in v:
+                            synonyms_new[k].append(k_0)  
                     for k_o, v_o in onto_dict.items():    
                         synonyms = fill_synonyms(synonyms,c,v_o,k_o)
                     if c == k:
                         comp = key
                     else:
-                        class_list, comp, rel_synonym = compare_synonyms(synonyms, inchikey, class_list, c, rel_synonym) #,comp = True                
+                        class_list, comp, rel_synonym = compare_synonyms(synonyms, inchikey, class_list, c, rel_synonym, synonyms_new) #,comp = True                
                         if c != comp:
                             chem_list.append(rel_synonym[c])
-                    onto_new_dict[key].append(comp) 
+                    chem_dict[key].append(comp) 
                 else:
-                    comp= rel_synonym[c]
-                    onto_new_dict[key].append(comp) 
+                    comp = rel_synonym[c]
+                    chem_dict[key].append(comp) 
                     continue
                 
             """
             if key:
-                for i in onto_new_dict[key]:
+                for i in chem_dict[key]:
                     if len(i) == 1: #remove components if one of the components (atoms) doesn't exist (ex.ZMS- Z,M don't exist, S-exists)                                   
                         print('deleted key:{}'.format(key))
                         chem_list.remove(key)
                         class_list.remove(key)
-                        onto_new_dict.pop(key)
+                        chem_dict.pop(key)
                         break
               """  
     class_list = [*set(class_list)] #remove duplicates
     class_list.extend(['molecule'])
     missing, match_dict = create_list_IRIs(class_list,IRI_json_filename = 'iriDictionary')
 
-    return missing, match_dict,chem_list, rel_synonym,onto_new_dict
+    return missing, match_dict,chem_list, rel_synonym,chem_dict
 
 def synonym_dicts(class_list):
     """
@@ -597,12 +610,12 @@ def synonym_dicts(class_list):
     desc_dict = {} 
     inchikey = {}
     temp_class_label = []
-    
+    desc_dict_new = {}
     new_world4 = owlready2.World()
     onto = new_world4.get_ontology('ontologies/{}.owl'.format(onto_new)).load()
-    mols_newonto= onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_25367').descendants()
+    mols_newonto = list(onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_25367').descendants())
 
-    def_id = ["hasRelatedSynonym", "hasExactSynonym","inchikey", 'comment']
+    def_id = ["hasRelatedSynonym", "hasExactSynonym","inchikey", "comment"]
     
     for i in range(len(class_list)):
         temp_class = class_list[i]
@@ -634,13 +647,45 @@ def synonym_dicts(class_list):
             elif not desc_dict[temp_class_label]:    
                 desc_dict[temp_class_label] = [temp_class_label]
             if temp_class in mols_newonto:
-                temp_class_new=onto.search_one(iri=temp_class.iri)
-                ...
+                temp_class_new = onto.search_one(iri = temp_class.iri)
+                desc_dict = check_comment_ind(temp_class_new,desc_dict)
+                for c in temp_class_new.comment:
+                    if c not in desc_dict[temp_class_label] and c != 'created automatically':
+                        desc_dict[temp_class_label].append(c)
+
             # get inchikeys of chemical components
             inchikey[temp_class_label] = getattr(temp_class,def_id[2])
+    for c in mols_newonto:
+        if c.label[0] not in desc_dict.keys() and c not in class_list:
+            desc_dict_new[c.label[0]] = getattr(c,def_id[3])
+            if "created automatically" in desc_dict_new[c.label[0]]:
+                desc_dict_new[c.label[0]].remove('created automatically')
+            _,desc_dict_new = check_comment_ind(c,desc_dict_new,desc_dict_new)
     print("Done.")
-    return desc_dict,  inchikey
+    return desc_dict, inchikey, desc_dict_new
 
+def check_comment_ind(super_class,desc_dict,desc_dict_new):
+    super_class_label = super_class.label[0]
+    ind = super_class.instances()
+    same = False
+    if desc_dict == desc_dict_new:
+        same = True
+    if len(ind) > 0:
+        for i in ind:
+            if i.label[0] == super_class_label:
+                if same == False:
+                    for c in i.comment:
+                        if c not in desc_dict[super_class_label] and c != 'created automatically':
+                            desc_dict[super_class_label].append(c)
+                else:
+                    for c in i.comment:
+                        if c not in desc_dict_new[super_class_label] and c != 'created automatically':
+                            desc_dict_new[super_class_label].append(c)                        
+            else:
+                desc_dict_new[i.label[0]] = getattr(i,"comment")
+                desc_dict_new[i.label[0]].remove('created automatically')
+    return desc_dict,desc_dict_new
+    
 def fill_synonyms(synonyms,c,v,k):
     pattern = r'^{}$'.format(c)
     if c not in synonyms.keys():
@@ -674,21 +719,58 @@ def search_inchikey(inchikey, c):
             mol_out = [c]          
     return mol_out,  mol
 
-def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
-    numinbrackets = None
+def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym, synonyms_new):
+    #numinbrackets = None
     if len(synonyms[k]) == 1:
             key = synonyms[k][0]
             print('found {} in ChEBI as {}'.format(k,key))
     else:   
             print(k)
+            '''
             if re.search(r'^[A-Za-z]+\(\d+\)$',k):
                 numinbrackets = k
                 k = re.findall(r'^([A-Za-z]+)\(\d+\)$',k)[0]
+                '''
+            if len(synonyms_new[k])>0:
+                if len(synonyms_new[k]) == 1:
+                    
+                    print("found following synonym in the working ontology: \n{}".format(synonyms_new[k][0]))
+                    while True:    
+                        ans = ("is this compound name correct? yes/no")
+                        if ans == 'yes':
+                            key = synonyms_new[k][0]
+                            class_list.append(key)
+                            rel_synonym[k]=key
+                            return class_list, key, rel_synonym
+                        elif ans == 'no':
+                            break
+                        else:
+                            print('\nError: write "yes" or "no"\n')
+                else:    
+                    
+                    print('found following synonyms in the ontology:')
+                    n=1
+                    for i in synonyms_new[k]:
+                        print('{}. {}'.format(n,i))
+                        n+=1 
+                    while True:
+                        idx = input('\nwrite number of fitting synonym or "none"\n')
+                        try:
+                            idx = int(idx)
+                            key = synonyms_new[k][idx-1]
+                            class_list.append(key)
+                            rel_synonym[k]=key
+                            return class_list, key, rel_synonym
+                        except:
+                            if idx == 'none':
+                                break
+                            else:
+                                print('\nError: write a number between 1 and {} or "none"\n'.format(len(synonyms_new[k])))
             comp_check, mol= search_inchikey(inchikey, k)
             if k in comp_check:
                 if len(synonyms[k]) == 0:
                     if not mol:
-                        print('no synonyms and entities for {}'.format(k))
+                        print('no synonyms and entities for {} found in ChEBI and Pubchem'.format(k))
                         ans= input('Is {} an existing compound?\n'.format(k))
                         if ans=='no':
                             key=False   
@@ -723,7 +805,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                                     key = mol_new[idx-1].iupac_name
                                     break
                                 except:
-                                    print('\nerror: write a number between 1 and {} or "none"\n'.format(len(mol_new)))
+                                    print('\nError: write a number between 1 and {} or "none"\n'.format(len(mol_new)))
                                     
                 else:
                     while True:
@@ -744,7 +826,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                                     key = synonyms[k][idx-1]
                                     break
                                 except:
-                                    print('\nerror: write a number between 1 and {} or "none"\n'.format(len(synonyms[k])))                               
+                                    print('\nError: write a number between 1 and {} or "none"\n'.format(len(synonyms[k])))                               
             elif len(comp_check) == 1:
                 key = comp_check[0]                  
             else:
@@ -766,12 +848,13 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym):
                             key = comp_check[idx-1]
                             break
                         except:
-                            print('\nerror: write a number between 1 and {} or "none"\n'.format(len(comp_check)))                  
+                            print('\nError: write a number between 1 and {} or "none"\n'.format(len(comp_check)))                  
                     
     if key == None or not key:
         key = k 
-    if numinbrackets != None:
-        rel_synonym[numinbrackets] = key  
+    #if numinbrackets != None:
+        #rel_synonym[numinbrackets] = key  
+    
     elif k not in rel_synonym.keys():
         rel_synonym[k] = key          
     class_list.append(key)
@@ -839,6 +922,6 @@ test_txt="""A method for the synthesis of highly crystalline Rh2P nanoparticles 
 onto_class_list=load_classes_chebi()
 sents = text_prep(test_txt) 
 categories,chem_list, reac_dict, sup_cat, abbreviation= CatalysisIE_search(model, sents)
-missing, match_dict, rel_synonym, onto_new_dict=chemical_prep(chem_list, onto_class_list)
+missing, match_dict, rel_synonym, chem_dict=chemical_prep(chem_list, onto_class_list)
 
 '''
