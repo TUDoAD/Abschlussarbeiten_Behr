@@ -374,12 +374,26 @@ def get_synonyms(ent_list): #,is_cat=False
                     ent_dict[temp_class_label].append(temp_class_label)
                 elif not ent_dict[temp_class_label]:    
                     ent_dict[temp_class_label] = [temp_class_label]
-                  
+    for k,v in ent_dict.items():
+                nlp = spacy.load('en_core_web_sm')
+                dist_ent=[]
+                formula =False
+                for value in v: 
+
+                    if re.search(r'\b(?:[A-Z][a-z]?)+(?:\d+(?:[A-Z][a-z]?)+)*\b', value) and formula==False:
+                        formula= True
+                        dist_ent.append(value)
+                    elif full_name ==False and (len(value.split()) >= 2 or re.match(r'[A-Za-z]([a-z]+){3,}', molecule) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+', molecule)):
+                        doc=nlp(value)
+                        dist_ent.append(doc.lemma_)
+                        full_name= True
+                ent_dict[k]=dist_ent      
     for v in ent_dict.values():
         for value in v:
             if value not in entity_all:
                 entity_all.append(value)
     return entity_all,ent_dict
+
 
 def get_entities(doi):
     sup_list=get_support(sup=None,doi=doi)
@@ -452,7 +466,8 @@ def scopus_seach_process(doi, onto_pub_list ):
             df_all = pd.concat([df_all, df], axis=0, ignore_index=True)
     return df_all
 
-        
+#def synonym_reduction(list_type):
+            
     
 def ScopusSearchQueries(reac_all, sup_all, cat_all, cat_full_all,reactant_all, product_all,queries):
     columns= ['eid',

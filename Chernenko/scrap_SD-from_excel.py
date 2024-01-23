@@ -7,7 +7,7 @@ Created on Sun Jan 14 06:39:56 2024
 import requests
 import pandas as pd
 path='./output/NAME_OF_EXCEL.xlsx' #change this to correct path
-papers=pd.read_excel(path, sheet_name='distinct_eid') #change the ame of sheet if needed
+papers=pd.read_excel(path, sheet_name='distinct_eid') #change the name of sheet if needed
 #  ScienceDirect API key
 api_key = '173ea79a3547e18083fed35e7356bb62' # c4c1c384a5eb47dc15ddde06584e07ba
 
