@@ -9,6 +9,7 @@ import pandas as pd
 from bs4 import BeautifulSoup 
 import itertools
 from pybliometrics.scopus import ScopusSearch
+import spacy
 #query function for reaction retrieval
 def get_reaction(reac=None,doi=None,include_all=False):
     df_reac=None
@@ -374,18 +375,22 @@ def get_synonyms(ent_list): #,is_cat=False
                     ent_dict[temp_class_label].append(temp_class_label)
                 elif not ent_dict[temp_class_label]:    
                     ent_dict[temp_class_label] = [temp_class_label]
+    nlp = spacy.load('en_core_web_sm')
     for k,v in ent_dict.items():
-                nlp = spacy.load('en_core_web_sm')
+                
                 dist_ent=[]
                 formula =False
+                full_name = False
                 for value in v: 
 
                     if re.search(r'\b(?:[A-Z][a-z]?)+(?:\d+(?:[A-Z][a-z]?)+)*\b', value) and formula==False:
                         formula= True
                         dist_ent.append(value)
-                    elif full_name ==False and (len(value.split()) >= 2 or re.match(r'[A-Za-z]([a-z]+){3,}', molecule) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+', molecule)):
+                    elif full_name ==False and (len(value.split()) >= 2 or re.match(r'[A-Za-z]([a-z]+){3,}', value) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+', value)):
                         doc=nlp(value)
-                        dist_ent.append(doc.lemma_)
+                        if len(value.split()) == 1:
+                            doc=doc[0].lemma_
+                        dist_ent.append(doc)
                         full_name= True
                 ent_dict[k]=dist_ent      
     for v in ent_dict.values():
@@ -455,6 +460,7 @@ def scopus_seach_process(doi, onto_pub_list ):
     if doi!=None:
         sup_all, cat_all, reactant_all, product_all, cat_full_all= get_entities(doi)
         list_reac_doi,_ = get_reaction(reac=None,doi=doi) 
+        reac_all = [*set([i[0].lower() for i in list_reac_doi])]
         df_all,_=ScopusSearchQueries(reac_all, sup_all, cat_all,cat_full_all, reactant_all, product_all,queries)
         
     else:
@@ -643,3 +649,43 @@ titles_filtered['doi']=dois
 titles_filtered['title']=titles
 df_titles_filtered=pd.DataFrame(data =titles_filtered)
 """
+"""
+onto_name= "afo_dataset_1-m" #input name of the ontology
+
+#perform reasoning, get dois from publications in the extended ontology
+onto_pub_list,onto,df=reasoning_dois_onto(onto_name)
+queries=[]
+for p in onto_pub_list:
+    sup_all, cat_all, reactant_all, product_all,cat_full_all = get_entities(p[0])
+    list_reac_doi,_ = get_reaction(reac=None,doi=p[0]) 
+    reac_all = [*set([i[0].lower() for i in list_reac_doi])]
+    if not reac_all:
+        reac_all.append(' ')
+    if not reactant_all:
+        reactant_all.append(' ')
+    if not product_all:
+        product_all.append(' ')
+    if not sup_all:
+        sup_all['sup']=[" "]
+    if not cat_all:
+        cat_all["cat"]=["catalysis"]
+    for r in reac_all:
+            for react in reactant_all:
+                for prod in product_all:
+                    if cat_full_all:
+                        for v_cat_all in cat_full_all.values():
+                            for c in v_cat_all:
+                                query = 'TITLE-ABS-KEY("{}"AND"{}"AND"{}"AND"{}")'.format(r,c,react,prod)
+                                if query not in queries:
+                                    queries.append(query) 
+                    for k_cat,v_cat in cat_all.items():
+                        for k_sup,v_sup in sup_all.items():
+                            if k_sup == k_cat:
+                                continue
+                            else:
+                                for cat in v_cat:
+                                    for sup in v_sup:
+                                        query = 'TITLE-ABS-KEY("{}"AND"{}"AND"{}"AND"{}"AND"{}")'.format(r,cat,sup,react,prod)
+                                        if query not in queries:
+                                            queries.append(query) 
+                                            """
