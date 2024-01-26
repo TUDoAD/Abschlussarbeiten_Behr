@@ -1,1 +1,2 @@
 Import von neuen chemischen Substanzen in DWSIM
+C:\Users\smaxbehr\AppData\Local\DWSIM8\addcomps
