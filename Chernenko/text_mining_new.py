@@ -396,57 +396,28 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                         elif l == 'Catalyst':
                             cem=[]
                             if '/' in mol[i][0]:
-                                entity = entity.replace('/',' supported on ')
-                                support = mol[i][2]
-                                chem_list.append(support)
-                                catalyst = mol[i][1]
-                                chem_list.append(catalyst)
-                                sup = True
+                                chem_list.append(mol[i][2])
+                                chem_list.append(mol[i][1])
                             if '@' in mol[i][0]:
                                     #if entity not in abbreviation.keys():
-                                    entity = entity.replace('@',' supported on ')
                                     support = mol[i][2]
                                     if re.findall(r'([A-Za-z]+)[—–-]\d+[—–-]?\d*[A-Z]*', support):
                                         print(re.findall(r'(([A-Za-z]+)[—–-]\d+[—–-]?\d*[A-Z]*)', support))
                                         list_spans.append(re.findall(r'([A-Za-z]+)[—–-]\d+[—–-]?\d*[A-Z]*', support)[0])
                                     chem_list.append(support)
-                                    catalyst = mol[i][1]
-                                    chem_list.append(catalyst)
-                                    sup = True
+                                    chem_list.append(mol[i][1])
                             elif 'on' in mol[i][0]:
                                 
                                 sup = False
                                 if 'based' not in entity[:re.search(r'[\s]on[\s]',entity).start()]:
                                     for c in chem_entity:
                                         if mol[i][1] in chem_list_all:
-                                            sup = True
                                             cem.append(mol[i][1])
                                             if mol[i][1] not in chem_list:
                                                 print('{} added to chem_list'.format(mol[i][1]))
                                                 chem_list.append(mol[i][1])
                                         elif c in entity[:re.search(r'[\s]on[\s]',entity).start()]:
                                             cem.append(c)
-                                    for c in chem_entity:    
-                                        if c in entity[re.search(r'[\s]on[\s]',entity).end():]:
-                                            support = c     
-                                            sup =True
-                                            break
-                                        else:
-                                            sup=False
-                                    if sup==True:
-                                        entity = entity.replace('on','supported on')                                        
-                            if sup==True:    
-                                if support in sup_cat.keys():
-                                    if cem:
-                                        sup_cat[support].extend([c for c in cem if c not in sup_cat[support]])
-                                    elif catalyst not in sup_cat[support]:
-                                        sup_cat[support].append(catalyst)
-                                else:
-                                    if cem:
-                                        cem=[*set(cem)]
-                                        sup_cat[support] = cem
-                                    else:
-                                        sup_cat[support] = [catalyst]
                         else:
                             for n in range(1, len(mol[i])):
                                 chem_list.append(mol[i][n])
@@ -482,7 +453,11 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                         else:
                             chem_list.append(c.text)
                     chem_list.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_list and cem not in list_spans])
-                                         
+                    c_list=[]
+                    for c in chem_list:
+                        if not re.search(r'(([\w—–-]+)(?:[\s]?/[\s]?|[\s]?@[\s]?)+([\w—–-]+))', c):
+                            c_list.append(c)
+                    chem_list=c_list    
                 #else:
                 
                 categories[entity] = l 
@@ -508,6 +483,7 @@ def chemical_prep(chem_list, onto_class_list):
     onto_dict, inchikey, onto_dict_new = synonym_dicts(onto_class_list)
     
     for molecule in chem_list:  
+
         if re.search(r'^ [A-Za-z\d—–-]+|^[A-Za-z\d—–-]+ $',molecule): 
             molecule = molecule.replace(' ','')
         if molecule in abbreviation.keys():

@@ -125,15 +125,16 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                     based_m = re.search('based',entity)
                     if based_m.start() != 0 or entity[:based_m.start()-1].lower() != 'catalyst': 
                         e_snip = entity[:based_m.start()-1]
+                        e_snip_old = entities_raw[entity][0][:based_m.start()-1]
                         e_cleaned = e_snip
                         for c in chem_entity:
                             pattern ='\\b'+c+'\\b'
                             if re.search(pattern,e_snip): 
-                                e_snip= e_snip[e_snip.index(c)+len(c)+1:]
+                                e_snip = e_snip[e_snip.index(c)+len(c)+1:]
                                 c_t = rel_synonym[c] 
                                 if c_t not in spans_n:    
                                     spans_n.append(c_t)
-                                if re.search('[Ss]upported', e_snip):
+                                if re.search('[Ss]upported', e_snip_old):
                                     e_cleaned = e_snip[re.search('[sS]upported',e_snip).end()+1:]
                                     support.append(c_t)
                                     continue
@@ -144,8 +145,9 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                         if entity[based_m.end()+1:] != 'catalyst':
                             s_on = False
                             e_snip = entity[based_m.end()+1:]
+                            e_snip_old = entities_raw[entity][0][based_m.end()+1:]
                             if ' on ' in e_snip: #based on/ based exclusivelly on
-                                if re.search('supported on', e_snip):
+                                if re.search('supported on', e_snip_old):
                                     s_on = True
                                     sup_i = True
                                     #Rh-Co based system supported on alumina, titania and silica
@@ -154,7 +156,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                                     based_m = re.search('on',entity)
                                 e_snip = entity[based_m.end()+1:]
                                 
-                            if re.search('supported', e_snip) and s_on==False: 
+                            if re.search('supported', e_snip_old) and s_on==False: 
                                         #based on silica supported bimetallic catalysts
                                         e_btwn = e_snip[:re.search('supported', e_snip).start()-1]    
                                         sup_i = True
@@ -175,14 +177,15 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                 elif entity not in chem_list and not set(entity.split()).issubset(chem_list):
                     sup_i = False
                     entity_n = entity
-                    if re.search('supported on', entity) or re.search('encapsulated within', entity):
+                    
+                    if re.search('supported on', entities_raw[entity][0]) or re.search('encapsulated within', entities_raw[entity][0]):
                         #Rh-Co supported on alumina, titania and silica                                    
-                        if 'supported on' in entity:
+                        if 'supported on' in entities_raw[entity][0]:
                             e_btwn=entity[re.search('supported on ', entity).end():]
                         else:
                             e_btwn=entity[re.search('encapsulated within ', entity).end():]
                         sup_i=True                            
-                    elif re.search('supported', entity) and re: #bimetallic SiO2-supported RhCo3 cluster catalyst 
+                    elif re.search('supported', entities_raw[entity][0]): #bimetallic SiO2-supported RhCo3 cluster catalyst 
                         if '-' in entity and entity.index('-')==re.search('supported',entity).start()-1:
                             entity_n= entity[:entity.index('-')]+ ' '+entity[entity.index('-')+1:]
                             
@@ -321,7 +324,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
     print('comment_treat:{}'.format(comment_treat))
     print('comment_charac:{}'.format(comment_charac))
     return df_entity, rel_synonym, missing_all, match_dict_all
-
+"""
 def catalyst_support(entity, chem_list):
     spans = sorted(Document(entity).cems, key = lambda span: span.start)
     chem_entity=[c.text for c in spans]
@@ -381,6 +384,7 @@ def catalyst_support(entity, chem_list):
                 new_values.append(rel_synonym[i])
 
             sup_cat[k]=new_values
+"""
 def shortcut_add_class(ele_old,classes_n, not_del, value, i, key ):
        
     classes_n[key].append(value[i])
@@ -396,6 +400,8 @@ def shortcut_add_class(ele_old,classes_n, not_del, value, i, key ):
     return classes_n, ele_old
 
 def check_in_snip(e_snip, classes, entity, l, chem_list):
+    
+    global entities_raw1
     classes[entity] = []
     doc_snip = nlp(e_snip)
     head = None
@@ -454,16 +460,20 @@ def check_in_snip(e_snip, classes, entity, l, chem_list):
             if '-' in doc_snip.text:
                 doc_snip = nlp(e_snip.replace('-',' '))
             for token in reversed(list(doc_snip)):
-                if token.text=='reaction':
+                if token.text =='reaction':
                     token_new = token.text
-                    head=token_new
-                elif token.head.text == token.text and head==None:
+                    head = token_new
+                elif token.head.text == token.text:
                     token_new = token.head.text
                     head=token_new
                 else:
                     continue
                 list_token=[]
                 classes[entity].extend(check_in_children(token, token_new,list_token))
+        elif doc_snip[0].pos_ == 'VERB' and re.search('ed$',token.text):
+            head = re.sub('e$','ion', token.lemma_)
+            classes[entity].append(head)
+            entities_raw1[head]=[entity]
         else:
             classes[entity].append(e_snip)            
     classes[entity] = [*set(classes[entity])] 
