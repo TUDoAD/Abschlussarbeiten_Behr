@@ -524,7 +524,7 @@ def crossref_search(result,k):
     title = soup.get_text()
     publisher=result['message']['items'][k]['publisher']
     return title,publisher
- 
+''' 
 #abstract_all=''
 path=r'.\Methanisierung\*.pdf'
 for i in glob.iglob(path):
@@ -539,7 +539,7 @@ for i in glob.iglob(path):
     #    print("Abstract:"+abstract)
     #else:
     #    print('no abstract found')
-        
+'''        
 """
     import json
     def set_config_key(key, value):

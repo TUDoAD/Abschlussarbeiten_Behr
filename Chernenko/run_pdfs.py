@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Sep 23 14:07:50 2023
-hor: smdicher"""
+ (author: smdicher"""
 from text_mining import load_classes_chebi, delete_files_in_directory, run_text_mining, add_publication
 from preprocess_onto import *
-from onto_extension import preprocess_classes,create_classes_onto 
+from onto_extension_new import preprocess_classes,create_classes_onto 
 from txt_extract import get_abstract, get_metadata
 from CatalysisIE.model import *
 from CatalysisIE.utils import *

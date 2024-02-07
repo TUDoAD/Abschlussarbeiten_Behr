@@ -715,7 +715,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                     continue
 
         for sup,v in sup_cat.items():
-            sup = rel_synonym[sup] #if sup in rel_synonym.keys() else sup
+            sup = rel_synonym[sup] if sup in rel_synonym.keys() else sup
             try:
                 sup = [i for i in list(onto.search(label=sup)) if i in list(onto.individuals())][0]
             except:

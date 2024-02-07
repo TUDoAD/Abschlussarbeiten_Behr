@@ -64,10 +64,11 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
 
     for k in sup_cat.keys():   
         sup_cat[k]=[*set(sup_cat[k])]
-        if rel_synonym[k] in sup_cat.keys():
-                sup_cat[rel_synonym[k]].extend(sup_cat[k])                  
-        else:
-                pop.append({rel_synonym[k]:sup_cat[k]})
+        if k in rel_synonym.keys():
+            if rel_synonym[k] in sup_cat.keys():
+                    sup_cat[rel_synonym[k]].extend(sup_cat[k])                  
+            else:
+                    pop.append({rel_synonym[k]:sup_cat[k]})
         pop.append(k)
     for i in pop:
         if type(i) == dict:
@@ -246,7 +247,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                     else: 
                         c_list = []
                         for c in entity.split():
-                            c_t = rel_synonym[c] #if c in rel_synonym.keys() else c
+                            c_t = rel_synonym[c] if c in rel_synonym.keys() else c
                             if "atom" in c_t:
                                c_list=[entity]
                                break
@@ -264,7 +265,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                     spans_dict[entity].append(c_t) #
             elif entity not in classes.keys() and l in ['Product','Reactant']: 
                     for c in chem_entity:
-                        c_t = rel_synonym[c] #if c in rel_synonym.keys() else c
+                        c_t = rel_synonym[c] if c in rel_synonym.keys() else c
                         spans_dict[entity].append(c_t) #muss für entities wie "phenolic species", alkyl group erweitert werden  
                     list_all.append([entity,['chemical substance'],[],l])
     for k,v in spans_dict.items(): #replacement of parts of chemical entities with full name. i.e. ['zeolite', 'ZSM-5']-> ['ZSM-5 zeolite'] if 'ZSM-5 zeolite' is in entity
@@ -725,7 +726,8 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                     continue
 
         for sup,v in sup_cat.items():
-            sup = rel_synonym[sup] #if sup in rel_synonym.keys() else sup
+            if sup in rel_synonym.keys():
+                sup = rel_synonym[sup] 
             try:
                 sup = [i for i in list(onto.search(label=sup)) if i in list(onto.individuals())][0]
             except:

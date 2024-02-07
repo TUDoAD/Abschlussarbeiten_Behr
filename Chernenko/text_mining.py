@@ -24,8 +24,8 @@ def run_text_mining(abstract,model, onto_class_list):
          for key, value in json.load(json_config).items():
              set_config_key(key, value)
     sents = text_prep(abstract) 
-    categories,chem_list, reac_dict, sup_cat, abbreviation,raw_entities= CatalysisIE_search(model, sents)
-    missing, match_dict,chem_list,rel_synonym, chem_dict=chemical_prep(chem_list, onto_class_list)
+    categories,chem_list, reac_dict, sup_cat, abbreviation,raw_entities = CatalysisIE_search(model, sents)
+    missing, match_dict,chem_list,rel_synonym, chem_dict = chemical_prep(chem_list, onto_class_list)
     return chem_list, categories,chem_dict, sup_cat, abbreviation, missing, match_dict, rel_synonym, reac_dict,raw_entities
         
 def load_classes_chebi():
@@ -370,7 +370,6 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                 chem_entity=[c.text for c in spans]
                 list_spans=[i for c in spans for i in c.text.split()]+[c.text for c in spans]
                 chem_entity.extend([cem for cem in chem_list_all if cem in entity and cem not in chem_entity and cem not in list_spans])
-                
                 for c in chem_entity: # search spans
                 #if for i.e. ZSM-5 in entity if only ZSM found. replace ZSM with ZSM-5 in chem_list
                     pattern = r'\b({}[—–-]\d+[-]?\d*[A-Z]*)\b'.format(c)
@@ -384,6 +383,8 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                     if matches:
                             list_spans.append(c)
                             chem_list.append(matches[0])
+                    pattern = r'\b'
+                    
                 pattern = r'^[\d,]+[—–-] [a-z]+$' #1,3- butadiene -> 1,3-butadiene
                 if re.search(pattern,entity) or re.search(r'^ [A-Za-z\d—–-]+$|^[A-Za-z\d—–-]+ $',entity):
                     entity=entity.replace(' ','') 
@@ -399,7 +400,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                                 entity = entity.replace('/',' supported on ')
                                 support = mol[i][2]
                                 chem_list.append(support)
-                                catalyst = mol[i][1]
+                                catalyst = del_numbers(mol[i][1])
                                 chem_list.append(catalyst)
                                 sup = True
                             if '@' in mol[i][0]:
@@ -410,7 +411,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                                         print(re.findall(r'(([A-Za-z]+)[—–-]\d+[—–-]?\d*[A-Z]*)', support))
                                         list_spans.append(re.findall(r'([A-Za-z]+)[—–-]\d+[—–-]?\d*[A-Z]*', support)[0])
                                     chem_list.append(support)
-                                    catalyst = mol[i][1]
+                                    catalyst = del_numbers(mol[i][1])
                                     chem_list.append(catalyst)
                                     sup = True
                             elif 'on' in mol[i][0]:
@@ -496,6 +497,14 @@ def CatalysisIE_search(model, test_sents): #change description at the and
     chem_list = [*set(chem_list)]
     return categories,chem_list, reac_dict, sup_cat, abbreviation,raw_entities
 
+def del_numbers(molecule):
+    match=re.findall(r'^([\d]+.[\d]+)[A-Z]|^([\d]+)[A-Z]', molecule) 
+    if match:
+        if match[0][0]:
+            molecule = re.sub(match[0][0],'', molecule)
+        else:
+            molecule = re.sub(match[0][1],'', molecule)
+    return molecule
 
 def chemical_prep(chem_list, onto_class_list):
     global chem_dict
@@ -505,11 +514,21 @@ def chemical_prep(chem_list, onto_class_list):
     synonyms = {}
     chem_dict = {}
     synonyms_new={}
+    to_remove=[]
     onto_dict, inchikey, onto_dict_new = synonym_dicts(onto_class_list)
     
     for molecule in chem_list:  
         if re.search(r'^ [A-Za-z\d—–-]+|^[A-Za-z\d—–-]+ $',molecule): 
             molecule = molecule.replace(' ','')
+        match=re.findall(r'^([\d]+.[\d]+)[A-Z]|^([\d]+)[A-Z]', molecule) 
+        if match:
+            to_remove.append(molecule)
+            if match[0][0]:
+                molecule = re.sub(match[0][0],'', molecule)
+            else:
+                molecule = re.sub(match[0][1],'', molecule)
+            if molecule not in chem_list:   
+                chem_list.append(molecule)
         if molecule in abbreviation.keys():
             comp_dict[molecule] = []
             spans = Document(abbreviation[molecule]).cems
@@ -525,15 +544,16 @@ def chemical_prep(chem_list, onto_class_list):
             chem_dict[molecule] = []
             class_list.append(molecule)
             continue        
-        match_material = re.findall(r'((?:[A-Z](?:[a-wyz]?[\d]*))+)[—–-]((?:[A-Z](?:[a-wyz]?[\d]*))+)', molecule) #TiO2-SiO2 from Ni-W/TiO2-SiO2
+        match_material = re.findall(r'((?:[A-Z](?:[a-wz]?[\d]*))+)[—–-]((?:[A-Z](?:[a-wz]?[\d]*))+)', molecule) #TiO2-SiO2 from Ni-W/TiO2-SiO2
         if match_material and molecule in sup_cat.keys():
             comp_dict[molecule] = [match_material[0][0], match_material[0][1]]
         molecule_split = molecule.split()        
         if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]+){3,}', molecule) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+', molecule):
             comp_dict[molecule] = molecule_split  
-        else:
-             comp = re.findall(r'([A-Z](?:[a-wyz]+)?)', molecule)
+        elif molecule not in comp_dict.keys():
+             comp = re.findall(r'([A-Z](?:[a-wz]+)?)', molecule)
              comp_dict[molecule] = comp
+    chem_list=[i for i in chem_list  if i not in to_remove]
     for k,v in comp_dict.items():
         
         i = 0
@@ -547,8 +567,8 @@ def chemical_prep(chem_list, onto_class_list):
                     synonyms_new[k] = [k]
                 else: 
                     synonyms_new[k] = []
-                    for k_0,v in onto_dict_new.items():
-                        if k in v:
+                    for k_0,v_0 in onto_dict_new.items():
+                        if k in v_0:
                             synonyms_new[k].append(k_0)    
                 for k_o, v_o in onto_dict.items():
                     synonyms = fill_synonyms(synonyms,k,v_o,k_o)  
@@ -562,10 +582,10 @@ def chemical_prep(chem_list, onto_class_list):
                          
             for c in v:
                 if c not in rel_synonym.keys():
-                    synonyms_new[k] = []
-                    for k_o,v in onto_dict_new.items():
-                        if c in v:
-                            synonyms_new[k].append(k_0)  
+                    synonyms_new[c] = []
+                    for k_0,v_0 in onto_dict_new.items():
+                        if c in v_0:
+                            synonyms_new[c].append(k_0)  
                     for k_o, v_o in onto_dict.items():    
                         synonyms = fill_synonyms(synonyms,c,v_o,k_o)
                     if c == k:
@@ -614,7 +634,7 @@ def synonym_dicts(class_list):
     new_world4 = owlready2.World()
     onto = new_world4.get_ontology('ontologies/{}.owl'.format(onto_new)).load()
     mols_newonto = list(onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_25367').descendants())
-
+    mols_newonto.extend(list(onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_33250').descendants()))
     def_id = ["hasRelatedSynonym", "hasExactSynonym","inchikey", "comment"]
     
     for i in range(len(class_list)):
@@ -656,16 +676,22 @@ def synonym_dicts(class_list):
             # get inchikeys of chemical components
             inchikey[temp_class_label] = getattr(temp_class,def_id[2])
     for c in mols_newonto:
-        if c.label[0] not in desc_dict.keys() and c not in class_list:
-            desc_dict_new[c.label[0]] = getattr(c,def_id[3])
-            if "created automatically" in desc_dict_new[c.label[0]]:
-                desc_dict_new[c.label[0]].remove('created automatically')
-            _,desc_dict_new = check_comment_ind(c,desc_dict_new,desc_dict_new)
+        if c.label:
+             # and c not in class_list:
+            #if c.label[0].replace(' (molecule)','') not in desc_dict.keys():
+                if c.label[0].replace(' (molecule)','') not in desc_dict_new.keys():
+                    desc_dict_new[c.label[0].replace(' (molecule)','')] = getattr(c,def_id[3])
+            #else:
+            #    desc_dict[c.label[0]].extend([i for i in getattr(c,def_id[3]) if i not in desc_dict_new[c.label[0]]])
+                if "created automatically" in desc_dict_new[c.label[0].replace(' (molecule)','')]:
+                    desc_dict_new[c.label[0].replace(' (molecule)','')].remove('created automatically')
+                _,desc_dict_new = check_comment_ind(c,desc_dict_new,desc_dict_new)
+        
     print("Done.")
     return desc_dict, inchikey, desc_dict_new
 
 def check_comment_ind(super_class,desc_dict,desc_dict_new):
-    super_class_label = super_class.label[0]
+    super_class_label = super_class.label[0].replace(' (molecule)','')
     ind = super_class.instances()
     same = False
     if desc_dict == desc_dict_new:
@@ -683,7 +709,8 @@ def check_comment_ind(super_class,desc_dict,desc_dict_new):
                             desc_dict_new[super_class_label].append(c)                        
             else:
                 desc_dict_new[i.label[0]] = getattr(i,"comment")
-                desc_dict_new[i.label[0]].remove('created automatically')
+                if 'created automatically' in desc_dict_new[i.label[0]]:
+                    desc_dict_new[i.label[0]].remove('created automatically')
     return desc_dict,desc_dict_new
     
 def fill_synonyms(synonyms,c,v,k):
@@ -850,12 +877,13 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym, synonyms_ne
                         except:
                             print('\nError: write a number between 1 and {} or "none"\n'.format(len(comp_check)))                  
                     
-    if key == None or not key:
+    if key == None or not key or key == 'None':
         key = k 
+        
     #if numinbrackets != None:
         #rel_synonym[numinbrackets] = key  
     
-    elif k not in rel_synonym.keys():
+    if k not in rel_synonym.keys():
         rel_synonym[k] = key          
     class_list.append(key)
     return class_list, key, rel_synonym
@@ -925,6 +953,7 @@ categories,chem_list, reac_dict, sup_cat, abbreviation= CatalysisIE_search(model
 missing, match_dict, rel_synonym, chem_dict=chemical_prep(chem_list, onto_class_list)
 
 '''
+'''
 with open("config.json") as json_config:
          for key, value in json.load(json_config).items():
              set_config_key(key, value)
@@ -934,3 +963,4 @@ temperature and sulfur-tolerant stability of 100 h life were investigated."""
 
 sents = text_prep(test_txt) 
 categories,chem_list, reac_dict, sup_cat, abbreviation,raw_entities= CatalysisIE_search(model, sents)
+'''
