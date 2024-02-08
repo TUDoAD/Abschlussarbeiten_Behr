@@ -763,7 +763,7 @@ def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym, synonyms_ne
                     
                     print("found following synonym in the working ontology: \n{}".format(synonyms_new[k][0]))
                     while True:    
-                        ans = ("is this compound name correct? yes/no")
+                        ans = input("is this compound name correct? yes/no:\n")
                         if ans == 'yes':
                             key = synonyms_new[k][0]
                             class_list.append(key)
