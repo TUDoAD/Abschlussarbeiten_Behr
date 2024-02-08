@@ -46,9 +46,9 @@ def load_classes_chebi():
     start_time=time.time()
     new_world3 = owlready2.World()
     try:
-        onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
-    except:
         onto = new_world3.get_ontology('./ontologies/chebi.owl').load()
+    except:
+        onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
     onto_class_list = list(onto.classes())
     set_org_mol= onto.search_one(label='organic group').descendants()
     for i in set_org_mol:
