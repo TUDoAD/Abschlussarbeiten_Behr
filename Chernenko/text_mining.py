@@ -46,9 +46,9 @@ def load_classes_chebi():
     start_time=time.time()
     new_world3 = owlready2.World()
     try:
-        onto = new_world3.get_ontology('./ontologies/chebi.owl').load()
-    except:
         onto = new_world3.get_ontology('http://purl.obolibrary.org/obo/chebi.owl').load()
+    except:
+        onto = new_world3.get_ontology('./ontologies/chebi.owl').load()
     onto_class_list = list(onto.classes())
     set_org_mol= onto.search_one(label='organic group').descendants()
     for i in set_org_mol:
@@ -94,8 +94,6 @@ def add_publication(doi,title,abstract):
 
     Parameters
     ----------
-    onto_name : str
-        The name of the parent ontology (i.e. 'afo').
     doi : str
         The DOI (Digital Object Identifier) of the publication.
     title : str
@@ -575,7 +573,7 @@ def chemical_prep(chem_list, onto_class_list):
                 class_list, key, rel_synonym = compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym,synonyms_new) #,comp = False
                 if key == False:
                     chem_list.remove(k)
-                    break
+                    continue
                 elif k != key:
                     chem_list.append(rel_synonym[k])
             chem_dict[key] = []
