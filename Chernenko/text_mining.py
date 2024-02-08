@@ -632,7 +632,8 @@ def synonym_dicts(class_list):
     new_world4 = owlready2.World()
     onto = new_world4.get_ontology('ontologies/{}.owl'.format(onto_new)).load()
     mols_newonto = list(onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_25367').descendants())
-    mols_newonto.extend(list(onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_33250').descendants()))
+    if onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_33250'):
+        mols_newonto.extend(list(onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_33250').descendants()))
     def_id = ["hasRelatedSynonym", "hasExactSynonym","inchikey", "comment"]
     
     for i in range(len(class_list)):
