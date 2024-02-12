@@ -108,7 +108,6 @@ def add_publication(doi,title,abstract):
         If the publication already exists in the ontology, it returns None.
  
     """
-    #TODO Zahl von publication von hinten mit regex ablesen, in integer umwandeln, dann +1 -> p_id
     print('processing input publication...')
     global p_id
     new_world = owlready2.World()
@@ -136,7 +135,10 @@ def add_publication(doi,title,abstract):
             p_id = None
             return p_id
         else:
-            p_id = len(list(pub_c.instances()))+1
+            if pub_c.instances():
+                p_id= int(re.search(r'[\d]+$', p).group(0))+1
+            else:
+                p_id = 1
             new_pub = pub_c('publication{}'.format(p_id))
             new_pub.label.append('publication{}'.format(p_id))
             new_pub.comment.append('DOI: {}'.format(doi))
@@ -241,7 +243,6 @@ def CatalysisIE_search(model, test_sents): #change description at the and
     It takes a model, a list of test sentences, a dictionary with ontologies and its IRIs, and the name of the ontology as input. 
     It processes the sentences, extracts chemical entities, and returns information related to catalysis, chemicals, and reactions.
 
-
     Parameters
     ----------
     model : object
@@ -249,32 +250,26 @@ def CatalysisIE_search(model, test_sents): #change description at the and
 
     test_sents : list
         A list of test sentences for information extraction.
-    
-    onto_list : dict
-        A dictionary of ontologies for search of existing classes.
-    
-    onto_name : str
-        The name of the ontology to use.
 
     Returns
     -------
     categories : dict
         A dictionary of categories for the entities extracted from the text.
-    
+
     chem_list : list
         A list of chemical entities.
-    
+
+    reac_dict : dict
+        A dictionary of reactions and reactants.
+
+    sup_cat : dict
+        A dictionary of support materials and according catalyst compounds.
+
     abbreviation : dict
         A dictionary of abbreviations and their expansions.
-    
-    sup_cat : dict
-        A dictionary of catalysts and their support materials.
-    
-    chem_list_all : list
-        A list of all possible chemical entities in sentences.
-    
-    reac_dict : dict
-        A dictionary of reactions and their types.
+
+    raw_entities : dict
+        A dictionary of changed extracted entities and their original forms.
 
     Notes
     -----
@@ -330,11 +325,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
             
             entity = re.sub(r' product$','',entity)
             entity = re.sub(r' reactant$','',entity)
-            '''
-            if re.search(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity): #Rh(111 )
-                i = re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0].replace(' ','')
-                entity = entity.replace(re.findall(r'[A-Za-z]*(\([\s]?[\d]+[\s]?\))',entity)[0],i)
-            '''
+
             pattern = r'([A-Za-z]+[\s]?[—–-] [a-z]+|[A-Za-z]+ [—–-][\s]?[a-z]+)' #e_split:['hydro- formylation'] and entity:heterogeneous hydro- formylation or X - ray diffraction
             e_split = re.findall(pattern,entity)
             if e_split:
@@ -505,6 +496,38 @@ def del_numbers(molecule):
     return molecule
 
 def chemical_prep(chem_list, onto_class_list):
+    """
+    Prepares chemical entities for ontology extension.
+    
+    Parameters
+    ----------
+    chem_list : list
+           A list of chemical entities to be prepared for ontology mapping.
+    onto_class_list : list
+           A list of ontology classes used for mapping.
+    
+    Returns
+    -------
+    missing : list
+           A list of chemical entities with missing ontology classes.
+    match_dict : dict
+           A dictionary mapping chemical entities to their matched ontology classes.
+    chem_list : list
+           Updated list of chemical entities after ontology mapping.
+    rel_synonym : dict
+           A dictionary mapping chemical entities to their resolved synonyms.
+    chem_dict : dict
+           A dictionary mapping chemical entities to their components.
+    
+    This function prepares chemical entities for ontology mapping. It processes the input chemical list,
+    resolves synonyms, and creates dictionaries for further processing.
+    
+    Example
+    -------
+    chem_list = ['compound1', 'compound2']
+    onto_class_list = [class1, class2, ...]
+    missing_entities, matched_entities, updated_chem_list, resolved_synonyms, components_dict = chemical_prep(chem_list, onto_class_list)
+   """
     global chem_dict
     rel_synonym = {}
     comp_dict = {}
@@ -598,16 +621,6 @@ def chemical_prep(chem_list, onto_class_list):
                     chem_dict[key].append(comp) 
                     continue
                 
-            """
-            if key:
-                for i in chem_dict[key]:
-                    if len(i) == 1: #remove components if one of the components (atoms) doesn't exist (ex.ZMS- Z,M don't exist, S-exists)                                   
-                        print('deleted key:{}'.format(key))
-                        chem_list.remove(key)
-                        class_list.remove(key)
-                        chem_dict.pop(key)
-                        break
-              """  
     class_list = [*set(class_list)] #remove duplicates
     class_list.extend(['molecule'])
     missing, match_dict = create_list_IRIs(class_list,IRI_json_filename = 'iriDictionary')
@@ -616,13 +629,35 @@ def chemical_prep(chem_list, onto_class_list):
 
 def synonym_dicts(class_list):
     """
-    extracts class names and descriptions based on class list (the owlready2 object)
-    returns dictionary with general structure of 
-    desc_dict = {ontology_class_label : Definition string}
-    WARNING: Descriptions often have different identifiers (see try:... except loop)
-           
+    Extracts information about synonyms and InChIKeys from a list of ontology classes; 
+    extracts annotations (comments) of subclasses (and their individuals) of "atom" and "molecule" classes from the working ontology  
 
-
+    Parameters
+    ----------
+    class_list : list
+        A list of ontology classes.
+    
+    Returns
+    -------
+    desc_dict : dict
+        A dictionary mapping class labels to lists of related and exact synonyms.
+    inchikey : dict
+        A dictionary mapping class labels to InChIKeys.
+    desc_dict_new : dict
+        A dictionary mapping labels of subclassses of "molecule" and "atom" to additional comments.
+    
+    The function iterates through the provided list of ontology classes and extracts information
+    about synonyms and InChIKeys. It creates three dictionaries.
+    
+    Note
+    ----
+    The function relies on the existence of certain properties such as prefLabel, label, hasRelatedSynonym,
+    hasExactSynonym, inchikey, and comment in the ontology classes.
+    
+    Example
+    -------
+    class_list = [class1, class2, ...]
+    desc_dict, inchikey, desc_dict_new = synonym_dicts(class_list)
     """
     print("Extracting formulae...")
     desc_dict = {} 
@@ -690,6 +725,39 @@ def synonym_dicts(class_list):
     return desc_dict, inchikey, desc_dict_new
 
 def check_comment_ind(super_class,desc_dict,desc_dict_new):
+    """
+    Checks for additional comments in instances of a given superclass and updates dictionaries accordingly.
+
+    Parameters
+    ----------
+    super_class : owlready2.entity.ThingClass
+        The superclass for which instances are checked for additional comments.
+    desc_dict : dict
+        A dictionary mapping class labels to lists of related and exact synonyms.
+    desc_dict_new : dict
+        A dictionary mapping molecule labels to additional comments.
+
+    Returns
+    -------
+    desc_dict : dict
+        Updated dictionary mapping class labels to lists of related and exact synonyms.
+    desc_dict_new : dict
+        Updated dictionary mapping molecule labels to additional comments.
+
+    This function takes a superclass, iterates through its instances, and checks for additional comments.
+    It updates either 'desc_dict' or 'desc_dict_new' based on the comparison of the two dictionaries.
+    If 'desc_dict' and 'desc_dict_new' are different, the function updates 'desc_dict'.
+    Otherwise, it updates 'desc_dict_new'.
+
+    Note
+    ----
+    The function assumes the existence of certain properties, such as label and comment, in the instances.
+
+    Example
+    -------
+    super_class = some_superclass
+    desc_dict, desc_dict_new = check_comment_ind(super_class, desc_dict, desc_dict_new)
+    """
     super_class_label = super_class.label[0].replace(' (molecule)','')
     ind = super_class.instances()
     same = False
@@ -713,6 +781,37 @@ def check_comment_ind(super_class,desc_dict,desc_dict_new):
     return desc_dict,desc_dict_new
     
 def fill_synonyms(synonyms,c,v,k):
+    """
+    Adds a synonym to the dictionary based on a pattern match.
+
+    Parameters
+    ----------
+    synonyms : dict
+        A dictionary mapping a category (c) to a list of synonyms.
+    c : str
+        The category for which synonyms are being filled.
+    v : list
+        A list of potential synonyms.
+    k : str
+        The synonym to be added to the dictionary.
+
+    Returns
+    -------
+    synonyms : dict
+        Updated dictionary with added synonym.
+
+    This function takes a dictionary of synonyms, a category (c), a list of potential synonyms (v), and a synonym (k).
+    It checks if the synonym matches a pattern based on the category and adds it to the list of synonyms for that category.
+    If the synonym is not present in the list, it is appended.
+
+    Example
+    -------
+    synonyms = {'category1': ['synonym1', 'synonym2'], 'category2': ['synonym3']}
+    category = 'category1'
+    potential_synonyms = ['synonym4', 'synonym5']
+    synonym_to_add = 'synonym4'
+    updated_synonyms = fill_synonyms(synonyms, category, potential_synonyms, synonym_to_add)
+    """
     pattern = r'^{}$'.format(c)
     if c not in synonyms.keys():
                 synonyms[c] = []
@@ -728,6 +827,39 @@ def fill_synonyms(synonyms,c,v,k):
     return synonyms
 
 def search_inchikey(inchikey, c):    
+    """
+    Searches for compounds with a given InChIKey or chemical identifier.
+
+    Parameters
+    ----------
+    inchikey : dict
+        A dictionary mapping class labels to carresponding InChIKeys
+    c : str
+        The chemical formula or name to search for.
+
+    Returns
+    -------
+    mol_out : list
+        A list of chemical entities corresponding to compounds found in the search.
+    mol : list
+        A list of compounds retrieved from the search.
+
+    This function attempts to retrieve compounds based on a given chemical identifier (c).
+    It first tries to search by formula using the 'get_compounds' function in PubChem and the 'formula' parameter.
+    If unsuccessful, it then tries to search by name using the 'get_compounds' function in PubChem and the 'name' parameter.
+    If both attempts fail, an empty list is returned.
+
+    The function checks if the retrieved compounds have corresponding InChIKeys in the provided 'inchikey' dictionary.
+    It returns two lists:
+    - mol_out: A list of chemical identifiers corresponding to compounds found in the search.
+    - mol: A list of compounds retrieved from the search.
+
+    Example
+    -------
+    inchikey = {'carbon dioxide': 'InChIKey123', 'methanol': 'InChIKey456'}
+    chemical_identifier = 'carbon dioxide'
+    comp_check, compounds_found = search_inchikey(inchikey, chemical_identifier)
+    """
     try:
         mol = get_compounds(c, 'formula')    
     except:
@@ -746,17 +878,56 @@ def search_inchikey(inchikey, c):
     return mol_out,  mol
 
 def compare_synonyms(synonyms, inchikey, class_list, k, rel_synonym, synonyms_new):
-    #numinbrackets = None
+    """
+    Compares and resolves synonyms for a given chemical entity.
+
+    Parameters
+    ----------
+    synonyms : dict
+        A dictionary mapping chemical entities to lists of synonyms.
+    inchikey : dict
+        A dictionary mapping chemical identifiers to corresponding InChIKeys.
+    class_list : list
+        A list of chemical entities and their corresponding classes.
+    k : str
+        The chemical entity for which synonyms are being compared.
+    rel_synonym : dict
+        A dictionary mapping chemical entities to their resolved synonyms.
+    synonyms_new : dict
+        A dictionary mapping chemical entities to additional synonyms.
+
+    Returns
+    -------
+    class_list : list
+        Updated list of chemical entities and their corresponding classes.
+    key : str
+        The resolved synonym or chemical identifier for the given entity.
+    rel_synonym : dict
+        Updated dictionary mapping chemical entities to their resolved synonyms.
+
+    This function compares synonyms for a given chemical entity (k) and resolves them.
+    It interacts with the user to choose the most appropriate synonym or identifier.
+    The function updates the 'class_list' and 'rel_synonym' accordingly.
+
+    Example
+    -------
+    synonyms = {'O': ['oxygen atom'], 'NiMnAl': [], 'H': ['l-histidine', 'hydrogen atom'], 'nickel': ['nickel atom']}
+    inchikey = {'carbon dioxide': 'InChIKey123', 'methanol': 'InChIKey456'}
+    class_list = ['class1', 'class2']
+    chemical_entity = 'O'
+    resolved_synonym = {'O': 'oxygen atom'}
+    additional_synonyms = {'O': ['oxygen atom'],'NiMnAl': [], 'Ni': ['nickel atom'],'H':[]}
+    updated_class_list, resolved_key, updated_resolved_synonym = compare_synonyms(
+        synonyms, inchikey, class_list, chemical_entity, resolved_synonym, additional_synonyms
+    )
+    """
+    
     if len(synonyms[k]) == 1:
             key = synonyms[k][0]
             print('found {} in ChEBI as {}'.format(k,key))
     else:   
             print(k)
-            '''
-            if re.search(r'^[A-Za-z]+\(\d+\)$',k):
-                numinbrackets = k
-                k = re.findall(r'^([A-Za-z]+)\(\d+\)$',k)[0]
-                '''
+
             if len(synonyms_new[k])>0:
                 if len(synonyms_new[k]) == 1:
                     
