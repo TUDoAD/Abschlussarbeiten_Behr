@@ -138,7 +138,7 @@ def add_publication(doi,title,abstract):
             if pub_c.instances():
                 n=[]
                 for p in list(pub_c.instances()):
-                    n.append(int(re.search(r'[\d]+$', p).group(0)))
+                    n.append(int(re.findall(r'[\d]+$', p.label[0])[0]))
                 p_id= max(n)+1
             else:
                 p_id = 1
