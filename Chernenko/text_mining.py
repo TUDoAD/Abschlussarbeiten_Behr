@@ -136,7 +136,10 @@ def add_publication(doi,title,abstract):
             return p_id
         else:
             if pub_c.instances():
-                p_id= int(re.search(r'[\d]+$', p).group(0))+1
+                n=[]
+                for p in list(pub_c.instances()):
+                    n.append(int(re.search(r'[\d]+$', p).group(0)))
+                p_id= max(n)+1
             else:
                 p_id = 1
             new_pub = pub_c('publication{}'.format(p_id))
@@ -372,8 +375,13 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                     if matches:
                             list_spans.append(c)
                             chem_list.append(matches[0])
-                    pattern = r'\b'
-                    
+                    #pattern = r'\b'
+                    pattern=r'[A-z][a-z]?[\s]?[\d]*[A-z][a-z]?[\s]?[\d]*'
+                    if re.search(pattern,c).string and ' ' in re.search(pattern,c).string: 
+                        chem_new=chem_new=re.sub(re.search(pattern,c).string, re.sub(' ','', re.search(pattern,c).string), c)
+                        chem_list.append(chem_new)
+                        list_spans.append(c)
+                        
                 pattern = r'^[\d,]+[—–-] [a-z]+$' #1,3- butadiene -> 1,3-butadiene
                 if re.search(pattern,entity) or re.search(r'^ [A-Za-z\d—–-]+$|^[A-Za-z\d—–-]+ $',entity):
                     entity=entity.replace(' ','') 
