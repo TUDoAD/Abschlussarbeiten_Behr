@@ -378,9 +378,11 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                     #pattern = r'\b'
                     pattern=r'[A-z][a-z]?[\s]?[\d]*[A-z][a-z]?[\s]?[\d]*'
                     if re.search(pattern,c).string and ' ' in re.search(pattern,c).string: 
-                        chem_new=chem_new=re.sub(re.search(pattern,c).string, re.sub(' ','', re.search(pattern,c).string), c)
+                        chem_new=re.sub(re.search(pattern,c).string, re.sub(' ','', re.search(pattern,c).string), c)
                         chem_list.append(chem_new)
                         list_spans.append(c)
+                        if c in entity:
+                            entity= re.sub(c,chem_new, entity)
                         
                 pattern = r'^[\d,]+[—–-] [a-z]+$' #1,3- butadiene -> 1,3-butadiene
                 if re.search(pattern,entity) or re.search(r'^ [A-Za-z\d—–-]+$|^[A-Za-z\d—–-]+ $',entity):
