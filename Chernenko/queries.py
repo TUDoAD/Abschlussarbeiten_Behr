@@ -118,6 +118,7 @@ def get_catalyst_full(doi = None):
         PREFIX role: <http://purl.allotrope.org/ontologies/role#>
         PREFIX afo: <http://purl.allotrope.org/voc/afo/merged/REC/2023/09/merged-without-qudt-and-inferred#>
         PREFIX new:  <http://www.semanticweb.org/ontologies/2023/11/new_onto.owl#>
+        
         """ + select + sparqlstr
     catalyst_list = list(default_world.sparql(sparqlstr))
     new_k = []
@@ -165,13 +166,31 @@ def get_catalyst(cat = None,doi = None,include_all = False):
                                        ?chem_sub rdfs:label 'chemical substance'.}
                      }
                  """
-
+    else:
+        sparqlstr =  '''
+        WHERE {
+            {   ?catalyst_e rdf:type owl:NamedIndividual.
+                ?catalyst_e rdf:type ?type.
+                ?type rdfs:subClassOf* ?chem_sub.
+                ?chem_sub rdfs:label|obp:hasRelatedSynonym|obp:hasExactSynonym|che:formula|rdfs:comment "'''+ cat+'''".
+                ?catalyst_e rdfs:label ?catalyst.
+                }
+            UNION
+            {
+                ?catalyst_e rdf:type owl:NamedIndividual.
+                ?catalyst_e rdfs:label|rdfs:comment "'''+ cat+'''".
+                ?catalyst_e rdfs:label ?catalyst.
+                }
+            
+                '''
+                
     if doi == None:
         select = """SELECT ?catalyst_e ?catalyst ?doi"""
         end="""
         	?catalyst_e afo:mentioned_in ?mention.
             ?mention afo:has_doi ?doi}
             """
+
         
     else:
         select = """SELECT ?catalyst_e ?catalyst """
@@ -189,7 +208,8 @@ def get_catalyst(cat = None,doi = None,include_all = False):
     PREFIX role: <http://purl.allotrope.org/ontologies/role#>
     PREFIX afo: <http://purl.allotrope.org/voc/afo/merged/REC/2023/09/merged-without-qudt-and-inferred#>
     PREFIX new:  <http://www.semanticweb.org/ontologies/2023/11/new_onto.owl#>
-    
+    PREFIX obp: <http://www.geneontology.org/formats/oboInOwl#>
+    PREFIX che: <http://purl.obolibrary.org/obo/chebi/>
     """ 
     sparqlstr1=prefix+ select + sparqlstr +end
     #print(sparqlstr)
