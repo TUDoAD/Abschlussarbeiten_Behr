@@ -165,7 +165,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                                     sup_i = False
                                 
                             for c in chem_entity:
-                                    pattern ='\\b'+c+'\\b'
+                                    pattern ='\\b[\\d.]*'+c+'\\b'
                                     if re.search(pattern,e_snip):
                                         c_t = rel_synonym[c] 
                                         if sup_i == True and c in e_btwn:
@@ -200,7 +200,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                             d=d.replace(')', '\\)')
                             pattern=d
                         else:
-                            pattern='\\b'+c+'\\b'
+                            pattern='\\b[\\d.]*'+c+'\\b'
                         if re.search(pattern,entity_n):
                             c_t = rel_synonym[c] 
                             if sup_i==True and c in e_btwn:
@@ -471,8 +471,8 @@ def check_in_snip(e_snip, classes, entity, l, chem_list):
                     continue
                 list_token=[]
                 classes[entity].extend(check_in_children(token, token_new,list_token))
-        elif doc_snip[0].pos_ == 'VERB' and re.search('ed$',token.text):
-            head = re.sub('e$','ion', token.lemma_)
+        elif doc_snip[0].pos_ == 'VERB' and re.search('ed$',doc_snip[0].text):
+            head = re.sub('e$','ion', doc_snip[0].lemma_)
             classes[entity].append(head)
             entities_raw1[head]=[entity]
         else:
@@ -740,7 +740,7 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
             sup.RO_0000087.append(support_role_i)
             
             for cat in v:
-                cat = rel_synonym[cat] #if cat in rel_synonym.keys() else cat
+                cat = rel_synonym[cat] if cat in rel_synonym.keys() else cat
                 try:
                     cat = [i for i in list(onto.search(label=cat)) if i in list(onto.individuals())][0]
                 except:
