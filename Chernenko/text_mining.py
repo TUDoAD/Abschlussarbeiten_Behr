@@ -376,8 +376,8 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                             list_spans.append(c)
                             chem_list.append(matches[0])
                     #pattern = r'\b'
-                    pattern=r'[A-z][a-z]?[\s]?[\d]*[A-z][a-z]?[\s]?[\d]*'
-                    if re.search(pattern,c).string and ' ' in re.search(pattern,c).string: 
+                    pattern=r'[A-Z][a-z]?[\s]?[\d]*[A-Z][a-z]?[\s]?[\d]*'
+                    if re.search(pattern,c) and ' ' in re.search(pattern,c).string: 
                         chem_new=re.sub(re.search(pattern,c).string, re.sub(' ','', re.search(pattern,c).string), c)
                         chem_list.append(chem_new)
                         list_spans.append(c)
