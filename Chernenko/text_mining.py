@@ -318,7 +318,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                         entity_raw=entity
             #match hyphen in chemical entity and remove it  # Rh-Co --> RhCo
             abbr=False
-            match_hyph = re.findall(r'(([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?))', entity) 
+            match_hyph = re.findall(r'(([A-Z](?:[a-z])?)[—–-]([A-Z](?:[a-z])?))(?:[\s\/\@]|$)', entity) 
             for v in abbreviation.keys():
                 if v in entity:
                     abbr=True
@@ -329,7 +329,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
             entity = re.sub(r' product$','',entity)
             entity = re.sub(r' reactant$','',entity)
 
-            pattern = r'([A-Za-z]+[\s]?[—–-] [a-z]+|[A-Za-z]+ [—–-][\s]?[a-z]+)' #e_split:['hydro- formylation'] and entity:heterogeneous hydro- formylation or X - ray diffraction
+            pattern = r'\b([A-Za-z]+[\s]?[—–-] [a-z]+|[A-Za-z]+ [—–-][\s]?[a-z]+)\b' #e_split:['hydro- formylation'] and entity:heterogeneous hydro- formylation or X - ray diffraction
             e_split = re.findall(pattern,entity)
             if e_split:
                 for i in e_split:
@@ -375,7 +375,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                     if matches:
                             list_spans.append(c)
                             chem_list.append(matches[0])
-                    #pattern = r'\b'
+                    #TOD
                     pattern=r'[A-Z][a-z]?[\s]?[\d]*[A-Z][a-z]?[\s]?[\d]*'
                     if re.search(pattern,c) and ' ' in re.search(pattern,c).string: 
                         chem_new=re.sub(re.search(pattern,c).string, re.sub(' ','', re.search(pattern,c).string), c)
@@ -582,8 +582,10 @@ def chemical_prep(chem_list, onto_class_list):
         if len(molecule_split) >= 2 or re.match(r'[A-Za-z]([a-z]+){3,}', molecule) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+', molecule):
             comp_dict[molecule] = molecule_split  
         elif molecule not in comp_dict.keys():
-             comp = re.findall(r'([A-Z](?:[a-wz]+)?)', molecule)
-             comp_dict[molecule] = comp
+             comp_dict[molecule] = re.findall(r'([A-Z](?:[a-wz]+)?)', molecule)
+        for c in comp_dict[molecule]:
+            if not re.match(r'[A-Za-z]([a-z]+){3,}', c) and not re.match(r'[\d,]+[—–-][A-Z]?[a-z]+', c):
+                comp_dict[c]=re.findall(r'([A-Z](?:[a-wz]+)?)', c)
     chem_list=[i for i in chem_list  if i not in to_remove]
     for k,v in comp_dict.items():
         
@@ -623,7 +625,7 @@ def chemical_prep(chem_list, onto_class_list):
                         comp = key
                     else:
                         class_list, comp, rel_synonym = compare_synonyms(synonyms, inchikey, class_list, c, rel_synonym, synonyms_new) #,comp = True                
-                        if c != comp:
+                        if c != comp and comp != False:
                             chem_list.append(rel_synonym[c])
                     chem_dict[key].append(comp) 
                 else:
