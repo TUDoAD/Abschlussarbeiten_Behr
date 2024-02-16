@@ -18,7 +18,7 @@ with open("config.json") as json_config:
 get_compounds("SiO2","formula")         
 model = BERTSpan.load_from_checkpoint(ckpt_name, model_name=bert_name, train_dataset=[], val_dataset=[], test_dataset=[])
 
-onto_class_list = load_classes_chebi()
+#onto_class_list = load_classes_chebi()
 df_all = pd.DataFrame(columns=['entity','classes','cems', 'category'])
 created_cl=[]
 match_d_all={}
@@ -37,7 +37,7 @@ for i in glob.iglob(path):
         if p_id == None:
             print('p_id = None')
             continue
-        chem_list, categories,onto_new_dict, sup_cat, abbreviation, missing, match_dict, rel_synonym, reac_dict,entities_raw = run_text_mining(abstract,model, onto_class_list)
+        chem_list, categories,onto_new_dict, sup_cat, abbreviation, missing, match_dict, rel_synonym, reac_dict,entities_raw = run_text_mining(abstract,model) #, onto_class_list
         df_entity, rel_synonym, missing_all, match_dict_all = preprocess_classes(categories, abbreviation, onto_new_dict, sup_cat, rel_synonym, chem_list, missing, match_dict,entities_raw)
         df_all = pd.concat([df_all, df_entity], axis=0)
         onto_extender()

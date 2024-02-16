@@ -19,13 +19,13 @@ from preprocess_onto import *
 import pickle
 def set_config_key(key, value):
      globals()[key] = value
-def run_text_mining(abstract,model, onto_class_list):
+def run_text_mining(abstract,model):#, onto_class_list
     with open("config.json") as json_config:
          for key, value in json.load(json_config).items():
              set_config_key(key, value)
     sents = text_prep(abstract) 
     categories,chem_list, reac_dict, sup_cat, abbreviation,raw_entities = CatalysisIE_search(model, sents)
-    missing, match_dict,chem_list,rel_synonym, chem_dict = chemical_prep(chem_list, onto_class_list)
+    missing, match_dict,chem_list,rel_synonym, chem_dict = chemical_prep(chem_list) #, onto_class_list
     return chem_list, categories,chem_dict, sup_cat, abbreviation, missing, match_dict, rel_synonym, reac_dict,raw_entities
         
 def load_classes_chebi():
@@ -56,7 +56,7 @@ def load_classes_chebi():
             onto_class_list.remove(i)
     print("--- %.2f seconds ---" % (time.time() - start_time))
     #onto_dict,inchikey = synonym_dicts(onto_class_list)
-    
+
     return onto_class_list
 
 def delete_files_in_directory(directory_path):
@@ -377,7 +377,7 @@ def CatalysisIE_search(model, test_sents): #change description at the and
                             chem_list.append(matches[0])
                     #TOD
                     pattern=r'[A-Z][a-z]?[\s]?[\d]*[A-Z][a-z]?[\s]?[\d]*'
-                    if re.search(pattern,c) and ' ' in re.search(pattern,c).string: 
+                    if re.search(pattern,c) and ' ' in re.findall(pattern,c)[0]: 
                         chem_new=re.sub(re.search(pattern,c).string, re.sub(' ','', re.search(pattern,c).string), c)
                         chem_list.append(chem_new)
                         list_spans.append(c)
@@ -505,7 +505,7 @@ def del_numbers(molecule):
             molecule = re.sub(match[0][1],'', molecule)
     return molecule
 
-def chemical_prep(chem_list, onto_class_list):
+def chemical_prep(chem_list):
     """
     Prepares chemical entities for ontology extension.
     
@@ -546,7 +546,7 @@ def chemical_prep(chem_list, onto_class_list):
     chem_dict = {}
     synonyms_new={}
     to_remove=[]
-    onto_dict, inchikey, onto_dict_new = synonym_dicts(onto_class_list)
+    onto_dict, inchikey, onto_dict_new = synonym_dicts()
     
     for molecule in chem_list:  
         if re.search(r'^ [A-Za-z\d—–-]+|^[A-Za-z\d—–-]+ $',molecule): 
@@ -586,6 +586,8 @@ def chemical_prep(chem_list, onto_class_list):
         for c in comp_dict[molecule]:
             if not re.match(r'[A-Za-z]([a-z]+){3,}', c) and not re.match(r'[\d,]+[—–-][A-Z]?[a-z]+', c):
                 comp_dict[c]=re.findall(r'([A-Z](?:[a-wz]+)?)', c)
+                if c not in chem_list:
+                    chem_list.append(c)
     chem_list=[i for i in chem_list  if i not in to_remove]
     for k,v in comp_dict.items():
         
@@ -639,7 +641,7 @@ def chemical_prep(chem_list, onto_class_list):
 
     return missing, match_dict,chem_list, rel_synonym,chem_dict
 
-def synonym_dicts(class_list):
+def synonym_dicts():
     """
     Extracts information about synonyms and InChIKeys from a list of ontology classes; 
     extracts annotations (comments) of subclasses (and their individuals) of "atom" and "molecule" classes from the working ontology  
@@ -676,16 +678,21 @@ def synonym_dicts(class_list):
     inchikey = {}
     temp_class_label = []
     desc_dict_new = {}
+    f = open('iriDictionaryChEBI.json')
+    class_list = json.load(f)
+    f.close()
     new_world4 = owlready2.World()
     onto = new_world4.get_ontology('ontologies/{}.owl'.format(onto_new)).load()
-    mols_newonto = list(onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_25367').descendants())
+    mols_newonto = [cls.iri for cls in onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_25367').descendants()]
     if onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_33250'):
-        mols_newonto.extend(list(onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_33250').descendants()))
+        mols_newonto.extend([cls.iri for cls in onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_33250').descendants()])
     def_id = ["hasRelatedSynonym", "hasExactSynonym","inchikey", "comment"]
     
-    for i in range(len(class_list)):
-        temp_class = class_list[i]
+    for temp_class,v in class_list.items():
+        #temp_class = class_list[k]
         #check, if label and definition are not empty:
+        temp_class_label=class_list[temp_class]['label']
+        """
         try:
             if temp_class.prefLabel:
                 # if preferred label is not empty, use it as class label
@@ -701,37 +708,39 @@ def synonym_dicts(class_list):
                 temp_class_label = []
                 print("Label for class {} not determined!".format(str(temp_class)))
                 return()
-
+            """
         if temp_class_label and temp_class_label not in desc_dict.keys():
             #if temp_class in 
             # if class got a label which is not empty, search for Related and Exact synonyms                    
-            desc_dict[temp_class_label] = getattr(temp_class,def_id[0])
-            desc_dict[temp_class_label].extend(getattr(temp_class,def_id[1]))
+            #desc_dict[temp_class_label] = getattr(temp_class,def_id[0])
+            #desc_dict[temp_class_label].extend(getattr(temp_class,def_id[1]))
+            desc_dict[temp_class_label] = class_list[temp_class]['synonyms']
             
-            if desc_dict[temp_class_label] and temp_class_label not in desc_dict[temp_class_label]: 
-                desc_dict[temp_class_label].append(temp_class_label)
-            elif not desc_dict[temp_class_label]:    
-                desc_dict[temp_class_label] = [temp_class_label]
+            #if desc_dict[temp_class_label] and temp_class_label not in desc_dict[temp_class_label]: 
+            #    desc_dict[temp_class_label].append(temp_class_label)
+            #elif not desc_dict[temp_class_label]:    
+            #    desc_dict[temp_class_label] = [temp_class_label]
             if temp_class in mols_newonto:
-                temp_class_new = onto.search_one(iri = temp_class.iri)
-                desc_dict = check_comment_ind(temp_class_new,desc_dict)
+                temp_class_new = onto.search_one(iri = temp_class)
+                desc_dict, desc_dict_new = check_comment_ind(temp_class_new,desc_dict, desc_dict_new)
                 for c in temp_class_new.comment:
                     if c not in desc_dict[temp_class_label] and c != 'created automatically':
                         desc_dict[temp_class_label].append(c)
 
             # get inchikeys of chemical components
-            inchikey[temp_class_label] = getattr(temp_class,def_id[2])
+            inchikey[temp_class_label] = class_list[temp_class]['inchikey']
     for c in mols_newonto:
-        if c.label:
+        cls = onto.search_one(iri = c)
+        if cls.label:
              # and c not in class_list:
             #if c.label[0].replace(' (molecule)','') not in desc_dict.keys():
-                if c.label[0].replace(' (molecule)','') not in desc_dict_new.keys():
-                    desc_dict_new[c.label[0].replace(' (molecule)','')] = getattr(c,def_id[3])
+                if cls.label[0].replace(' (molecule)','') not in desc_dict_new.keys():
+                    desc_dict_new[cls.label[0].replace(' (molecule)','')] = getattr(cls,def_id[3])
             #else:
             #    desc_dict[c.label[0]].extend([i for i in getattr(c,def_id[3]) if i not in desc_dict_new[c.label[0]]])
-                if "created automatically" in desc_dict_new[c.label[0].replace(' (molecule)','')]:
-                    desc_dict_new[c.label[0].replace(' (molecule)','')].remove('created automatically')
-                _,desc_dict_new = check_comment_ind(c,desc_dict_new,desc_dict_new)
+                if "created automatically" in desc_dict_new[cls.label[0].replace(' (molecule)','')]:
+                    desc_dict_new[cls.label[0].replace(' (molecule)','')].remove('created automatically')
+                _,desc_dict_new = check_comment_ind(cls, desc_dict_new, desc_dict_new)
         
     print("Done.")
     return desc_dict, inchikey, desc_dict_new
