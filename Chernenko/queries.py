@@ -181,6 +181,12 @@ def get_catalyst(cat = None,doi = None,include_all = False):
                 ?catalyst_e rdfs:label|rdfs:comment "'''+ cat+'''".
                 ?catalyst_e rdfs:label ?catalyst.
                 }
+            UNION
+            {
+                ?catalyst_e rdf:type owl:NamedIndividual.
+                    ?catalyst_e rdf:type ?type.
+                    ?type rdfs:subClassOf* ?chem_sub.
+                    ?chem_sub rdfs:label|obp:hasRelatedSynonym|obp:hasExactSynonym|che:formula|rdfs:comment "'''+ cat+'''".
             
                 '''
                 
@@ -370,6 +376,7 @@ def get_synonyms(ent_list): #,is_cat=False
                 if super_class[0] not in class_list:
                     class_list.extend(super_class)
                 class_list.append(ent_list[i][0])
+            
     def_id = ["hasRelatedSynonym", "hasExactSynonym","comment"]
     temp_class_label=[]
     for i in range(len(class_list)):
@@ -392,26 +399,38 @@ def get_synonyms(ent_list): #,is_cat=False
                 ent_dict[temp_class_label].extend([i for i in getattr(temp_class,def_id[2]) if i != 'created automatically'])
                 ent_dict[temp_class_label]=[*set(ent_dict[temp_class_label])]
                 if ent_dict[temp_class_label] and temp_class_label not in ent_dict[temp_class_label]: 
-                    ent_dict[temp_class_label].append(temp_class_label)
+                    ent_dict[temp_class_label].insert(0, temp_class_label)
                 elif not ent_dict[temp_class_label]:    
                     ent_dict[temp_class_label] = [temp_class_label]
     nlp = spacy.load('en_core_web_sm')
     for k,v in ent_dict.items():
-                
+                n=0
                 dist_ent=[]
                 formula =False
                 full_name = False
                 for value in v: 
 
-                    if re.search(r'\b(?:[A-Z][a-z]?)+(?:\d+(?:[A-Z][a-z]?)+)*\b', value) and formula==False:
+                    if re.search(r'\b(?:[A-Z][a-z]?\d*)+(?:(?:[A-Z][a-z]?)+\d*)*\b', value) and formula==False and len(value.split()) == 1:
                         formula= True
                         dist_ent.append(value)
-                    elif full_name ==False and (len(value.split()) >= 2 or re.match(r'[A-Za-z]([a-z]+){3,}', value) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+', value)):
+                    elif full_name==False and (len(value.split()) >= 2 or re.match(r'[A-Za-z]([a-z]+){3,}', value) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+', value)):
                         doc=nlp(value)
+                        if re.search(r'\([VIX]+\)',value):
+                            continue
                         if len(value.split()) == 1:
                             doc=doc[0].lemma_
                         dist_ent.append(doc)
                         full_name= True
+                    """    
+                    elif full_name ==True and n==0 and (len(value.split()) >= 2 or re.match(r'[A-Za-z]([a-z]+){3,}', value) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+', value)):
+                        n=1
+                        doc=nlp(value)
+                        if re.search(r'\([VIX]+\)',value):
+                            continue
+                        if len(value.split()) == 1:
+                            doc=doc[0].lemma_
+                        dist_ent.append(doc)
+                    """
                 ent_dict[k]=dist_ent      
     for v in ent_dict.values():
         for value in v:
@@ -484,12 +503,15 @@ def scopus_seach_process(doi, onto_pub_list ):
         df_all,_=ScopusSearchQueries(reac_all, sup_all, cat_all,cat_full_all, reactant_all, product_all,queries)
         
     else:
+        n=1
         for p in onto_pub_list:
+            print('processing publication #{}'.format(str(n)))
             sup_all, cat_all, reactant_all, product_all,cat_full_all = get_entities(p[0])
             list_reac_doi,_ = get_reaction(reac=None,doi=p[0]) 
             reac_all = [*set([i[0].lower() for i in list_reac_doi])]
             df,queries = ScopusSearchQueries(reac_all, sup_all, cat_all,cat_full_all, reactant_all, product_all,queries)
             df_all = pd.concat([df_all, df], axis=0, ignore_index=True)
+            n+=1
     return df_all
 
 #def synonym_reduction(list_type):
@@ -535,18 +557,29 @@ def ScopusSearchQueries(reac_all, sup_all, cat_all, cat_full_all,reactant_all, p
           'query']
     df_all = pd.DataFrame(columns=columns)
     results=[]
-    
+    all_ent=[]
     if not reac_all:
         reac_all.append(' ')
+    else:
+        all_ent.append(reac_all)
     if not reactant_all:
         reactant_all.append(' ')
+    else:
+        all_ent.append(reactant_all)
     if not product_all:
         product_all.append(' ')
+    else:
+        all_ent.append(product_all)
     if not sup_all:
         sup_all['sup']=[" "]
+    else:
+        all_ent.append(sup_all)
     if not cat_all:
         cat_all["cat"]=["catalysis"]
-    for r in reac_all:
+    else:
+        all_ent.append(cat_all)
+    if len(all_ent) > 1:
+        for r in reac_all:
             for react in reactant_all:
                 for prod in product_all:
                     if cat_full_all:
@@ -579,6 +612,8 @@ def ScopusSearchQueries(reac_all, sup_all, cat_all, cat_full_all,reactant_all, p
                                             df = pd.DataFrame(pd.DataFrame(result.results))
                                             df['query'] = [query for _ in range(result.get_results_size())]
                                             df_all = pd.concat([df_all, df], axis=0, ignore_index=True)
+    else:
+        print('no queries for publication')
     return df_all,queries
 
 def reasoning_dois_onto(onto_name):
@@ -670,7 +705,7 @@ titles_filtered['title']=titles
 df_titles_filtered=pd.DataFrame(data =titles_filtered)
 """
 """
-onto_name= "afo_dataset_1-m" #input name of the ontology
+onto_name= "afo_new" #input name of the ontology
 
 #perform reasoning, get dois from publications in the extended ontology
 onto_pub_list,onto,df=reasoning_dois_onto(onto_name)
@@ -679,25 +714,39 @@ for p in onto_pub_list:
     sup_all, cat_all, reactant_all, product_all,cat_full_all = get_entities(p[0])
     list_reac_doi,_ = get_reaction(reac=None,doi=p[0]) 
     reac_all = [*set([i[0].lower() for i in list_reac_doi])]
+    all_ent=[]
     if not reac_all:
         reac_all.append(' ')
+    else:
+        all_ent.append(reac_all)
     if not reactant_all:
         reactant_all.append(' ')
+    else:
+        all_ent.append(reactant_all)
     if not product_all:
         product_all.append(' ')
+    else:
+        all_ent.append(product_all)
     if not sup_all:
         sup_all['sup']=[" "]
+    else:
+        all_ent.append(sup_all)
     if not cat_all:
         cat_all["cat"]=["catalysis"]
-    for r in reac_all:
+    else:
+        all_ent.append(cat_all)
+    if len(all_ent) > 1:
+        for r in reac_all:
             for react in reactant_all:
                 for prod in product_all:
                     if cat_full_all:
                         for v_cat_all in cat_full_all.values():
                             for c in v_cat_all:
                                 query = 'TITLE-ABS-KEY("{}"AND"{}"AND"{}"AND"{}")'.format(r,c,react,prod)
+                                
                                 if query not in queries:
                                     queries.append(query) 
+                                    print(query)
                     for k_cat,v_cat in cat_all.items():
                         for k_sup,v_sup in sup_all.items():
                             if k_sup == k_cat:
@@ -708,4 +757,5 @@ for p in onto_pub_list:
                                         query = 'TITLE-ABS-KEY("{}"AND"{}"AND"{}"AND"{}"AND"{}")'.format(r,cat,sup,react,prod)
                                         if query not in queries:
                                             queries.append(query) 
-                                            """
+                                            print(query)
+  """                                        
