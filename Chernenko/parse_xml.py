@@ -6,6 +6,8 @@ Created on Thu Jan 18 05:05:29 2024
 """
 import glob
 import json
+import os
+#from CatalysisIE.utils import cleanup_text
 from LimeSoup import (
     ACSSoup, 
     AIPSoup,
@@ -24,18 +26,19 @@ def get_content(data, content):
         if k=='content':
             if isinstance(v[0], dict):
                 for s in v:
-                    content= get_content(data, content)
+                    content= get_content(s, content)
                 
             else:
                 for text in v:
                     content.append(text)
     return content
-id=1
+#id=1
 path="./text_xml/*.xml"
 for xml in glob.iglob(path):
     with open('{}'.format(xml), 'r', encoding='utf-8') as file:
         xml_str = file.read()
-        name=xml.strip('.xml')
+        name=os.path.basename(xml).strip('.xml')
+        print(name)
         try:
             data = ElsevierSoup.parse(xml_str) 
         except:
@@ -58,12 +61,16 @@ for xml in glob.iglob(path):
         content=[]
         for s in data['Sections']:
             content= get_content(s,content)
+        '''
         txt_pub = " ".join(content)
+        #txt_pub = cleanup_text(txt_pub)
         full_content={"id":id,"data":{"text":txt_pub}}
         id+=1
-        with open('./text_xml/text_json/{name}.json', 'w', encoding = 'utf-8') as f:
+        '''
+        with open('./text_xml/text_json/{}.json'.format(name), 'w', encoding = 'utf-8') as f:
             json.dump(data, f, sort_keys=True, indent=4, ensure_ascii=False)
             f.close()
+        '''
         with open('./text_xml/text_json_labeling/{name}_labeling.json', 'w', encoding = 'utf-8') as f:
             json.dump(full_content,f, sort_keys=True, indent=4, ensure_ascii=False)
-            f.close()
+            f.close()'''

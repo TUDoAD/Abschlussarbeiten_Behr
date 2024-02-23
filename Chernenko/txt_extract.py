@@ -372,32 +372,7 @@ def pdf_title(filename):
     if valid_title(title):
         return title
     return os.path.basename(os.path.splitext(filename)[0])
-"""
-def get_metadata_1(filename):
-    
-    title = pdf_title(filename)
-    title = sanitize(' '.join(title.split()))
-    ab=None
-    cr = Crossref()
-    result = cr.works(query = title)
-    title=result['message']['items'][0]['title'][0]
-    doi=result['message']['items'][0]['DOI']
-    publisher=result['message']['items'][0]['publisher']
-    try:
-            ab = AbstractRetrieval(doi)
-    except:
-            file= Reader()
-            pdf= file.read_file(filename)
-            if not pdf or pdf=='':
-                return None,None,None,None
-            title=pdf.title()
-            cr = Crossref()
-            result = cr.works(query = title)
-            doi=result['message']['items'][0]['DOI']
-            title=result['message']['items'][0]['title'][0]
-            publisher=result['message']['items'][0]['publisher']
-    return title, doi, publisher,ab
-"""
+
 def get_abstract(path, doi, publisher):                                    
     
 

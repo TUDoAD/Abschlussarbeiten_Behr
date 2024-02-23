@@ -1,0 +1,1607 @@
+<full-text-retrieval-response xmlns="http://www.elsevier.com/xml/svapi/article/dtd" xmlns:bk="http://www.elsevier.com/xml/bk/dtd" xmlns:cals="http://www.elsevier.com/xml/common/cals/dtd" xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns:ja="http://www.elsevier.com/xml/ja/dtd" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:sa="http://www.elsevier.com/xml/common/struct-aff/dtd" xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd" xmlns:tb="http://www.elsevier.com/xml/common/table/dtd" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xocs="http://www.elsevier.com/xml/xocs/dtd" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><coredata><prism:url>https://api.elsevier.com/content/article/pii/S1381116997000356</prism:url><dc:identifier>doi:10.1016/S1381-1169(97)00035-6</dc:identifier><eid>1-s2.0-S1381116997000356</eid><prism:doi>10.1016/S1381-1169(97)00035-6</prism:doi><pii>S1381-1169(97)00035-6</pii><dc:title>Formation of bimetallic RhCo3 clusters from monometallic carbonyl clusters on SiO2 as probed by hydroformylation </dc:title><prism:publicationName>Journal of Molecular Catalysis A: Chemical</prism:publicationName><prism:aggregationType>Journal</prism:aggregationType><pubType>fla</pubType><prism:issn>13811169</prism:issn><prism:volume>125</prism:volume><prism:issueIdentifier>1</prism:issueIdentifier><prism:startingPage>47</prism:startingPage><prism:endingPage>52</prism:endingPage><prism:pageRange>47-52</prism:pageRange><prism:number>1</prism:number><dc:format>text/xml</dc:format><prism:coverDate>1997-10-31</prism:coverDate><prism:coverDisplayDate>31 October 1997</prism:coverDisplayDate><prism:copyright>Copyright © 1997 Published by Elsevier B.V.</prism:copyright><prism:publisher>Published by Elsevier B.V.</prism:publisher><dc:creator>Huang, Lin</dc:creator><dc:description>
+                  A bimetallic SiO2-supported RhCo3 cluster catalyst derived from Rh4(CO)12 and Co2(CO)8 by coimpregnation followed by decarbonylation under H2 at 623 K has been probed by atmospheric ethylene hydroformylation at 423 K. The catalytic behavior is consistent with that of 
+                        
+                           
+                              RhCo3
+                              
+                           
+                           SiO2
+                           
+                        
+                      derived from RhCo3(CO)12. At the same time, the corresponding binary catalysts prepared from inorganic rhodium and cobalt salts exhibit much lower activities than 
+                        
+                           
+                              RhCo3
+                              
+                           
+                           SiO2
+                           
+                        
+                      and significantly enhanced activities compared to monometallic catalysts. The results suggest that the increase in catalytic activity by combination of rhodium and cobalt is attributed to the bimetallic catalysis by RhCo3 clusters regardless of the synergistic catalysis by monometallic rhodium and cobalt sites.
+               </dc:description><openaccess>0</openaccess><openaccessArticle>false</openaccessArticle><openaccessType/><openArchiveArticle>false</openArchiveArticle><openaccessSponsorName/><openaccessSponsorType/><openaccessUserLicense/><dcterms:subject>Silica-supported RhCo3
+                  </dcterms:subject><dcterms:subject>Rh4(CO)12
+                  </dcterms:subject><dcterms:subject>Co2(CO)8
+                  </dcterms:subject><dcterms:subject>Coimpregnation</dcterms:subject><dcterms:subject>Hydroformylation</dcterms:subject><link href="https://api.elsevier.com/content/article/pii/S1381116997000356" rel="self"/><link href="https://www.sciencedirect.com/science/article/pii/S1381116997000356" rel="scidir"/></coredata><objects><object ref="si2" category="thumbnail" type="ALTIMG" multimediatype="GIF image file" mimetype="image/gif" width="89" height="30" size="579">https://api.elsevier.com/content/object/eid/1-s2.0-S1381116997000356-si2.gif?httpAccept=%2A%2F%2A</object><object ref="si1" category="thumbnail" type="ALTIMG" multimediatype="GIF image file" mimetype="image/gif" width="89" height="30" size="579">https://api.elsevier.com/content/object/eid/1-s2.0-S1381116997000356-si1.gif?httpAccept=%2A%2F%2A</object></objects><scopus-id>0030776538</scopus-id><scopus-eid>2-s2.0-0030776538</scopus-eid><link href="https://api.elsevier.com/content/abstract/scopus_id/0030776538" rel="abstract"/><originalText><xocs:doc xsi:schemaLocation="http://www.elsevier.com/xml/xocs/dtd http://null/schema/dtds/document/fulltext/xcr/xocs-article.xsd"><xocs:meta xmlns:xoe="http://www.elsevier.com/xml/xoe/dtd">
+      <xocs:content-family>serial</xocs:content-family>
+      <xocs:content-type>JL</xocs:content-type>
+      <xocs:cid>271358</xocs:cid>
+      <xocs:ssids>
+         <xocs:ssid type="alllist">291210</xocs:ssid>
+         <xocs:ssid type="subj">291744</xocs:ssid>
+         <xocs:ssid type="subj">291790</xocs:ssid>
+         <xocs:ssid type="subj">291809</xocs:ssid>
+         <xocs:ssid type="content">31</xocs:ssid>
+      </xocs:ssids>
+      <xocs:srctitle>Journal of Molecular Catalysis A: Chemical</xocs:srctitle>
+      <xocs:normalized-srctitle>JOURNALMOLECULARCATALYSISACHEMICAL</xocs:normalized-srctitle>
+      <xocs:orig-load-date yyyymmdd="19980521">1998-05-21</xocs:orig-load-date>
+      <xocs:available-online-date yyyymmdd="19980521">1998-05-21</xocs:available-online-date>
+      <xocs:ew-transaction-id>2010-03-25T02:32:37</xocs:ew-transaction-id>
+      <xocs:eid>1-s2.0-S1381116997000356</xocs:eid>
+      <xocs:pii-formatted>S1381-1169(97)00035-6</xocs:pii-formatted>
+      <xocs:pii-unformatted>S1381116997000356</xocs:pii-unformatted>
+      <xocs:doi>10.1016/S1381-1169(97)00035-6</xocs:doi>
+      <xocs:item-stage>S350</xocs:item-stage>
+      <xocs:item-version-number>S350.1</xocs:item-version-number>
+      <xocs:item-weight>HEAD-AND-TAIL</xocs:item-weight>
+      <xocs:hub-eid>1-s2.0-S1381116900X00672</xocs:hub-eid>
+      <xocs:timestamp yyyymmdd="20150515">2015-05-15T05:56:33.668241-04:00</xocs:timestamp>
+      <xocs:dco>0</xocs:dco>
+      <xocs:tomb>0</xocs:tomb>
+      <xocs:date-search-begin>19971031</xocs:date-search-begin>
+      <xocs:year-nav>1997</xocs:year-nav>
+      <xocs:indexeddate epoch="895708800">1998-05-21T00:00:00Z</xocs:indexeddate>
+      <xocs:articleinfo>rawtext articleinfo crossmark dco dateupdated tomb dateloaded datesearch indexeddate issuelist volumelist yearnav absattachment articletitlenorm authfirstinitialnorm authfirstsurnamenorm cid cids contenttype copyright dateloadedtxt docsubtype doctype doi eid ewtransactionid hubeid issfirst issn issnnorm itemstage itemtransactionid itemweight openaccess openarchive pg pgfirst pglast pii piinorm pubdatestart pubdatetxt pubyr sortorder srctitle srctitlenorm srctype volfirst volissue webpdf webpdfpagecount affil articletitle auth authfirstini authfull authkeywords authlast doctopic footnotes primabst pubtype ref alllist content subj ssids</xocs:articleinfo>
+      <xocs:issns>
+         <xocs:issn-primary-formatted>1381-1169</xocs:issn-primary-formatted>
+         <xocs:issn-primary-unformatted>13811169</xocs:issn-primary-unformatted>
+      </xocs:issns>
+      <xocs:crossmark is-crossmark="0"/>
+      <xocs:vol-first>125</xocs:vol-first>
+      <xocs:volume-list>
+         <xocs:volume>125</xocs:volume>
+      </xocs:volume-list>
+      <xocs:iss-first>1</xocs:iss-first>
+      <xocs:issue-list>
+         <xocs:issue>1</xocs:issue>
+      </xocs:issue-list>
+      <xocs:vol-iss-suppl-text>Volume 125, Issue 1</xocs:vol-iss-suppl-text>
+      <xocs:sort-order>10</xocs:sort-order>
+      <xocs:first-fp>47</xocs:first-fp>
+      <xocs:last-lp>52</xocs:last-lp>
+      <xocs:pages>
+         <xocs:first-page>47</xocs:first-page>
+         <xocs:last-page>52</xocs:last-page>
+      </xocs:pages>
+      <xocs:cover-date-orig>
+         <xocs:start-date>19971031</xocs:start-date>
+      </xocs:cover-date-orig>
+      <xocs:cover-date-text>31 October 1997</xocs:cover-date-text>
+      <xocs:cover-date-start>1997-10-31</xocs:cover-date-start>
+      <xocs:cover-date-year>1997</xocs:cover-date-year>
+      <xocs:document-type>converted-article</xocs:document-type>
+      <xocs:document-subtype>fla</xocs:document-subtype>
+      <xocs:copyright-line>Copyright © 1997 Published by Elsevier B.V.</xocs:copyright-line>
+      <xocs:normalized-article-title>FORMATIONBIMETALLICRHCO3CLUSTERSMONOMETALLICCARBONYLCLUSTERSSIO2PROBEDBYHYDROFORMYLATION</xocs:normalized-article-title>
+      <xocs:normalized-first-auth-surname>HUANG</xocs:normalized-first-auth-surname>
+      <xocs:normalized-first-auth-initial>L</xocs:normalized-first-auth-initial>
+      <xocs:references>
+         <xocs:ref-info refid="BIB1">
+            <xocs:ref-normalized-surname>SINFELT</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1973</xocs:ref-pub-year>
+            <xocs:ref-first-fp>308</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>J</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB2">
+            <xocs:ref-normalized-surname>LAINE</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1982</xocs:ref-pub-year>
+            <xocs:ref-first-fp>137</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>R</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB3">
+            <xocs:ref-normalized-surname>ICHIKAWA</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1979</xocs:ref-pub-year>
+            <xocs:ref-first-fp>67</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>M</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB4">
+            <xocs:ref-normalized-surname>ICHIKAWA</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1986</xocs:ref-pub-year>
+            <xocs:ref-first-fp>819</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>M</xocs:ref-normalized-initial>
+            <xocs:ref-normalized-srctitle>PROC5THINTSYMPRELATIONSBETWEENHOMOGENEOUSHETEROGENEOUSCATALYSIS</xocs:ref-normalized-srctitle>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB5">
+            <xocs:ref-normalized-surname>FUKUOKA</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1989</xocs:ref-pub-year>
+            <xocs:ref-first-fp>295</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>A</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB6">
+            <xocs:ref-normalized-surname>FUKUOKA</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1990</xocs:ref-pub-year>
+            <xocs:ref-first-fp>434</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>A</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB7">
+            <xocs:ref-normalized-surname>TRUNSCHKE</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1991</xocs:ref-pub-year>
+            <xocs:ref-first-fp>221</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>A</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB8">
+            <xocs:ref-normalized-surname>ALVILA</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1992</xocs:ref-pub-year>
+            <xocs:ref-first-fp>333</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>L</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB9">
+            <xocs:ref-normalized-surname>SHIDO</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1993</xocs:ref-pub-year>
+            <xocs:ref-first-fp>97</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>T</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB10">
+            <xocs:ref-normalized-surname>XIAO</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1994</xocs:ref-pub-year>
+            <xocs:ref-first-fp>578</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>F</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB11"/>
+         <xocs:ref-info refid="BIB12">
+            <xocs:ref-normalized-surname>HUANG</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1996</xocs:ref-pub-year>
+            <xocs:ref-first-fp>203</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>L</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB13">
+            <xocs:ref-normalized-surname>HUANG</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1996</xocs:ref-pub-year>
+            <xocs:ref-first-fp>69</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>L</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB14">
+            <xocs:ref-normalized-surname>MARTINENGO</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1980</xocs:ref-pub-year>
+            <xocs:ref-first-fp>209</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>S</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB15">
+            <xocs:ref-normalized-surname>MARTINENGO</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1973</xocs:ref-pub-year>
+            <xocs:ref-first-fp>379</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>S</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB16">
+            <xocs:ref-normalized-surname>THEOLIER</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1980</xocs:ref-pub-year>
+            <xocs:ref-first-fp>201</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>A</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB17">
+            <xocs:ref-normalized-surname>SCHNEIDER</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1984</xocs:ref-pub-year>
+            <xocs:ref-first-fp>4593</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>R</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB18">
+            <xocs:ref-normalized-surname>GLOOR</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1994</xocs:ref-pub-year>
+            <xocs:ref-first-fp>9865</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>A</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB19">
+            <xocs:ref-normalized-surname>MING</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1995</xocs:ref-pub-year>
+            <xocs:ref-first-fp>23</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>H</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB20">
+            <xocs:ref-normalized-surname>NIEMELA</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1995</xocs:ref-pub-year>
+            <xocs:ref-first-fp>45</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>M</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB21">
+            <xocs:ref-normalized-surname>VANTBLIK</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1984</xocs:ref-pub-year>
+            <xocs:ref-first-fp>155</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>H</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB22"/>
+         <xocs:ref-info refid="BIB23">
+            <xocs:ref-normalized-surname>GASTNER</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1990</xocs:ref-pub-year>
+            <xocs:ref-first-fp>819</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>D</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB24">
+            <xocs:ref-normalized-surname>LAPIDUS</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1991</xocs:ref-pub-year>
+            <xocs:ref-first-fp>65</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>A</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB25">
+            <xocs:ref-normalized-surname>HUNTER</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1992</xocs:ref-pub-year>
+            <xocs:ref-first-fp>281</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>D</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB26">
+            <xocs:ref-normalized-surname>MARCHIONNA</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1986</xocs:ref-pub-year>
+            <xocs:ref-first-fp>107</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>M</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB27">
+            <xocs:ref-normalized-surname>HIDAI</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1986</xocs:ref-pub-year>
+            <xocs:ref-first-fp>29</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>M</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB28">
+            <xocs:ref-normalized-surname>ANDRIANARY</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1987</xocs:ref-pub-year>
+            <xocs:ref-first-fp>89</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>P</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB29">
+            <xocs:ref-normalized-surname>ICHII</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1989</xocs:ref-pub-year>
+            <xocs:ref-first-fp>L13</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>Y</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB30">
+            <xocs:ref-normalized-surname>ALVILA</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1992</xocs:ref-pub-year>
+            <xocs:ref-first-fp>281</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>L</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB31">
+            <xocs:ref-normalized-surname>TAKEUCHI</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1994</xocs:ref-pub-year>
+            <xocs:ref-first-fp>423</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>K</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB32">
+            <xocs:ref-normalized-surname>KIP</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1986</xocs:ref-pub-year>
+            <xocs:ref-first-fp>43</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>B</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB33">
+            <xocs:ref-normalized-surname>CHUANG</xocs:ref-normalized-surname>
+            <xocs:ref-pub-year>1993</xocs:ref-pub-year>
+            <xocs:ref-first-fp>490</xocs:ref-first-fp>
+            <xocs:ref-normalized-initial>S</xocs:ref-normalized-initial>
+         </xocs:ref-info>
+         <xocs:ref-info refid="BIB34"/>
+         <xocs:ref-info refid="BIB35"/>
+      </xocs:references>
+      <xocs:refkeys>
+         <xocs:refkey3>HUANGX1997X47</xocs:refkey3>
+         <xocs:refkey4lp>HUANGX1997X47X52</xocs:refkey4lp>
+         <xocs:refkey4ai>HUANGX1997X47XL</xocs:refkey4ai>
+         <xocs:refkey5>HUANGX1997X47X52XL</xocs:refkey5>
+      </xocs:refkeys>
+      <xocs:open-access>
+         <xocs:oa-article-status is-open-access="0" is-open-archive="0"/>
+      </xocs:open-access>
+      <xocs:attachment-metadata-doc>
+         <xocs:attachment-set-type>item</xocs:attachment-set-type>
+         <xocs:pii-formatted>S1381-1169(97)00035-6</xocs:pii-formatted>
+         <xocs:pii-unformatted>S1381116997000356</xocs:pii-unformatted>
+         <xocs:eid>1-s2.0-S1381116997000356</xocs:eid>
+         <xocs:doi>10.1016/S1381-1169(97)00035-6</xocs:doi>
+         <xocs:cid>271358</xocs:cid>
+         <xocs:timestamp>2010-09-29T16:29:32.1328-04:00</xocs:timestamp>
+         <xocs:cover-date-start>1997-10-31</xocs:cover-date-start>
+         <xocs:attachments>
+            <xocs:web-pdf>
+               <xocs:attachment-eid>1-s2.0-S1381116997000356-main.pdf</xocs:attachment-eid>
+               <xocs:ucs-locator>https://s3.amazonaws.com/prod-ucs-content-store-us-east/content/pii:S1381116997000356/MAIN/application/pdf/88831a19267bb9a42156065f136c11a4/main.pdf</xocs:ucs-locator>
+               <xocs:ucs-locator>https://s3-eu-west-1.amazonaws.com/prod-ucs-content-store-eu-west/content/pii:S1381116997000356/MAIN/application/pdf/88831a19267bb9a42156065f136c11a4/main.pdf</xocs:ucs-locator>
+               <xocs:filename>main.pdf</xocs:filename>
+               <xocs:extension>pdf</xocs:extension>
+               <xocs:pdf-optimized>true</xocs:pdf-optimized>
+               <xocs:filesize>629622</xocs:filesize>
+               <xocs:web-pdf-purpose>MAIN</xocs:web-pdf-purpose>
+               <xocs:web-pdf-page-count>6</xocs:web-pdf-page-count>
+               <xocs:web-pdf-images>
+                  <xocs:web-pdf-image>
+                     <xocs:attachment-eid>1-s2.0-S1381116997000356-main_1.png</xocs:attachment-eid>
+                     <xocs:ucs-locator>https://s3.amazonaws.com/prod-ucs-content-store-us-east/content/pii:S1381116997000356/PREVIEW/image/png/3c22e7873464c727f7f491b1fc3ed512/main_1.png</xocs:ucs-locator>
+                     <xocs:ucs-locator>https://s3-eu-west-1.amazonaws.com/prod-ucs-content-store-eu-west/content/pii:S1381116997000356/PREVIEW/image/png/3c22e7873464c727f7f491b1fc3ed512/main_1.png</xocs:ucs-locator>
+                     <xocs:filename>main_1.png</xocs:filename>
+                     <xocs:extension>png</xocs:extension>
+                     <xocs:filesize>61524</xocs:filesize>
+                     <xocs:pixel-height>849</xocs:pixel-height>
+                     <xocs:pixel-width>656</xocs:pixel-width>
+                     <xocs:attachment-type>IMAGE-WEB-PDF</xocs:attachment-type>
+                     <xocs:pdf-page-num>1</xocs:pdf-page-num>
+                  </xocs:web-pdf-image>
+               </xocs:web-pdf-images>
+            </xocs:web-pdf>
+            <xocs:attachment>
+               <xocs:attachment-eid>1-s2.0-S1381116997000356-si2.gif</xocs:attachment-eid>
+               <xocs:ucs-locator>https://s3.amazonaws.com/prod-ucs-content-store-us-east/content/pii:S1381116997000356/STRIPIN/image/gif/6a3bed23d72cfe3a6b9aaa1036ec651b/si2.gif</xocs:ucs-locator>
+               <xocs:ucs-locator>https://s3-eu-west-1.amazonaws.com/prod-ucs-content-store-eu-west/content/pii:S1381116997000356/STRIPIN/image/gif/6a3bed23d72cfe3a6b9aaa1036ec651b/si2.gif</xocs:ucs-locator>
+               <xocs:file-basename>si2</xocs:file-basename>
+               <xocs:abstract-attachment>true</xocs:abstract-attachment>
+               <xocs:filename>si2.gif</xocs:filename>
+               <xocs:extension>gif</xocs:extension>
+               <xocs:filesize>579</xocs:filesize>
+               <xocs:pixel-height>30</xocs:pixel-height>
+               <xocs:pixel-width>89</xocs:pixel-width>
+               <xocs:attachment-type>ALTIMG</xocs:attachment-type>
+            </xocs:attachment>
+            <xocs:attachment>
+               <xocs:attachment-eid>1-s2.0-S1381116997000356-si1.gif</xocs:attachment-eid>
+               <xocs:ucs-locator>https://s3.amazonaws.com/prod-ucs-content-store-us-east/content/pii:S1381116997000356/STRIPIN/image/gif/6a3bed23d72cfe3a6b9aaa1036ec651b/si2.gif</xocs:ucs-locator>
+               <xocs:ucs-locator>https://s3-eu-west-1.amazonaws.com/prod-ucs-content-store-eu-west/content/pii:S1381116997000356/STRIPIN/image/gif/6a3bed23d72cfe3a6b9aaa1036ec651b/si2.gif</xocs:ucs-locator>
+               <xocs:file-basename>si1</xocs:file-basename>
+               <xocs:abstract-attachment>true</xocs:abstract-attachment>
+               <xocs:filename>si1.gif</xocs:filename>
+               <xocs:extension>gif</xocs:extension>
+               <xocs:filesize>579</xocs:filesize>
+               <xocs:pixel-height>30</xocs:pixel-height>
+               <xocs:pixel-width>89</xocs:pixel-width>
+               <xocs:attachment-type>ALTIMG</xocs:attachment-type>
+            </xocs:attachment>
+         </xocs:attachments>
+      </xocs:attachment-metadata-doc>
+   </xocs:meta><xocs:rawtext xmlns:xoe="http://www.elsevier.com/xml/xoe/dtd">ELSEVIER    JOURNALOF MOLECULAR CATALYSIS    A: CHEMICAL    Journal of Molecular Catalysis A: Chemical 125 (1997) 47-52    Formation of bimetallic RhC03 clusters from monometallic  carbonyl clusters on S'02 as probed by hydroformylation    Lin Huang    State Key Laboratory of Catalvsis, Dalian Institute of Chemical Physics. Chinese Academv of Sciences, P.O. Box 110. 116023 Dalian,  China    Received 31 July 1996; accepted 17 January 1997    Abstract     A bimetallic S'02-supported RhCo; cluster catalyst derived from Rh,(CO),2 and Col(CO)8 by coimpregnation followed by decarbonylation under Hz at 623 K has been probed by atmospheric ethylene hydroformylation at 423 K. The catalytic behavior is consistent with that of RhC03/S'02 derived from RhC03(CO),2. At the same time, the corresponding binary catalysts prepared from inorganic rhodium and cobalt salts exhibit much lower activities than RhC03/S'02 and significantly enhanced activities compared to monometallic catalysts. The results suggest that the increase in catalytic activity by combination of rhodium and cobalt is attributed to the bimetallic catalysis by RhC03 clusters regardless of the synergistic catalysis by monometallic rhodium and cobalt sites. 1997 Elsevier Science B.v.    KevHords: Silica-supported RhCo;; Rh4(CO),,; Co,(CO)s; Coimpregnation; Hydroformylation    1. Introduction     For most of the heterogeneously catalyzed reactions, the enhancement of reaction rates by a combination of two different metals relative to the catalysis by one of the metals is probably ascribed to the bimetallic effect [1,2]. It is documented that many binary supported metallic catalysts which show considerably increased hydroformylation activity compared to monometallic catalysts virtually have the nature of bimetallic particles or bimetallic clusters [312]. In our recent studies, we discovered that the bimetallic carbonyl cluster RhC03(CO)12 favorably gives the bimetallic RhC03 cluster on the     Tel. 1 + 86-411) 4671991 ; Fax (+ 86-411) 4694447.    1381-1169/97/$17.00 1997 Elsevier Science B.v. All rights reserved.  P11S1381-1169(97)00035-6    Si02 surface after thermal decarbonylation under HZ or under Owhich brings about a 20-fold enhanced rate of formation of oxygenates in ethylene hydroformylation with respect to a monometallic catalyst Rh/Si02 [1113]. IR spectroscopic evidence has been afforded that RhCo3(CO)12/S'O2 is readily regenerated from RhC03 under catalytic conditions and is responsible for the strong catalysis [ 11 ]. Therefore, it appears likely that the increase in catalytic activity for hydroformylation depends on the content of bimetallic RhC03 clusters present on the surface in a binary supported rhodium and cobalt system. In the present paper, we report a similar observation concerning excellent catalytic performances in ethylene hydroformylation over a SiO.,-supported  48    L. Huang/Journal of Molecular Catalysis A: Chemical 125 (1997) 47-52    catalyst derived from Rh4(CO)12 and Co2(CO)8 by coimpregnation, which suggests the same bimetallic effect. The catalytic data may be associated with the formation of bimetallic RhC03 clusters from the two monometallic clusters on Si02, by comparison with the catalytic behaviors of S'02-supported catalysts derived from Rh4(CO)12, RhC03(CO)121 [RhCl3 + Co2(CO)g] and [RhCl3 + Co(N03)21, etc.    2. Experimental     RhCl3 - nH20, Co(N03)2 - 6H20 and C02(CO)8 were purchased commercially. Rh4(CO)12 and RhC03(CO)12 were synthesized according to literature [ 14,15]. Si02 was a silica `Aerosil' supplied by Degussa with a surface area of 380 m2/g. n-hexane used as the solvent was distilled over P205 and stored under Ar over activated 5 A molecular sieves. The gases H2, CO, C 2 H 4 and Ar had a purity of 99.99%. Before introduction into a sample vessel and a reactor, they were further purified by passage through traps of activated 5 A molecular sieves and Mn/MnO.   The carbonyl clusters Rh4(CO)12, C02(CO)8 and RhC03(CO)12 were employed to prepare a series of catalysts such as Rh6(CO)16/Si02 [16], Co4(CO)12/Si02 [17], [Rh6(CO)16 +  C04(CO)12]/S'02 and RhC03(CO)12/S'02' Si02 (60-80 mesh granule) was predehydroxylated under vacuum at 673 K for 5 h and impregnated or coimpregnated with the carbonyl clusters in dry n-hexane under Ar. The impregnated systems were subjected to 2 h of stirring. The solvent was removed by evacuation and the resulting solid samples were dried under vacuum at 1.3 X 10-3 kPa for 1 h. For preparing a binary S'02-supported catalyst from RhCl3 and Co2(CO)g, Si02 was first impregnated with an aqueous solution of RhC13 - nH20 followed by drying and calcination in air at 673 K for 5 h. Then the resulting sample was impregnated with a n-hexane solution of C02(CO)8 followed by stirring and removal of the solvent. For prepar-    ing a conventional supported catalyst, Si02 was directly impregnated with an aqueous solution of RhC13 nH20 or of [RhC13 - nH20 + Co(N03)2 6H20] followed by drying and calcination in air at 673 K for 5 h. Such oxidative calcination is believed to lead to a partial conversion of RhC13 to Rh203 [18] and a total conversion of Co(N03)2 to Co304 [19,20]. All rhodium catalyst precursors prepared contained 1 % Rh. The loading of cobalt in related catalysts was 1.7% at an atomic ratio of Co:Rh = 3:1. The catalyst precursors containing carbonyl clusters were transferred to the reactor under Ar prior to catalytic tests.   Hydroformylation of ethylene was conducted under atmospheric pressure at 423 K in a glass tubing flow reactor (i.d. = 7 mm) where 0.1 g of catalyst precursor was charged. The catalyst precursors were treated in flowing H 2 at 623 K for 2 h and subsequently H2 was replaced by a mixture of C 2 H 4 , CO and H 2 (20:20:20 ml/min) at 443-473 K. Studies of temperature programmed reduction (TPR) have demonstrated that Rh203 (or RhCl3) and Co304 are sufficiently completely reduced to Rho and Coo at temperatures of 473 K [21,22] and 623 K [22-24], respectively. The total conversion of C2H4 was inferior to 15%. Data were taken 7 h after the initiation of reaction. Both hydrocarbon and oxygenated products were analyzed on line with gas chromatography, using a 2 m length column of Porapak R and a flame ionization detector.   The metal contents of the samples studied were determined by X-ray fluorescence spectroscopy.    3. Results and discussion     Table 1 summarizes the catalytic results of all the S'02-supported catalysts studied in ethylene hydroformylation under atmospheric pressure at 423 K. The monometallic rhodium catalysts derived from both Rh4(CO)12 and RhC13 presented lower activities and selectivities for  G. Huang / Journal of Molecular Catalysis A: Chemical 125 (1997) 47-52    the formation of propanal with no production of propanol. The monometallic cobalt catalyst derived from Co2(CO)g exhibited undetectable activities for both hydroformylation and hydrogenation under the same conditions. In contrast, the RhC03(CO)12-derived catalyst exhibited an incomparable catalytic performance in activity: the activity to oxygenates was increased by 20 times relative to the Rh4(CO)12-derived monometallic catalyst. Moreover it also exhibited an improved selectivity to oxygenates by 30%. The results are due to the bimetallic effect of RhC03 as we have concluded by spectroscopic and catalytic studies [ 11 ]. When a binary catalyst was obtained from Rh4(CO)12 and Col(CO)g by coimpregnation followed by decarbonylation under the same conditions, its catalytic behavior was quite similar to that of the RhC03/S'02 catalyst: after 7 h of reaction, the activities to oxygenates and to ethane were 6.10 and 3.32 mol/Rh mol/min respectively, which are close to those of RhC03/S'02 so that the selectivity to each product is much the same as that of RhC03/S'02, as shown in Table l; after prolonged reaction, the catalyst was quite stable as shown in Fig. 1 and the activities are compatible with those of RhC03/S'02 [11] for the formations of both oxygenates and ethane within an experimental error. The catalytic re-    49    10  v  0   E  22  i- 5    0    ( C2H6  (nJ CZH5CH0  (a) n-C3H70H  (o) C2F~CHO n-C3H70H    0  30 60 90   Reaction time (hr)    Fig. 1. Dynamic atmospheric ethylene hydroformylation (CZH4:CO:Hz = 20:20:20 ml/min) at 423 K over a catalyst by 2 h of decarbonylation of [Rhb(CO),6+Co4(CO)12]/S'OZ 0%o Rh loading, Co:Rh = 3:1 atomic ratio) under H, at 623 K.    sults suggest that the coimpregnated catalyst possesses the bimetallic property rather than the binary monometallic property and probably involves the same bimetallic RhC03 clusters.   To put in evidence the existence of bimetallic RhC03 clusters in the coimpregnated catalyst, we performed an oxidative processing on the catalyst and investigated the catalytic properties of the catalyst thus treated. After 7 h of normal    Table 1  Catalytic properties of SiO=-supported catalysts a in atmospheric ethylene hydroformylation (CZH4:CO:H, = 20:20:20 ml/min) at 423 K    Starting material Co:Rh (atomic ratio) Activity b  Selectivity (mol%)    CZH6 oxygenates ` oxygenates n-C,H7OH  Co'(CO)s  0 0 - -  Rh4(CO),,  0.62 0.31 34 0  RhCl3  0.39 0.28 41 0  RhC03(CO),2  3.63 6.56 64 6  Rh4(CO)11+C02(CO)8 3:1 3.32 6.10 65 9  [Rh4(CO)1, + C02(CO)81 d 3:1 2.16 4.69 69 5  RhCl; + Col(CO)8 3:1 0.88 1.40 61 8  RhCI; + Co(N03)2 3:1 0.35 0.96 74 9    V With 1o Rh and 1.7% Co loadings. b Expressed by (mol/Co mol/min) for CO/S'02 and (mol/Rh mol/min) for Rh/SiO, and Rh-containing catalysts. Data were taken 7 h after the initiation of reaction. C,HSCHO+n-C3H7OH. d The catalyst was treated under OZ at 623 K for 2 h and flushed with Ar at 623 K for 1 h after 7 h of normal catalytic test, data were taken 1.5 h after the initiation of reaction.  50    L. Huang /Journal of Molecular Catalysis A: Chemical 125 (1997) 47-52    catalytic test, the catalyst was flushed with Ar at 423 K for 1 h and then Ar was replaced by OZ at 423 K. The catalyst was oxidatively treated in flowing OZ at 623 K for 2 h and flushed with Ar at 623 K for 1 h. Finally Ar was replaced by the reaction gas mixture at 423 K to start the reaction. After 1.5 h of reaction, the activities to oxygenates and to ethane were 4.69 and 2.16 mol/Rh mol/min respectively, which are still appreciably high. Moreover there was no significant difference in product selectivity compared to the initial catalyst. These observed activities are certainly not attributed to the catalysis by monometallic rhodium particles, Rh+ and Rh203 (or RhC13), etc. supported on Si02. In a very recent work, we demonstrated the preservation of bimetallic RhC03 clusters derived from RhC03(CO)12/S'02 by decarbonylation under OZ at 623 K by hydroformylation probing; we also illustrated the oxidation of a binary Si02supported rhodium and cobalt system derived from Rh4(CO)12 and Co2(CO)8 after decarbonylation under 02 at 623 K, which resulted in almost no catalytic activity for ethylene hydroformylation. Consistent with the stability of bimetallic RhC03 cluster in RhC03(CO),2/S'02 under 02 at high temperatures, the catalytic behavior of the coimpregnated catalyst following thermal treatment under 02 in the present case suggests that bimetallic RhC03 clusters are effectively formed from [Rh6(CO)16 +  Co4(CO)12)/Si02 (Co:Rh = 3:1 atomic ratio) by decarbonylation under H2 at 623 K and can be retained intact on the Si02 surface without oxidative decomposition during oxidative treatment under 02 at 623 K. It is necessary to mention that monometallic rhodium and cobalt particles, if produced by thermal decarbonylation of supported monometallic clusters under H2 can be fully oxidized to Rh+, Rh203 and Co304 on Si02 upon treatment under 02 at 623 K [18-21] and that the resulting monometallic rhodium and cobalt oxides are impossibly transformed to bimetallic Rh-Co particles under a HZ containing hydroformylation atmosphere at 423 K, as indicated by our another study [ 12].    Following oxidative processing, the systematic slight decrease in the activities to oxygenates and to ethane may result from the sintering of RhC03 on the surface caused by additional heating at a high temperature.   The above catalytic data provide cardinal evidence for the presence of bimetallic RhC03 clusters on the Si02 surface in the coimpregnated system. On the other hand, the synergistic catalysis by two heteronuclear monometallic sites with the mechanism of dinuclear elimination toward hydroformylation especially heterogeneous hydroformylation is poorly understood. Previous findings regarding the remarkable enhancement of catalytic activity in hydroformylation by combination of various noble metals with cobalt with respect to monometallic catalysts [25-31], led us to verify the possible synergistic effect resulting in strongly increased hydroformylation activity with monometallic rhodium and cobalt sites on Si02.   Apart from coimpregnation with Rh4(CO)12 and Co2(CO)g, we adopted alternative combinations such as [RhCl3 + Co2(CO)g] and [RhC13 + Co(N03)21 as starting materials in the preparation of binary S'02-supported catalysts with the equivalent composition. As shown in Table 1, interesting observations were made:   First, the RhC13-derived Rh/Si02 catalyst had comparable activity and relatively good selectivity for ethylene hydroformylation to the Rh4(CO)12 derived Rh/Si02 catalyst.   Second, addition of cobalt to the RhC13-derived Rh/Si02 led to obvious increases in activity and selectivity toward hydroformylation, showing significantly the promoting effects of cobalt on the catalysis.   Third, RhCl3 was not able to play the same role as Rh4(CO)12 in the enhancement of hydroformylation activity by combination with Co2(CO)8 although the hydroformylation activity of the corresponding binary catalyst was 4 times higher than that of the RhC13 derived Rh/Si02 catalyst.   We thus reckon that the catalytic behavior of a Co2(CO)g-derived binary rhodium and cobalt  L. Huang/ Journal of Molecular Catalvsis A: Chemical 125 (1997) 47-52    system would not rely to appreciable extent on the choice of rhodium precursors if the synergistic hydrogenolysis step forming propanal via dinuclear reductive elimination occurred between a cobalt acyl and rhodium hydride. It is generally difficult to prepare highly active metallic catalysts from inorganic salts. It has long been known that both monometallic and binary supported catalysts derived from organometallic complexes are of great advantage over those prepared from inorganic compounds for many reactions. The observed apparent difference in catalytic activity due to the different precursors in the present work suggests that the hydroformylation activity of a binary rhodium and cobalt catalyst depends on the degree of formation of bimetallic RhC03 clusters on Si02. The formation of RhC03 seems to be remarkably influenced by the use of precursors. The combination of the carbonyl clusters Rh4(CO)12 and Co.,(CO)8 may be the best, which favorably yields RhC03 clusters on the surface by thermal decarbonylation under H 2 , whereas the use of the inorganic salts RhCI 3 and Co(N03), results in the formation of RhC03 clusters on the surface only to a very small extent. In this regard, a detailed spectroscopic characterization on the formation of RhC03 clusters from different rhodium and cobalt precursors for hydroformylation catalysts is now in progress.   In the current work, the chlorine-containing inorganic compound RhC13 was used as a precursor instead of Rh(N03)3 to prepare a Rh/SiO, and some (Rh + Co)/Si02 catalysts. The presence of chlorine in Rh/Si02 catalysts is known to exert an important detrimental influence on the catalytic properties toward oxygenated products from CO hydrogenation and olefin hydroformylation [32,33]. According to a recent study of Gloor et al. by EXAFS, a Rh/Si02 catalyst prepared from [Rh(NH3)5C1]C12 via calcination and reduction at 673 K is still not free of chlorine yet and the remaining chlorine atoms are in contact with Rh atoms [18]. Similarly, not all chlorine atoms    51    could be removed despite that our catalysts prepared from RhCl3 have undergone calcination at 673 for 5 h and reduction at 623 K for 2 h. However, this vestige of chlorine seems to play a negligible role in diminishing the hydroformylation activity of Rh/Si02, by comparison of the catalytic results of the catalysts derived from Rh4(CO)12 and prepared from RhC13 in Table 1. Also these two catalysts have much the same dispersion of metallic rhodium particles on Si02 [34]. When Rh4(CO)12 was chosen in place of RhC13 to make [Rh4(CO)12 + Co(NO3)2)/Si02, the resulting catalyst only exhibited a very slight increase in hydroformylation activity compared to the [RhC13 + Co(N03)2 ]-derived catalyst [35]. In addition, we observed that coimpregnation of chlorine-containing [Rh(CO)2C1]2 and C02"), on SiO, followed by reduction at 623 K led to equivalent excellent catalytic performances to those of the bimetallic catalyst RhC03/SiO, derived from RhC03(CO),2 [35]. There was no negative effect on both the activity and the selectivity of RhC03/S'O', in ethylene hydroformylation by use of [Rh(CO)2Cl]2. These findings could allow us to account for the nature and significance of the enhanced hydroformylation activities to different extent over the binary rhodium and cobalt catalysts studied. The different behaviors of metal carbonyls and metal salts on the surfaces with respect to the formation of supported bimetallic catalysts, are far from being understood and deserve to be explored.   In summary, this work has shown a successful preparative approach to bimetallic supported RhC03 cluster catalysts from monometallic carbonyl clusters by coimpregnation, based on the similarity of the catalytic properties in ethylene hydroformylation with those of the RhC03(CO),2-derived RhC03/S'02 catalyst. The observed considerably high catalytic activities suggest that bimetallic RhC03 clusters can be effectively obtained from monometallic rhodium and cobalt carbonyls as well as from RhC03(CO)12 on Si02 by thermal decarbonylation under H,. Up to date, there is no success  52  L. Huang /Journal of Molecular Catalysis A: Chemical 125 (1997) 47-52    which appears concerning the production of a bimetallic cluster from two monometallic clusters on inorganic surfaces. By contrast, although binary S'02-supported catalysts prepared from inorganic rhodium and cobalt salts display significantly increased activity and improved selectivity compared to monometallic catalysts, the activity is much lower than that of the coim-  regnated catalyst. This appears highly related to the slight formation of RhCo3 in binary catalysts prepared from inorganic salts. The obtained catalytic results suggest that the enhancement in activity in hydroformylation relative to monometallic catalysts is ascribed to the bimetallic catalysis by RhCo3 clusters rather than to the synergistic catalysis via dinuclear elimination by monometallic rhodium and cobalt sites.    Acknowledgements     The author is grateful to the Chinese Academy of Sciences for supporting this research project.    References    [1] J.H. Sinfelt, J. Catal. 23 (1973) 308.  [2] R.M. Laine, J. Mol. Catal. 14 (1982) 137.  [3] M. Ichikawa, J. Catal. 59 (1979) 67.  [4] M. Ichikawa, Proc. 5th Int. Symp. on Relations between  Homogeneous and Heterogeneous Catalysis, 1986, p. 819.  [5] A. Fukuoka, L.-F. Rao, N. Kosugi, H. Kuroda, M. Ichikawa,  Appl. Catal. 50 (1989) 295.  [6] A. Fukuoka, T. Kimum, N. Kosugi, H. Kuroda, Y. Minai, Y.   Sakai, T. Tominaga, M. Ichikawa, J. Catal. 126 (1990) 434. [7] A. Trunschke, H.-C. Bottcher, A. Fukuoka, M. Ichikawa, H.   Miessner, Catal. Lett. 8 (1991) 221.  [8] L. Alvila, T.A. Pakkanen, T.T. Pakkanen, O. Krause, J. Mol.  Catal. 75 (1992) 333.    [9] T. Shido, T. Okazaki, N.A. Ulla, T. Fujimoto, M. Ichikawa,  Catal. Lett. 17 (1993) 97.  [10] F.-S. Xiao, M. Ichikawa, J. Catal. 147 (1994) 578.  [I1] L. Huang, A. Liu, Y. Xu, J. Mol. Catal. A, in press.  [12] L. Huang, Y. Xu, Catal. Lett. 40 (1996) 203.  [13] L. Huang, J. Mol. Catal. A 112 (1996) 69.  [14] S. Martinengo, G. Giordano, P. Chini, Inorg. Synth. 20  (1980) 209.  [15] S. Martinengo, P. Chini, V.G. Albano, F. Cariati, J.  Organomet. Chem. 59 (1973) 379.  [16] A. Theolier, A.K. Smith, M. Leconte, J.M. Basset, G.M.  Zanderighi, R. Psaro, R. Ugo, J. Organomet. Chem. 191 (1980) 201.  [17] R.L. Schneider, R.F. Howe, K.L. Watters, Inorg. Chem. 23  (1984) 4593.  [18] A.P. Gloor, R. Prins, J. Am. Chem. Soc. 98 (1994) 9865.  [19] H. Ming, B.G. Baker, Appl. Catal. A: General 123 (1995)  23.  [20] M.K. Niemela, A.O1 Krause, T. Vaara, J. Lahtinen, Topics.  Catal. 2 (1995) 45.  [21] H.F.J. van't Blik, J.M. Niemantsverdriet, Appl. Catal. 10  (1984) 155.  [22] L. Huang, Y. Xu, Kinet. React Catal. Lett., in press.  [23] D.G. Gastner, P.R. Watson, I.Y. Chan, J. Phys. Chem. 94  (1990) 819.  [24] A. Lapidus, A. Krylova, V. Kazanskii, V. Borovkov, A.  Zaitsev, J. Rathousky, A. Zukal, M. Jancalkova, Appl. Catal. 73 (1991) 65.  [25] D.L. Hunter, S.E. Moore, P.E. Garrou, R.A. Dubois, Appl.  Catal. 199 (1992) 281.  [26] M. Marchionna, G. Longoni, J. Mol. Catal. 35 (1986) 107.  [27] M. Hidai, A. Fukuoka, Y. Koyasu, Y. Uchida, J. Mol. Catal.  35 (1986) 29.  [28] P. Andrianary, G. Jenner, J. Organomet. Chem. 322 (1987)  89.  [29] Y. Ichii, M. Sato, H. Matsuzaka, M. Hidai, J. Mol. Catal. 54  (1989) L13.  [30] L. Alvila, T.A. Pakkanen, T.T. Pakkanen, O. Krause, J. Mol.  Catal. 71 (1992) 281.  [31] K. Takeuchi, T.-a. Hanaoka, T. Matsuzaki, Y. Sugi, S.   Ogasawara, Y. Abe, T. Misono, Catal. Today 20 (1994) 423. [32] B.J. Kip, F.W.A. Dime, J. van Grondelle, R. Prins, Appl.   Catal. 25 (1986) 43.  [33] S.S.C. Chuang, G. Srinivas, A. Mukherjee, J. Catal. 139  (1993) 490.  [34] L. Huang, unpublished result.  [35] L. Huang, J. Mol. Catal. A, submitted for publication.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </xocs:rawtext><xocs:serial-item xmlns:xoe="http://www.elsevier.com/xml/xoe/dtd">
+      <converted-article xmlns="http://www.elsevier.com/xml/ja/dtd" version="4.5.2" docsubtype="fla" xml:lang="en">
+         <item-info>
+            <jid>MOLCAA</jid>
+            <aid>97000356</aid>
+            <ce:pii>S1381-1169(97)00035-6</ce:pii>
+            <ce:doi>10.1016/S1381-1169(97)00035-6</ce:doi>
+            <ce:copyright type="unknown" year="1997"/>
+            <ce:doctopics>
+               <ce:doctopic>
+                  <ce:text>Molecular aspects of heterogenous catalysis</ce:text>
+               </ce:doctopic>
+            </ce:doctopics>
+         </item-info>
+         <head>
+            <ce:dochead>
+               <ce:textfn>Article</ce:textfn>
+            </ce:dochead>
+            <ce:title>Formation of bimetallic RhCo<ce:inf loc="post">3</ce:inf> clusters from monometallic carbonyl clusters on SiO<ce:inf loc="post">2</ce:inf> as probed by hydroformylation</ce:title>
+            <ce:author-group>
+               <ce:author>
+                  <ce:given-name>Lin</ce:given-name>
+                  <ce:surname>Huang</ce:surname>
+                  <ce:cross-ref refid="FN1">
+                     <ce:sup loc="post">∗</ce:sup>
+                  </ce:cross-ref>
+               </ce:author>
+               <ce:affiliation>
+                  <ce:textfn>State Key Laboratory of Catalysis, Dalian Institute of Chemical Physics, Chinese Academy of Sciences, P.O. Box 110, 116023 Dalian, China</ce:textfn>
+               </ce:affiliation>
+               <ce:footnote id="FN1">
+                  <ce:label>∗</ce:label>
+                  <ce:note-para>Tel. (+86-411) 4671991; Fax (+86-411) 4694447.</ce:note-para>
+               </ce:footnote>
+            </ce:author-group>
+            <ce:date-received day="31" month="7" year="1996"/>
+            <ce:date-accepted day="17" month="1" year="1997"/>
+            <ce:abstract class="author"><ce:abstract-sec>
+                  <ce:simple-para view="all">A bimetallic SiO<ce:inf loc="post">2</ce:inf>-supported RhCo<ce:inf loc="post">3</ce:inf> cluster catalyst derived from Rh<ce:inf loc="post">4</ce:inf>(CO)<ce:inf loc="post">12</ce:inf> and Co<ce:inf loc="post">2</ce:inf>(CO)<ce:inf loc="post">8</ce:inf> by coimpregnation followed by decarbonylation under H<ce:inf loc="post">2</ce:inf> at 623 K has been probed by atmospheric ethylene hydroformylation at 423 K. The catalytic behavior is consistent with that of <math altimg="si1.gif">
+                        <fr shape="sol" align="c" style="s">
+                           <nu>
+                              <rm>RhCo<inf loc="post">3</inf>
+                              </rm>
+                           </nu>
+                           <de>SiO<inf loc="post">2</inf>
+                           </de>
+                        </fr>
+                     </math> derived from RhCo<ce:inf loc="post">3</ce:inf>(CO)<ce:inf loc="post">12</ce:inf>. At the same time, the corresponding binary catalysts prepared from inorganic rhodium and cobalt salts exhibit much lower activities than <math altimg="si2.gif">
+                        <fr shape="sol" align="c" style="s">
+                           <nu>
+                              <rm>RhCo<inf loc="post">3</inf>
+                              </rm>
+                           </nu>
+                           <de>SiO<inf loc="post">2</inf>
+                           </de>
+                        </fr>
+                     </math> and significantly enhanced activities compared to monometallic catalysts. The results suggest that the increase in catalytic activity by combination of rhodium and cobalt is attributed to the bimetallic catalysis by RhCo<ce:inf loc="post">3</ce:inf> clusters regardless of the synergistic catalysis by monometallic rhodium and cobalt sites.</ce:simple-para>
+               </ce:abstract-sec></ce:abstract>
+            <ce:keywords class="keyword">
+               <ce:section-title>Keywords</ce:section-title>
+               <ce:keyword>
+                  <ce:text>Silica-supported RhCo<ce:inf loc="post">3</ce:inf>
+                  </ce:text>
+               </ce:keyword>
+               <ce:keyword>
+                  <ce:text>Rh<ce:inf loc="post">4</ce:inf>(CO)<ce:inf loc="post">12</ce:inf>
+                  </ce:text>
+               </ce:keyword>
+               <ce:keyword>
+                  <ce:text>Co<ce:inf loc="post">2</ce:inf>(CO)<ce:inf loc="post">8</ce:inf>
+                  </ce:text>
+               </ce:keyword>
+               <ce:keyword>
+                  <ce:text>Coimpregnation</ce:text>
+               </ce:keyword>
+               <ce:keyword>
+                  <ce:text>Hydroformylation</ce:text>
+               </ce:keyword>
+            </ce:keywords>
+         </head>
+         <tail>
+            <ce:bibliography view="all">
+               <ce:section-title>References</ce:section-title>
+               <ce:bibliography-sec>
+                  <ce:bib-reference id="BIB1">
+                     <ce:label>[1]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>J.H.</ce:given-name>
+                                 <ce:surname>Sinfelt</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>23</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1973</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>308</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB2">
+                     <ce:label>[2]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>R.M.</ce:given-name>
+                                 <ce:surname>Laine</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Mol. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>14</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1982</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>137</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB3">
+                     <ce:label>[3]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>M.</ce:given-name>
+                                 <ce:surname>Ichikawa</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>59</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1979</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>67</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB4">
+                     <ce:label>[4]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>M.</ce:given-name>
+                                 <ce:surname>Ichikawa</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:edited-book>
+                              <sb:title>
+                                 <sb:maintitle>Proc. 5th Int. Symp. on Relations between Homogeneous and Heterogeneous Catalysis</sb:maintitle>
+                              </sb:title>
+                              <sb:date>1986</sb:date>
+                           </sb:edited-book>
+                           <sb:pages>
+                              <sb:first-page>819</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB5">
+                     <ce:label>[5]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>A.</ce:given-name>
+                                 <ce:surname>Fukuoka</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>L.-F.</ce:given-name>
+                                 <ce:surname>Rao</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>N.</ce:given-name>
+                                 <ce:surname>Kosugi</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>H.</ce:given-name>
+                                 <ce:surname>Kuroda</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>M.</ce:given-name>
+                                 <ce:surname>Ichikawa</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>Appl. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>50</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1989</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>295</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB6">
+                     <ce:label>[6]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>A.</ce:given-name>
+                                 <ce:surname>Fukuoka</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>T.</ce:given-name>
+                                 <ce:surname>Kimuru</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>N.</ce:given-name>
+                                 <ce:surname>Kosugi</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>H.</ce:given-name>
+                                 <ce:surname>Kuroda</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>Y.</ce:given-name>
+                                 <ce:surname>Minai</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>Y.</ce:given-name>
+                                 <ce:surname>Sakai</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>T.</ce:given-name>
+                                 <ce:surname>Tominaga</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>M.</ce:given-name>
+                                 <ce:surname>Ichikawa</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>126</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1990</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>434</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB7">
+                     <ce:label>[7]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>A.</ce:given-name>
+                                 <ce:surname>Trunschke</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>H.-C.</ce:given-name>
+                                 <ce:surname>Bottcher</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>A.</ce:given-name>
+                                 <ce:surname>Fukuoka</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>M.</ce:given-name>
+                                 <ce:surname>Ichikawa</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>H.</ce:given-name>
+                                 <ce:surname>Miessner</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>Catal. Lett.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>8</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1991</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>221</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB8">
+                     <ce:label>[8]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>L.</ce:given-name>
+                                 <ce:surname>Alvila</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>T.A.</ce:given-name>
+                                 <ce:surname>Pakkanen</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>T.T.</ce:given-name>
+                                 <ce:surname>Pakkanen</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>O.</ce:given-name>
+                                 <ce:surname>Krause</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Mol. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>75</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1992</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>333</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB9">
+                     <ce:label>[9]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>T.</ce:given-name>
+                                 <ce:surname>Shido</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>T.</ce:given-name>
+                                 <ce:surname>Okazaki</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>N.A.</ce:given-name>
+                                 <ce:surname>Ulla</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>T.</ce:given-name>
+                                 <ce:surname>Fujimoto</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>M.</ce:given-name>
+                                 <ce:surname>Ichikawa</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>Catal. Lett.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>17</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1993</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>97</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB10">
+                     <ce:label>[10]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>F.-S.</ce:given-name>
+                                 <ce:surname>Xiao</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>M.</ce:given-name>
+                                 <ce:surname>Ichikawa</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>147</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1994</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>578</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB11">
+                     <ce:label>[11]</ce:label>
+                     <ce:other-ref>
+                        <ce:textref>L. Huang, A. Liu, Y. Xu, J. Mol. Catal. A, in press.</ce:textref>
+                     </ce:other-ref>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB12">
+                     <ce:label>[12]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>L.</ce:given-name>
+                                 <ce:surname>Huang</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>Y.</ce:given-name>
+                                 <ce:surname>Xu</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>Catal. Lett.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>40</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1996</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>203</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB13">
+                     <ce:label>[13]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>L.</ce:given-name>
+                                 <ce:surname>Huang</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Mol. Catal. A</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>112</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1996</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>69</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB14">
+                     <ce:label>[14]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>S.</ce:given-name>
+                                 <ce:surname>Martinengo</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>G.</ce:given-name>
+                                 <ce:surname>Giordano</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>P.</ce:given-name>
+                                 <ce:surname>Chini</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>Inorg. Synth.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>20</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1980</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>209</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB15">
+                     <ce:label>[15]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>S.</ce:given-name>
+                                 <ce:surname>Martinengo</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>P.</ce:given-name>
+                                 <ce:surname>Chini</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>V.G.</ce:given-name>
+                                 <ce:surname>Albano</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>F.</ce:given-name>
+                                 <ce:surname>Cariati</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Organomet. Chem.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>59</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1973</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>379</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB16">
+                     <ce:label>[16]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>A.</ce:given-name>
+                                 <ce:surname>Theolier</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>A.K.</ce:given-name>
+                                 <ce:surname>Smith</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>M.</ce:given-name>
+                                 <ce:surname>Leconte</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>J.M.</ce:given-name>
+                                 <ce:surname>Basset</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>G.M.</ce:given-name>
+                                 <ce:surname>Zanderighi</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>R.</ce:given-name>
+                                 <ce:surname>Psaro</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>R.</ce:given-name>
+                                 <ce:surname>Ugo</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Organomet. Chem.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>191</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1980</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>201</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB17">
+                     <ce:label>[17]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>R.L.</ce:given-name>
+                                 <ce:surname>Schneider</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>R.F.</ce:given-name>
+                                 <ce:surname>Howe</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>K.L.</ce:given-name>
+                                 <ce:surname>Watters</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>Inorg. Chem.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>23</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1984</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>4593</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB18">
+                     <ce:label>[18]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>A.P.</ce:given-name>
+                                 <ce:surname>Gloor</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>R.</ce:given-name>
+                                 <ce:surname>Prins</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Am. Chem. Soc.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>98</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1994</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>9865</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB19">
+                     <ce:label>[19]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>H.</ce:given-name>
+                                 <ce:surname>Ming</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>B.G.</ce:given-name>
+                                 <ce:surname>Baker</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>Appl. Catal. A: General</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>123</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1995</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>23</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB20">
+                     <ce:label>[20]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>M.K.</ce:given-name>
+                                 <ce:surname>Niemela</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>A.O.I.</ce:given-name>
+                                 <ce:surname>Krause</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>T.</ce:given-name>
+                                 <ce:surname>Vaara</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>J.</ce:given-name>
+                                 <ce:surname>Lahtinen</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>Topics. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>2</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1995</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>45</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB21">
+                     <ce:label>[21]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>H.F.J.</ce:given-name>
+                                 <ce:surname>van't Blik</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>J.M.</ce:given-name>
+                                 <ce:surname>Niemantsverdriet</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>Appl. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>10</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1984</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>155</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB22">
+                     <ce:label>[22]</ce:label>
+                     <ce:other-ref>
+                        <ce:textref>L. Huang, Y. Xu, Kinet. React Catal. Lett., in press.</ce:textref>
+                     </ce:other-ref>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB23">
+                     <ce:label>[23]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>D.G.</ce:given-name>
+                                 <ce:surname>Gastner</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>P.R.</ce:given-name>
+                                 <ce:surname>Watson</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>I.Y.</ce:given-name>
+                                 <ce:surname>Chan</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Phys. Chem.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>94</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1990</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>819</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB24">
+                     <ce:label>[24]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>A.</ce:given-name>
+                                 <ce:surname>Lapidus</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>A.</ce:given-name>
+                                 <ce:surname>Krylova</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>V.</ce:given-name>
+                                 <ce:surname>Kazanskii</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>V.</ce:given-name>
+                                 <ce:surname>Borovkov</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>A.</ce:given-name>
+                                 <ce:surname>Zaitsev</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>J.</ce:given-name>
+                                 <ce:surname>Rathousky</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>A.</ce:given-name>
+                                 <ce:surname>Zukal</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>M.</ce:given-name>
+                                 <ce:surname>Jancalkova</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>Appl. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>73</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1991</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>65</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB25">
+                     <ce:label>[25]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>D.L.</ce:given-name>
+                                 <ce:surname>Hunter</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>S.E.</ce:given-name>
+                                 <ce:surname>Moore</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>P.E.</ce:given-name>
+                                 <ce:surname>Garrou</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>R.A.</ce:given-name>
+                                 <ce:surname>Dubois</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>Appl. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>199</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1992</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>281</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB26">
+                     <ce:label>[26]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>M.</ce:given-name>
+                                 <ce:surname>Marchionna</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>G.</ce:given-name>
+                                 <ce:surname>Longoni</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Mol. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>35</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1986</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>107</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB27">
+                     <ce:label>[27]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>M.</ce:given-name>
+                                 <ce:surname>Hidai</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>A.</ce:given-name>
+                                 <ce:surname>Fukuoka</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>Y.</ce:given-name>
+                                 <ce:surname>Koyasu</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>Y.</ce:given-name>
+                                 <ce:surname>Uchida</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Mol. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>35</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1986</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>29</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB28">
+                     <ce:label>[28]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>P.</ce:given-name>
+                                 <ce:surname>Andrianary</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>G.</ce:given-name>
+                                 <ce:surname>Jenner</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Organomet. Chem.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>322</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1987</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>89</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB29">
+                     <ce:label>[29]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>Y.</ce:given-name>
+                                 <ce:surname>Ichii</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>M.</ce:given-name>
+                                 <ce:surname>Sato</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>H.</ce:given-name>
+                                 <ce:surname>Matsuzaka</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>M.</ce:given-name>
+                                 <ce:surname>Hidai</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Mol. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>54</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1989</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>L13</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB30">
+                     <ce:label>[30]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>L.</ce:given-name>
+                                 <ce:surname>Alvila</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>T.A.</ce:given-name>
+                                 <ce:surname>Pakkanen</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>T.T.</ce:given-name>
+                                 <ce:surname>Pakkanen</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>O.</ce:given-name>
+                                 <ce:surname>Krause</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Mol. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>71</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1992</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>281</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB31">
+                     <ce:label>[31]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>K.</ce:given-name>
+                                 <ce:surname>Takeuchi</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>T.-a.</ce:given-name>
+                                 <ce:surname>Hanaoka</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>T.</ce:given-name>
+                                 <ce:surname>Matsuzaki</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>Y.</ce:given-name>
+                                 <ce:surname>Sugi</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>S.</ce:given-name>
+                                 <ce:surname>Ogasawara</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>Y.</ce:given-name>
+                                 <ce:surname>Abe</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>T.</ce:given-name>
+                                 <ce:surname>Misono</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>Catal. Today</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>20</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1994</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>423</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB32">
+                     <ce:label>[32]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>B.J.</ce:given-name>
+                                 <ce:surname>Kip</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>F.W.A.</ce:given-name>
+                                 <ce:surname>Dirne</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>J.</ce:given-name>
+                                 <ce:surname>van Grondelle</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>R.</ce:given-name>
+                                 <ce:surname>Prins</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>Appl. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>25</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1986</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>43</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB33">
+                     <ce:label>[33]</ce:label>
+                     <sb:reference>
+                        <sb:contribution langtype="en">
+                           <sb:authors>
+                              <sb:author>
+                                 <ce:given-name>S.S.C.</ce:given-name>
+                                 <ce:surname>Chuang</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>G.</ce:given-name>
+                                 <ce:surname>Srinivas</ce:surname>
+                              </sb:author>
+                              <sb:author>
+                                 <ce:given-name>A.</ce:given-name>
+                                 <ce:surname>Mukherjee</ce:surname>
+                              </sb:author>
+                           </sb:authors>
+                        </sb:contribution>
+                        <sb:host>
+                           <sb:issue>
+                              <sb:series>
+                                 <sb:title>
+                                    <sb:maintitle>J. Catal.</sb:maintitle>
+                                 </sb:title>
+                                 <sb:volume-nr>139</sb:volume-nr>
+                              </sb:series>
+                              <sb:date>1993</sb:date>
+                           </sb:issue>
+                           <sb:pages>
+                              <sb:first-page>490</sb:first-page>
+                           </sb:pages>
+                        </sb:host>
+                     </sb:reference>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB34">
+                     <ce:label>[34]</ce:label>
+                     <ce:other-ref>
+                        <ce:textref>L. Huang, unpublished result.</ce:textref>
+                     </ce:other-ref>
+                  </ce:bib-reference>
+                  <ce:bib-reference id="BIB35">
+                     <ce:label>[35]</ce:label>
+                     <ce:other-ref>
+                        <ce:textref>L. Huang, J. Mol. Catal. A, submitted for publication.</ce:textref>
+                     </ce:other-ref>
+                  </ce:bib-reference>
+               </ce:bibliography-sec>
+            </ce:bibliography>
+         </tail>
+      </converted-article>
+   </xocs:serial-item></xocs:doc></originalText></full-text-retrieval-response>

@@ -65,11 +65,11 @@ def create_list_IRIs(class_list, IRI_json_filename = 'iriDictionary'):
         print('{} not in the list of the given ontologies "onto_list"')
     
     for entity in class_list:
-        if entity not in entities_all:
+        if entity or entity.lower() not in entities_all:
             match_dict = search_value_in_nested_dict(entity, onto_names, onto_dict, match_dict)
         else:
 
-            match_dict['dummy_'+entity]=[entity,entity]
+            match_dict['dummy_'+entity.lower()]=[entity]
     values=[i[0] for i in match_dict.values()]
             
     missing = [e for e in class_list if e not in values and e not in entities_all] 
@@ -138,11 +138,16 @@ def search_value_in_nested_dict(value, onto_names, onto_dict, match_dict):
 
 def onto_extender ():
     for o,iri in onto_list.items():
-        # The first path leads to robot.jar and may need to be modified by the user.
-        # --input: is the ontology in which to search for the desired IRI's.
-        # --method: can be modified as needed  [http://robot.obolibrary.org/extract]
-        # --term-file: is the text file, in which the IRI's are stored, which are to be searched for.
-        os.system('java -jar c://Windows/robot.jar extract --input-iri {} --method BOT --term-file class_lists/IRIs_{}.txt --output ontology_snipet/{}_classes.owl'.format(iri,o,o))
+        if o== "AFO":
+            continue
+        elif "ontologies" in iri:
+            os.system('java -jar c://Windows/robot.jar extract --input {} --method BOT --term-file class_lists/IRIs_{}.txt --output ontology_snipet/{}_classes.owl'.format(iri,o,o))
+        else:
+            # The first path leads to robot.jar and may need to be modified by the user.
+            # --input: is the ontology in which to search for the desired IRI's.
+            # --method: can be modified as needed  [http://robot.obolibrary.org/extract]
+            # --term-file: is the text file, in which the IRI's are stored, which are to be searched for.
+            os.system('java -jar c://Windows/robot.jar extract --input-iri {} --method BOT --term-file class_lists/IRIs_{}.txt --output ontology_snipet/{}_classes.owl'.format(iri,o,o))
     for filepath in glob.iglob('ontology_snipet/*.owl'):
         os.system('robot merge --input ontologies/{}.owl --input {} --output ontologies/{}.owl'.format(onto_new, filepath,  onto_new))
         #os.system('robot merge --input empty.owl --input {} --output empty.owl'.format(filepath))

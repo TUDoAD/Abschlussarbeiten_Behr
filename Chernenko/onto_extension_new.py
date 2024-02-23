@@ -202,7 +202,7 @@ def preprocess_classes(categories,abbreviation, onto_new_dict, sup_cat, rel_syno
                         else:
                             pattern='\\b[\\d.]*'+c+'\\b'
                         if re.search(pattern,entity_n):
-                            c_t = rel_synonym[c] 
+                            c_t = rel_synonym[c] if c in rel_synonym.keys() else c
                             if sup_i==True and c in e_btwn:
                                 eq_idx=e_btwn.find('=') #RhM3/MCM-41, M = Fe, Co, Ni, Cu, or Zn
                                 if eq_idx != -1: 
@@ -700,7 +700,10 @@ def create_classes_onto(abbreviation, sup_cat, missing, match_dict, df_entity,re
                         try:
                             ind= [i for i in list(onto.search(label=row.entity)) if i in list(onto.individuals())][0] 
                         except:
-                            onto,ind=add_individum(onto,[i for i in list(onto.search(label=row.classes[0])) if i in list(onto.classes())][0], row.entity,p_id)
+                            try:
+                                ind= [i for i in list(onto.search(label=row.entity.lower())) if i in list(onto.individuals())][0] 
+                            except:
+                                onto,ind=add_individum(onto,[i for i in list(onto.search(label=row.classes[0])) if i in list(onto.classes())][0], row.entity,p_id)
                         for r in reac_dict[row.entity]:
                             c_t=rel_synonym[r] if r in rel_synonym.keys() else r
                             try:

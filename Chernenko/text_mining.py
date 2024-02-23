@@ -574,6 +574,7 @@ def chemical_prep(chem_list):
         if re.search(r'[A-Z]+[—–-][\d]+', molecule):
             chem_dict[molecule] = []
             class_list.append(molecule)
+            rel_synonym[molecule]= molecule
             continue        
         match_material = re.findall(r'((?:[A-Z](?:[a-wz]?[\d]*))+)[—–-]((?:[A-Z](?:[a-wz]?[\d]*))+)', molecule) #TiO2-SiO2 from Ni-W/TiO2-SiO2
         if match_material and molecule in sup_cat.keys():
@@ -684,8 +685,8 @@ def synonym_dicts():
     new_world4 = owlready2.World()
     onto = new_world4.get_ontology('ontologies/{}.owl'.format(onto_new)).load()
     mols_newonto = [cls.iri for cls in onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_25367').descendants()]
-    if onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_33250'):
-        mols_newonto.extend([cls.iri for cls in onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_33250').descendants()])
+    if onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_23367'):
+        mols_newonto.extend([cls.iri for cls in onto.search_one(iri='http://purl.obolibrary.org/obo/CHEBI_23367').descendants()])
     def_id = ["hasRelatedSynonym", "hasExactSynonym","inchikey", "comment"]
     
     for temp_class,v in class_list.items():

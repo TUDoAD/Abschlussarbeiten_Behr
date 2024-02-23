@@ -10,7 +10,8 @@ import requests
 import pandas as pd
 from txt_extract import get_metadata
 import glob
-path = './Methanisierung/*.pdf'
+
+path = './import/*.pdf'
 
 
 #  ScienceDirect API key
@@ -37,8 +38,9 @@ for pdf in glob.iglob(path):
     
     # Check if the request was successful (status code 200)
     if response.status_code == 200:
+        #if response.text
         # Save the XML content to a file
-        with open('{}.xml'.format(name), 'w', encoding='utf-8') as file:
+        with open('{}_1.xml'.format(name), 'w', encoding='utf-8') as file:
             file.write(response.text)
         print('XML content saved to {}.xml'.format(name))
     else:
