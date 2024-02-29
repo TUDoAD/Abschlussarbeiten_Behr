@@ -186,6 +186,7 @@ def get_catalyst(cat = None,doi = None,include_all = False):
                 ?catalyst_e rdf:type owl:NamedIndividual.
                     ?catalyst_e rdf:type ?type.
                     ?type rdfs:subClassOf* ?chem_sub.
+                    FILTER EXISTS{}
                     ?chem_sub rdfs:label|obp:hasRelatedSynonym|obp:hasExactSynonym|che:formula|rdfs:comment "'''+ cat+'''".
             
                 '''
@@ -746,7 +747,7 @@ for p in onto_pub_list:
                                 
                                 if query not in queries:
                                     queries.append(query) 
-                                    print(query)
+                                    #print(query)
                     for k_cat,v_cat in cat_all.items():
                         for k_sup,v_sup in sup_all.items():
                             if k_sup == k_cat:
@@ -757,5 +758,5 @@ for p in onto_pub_list:
                                         query = 'TITLE-ABS-KEY("{}"AND"{}"AND"{}"AND"{}"AND"{}")'.format(r,cat,sup,react,prod)
                                         if query not in queries:
                                             queries.append(query) 
-                                            print(query)
-  """                                        
+                                            #print(query)                                        
+    """
