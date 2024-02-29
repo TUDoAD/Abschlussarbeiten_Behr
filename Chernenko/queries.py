@@ -413,11 +413,14 @@ def get_synonyms(ent_list): #,is_cat=False
 
                     if re.search(r'\b(?:[A-Z][a-z]?\d*)+(?:(?:[A-Z][a-z]?)+\d*)*\b', value) and formula==False and len(value.split()) == 1:
                         formula= True
+                        value=re.sub(r'\[|\]','',value)
                         dist_ent.append(value)
                     elif full_name==False and (len(value.split()) >= 2 or re.match(r'[A-Za-z]([a-z]+){3,}', value) or re.match(r'[\d,]+[—–-][A-Z]?[a-z]+', value)):
+                        value=re.sub(r' \(molecule\)','', value)
                         doc=nlp(value)
                         if re.search(r'\([VIX]+\)',value):
                             continue
+                        
                         if len(value.split()) == 1:
                             doc=doc[0].lemma_
                         dist_ent.append(doc)
@@ -581,38 +584,42 @@ def ScopusSearchQueries(reac_all, sup_all, cat_all, cat_full_all,reactant_all, p
         all_ent.append(cat_all)
     if len(all_ent) > 1:
         for r in reac_all:
-            for react in reactant_all:
-                for prod in product_all:
-                    if cat_full_all:
-                        for v_cat_all in cat_full_all.values():
-                            for c in v_cat_all:
-                                query = 'TITLE-ABS-KEY("{}"AND"{}"AND"{}"AND"{}")'.format(r,c,react,prod)
-                                if query not in queries:
-                                    
-                                    result = ScopusSearch(query, view='STANDARD',verbose=False, subscriber=True, refresh=100)
-                                    print('Downloading results for query ' + query)
-                                    results.append(result)
-                                    queries.append(query) 
-                                    df = pd.DataFrame(pd.DataFrame(result.results))
-                                    df['query'] = [query for _ in range(result.get_results_size())]
-                                    df_all = pd.concat([df_all, df], axis=0, ignore_index=True)
-                    for k_cat,v_cat in cat_all.items():
-                        for k_sup,v_sup in sup_all.items():
-                            if k_sup == k_cat:
-                                continue
-                            else:
-                                for cat in v_cat:
-                                    for sup in v_sup:
-                                        query = 'TITLE-ABS-KEY("{}"AND"{}"AND"{}"AND"{}"AND"{}")'.format(r,cat,sup,react,prod)
-                                        if query not in queries:
-                                            
-                                            result = ScopusSearch(query, view='STANDARD',verbose=False, subscriber=True, refresh=100)
-                                            print('Downloading results for query ' + query)
-                                            results.append(result)
-                                            queries.append(query) 
-                                            df = pd.DataFrame(pd.DataFrame(result.results))
-                                            df['query'] = [query for _ in range(result.get_results_size())]
-                                            df_all = pd.concat([df_all, df], axis=0, ignore_index=True)
+            if r==' ':
+                break
+            else:
+                for react in reactant_all:
+                    for prod in product_all:
+                        if prod==react:
+                            prod=' '
+                        if cat_full_all:
+                            for v_cat_all in cat_full_all.values():
+                                for c in v_cat_all:
+                                    query = 'TITLE-ABS-KEY("{}"AND"{}"AND"{}"AND"{}")'.format(r,c,react,prod)
+                                    if query not in queries:
+                                        result = ScopusSearch(query, view='STANDARD',verbose=False, subscriber=True, refresh=100)
+                                        print('Downloading results for query ' + query)
+                                        results.append(result)
+                                        queries.append(query) 
+                                        df = pd.DataFrame(pd.DataFrame(result.results))
+                                        df['query'] = [query for _ in range(result.get_results_size())]
+                                        df_all = pd.concat([df_all, df], axis=0, ignore_index=True)
+                        for k_cat,v_cat in cat_all.items():
+                            for k_sup,v_sup in sup_all.items():
+                                if k_sup == k_cat:
+                                    continue
+                                else:
+                                    for cat in v_cat:
+                                        for sup in v_sup:
+                                            query = 'TITLE-ABS-KEY("{}"AND"{}"AND"{}"AND"{}"AND"{}")'.format(r,cat,sup,react,prod)
+                                            if query not in queries:
+                                                result = ScopusSearch(query, view='STANDARD',verbose=False, subscriber=True, refresh=100)                                         
+                                                result = ScopusSearch(query, view='STANDARD',verbose=False, subscriber=True, refresh=100)
+                                                print('Downloading results for query ' + query)
+                                                results.append(result)
+                                                queries.append(query) 
+                                                df = pd.DataFrame(pd.DataFrame(result.results))
+                                                df['query'] = [query for _ in range(result.get_results_size())]
+                                                df_all = pd.concat([df_all, df], axis=0, ignore_index=True)
     else:
         print('no queries for publication')
     return df_all,queries
@@ -706,7 +713,7 @@ titles_filtered['title']=titles
 df_titles_filtered=pd.DataFrame(data =titles_filtered)
 """
 """
-onto_name= "afo_new" #input name of the ontology
+onto_name= "afo_dataset-1" #input name of the ontology
 
 #perform reasoning, get dois from publications in the extended ontology
 onto_pub_list,onto,df=reasoning_dois_onto(onto_name)
