@@ -169,7 +169,7 @@ def get_catalyst(cat = None,doi = None,include_all = False):
     else:
         sparqlstr =  '''
         WHERE {
-            {   ?catalyst_e rdf:type owl:NamedIndividual.
+                {   ?catalyst_e rdf:type owl:NamedIndividual.
                 ?catalyst_e rdf:type ?type.
                 ?type rdfs:subClassOf* ?chem_sub.
                 ?chem_sub rdfs:label|obp:hasRelatedSynonym|obp:hasExactSynonym|che:formula|rdfs:comment "'''+ cat+'''".
@@ -184,11 +184,17 @@ def get_catalyst(cat = None,doi = None,include_all = False):
             UNION
             {
                 ?catalyst_e rdf:type owl:NamedIndividual.
-                    ?catalyst_e rdf:type ?type.
-                    ?type rdfs:subClassOf* ?chem_sub.
-                    FILTER EXISTS{}
-                    ?chem_sub rdfs:label|obp:hasRelatedSynonym|obp:hasExactSynonym|che:formula|rdfs:comment "'''+ cat+'''".
-            
+                    ?catalyst_e rdfs:label|rdfs:comment ?cat.
+                    FILTER regex(STR(?cat),"'''+ cat+'''","i").
+                    ?catalyst_e rdfs:label ?catalyst.
+            }
+            UNION
+            {
+                ?catalyst_e rdf:type owl:NamedIndividual.
+                    ?catalyst_e obp:hasRelatedSynonym|obp:hasExactSynonym ?cat.
+                    FILTER regex(STR(?cat),"'''+ cat+'''","i").
+                    ?catalyst_e rdfs:label ?catalyst.
+            }
                 '''
                 
     if doi == None:
