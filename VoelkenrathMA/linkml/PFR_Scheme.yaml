@@ -4,6 +4,7 @@ description: A scheme for the process simulation of a methanation-reaction in DW
 prefixes:
   dwsim: "http://example.com/dwsim#"
   linkml: "https://w3id.org/linkml/"
+  AFR: http://purl.allotrope.org/ontologies/result#AFR_
 
 types:
   - name: Mixture
@@ -20,30 +21,37 @@ types:
 classes:
   - name: Mixture
     is_a: entity
+    class_uri: http://purl.allotrope.org/ontologies/material#AFM_0001038
     slots:
       - name: temperature
         domain: Mixture
         range: float
         description: Temperature of the inlet
+        slot_uri: AFR:0001584
       - name: pressure
         domain: Mixture
         range: float
         description: Pressure of the inlet
+        slot_uri: AFR:0001918
       - name: velocity # ACHTUNG dient zur bestimmung von Massen-/Molfluss
         domain: Mixture
         range: float
         description: Mass flow rate of the inlet
+        slot_uri: AFR:0002632
       - name: mole_fraction # <MOLEFRAC>
         domain: Mixture
         range: list[list[str,float]]
         description: Mole fraction of a compound in the inlet
+        slot_uri: https://purl.allotrope.org/ontologies/quality#AFQ_0000005
       - name: substances
         domain: Mixture
         range: list[]
         description: Every Substance and Pseudocomponent in this reaction System
+        slot_uri: http://purl.obolibrary.org/obo/CHEBI_24431
 
   - name: Reactor
     is_a: entity
+    class_uri: http://purl.allotrope.org/ontologies/equipment#AFE_0000153
     slots:
       - name: calculation_mode
         domain: Reactor
@@ -80,6 +88,7 @@ classes:
         
   - name: ChemicalReaction
     is_a: entity
+    class_uri: http://purl.allotrope.org/ontologies/process#AFP_0003711
     slots:
       - name: reaction_mechanism
         domain: ChemicalReaction
@@ -88,7 +97,8 @@ classes:
   
   - name: ReactionMechanism
     is_a: list
-    slots:
+    class_uri: http://example.org#reactionMechanism 
+    slots: 
       - name: reactions
         domain: ReactionMechanism
         range: Reaction
@@ -96,6 +106,7 @@ classes:
 
   - name: Reaction
     is_a: entity
+    class_uri: http://purl.allotrope.org/ontologies/process#AFP_0003711
     slots:
       - name: id
         domain: Reaction
