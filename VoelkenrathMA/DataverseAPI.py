@@ -299,7 +299,7 @@ def upload():
     print("Uploading files...")
 #    base_url = "https://nfdirepo.fokus.fraunhofer.de"
     base_url = "https://nfdirepo.fokus.fraunhofer.de"
-    api_key = "466ba301-fc88-404b-8649-327db3cd38ab"
+    api_key = ""
     dataverse_alias = "TUDO_ProcessSimulation_test"
     
     # create a NativeAPI instance
