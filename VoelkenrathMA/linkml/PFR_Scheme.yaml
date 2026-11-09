@@ -5,138 +5,221 @@ prefixes:
   dwsim: "http://example.com/dwsim#"
   linkml: "https://w3id.org/linkml/"
   AFR: http://purl.allotrope.org/ontologies/result#AFR_
+  reac4cat: https://nfdi4cat.org/ontologies/reac4cat#
 
-types:
-  - name: Mixture
-    description: Represents a mixture of chemical compounds
-    uri: https://nfdi4cat.org/ontologies/reac4cat#Mixture
+imports:
+  - linkml:types
 
-  - name: Reactor
-    description: Represents a chemical reactor
-    uri: http://purl.allotrope.org/ontologies/equipment#AFE_0000153
-
-  - name: ChemicalReaction
-    description: Represents a chemical reaction
-
+# ---------------------------------------------------------------------------
+# Classes: only reference slots by name, the slots themselves are defined below
+# ---------------------------------------------------------------------------
 classes:
-  - name: Mixture
-    is_a: entity
-    class_uri: http://purl.allotrope.org/ontologies/material#AFM_0001038
-    slots:
-      - name: temperature
-        domain: Mixture
-        range: float
-        description: Temperature of the inlet
-        slot_uri: AFR:0001584
-      - name: pressure
-        domain: Mixture
-        range: float
-        description: Pressure of the inlet
-        slot_uri: AFR:0001918
-      - name: velocity # ACHTUNG dient zur bestimmung von Massen-/Molfluss
-        domain: Mixture
-        range: float
-        description: Mass flow rate of the inlet
-        slot_uri: AFR:0002632
-      - name: mole_fraction # <MOLEFRAC>
-        domain: Mixture
-        range: list[list[str,float]]
-        description: Mole fraction of a compound in the inlet
-        slot_uri: https://purl.allotrope.org/ontologies/quality#AFQ_0000005
-      - name: substances
-        domain: Mixture
-        range: list[]
-        description: Every Substance and Pseudocomponent in this reaction System
-        slot_uri: http://purl.obolibrary.org/obo/CHEBI_24431
+  Entity:
+    abstract: true
+    description: Abstract root class for all domain entities of this scheme
 
-  - name: Reactor
-    is_a: entity
+  EntityList:
+    abstract: true
+    description: Abstract root class for all container classes that group a list of entities
+
+  Mixture:
+    is_a: Entity
+    description: Represents a mixture of chemical compounds
+    class_uri: http://purl.allotrope.org/ontologies/material#AFM_0001038
+    close_mappings:
+      - reac4cat:Mixture   # former entry of the 'types' block
+    slots:
+      - temperature
+      - pressure
+      - velocity
+      - mole_fraction
+      - substances
+
+  MoleFraction:
+    is_a: Entity
+    description: Mole fraction of a single compound within a mixture
+    slots:
+      - compound
+      - fraction
+
+  Substance:
+    is_a: Entity
+    description: A substance or pseudocomponent of the reaction system
+    slots:
+      - formula
+      - substance_name
+
+  Reactor:
+    is_a: Entity
+    description: Represents a chemical reactor
     class_uri: http://purl.allotrope.org/ontologies/equipment#AFE_0000153
     slots:
-      - name: calculation_mode
-        domain: Reactor
-        range: float
-        description: Calculation mode for the reactor
-      - name: reactive_volume
-        domain: Reactor
-        range: float
-        description: Volume of the reactive space in the reactor
-      - name: tube_length # <SECTION>
-        domain: Reactor
-        range: float
-        description: Length of the reactor tube
-      - name: tube_diameter # <GEOMETRY>
-        domain: Reactor
-        range: float
-        description: Diameter of the reactor tube
-      - name: num_tubes # nicht gegeben --> als 1 fuer die Simulation annehmen
-        domain: Reactor
-        range: integer
-        description: Number of tubes in the reactor
-      - name: catalyst_loading # nicht gegeben (je nach Reaktion nicht benoetigt)
-        domain: Reactor
-        range: float
-        description: Loading of the catalyst in the reactor
-      - name: catalyst_particle_diameter # <SECTION>
-        domain: Reactor
-        range: float
-        description: Diameter of the catalyst particles
-      - name: catalyst_void_fraction # <SECTION> --> allerdings nur porositaet
-        domain: Reactor
-        range: float
-        description: Void fraction in the catalyst bed
-        
-  - name: ChemicalReaction
-    is_a: entity
-    class_uri: http://purl.allotrope.org/ontologies/process#AFP_0003711
-    slots:
-      - name: reaction_mechanism
-        domain: ChemicalReaction
-        range: ReactionMechanism
-        description: The mechanism of a chemical reaction
-  
-  - name: ReactionMechanism
-    is_a: list
-    class_uri: http://example.org#reactionMechanism 
-    slots: 
-      - name: reactions
-        domain: ReactionMechanism
-        range: Reaction
-        description: List of the reaction and parameter
+      - calculation_mode
+      - reactive_volume
+      - tube_length
+      - tube_diameter
+      - num_tubes
+      - catalyst_loading
+      - catalyst_particle_diameter
+      - catalyst_void_fraction
 
-  - name: Reaction
-    is_a: entity
+  ChemicalReaction:
+    is_a: Entity
+    description: Represents a chemical reaction
     class_uri: http://purl.allotrope.org/ontologies/process#AFP_0003711
     slots:
-      - name: id
-        domain: Reaction
-        range: int
-        description: Identifier for the reaction
-      - name: reaction_equation
-        domain: Reaction
-        range: str
-        description: Equation for this step in the Reaction_Mechanism
-      - name: EA
-        domain: Reaction
-        range: float
-        description: Activation Energy of the reaction
-      - name: beta
-        domain: Reaction
-        range: float
-        description: beta value of the reaction
-      - name: S0
-        domain: Reaction
-        range: float
-        description: S0 value of the reaction
-      - name: A_cm_units
-        domain: Reaction
-        range: float
-        description: A/cm value of the reaction
-      - name: epsilon
-        domain: Reaction
-        range: float
-        description: Epsilon value of the reaction
-      - name: mu
-        domain: Reaction
-        range: float
-        description: Mu value of the reaction
+      - reaction_mechanism
+
+  ReactionMechanism:
+    is_a: EntityList
+    class_uri: http://example.org#reactionMechanism
+    slots:
+      - reactions
+
+  Reaction:
+    is_a: Entity
+    class_uri: http://purl.allotrope.org/ontologies/process#AFP_0003711
+    slots:
+      - id
+      - reaction_equation
+      - EA
+      - beta
+      - S0
+      - A_cm_units
+      - epsilon
+      - mu
+
+# ---------------------------------------------------------------------------
+# Slots
+# ---------------------------------------------------------------------------
+slots:
+  # --- Mixture ---
+  temperature:
+    domain: Mixture
+    range: float
+    description: Temperature of the inlet
+    slot_uri: AFR:0001584
+  pressure:
+    domain: Mixture
+    range: float
+    description: Pressure of the inlet
+    slot_uri: AFR:0001918
+  velocity: # ACHTUNG dient zur bestimmung von Massen-/Molfluss
+    domain: Mixture
+    range: float
+    description: Mass flow rate of the inlet
+    slot_uri: AFR:0002632
+  mole_fraction: # <MOLEFRAC>
+    domain: Mixture
+    range: MoleFraction
+    multivalued: true
+    inlined_as_list: true
+    description: Mole fraction of a compound in the inlet
+    slot_uri: https://purl.allotrope.org/ontologies/quality#AFQ_0000005
+  substances:
+    domain: Mixture
+    range: Substance
+    multivalued: true
+    inlined_as_list: true
+    description: Every Substance and Pseudocomponent in this reaction System
+    slot_uri: http://purl.obolibrary.org/obo/CHEBI_24431
+
+  # --- MoleFraction ---
+  compound:
+    domain: MoleFraction
+    range: string
+    description: Formula of the compound the mole fraction refers to
+  fraction:
+    domain: MoleFraction
+    range: float
+    description: Value of the mole fraction
+
+  # --- Substance ---
+  formula:
+    domain: Substance
+    range: string
+    description: Chemical formula of the substance (e.g. CO2)
+  substance_name:
+    domain: Substance
+    range: string
+    description: Name of the substance (e.g. Carbon dioxide)
+
+  # --- Reactor ---
+  calculation_mode:
+    domain: Reactor
+    range: string
+    description: Calculation mode for the reactor (e.g. isothermal)
+  reactive_volume:
+    domain: Reactor
+    range: float
+    description: Volume of the reactive space in the reactor
+  tube_length: # <SECTION>
+    domain: Reactor
+    range: float
+    description: Length of the reactor tube
+  tube_diameter: # <GEOMETRY>
+    domain: Reactor
+    range: float
+    description: Diameter of the reactor tube
+  num_tubes: # nicht gegeben --> als 1 fuer die Simulation annehmen
+    domain: Reactor
+    range: integer
+    description: Number of tubes in the reactor
+  catalyst_loading: # nicht gegeben (je nach Reaktion nicht benoetigt)
+    domain: Reactor
+    range: float
+    description: Loading of the catalyst in the reactor
+  catalyst_particle_diameter: # <SECTION>
+    domain: Reactor
+    range: float
+    description: Diameter of the catalyst particles
+  catalyst_void_fraction: # <SECTION> --> allerdings nur porositaet
+    domain: Reactor
+    range: float
+    description: Void fraction in the catalyst bed
+
+  # --- ChemicalReaction ---
+  reaction_mechanism:
+    domain: ChemicalReaction
+    range: ReactionMechanism
+    description: The mechanism of a chemical reaction
+
+  # --- ReactionMechanism ---
+  reactions:
+    domain: ReactionMechanism
+    range: Reaction
+    description: List of the reaction and parameter
+
+  # --- Reaction ---
+  id:
+    domain: Reaction
+    range: integer
+    description: Identifier for the reaction
+  reaction_equation:
+    domain: Reaction
+    range: string
+    description: Equation for this step in the Reaction_Mechanism
+  EA:
+    domain: Reaction
+    range: float
+    description: Activation Energy of the reaction
+  beta:
+    domain: Reaction
+    range: float
+    description: beta value of the reaction
+  S0:
+    domain: Reaction
+    range: float
+    description: S0 value of the reaction
+  A_cm_units:
+    domain: Reaction
+    range: float
+    description: A/cm value of the reaction
+  epsilon:
+    domain: Reaction
+    range: float
+    description: Epsilon value of the reaction
+  mu:
+    domain: Reaction
+    range: float
+    description: Mu value of the reaction
