@@ -176,13 +176,122 @@ def _build_dataset_metadata(dataset, simulation_data):
     return json.dumps(metadata)
 
 
+def _prepare_simulations(root, description):
+    groups = sorted(path for path in root.glob("NewReaction_*") if path.is_dir())
+    simulation_folders = sorted(
+        simulation
+        for group in groups
+        for simulation in group.iterdir()
+        if simulation.is_dir()
+    )
+    if not simulation_folders:
+        raise FileNotFoundError(f"No simulation folders found under {root}")
+
+    prepared = []
+    for simulation_folder in simulation_folders:
+        files_by_suffix = {
+            suffix: list(simulation_folder.glob(f"*{suffix}"))
+            for suffix in (".dwxmz", ".ttl", ".yaml")
+        }
+        if any(len(files) != 1 for files in files_by_suffix.values()):
+            counts = {suffix: len(files) for suffix, files in files_by_suffix.items()}
+            raise ValueError(f"Expected one .dwxmz, .ttl, and .yaml in {simulation_folder}: {counts}")
+
+        files = tuple(files_by_suffix[suffix][0] for suffix in (".dwxmz", ".ttl", ".yaml"))
+        if len(list(simulation_folder.iterdir())) != len(files):
+            raise ValueError(f"Unexpected additional files in {simulation_folder}")
+
+        with files[2].open("r", encoding="utf-8") as data_file:
+            simulation_data = yaml.safe_load(data_file)
+
+        dataset = Dataset()
+        dataset.set({"title": simulation_folder.name})
+        dataset.set({"author": [{'authorName': "Sommer-Behr, Alexander"}, {'authorName': "Völkenrath, Marc"}]})
+        dataset.set({"dsDescription": [{"dsDescriptionValue": f"{description} Simulation group: {simulation_folder.parent.name}."}]})
+        dataset.set({"datasetContact": [{"datasetContactEmail": "alexander.behr@tu-dortmund.de", "datasetContactName": "Behr, Alexander"},
+                                         {"datasetContactEmail": "marc.voelkenrath@tu-dortmund.de", "datasetContactName": "Völkenrath, Marc"}]})
+        dataset.set({"subject": ["Engineering", "Chemistry"]})
+        metadata = _build_dataset_metadata(dataset, simulation_data)
+        prepared.append((simulation_folder, files, simulation_data, metadata))
+
+    return prepared
+
+
+def _add_ontology_record(ontology, simulation_folder, simulation_data, dataset_pid, file_urls):
+    sections = {
+        name: value
+        for section in simulation_data
+        for name, value in section.items()
+    }
+    mixture = sections["Mixture"][0]
+    fractions = dict(mixture["mole_fraction"])
+    temperature = mixture["temperature"][0]["outlet"]
+    pressure = mixture["pressure"]
+    residence_time = mixture["residence time"]
+    outlet_section = sections.get("Outlet Composition", sections.get("Sep_Gas Composition", []))
+    outlet = dict(outlet_section)
+    turnover = dict(sections.get("Turnover", []))
+    selectivity = sections.get("Selectivity_normed", [{}])[0]
+    yield_data = sections.get("Yield", [])
+
+    reaction_class = next(
+        (item for item in ontology.search(iri="*Methanation") if str(item) == "reac4cat.Methanation"),
+        None,
+    )
+    if reaction_class is None:
+        raise ValueError("Ontology class reac4cat.Methanation was not found")
+
+    individual_name = (
+        f"Sim_{simulation_folder.parent.name}_{sections['Reaction_Type']}_"
+        f"{fractions.get('CO2')}_{temperature}K_{pressure}Pa_{residence_time}s_wd"
+    )
+    with ontology:
+        individual = reaction_class(individual_name)
+
+        def append_unique(property_values, value):
+            if value is not None and value not in property_values:
+                property_values.append(value)
+
+        append_unique(individual.hasMolarFractionCarbonDioxide, fractions.get("CO2"))
+        append_unique(individual.hasMolarFractionHydrogen, fractions.get("H2"))
+        append_unique(individual.hasMolarFractionArgon, fractions.get("Ar"))
+        append_unique(individual.hasSimulatedDownstream, sections.get("hasDownstream"))
+        append_unique(individual.hasSimulatedReactionPressure, pressure)
+        append_unique(individual.hasSimulatedReactionTemperature, temperature)
+        append_unique(individual.hasSimulatedReactionResidenceTime, residence_time)
+        append_unique(individual.hasOutletMolarFractionCarbonDioxide, outlet.get("CO2"))
+        append_unique(individual.hasOutletMolarFractionWater, outlet.get("H2O"))
+        append_unique(individual.hasOutletMolarFractionHydrogen, outlet.get("H2"))
+        append_unique(individual.hasOutletMolarFractionMethane, outlet.get("CH4"))
+        append_unique(individual.hasOutletMolarFractionCarbonMonoxide, outlet.get("CO"))
+        append_unique(individual.hasOutletMolarFractionArgon, outlet.get("Ar"))
+        append_unique(individual.hasTurnoverHydrogen, turnover.get("X_H2"))
+        append_unique(individual.hasTurnoverCarbonDioxide, turnover.get("X_CO2"))
+        append_unique(individual.hasYieldMethane, yield_data[1] if len(yield_data) > 1 else None)
+        append_unique(individual.hasSelectivity_CO2_CH4, selectivity.get("CH4"))
+        append_unique(individual.hasSelectivity_CO2_CO, selectivity.get("CO"))
+
+        dataset_url = (
+            "https://nfdirepo.fokus.fraunhofer.de/dataset.xhtml?persistentId="
+            f"{dataset_pid}&version=DRAFT"
+        )
+        comments = [f"Dataset: {dataset_url}"]
+        labels = {".dwxmz": "DWSIM-file", ".ttl": "TTL-file", ".yaml": "LinkML-file"}
+        comments.extend(
+            f"{labels[path.suffix.lower()]}: {url}"
+            for path, url in file_urls.items()
+        )
+        for comment in comments:
+            append_unique(individual.comment, comment)
+
+
 def upload():
     start = time.time()
     ## Adjustments    
     title = "DWSIM Methanation (x_co2=0.04, with Downstream)"
     descr = "Automated simulation result file for the Ni-catalyzed Methanation of Carbon Dioxide (x_co2=0.04) with downstream process."
     #folder_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/linkml/NewReaction_06/"
-    folder_path = "./linkml/NewReaction_01_test/"
+    folder_path = "./linkml/with_ttl/NewReaction_01"
     #onto_path = "C:/Users/smmcvoel/Documents/GitHub/Abschlussarbeiten_Behr/VoelkenrathMA/ontologies/MV-Onto.owl"
     onto_path = "./ontologies/test-onto_ASB.owl"
     
@@ -190,7 +299,7 @@ def upload():
     print("Uploading files...")
 #    base_url = "https://nfdirepo.fokus.fraunhofer.de"
     base_url = "https://nfdirepo.fokus.fraunhofer.de"
-    api_key = ""
+    api_key = "466ba301-fc88-404b-8649-327db3cd38ab"
     dataverse_alias = "TUDO_ProcessSimulation_test"
     
     # create a NativeAPI instance
