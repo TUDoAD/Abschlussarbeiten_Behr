@@ -1,0 +1,335 @@
+@prefix AFE: <http://purl.allotrope.org/ontologies/equipment#AFE_> .
+@prefix AFM: <http://purl.allotrope.org/ontologies/material#AFM_> .
+@prefix AFP: <http://purl.allotrope.org/ontologies/process#AFP_> .
+@prefix afo: <http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#> .
+@prefix exp: <http://example.org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix reac4cat: <https://nfdi4cat.org/ontologies/reac4cat#> .
+@prefix sim: <http://example.com/data/methanation/NewReaction_01/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+sim:Methanation_0.04_746.846K_100000Pa_0.01ms a owl:NamedIndividual,
+        reac4cat:Methanation ;
+    afo:hasReactionMechanism sim:Methanation_0.04_746.846K_100000Pa_0.01ms_ReactionMechanism ;
+    afo:hasReactor sim:Methanation_0.04_746.846K_100000Pa_0.01ms_Reactor ;
+    afo:hasSelectivity_CO2_CH4 0.020298832372099798 ;
+    afo:hasSelectivity_CO2_CO 0.9797011676279002 ;
+    afo:hasSimulatedDownstream "No" ;
+    afo:hasSimulatedReactionPressure 100000.0 ;
+    afo:hasSimulatedReactionResidenceTime 0.01 ;
+    afo:hasSimulatedReactionTemperature 746.846 ;
+    afo:hasTurnoverCarbonDioxide 0.42065669749791995 ;
+    afo:hasTurnoverHydrogen 0.3499005985862724 ;
+    afo:hasUnnormalizedSelectivity_CO2_CH4 0.020332265097790576 ;
+    afo:hasUnnormalizedSelectivity_CO2_CO 0.9813147619369629 ;
+    afo:hasYieldMethane 0.008552903488688807 ;
+    rdfs:comment "DWSIM-file: Methanation_0.04_746.846K_100000Pa_0.01ms.dwxmz",
+        "LinkML-file: Methanation_0.04_746.846K_100000Pa_0.01ms.yaml" ;
+    reac4cat:hasInitialMixture sim:Methanation_0.04_746.846K_100000Pa_0.01ms_Feed ;
+    reac4cat:hasProduct sim:Methanation_0.04_746.846K_100000Pa_0.01ms_Product .
+
+afo:hasCatalystLoading a owl:DatatypeProperty ;
+    rdfs:label "hasCatalystLoading"@en ;
+    rdfs:comment "Loading of the catalyst in the reactor"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasCatalystParticleDiameter a owl:DatatypeProperty ;
+    rdfs:label "hasCatalystParticleDiameter"@en ;
+    rdfs:comment "Diameter of the catalyst particles"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasCatalystVoidFraction a owl:DatatypeProperty ;
+    rdfs:label "hasCatalystVoidFraction"@en ;
+    rdfs:comment "Void fraction in the catalyst bed"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasKineticParameterBr a owl:DatatypeProperty ;
+    rdfs:label "hasKineticParameterBr"@en ;
+    rdfs:comment "Kinetic parameter br of the rate expression"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasKineticParameterK1 a owl:DatatypeProperty ;
+    rdfs:label "hasKineticParameterK1"@en ;
+    rdfs:comment "Kinetic parameter K_1 of the rate expression (NewReaction-Datasheets: K_CO2)"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasKineticParameterK2 a owl:DatatypeProperty ;
+    rdfs:label "hasKineticParameterK2"@en ;
+    rdfs:comment "Kinetic parameter K_2 of the rate expression (NewReaction-Datasheets: K_H2)"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasKineticParameterK3 a owl:DatatypeProperty ;
+    rdfs:label "hasKineticParameterK3"@en ;
+    rdfs:comment "Kinetic parameter K_3 of the rate expression (NewReaction-Datasheets: K_H2O)"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasMolarFlowArgon a owl:DatatypeProperty ;
+    rdfs:label "hasMolarFlowArgon"@en ;
+    rdfs:comment "Molar flow of argon (Ar) in the mixture"@en ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf afo:hasMolarFlow .
+
+afo:hasMolarFlowCarbonDioxide a owl:DatatypeProperty ;
+    rdfs:label "hasMolarFlowCarbonDioxide"@en ;
+    rdfs:comment "Molar flow of carbon dioxide (CO2) in the mixture"@en ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf afo:hasMolarFlow .
+
+afo:hasMolarFlowCarbonMonoxide a owl:DatatypeProperty ;
+    rdfs:label "hasMolarFlowCarbonMonoxide"@en ;
+    rdfs:comment "Molar flow of carbon monoxide (CO) in the mixture"@en ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf afo:hasMolarFlow .
+
+afo:hasMolarFlowHydrogen a owl:DatatypeProperty ;
+    rdfs:label "hasMolarFlowHydrogen"@en ;
+    rdfs:comment "Molar flow of hydrogen (H2) in the mixture"@en ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf afo:hasMolarFlow .
+
+afo:hasMolarFlowMethane a owl:DatatypeProperty ;
+    rdfs:label "hasMolarFlowMethane"@en ;
+    rdfs:comment "Molar flow of methane (CH4) in the mixture"@en ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf afo:hasMolarFlow .
+
+afo:hasMolarFlowNickel a owl:DatatypeProperty ;
+    rdfs:label "hasMolarFlowNickel"@en ;
+    rdfs:comment "Molar flow of nickel (Ni) in the mixture"@en ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf afo:hasMolarFlow .
+
+afo:hasMolarFlowWater a owl:DatatypeProperty ;
+    rdfs:label "hasMolarFlowWater"@en ;
+    rdfs:comment "Molar flow of water (H2O) in the mixture"@en ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf afo:hasMolarFlow .
+
+afo:hasMolarFractionArgon a owl:DatatypeProperty ;
+    rdfs:subPropertyOf afo:hasMolarFraction .
+
+afo:hasMolarFractionCarbonDioxide a owl:DatatypeProperty ;
+    rdfs:subPropertyOf afo:hasMolarFraction .
+
+afo:hasMolarFractionCarbonMonoxide a owl:DatatypeProperty ;
+    rdfs:subPropertyOf afo:hasMolarFraction .
+
+afo:hasMolarFractionHydrogen a owl:DatatypeProperty ;
+    rdfs:subPropertyOf afo:hasMolarFraction .
+
+afo:hasMolarFractionMethane a owl:DatatypeProperty ;
+    rdfs:label "hasMolarFractionMethane"@en ;
+    rdfs:comment "Mole fraction of methane (CH4) in the mixture"@en ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf afo:hasMolarFraction .
+
+afo:hasMolarFractionNickel a owl:DatatypeProperty ;
+    rdfs:label "hasMolarFractionNickel"@en ;
+    rdfs:comment "Mole fraction of nickel (Ni) in the mixture"@en ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf afo:hasMolarFraction .
+
+afo:hasMolarFractionWater a owl:DatatypeProperty ;
+    rdfs:label "hasMolarFractionWater"@en ;
+    rdfs:comment "Mole fraction of water (H2O) in the mixture"@en ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf afo:hasMolarFraction .
+
+afo:hasReactionEquation a owl:DatatypeProperty ;
+    rdfs:label "hasReactionEquation"@en ;
+    rdfs:comment "Equation of the reaction (e.g. CO2+4H2>CH4+2H2O)"@en ;
+    rdfs:range xsd:string .
+
+afo:hasReactionId a owl:DatatypeProperty ;
+    rdfs:label "hasReactionId"@en ;
+    rdfs:comment "Identifier of the reaction within the mechanism (YAML: id)"@en ;
+    rdfs:range xsd:integer .
+
+afo:hasReactionMechanism a owl:ObjectProperty ;
+    rdfs:label "hasReactionMechanism"@en ;
+    rdfs:comment "Reaction mechanism used in the simulation (YAML: ChemicalReaction)"@en .
+
+afo:hasReactionStep a owl:ObjectProperty ;
+    rdfs:label "hasReactionStep"@en ;
+    rdfs:comment "Reaction (step) of the mechanism"@en .
+
+afo:hasReactiveVolume a owl:DatatypeProperty ;
+    rdfs:label "hasReactiveVolume"@en ;
+    rdfs:comment "Volume of the reactive space in the reactor"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasReactor a owl:ObjectProperty ;
+    rdfs:label "hasReactor"@en ;
+    rdfs:comment "The simulated reactor (YAML: Reactor)"@en .
+
+afo:hasReactorCalculationMode a owl:DatatypeProperty ;
+    rdfs:label "hasReactorCalculationMode"@en ;
+    rdfs:comment "Calculation mode for the reactor (e.g. isothermal)"@en ;
+    rdfs:range xsd:string .
+
+afo:hasReactorNumberOfTubes a owl:DatatypeProperty ;
+    rdfs:label "hasReactorNumberOfTubes"@en ;
+    rdfs:comment "Number of tubes in the reactor"@en ;
+    rdfs:range xsd:integer .
+
+afo:hasReactorTubeDiameter a owl:DatatypeProperty ;
+    rdfs:label "hasReactorTubeDiameter"@en ;
+    rdfs:comment "Diameter of the reactor tube"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasReactorTubeLength a owl:DatatypeProperty ;
+    rdfs:label "hasReactorTubeLength"@en ;
+    rdfs:comment "Length of the reactor tube"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasSelectivity_CO2_CH4 a owl:DatatypeProperty ;
+    rdfs:subPropertyOf afo:hasSelectivity .
+
+afo:hasSelectivity_CO2_CO a owl:DatatypeProperty ;
+    rdfs:subPropertyOf afo:hasSelectivity .
+
+afo:hasSimulatedDownstream a owl:DatatypeProperty .
+
+afo:hasSimulatedReactionPressure a owl:DatatypeProperty .
+
+afo:hasSimulatedReactionResidenceTime a owl:DatatypeProperty .
+
+afo:hasSimulatedReactionTemperature a owl:DatatypeProperty .
+
+afo:hasTemperature a owl:DatatypeProperty ;
+    rdfs:label "hasTemperature"@en ;
+    rdfs:comment "Temperature of the mixture in K (feed: YAML Mixture.temperature.feed)"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasTotalMolarFlow a owl:DatatypeProperty ;
+    rdfs:label "hasTotalMolarFlow"@en ;
+    rdfs:comment "Total molar flow of the mixture (YAML: MolarFlow_In / MolarFlow_Out)"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasTurnoverCarbonDioxide a owl:DatatypeProperty ;
+    rdfs:subPropertyOf afo:hasTurnover .
+
+afo:hasTurnoverHydrogen a owl:DatatypeProperty ;
+    rdfs:subPropertyOf afo:hasTurnover .
+
+afo:hasUnnormalizedSelectivity_CO2_CH4 a owl:DatatypeProperty ;
+    rdfs:label "hasUnnormalizedSelectivity_CO2_CH4"@en ;
+    rdfs:comment "Selectivity of CO2 towards CH4, not normalized (YAML: Selectivity)"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasUnnormalizedSelectivity_CO2_CO a owl:DatatypeProperty ;
+    rdfs:label "hasUnnormalizedSelectivity_CO2_CO"@en ;
+    rdfs:comment "Selectivity of CO2 towards CO, not normalized (YAML: Selectivity)"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasYieldMethane a owl:DatatypeProperty ;
+    rdfs:subPropertyOf afo:hasYield .
+
+reac4cat:hasComponent a owl:ObjectProperty .
+
+reac4cat:hasInitialMixture a owl:ObjectProperty .
+
+reac4cat:hasProduct a owl:ObjectProperty .
+
+sim:Methanation_0.04_746.846K_100000Pa_0.01ms_Feed a AFM:0001038,
+        owl:NamedIndividual ;
+    afo:hasMolarFlowArgon 0.0034483257807165512 ;
+    afo:hasMolarFlowCarbonDioxide 0.0001517415085023785 ;
+    afo:hasMolarFlowCarbonMonoxide 0.0 ;
+    afo:hasMolarFlowHydrogen 0.00019347042334053255 ;
+    afo:hasMolarFlowMethane 0.0 ;
+    afo:hasMolarFlowNickel 0.0 ;
+    afo:hasMolarFlowWater 0.0 ;
+    afo:hasMolarFractionArgon 0.909 ;
+    afo:hasMolarFractionCarbonDioxide 0.04 ;
+    afo:hasMolarFractionHydrogen 0.051 ;
+    afo:hasTemperature 298.0 ;
+    afo:hasTotalMolarFlow 0.003793537712559462 ;
+    reac4cat:hasComponent afo:Sub_Ar,
+        reac4cat:Sub_CO2,
+        reac4cat:Sub_H2 .
+
+sim:Methanation_0.04_746.846K_100000Pa_0.01ms_Product a AFM:0001038,
+        owl:NamedIndividual ;
+    afo:hasMolarFlowArgon 0.0034507103463076003 ;
+    afo:hasMolarFlowCarbonDioxide 0.00008791042666241542 ;
+    afo:hasMolarFlowCarbonMonoxide 0.00006263838287996216 ;
+    afo:hasMolarFlowHydrogen 0.00012577500640494069 ;
+    afo:hasMolarFlowMethane 0.0000012978304774488953 ;
+    afo:hasMolarFlowNickel 0.0 ;
+    afo:hasMolarFlowWater 0.0000652338436965571 ;
+    afo:hasMolarFractionArgon 0.9096218426397282 ;
+    afo:hasMolarFractionCarbonDioxide 0.02317356029997622 ;
+    afo:hasMolarFractionCarbonMonoxide 0.01651174266661122 ;
+    afo:hasMolarFractionHydrogen 0.03315482367464039 ;
+    afo:hasMolarFractionMethane 0.00034211360324528034 ;
+    afo:hasMolarFractionNickel 0.0 ;
+    afo:hasMolarFractionWater 0.01719591711579863 ;
+    afo:hasTotalMolarFlow 0.003793565836428925 ;
+    reac4cat:hasComponent afo:Sub_Ar,
+        afo:Sub_CO,
+        reac4cat:Sub_CH4,
+        reac4cat:Sub_CO2,
+        reac4cat:Sub_H2,
+        reac4cat:Sub_H2O .
+
+sim:Methanation_0.04_746.846K_100000Pa_0.01ms_ReactionMechanism a exp:reactionMechanism,
+        owl:NamedIndividual ;
+    afo:hasReactionStep sim:Methanation_0.04_746.846K_100000Pa_0.01ms_Reaction_0 .
+
+sim:Methanation_0.04_746.846K_100000Pa_0.01ms_Reaction_0 a AFP:0003711,
+        owl:NamedIndividual ;
+    afo:hasKineticParameterBr 0.00000881 ;
+    afo:hasKineticParameterK1 30.3 ;
+    afo:hasKineticParameterK2 3.7 ;
+    afo:hasKineticParameterK3 200.0 ;
+    afo:hasReactionEquation "CO2+4H2>CH4+2H2O" ;
+    afo:hasReactionId 0 .
+
+sim:Methanation_0.04_746.846K_100000Pa_0.01ms_Reactor a AFE:0000153,
+        owl:NamedIndividual ;
+    afo:hasCatalystLoading 149.3934399 ;
+    afo:hasCatalystParticleDiameter 0.00075 ;
+    afo:hasCatalystVoidFraction 0.46 ;
+    afo:hasReactiveVolume 0.000002356 ;
+    afo:hasReactorCalculationMode "isothermal" ;
+    afo:hasReactorNumberOfTubes 1 ;
+    afo:hasReactorTubeDiameter 0.01 ;
+    afo:hasReactorTubeLength 0.03 .
+
+exp:reactionMechanism a owl:Class .
+
+AFE:0000153 a owl:Class .
+
+AFP:0003711 a owl:Class .
+
+afo:Sub_CO a owl:NamedIndividual .
+
+afo:hasYield a owl:DatatypeProperty .
+
+reac4cat:Methanation a owl:Class .
+
+reac4cat:Sub_CH4 a owl:NamedIndividual .
+
+reac4cat:Sub_H2O a owl:NamedIndividual .
+
+AFM:0001038 a owl:Class .
+
+afo:Sub_Ar a owl:NamedIndividual .
+
+afo:hasSelectivity a owl:DatatypeProperty .
+
+afo:hasTurnover a owl:DatatypeProperty .
+
+reac4cat:Sub_CO2 a owl:NamedIndividual .
+
+reac4cat:Sub_H2 a owl:NamedIndividual .
+
+afo:hasMolarFlow a owl:DatatypeProperty ;
+    rdfs:label "hasMolarFlow"@en ;
+    rdfs:comment "Molar flow of a compound in a mixture"@en ;
+    rdfs:range xsd:decimal .
+
+afo:hasMolarFraction a owl:DatatypeProperty .
+

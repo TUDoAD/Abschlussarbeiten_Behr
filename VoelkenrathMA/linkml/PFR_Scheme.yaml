@@ -1,225 +1,501 @@
 id: http://example.com/schemas/methanation
 name: Methanation
-description: A scheme for the process simulation of a methanation-reaction in DWSIM
+description: >-
+  A scheme for the process simulation of a methanation-reaction in DWSIM. Every simulation is
+  converted into named individuals (simulation, mixtures, reactor, reaction mechanism, reactions)
+  that are connected by object properties and carry datatype properties. Names and IRIs follow
+  the existing ontology (ontologies/MV-Onto.owl); slots annotated with 'in_mv_onto' already exist
+  there, all others extend it.
 prefixes:
-  dwsim: "http://example.com/dwsim#"
-  linkml: "https://w3id.org/linkml/"
-  AFR: http://purl.allotrope.org/ontologies/result#AFR_
+  linkml: https://w3id.org/linkml/
+  afo: http://purl.allotrope.org/voc/afo/merged/REC/2023/03/merged-without-qudt-and-inferred#
   reac4cat: https://nfdi4cat.org/ontologies/reac4cat#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  AFM: http://purl.allotrope.org/ontologies/material#AFM_
+  AFE: http://purl.allotrope.org/ontologies/equipment#AFE_
+  AFP: http://purl.allotrope.org/ontologies/process#AFP_
+  exp: http://example.org#  # same prefix as used in Query.py
+  methanation: http://example.com/schemas/methanation/
+
+default_prefix: methanation
 
 imports:
   - linkml:types
 
 # ---------------------------------------------------------------------------
-# Classes: only reference slots by name, the slots themselves are defined below
+# Classes
 # ---------------------------------------------------------------------------
 classes:
   Entity:
     abstract: true
     description: Abstract root class for all domain entities of this scheme
+    slots:
+      - iri
 
-  EntityList:
-    abstract: true
-    description: Abstract root class for all container classes that group a list of entities
+  MethanationSimulation:
+    is_a: Entity
+    tree_root: true
+    class_uri: reac4cat:Methanation
+    description: "One DWSIM simulation run of the methanation (reactor and optional downstream), i.e. the content of one simulation YAML file"
+    slots:
+      - has_simulated_reaction_temperature
+      - has_simulated_reaction_pressure
+      - has_simulated_reaction_residence_time
+      - has_simulated_downstream
+      - has_turnover_carbon_dioxide
+      - has_turnover_hydrogen
+      - has_yield_methane
+      - has_selectivity_co2_ch4
+      - has_selectivity_co2_co
+      - has_unnormalized_selectivity_co2_ch4
+      - has_unnormalized_selectivity_co2_co
+      - has_initial_mixture
+      - has_product
+      - has_separator_gas_outlet
+      - has_separator_liquid_outlet
+      - has_reactor
+      - has_reaction_mechanism
+      - comments
 
   Mixture:
     is_a: Entity
-    description: Represents a mixture of chemical compounds
     class_uri: http://purl.allotrope.org/ontologies/material#AFM_0001038
     close_mappings:
-      - reac4cat:Mixture   # former entry of the 'types' block
+      - reac4cat:Mixture
+    description: "Represents a mixture of chemical compounds"
     slots:
-      - temperature
-      - pressure
-      - velocity
-      - mole_fraction
-      - substances
-
-  MoleFraction:
-    is_a: Entity
-    description: Mole fraction of a single compound within a mixture
-    slots:
-      - compound
-      - fraction
-
-  Substance:
-    is_a: Entity
-    description: A substance or pseudocomponent of the reaction system
-    slots:
-      - formula
-      - substance_name
+      - has_temperature
+      - has_molar_fraction_carbon_dioxide
+      - has_molar_fraction_hydrogen
+      - has_molar_fraction_methane
+      - has_molar_fraction_water
+      - has_molar_fraction_carbon_monoxide
+      - has_molar_fraction_argon
+      - has_molar_fraction_nickel
+      - has_total_molar_flow
+      - has_molar_flow_carbon_dioxide
+      - has_molar_flow_hydrogen
+      - has_molar_flow_methane
+      - has_molar_flow_water
+      - has_molar_flow_carbon_monoxide
+      - has_molar_flow_argon
+      - has_molar_flow_nickel
+      - has_component
 
   Reactor:
     is_a: Entity
-    description: Represents a chemical reactor
     class_uri: http://purl.allotrope.org/ontologies/equipment#AFE_0000153
+    description: "Represents a chemical reactor"
     slots:
-      - calculation_mode
-      - reactive_volume
-      - tube_length
-      - tube_diameter
-      - num_tubes
-      - catalyst_loading
-      - catalyst_particle_diameter
-      - catalyst_void_fraction
-
-  ChemicalReaction:
-    is_a: Entity
-    description: Represents a chemical reaction
-    class_uri: http://purl.allotrope.org/ontologies/process#AFP_0003711
-    slots:
-      - reaction_mechanism
+      - has_reactor_calculation_mode
+      - has_reactive_volume
+      - has_reactor_tube_length
+      - has_reactor_tube_diameter
+      - has_reactor_number_of_tubes
+      - has_catalyst_loading
+      - has_catalyst_particle_diameter
+      - has_catalyst_void_fraction
 
   ReactionMechanism:
-    is_a: EntityList
+    is_a: Entity
     class_uri: http://example.org#reactionMechanism
+    description: "The reaction mechanism (list of reactions) used in the simulation"
     slots:
-      - reactions
+      - has_reaction_step
 
   Reaction:
     is_a: Entity
     class_uri: http://purl.allotrope.org/ontologies/process#AFP_0003711
+    description: "A single reaction (step) of the reaction mechanism"
     slots:
-      - id
-      - reaction_equation
-      - EA
-      - beta
-      - S0
-      - A_cm_units
-      - epsilon
-      - mu
+      - has_reaction_id
+      - has_reaction_equation
+      - has_kinetic_parameter_k1
+      - has_kinetic_parameter_k2
+      - has_kinetic_parameter_k3
+      - has_kinetic_parameter_br
+      - has_activation_energy
+      - has_temperature_exponent
+      - has_sticking_coefficient
+      - has_pre_exponential_factor
+      - has_coverage_parameter_epsilon
+      - has_coverage_parameter_mu
+
+  Substance:
+    is_a: Entity
+    description: "A substance; individuals are not created by the converter but referenced (e.g. reac4cat:Sub_CO2 from MV-Onto.owl), see enum Compound"
 
 # ---------------------------------------------------------------------------
-# Slots
+# Enums
+# ---------------------------------------------------------------------------
+enums:
+  Compound:
+    description: >-
+      Compounds of the simulations. The text is used in the property names
+      (e.g. hasMolarFractionCarbonDioxide), the meaning is the substance individual
+      that is linked with reac4cat:hasComponent.
+    permissible_values:
+      CO2:
+        description: CarbonDioxide
+        meaning: reac4cat:Sub_CO2
+      H2:
+        description: Hydrogen
+        meaning: reac4cat:Sub_H2
+      CH4:
+        description: Methane
+        meaning: reac4cat:Sub_CH4
+      H2O:
+        description: Water
+        meaning: reac4cat:Sub_H2O
+      CO:
+        description: CarbonMonoxide
+        meaning: afo:Sub_CO
+      Ar:
+        description: Argon
+        meaning: afo:Sub_Ar
+      Ni:
+        description: Nickel
+        meaning: reac4cat:Sub_Ni
+
+# ---------------------------------------------------------------------------
+# Slots (slot_uri = property in the ontology)
 # ---------------------------------------------------------------------------
 slots:
-  # --- Mixture ---
-  temperature:
-    domain: Mixture
-    range: float
-    description: Temperature of the inlet
-    slot_uri: AFR:0001584
-  pressure:
-    domain: Mixture
-    range: float
-    description: Pressure of the inlet
-    slot_uri: AFR:0001918
-  velocity: # ACHTUNG dient zur bestimmung von Massen-/Molfluss
-    domain: Mixture
-    range: float
-    description: Mass flow rate of the inlet
-    slot_uri: AFR:0002632
-  mole_fraction: # <MOLEFRAC>
-    domain: Mixture
-    range: MoleFraction
+  iri:
+    identifier: true
+    range: uriorcurie
+    description: IRI of the individual
+  comments:
+    slot_uri: rdfs:comment
+    range: string
     multivalued: true
-    inlined_as_list: true
-    description: Mole fraction of a compound in the inlet
-    slot_uri: https://purl.allotrope.org/ontologies/quality#AFQ_0000005
-  substances:
-    domain: Mixture
+    description: >-
+      References to the simulation files in the format evaluated by Query.py
+      ('DWSIM-file: ...', 'LinkML-file: ...')
+
+  # --- Property groups (super properties, used for rdfs:subPropertyOf) ---
+  has_molar_fraction:
+    slot_uri: afo:hasMolarFraction
+    range: decimal
+    abstract: true
+    description: "Mole fraction of a compound in a mixture"
+    annotations:
+      in_mv_onto: true
+  has_molar_flow:
+    slot_uri: afo:hasMolarFlow
+    range: decimal
+    abstract: true
+    description: "Molar flow of a compound in a mixture"
+  has_turnover:
+    slot_uri: afo:hasTurnover
+    range: decimal
+    abstract: true
+    description: "Conversion (turnover) X of an educt"
+    annotations:
+      in_mv_onto: true
+  has_yield:
+    slot_uri: afo:hasYield
+    range: decimal
+    abstract: true
+    description: "Yield Y of a product"
+    annotations:
+      in_mv_onto: true
+  has_selectivity:
+    slot_uri: afo:hasSelectivity
+    range: decimal
+    abstract: true
+    description: "Normalized selectivity of a product"
+    annotations:
+      in_mv_onto: true
+
+  # --- MethanationSimulation ---
+  has_simulated_reaction_temperature:
+    slot_uri: afo:hasSimulatedReactionTemperature
+    range: decimal
+    description: "Simulated reaction temperature in K (YAML: Mixture.temperature.outlet)"
+    annotations:
+      in_mv_onto: true
+  has_simulated_reaction_pressure:
+    slot_uri: afo:hasSimulatedReactionPressure
+    range: decimal
+    description: "Simulated reaction pressure in Pa (YAML: Mixture.pressure)"
+    annotations:
+      in_mv_onto: true
+  has_simulated_reaction_residence_time:
+    slot_uri: afo:hasSimulatedReactionResidenceTime
+    range: decimal
+    description: "Simulated residence time (YAML: Mixture.residence time)"
+    annotations:
+      in_mv_onto: true
+  has_simulated_downstream:
+    slot_uri: afo:hasSimulatedDownstream
+    range: string
+    pattern: "^(Yes|No)$"
+    description: "'Yes' if the simulation contains a downstream (separator) after the reactor, otherwise 'No' (YAML: hasDownstream)"
+    annotations:
+      in_mv_onto: true
+  has_turnover_carbon_dioxide:
+    slot_uri: afo:hasTurnoverCarbonDioxide
+    range: decimal
+    is_a: has_turnover
+    description: "Conversion (turnover) of carbon dioxide (YAML: Turnover)"
+    annotations:
+      in_mv_onto: true
+  has_turnover_hydrogen:
+    slot_uri: afo:hasTurnoverHydrogen
+    range: decimal
+    is_a: has_turnover
+    description: "Conversion (turnover) of hydrogen (YAML: Turnover)"
+    annotations:
+      in_mv_onto: true
+  has_yield_methane:
+    slot_uri: afo:hasYieldMethane
+    range: decimal
+    is_a: has_yield
+    description: "Yield of methane (YAML: Yield)"
+    annotations:
+      in_mv_onto: true
+  has_selectivity_co2_ch4:
+    slot_uri: afo:hasSelectivity_CO2_CH4
+    range: decimal
+    is_a: has_selectivity
+    description: "Normalized selectivity of CO2 towards CH4 (YAML: Selectivity_normed)"
+    annotations:
+      in_mv_onto: true
+  has_selectivity_co2_co:
+    slot_uri: afo:hasSelectivity_CO2_CO
+    range: decimal
+    is_a: has_selectivity
+    description: "Normalized selectivity of CO2 towards CO (YAML: Selectivity_normed)"
+    annotations:
+      in_mv_onto: true
+  has_unnormalized_selectivity_co2_ch4:
+    slot_uri: afo:hasUnnormalizedSelectivity_CO2_CH4
+    range: decimal
+    description: "Selectivity of CO2 towards CH4, not normalized (YAML: Selectivity)"
+  has_unnormalized_selectivity_co2_co:
+    slot_uri: afo:hasUnnormalizedSelectivity_CO2_CO
+    range: decimal
+    description: "Selectivity of CO2 towards CO, not normalized (YAML: Selectivity)"
+  has_initial_mixture:
+    slot_uri: reac4cat:hasInitialMixture
+    range: Mixture
+    inlined: true
+    description: "Feed mixture entering the reactor (YAML: Mixture, Inlet)"
+    annotations:
+      in_mv_onto: true
+  has_product:
+    slot_uri: reac4cat:hasProduct
+    range: Mixture
+    inlined: true
+    description: "Product mixture at the reactor outlet (YAML: Outlet, Outlet Composition)"
+    annotations:
+      in_mv_onto: true
+  has_separator_gas_outlet:
+    slot_uri: afo:hasSeparatorGasOutlet
+    range: Mixture
+    inlined: true
+    description: "Gas outlet of the downstream separator (YAML: Sep_Gas Composition)"
+  has_separator_liquid_outlet:
+    slot_uri: afo:hasSeparatorLiquidOutlet
+    range: Mixture
+    inlined: true
+    description: "Liquid outlet of the downstream separator (YAML: Sep_Liquid Composition)"
+  has_reactor:
+    slot_uri: afo:hasReactor
+    range: Reactor
+    inlined: true
+    description: "The simulated reactor (YAML: Reactor)"
+  has_reaction_mechanism:
+    slot_uri: afo:hasReactionMechanism
+    range: ReactionMechanism
+    inlined: true
+    description: "Reaction mechanism used in the simulation (YAML: ChemicalReaction)"
+
+  # --- Mixture ---
+  has_temperature:
+    slot_uri: afo:hasTemperature
+    range: decimal
+    description: "Temperature of the mixture in K (feed: YAML Mixture.temperature.feed)"
+  has_molar_fraction_carbon_dioxide:
+    slot_uri: afo:hasMolarFractionCarbonDioxide
+    range: decimal
+    is_a: has_molar_fraction
+    description: "Mole fraction of carbon dioxide (CO2) in the mixture"
+    annotations:
+      in_mv_onto: true
+  has_molar_fraction_hydrogen:
+    slot_uri: afo:hasMolarFractionHydrogen
+    range: decimal
+    is_a: has_molar_fraction
+    description: "Mole fraction of hydrogen (H2) in the mixture"
+    annotations:
+      in_mv_onto: true
+  has_molar_fraction_methane:
+    slot_uri: afo:hasMolarFractionMethane
+    range: decimal
+    is_a: has_molar_fraction
+    description: "Mole fraction of methane (CH4) in the mixture"
+  has_molar_fraction_water:
+    slot_uri: afo:hasMolarFractionWater
+    range: decimal
+    is_a: has_molar_fraction
+    description: "Mole fraction of water (H2O) in the mixture"
+  has_molar_fraction_carbon_monoxide:
+    slot_uri: afo:hasMolarFractionCarbonMonoxide
+    range: decimal
+    is_a: has_molar_fraction
+    description: "Mole fraction of carbon monoxide (CO) in the mixture"
+    annotations:
+      in_mv_onto: true
+  has_molar_fraction_argon:
+    slot_uri: afo:hasMolarFractionArgon
+    range: decimal
+    is_a: has_molar_fraction
+    description: "Mole fraction of argon (Ar) in the mixture"
+    annotations:
+      in_mv_onto: true
+  has_molar_fraction_nickel:
+    slot_uri: afo:hasMolarFractionNickel
+    range: decimal
+    is_a: has_molar_fraction
+    description: "Mole fraction of nickel (Ni) in the mixture"
+  has_total_molar_flow:
+    slot_uri: afo:hasTotalMolarFlow
+    range: decimal
+    description: "Total molar flow of the mixture (YAML: MolarFlow_In / MolarFlow_Out)"
+  has_molar_flow_carbon_dioxide:
+    slot_uri: afo:hasMolarFlowCarbonDioxide
+    range: decimal
+    is_a: has_molar_flow
+    description: "Molar flow of carbon dioxide (CO2) in the mixture"
+  has_molar_flow_hydrogen:
+    slot_uri: afo:hasMolarFlowHydrogen
+    range: decimal
+    is_a: has_molar_flow
+    description: "Molar flow of hydrogen (H2) in the mixture"
+  has_molar_flow_methane:
+    slot_uri: afo:hasMolarFlowMethane
+    range: decimal
+    is_a: has_molar_flow
+    description: "Molar flow of methane (CH4) in the mixture"
+  has_molar_flow_water:
+    slot_uri: afo:hasMolarFlowWater
+    range: decimal
+    is_a: has_molar_flow
+    description: "Molar flow of water (H2O) in the mixture"
+  has_molar_flow_carbon_monoxide:
+    slot_uri: afo:hasMolarFlowCarbonMonoxide
+    range: decimal
+    is_a: has_molar_flow
+    description: "Molar flow of carbon monoxide (CO) in the mixture"
+  has_molar_flow_argon:
+    slot_uri: afo:hasMolarFlowArgon
+    range: decimal
+    is_a: has_molar_flow
+    description: "Molar flow of argon (Ar) in the mixture"
+  has_molar_flow_nickel:
+    slot_uri: afo:hasMolarFlowNickel
+    range: decimal
+    is_a: has_molar_flow
+    description: "Molar flow of nickel (Ni) in the mixture"
+  has_component:
+    slot_uri: reac4cat:hasComponent
     range: Substance
     multivalued: true
-    inlined_as_list: true
-    description: Every Substance and Pseudocomponent in this reaction System
-    slot_uri: http://purl.obolibrary.org/obo/CHEBI_24431
-
-  # --- MoleFraction ---
-  compound:
-    domain: MoleFraction
-    range: string
-    description: Formula of the compound the mole fraction refers to
-  fraction:
-    domain: MoleFraction
-    range: float
-    description: Value of the mole fraction
-
-  # --- Substance ---
-  formula:
-    domain: Substance
-    range: string
-    description: Chemical formula of the substance (e.g. CO2)
-  substance_name:
-    domain: Substance
-    range: string
-    description: Name of the substance (e.g. Carbon dioxide)
+    inlined: false
+    description: "Substance contained in the mixture (mole fraction or molar flow > 0)"
+    annotations:
+      in_mv_onto: true
 
   # --- Reactor ---
-  calculation_mode:
-    domain: Reactor
+  has_reactor_calculation_mode:
+    slot_uri: afo:hasReactorCalculationMode
     range: string
-    description: Calculation mode for the reactor (e.g. isothermal)
-  reactive_volume:
-    domain: Reactor
-    range: float
-    description: Volume of the reactive space in the reactor
-  tube_length: # <SECTION>
-    domain: Reactor
-    range: float
-    description: Length of the reactor tube
-  tube_diameter: # <GEOMETRY>
-    domain: Reactor
-    range: float
-    description: Diameter of the reactor tube
-  num_tubes: # nicht gegeben --> als 1 fuer die Simulation annehmen
-    domain: Reactor
+    description: "Calculation mode for the reactor (e.g. isothermal)"
+  has_reactive_volume:
+    slot_uri: afo:hasReactiveVolume
+    range: decimal
+    description: "Volume of the reactive space in the reactor"
+  has_reactor_tube_length:
+    slot_uri: afo:hasReactorTubeLength
+    range: decimal
+    description: "Length of the reactor tube"
+  has_reactor_tube_diameter:
+    slot_uri: afo:hasReactorTubeDiameter
+    range: decimal
+    description: "Diameter of the reactor tube"
+  has_reactor_number_of_tubes:
+    slot_uri: afo:hasReactorNumberOfTubes
     range: integer
-    description: Number of tubes in the reactor
-  catalyst_loading: # nicht gegeben (je nach Reaktion nicht benoetigt)
-    domain: Reactor
-    range: float
-    description: Loading of the catalyst in the reactor
-  catalyst_particle_diameter: # <SECTION>
-    domain: Reactor
-    range: float
-    description: Diameter of the catalyst particles
-  catalyst_void_fraction: # <SECTION> --> allerdings nur porositaet
-    domain: Reactor
-    range: float
-    description: Void fraction in the catalyst bed
-
-  # --- ChemicalReaction ---
-  reaction_mechanism:
-    domain: ChemicalReaction
-    range: ReactionMechanism
-    description: The mechanism of a chemical reaction
+    description: "Number of tubes in the reactor"
+  has_catalyst_loading:
+    slot_uri: afo:hasCatalystLoading
+    range: decimal
+    description: "Loading of the catalyst in the reactor"
+  has_catalyst_particle_diameter:
+    slot_uri: afo:hasCatalystParticleDiameter
+    range: decimal
+    description: "Diameter of the catalyst particles"
+  has_catalyst_void_fraction:
+    slot_uri: afo:hasCatalystVoidFraction
+    range: decimal
+    description: "Void fraction in the catalyst bed"
 
   # --- ReactionMechanism ---
-  reactions:
-    domain: ReactionMechanism
+  has_reaction_step:
+    slot_uri: afo:hasReactionStep
     range: Reaction
-    description: List of the reaction and parameter
+    multivalued: true
+    inlined_as_list: true
+    description: "Reaction (step) of the mechanism"
 
   # --- Reaction ---
-  id:
-    domain: Reaction
+  has_reaction_id:
+    slot_uri: afo:hasReactionId
     range: integer
-    description: Identifier for the reaction
-  reaction_equation:
-    domain: Reaction
+    description: "Identifier of the reaction within the mechanism (YAML: id)"
+  has_reaction_equation:
+    slot_uri: afo:hasReactionEquation
     range: string
-    description: Equation for this step in the Reaction_Mechanism
-  EA:
-    domain: Reaction
-    range: float
-    description: Activation Energy of the reaction
-  beta:
-    domain: Reaction
-    range: float
-    description: beta value of the reaction
-  S0:
-    domain: Reaction
-    range: float
-    description: S0 value of the reaction
-  A_cm_units:
-    domain: Reaction
-    range: float
-    description: A/cm value of the reaction
-  epsilon:
-    domain: Reaction
-    range: float
-    description: Epsilon value of the reaction
-  mu:
-    domain: Reaction
-    range: float
-    description: Mu value of the reaction
+    description: "Equation of the reaction (e.g. CO2+4H2>CH4+2H2O)"
+  has_kinetic_parameter_k1:
+    slot_uri: afo:hasKineticParameterK1
+    range: decimal
+    description: "Kinetic parameter K_1 of the rate expression (NewReaction-Datasheets: K_CO2)"
+  has_kinetic_parameter_k2:
+    slot_uri: afo:hasKineticParameterK2
+    range: decimal
+    description: "Kinetic parameter K_2 of the rate expression (NewReaction-Datasheets: K_H2)"
+  has_kinetic_parameter_k3:
+    slot_uri: afo:hasKineticParameterK3
+    range: decimal
+    description: "Kinetic parameter K_3 of the rate expression (NewReaction-Datasheets: K_H2O)"
+  has_kinetic_parameter_br:
+    slot_uri: afo:hasKineticParameterBr
+    range: decimal
+    description: "Kinetic parameter br of the rate expression"
+  has_activation_energy:
+    slot_uri: afo:hasActivationEnergy
+    range: decimal
+    description: "Activation energy of the reaction (YAML: EA)"
+  has_temperature_exponent:
+    slot_uri: afo:hasTemperatureExponent
+    range: decimal
+    description: "Temperature exponent beta of the reaction (YAML: beta)"
+  has_sticking_coefficient:
+    slot_uri: afo:hasStickingCoefficient
+    range: decimal
+    description: "Sticking coefficient S0 of the reaction (YAML: S0)"
+  has_pre_exponential_factor:
+    slot_uri: afo:hasPreExponentialFactor
+    range: decimal
+    description: "Pre-exponential factor of the reaction (YAML: A_cm_units)"
+  has_coverage_parameter_epsilon:
+    slot_uri: afo:hasCoverageParameterEpsilon
+    range: decimal
+    description: "Coverage dependent parameter epsilon of the reaction (YAML: epsilon)"
+  has_coverage_parameter_mu:
+    slot_uri: afo:hasCoverageParameterMu
+    range: decimal
+    description: "Coverage dependent parameter mu of the reaction (YAML: mu)"

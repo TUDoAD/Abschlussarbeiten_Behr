@@ -1,0 +1,1236 @@
+collection;simulation;status;triples;message
+NewReaction_01;Methanation_0.04_1048.944K_1000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_1048.944K_1000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_1048.944K_1000000Pa_10ms;ok (with warnings);250;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_01;Methanation_0.04_1048.944K_1000000Pa_1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_1048.944K_100000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_1048.944K_100000Pa_0.1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_1048.944K_100000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_1048.944K_100000Pa_1ms;ok (with warnings);250;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_01;Methanation_0.04_1048.944K_2000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_1048.944K_2000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_1048.944K_2000000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_1048.944K_2000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_1048.944K_3000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_1048.944K_3000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_1048.944K_3000000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_1048.944K_3000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_1114.399K_1000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_1114.399K_1000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_1114.399K_1000000Pa_10ms;ok (with warnings);250;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_01;Methanation_0.04_1114.399K_1000000Pa_1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_1114.399K_100000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_1114.399K_100000Pa_0.1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_1114.399K_100000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_1114.399K_100000Pa_1ms;ok (with warnings);250;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_01;Methanation_0.04_1114.399K_2000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_1114.399K_2000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_1114.399K_2000000Pa_10ms;ok (with warnings);250;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_01;Methanation_0.04_1114.399K_2000000Pa_1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_1114.399K_3000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_1114.399K_3000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_1114.399K_3000000Pa_10ms;ok (with warnings);250;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_01;Methanation_0.04_1114.399K_3000000Pa_1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_405.098K_1000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_1000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_1000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_1000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_100000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_100000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_100000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_100000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_2000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_2000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_2000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_2000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_3000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_3000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_3000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_405.098K_3000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_1000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_1000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_1000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_1000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_100000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_100000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_100000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_100000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_2000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_2000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_2000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_2000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_3000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_3000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_3000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_481.252K_3000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_1000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_1000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_1000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_1000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_100000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_100000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_100000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_100000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_2000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_2000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_2000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_2000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_3000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_3000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_3000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_545.448K_3000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_1000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_1000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_1000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_1000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_100000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_100000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_100000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_100000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_2000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_2000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_2000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_2000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_3000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_3000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_3000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_593.28K_3000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_1000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_1000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_1000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_1000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_100000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_100000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_100000Pa_10ms;ok (with warnings);250;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_01;Methanation_0.04_632.301K_100000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_2000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_2000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_2000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_2000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_3000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_3000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_3000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_632.301K_3000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_688.944K_1000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_688.944K_1000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_688.944K_100000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_688.944K_100000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_688.944K_100000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_688.944K_100000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_688.944K_2000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_688.944K_2000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_688.944K_2000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_688.944K_2000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_688.944K_3000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_688.944K_3000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_688.944K_3000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_688.944K_3000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_746.846K_1000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_746.846K_1000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_746.846K_1000000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_746.846K_1000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_746.846K_100000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_746.846K_100000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_746.846K_100000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_746.846K_100000Pa_1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_746.846K_2000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_746.846K_2000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_746.846K_2000000Pa_10ms;ok (with warnings);250;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_01;Methanation_0.04_746.846K_2000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_746.846K_3000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_746.846K_3000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_746.846K_3000000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_746.846K_3000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_806.007K_1000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_806.007K_1000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_806.007K_1000000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_806.007K_1000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_806.007K_100000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_806.007K_100000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_806.007K_100000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_806.007K_100000Pa_1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_806.007K_2000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_806.007K_2000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_806.007K_2000000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_806.007K_2000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_806.007K_3000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_806.007K_3000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_806.007K_3000000Pa_10ms;ok (with warnings);250;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_01;Methanation_0.04_806.007K_3000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_863.909K_1000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_863.909K_1000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_863.909K_1000000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_863.909K_1000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_863.909K_100000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_863.909K_100000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_863.909K_100000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_863.909K_100000Pa_1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_863.909K_2000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_863.909K_2000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_863.909K_2000000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_863.909K_2000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_863.909K_3000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_863.909K_3000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_863.909K_3000000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_863.909K_3000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_929.364K_1000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_929.364K_1000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_929.364K_1000000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_929.364K_1000000Pa_1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_929.364K_100000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_929.364K_100000Pa_0.1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_929.364K_100000Pa_10ms;ok;255;
+NewReaction_01;Methanation_0.04_929.364K_100000Pa_1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_929.364K_2000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_929.364K_2000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_929.364K_2000000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_929.364K_2000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_929.364K_3000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_929.364K_3000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_929.364K_3000000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_929.364K_3000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_986.007K_1000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_986.007K_1000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_986.007K_1000000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_986.007K_1000000Pa_1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_986.007K_100000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_986.007K_100000Pa_0.1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_986.007K_100000Pa_10ms;ok (with warnings);250;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_01;Methanation_0.04_986.007K_100000Pa_1ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_986.007K_2000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_986.007K_2000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_986.007K_2000000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_986.007K_2000000Pa_1ms;ok;255;
+NewReaction_01;Methanation_0.04_986.007K_3000000Pa_0.01ms;ok;255;
+NewReaction_01;Methanation_0.04_986.007K_3000000Pa_0.1ms;ok;255;
+NewReaction_01;Methanation_0.04_986.007K_3000000Pa_10ms;ok (with warnings);250;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_01;Methanation_0.04_986.007K_3000000Pa_1ms;ok;255;
+NewReaction_02;Methanation_0.5_1048.944K_1000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_1048.944K_1000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_1048.944K_1000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_1048.944K_1000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_1048.944K_100000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_1048.944K_100000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_1048.944K_100000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_1048.944K_100000Pa_1ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_1048.944K_2000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_1048.944K_2000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_1048.944K_2000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_1048.944K_2000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_1048.944K_3000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_1048.944K_3000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_1048.944K_3000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_1048.944K_3000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_1114.399K_1000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_1114.399K_1000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_1114.399K_1000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_1114.399K_1000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_1114.399K_100000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_1114.399K_100000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_1114.399K_100000Pa_10ms;ok (with warnings);236;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_02;Methanation_0.5_1114.399K_100000Pa_1ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_1114.399K_2000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_1114.399K_2000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_1114.399K_2000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_1114.399K_2000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_1114.399K_3000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_1114.399K_3000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_1114.399K_3000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_1114.399K_3000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_1000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_1000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_1000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_1000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_100000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_100000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_100000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_100000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_2000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_2000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_2000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_2000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_3000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_3000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_3000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_405.098K_3000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_1000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_1000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_1000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_1000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_100000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_100000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_100000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_100000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_2000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_2000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_2000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_2000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_3000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_3000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_3000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_481.252K_3000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_1000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_1000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_1000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_1000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_100000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_100000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_100000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_100000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_2000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_2000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_2000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_2000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_3000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_3000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_3000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_545.448K_3000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_1000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_1000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_1000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_1000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_100000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_100000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_100000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_100000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_2000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_2000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_2000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_2000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_3000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_3000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_3000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_593.28K_3000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_1000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_1000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_1000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_1000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_100000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_100000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_100000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_100000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_2000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_2000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_2000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_2000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_3000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_3000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_3000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_632.301K_3000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_1000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_1000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_1000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_1000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_100000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_100000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_100000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_100000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_2000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_2000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_2000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_2000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_3000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_3000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_3000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_688.944K_3000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_746.846K_1000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_746.846K_1000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_746.846K_100000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_746.846K_100000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_746.846K_100000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_746.846K_100000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_746.846K_2000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_746.846K_2000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_746.846K_2000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_746.846K_2000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_746.846K_3000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_746.846K_3000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_746.846K_3000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_746.846K_3000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_1000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_1000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_1000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_1000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_100000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_100000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_100000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_806.007K_100000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_2000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_2000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_2000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_2000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_3000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_3000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_3000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_806.007K_3000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_863.909K_1000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_863.909K_1000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_863.909K_1000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_863.909K_1000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_863.909K_100000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_863.909K_100000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_863.909K_100000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_863.909K_100000Pa_1ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_863.909K_2000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_863.909K_2000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_863.909K_2000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_863.909K_2000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_863.909K_3000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_863.909K_3000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_863.909K_3000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_863.909K_3000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_929.364K_1000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_929.364K_1000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_929.364K_1000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_929.364K_1000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_929.364K_100000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_929.364K_100000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_929.364K_100000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_929.364K_100000Pa_1ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_929.364K_2000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_929.364K_2000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_929.364K_2000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_929.364K_2000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_929.364K_3000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_929.364K_3000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_929.364K_3000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_929.364K_3000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_986.007K_1000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_986.007K_1000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_986.007K_1000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_986.007K_1000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_986.007K_100000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_986.007K_100000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_986.007K_100000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_986.007K_100000Pa_1ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_02;Methanation_0.5_986.007K_2000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_986.007K_2000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_986.007K_2000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_986.007K_2000000Pa_1ms;ok;241;
+NewReaction_02;Methanation_0.5_986.007K_3000000Pa_0.01ms;ok;241;
+NewReaction_02;Methanation_0.5_986.007K_3000000Pa_0.1ms;ok;241;
+NewReaction_02;Methanation_0.5_986.007K_3000000Pa_10ms;ok;241;
+NewReaction_02;Methanation_0.5_986.007K_3000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_1048.944K_1000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_1048.944K_1000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_1048.944K_1000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_1048.944K_1000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_1048.944K_100000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_1048.944K_100000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_1048.944K_100000Pa_10ms;ok (with warnings);236;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_03;Methanation_0.2_1048.944K_100000Pa_1ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_1048.944K_2000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_1048.944K_2000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_1048.944K_2000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_1048.944K_2000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_1048.944K_3000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_1048.944K_3000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_1048.944K_3000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_1048.944K_3000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_1114.399K_1000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_1114.399K_1000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_1114.399K_1000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_1114.399K_1000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_1114.399K_100000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_1114.399K_100000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_1114.399K_100000Pa_10ms;ok (with warnings);236;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_03;Methanation_0.2_1114.399K_100000Pa_1ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_1114.399K_2000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_1114.399K_2000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_1114.399K_2000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_1114.399K_2000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_1114.399K_3000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_1114.399K_3000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_1114.399K_3000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_1114.399K_3000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_1000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_1000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_1000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_1000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_100000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_100000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_100000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_100000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_2000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_2000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_2000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_2000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_3000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_3000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_3000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_405.098K_3000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_1000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_1000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_1000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_1000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_100000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_100000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_100000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_100000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_2000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_2000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_2000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_2000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_3000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_3000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_3000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_481.252K_3000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_1000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_1000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_1000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_1000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_100000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_100000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_100000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_100000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_2000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_2000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_2000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_2000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_3000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_3000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_3000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_545.448K_3000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_1000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_1000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_1000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_1000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_100000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_100000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_100000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_100000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_2000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_2000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_2000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_2000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_3000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_3000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_3000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_593.28K_3000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_1000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_1000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_1000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_1000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_100000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_100000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_100000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_100000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_2000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_2000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_2000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_2000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_3000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_3000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_3000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_632.301K_3000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_1000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_1000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_1000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_1000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_100000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_100000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_100000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_100000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_2000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_2000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_2000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_2000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_3000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_3000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_3000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_688.944K_3000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_746.846K_1000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_746.846K_100000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_746.846K_100000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_746.846K_100000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_746.846K_100000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_746.846K_2000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_746.846K_2000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_746.846K_2000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_746.846K_2000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_746.846K_3000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_746.846K_3000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_746.846K_3000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_746.846K_3000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_806.007K_1000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_806.007K_1000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_806.007K_1000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_806.007K_1000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_806.007K_100000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_806.007K_100000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_806.007K_100000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_806.007K_100000Pa_1ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_806.007K_2000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_806.007K_2000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_806.007K_2000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_806.007K_2000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_806.007K_3000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_806.007K_3000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_806.007K_3000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_806.007K_3000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_863.909K_1000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_863.909K_1000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_863.909K_1000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_863.909K_1000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_863.909K_100000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_863.909K_100000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_863.909K_100000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_863.909K_100000Pa_1ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_863.909K_2000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_863.909K_2000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_863.909K_2000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_863.909K_2000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_863.909K_3000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_863.909K_3000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_863.909K_3000000Pa_10ms;ok;241;
+NewReaction_03;Methanation_0.2_863.909K_3000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_929.364K_1000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_929.364K_1000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_929.364K_1000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_929.364K_1000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_929.364K_100000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_929.364K_100000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_929.364K_100000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_929.364K_100000Pa_1ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_929.364K_2000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_929.364K_2000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_929.364K_2000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_929.364K_2000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_929.364K_3000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_929.364K_3000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_929.364K_3000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_929.364K_3000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_986.007K_1000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_986.007K_1000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_986.007K_1000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_986.007K_1000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_986.007K_100000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_986.007K_100000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_986.007K_100000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_986.007K_100000Pa_1ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_986.007K_2000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_986.007K_2000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_986.007K_2000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_986.007K_2000000Pa_1ms;ok;241;
+NewReaction_03;Methanation_0.2_986.007K_3000000Pa_0.01ms;ok;241;
+NewReaction_03;Methanation_0.2_986.007K_3000000Pa_0.1ms;ok;241;
+NewReaction_03;Methanation_0.2_986.007K_3000000Pa_10ms;ok (with warnings);236;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_03;Methanation_0.2_986.007K_3000000Pa_1ms;ok;241;
+NewReaction_04;Methanation_0.04_1048.944K_1000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_1048.944K_1000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_1048.944K_1000000Pa_10ms;ok (with warnings);276;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_04;Methanation_0.04_1048.944K_1000000Pa_1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_1048.944K_100000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_1048.944K_100000Pa_0.1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_1048.944K_100000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_1048.944K_100000Pa_1ms;ok (with warnings);276;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_04;Methanation_0.04_1048.944K_2000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_1048.944K_2000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_1048.944K_2000000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_1048.944K_2000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_1048.944K_3000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_1048.944K_3000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_1048.944K_3000000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_1048.944K_3000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_1114.399K_1000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_1114.399K_1000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_1114.399K_1000000Pa_10ms;ok (with warnings);276;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_04;Methanation_0.04_1114.399K_1000000Pa_1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_1114.399K_100000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_1114.399K_100000Pa_0.1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_1114.399K_100000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_1114.399K_100000Pa_1ms;ok (with warnings);276;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_04;Methanation_0.04_1114.399K_2000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_1114.399K_2000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_1114.399K_2000000Pa_10ms;ok (with warnings);276;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_04;Methanation_0.04_1114.399K_2000000Pa_1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_1114.399K_3000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_1114.399K_3000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_1114.399K_3000000Pa_10ms;ok (with warnings);276;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_04;Methanation_0.04_1114.399K_3000000Pa_1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_405.098K_1000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_1000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_1000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_1000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_100000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_100000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_100000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_100000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_2000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_2000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_2000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_2000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_3000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_3000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_3000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_405.098K_3000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_1000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_1000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_1000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_1000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_100000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_100000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_100000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_100000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_2000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_2000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_2000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_2000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_3000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_3000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_3000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_481.252K_3000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_1000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_1000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_1000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_1000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_100000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_100000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_100000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_100000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_2000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_2000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_2000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_2000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_3000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_3000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_3000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_545.448K_3000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_1000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_1000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_1000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_1000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_100000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_100000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_100000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_100000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_2000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_2000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_2000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_2000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_3000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_3000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_3000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_593.28K_3000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_1000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_1000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_1000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_1000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_100000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_100000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_100000Pa_10ms;ok (with warnings);276;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_04;Methanation_0.04_632.301K_100000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_2000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_2000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_2000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_2000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_3000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_3000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_3000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_632.301K_3000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_688.944K_1000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_688.944K_1000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_688.944K_100000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_688.944K_100000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_688.944K_100000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_688.944K_100000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_688.944K_2000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_688.944K_2000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_688.944K_2000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_688.944K_2000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_688.944K_3000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_688.944K_3000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_688.944K_3000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_688.944K_3000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_746.846K_1000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_746.846K_1000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_746.846K_1000000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_746.846K_1000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_746.846K_100000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_746.846K_100000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_746.846K_100000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_746.846K_100000Pa_1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_746.846K_2000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_746.846K_2000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_746.846K_2000000Pa_10ms;ok (with warnings);276;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_04;Methanation_0.04_746.846K_2000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_746.846K_3000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_746.846K_3000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_746.846K_3000000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_746.846K_3000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_806.007K_1000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_806.007K_1000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_806.007K_1000000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_806.007K_1000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_806.007K_100000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_806.007K_100000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_806.007K_100000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_806.007K_100000Pa_1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_806.007K_2000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_806.007K_2000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_806.007K_2000000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_806.007K_2000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_806.007K_3000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_806.007K_3000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_806.007K_3000000Pa_10ms;ok (with warnings);276;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_04;Methanation_0.04_806.007K_3000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_863.909K_1000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_863.909K_1000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_863.909K_1000000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_863.909K_1000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_863.909K_100000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_863.909K_100000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_863.909K_100000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_863.909K_100000Pa_1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_863.909K_2000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_863.909K_2000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_863.909K_2000000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_863.909K_2000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_863.909K_3000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_863.909K_3000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_863.909K_3000000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_863.909K_3000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_929.364K_1000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_929.364K_1000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_929.364K_1000000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_929.364K_1000000Pa_1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_929.364K_100000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_929.364K_100000Pa_0.1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_929.364K_100000Pa_10ms;ok;286;
+NewReaction_04;Methanation_0.04_929.364K_100000Pa_1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_929.364K_2000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_929.364K_2000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_929.364K_2000000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_929.364K_2000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_929.364K_3000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_929.364K_3000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_929.364K_3000000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_929.364K_3000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_986.007K_1000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_986.007K_1000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_986.007K_1000000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_986.007K_1000000Pa_1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_986.007K_100000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_986.007K_100000Pa_0.1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_986.007K_100000Pa_10ms;ok (with warnings);276;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_04;Methanation_0.04_986.007K_100000Pa_1ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_986.007K_2000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_986.007K_2000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_986.007K_2000000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_986.007K_2000000Pa_1ms;ok;286;
+NewReaction_04;Methanation_0.04_986.007K_3000000Pa_0.01ms;ok;286;
+NewReaction_04;Methanation_0.04_986.007K_3000000Pa_0.1ms;ok;286;
+NewReaction_04;Methanation_0.04_986.007K_3000000Pa_10ms;ok (with warnings);276;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_04;Methanation_0.04_986.007K_3000000Pa_1ms;ok;286;
+NewReaction_05;Methanation_0.5_1048.944K_1000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_1048.944K_1000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_1048.944K_1000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_1048.944K_1000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_1048.944K_100000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_1048.944K_100000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_1048.944K_100000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_1048.944K_100000Pa_1ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_1048.944K_2000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_1048.944K_2000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_1048.944K_2000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_1048.944K_2000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_1048.944K_3000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_1048.944K_3000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_1048.944K_3000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_1048.944K_3000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_1114.399K_1000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_1114.399K_1000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_1114.399K_1000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_1114.399K_1000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_1114.399K_100000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_1114.399K_100000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_1114.399K_100000Pa_10ms;ok (with warnings);260;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_05;Methanation_0.5_1114.399K_100000Pa_1ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_1114.399K_2000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_1114.399K_2000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_1114.399K_2000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_1114.399K_2000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_1114.399K_3000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_1114.399K_3000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_1114.399K_3000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_1114.399K_3000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_1000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_1000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_1000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_1000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_100000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_100000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_100000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_100000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_2000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_2000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_2000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_2000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_3000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_3000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_3000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_405.098K_3000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_1000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_1000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_1000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_1000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_100000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_100000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_100000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_100000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_2000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_2000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_2000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_2000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_3000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_3000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_3000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_481.252K_3000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_1000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_1000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_1000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_1000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_100000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_100000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_100000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_100000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_2000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_2000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_2000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_2000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_3000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_3000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_3000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_545.448K_3000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_1000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_1000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_1000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_1000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_100000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_100000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_100000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_100000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_2000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_2000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_2000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_2000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_3000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_3000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_3000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_593.28K_3000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_1000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_1000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_1000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_1000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_100000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_100000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_100000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_100000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_2000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_2000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_2000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_2000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_3000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_3000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_3000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_632.301K_3000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_1000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_1000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_1000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_1000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_100000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_100000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_100000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_100000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_2000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_2000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_2000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_2000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_3000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_3000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_3000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_688.944K_3000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_746.846K_1000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_746.846K_1000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_746.846K_100000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_746.846K_100000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_746.846K_100000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_746.846K_100000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_746.846K_2000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_746.846K_2000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_746.846K_2000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_746.846K_2000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_746.846K_3000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_746.846K_3000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_746.846K_3000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_746.846K_3000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_1000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_1000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_1000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_1000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_100000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_100000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_100000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_806.007K_100000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_2000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_2000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_2000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_2000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_3000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_3000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_3000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_806.007K_3000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_863.909K_1000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_863.909K_1000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_863.909K_1000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_863.909K_1000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_863.909K_100000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_863.909K_100000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_863.909K_100000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_863.909K_100000Pa_1ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_863.909K_2000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_863.909K_2000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_863.909K_2000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_863.909K_2000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_863.909K_3000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_863.909K_3000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_863.909K_3000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_863.909K_3000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_929.364K_1000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_929.364K_1000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_929.364K_1000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_929.364K_1000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_929.364K_100000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_929.364K_100000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_929.364K_100000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_929.364K_100000Pa_1ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_929.364K_2000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_929.364K_2000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_929.364K_2000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_929.364K_2000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_929.364K_3000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_929.364K_3000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_929.364K_3000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_929.364K_3000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_986.007K_1000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_986.007K_1000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_986.007K_1000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_986.007K_1000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_986.007K_100000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_986.007K_100000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_986.007K_100000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_986.007K_100000Pa_1ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_05;Methanation_0.5_986.007K_2000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_986.007K_2000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_986.007K_2000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_986.007K_2000000Pa_1ms;ok;269;
+NewReaction_05;Methanation_0.5_986.007K_3000000Pa_0.01ms;ok;269;
+NewReaction_05;Methanation_0.5_986.007K_3000000Pa_0.1ms;ok;269;
+NewReaction_05;Methanation_0.5_986.007K_3000000Pa_10ms;ok;269;
+NewReaction_05;Methanation_0.5_986.007K_3000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_1048.944K_1000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_1048.944K_1000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_1048.944K_1000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_1048.944K_1000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_1048.944K_100000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_1048.944K_100000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_1048.944K_100000Pa_10ms;ok (with warnings);260;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_06;Methanation_0.2_1048.944K_100000Pa_1ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_1048.944K_2000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_1048.944K_2000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_1048.944K_2000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_1048.944K_2000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_1048.944K_3000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_1048.944K_3000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_1048.944K_3000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_1048.944K_3000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_1114.399K_1000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_1114.399K_1000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_1114.399K_1000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_1114.399K_1000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_1114.399K_100000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_1114.399K_100000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_1114.399K_100000Pa_10ms;ok (with warnings);260;outlet molar flow is 0 (simulation probably not converged)
+NewReaction_06;Methanation_0.2_1114.399K_100000Pa_1ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_1114.399K_2000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_1114.399K_2000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_1114.399K_2000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_1114.399K_2000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_1114.399K_3000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_1114.399K_3000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_1114.399K_3000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_1114.399K_3000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_1000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_1000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_1000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_1000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_100000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_100000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_100000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_100000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_2000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_2000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_2000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_2000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_3000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_3000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_3000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_405.098K_3000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_1000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_1000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_1000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_1000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_100000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_100000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_100000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_100000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_2000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_2000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_2000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_2000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_3000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_3000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_3000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_481.252K_3000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_1000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_1000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_1000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_1000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_100000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_100000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_100000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_100000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_2000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_2000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_2000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_2000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_3000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_3000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_3000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_545.448K_3000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_1000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_1000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_1000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_1000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_100000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_100000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_100000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_100000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_2000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_2000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_2000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_2000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_3000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_3000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_3000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_593.28K_3000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_1000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_1000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_1000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_1000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_100000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_100000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_100000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_100000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_2000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_2000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_2000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_2000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_3000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_3000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_3000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_632.301K_3000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_1000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_1000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_1000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_1000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_100000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_100000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_100000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_100000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_2000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_2000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_2000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_2000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_3000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_3000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_3000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_688.944K_3000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_746.846K_1000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_746.846K_1000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_746.846K_1000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_746.846K_1000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_746.846K_100000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_746.846K_100000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_746.846K_2000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_746.846K_2000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_746.846K_2000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_746.846K_2000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_746.846K_3000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_746.846K_3000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_746.846K_3000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_746.846K_3000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_806.007K_1000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_806.007K_1000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_806.007K_1000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_806.007K_1000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_806.007K_100000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_806.007K_100000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_806.007K_100000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_806.007K_100000Pa_1ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_806.007K_2000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_806.007K_2000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_806.007K_2000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_806.007K_2000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_806.007K_3000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_806.007K_3000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_806.007K_3000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_806.007K_3000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_863.909K_1000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_863.909K_1000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_863.909K_1000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_863.909K_1000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_863.909K_100000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_863.909K_100000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_863.909K_100000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_863.909K_100000Pa_1ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_863.909K_2000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_863.909K_2000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_863.909K_2000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_863.909K_2000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_863.909K_3000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_863.909K_3000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_863.909K_3000000Pa_10ms;ok;269;
+NewReaction_06;Methanation_0.2_863.909K_3000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_929.364K_1000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_929.364K_1000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_929.364K_1000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_929.364K_1000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_929.364K_100000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_929.364K_100000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_929.364K_100000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_929.364K_100000Pa_1ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_929.364K_2000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_929.364K_2000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_929.364K_2000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_929.364K_2000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_929.364K_3000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_929.364K_3000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_929.364K_3000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_929.364K_3000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_986.007K_1000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_986.007K_1000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_986.007K_1000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_986.007K_1000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_986.007K_100000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_986.007K_100000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_986.007K_100000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_986.007K_100000Pa_1ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_986.007K_2000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_986.007K_2000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_986.007K_2000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_986.007K_2000000Pa_1ms;ok;269;
+NewReaction_06;Methanation_0.2_986.007K_3000000Pa_0.01ms;ok;269;
+NewReaction_06;Methanation_0.2_986.007K_3000000Pa_0.1ms;ok;269;
+NewReaction_06;Methanation_0.2_986.007K_3000000Pa_10ms;ok (with warnings);260;"outlet molar flow is 0 (simulation probably not converged); axial profile has only 1 point(s)"
+NewReaction_06;Methanation_0.2_986.007K_3000000Pa_1ms;ok;269;
