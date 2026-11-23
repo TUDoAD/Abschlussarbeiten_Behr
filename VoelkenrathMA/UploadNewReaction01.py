@@ -11,6 +11,7 @@ import requests
 
 
 BASE_URL = "https://repository.nfdi4cat.org"
+DEFAULT_DATAVERSE_ALIAS = "ad-tu-dortmund"
 DEFAULT_ROOT = Path(__file__).resolve().parent / "linkml" / "with_ttl" / "test" #"NewReaction_01"
 DEFAULT_DESCRIPTION = (
     "Automated DWSIM simulation results for Ni-catalyzed methanation of carbon dioxide. "
@@ -166,8 +167,8 @@ def main(argv=None):
     parser.add_argument("--root", type=Path, default=DEFAULT_ROOT, help="Methanation Simulation files directory")
     parser.add_argument(
         "--dataverse",
-        default=os.environ.get("NFDI4CAT_DATAVERSE"),
-        help="Target Dataverse alias (or set NFDI4CAT_DATAVERSE)",
+        default=os.environ.get("NFDI4CAT_DATAVERSE", DEFAULT_DATAVERSE_ALIAS),
+        help=f"Target Dataverse alias (default: {DEFAULT_DATAVERSE_ALIAS})",
     )
     parser.add_argument(
         "--title",
@@ -194,9 +195,6 @@ def main(argv=None):
     api_token = os.environ.get("NFDI4CAT_API_TOKEN")
     if not api_token:
         parser.error("Set the NFDI4CAT_API_TOKEN environment variable before uploading.")
-    if not args.dataverse:
-        parser.error("Provide --dataverse or set the NFDI4CAT_DATAVERSE environment variable.")
-
     session = requests.Session()
     session.headers.update({"X-Dataverse-key": api_token})
     persistent_id = create_dataset(
